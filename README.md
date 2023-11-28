@@ -28,8 +28,7 @@ I made a discord server, where you can get support and much more! Join to us!
 > only update on weekends
 ***
 ## 📸 Preview
-![](/Image1.png)
-![](/Image2.png)
+![](/image2.png)
 
 ## 📋 Features
 
