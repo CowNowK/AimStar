@@ -66,6 +66,6 @@ I made a discord server, where you can get support and much more! Join to us!
   - Mouse Aimbot
 - Major help from Shinyaluvs
 
-## ⭐ Star History
+## ⭐ Star History (Old Repo)
 
 [![Star History Chart](https://api.star-history.com/svg?repos=CowNowK/AimStarCS2&type=Date)](https://star-history.com/#CowNowK/AimStarCS2&Date)
