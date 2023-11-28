@@ -16,19 +16,18 @@ int main()
 	std::printf(
 	"AimStar External for CS2\n"
 	"Author: CowNow\n"
-	"Source Code: https://github.com/CowNowK/AimStarCS2\n"
+	"Source Code: https://github.com/CowNowK/AimStar\n"
 	"\n"
 	"- This features may result in VAC Bans, use at your own risk:\n"
-	"	* Bhop, NoFlash\n"
+	"	* NoFlash\n"
 	"- Press [INS] to show or hide Menu.\n"
-	"- Language Bug: some very special characters may not be displayed\n"
 	"\n"
 	"#Disclamers:\n"
 	"- Because AimStar has too many users, and there are many derivative cheats that are being sold or free. AimStar may now be detected\n"
 	"- Use at your own risk\n"
 	"\n"
 	"#Contributors: \n"
-	"Shinyaluvs, Skarbor, KeysIsCool, Kenny, Cr1ppl3, tokinaa, faster_bbc, vsantos1, 5mmod, gScream, Hazetick, styx\n"
+	"Shinyaluvs, Nx0Ri, Skarbor, KeysIsCool, Kenny, Cr1ppl3, tokinaa, faster_bbc, vsantos1, 5mmod, gScream, Hazetick, styx\n"
 	"\n"
 	);
 
