@@ -6,7 +6,7 @@
 #include <filesystem>
 #include <string>
 #include "../Font/IconsFontAwesome5.h"
-#include "../Sources/Language.h"
+#include "../Resources/Language.h"
 
 namespace ConfigMenu {
 

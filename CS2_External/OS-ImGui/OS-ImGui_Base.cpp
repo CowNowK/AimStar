@@ -1,8 +1,8 @@
 ﻿#include "OS-ImGui_Base.h"
 #include "..\Font\fontArray.h"
 #include "..\Font\IconsFontAwesome5.h"
-#include "..\Sources\WeaponIcon.h"
-#include "..\Sources\Language.h"
+#include "..\Resources\WeaponIcon.h"
+#include "..\Resources\Language.h"
 
 /****************************************************
 * Copyright (C)	: Liv
