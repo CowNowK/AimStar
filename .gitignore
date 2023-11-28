@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+/CS2_External/x64/Release
+/.vs/AimStar/v17
+/x64/Release
+/.vs/CS2_External
