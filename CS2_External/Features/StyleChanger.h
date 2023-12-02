@@ -30,7 +30,7 @@ namespace StyleChanger
 		case 6:
 			Styles::SquareDark();
 			break;
-		defaultDICK:
+		default:
 			break;
 		}
 	}
