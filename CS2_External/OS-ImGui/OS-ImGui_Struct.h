@@ -8,15 +8,6 @@
 #pragma comment(lib,"dxgi.lib")
 #include <d3d11.h>
 
-/****************************************************
-* Copyright (C)	: Liv
-* @file			: OS-ImGui_Struct.h
-* @author		: Liv
-* @email		: 1319923129@qq.com
-* @version		: 1.0
-* @date			: 2023/9/17	11:30
-****************************************************/
-
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 class Vec2

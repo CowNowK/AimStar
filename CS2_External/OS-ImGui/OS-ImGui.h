@@ -1,15 +1,6 @@
 #pragma once
 #include "OS-ImGui_External.h"
 
-/****************************************************
-* Copyright (C)	: Liv
-* @file			: OS-ImGui.h
-* @author		: Liv
-* @email		: 1319923129@qq.com
-* @version		: 1.0
-* @date			: 2023/9/17	11:25
-****************************************************/
-
 namespace OSImGui
 {
 #ifdef _CONSOLE
@@ -48,12 +39,14 @@ namespace OSImGui
 		void ShadowCircle(Vec2 Pos, float Radius, ImColor CircleColor, ImColor ShadowColor, float ShadowThickness, Vec2 ShadowOffset, int Num = 30);
 		// Ô²Í·»¬¶¯Ìõ
 		bool SliderScalarEx1(const char* label, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags);
+		bool SliderScalarEx2(const char* label, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags);
 
 		// Open webpage button
 		void OpenWebpage(const char* url);
 		void OpenWebpageButton(const char* label, const char* url);
 
 		void MyProgressBar(float fraction, const ImVec2& Size, const char* overlay, ImVec4 Color);
+		void SwitchButton(const char* str_id, bool* v);
 	};
 }
 

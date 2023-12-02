@@ -4,15 +4,6 @@
 #include "..\Resources\WeaponIcon.h"
 #include "..\Resources\Language.h"
 
-/****************************************************
-* Copyright (C)	: Liv
-* @file			: OS-ImGui_Base.cpp
-* @author		: Liv
-* @email		: 1319923129@qq.com
-* @version		: 1.0
-* @date			: 2023/6/18	11:21
-****************************************************/
-
 namespace OSImGui
 {
     bool OSImGui_Base::InitImGui(ID3D11Device* device, ID3D11DeviceContext* device_context)

@@ -3,18 +3,40 @@
 #include <Shellapi.h>
 #include <Windows.h>
 
-/****************************************************
-* Copyright (C)	: Liv
-* @file			: OS-ImGui.cpp
-* @author		: Liv
-* @email		: 1319923129@qq.com
-* @version		: 1.0
-* @date			: 2023/9/17	11:25
-****************************************************/
-
 // OS-ImGui Draw »æÖÆ¹¦ÄÜ
 namespace OSImGui
 {
+    void OSImGui::SwitchButton(const char* str_id, bool* v)
+    {
+        ImVec2 p = ImGui::GetCursorScreenPos();
+        ImDrawList* DrawList = ImGui::GetWindowDrawList();
+        float Height = ImGui::GetFrameHeight();
+        float Width = Height * 1.7f;
+        float Radius = Height / 2 - 2;
+
+        ImGui::InvisibleButton(str_id, ImVec2(Width, Height));
+        if (ImGui::IsItemClicked())
+            *v = !(*v);
+        // Animation
+        float t = *v ? 1.0f : 0.f;
+        ImGuiContext& g = *GImGui;
+        float AnimationSpeed = 0.08f;
+        if (g.LastActiveId == g.CurrentWindow->GetID(str_id))
+        {
+            float T_Animation = ImSaturate(g.LastActiveIdTimer / AnimationSpeed);
+            t = *v ? (T_Animation) : (1.0f - T_Animation);
+        }
+        // Hovered Color
+        ImU32 Color;
+        Color = ImGui::GetColorU32(ImLerp(ImVec4(1.00f, 0.30f, 0.0f, 1.0f), ImVec4(0.0f, 1.0f, 0.63f, 1.000f), t));
+        // Rendering
+        DrawList->AddRectFilled(ImVec2(p.x, p.y + Height * 0.30f), ImVec2(p.x + Width, p.y + Height * 0.70f), IM_COL32(87, 87, 87, 255), Height);
+        DrawList->AddCircleFilled(ImVec2(p.x + Radius + t * (Width - Radius * 2), p.y + Radius + 2), Radius, Color, 360);
+
+        ImGui::SameLine();
+        ImGui::Text(str_id);
+    }
+
     void OSImGui::MyProgressBar(float fraction, const ImVec2& Size, const char* overlay, ImVec4 Color)
     {
         ImGui::PushStyleColor(ImGuiCol_PlotHistogram, Color);
@@ -422,5 +444,113 @@ namespace OSImGui
         return value_changed;
     }
 
+    bool OSImGui::SliderScalarEx2(const char* label, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags)
+    {
+        ImGuiWindow* window = ImGui::GetCurrentWindow();
+        if (window->SkipItems)
+            return false;
+
+        ImGuiContext& g = *GImGui;
+        const ImGuiStyle& style = g.Style;
+        const ImGuiID id = window->GetID(label);
+        const float w = ImGui::CalcItemWidth();
+
+        const ImVec2 label_size = ImGui::CalcTextSize(label, NULL, true);
+        const ImRect frame_bb(window->DC.CursorPos, (Vec2(window->DC.CursorPos) + Vec2(w, label_size.y + style.FramePadding.y * 2.0f)).ToImVec2());
+        const ImRect total_bb(frame_bb.Min, (Vec2(frame_bb.Max) + Vec2(label_size.x > 0.0f ? style.ItemInnerSpacing.x + label_size.x : 0.0f, 0.0f)).ToImVec2());
+
+        const bool temp_input_allowed = (flags & ImGuiSliderFlags_NoInput) == 0;
+        ImGui::ItemSize(total_bb, style.FramePadding.y);
+        if (!ImGui::ItemAdd(total_bb, id, &frame_bb, temp_input_allowed ? ImGuiItemFlags_Inputable : 0))
+            return false;
+
+        // Default format string when passing NULL
+        if (format == NULL)
+            format = ImGui::DataTypeGetInfo(data_type)->PrintFmt;
+
+        const bool hovered = ImGui::ItemHoverable(frame_bb, id);
+        bool temp_input_is_active = temp_input_allowed && ImGui::TempInputIsActive(id);
+        if (!temp_input_is_active)
+        {
+            // Tabbing or CTRL-clicking on Slider turns it into an input box
+            const bool input_requested_by_tabbing = temp_input_allowed && (g.LastItemData.StatusFlags & ImGuiItemStatusFlags_FocusedByTabbing) != 0;
+            const bool clicked = hovered && ImGui::IsMouseClicked(0, id);
+            const bool make_active = (input_requested_by_tabbing || clicked || g.NavActivateId == id);
+            if (make_active && clicked)
+                ImGui::SetKeyOwner(ImGuiKey_MouseLeft, id);
+            if (make_active && temp_input_allowed)
+                if (input_requested_by_tabbing || (clicked && g.IO.KeyCtrl) || (g.NavActivateId == id && (g.NavActivateFlags & ImGuiActivateFlags_PreferInput)))
+                    temp_input_is_active = true;
+
+            if (make_active && !temp_input_is_active)
+            {
+                ImGui::SetActiveID(id, window);
+                ImGui::SetFocusID(id, window);
+                ImGui::FocusWindow(window);
+                g.ActiveIdUsingNavDirMask |= (1 << ImGuiDir_Left) | (1 << ImGuiDir_Right);
+            }
+        }
+
+        if (temp_input_is_active)
+        {
+            // Only clamp CTRL+Click input when ImGuiSliderFlags_AlwaysClamp is set
+            const bool is_clamp_input = (flags & ImGuiSliderFlags_AlwaysClamp) != 0;
+            return ImGui::TempInputScalar(frame_bb, id, label, data_type, p_data, format, is_clamp_input ? p_min : NULL, is_clamp_input ? p_max : NULL);
+        }
+
+        float grab_radius = 8;
+
+        // Draw frame
+        ImRect frame_sc = frame_bb;
+        float frame_height_origin = frame_sc.GetHeight();
+        frame_sc.Min.y += frame_height_origin / 3;
+        frame_sc.Max.y -= frame_height_origin / 3;
+        const ImU32 frame_col = ImGui::ColorConvertFloat4ToU32(g.ActiveId == id ? ImColor(60, 60, 60, 255) : hovered ? ImColor(130, 130, 130, 255) : ImColor(87, 87, 87, 255));
+        ImGui::RenderNavHighlight(frame_bb, id);
+        window->DrawList->AddRectFilled(frame_sc.Min, frame_sc.Max, frame_col, grab_radius);
+
+        // Slider behavior
+        ImRect grab_bb;
+        const bool value_changed = ImGui::SliderBehavior(frame_bb, id, data_type, p_data, p_min, p_max, format, flags, &grab_bb);
+        if (value_changed)
+            ImGui::MarkItemEdited(id);
+
+        // Render grab
+        if (grab_bb.Max.x > grab_bb.Min.x)
+        {
+            window->DrawList->AddRectFilled(
+                { grab_bb.GetCenter().x - grab_radius * 1.5f, grab_bb.GetCenter().y - grab_radius },
+                { grab_bb.GetCenter().x + grab_radius * 1.5f, grab_bb.GetCenter().y + grab_radius },
+                ImColor(220, 220, 220, 255), 3);
+            window->DrawList->AddLine(
+                { grab_bb.GetCenter().x - grab_radius * 0.5f - 1, grab_bb.GetCenter().y - grab_radius * 0.75f },
+                { grab_bb.GetCenter().x - grab_radius * 0.5f - 1, grab_bb.GetCenter().y + grab_radius * 0.75f },
+                ImColor(150, 150, 150, 255), 1.3f);
+            window->DrawList->AddLine(
+                { grab_bb.GetCenter().x - 1, grab_bb.GetCenter().y - grab_radius * 0.75f },
+                { grab_bb.GetCenter().x - 1, grab_bb.GetCenter().y + grab_radius * 0.75f },
+                ImColor(150, 150, 150, 255), 1.3f);
+            window->DrawList->AddLine(
+                { grab_bb.GetCenter().x + grab_radius * 0.5f - 1, grab_bb.GetCenter().y - grab_radius * 0.75f },
+                { grab_bb.GetCenter().x + grab_radius * 0.5f - 1, grab_bb.GetCenter().y + grab_radius * 0.75f },
+                ImColor(150, 150, 150, 255), 1.3f);
+        }
+
+        // Display value using user-provided display format so user can add prefix/suffix/decorations to the value.
+        char value_buf[64];
+        const char* value_buf_end = value_buf + ImGui::DataTypeFormatString(value_buf, IM_ARRAYSIZE(value_buf), data_type, p_data, format);
+        if (g.LogEnabled)
+            ImGui::LogSetNextTextDecoration("{", "}");
+        ImGui::RenderTextClipped(frame_bb.Min, frame_bb.Max, value_buf, value_buf_end, NULL, ImVec2(0.5f, 0.5f));
+
+
+        // label
+        if (label_size.x > 0.0f)
+            ImGui::RenderText(ImVec2(frame_bb.Max.x + style.ItemInnerSpacing.x, frame_bb.Min.y + style.FramePadding.y), label);
+
+
+        IMGUI_TEST_ENGINE_ITEM_INFO(id, label, g.LastItemData.StatusFlags | (temp_input_allowed ? ImGuiItemStatusFlags_Inputable : 0));
+        return value_changed;
+    }
 }
 

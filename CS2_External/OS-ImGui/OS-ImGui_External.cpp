@@ -1,15 +1,6 @@
 #include "OS-ImGui_External.h"
 #include "../MenuConfig.hpp"
 
-/****************************************************
-* Copyright (C)	: Liv
-* @file			: OS-ImGui_External.cpp
-* @author		: Liv
-* @email		: 1319923129@qq.com
-* @version		: 1.0
-* @date			: 2023/6/18	11:21
-****************************************************/
-
 // D3D11 Device
 namespace OSImGui
 {
