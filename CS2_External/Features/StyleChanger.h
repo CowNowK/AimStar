@@ -27,6 +27,9 @@ namespace StyleChanger
 		case 5:
 			Styles::RoundGray();
 			break;
+		case 6:
+			Styles::SquareDark();
+			break;
 		default:
 			break;
 		}
