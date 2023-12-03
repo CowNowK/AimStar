@@ -288,7 +288,7 @@ namespace GUI
 				ImGui::SetColumnOffset(1, 250.0f);
 
 				if (ImGui::Combo(Lang::MiscText.LanguageList, &MenuConfig::Language,
-					"English\0Danish\0German\0Polish\0Portuguese\0Russian\0Simplified Chinese\0Slovak\0French\0")) // Korean\0
+					"English\0Danish\0German\0Polish\0Portuguese\0Russian\0Simplified Chinese\0Slovak\0French\0Turkish\0Hungarian\0")) // Korean\0
 					Lang::ChangeLang(MenuConfig::Language);
 				if (ImGui::Combo(Lang::MiscText.ThemeList, &MenuConfig::MenuStyle, "Default\0Hacker\0Red\0Modern Dark\0Deep Dark\0Round Gray\0Square Dark\0"))
 					StyleChanger::UpdateSkin(MenuConfig::MenuStyle);
@@ -631,7 +631,7 @@ namespace GUI
 				ImGui::ColorEdit4("Targeting", reinterpret_cast<float*>(&CrosshairConfig::TargetedColor), ImGuiColorEditFlags_NoInputs);
 				ImGui::SeparatorText("Window Style");
 				ImGui::SetNextItemWidth(MenuConfig::ComboWidth);
-				if (ImGui::Combo("Theme", &MenuConfig::MenuStyle, "Default\0Hacker\0Red\0Modern Dark\0Deep Dark\0"))
+				if (ImGui::Combo("Theme", &MenuConfig::MenuStyle, "Default\0Hacker\0Red\0Modern Dark\0Deep Dark\0Round Gray\0Square Dark\0"))
 					StyleChanger::UpdateSkin(MenuConfig::MenuStyle);
 				ImGui::SetNextItemWidth(MenuConfig::ComboWidth);
 				ImGui::Combo("Style", &MenuConfig::WindowStyle, "Window\0Collapse\0");
