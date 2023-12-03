@@ -89,11 +89,8 @@ void Cheats::Run()
 //  std::future<void> Thread_PlayerESP = std::async(ESP::RenderPlayerESP, std::ref(Entity), std::ref(Rect));
 	if (MenuConfig::ShowMenu)
 	{
-		if (MenuConfig::WindowStyle == 0)
-		{
 			GUI::RenderMenu();
 			ESP::PreviewWindow();
-		}
 	}
 		
 

@@ -10,7 +10,14 @@ namespace MenuConfig
 	struct {
 		// 0: Visual 1: Aimbot 2: Misc 3: Config
 		int MenuPage = 0;
-	} Settings;
+		ImVec2 LogoPos		= ImVec2(30.f, 30.f);
+		ImVec2 Button1Pos	= ImVec2(30.f, 142.f);
+		ImVec2 Button2Pos	= ImVec2(30.f, 142.f + 90.f);
+		ImVec2 Button3Pos	= ImVec2(30.f, 142.f + 180.f);
+		ImVec2 Button4Pos	= ImVec2(30.f, 142.f + 270.f);
+		ImVec2 ChildPos		= ImVec2(257.f, 20.f);
+		ImVec2 ChildSize	= ImVec2(574.f, 474.f);
+	} WCS;	// Window Component Settings
 	
 	struct {
 		bool BunnyHop = false;
