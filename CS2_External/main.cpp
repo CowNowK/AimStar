@@ -47,7 +47,7 @@ int main()
 		std::cout << "[ERROR] Please launch the game first!" << std::endl;
 		goto END;
 	case 2: 
-		std::cout << "[ERROR] Failed to hook process, please run the cheat in UAC." << std::endl; 
+		std::cout << "[ERROR] Failed to hook process, please run the cheat as Administrator (Right click AimStar > Run as Adminstrator)." << std::endl; 
 		goto END; 
 	case 3:
 		std::cout << "[ERROR] Failed to get module address." << std::endl; 
