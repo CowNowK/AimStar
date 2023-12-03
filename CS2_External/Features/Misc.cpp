@@ -59,7 +59,7 @@ void Misc::HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcep
 	if (!MenuConfig::Misc.HitSound)
 		return;
 
-	std::string soundDir = MenuConfig::Settings.SoundPath + "\\Hit.wav";
+	std::string soundDir = MenuConfig::SoundPath + "\\Hit.wav";
 	std::wstring sound = Misc::STR2LPCWSTR(soundDir);
 
 	uintptr_t pBulletServices;

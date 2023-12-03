@@ -4,9 +4,12 @@
 
 namespace MenuConfig
 {
+	inline std::string path = "";
+	inline std::string SoundPath = "";
+
 	struct {
-		std::string path = "";
-		std::string SoundPath = "";
+		// 0: Visual 1: Aimbot 2: Misc 3: Config
+		int MenuPage = 0;
 	} Settings;
 	
 	struct {

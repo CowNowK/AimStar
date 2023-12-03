@@ -25,7 +25,7 @@ namespace ConfigMenu {
 
 			static int selectedConfig = -1;
 
-			const std::string configDir = MenuConfig::Settings.path;
+			const std::string configDir = MenuConfig::path;
 			static std::vector<std::string> configFiles;
 			std::vector<const char*> configFilesCStr;
 

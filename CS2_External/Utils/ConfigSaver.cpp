@@ -12,7 +12,7 @@ namespace MyConfigSaver {
 
     // Function to save the configuration to a file
     void SaveConfig(const std::string& filename) {
-        std::ofstream configFile(MenuConfig::Settings.path + '\\' + filename);
+        std::ofstream configFile(MenuConfig::path + '\\' + filename);
         if (!configFile.is_open()) {
             std::cerr << "[Info] Error: Could not open the configuration file." << std::endl;
             return;
@@ -127,12 +127,12 @@ namespace MyConfigSaver {
 
 
         configFile.close();
-        std::cout << "[Info] Configuration saved to " << MenuConfig::Settings.path + '\\' + filename << std::endl;
+        std::cout << "[Info] Configuration saved to " << MenuConfig::path + '\\' + filename << std::endl;
     }
 
     // Function to load the configuration from a file
     void LoadConfig(const std::string& filename) {
-        std::ifstream configFile(MenuConfig::Settings.path + '\\' + filename);
+        std::ifstream configFile(MenuConfig::path + '\\' + filename);
         if (!configFile.is_open()) {
             std::cerr << "[Info] Error: Could not open the configuration file." << std::endl;
             return;
@@ -253,6 +253,6 @@ namespace MyConfigSaver {
         }
 
         configFile.close();
-        std::cout << "[Info] Configuration loaded from " << MenuConfig::Settings.path + '\\' + filename << std::endl;
+        std::cout << "[Info] Configuration loaded from " << MenuConfig::path + '\\' + filename << std::endl;
     }
 } // namespace ConfigSaver

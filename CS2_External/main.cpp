@@ -38,9 +38,9 @@ int main()
 		std::cerr << "[Info] Error: Failed to get the Documents folder path." << std::endl;
 		goto END;
 	}
-	MenuConfig::Settings.path = documentsPath;
-	MenuConfig::Settings.path += "\\AimStar";
-	MenuConfig::Settings.SoundPath = MenuConfig::Settings.path + "\\Sounds";
+	MenuConfig::path = documentsPath;
+	MenuConfig::path += "\\AimStar";
+	MenuConfig::SoundPath = MenuConfig::path + "\\Sounds";
 
 	switch (ProcessStatus) {
 	case 1:
@@ -79,12 +79,12 @@ int main()
 	std::cout << "--LocalPlayerPawn:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::LocalPlayerPawn << std::endl;
 	*/
 
-	if (fs::exists(MenuConfig::Settings.path))
-		std::cout << "[Info] Config folder connected: " << MenuConfig::Settings.path << std::endl;
+	if (fs::exists(MenuConfig::path))
+		std::cout << "[Info] Config folder connected: " << MenuConfig::path << std::endl;
 	else
 	{
-		if (fs::create_directory(MenuConfig::Settings.path))
-			std::cout << "[Info] Config folder created: " << MenuConfig::Settings.path << std::endl;
+		if (fs::create_directory(MenuConfig::path))
+			std::cout << "[Info] Config folder created: " << MenuConfig::path << std::endl;
 		else
 		{
 			std::cerr << "[Info] Error: Failed to create the config directory." << std::endl;
@@ -92,12 +92,12 @@ int main()
 		}
 	}
 
-	if (fs::exists(MenuConfig::Settings.SoundPath))
-		std::cout << "[Info] Hitsound folder connected: " << MenuConfig::Settings.SoundPath << std::endl;
+	if (fs::exists(MenuConfig::SoundPath))
+		std::cout << "[Info] Hitsound folder connected: " << MenuConfig::SoundPath << std::endl;
 	else
 	{
-		if (fs::create_directory(MenuConfig::Settings.SoundPath))
-			std::cout << "[Info] Hitsound folder created: " << MenuConfig::Settings.SoundPath << std::endl;
+		if (fs::create_directory(MenuConfig::SoundPath))
+			std::cout << "[Info] Hitsound folder created: " << MenuConfig::SoundPath << std::endl;
 		else
 		{
 			std::cerr << "[Info] Error: Failed to create the file directory." << std::endl;
