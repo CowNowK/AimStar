@@ -137,6 +137,9 @@
     <ClInclude Include="Utils\Handles.h" />
     <ClInclude Include="Features\RCS.h" />
     <ClInclude Include="Resources\Language.h" />
+    <ClInclude Include="Resources\Images.h" />
+    <ClInclude Include="OS-ImGui\stb\stb_image.h" />
+    <ClInclude Include="Backup\CollapseGUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">

@@ -10,6 +10,10 @@ namespace OSImGui
 #endif
 	{
 	public:
+		bool LoadTextureFromFile(const char* filename, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height);
+		bool LoadTextureFromMemory(unsigned char* Memory, UINT size, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height);
+
+		void ShowRawImage(unsigned char* image, int width, int height);
 		// ÎÄ±¾
 		void Text(std::string Text, Vec2 Pos, ImColor Color, float FontSize = 15, bool KeepCenter = false);
 		void MyText(std::string Text, bool isCenter);
