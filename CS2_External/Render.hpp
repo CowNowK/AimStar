@@ -61,71 +61,71 @@ namespace Render
 	{
 		int BorderWidth = 2;
 		int DotSize = 1;
-		int gap = CrosshairConfig::Gap / 2;
+		int gap = MenuConfig::Crosshairs.Gap / 2;
 
 		int outlineGap = gap - 1;
-		float Thickness = CrosshairConfig::Thickness;
+		float Thickness = MenuConfig::Crosshairs.Thickness;
 
-		ImVec2 offset1{ CrosshairConfig::DotSize,CrosshairConfig::DotSize };
-		ImVec2 offset2{ CrosshairConfig::DotSize + 1,CrosshairConfig::DotSize + 1 };
+		ImVec2 offset1{ MenuConfig::Crosshairs.DotSize,MenuConfig::Crosshairs.DotSize };
+		ImVec2 offset2{ MenuConfig::Crosshairs.DotSize + 1,MenuConfig::Crosshairs.DotSize + 1 };
 
 		/*
 		===== Outline =====
 		*/
-		if (CrosshairConfig::drawOutLine)
+		if (MenuConfig::Crosshairs.drawOutLine)
 		{
 			//dot
-			if (CrosshairConfig::drawDot)
+			if (MenuConfig::Crosshairs.drawDot)
 				drawList->AddRectFilled(ImVec2(pos.x - offset1.x, pos.y - offset1.y), ImVec2(pos.x + offset2.x, pos.y + offset2.y), color & IM_COL32_A_MASK);
 
-			if (CrosshairConfig::drawCrossline)
+			if (MenuConfig::Crosshairs.drawCrossline)
 			{
 				//left
-				drawList->AddRectFilled(ImVec2(pos.x - (outlineGap + BorderWidth + CrosshairConfig::HorizontalLength), pos.y - Thickness), ImVec2(pos.x - outlineGap, pos.y + 1 + Thickness), color & IM_COL32_A_MASK);
+				drawList->AddRectFilled(ImVec2(pos.x - (outlineGap + BorderWidth + MenuConfig::Crosshairs.HorizontalLength), pos.y - Thickness), ImVec2(pos.x - outlineGap, pos.y + 1 + Thickness), color & IM_COL32_A_MASK);
 				//right
-				drawList->AddRectFilled(ImVec2(pos.x + (outlineGap + DotSize), pos.y - Thickness), ImVec2(pos.x + (outlineGap + DotSize + BorderWidth + CrosshairConfig::HorizontalLength), pos.y + 1 + Thickness), color & IM_COL32_A_MASK);
+				drawList->AddRectFilled(ImVec2(pos.x + (outlineGap + DotSize), pos.y - Thickness), ImVec2(pos.x + (outlineGap + DotSize + BorderWidth + MenuConfig::Crosshairs.HorizontalLength), pos.y + 1 + Thickness), color & IM_COL32_A_MASK);
 				//top
-				if (!CrosshairConfig::tStyle)
-					drawList->AddRectFilled(ImVec2(pos.x - Thickness, pos.y - (outlineGap + BorderWidth + CrosshairConfig::VerticalLength)), ImVec2(pos.x + 1 + Thickness, pos.y - outlineGap), color & IM_COL32_A_MASK);
+				if (!MenuConfig::Crosshairs.tStyle)
+					drawList->AddRectFilled(ImVec2(pos.x - Thickness, pos.y - (outlineGap + BorderWidth + MenuConfig::Crosshairs.VerticalLength)), ImVec2(pos.x + 1 + Thickness, pos.y - outlineGap), color & IM_COL32_A_MASK);
 				//bottom
-				drawList->AddRectFilled(ImVec2(pos.x - Thickness, pos.y + outlineGap + DotSize), ImVec2(pos.x + 1 + Thickness, pos.y + (outlineGap + DotSize + BorderWidth + CrosshairConfig::VerticalLength)), color & IM_COL32_A_MASK);
+				drawList->AddRectFilled(ImVec2(pos.x - Thickness, pos.y + outlineGap + DotSize), ImVec2(pos.x + 1 + Thickness, pos.y + (outlineGap + DotSize + BorderWidth + MenuConfig::Crosshairs.VerticalLength)), color & IM_COL32_A_MASK);
 			}
 						
 			//circle
-			if (CrosshairConfig::drawCircle)
-				drawList->AddCircle(ImVec2(pos.x, pos.y), CrosshairConfig::CircleRadius, color & IM_COL32_A_MASK, 0, 3.0f);
+			if (MenuConfig::Crosshairs.drawCircle)
+				drawList->AddCircle(ImVec2(pos.x, pos.y), MenuConfig::Crosshairs.CircleRadius, color & IM_COL32_A_MASK, 0, 3.0f);
 		}
 
 		/*
 		===== Crosshair =====
 		*/
 		// dot
-		if (CrosshairConfig::drawDot)
+		if (MenuConfig::Crosshairs.drawDot)
 			drawList->AddRectFilled(ImVec2(pos.x - offset1.x + DotSize, pos.y - offset1.y + DotSize), ImVec2(pos.x + offset1.x, pos.y + offset1.y), color);
 
-		if (CrosshairConfig::drawCrossline)
+		if (MenuConfig::Crosshairs.drawCrossline)
 		{
 			// left
-			drawList->AddRectFilled(ImVec2(pos.x - (gap + CrosshairConfig::HorizontalLength), pos.y - Thickness + 1), ImVec2(pos.x - gap, pos.y + Thickness), color);
+			drawList->AddRectFilled(ImVec2(pos.x - (gap + MenuConfig::Crosshairs.HorizontalLength), pos.y - Thickness + 1), ImVec2(pos.x - gap, pos.y + Thickness), color);
 			// right
-			drawList->AddRectFilled(ImVec2(pos.x + gap + DotSize, pos.y - Thickness + 1), ImVec2(pos.x + (gap + DotSize + CrosshairConfig::HorizontalLength), pos.y + Thickness), color);
+			drawList->AddRectFilled(ImVec2(pos.x + gap + DotSize, pos.y - Thickness + 1), ImVec2(pos.x + (gap + DotSize + MenuConfig::Crosshairs.HorizontalLength), pos.y + Thickness), color);
 			// top
-			if (!CrosshairConfig::tStyle)
-				drawList->AddRectFilled(ImVec2(pos.x - Thickness + 1, pos.y - (gap + CrosshairConfig::VerticalLength)), ImVec2(pos.x + Thickness, pos.y - gap), color);
+			if (!MenuConfig::Crosshairs.tStyle)
+				drawList->AddRectFilled(ImVec2(pos.x - Thickness + 1, pos.y - (gap + MenuConfig::Crosshairs.VerticalLength)), ImVec2(pos.x + Thickness, pos.y - gap), color);
 			// bottom
-			drawList->AddRectFilled(ImVec2(pos.x - Thickness + 1, pos.y + gap + DotSize), ImVec2(pos.x + Thickness, pos.y + (gap + DotSize + CrosshairConfig::VerticalLength)), color);
+			drawList->AddRectFilled(ImVec2(pos.x - Thickness + 1, pos.y + gap + DotSize), ImVec2(pos.x + Thickness, pos.y + (gap + DotSize + MenuConfig::Crosshairs.VerticalLength)), color);
 		}
 		
 		// circle
-		if (CrosshairConfig::drawCircle)
-			drawList->AddCircle(ImVec2(pos.x, pos.y), CrosshairConfig::CircleRadius, color, 0, 1.0f);
+		if (MenuConfig::Crosshairs.drawCircle)
+			drawList->AddCircle(ImVec2(pos.x, pos.y), MenuConfig::Crosshairs.CircleRadius, color, 0, 1.0f);
 	}
 
 	void DrawCrossHair2D()
 	{
 		Vec2 SightPos = Gui.Window.Size / 2;
-		Gui.Line({ SightPos.x - CrosshairConfig::CrossHairSize,SightPos.y }, { SightPos.x + CrosshairConfig::CrossHairSize,SightPos.y }, CrosshairConfig::CrossHairColor, 1);
-		Gui.Line({ SightPos.x,SightPos.y - CrosshairConfig::CrossHairSize }, { SightPos.x ,SightPos.y + CrosshairConfig::CrossHairSize }, CrosshairConfig::CrossHairColor, 1);
+		Gui.Line({ SightPos.x - MenuConfig::Crosshairs.CrossHairSize,SightPos.y }, { SightPos.x + MenuConfig::Crosshairs.CrossHairSize,SightPos.y }, MenuConfig::Crosshairs.CrossHairColor, 1);
+		Gui.Line({ SightPos.x,SightPos.y - MenuConfig::Crosshairs.CrossHairSize }, { SightPos.x ,SightPos.y + MenuConfig::Crosshairs.CrossHairSize }, MenuConfig::Crosshairs.CrossHairColor, 1);
 	}
 
 	void LineToEnemy(ImVec4 Rect, ImColor Color, float Thickness)
@@ -548,85 +548,85 @@ namespace Render
 	{
 		switch (style) {
 		case 1:
-			CrosshairConfig::drawDot = true;
-			CrosshairConfig::DotSize = 2;
-			CrosshairConfig::drawOutLine = true;
-			CrosshairConfig::drawCrossline = false;
-			CrosshairConfig::drawCircle = false;
-			CrosshairConfig::showTargeting = true;
+			MenuConfig::Crosshairs.drawDot = true;
+			MenuConfig::Crosshairs.DotSize = 2;
+			MenuConfig::Crosshairs.drawOutLine = true;
+			MenuConfig::Crosshairs.drawCrossline = false;
+			MenuConfig::Crosshairs.drawCircle = false;
+			MenuConfig::Crosshairs.showTargeting = true;
 			break;
 		case 2:
-			CrosshairConfig::drawDot = true;
-			CrosshairConfig::DotSize = 2;
-			CrosshairConfig::drawOutLine = true;
-			CrosshairConfig::drawCrossline = false;
-			CrosshairConfig::drawCircle = true;
-			CrosshairConfig::CircleRadius = 10.f;
-			CrosshairConfig::showTargeting = true;
+			MenuConfig::Crosshairs.drawDot = true;
+			MenuConfig::Crosshairs.DotSize = 2;
+			MenuConfig::Crosshairs.drawOutLine = true;
+			MenuConfig::Crosshairs.drawCrossline = false;
+			MenuConfig::Crosshairs.drawCircle = true;
+			MenuConfig::Crosshairs.CircleRadius = 10.f;
+			MenuConfig::Crosshairs.showTargeting = true;
 			break;
 		case 3:
-			CrosshairConfig::drawDot = true;
-			CrosshairConfig::DotSize = 1;
-			CrosshairConfig::drawOutLine = true;
-			CrosshairConfig::drawCrossline = true;
-			CrosshairConfig::HorizontalLength = 5;
-			CrosshairConfig::VerticalLength = 5;
-			CrosshairConfig::Gap = 18;
-			CrosshairConfig::tStyle = false;
-			CrosshairConfig::drawCircle = true;
-			CrosshairConfig::CircleRadius = 10.f;
-			CrosshairConfig::showTargeting = true;
-			CrosshairConfig::Thickness = 1;
+			MenuConfig::Crosshairs.drawDot = true;
+			MenuConfig::Crosshairs.DotSize = 1;
+			MenuConfig::Crosshairs.drawOutLine = true;
+			MenuConfig::Crosshairs.drawCrossline = true;
+			MenuConfig::Crosshairs.HorizontalLength = 5;
+			MenuConfig::Crosshairs.VerticalLength = 5;
+			MenuConfig::Crosshairs.Gap = 18;
+			MenuConfig::Crosshairs.tStyle = false;
+			MenuConfig::Crosshairs.drawCircle = true;
+			MenuConfig::Crosshairs.CircleRadius = 10.f;
+			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::Crosshairs.Thickness = 1;
 			break;
 		case 4:
-			CrosshairConfig::drawDot = true;
-			CrosshairConfig::DotSize = 1;
-			CrosshairConfig::drawOutLine = true;
-			CrosshairConfig::drawCrossline = true;
-			CrosshairConfig::HorizontalLength = 5;
-			CrosshairConfig::VerticalLength = 5;
-			CrosshairConfig::Gap = 1;
-			CrosshairConfig::tStyle = false;
-			CrosshairConfig::drawCircle = false;
-			CrosshairConfig::showTargeting = true;
-			CrosshairConfig::Thickness = 1;
+			MenuConfig::Crosshairs.drawDot = true;
+			MenuConfig::Crosshairs.DotSize = 1;
+			MenuConfig::Crosshairs.drawOutLine = true;
+			MenuConfig::Crosshairs.drawCrossline = true;
+			MenuConfig::Crosshairs.HorizontalLength = 5;
+			MenuConfig::Crosshairs.VerticalLength = 5;
+			MenuConfig::Crosshairs.Gap = 1;
+			MenuConfig::Crosshairs.tStyle = false;
+			MenuConfig::Crosshairs.drawCircle = false;
+			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::Crosshairs.Thickness = 1;
 			break;
 		case 5:
-			CrosshairConfig::drawDot = false;
-			CrosshairConfig::drawOutLine = true;
-			CrosshairConfig::drawCrossline = true;
-			CrosshairConfig::HorizontalLength = 7;
-			CrosshairConfig::VerticalLength = 7;
-			CrosshairConfig::Gap = 10;
-			CrosshairConfig::tStyle = false;
-			CrosshairConfig::drawCircle = false;
-			CrosshairConfig::showTargeting = true;
-			CrosshairConfig::Thickness = 1;
+			MenuConfig::Crosshairs.drawDot = false;
+			MenuConfig::Crosshairs.drawOutLine = true;
+			MenuConfig::Crosshairs.drawCrossline = true;
+			MenuConfig::Crosshairs.HorizontalLength = 7;
+			MenuConfig::Crosshairs.VerticalLength = 7;
+			MenuConfig::Crosshairs.Gap = 10;
+			MenuConfig::Crosshairs.tStyle = false;
+			MenuConfig::Crosshairs.drawCircle = false;
+			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::Crosshairs.Thickness = 1;
 			break;
 		case 6:
-			CrosshairConfig::drawDot = true;
-			CrosshairConfig::DotSize = 2;
-			CrosshairConfig::drawOutLine = true;
-			CrosshairConfig::drawCrossline = true;
-			CrosshairConfig::HorizontalLength = 8;
-			CrosshairConfig::VerticalLength = 8;
-			CrosshairConfig::Gap = 20;
-			CrosshairConfig::tStyle = false;
-			CrosshairConfig::drawCircle = false;
-			CrosshairConfig::showTargeting = true;
-			CrosshairConfig::Thickness = 1;
+			MenuConfig::Crosshairs.drawDot = true;
+			MenuConfig::Crosshairs.DotSize = 2;
+			MenuConfig::Crosshairs.drawOutLine = true;
+			MenuConfig::Crosshairs.drawCrossline = true;
+			MenuConfig::Crosshairs.HorizontalLength = 8;
+			MenuConfig::Crosshairs.VerticalLength = 8;
+			MenuConfig::Crosshairs.Gap = 20;
+			MenuConfig::Crosshairs.tStyle = false;
+			MenuConfig::Crosshairs.drawCircle = false;
+			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::Crosshairs.Thickness = 1;
 			break;
 		case 7:
-			CrosshairConfig::drawDot = false;
-			CrosshairConfig::drawOutLine = true;
-			CrosshairConfig::drawCrossline = true;
-			CrosshairConfig::HorizontalLength = 4;
-			CrosshairConfig::VerticalLength = 4;
-			CrosshairConfig::Gap = 13;
-			CrosshairConfig::Thickness = 10;
-			CrosshairConfig::tStyle = false;
-			CrosshairConfig::drawCircle = false;
-			CrosshairConfig::showTargeting = true;
+			MenuConfig::Crosshairs.drawDot = false;
+			MenuConfig::Crosshairs.drawOutLine = true;
+			MenuConfig::Crosshairs.drawCrossline = true;
+			MenuConfig::Crosshairs.HorizontalLength = 4;
+			MenuConfig::Crosshairs.VerticalLength = 4;
+			MenuConfig::Crosshairs.Gap = 13;
+			MenuConfig::Crosshairs.Thickness = 10;
+			MenuConfig::Crosshairs.tStyle = false;
+			MenuConfig::Crosshairs.drawCircle = false;
+			MenuConfig::Crosshairs.showTargeting = true;
 		default:
 			break;
 		}

@@ -12,7 +12,7 @@ namespace MyConfigSaver {
 
     // Function to save the configuration to a file
     void SaveConfig(const std::string& filename) {
-        std::ofstream configFile(MenuConfig::path + '\\' + filename);
+        std::ofstream configFile(MenuConfig::Settings.path + '\\' + filename);
         if (!configFile.is_open()) {
             std::cerr << "[Info] Error: Could not open the configuration file." << std::endl;
             return;
@@ -25,13 +25,13 @@ namespace MyConfigSaver {
         configFile << "MultiColor " << ESPConfig::MultiColor << std::endl;
         configFile << "BoxFilledVisColor " << ESPConfig::BoxFilledVisColor.Value.x << " " << ESPConfig::BoxFilledVisColor.Value.y << " " << ESPConfig::BoxFilledVisColor.Value.z << " " << ESPConfig::BoxFilledVisColor.Value.w << std::endl;
         configFile << "BoxFilledVisCheck " << ESPConfig::FilledVisBox << std::endl;
-        configFile << "SpecList " << MenuConfig::SpecList << std::endl;
-        configFile << "BombTimerCol " << MenuConfig::BombTimerCol.Value.x << " " << MenuConfig::BombTimerCol.Value.y << " " << MenuConfig::BombTimerCol.Value.z << " " << MenuConfig::BombTimerCol.Value.w << std::endl;
-        configFile << "bmbTimer " << MenuConfig::bmbTimer << std::endl;
+        configFile << "SpecList " << MenuConfig::Misc.SpecList << std::endl;
+        configFile << "BombTimerCol " << MenuConfig::Misc.BombTimerCol.Value.x << " " << MenuConfig::Misc.BombTimerCol.Value.y << " " << MenuConfig::Misc.BombTimerCol.Value.z << " " << MenuConfig::Misc.BombTimerCol.Value.w << std::endl;
+        configFile << "bmbTimer " << MenuConfig::Misc.bmbTimer << std::endl;
         configFile << "ESPVisCol " << ESPConfig::VisibleColor.Value.x << " " << ESPConfig::VisibleColor.Value.y << " " << ESPConfig::VisibleColor.Value.z << " " << ESPConfig::VisibleColor.Value.w << std::endl;;
         configFile << "ESPVisCheck " << ESPConfig::VisibleCheck << std::endl;
-        configFile << "GlowColor " << MenuConfig::GlowColor.Value.x << " " << MenuConfig::GlowColor.Value.y << " " << MenuConfig::GlowColor.Value.z << " " << MenuConfig::GlowColor.Value.w << std::endl;
-        configFile << "Glow " << MenuConfig::Glow << std::endl;
+        configFile << "GlowColor " << MenuConfig::Misc.GlowColor.Value.x << " " << MenuConfig::Misc.GlowColor.Value.y << " " << MenuConfig::Misc.GlowColor.Value.z << " " << MenuConfig::Misc.GlowColor.Value.w << std::endl;
+        configFile << "Glow " << MenuConfig::Misc.Glow << std::endl;
         configFile << "AirJump " << MenuConfig::AirJump << std::endl;
         configFile << "MenuStyle " << MenuConfig::MenuStyle << std::endl;
         configFile << "WindowStyle " << MenuConfig::WindowStyle << std::endl;
@@ -71,16 +71,16 @@ namespace MyConfigSaver {
         configFile << "LineToEnemyColor " << MenuConfig::LineToEnemyColor.Value.x << " " << MenuConfig::LineToEnemyColor.Value.y << " " << MenuConfig::LineToEnemyColor.Value.z << " " << MenuConfig::LineToEnemyColor.Value.w << std::endl;
         configFile << "BoxColor " << ESPConfig::BoxColor.Value.x << " " << ESPConfig::BoxColor.Value.y << " " << ESPConfig::BoxColor.Value.z << " " << ESPConfig::BoxColor.Value.w << std::endl;
         configFile << "EyeRayColor " << ESPConfig::EyeRayColor.Value.x << " " << ESPConfig::EyeRayColor.Value.y << " " << ESPConfig::EyeRayColor.Value.z << " " << ESPConfig::EyeRayColor.Value.w << std::endl;
-        configFile << "RadarCrossLineColor " << MenuConfig::RadarCrossLineColor.Value.x << " " << MenuConfig::RadarCrossLineColor.Value.y << " " << MenuConfig::RadarCrossLineColor.Value.z << " " << MenuConfig::RadarCrossLineColor.Value.w << std::endl;
+        configFile << "RadarCrossLineColor " << MenuConfig::Radar.RadarCrossLineColor.Value.x << " " << MenuConfig::Radar.RadarCrossLineColor.Value.y << " " << MenuConfig::Radar.RadarCrossLineColor.Value.z << " " << MenuConfig::Radar.RadarCrossLineColor.Value.w << std::endl;
         configFile << "HeadShootLineColor " << MenuConfig::HeadShootLineColor.Value.x << " " << MenuConfig::HeadShootLineColor.Value.y << " " << MenuConfig::HeadShootLineColor.Value.z << " " << MenuConfig::HeadShootLineColor.Value.w << std::endl;
         configFile << "ShowMenu " << MenuConfig::ShowMenu << std::endl;
-        configFile << "ShowRadar " << MenuConfig::ShowRadar << std::endl;
-        configFile << "RadarRange " << MenuConfig::RadarRange << std::endl;
-        configFile << "RadarPointSizeProportion " << MenuConfig::RadarPointSizeProportion << std::endl;
-        configFile << "RadarBgAlpha " << MenuConfig::RadarBgAlpha << std::endl;
-        configFile << "ShowCrossLine " << MenuConfig::ShowRadarCrossLine << std::endl;
-        configFile << "RadarType " << MenuConfig::RadarType << std::endl;
-        configFile << "Proportion " << MenuConfig::Proportion << std::endl;
+        configFile << "ShowRadar " << MenuConfig::Radar.ShowRadar << std::endl;
+        configFile << "RadarRange " << MenuConfig::Radar.RadarRange << std::endl;
+        configFile << "RadarPointSizeProportion " << MenuConfig::Radar.RadarPointSizeProportion << std::endl;
+        configFile << "RadarBgAlpha " << MenuConfig::Radar.RadarBgAlpha << std::endl;
+        configFile << "ShowCrossLine " << MenuConfig::Radar.ShowRadarCrossLine << std::endl;
+        configFile << "RadarType " << MenuConfig::Radar.RadarType << std::endl;
+        configFile << "Proportion " << MenuConfig::Radar.Proportion << std::endl;
         configFile << "BoxType " << MenuConfig::BoxType << std::endl;
         configFile << "TriggerBot " << MenuConfig::TriggerBot << std::endl;
         configFile << "TriggerAlways " << MenuConfig::TriggerAlways << std::endl;
@@ -88,31 +88,31 @@ namespace MyConfigSaver {
         configFile << "BypassOBS " << MenuConfig::BypassOBS << std::endl;
         configFile << "VisibleCheck " << MenuConfig::VisibleCheck << std::endl;
         configFile << "ShowHeadShootLine " << MenuConfig::ShowHeadShootLine << std::endl;
-        configFile << "ShowCrossHair " << CrosshairConfig::ShowCrossHair << std::endl;
-        configFile << "CrossHairColor " << CrosshairConfig::CrossHairColor.Value.x << " " << CrosshairConfig::CrossHairColor.Value.y << " " << CrosshairConfig::CrossHairColor.Value.z << " " << CrosshairConfig::CrossHairColor.Value.w << std::endl;
-        configFile << "CrossHairSize " << CrosshairConfig::CrossHairSize << std::endl;
-        configFile << "drawDot " << CrosshairConfig::drawDot << std::endl;
-        configFile << "tStyle " << CrosshairConfig::tStyle << std::endl;
-        configFile << "HorizontalLength " << CrosshairConfig::HorizontalLength << std::endl;
-        configFile << "VerticalLength " << CrosshairConfig::VerticalLength << std::endl;
-        configFile << "drawOutLine " << CrosshairConfig::drawOutLine << std::endl;
-        configFile << "drawCrossline " << CrosshairConfig::drawCrossline << std::endl;
-        configFile << "drawCircle " << CrosshairConfig::drawCircle << std::endl;
-        configFile << "showTargeting " << CrosshairConfig::showTargeting << std::endl;
-        configFile << "CircleRadius " << CrosshairConfig::CircleRadius << std::endl;
-        configFile << "TargetedColor " << CrosshairConfig::TargetedColor.Value.x << " " << CrosshairConfig::TargetedColor.Value.y << " " << CrosshairConfig::TargetedColor.Value.z << " " << CrosshairConfig::TargetedColor.Value.w << std::endl;
-        configFile << "Gap " << CrosshairConfig::Gap << std::endl;
-        configFile << "DynamicGap " << CrosshairConfig::DynamicGap << std::endl;
-        configFile << "DotSize " << CrosshairConfig::DotSize << std::endl;
-        configFile << "CrosshairsThickness " << CrosshairConfig::Thickness << std::endl;
-        configFile << "CrosshairsTeamCheck " << CrosshairConfig::TeamCheck << std::endl;
+        configFile << "ShowCrossHair " << MenuConfig::Crosshairs.ShowCrossHair << std::endl;
+        configFile << "CrossHairColor " << MenuConfig::Crosshairs.CrossHairColor.Value.x << " " << MenuConfig::Crosshairs.CrossHairColor.Value.y << " " << MenuConfig::Crosshairs.CrossHairColor.Value.z << " " << MenuConfig::Crosshairs.CrossHairColor.Value.w << std::endl;
+        configFile << "CrossHairSize " << MenuConfig::Crosshairs.CrossHairSize << std::endl;
+        configFile << "drawDot " << MenuConfig::Crosshairs.drawDot << std::endl;
+        configFile << "tStyle " << MenuConfig::Crosshairs.tStyle << std::endl;
+        configFile << "HorizontalLength " << MenuConfig::Crosshairs.HorizontalLength << std::endl;
+        configFile << "VerticalLength " << MenuConfig::Crosshairs.VerticalLength << std::endl;
+        configFile << "drawOutLine " << MenuConfig::Crosshairs.drawOutLine << std::endl;
+        configFile << "drawCrossline " << MenuConfig::Crosshairs.drawCrossline << std::endl;
+        configFile << "drawCircle " << MenuConfig::Crosshairs.drawCircle << std::endl;
+        configFile << "showTargeting " << MenuConfig::Crosshairs.showTargeting << std::endl;
+        configFile << "CircleRadius " << MenuConfig::Crosshairs.CircleRadius << std::endl;
+        configFile << "TargetedColor " << MenuConfig::Crosshairs.TargetedColor.Value.x << " " << MenuConfig::Crosshairs.TargetedColor.Value.y << " " << MenuConfig::Crosshairs.TargetedColor.Value.z << " " << MenuConfig::Crosshairs.TargetedColor.Value.w << std::endl;
+        configFile << "Gap " << MenuConfig::Crosshairs.Gap << std::endl;
+        configFile << "DynamicGap " << MenuConfig::Crosshairs.DynamicGap << std::endl;
+        configFile << "DotSize " << MenuConfig::Crosshairs.DotSize << std::endl;
+        configFile << "CrosshairsThickness " << MenuConfig::Crosshairs.Thickness << std::endl;
+        configFile << "CrosshairsTeamCheck " << MenuConfig::Crosshairs.TeamCheck << std::endl;
 
-        configFile << "BunnyHop " << MenuConfig::BunnyHop << std::endl;
-        configFile << "WorkInSpec " << MenuConfig::WorkInSpec << std::endl;
-        configFile << "NoFlash" << MenuConfig::NoFlash << std::endl;
-        configFile << "WaterMark " << MenuConfig::WaterMark << std::endl;
-        configFile << "CheatList " << MenuConfig::CheatList << std::endl;
-        configFile << "HitSound " << MenuConfig::HitSound << std::endl;
+        configFile << "BunnyHop " << MenuConfig::Misc.BunnyHop << std::endl;
+        configFile << "WorkInSpec " << MenuConfig::Misc.WorkInSpec << std::endl;
+        configFile << "NoFlash" << MenuConfig::Misc.NoFlash << std::endl;
+        configFile << "WaterMark " << MenuConfig::Misc.WaterMark << std::endl;
+        configFile << "CheatList " << MenuConfig::Misc.CheatList << std::endl;
+        configFile << "HitSound " << MenuConfig::Misc.HitSound << std::endl;
 
         configFile << "ESPenabled " << ESPConfig::ESPenbled << std::endl;
         configFile << "DrawFov " << ESPConfig::DrawFov << std::endl;
@@ -122,17 +122,17 @@ namespace MyConfigSaver {
         configFile << "PenisSize " << ESPConfig::PenisSize << std::endl;
         configFile << "PenisLength " << ESPConfig::PenisLength << std::endl;
         configFile << "SnaplinePos " << MenuConfig::LinePos << std::endl;
-        configFile << "CustomRadar " << MenuConfig::customRadar << std::endl;
+        configFile << "CustomRadar " << MenuConfig::Radar.customRadar << std::endl;
         configFile << "MenuStyle " << MenuConfig::MenuStyle << std::endl;
 
 
         configFile.close();
-        std::cout << "[Info] Configuration saved to " << MenuConfig::path + '\\' + filename << std::endl;
+        std::cout << "[Info] Configuration saved to " << MenuConfig::Settings.path + '\\' + filename << std::endl;
     }
 
     // Function to load the configuration from a file
     void LoadConfig(const std::string& filename) {
-        std::ifstream configFile(MenuConfig::path + '\\' + filename);
+        std::ifstream configFile(MenuConfig::Settings.path + '\\' + filename);
         if (!configFile.is_open()) {
             std::cerr << "[Info] Error: Could not open the configuration file." << std::endl;
             return;
@@ -150,13 +150,13 @@ namespace MyConfigSaver {
                 else if (key == "BoxFilledColor2") iss >> ESPConfig::FilledColor2.Value.x >> ESPConfig::FilledColor2.Value.y >> ESPConfig::FilledColor2.Value.z >> ESPConfig::FilledColor2.Value.w;
                 else if (key == "BoxFilledVisColor") iss >> ESPConfig::BoxFilledVisColor.Value.x >> ESPConfig::BoxFilledVisColor.Value.y >> ESPConfig::BoxFilledVisColor.Value.z >> ESPConfig::BoxFilledVisColor.Value.w;
                 else if (key == "BoxFilledVisCheck") iss >> ESPConfig::FilledVisBox;
-                else if (key == "SpecList") iss >> MenuConfig::SpecList;
-                else if (key == "BombTimerCol") iss >> MenuConfig::BombTimerCol.Value.x >> MenuConfig::BombTimerCol.Value.y >> MenuConfig::BombTimerCol.Value.z >> MenuConfig::BombTimerCol.Value.w;
-                else if (key == "bmbTimer") iss >> MenuConfig::bmbTimer;
+                else if (key == "SpecList") iss >> MenuConfig::Misc.SpecList;
+                else if (key == "BombTimerCol") iss >> MenuConfig::Misc.BombTimerCol.Value.x >> MenuConfig::Misc.BombTimerCol.Value.y >> MenuConfig::Misc.BombTimerCol.Value.z >> MenuConfig::Misc.BombTimerCol.Value.w;
+                else if (key == "bmbTimer") iss >> MenuConfig::Misc.bmbTimer;
                 else if (key == "ESPVisCol") iss >> ESPConfig::VisibleColor.Value.x >> ESPConfig::VisibleColor.Value.y >> ESPConfig::VisibleColor.Value.z >> ESPConfig::VisibleColor.Value.w;
                 else if (key == "ESPVisCheck") iss >> ESPConfig::VisibleCheck;
-                else if (key == "GlowColor") iss >> MenuConfig::GlowColor.Value.x >> MenuConfig::GlowColor.Value.y >> MenuConfig::GlowColor.Value.z >> MenuConfig::GlowColor.Value.w;
-                else if (key == "Glow") iss >> MenuConfig::Glow;
+                else if (key == "GlowColor") iss >> MenuConfig::Misc.GlowColor.Value.x >> MenuConfig::Misc.GlowColor.Value.y >> MenuConfig::Misc.GlowColor.Value.z >> MenuConfig::Misc.GlowColor.Value.w;
+                else if (key == "Glow") iss >> MenuConfig::Misc.Glow;
                 else if (key == "AirJump") iss >> MenuConfig::AirJump;
                 else if (key == "MenuStyle") iss >> MenuConfig::MenuStyle;
                 else if (key == "WindowStyle") iss >> MenuConfig::WindowStyle;
@@ -195,16 +195,16 @@ namespace MyConfigSaver {
                 else if (key == "LineToEnemyColor") iss >> MenuConfig::LineToEnemyColor.Value.x >> MenuConfig::LineToEnemyColor.Value.y >> MenuConfig::LineToEnemyColor.Value.z >> MenuConfig::LineToEnemyColor.Value.w;
                 else if (key == "BoxColor") iss >> ESPConfig::BoxColor.Value.x >> ESPConfig::BoxColor.Value.y >> ESPConfig::BoxColor.Value.z >> ESPConfig::BoxColor.Value.w;
                 else if (key == "EyeRayColor") iss >> ESPConfig::EyeRayColor.Value.x >> ESPConfig::EyeRayColor.Value.y >> ESPConfig::EyeRayColor.Value.z >> ESPConfig::EyeRayColor.Value.w;
-                else if (key == "CrossLineColor") iss >> MenuConfig::RadarCrossLineColor.Value.x >> MenuConfig::RadarCrossLineColor.Value.y >> MenuConfig::RadarCrossLineColor.Value.z >> MenuConfig::RadarCrossLineColor.Value.w;
+                else if (key == "CrossLineColor") iss >> MenuConfig::Radar.RadarCrossLineColor.Value.x >> MenuConfig::Radar.RadarCrossLineColor.Value.y >> MenuConfig::Radar.RadarCrossLineColor.Value.z >> MenuConfig::Radar.RadarCrossLineColor.Value.w;
                 else if (key == "HeadShootLineColor") iss >> MenuConfig::HeadShootLineColor.Value.x >> MenuConfig::HeadShootLineColor.Value.y >> MenuConfig::HeadShootLineColor.Value.z >> MenuConfig::HeadShootLineColor.Value.w;
                 else if (key == "ShowMenu") iss >> MenuConfig::ShowMenu;
-                else if (key == "ShowRadar") iss >> MenuConfig::ShowRadar;
-                else if (key == "RadarRange") iss >> MenuConfig::RadarRange;
-                else if (key == "RadarPointSizeProportion") iss >> MenuConfig::RadarPointSizeProportion;
-                else if (key == "RadarBgAlpha") iss >> MenuConfig::RadarBgAlpha;
-                else if (key == "ShowCrossLine") iss >> MenuConfig::ShowRadarCrossLine;
-                else if (key == "RadarType") iss >> MenuConfig::RadarType;
-                else if (key == "Proportion") iss >> MenuConfig::Proportion;
+                else if (key == "ShowRadar") iss >> MenuConfig::Radar.ShowRadar;
+                else if (key == "RadarRange") iss >> MenuConfig::Radar.RadarRange;
+                else if (key == "RadarPointSizeProportion") iss >> MenuConfig::Radar.RadarPointSizeProportion;
+                else if (key == "RadarBgAlpha") iss >> MenuConfig::Radar.RadarBgAlpha;
+                else if (key == "ShowCrossLine") iss >> MenuConfig::Radar.ShowRadarCrossLine;
+                else if (key == "RadarType") iss >> MenuConfig::Radar.RadarType;
+                else if (key == "Proportion") iss >> MenuConfig::Radar.Proportion;
                 else if (key == "BoxType") iss >> MenuConfig::BoxType;
                 else if (key == "TriggerBot") iss >> MenuConfig::TriggerBot;
                 else if (key == "TriggerAlways") iss >> MenuConfig::TriggerAlways;
@@ -212,31 +212,31 @@ namespace MyConfigSaver {
                 else if (key == "BypassOBS") iss >> MenuConfig::BypassOBS;
                 else if (key == "VisibleCheck") iss >> MenuConfig::VisibleCheck;
                 else if (key == "ShowHeadShootLine") iss >> MenuConfig::ShowHeadShootLine;
-                else if (key == "ShowCrossHair") iss >> CrosshairConfig::ShowCrossHair;
-                else if (key == "CrossHairColor") iss >> CrosshairConfig::CrossHairColor.Value.x >> CrosshairConfig::CrossHairColor.Value.y >> CrosshairConfig::CrossHairColor.Value.z >> CrosshairConfig::CrossHairColor.Value.w;
-                else if (key == "CrossHairSize") iss >> CrosshairConfig::CrossHairSize;
-                else if (key == "drawDot") iss >> CrosshairConfig::drawDot;
-                else if (key == "tStyle") iss >> CrosshairConfig::tStyle;
-                else if (key == "HorizontalLength") iss >> CrosshairConfig::HorizontalLength;
-                else if (key == "VerticalLength") iss >> CrosshairConfig::VerticalLength;
-                else if (key == "drawOutLine") iss >> CrosshairConfig::drawOutLine;
-                else if (key == "Gap") iss >> CrosshairConfig::Gap;
-                else if (key == "drawCrossline") iss >> CrosshairConfig::drawCrossline;
-                else if (key == "drawCircle") iss >> CrosshairConfig::drawCircle;
-                else if (key == "showTargeting") iss >> CrosshairConfig::showTargeting;
-                else if (key == "CircleRadius") iss >> CrosshairConfig::CircleRadius;
-                else if (key == "TargetedColor") iss >> CrosshairConfig::TargetedColor.Value.x >> CrosshairConfig::TargetedColor.Value.y >> CrosshairConfig::TargetedColor.Value.z >> CrosshairConfig::TargetedColor.Value.w;
-                else if (key == "DynamicGap") iss >> CrosshairConfig::DynamicGap;
-                else if (key == "DotSize") iss >> CrosshairConfig::DotSize;
-                else if (key == "CrosshairsThickness") iss >> CrosshairConfig::Thickness;
-                else if (key == "CrosshairsTeamCheck") iss >> CrosshairConfig::TeamCheck;
+                else if (key == "ShowCrossHair") iss >> MenuConfig::Crosshairs.ShowCrossHair;
+                else if (key == "CrossHairColor") iss >> MenuConfig::Crosshairs.CrossHairColor.Value.x >> MenuConfig::Crosshairs.CrossHairColor.Value.y >> MenuConfig::Crosshairs.CrossHairColor.Value.z >> MenuConfig::Crosshairs.CrossHairColor.Value.w;
+                else if (key == "CrossHairSize") iss >> MenuConfig::Crosshairs.CrossHairSize;
+                else if (key == "drawDot") iss >> MenuConfig::Crosshairs.drawDot;
+                else if (key == "tStyle") iss >> MenuConfig::Crosshairs.tStyle;
+                else if (key == "HorizontalLength") iss >> MenuConfig::Crosshairs.HorizontalLength;
+                else if (key == "VerticalLength") iss >> MenuConfig::Crosshairs.VerticalLength;
+                else if (key == "drawOutLine") iss >> MenuConfig::Crosshairs.drawOutLine;
+                else if (key == "Gap") iss >> MenuConfig::Crosshairs.Gap;
+                else if (key == "drawCrossline") iss >> MenuConfig::Crosshairs.drawCrossline;
+                else if (key == "drawCircle") iss >> MenuConfig::Crosshairs.drawCircle;
+                else if (key == "showTargeting") iss >> MenuConfig::Crosshairs.showTargeting;
+                else if (key == "CircleRadius") iss >> MenuConfig::Crosshairs.CircleRadius;
+                else if (key == "TargetedColor") iss >> MenuConfig::Crosshairs.TargetedColor.Value.x >> MenuConfig::Crosshairs.TargetedColor.Value.y >> MenuConfig::Crosshairs.TargetedColor.Value.z >> MenuConfig::Crosshairs.TargetedColor.Value.w;
+                else if (key == "DynamicGap") iss >> MenuConfig::Crosshairs.DynamicGap;
+                else if (key == "DotSize") iss >> MenuConfig::Crosshairs.DotSize;
+                else if (key == "CrosshairsThickness") iss >> MenuConfig::Crosshairs.Thickness;
+                else if (key == "CrosshairsTeamCheck") iss >> MenuConfig::Crosshairs.TeamCheck;
 
-                else if (key == "BunnyHop") iss >> MenuConfig::BunnyHop;
-                else if (key == "WorkInSpec") iss >> MenuConfig::WorkInSpec;
-                else if (key == "NoFlash") iss >> MenuConfig::NoFlash;
-                else if (key == "WaterMark") iss >> MenuConfig::WaterMark;
-                else if (key == "CheatList") iss >> MenuConfig::CheatList;
-                else if (key == "HitSound") iss >> MenuConfig::HitSound;
+                else if (key == "BunnyHop") iss >> MenuConfig::Misc.BunnyHop;
+                else if (key == "WorkInSpec") iss >> MenuConfig::Misc.WorkInSpec;
+                else if (key == "NoFlash") iss >> MenuConfig::Misc.NoFlash;
+                else if (key == "WaterMark") iss >> MenuConfig::Misc.WaterMark;
+                else if (key == "CheatList") iss >> MenuConfig::Misc.CheatList;
+                else if (key == "HitSound") iss >> MenuConfig::Misc.HitSound;
 
                 else if (key == "ESPenabled") iss >> ESPConfig::ESPenbled;
                 else if (key == "DrawFov") iss >> ESPConfig::DrawFov;
@@ -246,13 +246,13 @@ namespace MyConfigSaver {
                 else if (key == "PenisSize") iss >> ESPConfig::PenisSize;
                 else if (key == "PenisLength") iss >> ESPConfig::PenisLength;
                 else if (key == "SnaplinePos") iss >> MenuConfig::LinePos;
-                else if (key == "CustomRadar") iss >> MenuConfig::customRadar;
+                else if (key == "CustomRadar") iss >> MenuConfig::Radar.customRadar;
                 else if (key == "MenuStyle") iss >> MenuConfig::MenuStyle;
 
             }
         }
 
         configFile.close();
-        std::cout << "[Info] Configuration loaded from " << MenuConfig::path + '\\' + filename << std::endl;
+        std::cout << "[Info] Configuration loaded from " << MenuConfig::Settings.path + '\\' + filename << std::endl;
     }
 } // namespace ConfigSaver

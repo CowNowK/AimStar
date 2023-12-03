@@ -26,7 +26,7 @@ namespace OSImGui
 #endif
 	};
 
-	static D3DDevice g_Device;
+	inline D3DDevice g_Device;
 
 	enum WindowType
 	{

@@ -4,7 +4,7 @@
 
 void Misc::CheatList() noexcept
 {
-	if (!MenuConfig::CheatList)
+	if (!MenuConfig::Misc.CheatList)
 		return;
 
 	ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
@@ -16,25 +16,25 @@ void Misc::CheatList() noexcept
 	if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
 		ImGui::Text("Aimbot [Toggle]");
 	CheatText("RCS", MenuConfig::RCS);
-	CheatText("Glow", MenuConfig::Glow);
-	CheatText("Radar", MenuConfig::ShowRadar);
+	CheatText("Glow", MenuConfig::Misc.Glow);
+	CheatText("Radar", MenuConfig::Radar.ShowRadar);
 	if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
 		ImGui::Text("TriggerBot [Toggle]");
 
-	CheatText("Crosshair", CrosshairConfig::ShowCrossHair);
+	CheatText("Crosshair", MenuConfig::Crosshairs.ShowCrossHair);
 	CheatText("Headshot Line", MenuConfig::ShowHeadShootLine);
-	CheatText("No Flash", MenuConfig::NoFlash);
-	CheatText("Bhop", MenuConfig::BunnyHop);
-	CheatText("HitSound", MenuConfig::HitSound);
-	CheatText("Bomb Timer", MenuConfig::bmbTimer);
-	CheatText("Spec List", MenuConfig::SpecList);
+	CheatText("No Flash", MenuConfig::Misc.NoFlash);
+	CheatText("Bhop", MenuConfig::Misc.BunnyHop);
+	CheatText("HitSound", MenuConfig::Misc.HitSound);
+	CheatText("Bomb Timer", MenuConfig::Misc.bmbTimer);
+	CheatText("Spec List", MenuConfig::Misc.SpecList);
 
 	ImGui::End();
 }
 
 void Misc::Watermark() noexcept
 {
-	if (!MenuConfig::WaterMark)
+	if (!MenuConfig::Misc.WaterMark)
 		return;
 
 //	globalvars GV;
@@ -56,10 +56,10 @@ void Misc::Watermark() noexcept
 
 void Misc::HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept
 {
-	if (!MenuConfig::HitSound)
+	if (!MenuConfig::Misc.HitSound)
 		return;
 
-	std::string soundDir = MenuConfig::SoundPath + "\\Hit.wav";
+	std::string soundDir = MenuConfig::Settings.SoundPath + "\\Hit.wav";
 	std::wstring sound = Misc::STR2LPCWSTR(soundDir);
 
 	uintptr_t pBulletServices;
@@ -83,7 +83,7 @@ void Misc::HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcep
 
 void Misc::NoFlash(const CEntity& aLocalPlayer) noexcept
 {
-	if (!MenuConfig::NoFlash)
+	if (!MenuConfig::Misc.NoFlash)
 		return;
 
 	float duration = 0.0f;
@@ -96,14 +96,4 @@ void Misc::EdgeJump(const CEntity& aLocalPlayer) noexcept
 	float Gravity;
 	ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Entity.GravityScale, Gravity);
 	std::cout << Gravity << std::endl;
-}
-
-void Misc::Invincible(const CEntity& Player) noexcept
-{
-	if (!MenuConfig::infinity)
-		return;
-
-	float Health;
-	ProcessMgr.ReadMemory(Player.Pawn.Address + Offset::ServerPawn.CurrentHealth, Health);
-
 }

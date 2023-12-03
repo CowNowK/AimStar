@@ -4,8 +4,67 @@
 
 namespace MenuConfig
 {
-	inline std::string path = "";
-	inline std::string SoundPath = "";
+	struct {
+		std::string path = "";
+		std::string SoundPath = "";
+	} Settings;
+	
+	struct {
+		bool BunnyHop = false;
+		bool WorkInSpec = true;
+		bool NoFlash = false;
+		bool WaterMark = false;
+		bool CheatList = false;
+		bool HitSound = false;
+		bool SkinChanger = false;
+		bool Glow = false;
+		bool bmbTimer = false;
+		bool SpecList = false;
+		ImColor BombTimerCol = ImColor(255, 120, 0, 255);
+		ImColor GlowColor = ImColor(255, 0, 0, 100);
+	} Misc;
+
+	struct {
+		bool ShowRadar = false;
+		float RadarRange = 150;
+		float RadarPointSizeProportion = 1.f;
+		bool ShowRadarCrossLine = false;
+		ImColor RadarCrossLineColor = ImColor(220, 220, 220, 255);
+		// 0: circle 1: arrow 2: circle with arrow
+		int RadarType = 2;
+		float Proportion = 3300.f;
+		bool customRadar = false;
+		float RadarBgAlpha = 0.1f;
+	} Radar;
+
+	struct {
+		float CrossHairSize = 75;
+
+		bool ShowCrossHair = false;
+		bool drawDot = true;
+		bool drawCrossline = true;
+		bool tStyle = false;
+		bool drawCircle = false;
+		bool drawOutLine = true;
+		bool showTargeting = false;
+		bool DynamicGap = false;
+		bool TeamCheck = true;
+
+		int crosshairPreset = 0;
+		int Gap = 8;
+		int HorizontalLength = 6;
+		int VerticalLength = 6;
+		int Thickness = 1.0f;
+		float DotSize = 1.0f;
+		float CircleRadius = 3.f;
+
+		bool isAim = false;
+		bool isJump = false;
+
+		ImColor CrossHairColor = ImColor(0, 255, 0, 255);
+		ImColor TargetedColor = ImColor(255, 0, 0, 255);
+	} Crosshairs;
+
 	// 0: English 1: SimplifiedChinese
 	inline int Language = 0;
 
@@ -39,17 +98,6 @@ namespace MenuConfig
 
 	inline bool ShowMenu = true;
 
-	inline bool ShowRadar = false;
-	inline float RadarRange = 150;
-	inline float RadarPointSizeProportion = 1.f;
-	inline bool ShowRadarCrossLine = false;
-	inline ImColor RadarCrossLineColor = ImColor(220, 220, 220, 255);
-	// 0: circle 1: arrow 2: circle with arrow
-	inline int RadarType = 2;
-	inline float Proportion = 3300.f;
-	inline bool customRadar = false;
-	inline float RadarBgAlpha = 0.1f;
-
 	inline bool TriggerBot = false;
 	inline bool TriggerAlways = false;
 	inline int TriggerHotKey = 0;
@@ -67,50 +115,6 @@ namespace MenuConfig
 	inline ImColor LineToEnemyColor = ImColor(255, 255, 255, 220);
 
 	inline bool BypassOBS = false;
-
-	inline bool BunnyHop = false;
-	inline bool WorkInSpec = true;
-	inline bool NoFlash = false;
-	inline bool WaterMark = false;
-	inline bool CheatList = false;
-	inline bool HitSound = false;
-	inline bool SkinChanger = false;
-	inline bool Glow = false;
-	inline bool bmbTimer = false;
-	inline bool infinity = false;
-	inline bool SpecList = false;
-	inline ImColor BombTimerCol = ImColor(255, 120, 0, 255);
-	inline ImColor GlowColor = ImColor(255, 0, 0, 100);
-
-}
-
-namespace CrosshairConfig
-{
-	inline float CrossHairSize = 75;
-
-	inline bool ShowCrossHair = false;
-	inline bool drawDot = true;
-	inline bool drawCrossline = true;
-	inline bool tStyle = false;
-	inline bool drawCircle = false;
-	inline bool drawOutLine = true;
-	inline bool showTargeting = false;
-	inline bool DynamicGap = false;
-	inline bool TeamCheck = true;
-
-	inline int crosshairPreset = 0;
-	inline int Gap = 8;
-	inline int HorizontalLength = 6;
-	inline int VerticalLength = 6;
-	inline int Thickness = 1.0f;
-	inline float DotSize = 1.0f;
-	inline float CircleRadius = 3.f;
-
-	inline bool isAim = false;
-	inline bool isJump = false;
-	
-	inline ImColor CrossHairColor = ImColor(0, 255, 0, 255);
-	inline ImColor TargetedColor = ImColor(255, 0, 0, 255);
 }
 
 namespace ESPConfig

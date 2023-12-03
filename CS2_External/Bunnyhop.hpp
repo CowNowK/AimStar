@@ -12,7 +12,7 @@ namespace Bunnyhop
 
 	inline void Run(const CEntity& Local)
 	{
-		if (!MenuConfig::BunnyHop)
+		if (!MenuConfig::Misc.BunnyHop)
 			return;
 
 		if (GetAsyncKeyState(VK_SPACE) && AirCheck(Local))

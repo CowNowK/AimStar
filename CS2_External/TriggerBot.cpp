@@ -56,7 +56,7 @@ void TriggerBot::TargetCheck(const CEntity& LocalEntity) noexcept
 {
 	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::Pawn.iIDEntIndex, uHandle) || uHandle == -1)
 	{
-		CrosshairConfig::isAim = false;
+		MenuConfig::Crosshairs.isAim = false;
 	}
 	else
 	{
@@ -67,11 +67,11 @@ void TriggerBot::TargetCheck(const CEntity& LocalEntity) noexcept
 			{
 				if (Entity.UpdatePawn(PawnAddress))
 				{
-					CrosshairConfig::isAim = CrosshairConfig::TeamCheck ? (LocalEntity.Pawn.TeamID != Entity.Pawn.TeamID) : true;
+					MenuConfig::Crosshairs.isAim = MenuConfig::Crosshairs.TeamCheck ? (LocalEntity.Pawn.TeamID != Entity.Pawn.TeamID) : true;
 					return;
 				}
 			}
 		}
-		CrosshairConfig::isAim = false;
+		MenuConfig::Crosshairs.isAim = false;
 	}
 }
