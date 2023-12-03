@@ -34,46 +34,46 @@ void Cheats::KeyCheckThread()
 void Cheats::RadarSetting(Base_Radar& Radar)
 {
 	// Radar window
-	ImGui::SetNextWindowBgAlpha(MenuConfig::RadarBgAlpha);
+	ImGui::SetNextWindowBgAlpha(MenuConfig::Radar.RadarBgAlpha);
 	ImGui::Begin("Radar", 0, ImGuiWindowFlags_NoResize);
-	ImGui::SetWindowSize({ MenuConfig::RadarRange * 2,MenuConfig::RadarRange * 2 });
+	ImGui::SetWindowSize({ MenuConfig::Radar.RadarRange * 2,MenuConfig::Radar.RadarRange * 2 });
 	
-	if (!MenuConfig::customRadar)
+	if (!MenuConfig::Radar.customRadar)
 	{
 		ImGui::SetWindowPos(ImVec2(0, 0));
-		MenuConfig::ShowRadarCrossLine = false;
-		MenuConfig::Proportion = 3300.f;
-		MenuConfig::RadarPointSizeProportion = 1.f;
-		MenuConfig::RadarRange = 150.f;
-		MenuConfig::RadarBgAlpha = 0.1f;
+		MenuConfig::Radar.ShowRadarCrossLine = false;
+		MenuConfig::Radar.Proportion = 3300.f;
+		MenuConfig::Radar.RadarPointSizeProportion = 1.f;
+		MenuConfig::Radar.RadarRange = 150.f;
+		MenuConfig::Radar.RadarBgAlpha = 0.1f;
 	}
 		
 
 	// Radar.SetPos({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
 	Radar.SetDrawList(ImGui::GetWindowDrawList());
-	Radar.SetPos({ ImGui::GetWindowPos().x + MenuConfig::RadarRange, ImGui::GetWindowPos().y + MenuConfig::RadarRange });
-	Radar.SetProportion(MenuConfig::Proportion);
-	Radar.SetRange(MenuConfig::RadarRange);
-	Radar.SetSize(MenuConfig::RadarRange * 2);
-	Radar.SetCrossColor(MenuConfig::RadarCrossLineColor);
+	Radar.SetPos({ ImGui::GetWindowPos().x + MenuConfig::Radar.RadarRange, ImGui::GetWindowPos().y + MenuConfig::Radar.RadarRange });
+	Radar.SetProportion(MenuConfig::Radar.Proportion);
+	Radar.SetRange(MenuConfig::Radar.RadarRange);
+	Radar.SetSize(MenuConfig::Radar.RadarRange * 2);
+	Radar.SetCrossColor(MenuConfig::Radar.RadarCrossLineColor);
 
-	Radar.ArcArrowSize *= MenuConfig::RadarPointSizeProportion;
-	Radar.ArrowSize *= MenuConfig::RadarPointSizeProportion;
-	Radar.CircleSize *= MenuConfig::RadarPointSizeProportion;
+	Radar.ArcArrowSize *= MenuConfig::Radar.RadarPointSizeProportion;
+	Radar.ArrowSize *= MenuConfig::Radar.RadarPointSizeProportion;
+	Radar.CircleSize *= MenuConfig::Radar.RadarPointSizeProportion;
 
-	Radar.ShowCrossLine = MenuConfig::ShowRadarCrossLine;
+	Radar.ShowCrossLine = MenuConfig::Radar.ShowRadarCrossLine;
 	Radar.Opened = true;
 }
 
 void Cheats::RenderCrossHair(ImDrawList* drawList) noexcept
 {
-	if (!CrosshairConfig::ShowCrossHair)
+	if (!MenuConfig::Crosshairs.ShowCrossHair)
 		return;
 
-	if(CrosshairConfig::isAim && CrosshairConfig::showTargeting)
-		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(CrosshairConfig::TargetedColor));
+	if(MenuConfig::Crosshairs.isAim && MenuConfig::Crosshairs.showTargeting)
+		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(MenuConfig::Crosshairs.TargetedColor));
 	else
-		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(CrosshairConfig::CrossHairColor));
+		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(MenuConfig::Crosshairs.CrossHairColor));
 }
 
 void Cheats::Run()
@@ -94,10 +94,6 @@ void Cheats::Run()
 			GUI::RenderMenu();
 			ESP::PreviewWindow();
 		}
-		else {
-			GUI::RenderVapeMenu();
-		}
-
 	}
 		
 
@@ -124,9 +120,9 @@ void Cheats::Run()
 	static int LocalPlayerControllerIndex = 1;
 	if (!LocalEntity.UpdateController(LocalControllerAddress))
 		return;
-	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MenuConfig::WorkInSpec)
+	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MenuConfig::Misc.WorkInSpec)
 		return;
-	if (!ServerEntity.UpdateServerPawn(ServerPawnAddress) && !MenuConfig::WorkInSpec)
+	if (!ServerEntity.UpdateServerPawn(ServerPawnAddress) && !MenuConfig::Misc.WorkInSpec)
 		return;
 
 	// HealthBar Map
@@ -141,7 +137,7 @@ void Cheats::Run()
 
 	// Radar Data
 	Base_Radar Radar;
-	if (MenuConfig::ShowRadar)
+	if (MenuConfig::Radar.ShowRadar)
 		RadarSetting(Radar);
 
 	for (int i = 0; i < 64; i++)
@@ -169,8 +165,8 @@ void Cheats::Run()
 
 
 		// Add entity to radar
-		if (MenuConfig::ShowRadar)
-			Radar.AddPoint(LocalEntity.Pawn.Pos, LocalEntity.Pawn.ViewAngle.y, Entity.Pawn.Pos, ImColor(237, 85, 106, 200), MenuConfig::RadarType, Entity.Pawn.ViewAngle.y);
+		if (MenuConfig::Radar.ShowRadar)
+			Radar.AddPoint(LocalEntity.Pawn.Pos, LocalEntity.Pawn.ViewAngle.y, Entity.Pawn.Pos, ImColor(237, 85, 106, 200), MenuConfig::Radar.RadarType, Entity.Pawn.ViewAngle.y);
 
 		if (!Entity.IsInScreen())
 			continue;
@@ -237,7 +233,7 @@ void Cheats::Run()
 	}
 	
 	// Radar render
-	if(MenuConfig::ShowRadar)
+	if(MenuConfig::Radar.ShowRadar)
 	{
 		Radar.Render();
 		ImGui::End();
