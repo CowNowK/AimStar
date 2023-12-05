@@ -9,6 +9,8 @@
 </p>
 <h4 align="center">
   ⛔ USE AT YOUR OWN RISK ⛔
+  Status: Broken
+  Will be fixed on weekends
 </h4>
 
 ## ❗ Info
