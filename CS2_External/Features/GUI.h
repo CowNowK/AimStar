@@ -377,7 +377,6 @@ namespace GUI
 
 		}ImGui::End();
 	}
-
 	void RenderVapeMenu()
 	{
 		// ESP
