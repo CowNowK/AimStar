@@ -51,6 +51,7 @@ namespace AimControl
         Distance = sqrt(pow(OppPos.x, 2) + pow(OppPos.y, 2));
 
         Length = sqrt(Distance * Distance + OppPos.z * OppPos.z);
+        // RCS by @Tairitsu
         if (MenuConfig::RCS)
         {
             RCS::GetAngles(Local, Angles);

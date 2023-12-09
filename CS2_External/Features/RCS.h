@@ -1,5 +1,3 @@
-// Not available
-// The angles returned is only use for memory writing
 #pragma once
 #include <math.h>
 #include "..\Entity.h"
@@ -18,7 +16,6 @@ namespace RCS
 		int ScreenCenterX = Gui.Window.Size.x / 2;
 		int ScreenCenterY = Gui.Window.Size.y / 2;
 
-		// rcs algorithm in CS:GO
 		if (shotsFired)
 		{
 			uintptr_t clientState;

@@ -7,6 +7,58 @@
 
 namespace ESP
 {
+	struct WeaponIconSize
+	{
+		float width;
+		float height;
+		float offsetX;
+		float offsetY;
+	};
+	std::unordered_map<std::string, WeaponIconSize> weaponIconSizes = {
+		{"knife", {20.0f, 20.0f, -8.0f, 0.0f}},
+		{"deagle", {20.0f, 20.0f, -8.0f, 0.0f}},
+		{"elite", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"fiveseven", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"glock", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"revolver", {20.0f, 20.0f, -5.0f, 0.0f}},
+		{"hkp2000", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"p250", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"usp_silencer", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"tec9", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"cz75a", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"mac10", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"ump45", {20.0f, 20.0f, -10.0f, 0.0f}},
+		{"bizon", {20.0f, 20.0f, -10.0f, 0.0f}},
+		{"mp7", {20.0f, 20.0f, -5.0f, 0.0f}},
+		{"mp9", {20.0f, 20.0f, -10.0f, 0.0f}},
+		{"p90", {20.0f, 20.0f, -10.0f, 0.0f}},
+		{"galilar", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"famas", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"m4a1_silencer", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"m4a1", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"aug", {20.0f, 20.0f, -10.0f, 0.0f}},
+		{"sg556", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"ak47", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"g3sg1", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"scar20", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"awp", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"ssg08", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"xm1014", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"sawedoff", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"mag7", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"nova", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"negev", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"m249", {20.0f, 20.0f, -15.0f, 0.0f}},
+		{"taser", {20.0f, 20.0f, 0.0f, 0.0f}},
+		{"flashbang", {20.0f, 20.0f, 5.0f, 0.0f}},
+		{"hegrenade", {20.0f, 20.0f, 5.0f, 0.0f}},
+		{"smokegrenade", {20.0f, 20.0f, 5.0f, 0.0f}},
+		{"molotov", {20.0f, 20.0f, 5.0f, 0.0f}},
+		{"decoy", {20.0f, 20.0f, 5.0f, 0.0f}},
+		{"incgrenade", {20.0f, 20.0f, 5.0f, 0.0f}},
+		{"c4", {20.0f, 20.0f, 0.0f, 0.0f}},
+	};
+
 	ImVec4 GetBoxRect(const CEntity& Entity, int BoxType)
 	{
 		ImVec4 Rect;
@@ -55,6 +107,8 @@ namespace ESP
 
 	void RenderPlayerESP(const CEntity& LocalEntity, const CEntity& Entity, ImVec4 Rect, int LocalPlayerControllerIndex, int Index)
 	{
+		std::string weaponIcon = GunIcon(Entity.Pawn.WeaponName);
+
 		Render::DrawBone(Entity, ESPConfig::BoneColor, 1.3f);
 		Render::ShowPenis(Entity, ESPConfig::PenisLength, ESPConfig::PenisColor, ESPConfig::PenisSize);
 		Render::ShowLosLine(Entity, 50.0f, ESPConfig::EyeRayColor, 1.3f);
@@ -146,10 +200,14 @@ namespace ESP
 
 		if (ESPConfig::ShowWeaponESP)
 		{
-			Gui.StrokeText(Entity.Pawn.WeaponName, { Rect.x + Rect.z / 2,Rect.y + Rect.w }, ImColor(255, 255, 255, 255), 14, true);
+			if (MenuConfig::HealthBarType == 0 || MenuConfig::HealthBarType == 1)
+			{
+				WeaponIconSize iconSize = weaponIconSizes[Entity.Pawn.WeaponName];
+				ImVec2 textPosition = { Rect.x + (Rect.z - iconSize.width) / 2 + iconSize.offsetX, Rect.y + Rect.w + 1 + iconSize.offsetY };
 
-			// Weapon Icon
-			//Gui.StrokeText(RenderWeaponIcon(Entity), { Rect.x + Rect.z / 2,Rect.y + Rect.w }, ImColor(255, 255, 255, 255), 20, true);
+				//Gui.StrokeText(Entity.Pawn.WeaponName, { Rect.x + Rect.z / 2,Rect.y + Rect.w }, ImColor(255, 255, 255, 255), 14, true);
+				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 18.0f, textPosition, ImColor(255, 255, 255, 255), weaponIcon.c_str());
+			}
 		}
 			
 
