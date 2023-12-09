@@ -44,6 +44,58 @@ namespace ConfigMenu {
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::SetNextItemWidth(ComponentWidth);
 		ImGui::ListBox("##ConfigFiles", &selectedConfig, configFilesCStr.data(), configFilesCStr.size());
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		if (ImGui::Button("Load Selected", { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
+		{
+			std::string selectedConfigFile = configFiles[selectedConfig];
+			MyConfigSaver::LoadConfig(selectedConfigFile);
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Save Selected", { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
+		{
+			std::string selectedConfigFile = configFiles[selectedConfig];
+			MyConfigSaver::SaveConfig(selectedConfigFile);
+		}
+
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		if (ImGui::Button("Delete Selected", { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
+			ImGui::OpenPopup("##reallyDelete");
+		if (ImGui::BeginPopup("##reallyDelete"))
+		{
+			ImGui::TextUnformatted("Are you sure?");
+			if (ImGui::Button("No", { 45.0f, 0.0f }))
+				ImGui::CloseCurrentPopup();
+			ImGui::SameLine();
+			if (ImGui::Button("Yes", { 45.0f, 0.0f }))
+			{
+				// Delete
+				std::string selectedConfigFile = configFiles[selectedConfig];
+				std::string fullPath = configDir + "\\" + selectedConfigFile;
+				if (std::remove(fullPath.c_str()) == 0)
+				{
+					configFiles.erase(configFiles.begin() + selectedConfig);
+					selectedConfig = -1;
+				}
+				ImGui::CloseCurrentPopup();
+			}
+			ImGui::EndPopup();
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Reset Config", { 126.f, 30.f }))
+			ImGui::OpenPopup("##reallyReset");
+		if (ImGui::BeginPopup("##reallyReset"))
+		{
+			ImGui::TextUnformatted("Are you sure?");
+			if (ImGui::Button("No", { 45.0f, 0.0f }))
+				ImGui::CloseCurrentPopup();
+			ImGui::SameLine();
+			if (ImGui::Button("Yes", { 45.0f, 0.0f }))
+			{
+				ConfigMenu::ResetToDefault();
+				ImGui::CloseCurrentPopup();
+			}
+			ImGui::EndPopup();
+		}
 	}
 
 	void RenderConfigMenu(const char *Tab) {
