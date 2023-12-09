@@ -10,6 +10,8 @@
 #include "StyleChanger.h"
 #include "..\Resources\Language.h"
 
+namespace GUI
+{
 	void RenderMenu()
 	{
 		char TempText[256];
