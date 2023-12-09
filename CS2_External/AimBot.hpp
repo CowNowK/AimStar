@@ -89,26 +89,20 @@ namespace AimControl
             TargetY /= (Smooth * SpeedFactor);
             // by Skarbor
             
-            if (fabs(TargetX) < 1)
+            if (ScreenPos.x != ScreenCenterX)
             {
-                if (TargetX > 0)
-                {
-                    TargetX = 1;
-                }
-                if (TargetX < 0)
-                {
-                    TargetX = -1;
-                }
+                TargetX = (ScreenPos.x > ScreenCenterX) ? -(ScreenCenterX - ScreenPos.x) : ScreenPos.x - ScreenCenterX;
+                TargetX /= Smooth != 0.0f ? Smooth : 1.5f;
+                TargetX = (TargetX + ScreenCenterX > ScreenCenterX * 2 || TargetX + ScreenCenterX < 0) ? 0 : TargetX;
             }
-            if (fabs(TargetY) < 1)
+
+            if (ScreenPos.y != 0)
             {
-                if (TargetY > 0)
+                if (ScreenPos.y != ScreenCenterY)
                 {
-                    TargetY = 1;
-                }
-                if (TargetY < 0)
-                {
-                    TargetY = -1;
+                    TargetY = (ScreenPos.y > ScreenCenterY) ? -(ScreenCenterY - ScreenPos.y) : ScreenPos.y - ScreenCenterY;
+                    TargetY /= Smooth != 0.0f ? Smooth : 1.5f;
+                    TargetY = (TargetY + ScreenCenterY > ScreenCenterY * 2 || TargetY + ScreenCenterY < 0) ? 0 : TargetY;
                 }
             }
             mouse_event(MOUSEEVENTF_MOVE, TargetX, TargetY, NULL, NULL);
