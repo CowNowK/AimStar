@@ -269,13 +269,6 @@ void Cheats::Run()
 
 	bmb::RenderWindow();
 
-	// RCS
-	if (MenuConfig::RCS)
-	{
-		RCS::GetAngles(LocalEntity, Angles);
-		std::cout << "(" << Angles.x << ", " << Angles.y << ")" << std::endl;
-		RCS::Run(LocalEntity, Angles, MenuConfig::AimBot);
-	}
 	// Aimbot
 	if (MenuConfig::AimBot)
 	{

@@ -53,7 +53,7 @@ namespace RCS
 		}
 	}
 
-	inline void Run(const CEntity& Local, Vec2 AimAngles, bool isAimbotWorking)
+	inline void SetAngles(const CEntity& Local, Vec2& AimAngles, bool isAimbotWorking)
 	{
 		if (Local.Pawn.ShotsFired > RCSBullet)
 		{
@@ -65,12 +65,6 @@ namespace RCS
 
 			AimAngles.x = PunchAngle.x;
 			AimAngles.y = PunchAngle.y;
-		}
-		
-		if (!isAimbotWorking)
-		{
-			Gui.CircleFilled(AimAngles, 5.f, ImColor(0, 100, 255));
-			//mouse_event(MOUSEEVENTF_MOVE, (DWORD)AimAngles.x, (DWORD)AimAngles.y, NULL, NULL);
 		}
 	}
 }

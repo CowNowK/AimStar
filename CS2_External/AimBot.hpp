@@ -38,8 +38,9 @@ namespace AimControl
             return;
 
         float Yaw, Pitch;
-        float Distance, Norm;
+        float Distance, Norm, Length;
         Vec3 OppPos;
+        Vec2 Angles{ 0,0 };
         int ScreenCenterX = Gui.Window.Size.x / 2;
         int ScreenCenterY = Gui.Window.Size.y / 2;
         float TargetX = 0.f;
@@ -48,6 +49,30 @@ namespace AimControl
         OppPos = AimPos - LocalPos;
 
         Distance = sqrt(pow(OppPos.x, 2) + pow(OppPos.y, 2));
+
+        Length = sqrt(Distance * Distance + OppPos.z * OppPos.z);
+        if (MenuConfig::RCS)
+        {
+            RCS::GetAngles(Local, Angles);
+            RCS::SetAngles(Local, Angles, true);
+            float rad = Angles.x * RCSScale.x / 180.f * M_PI;
+            float si = sinf(rad);
+            float co = cosf(rad);
+
+            float z = OppPos.z * co + Distance * si;
+            float d = (Distance * co - OppPos.z * si) / Distance;
+
+            rad = -Angles.y * RCSScale.y / 180.f * M_PI;
+            si = sinf(rad);
+            co = cosf(rad);
+
+            float x = (OppPos.x * co - OppPos.y * si) * d;
+            float y = (OppPos.x * si + OppPos.y * co) * d;
+
+            OppPos = Vec3{ x, y, z };
+
+            AimPos = LocalPos + OppPos;
+        }
 
         Yaw = atan2f(OppPos.y, OppPos.x) * 57.295779513 - Local.Pawn.ViewAngle.y;
         Pitch = -atan(OppPos.z / Distance) * 57.295779513 - Local.Pawn.ViewAngle.x;
