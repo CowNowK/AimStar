@@ -377,16 +377,6 @@ namespace GUI
 
 		}ImGui::End();
 	}
-	void RenderVapeMenu()
-	{
-		// ESP
-		ImGui::SetNextWindowSize({ 320,0 });
-		ImGui::Begin(ICON_FA_EYE " Visual", nullptr, ImGuiWindowFlags_AlwaysAutoResize);
-		{
-			if (ImGui::CollapsingHeader("ESP"))
-			{
-				ImGui::Checkbox("Enabled", &ESPConfig::ESPenbled);
-				ImGui::Checkbox("Box", &ESPConfig::ShowBoxESP);
 				ImGui::SameLine();
 				ImGui::SetNextItemWidth(MenuConfig::ComboWidth);
 				ImGui::Combo("##BoxStyle", &MenuConfig::BoxType, "Normal\0Edge\0Corner\0Corner Edge\0");
