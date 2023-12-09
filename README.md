@@ -69,4 +69,4 @@ I made a discord server, where you can get support and much more! Join to us!
 
 ## ⭐ Star History (Old Repo)
 
-[![Star History Chart](https://api.star-history.com/svg?repos=CowNowK/AimStarCS2&type=Date)](https://star-history.com/#CowNowK/AimStarCS2&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=CowNowK/AimStar&type=Date)](https://star-history.com/#CowNowK/AimStar&Date)
