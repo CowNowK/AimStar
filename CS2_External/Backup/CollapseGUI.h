@@ -1,14 +1,3 @@
-#pragma once
-#include "..\MenuConfig.hpp"
-#include "..\Render.hpp"
-#include "..\AimBot.hpp"
-#include "..\Radar\Radar.h"
-#include "..\TriggerBot.h"
-#include "..\Utils\ConfigMenu.hpp"
-#include "..\Utils\ConfigSaver.hpp"
-
-#include "..\Features\StyleChanger.h"
-
 void RenderGUI()
 {
 	// ESP

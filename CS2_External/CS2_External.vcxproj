@@ -144,7 +144,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AimBot.hpp" />
-    <ClInclude Include="Backup\CollapseGUI.h" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="Bunnyhop.hpp" />
     <ClInclude Include="Cheats.h" />

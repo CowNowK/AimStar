@@ -9,8 +9,42 @@
 #include "../Resources/Language.h"
 
 namespace ConfigMenu {
-
 	
+	void RenderCFGmenu()
+	{
+		static char configNameBuffer[128] = "NewConfig";
+		static int selectedConfig = -1;
+
+		const std::string configDir = MenuConfig::path;
+		static std::vector<std::string> configFiles;
+		std::vector<const char*> configFilesCStr;
+
+		configFiles.clear();
+		for (const auto& entry : std::filesystem::directory_iterator(configDir))
+		{
+			if (entry.is_regular_file() && entry.path().extension() == ".config")
+			{
+				configFiles.push_back(entry.path().filename().string());
+			}
+		}
+		for (const auto& file : configFiles)
+		{
+			configFilesCStr.push_back(file.c_str());
+		}
+
+		float CursorX = 10.f;
+		float CurrentCursorX = ImGui::GetCursorPosX();
+		float ComponentWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x - CursorX * 2;
+
+		ImGui::SetCursorPos(ImVec2(15.f, 24.f));
+		ImGui::SeparatorText("Config");
+
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::TextDisabled("Config Files");
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::SetNextItemWidth(ComponentWidth);
+		ImGui::ListBox("##ConfigFiles", &selectedConfig, configFilesCStr.data(), configFilesCStr.size());
+	}
 
 	void RenderConfigMenu(const char *Tab) {
 		// Config		
