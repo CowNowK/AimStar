@@ -16,7 +16,7 @@ namespace OSImGui
         ImFontAtlas* fontAtlas = new ImFontAtlas();
         ImFontConfig arialConfig;
         arialConfig.FontDataOwnedByAtlas = false;
-        ImFont* arialFont = fontAtlas->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyhbd.ttc", 16.0f, &arialConfig, io.Fonts->GetGlyphRangesAll());
+        ImFont* arialFont = fontAtlas->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyhbd.ttc", 20.0f, &arialConfig, io.Fonts->GetGlyphRangesAll());
         
         ImFontConfig iconConfig;
         static const ImWchar iconRanges[] = { ICON_MIN_FA, ICON_MAX_16_FA, 0 };
@@ -44,7 +44,8 @@ namespace OSImGui
 
         io.Fonts = fontAtlas;
 
-        ImGui::StyleColorsEnemyMouse();
+        // ImGui::StyleColorsEnemyMouse();
+        ImGui::AimStarDefaultStyle();
         io.LogFilename = nullptr;
 
         if (!ImGui_ImplWin32_Init(Window.hWnd))

@@ -9,9 +9,291 @@
 
 #include "StyleChanger.h"
 #include "..\Resources\Language.h"
+#include "..\Resources\Images.h"
+
+ID3D11ShaderResourceView* AS_Logo = NULL;
+ID3D11ShaderResourceView* MenuButton1 = NULL;
+ID3D11ShaderResourceView* MenuButton2 = NULL;
+ID3D11ShaderResourceView* MenuButton3 = NULL;
+ID3D11ShaderResourceView* MenuButton4 = NULL;
+int LogoW = 0;
+int LogoH = 0;
+int buttonW = 0;
+int buttonH = 0;
 
 namespace GUI
 {
+	void LoadImages()
+	{
+		Gui.LoadTextureFromMemory(Images::AS_Logo, sizeof Images::AS_Logo, &AS_Logo, &LogoW, &LogoH);
+		Gui.LoadTextureFromMemory(Images::VisualButton, sizeof Images::VisualButton, &MenuButton1, &buttonW, &buttonH);
+		Gui.LoadTextureFromMemory(Images::AimbotButton, sizeof Images::AimbotButton, &MenuButton2, &buttonW, &buttonH);
+		Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
+		Gui.LoadTextureFromMemory(Images::ConfigButton, sizeof Images::ConfigButton, &MenuButton4, &buttonW, &buttonH);
+	}
+
+	// Components Settings
+	// ########################################
+	void AlignRight(float ContentWidth)
+	{
+		float ColumnContentWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x;
+		float checkboxPosX = ImGui::GetColumnOffset() + ColumnContentWidth - ContentWidth;
+		ImGui::SetCursorPosX(checkboxPosX);
+	}
+	void PutSwitch(const char* string, float CursorX, float ContentWidth, bool* v, bool ColorEditor = false, const char* lable = NULL, float col[4] = NULL)
+	{
+		ImGui::PushID(string);
+		float CurrentCursorX = ImGui::GetCursorPosX();
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::TextDisabled(string);
+		ImGui::SameLine();
+		if (ColorEditor) {
+			AlignRight(ContentWidth + ImGui::GetFrameHeight() + 8);
+			ImGui::ColorEdit4(lable, col, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_AlphaPreview);
+			ImGui::SameLine();
+		}
+		else {
+			AlignRight(ContentWidth);
+		}
+		
+		Gui.SwitchButton(string, v);
+		ImGui::PopID();
+	}
+	void PutSliderFloat(const char* string, float CursorX, float* v, const void* p_min, const void* p_max, const char* format)
+	{
+		// if there is no fucking ID, all the sliders would be fucking forced to sync when you click on one of them ;3
+		ImGui::PushID(string);
+		float CurrentCursorX = ImGui::GetCursorPosX();
+		float SliderWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x - CursorX;
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::TextDisabled(string);
+		ImGui::SameLine();
+		ImGui::TextDisabled(format, *v);
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::SetNextItemWidth(SliderWidth);
+		Gui.SliderScalarEx2("", ImGuiDataType_Float, v, p_min, p_max, "", ImGuiSliderFlags_None);
+		ImGui::PopID();
+	}
+	void PutSliderInt(const char* string, float CursorX, int* v, const void* p_min, const void* p_max, const char* format)
+	{
+		ImGui::PushID(string);
+		float CurrentCursorX = ImGui::GetCursorPosX();
+		float SliderWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x - CursorX;
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::TextDisabled(string);
+		ImGui::SameLine();
+		ImGui::TextDisabled(format, *v);
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::SetNextItemWidth(SliderWidth);
+		Gui.SliderScalarEx2("", ImGuiDataType_Float, v, p_min, p_max, "", ImGuiSliderFlags_None);
+		ImGui::PopID();
+	}
+	// ########################################
+
+	void NewGui()
+	{
+		LoadImages();
+
+		char TempText[256];
+		ImGuiWindowFlags Flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar;
+		ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - 851.0f) / 2.0f, (ImGui::GetIO().DisplaySize.y - 514.0f) / 2.0f }, ImGuiCond_Once);
+		ImGui::SetNextWindowSize({ 851,514 });
+		ImGui::Begin("AimStar Test", nullptr, Flags);
+		{
+			ImGui::SetCursorPos(MenuConfig::WCS.LogoPos);
+			ImGui::Image((void*)AS_Logo, ImVec2(LogoW, LogoH));
+
+			ImGui::SetCursorPos(MenuConfig::WCS.Button1Pos);
+			ImGui::Image((void*)MenuButton1, ImVec2(buttonW, buttonH));
+			if (ImGui::IsItemClicked()) {
+				MenuConfig::WCS.MenuPage = 0;
+			}
+			ImGui::SetCursorPos(MenuConfig::WCS.Button2Pos);
+			ImGui::Image((void*)MenuButton2, ImVec2(buttonW, buttonH));
+			if (ImGui::IsItemClicked()) {
+				MenuConfig::WCS.MenuPage = 1;
+			}
+			ImGui::SetCursorPos(MenuConfig::WCS.Button3Pos);
+			ImGui::Image((void*)MenuButton3, ImVec2(buttonW, buttonH));
+			if (ImGui::IsItemClicked()) {
+				MenuConfig::WCS.MenuPage = 2;
+			}
+			ImGui::SetCursorPos(MenuConfig::WCS.Button4Pos);
+			ImGui::Image((void*)MenuButton4, ImVec2(buttonW, buttonH));
+			if (ImGui::IsItemClicked()) {
+				MenuConfig::WCS.MenuPage = 3;
+			}
+
+			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);
+			
+			ImGui::BeginChild("Page", MenuConfig::WCS.ChildSize);
+			{
+				if (MenuConfig::WCS.MenuPage == 0)
+				{
+					ImGui::Columns(2, nullptr, false);
+					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
+					ImGui::SeparatorText("ESP");
+					float MinRounding = 0.f, MaxRouding = 15.f;
+					PutSwitch("Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoxESP, true, "###BoxCol", reinterpret_cast<float*>(&ESPConfig::BoxColor));
+					PutSliderFloat("Box Rounding:", 10.f, &ESPConfig::BoxRounding, &MinRounding, &MaxRouding, "%1.f");
+					PutSwitch("Filled Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::FilledBox, true, "###HeadBoxCol", reinterpret_cast<float*>(&ESPConfig::FilledColor));
+					PutSwitch("Head Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHeadBox, true, "###HeadBoxCol", reinterpret_cast<float*>(&ESPConfig::HeadBoxColor));
+					PutSwitch("Skeleton", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoneESP, true, "###BoneCol", reinterpret_cast<float*>(&ESPConfig::BoneColor));
+					PutSwitch("Snap Line", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowLineToEnemy, true, "###LineCol", reinterpret_cast<float*>(&MenuConfig::LineToEnemyColor));
+					PutSwitch("Eye Ray", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowEyeRay, true, "###LineCol", reinterpret_cast<float*>(&ESPConfig::EyeRayColor));
+					PutSwitch("Health", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthBar);
+					PutSwitch("Weapon", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowWeaponESP);
+					PutSwitch("Distance", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowDistance);
+					PutSwitch("Player Name", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowPlayerName);
+					
+					ImGui::NextColumn();
+					ImGui::SetCursorPosY(24.f);
+					ImGui::SeparatorText("Radar");
+					float RadarPointSizeProportionMin = 0.8f, RadarPointSizeProportionMax = 2.f;
+					float ProportionMin = 500.f, ProportionMax = 3300.f;
+					float RadarRangeMin = 100.f, RadarRangeMax = 300.f;
+					float AlphaMin = 0.f, AlphaMax = 1.f;
+					PutSwitch("Show Radar", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Radar.ShowRadar);
+					if (MenuConfig::Radar.ShowRadar)
+					{
+						PutSwitch("Custom", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Radar.customRadar);
+						if (MenuConfig::Radar.customRadar)
+						{
+							PutSliderFloat("Point Size:", 5.f, &MenuConfig::Radar.RadarPointSizeProportion, &RadarPointSizeProportionMin, &RadarPointSizeProportionMax, "%1.f");
+							PutSliderFloat("Proportion:", 5.f, &MenuConfig::Radar.Proportion, &ProportionMin, &ProportionMax, "%1.f");
+							PutSliderFloat("Radar Range:", 5.f, &MenuConfig::Radar.RadarRange, &RadarRangeMin, &RadarRangeMax, "%1.f");
+							PutSliderFloat("Window Alpha:", 5.f, &MenuConfig::Radar.RadarBgAlpha, &AlphaMin, &AlphaMax, "%1.f");
+						}
+					}
+					
+					ImGui::NewLine();
+					ImGui::SeparatorText("Crosshairs");
+					float DotMin = 1.f, DotMax = 50.f;
+					int LengthMin = 1, LengthMax = 100;
+					int GapMin = 1, GapMax = 50;
+					int ThickMin = 1, ThickMax = 20;
+					float CircleRmin = 1.f, CircleRmax = 50.f;
+					PutSwitch("Show Crosshais", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.ShowCrossHair, true, "###CrosshairsCol", reinterpret_cast<float*>(&MenuConfig::Crosshairs.CrossHairColor));
+					if (MenuConfig::Crosshairs.ShowCrossHair)
+					{
+						PutSwitch("Center Dot", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawDot);
+						if (MenuConfig::Crosshairs.drawDot)
+							PutSliderFloat("Dot Size:", 5.f, &MenuConfig::Crosshairs.DotSize, &DotMin, &DotMax, "%1.f px");
+						PutSwitch("Outline", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawOutLine);
+						PutSwitch("Cross line", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawCrossline);
+						if (MenuConfig::Crosshairs.drawCrossline)
+						{
+							PutSliderInt("Horizontal Length:", 5.f, &MenuConfig::Crosshairs.HorizontalLength, &LengthMin, &LengthMax, "%d px");
+							PutSliderInt("Vertical Length:", 5.f, &MenuConfig::Crosshairs.VerticalLength, &LengthMin, &LengthMax, "%d px");
+							PutSliderInt("Gap:", 5.f, &MenuConfig::Crosshairs.Gap, &GapMin, &GapMax, "%d px");
+							PutSliderInt("Thickness:", 5.f, &MenuConfig::Crosshairs.Thickness, &ThickMin, &ThickMax, "%d px");
+						}
+						PutSwitch("T Style", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.tStyle);
+						PutSwitch("Circle", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawCircle);
+						if (MenuConfig::Crosshairs.drawCircle)
+							PutSliderFloat("Circle Radius:", 5.f, &MenuConfig::Crosshairs.CircleRadius, &CircleRmin, &CircleRmax, "%.f px");
+						PutSwitch("Targeting Crosshairs", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.showTargeting, true, "###CircleCol", reinterpret_cast<float*>(&MenuConfig::Crosshairs.TargetedColor));
+						PutSwitch("Team Check", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.TeamCheck);
+					}
+					
+					ImGui::Columns(1);
+				}
+				
+				if (MenuConfig::WCS.MenuPage == 1)
+				{
+					ImGui::Columns(2, nullptr, false);
+					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
+					ImGui::SeparatorText("Aimbot");
+					float FovMin = 0.f, FovMax = 25.f;
+					float SmoothMin = 0.f, SmoothMax = 5.f;
+					PutSwitch("Aimbot", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::AimBot);
+					if (MenuConfig::AimBot)
+					{
+						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
+						ImGui::TextDisabled("Hotkey   ");
+						ImGui::SameLine();
+						if (ImGui::Combo("###AimKey", &MenuConfig::AimBotHotKey, "LALT\0LBUTTON\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0"))
+						{
+							AimControl::SetHotKey(MenuConfig::AimBotHotKey);
+						}
+						PutSwitch("Toggle Mode", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::AimToggleMode);
+						PutSwitch("Draw FOV", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::DrawFov, true, "###FOVcol", reinterpret_cast<float*>(&MenuConfig::FovCircleColor));
+						PutSwitch("Visible Only", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::VisibleCheck);
+						PutSliderFloat("FOV:", 10.f, &AimControl::AimFov, &FovMin, &FovMax, "%1.f");
+						PutSliderFloat("Smooth:", 10.f, &AimControl::Smooth, &SmoothMin, &SmoothMax, "%1.f");
+						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
+						ImGui::TextDisabled("Bone       ");
+						ImGui::SameLine();
+						if (ImGui::Combo("###AimPos", &MenuConfig::AimPosition, "Head\0Neck\0Chest\0Penis\0"))
+						{
+							switch (MenuConfig::AimPosition)
+							{
+							case 0:
+								MenuConfig::AimPositionIndex = BONEINDEX::head;
+								break;
+							case 1:
+								MenuConfig::AimPositionIndex = BONEINDEX::neck_0;
+								break;
+							case 2:
+								MenuConfig::AimPositionIndex = BONEINDEX::spine_1;
+								break;
+							case 3:
+								MenuConfig::AimPositionIndex = BONEINDEX::pelvis;
+								break;
+							default:
+								break;
+							}
+						}
+					}
+					ImGui::NextColumn();
+					ImGui::SetCursorPosY(24.f);
+					ImGui::SeparatorText("RCS");
+					PutSwitch("Enable RCS", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::RCS);
+
+					ImGui::Columns(1);
+				}
+
+				if (MenuConfig::WCS.MenuPage == 2)
+				{
+					ImGui::Columns(2, nullptr, false);
+					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
+					ImGui::SeparatorText("Misc");
+
+					PutSwitch("Headshot Line", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowHeadShootLine);
+					PutSwitch("Cheat in Spec", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.WorkInSpec);
+					PutSwitch("No Flash", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.NoFlash);
+					PutSwitch("Hit Sound", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.HitSound);
+					PutSwitch("Bomb Timer", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MenuConfig::Misc.BombTimerCol));
+					PutSwitch("Bunny Hop", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.BunnyHop);
+					PutSwitch("Watermark", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.WaterMark);
+					PutSwitch("Cheat list", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.CheatList);
+					PutSwitch("Team Check", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TeamCheck);
+
+					ImGui::NextColumn();
+					ImGui::SetCursorPosY(24.f);
+					ImGui::SeparatorText("Menu Settings");
+					PutSwitch("Anti Record", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::BypassOBS);
+					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
+					ImGui::TextDisabled("Style");
+					ImGui::SameLine();
+					ImGui::Combo("", &MenuConfig::WindowStyle, "Osiris\0AimStar\0");
+					
+
+					ImGui::Columns(1);
+				}
+
+				if (MenuConfig::WCS.MenuPage == 3)
+				{
+					ImGui::Columns(2, nullptr, false);
+					ConfigMenu::RenderCFGmenu();
+
+					ImGui::Columns(1);
+				}
+
+			} ImGui::EndChild();
+		} ImGui::End();
+	}
+
 	void RenderMenu()
 	{
 		char TempText[256];
@@ -290,9 +572,11 @@ namespace GUI
 				if (ImGui::Combo(Lang::MiscText.LanguageList, &MenuConfig::Language,
 					"English\0Danish\0German\0Polish\0Portuguese\0Russian\0Simplified Chinese\0Slovak\0French\0Turkish\0Hungarian\0")) // Korean\0
 					Lang::ChangeLang(MenuConfig::Language);
-				if (ImGui::Combo(Lang::MiscText.ThemeList, &MenuConfig::MenuStyle, "Default\0Hacker\0Red\0Modern Dark\0Deep Dark\0Round Gray\0"))
+				if (ImGui::Combo(Lang::MiscText.ThemeList, &MenuConfig::MenuStyle, "AimStar\0Enemy\0Hacker\0Red\0Modern Dark\0Deep Dark\0Round Gray\0"))
 					StyleChanger::UpdateSkin(MenuConfig::MenuStyle);
-				// ImGui::Combo(Lang::MiscText.StyleList, &MenuConfig::WindowStyle, "Window\0");
+				if (ImGui::Combo(Lang::MiscText.StyleList, &MenuConfig::WindowStyle, "Osiris\0AimStar\0"))
+					if (MenuConfig::WindowStyle)
+						StyleChanger::UpdateSkin(0);
 
 				ImGui::Checkbox(Lang::MiscText.HeadshotLine, &MenuConfig::ShowHeadShootLine);
 				ImGui::SameLine();

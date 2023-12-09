@@ -129,7 +129,7 @@ namespace MenuConfig
 
 namespace ESPConfig
 {
-	inline bool ESPenbled = false;
+	inline bool ESPenbled = true;
 	inline bool ShowBoneESP = true;
 	inline bool ShowBoxESP = true;
 	inline bool ShowHealthBar = true;
@@ -154,7 +154,7 @@ namespace ESPConfig
 	inline ImColor EyeRayColor = ImColor(255, 0, 0, 255);
 	inline ImColor HeadBoxColor = ImColor(255, 255, 255, 255);
 	inline ImColor VisibleColor = ImColor(255, 196, 0, 255);
-	inline ImColor FilledColor = ImColor(255, 255, 255, 255);
+	inline ImColor FilledColor = ImColor(255, 255, 255, 128);
 	inline ImColor BoxFilledVisColor = ImColor(0, 0, 255, 255);
 	inline ImColor FilledColor2 = ImColor(0, 255, 102, 255);
 
