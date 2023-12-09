@@ -206,7 +206,11 @@ namespace ESP
 				ImVec2 textPosition = { Rect.x + (Rect.z - iconSize.width) / 2 + iconSize.offsetX, Rect.y + Rect.w + 1 + iconSize.offsetY };
 
 				//Gui.StrokeText(Entity.Pawn.WeaponName, { Rect.x + Rect.z / 2,Rect.y + Rect.w }, ImColor(255, 255, 255, 255), 14, true);
-				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 18.0f, textPosition, ImColor(255, 255, 255, 255), weaponIcon.c_str());
+				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{ textPosition.x - 1, textPosition.y - 1 }, ImColor(0, 0, 0, 255), weaponIcon.c_str());
+				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{ textPosition.x - 1, textPosition.y + 1 }, ImColor(0, 0, 0, 255), weaponIcon.c_str());
+				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{ textPosition.x + 1, textPosition.y + 1 }, ImColor(0, 0, 0, 255), weaponIcon.c_str());
+				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{ textPosition.x + 1, textPosition.y - 1 }, ImColor(0, 0, 0, 255), weaponIcon.c_str());
+				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, textPosition, ImColor(255, 255, 255, 255), weaponIcon.c_str());
 			}
 		}
 			
