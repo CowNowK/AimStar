@@ -160,9 +160,9 @@ namespace GUI
 						if (MenuConfig::Radar.customRadar)
 						{
 							PutSliderFloat("Point Size:", 5.f, &MenuConfig::Radar.RadarPointSizeProportion, &RadarPointSizeProportionMin, &RadarPointSizeProportionMax, "%1.f");
-							PutSliderFloat("Proportion:", 5.f, &MenuConfig::Radar.Proportion, &ProportionMin, &ProportionMax, "%1.f");
-							PutSliderFloat("Radar Range:", 5.f, &MenuConfig::Radar.RadarRange, &RadarRangeMin, &RadarRangeMax, "%1.f");
-							PutSliderFloat("Window Alpha:", 5.f, &MenuConfig::Radar.RadarBgAlpha, &AlphaMin, &AlphaMax, "%1.f");
+							PutSliderFloat("Proportion:", 5.f, &MenuConfig::Radar.Proportion, &ProportionMin, &ProportionMax, "%.1f");
+							PutSliderFloat("Radar Range:", 5.f, &MenuConfig::Radar.RadarRange, &RadarRangeMin, &RadarRangeMax, "%.1f");
+							PutSliderFloat("Window Alpha:", 5.f, &MenuConfig::Radar.RadarBgAlpha, &AlphaMin, &AlphaMax, "%.1f");
 						}
 					}
 					
@@ -178,7 +178,7 @@ namespace GUI
 					{
 						PutSwitch("Center Dot", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawDot);
 						if (MenuConfig::Crosshairs.drawDot)
-							PutSliderFloat("Dot Size:", 5.f, &MenuConfig::Crosshairs.DotSize, &DotMin, &DotMax, "%1.f px");
+							PutSliderFloat("Dot Size:", 5.f, &MenuConfig::Crosshairs.DotSize, &DotMin, &DotMax, "%.f px");
 						PutSwitch("Outline", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawOutLine);
 						PutSwitch("Cross line", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawCrossline);
 						if (MenuConfig::Crosshairs.drawCrossline)
@@ -219,8 +219,8 @@ namespace GUI
 						PutSwitch("Toggle Mode", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::AimToggleMode);
 						PutSwitch("Draw FOV", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::DrawFov, true, "###FOVcol", reinterpret_cast<float*>(&MenuConfig::FovCircleColor));
 						PutSwitch("Visible Only", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::VisibleCheck);
-						PutSliderFloat("FOV:", 10.f, &AimControl::AimFov, &FovMin, &FovMax, "%1.f");
-						PutSliderFloat("Smooth:", 10.f, &AimControl::Smooth, &SmoothMin, &SmoothMax, "%1.f");
+						PutSliderFloat("FOV:", 10.f, &AimControl::AimFov, &FovMin, &FovMax, "%.1f");
+						PutSliderFloat("Smooth:", 10.f, &AimControl::Smooth, &SmoothMin, &SmoothMax, "%.1f");
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 						ImGui::TextDisabled("Bone       ");
 						ImGui::SameLine();
