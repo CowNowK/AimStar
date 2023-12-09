@@ -628,12 +628,12 @@ namespace GUI
 
 				ImGui::TextColored(ImColor(0, 200, 255, 255), Lang::ReadMeText.LastUpdate);
 				ImGui::SameLine();
-				ImGui::TextColored(ImColor(0, 200, 255, 255), "2023-11-19");
+				ImGui::TextColored(ImColor(0, 200, 255, 255), "2023-12-9");
 				sprintf_s(TempText, "%s%s", ICON_FA_COPY, Lang::ReadMeText.SourceButton);
 				Gui.OpenWebpageButton(TempText, "https://github.com/CowNowK/AimStar");
 				ImGui::SameLine();
 				sprintf_s(TempText, "%s%s", ICON_FA_COMMENT_DOTS, Lang::ReadMeText.DiscordButton);
-				Gui.OpenWebpageButton(TempText, "https://discord.gg/rsqmbc7Tz3");
+				Gui.OpenWebpageButton(TempText, "https://discord.com/invite/VgRrxwesPz");
 				ImGui::NewLine();
 
 				ImGui::Text(Lang::ReadMeText.OffsetsTitle);
