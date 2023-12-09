@@ -16,7 +16,7 @@ void Misc::CheatList() noexcept
 	if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
 		ImGui::Text("Aimbot [Toggle]");
 	CheatText("RCS", MenuConfig::RCS);
-	CheatText("Glow", MenuConfig::Misc.Glow);
+	CheatText("Glow", MenuConfig::Glow);
 	CheatText("Radar", MenuConfig::Radar.ShowRadar);
 	if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
 		ImGui::Text("TriggerBot [Toggle]");

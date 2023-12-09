@@ -226,7 +226,7 @@ namespace ConfigMenu {
 		ESPConfig::VisibleColor = ImColor(255, 196, 0, 255);
 		ESPConfig::VisibleCheck = false;
 		MenuConfig::Misc.GlowColor = ImColor(255, 0, 0, 100);;
-		MenuConfig::Misc.Glow = false;
+		MenuConfig::Glow = false;
 		MenuConfig::AirJump = false;
 		MenuConfig::MenuStyle = 0;
 		MenuConfig::WindowStyle = 0;

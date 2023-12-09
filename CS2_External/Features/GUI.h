@@ -442,7 +442,7 @@ namespace GUI
 			}
 			if (ImGui::BeginTabItem(Lang::GlowText.FeatureName))
 			{
-				Gui.MyCheckBox(Lang::Global.SwitchButton, &MenuConfig::Misc.Glow);
+				Gui.MyCheckBox(Lang::Global.SwitchButton, &MenuConfig::Glow);
 				ImGui::EndTabItem();
 			}
 			// Radar menu

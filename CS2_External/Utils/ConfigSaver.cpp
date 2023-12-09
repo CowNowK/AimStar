@@ -31,7 +31,7 @@ namespace MyConfigSaver {
         configFile << "ESPVisCol " << ESPConfig::VisibleColor.Value.x << " " << ESPConfig::VisibleColor.Value.y << " " << ESPConfig::VisibleColor.Value.z << " " << ESPConfig::VisibleColor.Value.w << std::endl;;
         configFile << "ESPVisCheck " << ESPConfig::VisibleCheck << std::endl;
         configFile << "GlowColor " << MenuConfig::Misc.GlowColor.Value.x << " " << MenuConfig::Misc.GlowColor.Value.y << " " << MenuConfig::Misc.GlowColor.Value.z << " " << MenuConfig::Misc.GlowColor.Value.w << std::endl;
-        configFile << "Glow " << MenuConfig::Misc.Glow << std::endl;
+        configFile << "Glow " << MenuConfig::Glow << std::endl;
         configFile << "AirJump " << MenuConfig::AirJump << std::endl;
         configFile << "MenuStyle " << MenuConfig::MenuStyle << std::endl;
         configFile << "WindowStyle " << MenuConfig::WindowStyle << std::endl;
@@ -156,7 +156,7 @@ namespace MyConfigSaver {
                 else if (key == "ESPVisCol") iss >> ESPConfig::VisibleColor.Value.x >> ESPConfig::VisibleColor.Value.y >> ESPConfig::VisibleColor.Value.z >> ESPConfig::VisibleColor.Value.w;
                 else if (key == "ESPVisCheck") iss >> ESPConfig::VisibleCheck;
                 else if (key == "GlowColor") iss >> MenuConfig::Misc.GlowColor.Value.x >> MenuConfig::Misc.GlowColor.Value.y >> MenuConfig::Misc.GlowColor.Value.z >> MenuConfig::Misc.GlowColor.Value.w;
-                else if (key == "Glow") iss >> MenuConfig::Misc.Glow;
+                else if (key == "Glow") iss >> MenuConfig::Glow;
                 else if (key == "AirJump") iss >> MenuConfig::AirJump;
                 else if (key == "MenuStyle") iss >> MenuConfig::MenuStyle;
                 else if (key == "WindowStyle") iss >> MenuConfig::WindowStyle;

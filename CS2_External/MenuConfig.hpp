@@ -27,7 +27,6 @@ namespace MenuConfig
 		bool CheatList = false;
 		bool HitSound = false;
 		bool SkinChanger = false;
-		bool Glow = false;
 		bool bmbTimer = false;
 		bool SpecList = false;
 		ImColor BombTimerCol = ImColor(255, 120, 0, 255);
@@ -123,6 +122,8 @@ namespace MenuConfig
 
 	inline bool ShowLineToEnemy = false;
 	inline ImColor LineToEnemyColor = ImColor(255, 255, 255, 220);
+
+	inline bool Glow = false;
 
 	inline bool BypassOBS = false;
 }
