@@ -132,23 +132,29 @@ namespace GUI
 				{
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
-					ImGui::SeparatorText("ESP");
+					ImGui::SeparatorText(ICON_FA_EYE" ESP");
 					float MinRounding = 0.f, MaxRouding = 15.f;
-					PutSwitch("Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoxESP, true, "###BoxCol", reinterpret_cast<float*>(&ESPConfig::BoxColor));
-					PutSliderFloat("Box Rounding:", 10.f, &ESPConfig::BoxRounding, &MinRounding, &MaxRouding, "%1.f");
-					PutSwitch("Filled Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::FilledBox, true, "###HeadBoxCol", reinterpret_cast<float*>(&ESPConfig::FilledColor));
-					PutSwitch("Head Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHeadBox, true, "###HeadBoxCol", reinterpret_cast<float*>(&ESPConfig::HeadBoxColor));
-					PutSwitch("Skeleton", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoneESP, true, "###BoneCol", reinterpret_cast<float*>(&ESPConfig::BoneColor));
-					PutSwitch("Snap Line", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowLineToEnemy, true, "###LineCol", reinterpret_cast<float*>(&MenuConfig::LineToEnemyColor));
-					PutSwitch("Eye Ray", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowEyeRay, true, "###LineCol", reinterpret_cast<float*>(&ESPConfig::EyeRayColor));
-					PutSwitch("Health", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthBar);
-					PutSwitch("Weapon", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowWeaponESP);
-					PutSwitch("Distance", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowDistance);
-					PutSwitch("Player Name", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowPlayerName);
+					PutSwitch("Toggle", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ESPenbled);
+					if (ESPConfig::ESPenbled)
+					{
+						PutSwitch("Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoxESP, true, "###BoxCol", reinterpret_cast<float*>(&ESPConfig::BoxColor));
+						PutSliderFloat("Box Rounding:", 10.f, &ESPConfig::BoxRounding, &MinRounding, &MaxRouding, "%1.f");
+						PutSwitch("Filled Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::FilledBox, true, "###HeadBoxCol", reinterpret_cast<float*>(&ESPConfig::FilledColor));
+						PutSwitch("Head Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHeadBox, true, "###HeadBoxCol", reinterpret_cast<float*>(&ESPConfig::HeadBoxColor));
+						PutSwitch("Skeleton", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoneESP, true, "###BoneCol", reinterpret_cast<float*>(&ESPConfig::BoneColor));
+						PutSwitch("Snap Line", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowLineToEnemy, true, "###LineCol", reinterpret_cast<float*>(&MenuConfig::LineToEnemyColor));
+						PutSwitch("Eye Ray", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowEyeRay, true, "###LineCol", reinterpret_cast<float*>(&ESPConfig::EyeRayColor));
+						PutSwitch("Health", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthBar);
+						PutSwitch("Weapon", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowWeaponESP);
+						PutSwitch("Distance", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowDistance);
+						PutSwitch("Player Name", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowPlayerName);
+						PutSwitch("Visible Check", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::VisibleCheck, true, "###VisibleCol", reinterpret_cast<float*>(&ESPConfig::VisibleColor));
+					}
+					
 					
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
-					ImGui::SeparatorText("Radar");
+					ImGui::SeparatorText(ICON_FA_COMPASS" Radar");
 					float RadarPointSizeProportionMin = 0.8f, RadarPointSizeProportionMax = 2.f;
 					float ProportionMin = 500.f, ProportionMax = 3300.f;
 					float RadarRangeMin = 100.f, RadarRangeMax = 300.f;
@@ -167,7 +173,7 @@ namespace GUI
 					}
 					
 					ImGui::NewLine();
-					ImGui::SeparatorText("Crosshairs");
+					ImGui::SeparatorText(ICON_FA_DOT_CIRCLE" Crosshairs");
 					float DotMin = 1.f, DotMax = 50.f;
 					int LengthMin = 1, LengthMax = 100;
 					int GapMin = 1, GapMax = 50;
@@ -203,7 +209,7 @@ namespace GUI
 				{
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
-					ImGui::SeparatorText("Aimbot");
+					ImGui::SeparatorText(ICON_FA_USER" Aimbot");
 					float FovMin = 0.f, FovMax = 25.f;
 					float SmoothMin = 0.f, SmoothMax = 5.f;
 					PutSwitch("Aimbot", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::AimBot);
@@ -247,11 +253,11 @@ namespace GUI
 					}
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
-					ImGui::SeparatorText("RCS");
+					ImGui::SeparatorText(ICON_FA_ARROW_ALT_CIRCLE_DOWN " RCS");
 					PutSwitch("Enable RCS", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::RCS);
 
 					ImGui::NewLine();
-					ImGui::SeparatorText("Triggerbot");
+					ImGui::SeparatorText(ICON_FA_HAND_POINTER" Triggerbot");
 					int DelayMin = 10, DelayMax = 1000;
 					int DurationMin = 0, DurationMax = 1000;
 					PutSwitch("Triggerbot", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TriggerBot);
@@ -279,7 +285,7 @@ namespace GUI
 				{
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
-					ImGui::SeparatorText("Misc");
+					ImGui::SeparatorText(ICON_FA_SUN" Misc");
 
 					PutSwitch("Headshot Line", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowHeadShootLine);
 					PutSwitch("Cheat in Spec", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.WorkInSpec);
@@ -293,7 +299,7 @@ namespace GUI
 
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
-					ImGui::SeparatorText("Menu Settings");
+					ImGui::SeparatorText(ICON_FA_HEART" Menu Settings");
 					PutSwitch("Anti Record", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::BypassOBS);
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled("Style");
@@ -618,10 +624,6 @@ namespace GUI
 
 				ImGui::NextColumn();
 				ImGui::Checkbox(Lang::MiscText.Bhop, &MenuConfig::Misc.BunnyHop);
-				if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
-				{
-					ImGui::SetTooltip("Bhop is currently unavailable as Valve fixes a bug that force jump");
-				}
 				ImGui::Checkbox(Lang::MiscText.Watermark, &MenuConfig::Misc.WaterMark);
 				ImGui::Checkbox(Lang::MiscText.CheatList, &MenuConfig::Misc.CheatList);
 				ImGui::Checkbox(Lang::MiscText.TeamCheck, &MenuConfig::TeamCheck);
@@ -650,7 +652,7 @@ namespace GUI
 
 				ImGui::TextColored(ImColor(0, 200, 255, 255), Lang::ReadMeText.LastUpdate);
 				ImGui::SameLine();
-				ImGui::TextColored(ImColor(0, 200, 255, 255), "2023-12-15");
+				ImGui::TextColored(ImColor(0, 200, 255, 255), "2023-12-16");
 				sprintf_s(TempText, "%s%s", ICON_FA_COPY, Lang::ReadMeText.SourceButton);
 				Gui.OpenWebpageButton(TempText, "https://github.com/CowNowK/AimStar");
 				ImGui::SameLine();
