@@ -151,7 +151,6 @@ void Cheats::Run()
 			LocalPlayerControllerIndex = i;
 			continue;
 		}
-		Misc::NoSmoke(EntityAddress);
 		if (!Entity.UpdateController(EntityAddress))
 			continue;
 		if (!Entity.UpdatePawn(Entity.Pawn.Address))

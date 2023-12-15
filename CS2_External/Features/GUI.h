@@ -250,6 +250,28 @@ namespace GUI
 					ImGui::SeparatorText("RCS");
 					PutSwitch("Enable RCS", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::RCS);
 
+					ImGui::NewLine();
+					ImGui::SeparatorText("Triggerbot");
+					int DelayMin = 10, DelayMax = 1000;
+					int DurationMin = 0, DurationMax = 1000;
+					PutSwitch("Triggerbot", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TriggerBot);
+					if (MenuConfig::TriggerBot)
+					{
+						if (!MenuConfig::TriggerAlways)
+						{
+							ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
+							ImGui::TextDisabled("Hotkey   ");
+							ImGui::SameLine();
+							if (ImGui::Combo("###TriggerbotKey", &MenuConfig::TriggerHotKey, "LALT\0LBUTTON\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0"))
+							{
+								TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
+							}
+						}
+						PutSwitch("Always Active", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TriggerAlways);
+						PutSliderInt("Shot Delay:", 5.f, &TriggerBot::TriggerDelay, &DelayMin, &DelayMax, "%d ms");
+						PutSliderInt("Shot Duration:", 5.f, &TriggerBot::FakeShotDelay, &DurationMin, &DurationMax, "%d ms");
+					}
+
 					ImGui::Columns(1);
 				}
 
