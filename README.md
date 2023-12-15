@@ -27,7 +27,7 @@ I made a discord server, where you can get support and much more! Join to us!
 **Isnt working?** -> [**__COMMON ISSUES__**](https://github.com/CowNowK/AimStarCS2/discussions/19)
 
 ***
-> only update on weekends
+> I am so busy that I may not update the code on time. If u have the capability to update or fix bugs, u can pull ur request🤩
 ***
 ## 📸 Preview
 ![](/image2.png)
