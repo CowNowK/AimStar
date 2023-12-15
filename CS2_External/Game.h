@@ -53,6 +53,7 @@ public:
 	bool SetViewAngle(float Yaw, float Pitch);
 
 	bool SetForceJump(int Value);
+	bool GetForceJump(int& Value);
 };
 
 inline CGame gGame;

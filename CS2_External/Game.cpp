@@ -98,3 +98,10 @@ bool CGame::SetForceJump(int value)
 
 	return true;
 }
+bool CGame::GetForceJump(int& value)
+{
+	if (!ProcessMgr.ReadMemory<int>(this->Address.ForceJump, value))
+		return false;
+
+	return true;
+}

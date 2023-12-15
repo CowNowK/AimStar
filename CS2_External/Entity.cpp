@@ -56,16 +56,6 @@ bool CEntity::UpdatePawn(const DWORD64& PlayerPawnAddress)
 	return true;
 }
 
-bool CEntity::UpdateServerPawn(const DWORD64& PlayerPawnAddress)
-{
-	if (PlayerPawnAddress == 0)
-		return false;
-	this->Pawn.Address = PlayerPawnAddress;
-
-	if (!this->Pawn.GetHealthOnServer())
-		return false;
-}
-
 bool PlayerController::GetTeamID()
 {
 	return GetDataAddressWithOffset<int>(Address, Offset::Entity.TeamID, this->TeamID);
@@ -185,11 +175,6 @@ bool PlayerPawn::GetPos()
 bool PlayerPawn::GetHealth()
 {
 	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentHealth, this->Health);
-}
-
-bool PlayerPawn::GetHealthOnServer()
-{
-	return GetDataAddressWithOffset<int>(Address, Offset::ServerPawn.CurrentHealth, this->Health);
 }
 
 bool PlayerPawn::GetFov()

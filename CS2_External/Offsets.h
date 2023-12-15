@@ -22,12 +22,12 @@ namespace Offset
 		DWORD IsAlive = 0x7F4;
 		DWORD PlayerPawn = 0x7EC;
 		DWORD iszPlayerName = 0x640;
-		DWORD EnemySensor = 0x13DC;
+		DWORD EnemySensor = 0x13E4;
 		DWORD GravityScale = 0x434;
 	}Entity;
 	struct
 	{
-		DWORD BulletServices = 0x16B0;
+		DWORD BulletServices = 0x16B8;
 		DWORD TotalHit = 0x40;
 		DWORD Pos = 0x1224;	// m_vOldOrigin
 		DWORD MaxHealth = 0x328;
@@ -38,21 +38,16 @@ namespace Offset
 		DWORD vecLastClipCameraPos = 0x1294;
 		DWORD pClippingWeapon = 0x12B0;
 		DWORD iShotsFired = 0x1420;
-		DWORD flFlashDuration = 0x1468;
-		DWORD aimPunchAngle = 0x1714;
+		DWORD flFlashDuration = 0x1470;
+		DWORD aimPunchAngle = 0x171C;
 		DWORD aimPunchCache = 0x1740;
 		DWORD iIDEntIndex = 0x1544;
 		DWORD iTeamNum = 0x3BF;
 		DWORD CameraServices = 0x10E0; // m_pCameraServices
 		DWORD iFovStart = 0x214;
-		DWORD fFlags = 0x63;
+		DWORD fFlags = 0x3C8;
 		DWORD bSpottedByMask = 0x1638 + 0xC; // entitySpottedState + bSpottedByMask
 	} Pawn;
-
-	struct
-	{
-		DWORD CurrentHealth = 0x32C; // m_iHealth
-	} ServerPawn;
 
 	struct
 	{
