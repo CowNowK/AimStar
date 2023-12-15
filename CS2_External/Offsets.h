@@ -25,6 +25,7 @@ namespace Offset
 		DWORD EnemySensor = 0x13E4;
 		DWORD GravityScale = 0x434;
 	}Entity;
+
 	struct
 	{
 		DWORD BulletServices = 0x16B8;
@@ -83,6 +84,18 @@ namespace Offset
 		DWORD m_flDefuseCountDown = 0xED0;
 		DWORD m_nBombSite = 0xE84;
 	} C4;
+
+	struct // C_BaseCSGrenadeProjectile
+	{ 
+		DWORD nSmokeEffectTickBegin = 0x1108; // int32_t
+		DWORD bDidSmokeEffect = 0x110C; // bool
+		DWORD nRandomSeed = 0x1110; // int32_t
+		DWORD vSmokeColor = 0x1114; // Vector
+		DWORD vSmokeDetonationPos = 0x1120; // Vector
+		DWORD VoxelFrameData = 0x1130; // CUtlVector<uint8_t>
+		DWORD bSmokeVolumeDataReceived = 0x1148; // bool
+		uintptr_t bSmokeEffectSpawned = 0x1149; // bool
+	} SmokeGrenadeProjectile; 
 
 	namespace Signatures
 	{

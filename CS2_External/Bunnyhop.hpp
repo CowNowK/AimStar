@@ -39,6 +39,5 @@ namespace Bunnyhop
 		{
 			gGame.SetForceJump(256);
 		}
-		std::cout << ForceJump << std::endl;
 	}
 }

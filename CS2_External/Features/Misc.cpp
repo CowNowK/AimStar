@@ -97,3 +97,29 @@ void Misc::EdgeJump(const CEntity& aLocalPlayer) noexcept
 	ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Entity.GravityScale, Gravity);
 	std::cout << Gravity << std::endl;
 }
+
+void Misc::NoSmoke(const DWORD64 EntityAddress) noexcept
+{
+	uintptr_t entbase;
+	bool SmokeStatus = false;
+	int SmokeTime;
+	ProcessMgr.ReadMemory(EntityAddress, entbase);
+	ProcessMgr.WriteMemory<bool>(entbase + Offset::SmokeGrenadeProjectile.bDidSmokeEffect, SmokeStatus);
+}
+
+void Misc::SmokeColor(const DWORD64 EntityAddress) noexcept
+{
+	uintptr_t entbase, adrr;
+	char toread[32];
+	std::string classname;
+	ProcessMgr.ReadMemory<uintptr_t>((uintptr_t)EntityAddress, entbase);
+	ProcessMgr.ReadMemory<uintptr_t>(entbase + 0x10, adrr);
+	ProcessMgr.ReadMemory<uintptr_t>(adrr + 0x20, adrr);
+	ProcessMgr.ReadMemory<char[32]>(adrr, toread);
+	classname = toread;
+	if (classname == "smokegrenade_projectile")
+	{		
+		Vector3 RED_COLOR = { 1.f, 0.f, 0.f };
+		ProcessMgr.WriteMemory<Vector3>(entbase + Offset::SmokeGrenadeProjectile.vSmokeColor, RED_COLOR);
+	}
+}

@@ -151,6 +151,7 @@ void Cheats::Run()
 			LocalPlayerControllerIndex = i;
 			continue;
 		}
+		Misc::NoSmoke(EntityAddress);
 		if (!Entity.UpdateController(EntityAddress))
 			continue;
 		if (!Entity.UpdatePawn(Entity.Pawn.Address))
@@ -229,7 +230,7 @@ void Cheats::Run()
 			Render::DrawDistance(LocalEntity, Entity, Rect);
 		}
 		Glow::Run(Entity);
-		SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);
+		// SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);
 	}
 	
 	// Radar render

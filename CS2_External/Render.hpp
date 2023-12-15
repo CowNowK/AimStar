@@ -9,6 +9,7 @@
 #include "OS-ImGui/imgui/imgui.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "OS-ImGui/imgui/imgui_internal.h"
+#include "TriggerBot.h"
 
 namespace Render
 {
@@ -31,6 +32,7 @@ namespace Render
 		case 1:
 			Gui.CircleFilled(CenterPos, Radius + 1, Color & IM_COL32_A_MASK);
 			Gui.CircleFilled(CenterPos, Radius, Color);
+			break;
 		default:
 			Gui.Circle(CenterPos, Radius, Color, 1.2);
 		}
