@@ -458,11 +458,11 @@ namespace ESP
 			}
 			if (MenuConfig::HealthBarType == 2) {
 				ImVec2 textPos(centerPos.x + 27, centerPos.y + 155);
-				ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 255, 255, 255), "Weapon");
+				ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, textPos, IM_COL32(255, 255, 255, 255), "W");
 			}
 			if (MenuConfig::HealthBarType == 0 || MenuConfig::HealthBarType == 1) {
 				ImVec2 textPos(centerPos.x + 27, centerPos.y + 150);
-				ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 255, 255, 255), "Weapon");
+				ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, textPos, IM_COL32(255, 255, 255, 255), "W");
 			}
 		}
 		ImGui::End();
