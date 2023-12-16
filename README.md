@@ -56,6 +56,7 @@ I made a discord server, where you can get support and much more! Join to us!
 </details>
 
 ## ⚠️ Disclamers
+- 🚫 **The project is for learning purposes only and strictly prohibited for any illegal activities. Users bear full responsibility for any misuse.**
 - Main code forked from [**__Liv__**](https://github.com/TKazer/CS2_External)
 - Features copied from UnknownCheats
   - [Glow](https://www.unknowncheats.me/forum/counter-strike-2-a/604503-glow-external.html)
