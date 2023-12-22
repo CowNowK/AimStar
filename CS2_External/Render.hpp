@@ -555,7 +555,7 @@ namespace Render
 			MenuConfig::Crosshairs.drawOutLine = true;
 			MenuConfig::Crosshairs.drawCrossline = false;
 			MenuConfig::Crosshairs.drawCircle = false;
-			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::TargetingCrosshairs = true;
 			break;
 		case 2:
 			MenuConfig::Crosshairs.drawDot = true;
@@ -564,7 +564,7 @@ namespace Render
 			MenuConfig::Crosshairs.drawCrossline = false;
 			MenuConfig::Crosshairs.drawCircle = true;
 			MenuConfig::Crosshairs.CircleRadius = 10.f;
-			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::TargetingCrosshairs = true;
 			break;
 		case 3:
 			MenuConfig::Crosshairs.drawDot = true;
@@ -577,7 +577,7 @@ namespace Render
 			MenuConfig::Crosshairs.tStyle = false;
 			MenuConfig::Crosshairs.drawCircle = true;
 			MenuConfig::Crosshairs.CircleRadius = 10.f;
-			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::TargetingCrosshairs = true;
 			MenuConfig::Crosshairs.Thickness = 1;
 			break;
 		case 4:
@@ -590,7 +590,7 @@ namespace Render
 			MenuConfig::Crosshairs.Gap = 1;
 			MenuConfig::Crosshairs.tStyle = false;
 			MenuConfig::Crosshairs.drawCircle = false;
-			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::TargetingCrosshairs = true;
 			MenuConfig::Crosshairs.Thickness = 1;
 			break;
 		case 5:
@@ -602,7 +602,7 @@ namespace Render
 			MenuConfig::Crosshairs.Gap = 10;
 			MenuConfig::Crosshairs.tStyle = false;
 			MenuConfig::Crosshairs.drawCircle = false;
-			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::TargetingCrosshairs = true;
 			MenuConfig::Crosshairs.Thickness = 1;
 			break;
 		case 6:
@@ -615,7 +615,7 @@ namespace Render
 			MenuConfig::Crosshairs.Gap = 20;
 			MenuConfig::Crosshairs.tStyle = false;
 			MenuConfig::Crosshairs.drawCircle = false;
-			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::TargetingCrosshairs = true;
 			MenuConfig::Crosshairs.Thickness = 1;
 			break;
 		case 7:
@@ -628,7 +628,7 @@ namespace Render
 			MenuConfig::Crosshairs.Thickness = 10;
 			MenuConfig::Crosshairs.tStyle = false;
 			MenuConfig::Crosshairs.drawCircle = false;
-			MenuConfig::Crosshairs.showTargeting = true;
+			MenuConfig::TargetingCrosshairs = true;
 		default:
 			break;
 		}

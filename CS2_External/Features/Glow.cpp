@@ -5,7 +5,7 @@ void Glow::Run(const CEntity& aLocalPlayer)
 {
 	float on = 86400.f;
 	float off = 0.f;
-	if (!MenuConfig::Misc.Glow)
+	if (!MenuConfig::Glow)
 	{
 		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Entity.EnemySensor, off);
 	}

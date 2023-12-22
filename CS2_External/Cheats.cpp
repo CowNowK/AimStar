@@ -70,7 +70,7 @@ void Cheats::RenderCrossHair(ImDrawList* drawList) noexcept
 	if (!MenuConfig::Crosshairs.ShowCrossHair)
 		return;
 
-	if(MenuConfig::Crosshairs.isAim && MenuConfig::Crosshairs.showTargeting)
+	if(MenuConfig::Crosshairs.isAim && MenuConfig::TargetingCrosshairs)
 		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(MenuConfig::Crosshairs.TargetedColor));
 	else
 		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(MenuConfig::Crosshairs.CrossHairColor));
@@ -243,10 +243,14 @@ void Cheats::Run()
 	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways))
 		TriggerBot::Run(LocalEntity);	
 
-	Misc::HitSound(LocalEntity, PreviousTotalHits);
-	Misc::NoFlash(LocalEntity);
-	Misc::Watermark();
-	Misc::CheatList();
+	if (MenuConfig::Misc.HitSound)
+		Misc::HitSound(LocalEntity, PreviousTotalHits);
+	if (MenuConfig::Misc.NoFlash)
+		Misc::NoFlash(LocalEntity);
+	if (MenuConfig::Misc.WaterMark)
+		Misc::Watermark();
+	if (MenuConfig::Misc.CheatList)
+		Misc::CheatList();
 
 	// Fov line
 	Render::DrawFov(LocalEntity, MenuConfig::FovLineSize, MenuConfig::FovLineColor, 1);

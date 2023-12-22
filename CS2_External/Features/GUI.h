@@ -202,7 +202,7 @@ namespace GUI
 						PutSwitch("Circle", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawCircle);
 						if (MenuConfig::Crosshairs.drawCircle)
 							PutSliderFloat("Circle Radius:", 5.f, &MenuConfig::Crosshairs.CircleRadius, &CircleRmin, &CircleRmax, "%.f px");
-						PutSwitch("Targeting Crosshairs", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.showTargeting, true, "###CircleCol", reinterpret_cast<float*>(&MenuConfig::Crosshairs.TargetedColor));
+						PutSwitch("Targeting Crosshairs", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TargetingCrosshairs, true, "###CircleCol", reinterpret_cast<float*>(&MenuConfig::Crosshairs.TargetedColor));
 						PutSwitch("Team Check", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.TeamCheck);
 					}
 					
@@ -297,6 +297,7 @@ namespace GUI
 					PutSwitch("Hit Sound", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.HitSound);
 					PutSwitch("Bomb Timer", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MenuConfig::Misc.BombTimerCol));
 					PutSwitch("Bunny Hop", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.BunnyHop);
+					PutSwitch("Enemy Sensor", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Glow);
 					PutSwitch("Watermark", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.WaterMark);
 					PutSwitch("Cheat list", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.CheatList);
 					PutSwitch("Team Check", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TeamCheck);
@@ -474,7 +475,7 @@ namespace GUI
 			}
 			if (ImGui::BeginTabItem(Lang::GlowText.FeatureName))
 			{
-				Gui.MyCheckBox(Lang::Global.SwitchButton, &MenuConfig::Misc.Glow);
+				Gui.MyCheckBox(Lang::Global.SwitchButton, &MenuConfig::Glow);
 				ImGui::EndTabItem();
 			}
 			// Radar menu
@@ -580,7 +581,7 @@ namespace GUI
 					ImGui::SliderFloat(Lang::CrosshairsText.RadiusSlider, &MenuConfig::Crosshairs.CircleRadius, 0.0f, 50.0f, "%.1f", ImGuiSliderFlags_NoInput);
 
 				ImGui::Separator();
-				ImGui::Checkbox(Lang::CrosshairsText.TargetCheck, &MenuConfig::Crosshairs.showTargeting);
+				ImGui::Checkbox(Lang::CrosshairsText.TargetCheck, &MenuConfig::TargetingCrosshairs);
 				ImGui::SameLine();
 				ImGui::ColorEdit4("##CrosshairColor", reinterpret_cast<float*>(&MenuConfig::Crosshairs.TargetedColor), ImGuiColorEditFlags_NoInputs);
 				ImGui::Checkbox(Lang::CrosshairsText.TeamCheck, &MenuConfig::Crosshairs.TeamCheck);

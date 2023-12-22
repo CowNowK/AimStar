@@ -6,9 +6,6 @@ namespace Misc
 {
 	void CheatList() noexcept
 	{
-		if (!MenuConfig::Misc.CheatList)
-			return;
-
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
 		ImGui::SetNextWindowBgAlpha(0.3f);
 		ImGui::SetNextWindowSize(ImVec2(200, 0));
@@ -18,7 +15,7 @@ namespace Misc
 		if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
 			ImGui::Text("Aimbot [Toggle]");
 		CheatText("RCS", MenuConfig::RCS);
-		CheatText("Glow", MenuConfig::Misc.Glow);
+		CheatText("Glow", MenuConfig::Glow);
 		CheatText("Radar", MenuConfig::Radar.ShowRadar);
 		if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
 			ImGui::Text("TriggerBot [Toggle]");
@@ -36,9 +33,6 @@ namespace Misc
 
 	void Watermark() noexcept
 	{
-		if (!MenuConfig::Misc.WaterMark)
-			return;
-
 		//	globalvars GV;
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
 		ImGui::SetNextWindowBgAlpha(0.3f);
@@ -58,9 +52,6 @@ namespace Misc
 
 	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept
 	{
-		if (!MenuConfig::Misc.HitSound)
-			return;
-
 		std::string soundDir = MenuConfig::SoundPath + "\\Hit.wav";
 		std::wstring sound = Misc::STR2LPCWSTR(soundDir);
 
@@ -85,9 +76,6 @@ namespace Misc
 
 	void NoFlash(const CEntity& aLocalPlayer) noexcept
 	{
-		if (!MenuConfig::Misc.NoFlash)
-			return;
-
 		float duration = 0.0f;
 		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashDuration, duration);
 	}
