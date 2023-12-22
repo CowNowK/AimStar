@@ -6,6 +6,9 @@ namespace Misc
 {
 	void CheatList() noexcept
 	{
+		if (!MiscCFG::CheatList)
+			return;
+
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
 		ImGui::SetNextWindowBgAlpha(0.3f);
 		ImGui::SetNextWindowSize(ImVec2(200, 0));
@@ -16,23 +19,26 @@ namespace Misc
 			ImGui::Text("Aimbot [Toggle]");
 		CheatText("RCS", MenuConfig::RCS);
 		CheatText("Glow", MenuConfig::Glow);
-		CheatText("Radar", MenuConfig::Radar.ShowRadar);
+		CheatText("Radar", RadarCFG::ShowRadar);
 		if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
 			ImGui::Text("TriggerBot [Toggle]");
 
-		CheatText("Crosshair", MenuConfig::Crosshairs.ShowCrossHair);
+		CheatText("Crosshair", CrosshairsCFG::ShowCrossHair);
 		CheatText("Headshot Line", MenuConfig::ShowHeadShootLine);
-		CheatText("No Flash", MenuConfig::Misc.NoFlash);
-		CheatText("Bhop", MenuConfig::Misc.BunnyHop);
-		CheatText("HitSound", MenuConfig::Misc.HitSound);
-		CheatText("Bomb Timer", MenuConfig::Misc.bmbTimer);
-		CheatText("Spec List", MenuConfig::Misc.SpecList);
+		CheatText("No Flash", MiscCFG::NoFlash);
+		CheatText("Bhop", MiscCFG::BunnyHop);
+		CheatText("HitSound", MiscCFG::HitSound);
+		CheatText("Bomb Timer", MiscCFG::bmbTimer);
+		CheatText("Spec List", MiscCFG::SpecList);
 
 		ImGui::End();
 	}
 
 	void Watermark() noexcept
 	{
+		if (!MiscCFG::WaterMark)
+			return;
+
 		//	globalvars GV;
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
 		ImGui::SetNextWindowBgAlpha(0.3f);
@@ -52,6 +58,9 @@ namespace Misc
 
 	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept
 	{
+		if (!MiscCFG::HitSound)
+			return;
+
 		std::string soundDir = MenuConfig::SoundPath + "\\Hit.wav";
 		std::wstring sound = Misc::STR2LPCWSTR(soundDir);
 
@@ -76,6 +85,9 @@ namespace Misc
 
 	void NoFlash(const CEntity& aLocalPlayer) noexcept
 	{
+		if (!MiscCFG::NoFlash)
+			return;
+
 		float duration = 0.0f;
 		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashDuration, duration);
 	}

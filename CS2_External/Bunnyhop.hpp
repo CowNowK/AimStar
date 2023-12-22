@@ -14,7 +14,7 @@ namespace Bunnyhop
 
 	inline void Run(const CEntity& Local)
 	{
-		if (!MenuConfig::Misc.BunnyHop)
+		if (!MiscCFG::BunnyHop)
 			return;
 
 		int ForceJump;

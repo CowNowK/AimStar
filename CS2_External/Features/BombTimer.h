@@ -41,7 +41,7 @@ namespace bmb
 
 	void RenderWindow()
 	{
-		if (!MenuConfig::Misc.bmbTimer)
+		if (!MiscCFG::bmbTimer)
 			return;
 
 		bool isBombPlanted;
@@ -100,7 +100,7 @@ namespace bmb
 			Gui.MyText("C4 not planted", true);
 			barLength = 0.0f;
 		}
-		Gui.MyProgressBar(barLength, { 180, 15 }, "", MenuConfig::Misc.BombTimerCol);
+		Gui.MyProgressBar(barLength, { 180, 15 }, "", MiscCFG::BombTimerCol);
 
 		if (isPlanted && !isBombPlanted)
 		{

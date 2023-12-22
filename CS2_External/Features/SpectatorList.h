@@ -41,7 +41,7 @@ namespace SpecList
 
     void GetSpectatorList(CEntity& Entity, CEntity& LocalEntity, DWORD64 EntityAddress)
     {
-        if (!MenuConfig::Misc.SpecList)
+        if (!MiscCFG::SpecList)
             return;
 
         std::vector<std::string> spectators;

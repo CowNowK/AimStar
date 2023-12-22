@@ -148,7 +148,8 @@ namespace GUI
 						PutSwitch("Skeleton", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoneESP, true, "###BoneCol", reinterpret_cast<float*>(&ESPConfig::BoneColor));
 						PutSwitch("Snap Line", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowLineToEnemy, true, "###LineCol", reinterpret_cast<float*>(&MenuConfig::LineToEnemyColor));
 						PutSwitch("Eye Ray", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowEyeRay, true, "###LineCol", reinterpret_cast<float*>(&ESPConfig::EyeRayColor));
-						PutSwitch("Health", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthBar);
+						PutSwitch("Health Bar", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthBar);
+						PutSwitch("Health Number", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthNum);
 						PutSwitch("Weapon", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowWeaponESP);
 						PutSwitch("Distance", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowDistance);
 						PutSwitch("Player Name", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowPlayerName);
@@ -163,16 +164,16 @@ namespace GUI
 					float ProportionMin = 500.f, ProportionMax = 3300.f;
 					float RadarRangeMin = 100.f, RadarRangeMax = 300.f;
 					float AlphaMin = 0.f, AlphaMax = 1.f;
-					PutSwitch("Show Radar", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Radar.ShowRadar);
-					if (MenuConfig::Radar.ShowRadar)
+					PutSwitch("Show Radar", 5.f, ImGui::GetFrameHeight() * 1.7, &RadarCFG::ShowRadar);
+					if (RadarCFG::ShowRadar)
 					{
-						PutSwitch("Custom", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Radar.customRadar);
-						if (MenuConfig::Radar.customRadar)
+						PutSwitch("Custom", 5.f, ImGui::GetFrameHeight() * 1.7, &RadarCFG::customRadar);
+						if (RadarCFG::customRadar)
 						{
-							PutSliderFloat("Point Size:", 5.f, &MenuConfig::Radar.RadarPointSizeProportion, &RadarPointSizeProportionMin, &RadarPointSizeProportionMax, "%1.f");
-							PutSliderFloat("Proportion:", 5.f, &MenuConfig::Radar.Proportion, &ProportionMin, &ProportionMax, "%.1f");
-							PutSliderFloat("Radar Range:", 5.f, &MenuConfig::Radar.RadarRange, &RadarRangeMin, &RadarRangeMax, "%.1f");
-							PutSliderFloat("Window Alpha:", 5.f, &MenuConfig::Radar.RadarBgAlpha, &AlphaMin, &AlphaMax, "%.1f");
+							PutSliderFloat("Point Size:", 5.f, &RadarCFG::RadarPointSizeProportion, &RadarPointSizeProportionMin, &RadarPointSizeProportionMax, "%1.f");
+							PutSliderFloat("Proportion:", 5.f, &RadarCFG::Proportion, &ProportionMin, &ProportionMax, "%.1f");
+							PutSliderFloat("Radar Range:", 5.f, &RadarCFG::RadarRange, &RadarRangeMin, &RadarRangeMax, "%.1f");
+							PutSliderFloat("Window Alpha:", 5.f, &RadarCFG::RadarBgAlpha, &AlphaMin, &AlphaMax, "%.1f");
 						}
 					}
 					
@@ -183,27 +184,27 @@ namespace GUI
 					int GapMin = 1, GapMax = 50;
 					int ThickMin = 1, ThickMax = 20;
 					float CircleRmin = 1.f, CircleRmax = 50.f;
-					PutSwitch("Show Crosshais", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.ShowCrossHair, true, "###CrosshairsCol", reinterpret_cast<float*>(&MenuConfig::Crosshairs.CrossHairColor));
-					if (MenuConfig::Crosshairs.ShowCrossHair)
+					PutSwitch("Show Crosshais", 5.f, ImGui::GetFrameHeight() * 1.7, &CrosshairsCFG::ShowCrossHair, true, "###CrosshairsCol", reinterpret_cast<float*>(&CrosshairsCFG::CrossHairColor));
+					if (CrosshairsCFG::ShowCrossHair)
 					{
-						PutSwitch("Center Dot", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawDot);
-						if (MenuConfig::Crosshairs.drawDot)
-							PutSliderFloat("Dot Size:", 5.f, &MenuConfig::Crosshairs.DotSize, &DotMin, &DotMax, "%.f px");
-						PutSwitch("Outline", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawOutLine);
-						PutSwitch("Cross line", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawCrossline);
-						if (MenuConfig::Crosshairs.drawCrossline)
+						PutSwitch("Center Dot", 5.f, ImGui::GetFrameHeight() * 1.7, &CrosshairsCFG::drawDot);
+						if (CrosshairsCFG::drawDot)
+							PutSliderFloat("Dot Size:", 5.f, &CrosshairsCFG::DotSize, &DotMin, &DotMax, "%.f px");
+						PutSwitch("Outline", 5.f, ImGui::GetFrameHeight() * 1.7, &CrosshairsCFG::drawOutLine);
+						PutSwitch("Cross line", 5.f, ImGui::GetFrameHeight() * 1.7, &CrosshairsCFG::drawCrossline);
+						if (CrosshairsCFG::drawCrossline)
 						{
-							PutSliderInt("Horizontal Length:", 5.f, &MenuConfig::Crosshairs.HorizontalLength, &LengthMin, &LengthMax, "%d px");
-							PutSliderInt("Vertical Length:", 5.f, &MenuConfig::Crosshairs.VerticalLength, &LengthMin, &LengthMax, "%d px");
-							PutSliderInt("Gap:", 5.f, &MenuConfig::Crosshairs.Gap, &GapMin, &GapMax, "%d px");
-							PutSliderInt("Thickness:", 5.f, &MenuConfig::Crosshairs.Thickness, &ThickMin, &ThickMax, "%d px");
+							PutSliderInt("Horizontal Length:", 5.f, &CrosshairsCFG::HorizontalLength, &LengthMin, &LengthMax, "%d px");
+							PutSliderInt("Vertical Length:", 5.f, &CrosshairsCFG::VerticalLength, &LengthMin, &LengthMax, "%d px");
+							PutSliderInt("Gap:", 5.f, &CrosshairsCFG::Gap, &GapMin, &GapMax, "%d px");
+							PutSliderInt("Thickness:", 5.f, &CrosshairsCFG::Thickness, &ThickMin, &ThickMax, "%d px");
 						}
-						PutSwitch("T Style", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.tStyle);
-						PutSwitch("Circle", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.drawCircle);
-						if (MenuConfig::Crosshairs.drawCircle)
-							PutSliderFloat("Circle Radius:", 5.f, &MenuConfig::Crosshairs.CircleRadius, &CircleRmin, &CircleRmax, "%.f px");
-						PutSwitch("Targeting Crosshairs", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TargetingCrosshairs, true, "###CircleCol", reinterpret_cast<float*>(&MenuConfig::Crosshairs.TargetedColor));
-						PutSwitch("Team Check", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Crosshairs.TeamCheck);
+						PutSwitch("T Style", 5.f, ImGui::GetFrameHeight() * 1.7, &CrosshairsCFG::tStyle);
+						PutSwitch("Circle", 5.f, ImGui::GetFrameHeight() * 1.7, &CrosshairsCFG::drawCircle);
+						if (CrosshairsCFG::drawCircle)
+							PutSliderFloat("Circle Radius:", 5.f, &CrosshairsCFG::CircleRadius, &CircleRmin, &CircleRmax, "%.f px");
+						PutSwitch("Targeting Crosshairs", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TargetingCrosshairs, true, "###CircleCol", reinterpret_cast<float*>(&CrosshairsCFG::TargetedColor));
+						PutSwitch("Team Check", 5.f, ImGui::GetFrameHeight() * 1.7, &CrosshairsCFG::TeamCheck);
 					}
 					
 					ImGui::Columns(1);
@@ -292,14 +293,14 @@ namespace GUI
 					ImGui::SeparatorText(ICON_FA_SUN" Misc");
 
 					PutSwitch("Headshot Line", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowHeadShootLine);
-					PutSwitch("Cheat in Spec", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.WorkInSpec);
-					PutSwitch("No Flash", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.NoFlash);
-					PutSwitch("Hit Sound", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.HitSound);
-					PutSwitch("Bomb Timer", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MenuConfig::Misc.BombTimerCol));
-					PutSwitch("Bunny Hop", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.BunnyHop);
+					PutSwitch("Cheat in Spec", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WorkInSpec);
+					PutSwitch("No Flash", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoFlash);
+					PutSwitch("Hit Sound", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::HitSound);
+					PutSwitch("Bomb Timer", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol));
+					PutSwitch("Bunny Hop", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
 					PutSwitch("Enemy Sensor", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Glow);
-					PutSwitch("Watermark", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.WaterMark);
-					PutSwitch("Cheat list", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Misc.CheatList);
+					PutSwitch("Watermark", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WaterMark);
+					PutSwitch("Cheat list", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::CheatList);
 					PutSwitch("Team Check", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TeamCheck);
 
 					ImGui::NextColumn();
@@ -488,24 +489,24 @@ namespace GUI
 					ImGui::SetTooltip("External rendering radar hack.");
 				}*/
 
-				Gui.MyCheckBox(Lang::Global.SwitchButton, &MenuConfig::Radar.ShowRadar);
+				Gui.MyCheckBox(Lang::Global.SwitchButton, &RadarCFG::ShowRadar);
 				ImGui::SetNextItemWidth(MenuConfig::ComboWidth + 20);
-				ImGui::Combo(Lang::RadarText.StyleList, &MenuConfig::Radar.RadarType, "Circle\0Arrow\0Circle & Arrow\0");
-				ImGui::Checkbox(Lang::RadarText.CustomCheck, &MenuConfig::Radar.customRadar);
+				ImGui::Combo(Lang::RadarText.StyleList, &RadarCFG::RadarType, "Circle\0Arrow\0Circle & Arrow\0");
+				ImGui::Checkbox(Lang::RadarText.CustomCheck, &RadarCFG::customRadar);
 
-				if (MenuConfig::Radar.customRadar)
+				if (RadarCFG::customRadar)
 				{
 					ImGui::NewLine();
-					ImGui::Checkbox(Lang::RadarText.CrossLine, &MenuConfig::Radar.ShowRadarCrossLine);
+					ImGui::Checkbox(Lang::RadarText.CrossLine, &RadarCFG::ShowRadarCrossLine);
 					ImGui::SameLine();
-					ImGui::ColorEdit4("##CrossLineColor", reinterpret_cast<float*>(&MenuConfig::Radar.RadarCrossLineColor), ImGuiColorEditFlags_NoInputs);
+					ImGui::ColorEdit4("##CrossLineColor", reinterpret_cast<float*>(&RadarCFG::RadarCrossLineColor), ImGuiColorEditFlags_NoInputs);
 					float RadarPointSizeProportionMin = 0.8f, RadarPointSizeProportionMax = 2.f;
 					float ProportionMin = 500.f, ProportionMax = 3300.f;
 					float RadarRangeMin = 100.f, RadarRangeMax = 300.f;
-					ImGui::SliderFloat(Lang::RadarText.SizeSlider, &MenuConfig::Radar.RadarPointSizeProportion, RadarPointSizeProportionMin, RadarPointSizeProportionMax, "%.1f");
-					ImGui::SliderFloat(Lang::RadarText.ProportionSlider, &MenuConfig::Radar.Proportion, ProportionMin, ProportionMax, "%.1f");
-					ImGui::SliderFloat(Lang::RadarText.RangeSlider, &MenuConfig::Radar.RadarRange, RadarRangeMin, RadarRangeMax, "%.1f");
-					ImGui::SliderFloat(Lang::RadarText.AlphaSlider, &MenuConfig::Radar.RadarBgAlpha, 0.0f, 1.0f, "%.2f");
+					ImGui::SliderFloat(Lang::RadarText.SizeSlider, &RadarCFG::RadarPointSizeProportion, RadarPointSizeProportionMin, RadarPointSizeProportionMax, "%.1f");
+					ImGui::SliderFloat(Lang::RadarText.ProportionSlider, &RadarCFG::Proportion, ProportionMin, ProportionMax, "%.1f");
+					ImGui::SliderFloat(Lang::RadarText.RangeSlider, &RadarCFG::RadarRange, RadarRangeMin, RadarRangeMax, "%.1f");
+					ImGui::SliderFloat(Lang::RadarText.AlphaSlider, &RadarCFG::RadarBgAlpha, 0.0f, 1.0f, "%.2f");
 				}
 				ImGui::EndTabItem();
 			}
@@ -547,44 +548,44 @@ namespace GUI
 					ImGui::SetTooltip("Highly customizable external crosshair.");
 				}*/
 
-				Gui.MyCheckBox(Lang::Global.SwitchButton, &MenuConfig::Crosshairs.ShowCrossHair);
+				Gui.MyCheckBox(Lang::Global.SwitchButton, &CrosshairsCFG::ShowCrossHair);
 
 				ImGui::SetNextItemWidth(MenuConfig::ComboWidth + 50);
-				if (ImGui::Combo(Lang::CrosshairsText.PresetList, &MenuConfig::Crosshairs.crosshairPreset, "Custom\0Dot\0Circle Dot 1\0Circle Dot 2\0Crosshair Small\0Crosshair Medium\0Crosshair Dot\0Square\0"))
-					Render::UpdateCrosshairPreset(MenuConfig::Crosshairs.crosshairPreset);
+				if (ImGui::Combo(Lang::CrosshairsText.PresetList, &CrosshairsCFG::crosshairPreset, "Custom\0Dot\0Circle Dot 1\0Circle Dot 2\0Crosshair Small\0Crosshair Medium\0Crosshair Dot\0Square\0"))
+					Render::UpdateCrosshairPreset(CrosshairsCFG::crosshairPreset);
 
 				ImGui::Text(Lang::CrosshairsText.ColorEditor);
 				ImGui::SameLine();
-				ImGui::ColorEdit4("##CrossHairColor", reinterpret_cast<float*>(&MenuConfig::Crosshairs.CrossHairColor), ImGuiColorEditFlags_NoInputs);
+				ImGui::ColorEdit4("##CrossHairColor", reinterpret_cast<float*>(&CrosshairsCFG::CrossHairColor), ImGuiColorEditFlags_NoInputs);
 
-				ImGui::Checkbox(Lang::CrosshairsText.Dot, &MenuConfig::Crosshairs.drawDot);
-				if (MenuConfig::Crosshairs.drawDot)
+				ImGui::Checkbox(Lang::CrosshairsText.Dot, &CrosshairsCFG::drawDot);
+				if (CrosshairsCFG::drawDot)
 				{
-					ImGui::SliderFloat(Lang::CrosshairsText.DotSizeSlider, &MenuConfig::Crosshairs.DotSize, 1.f, 50.f, "%.f");
+					ImGui::SliderFloat(Lang::CrosshairsText.DotSizeSlider, &CrosshairsCFG::DotSize, 1.f, 50.f, "%.f");
 				}
 
-				ImGui::Checkbox(Lang::CrosshairsText.Outline, &MenuConfig::Crosshairs.drawOutLine);
-				ImGui::Checkbox(Lang::CrosshairsText.Crossline, &MenuConfig::Crosshairs.drawCrossline);
-				if (MenuConfig::Crosshairs.drawCrossline)
+				ImGui::Checkbox(Lang::CrosshairsText.Outline, &CrosshairsCFG::drawOutLine);
+				ImGui::Checkbox(Lang::CrosshairsText.Crossline, &CrosshairsCFG::drawCrossline);
+				if (CrosshairsCFG::drawCrossline)
 				{
-					ImGui::SliderInt(Lang::CrosshairsText.hLengthSlider, &MenuConfig::Crosshairs.HorizontalLength, 1, 100, "%d", ImGuiSliderFlags_NoInput);
-					ImGui::SliderInt(Lang::CrosshairsText.vLengthSilder, &MenuConfig::Crosshairs.VerticalLength, 1, 100, "%d", ImGuiSliderFlags_NoInput);
-					ImGui::SliderInt(Lang::CrosshairsText.GapSlider, &MenuConfig::Crosshairs.Gap, 1, 50, "%d", ImGuiSliderFlags_NoInput);
-					//				ImGui::Checkbox("Dynamic Gap", &MenuConfig::Crosshairs.DynamicGap);
-					ImGui::SliderInt(Lang::CrosshairsText.ThicknessSlider, &MenuConfig::Crosshairs.Thickness, 1, 20, "%d", ImGuiSliderFlags_NoInput);
-					ImGui::Checkbox(Lang::CrosshairsText.tStyle, &MenuConfig::Crosshairs.tStyle);
+					ImGui::SliderInt(Lang::CrosshairsText.hLengthSlider, &CrosshairsCFG::HorizontalLength, 1, 100, "%d", ImGuiSliderFlags_NoInput);
+					ImGui::SliderInt(Lang::CrosshairsText.vLengthSilder, &CrosshairsCFG::VerticalLength, 1, 100, "%d", ImGuiSliderFlags_NoInput);
+					ImGui::SliderInt(Lang::CrosshairsText.GapSlider, &CrosshairsCFG::Gap, 1, 50, "%d", ImGuiSliderFlags_NoInput);
+					//				ImGui::Checkbox("Dynamic Gap", &CrosshairsCFG::DynamicGap);
+					ImGui::SliderInt(Lang::CrosshairsText.ThicknessSlider, &CrosshairsCFG::Thickness, 1, 20, "%d", ImGuiSliderFlags_NoInput);
+					ImGui::Checkbox(Lang::CrosshairsText.tStyle, &CrosshairsCFG::tStyle);
 				}
 
 				ImGui::Separator();
-				ImGui::Checkbox(Lang::CrosshairsText.Circle, &MenuConfig::Crosshairs.drawCircle);
-				if (MenuConfig::Crosshairs.drawCircle)
-					ImGui::SliderFloat(Lang::CrosshairsText.RadiusSlider, &MenuConfig::Crosshairs.CircleRadius, 0.0f, 50.0f, "%.1f", ImGuiSliderFlags_NoInput);
+				ImGui::Checkbox(Lang::CrosshairsText.Circle, &CrosshairsCFG::drawCircle);
+				if (CrosshairsCFG::drawCircle)
+					ImGui::SliderFloat(Lang::CrosshairsText.RadiusSlider, &CrosshairsCFG::CircleRadius, 0.0f, 50.0f, "%.1f", ImGuiSliderFlags_NoInput);
 
 				ImGui::Separator();
 				ImGui::Checkbox(Lang::CrosshairsText.TargetCheck, &MenuConfig::TargetingCrosshairs);
 				ImGui::SameLine();
-				ImGui::ColorEdit4("##CrosshairColor", reinterpret_cast<float*>(&MenuConfig::Crosshairs.TargetedColor), ImGuiColorEditFlags_NoInputs);
-				ImGui::Checkbox(Lang::CrosshairsText.TeamCheck, &MenuConfig::Crosshairs.TeamCheck);
+				ImGui::ColorEdit4("##CrosshairColor", reinterpret_cast<float*>(&CrosshairsCFG::TargetedColor), ImGuiColorEditFlags_NoInputs);
+				ImGui::Checkbox(Lang::CrosshairsText.TeamCheck, &CrosshairsCFG::TeamCheck);
 
 				ImGui::EndTabItem();
 			}
@@ -614,13 +615,13 @@ namespace GUI
 				ImGui::Checkbox(Lang::MiscText.HeadshotLine, &MenuConfig::ShowHeadShootLine);
 				ImGui::SameLine();
 				ImGui::ColorEdit4("##HeadShootLineColor", reinterpret_cast<float*>(&MenuConfig::HeadShootLineColor), ImGuiColorEditFlags_NoInputs);
-				ImGui::Checkbox(Lang::MiscText.SpecCheck, &MenuConfig::Misc.WorkInSpec);
-				ImGui::Checkbox(Lang::MiscText.NoFlash, &MenuConfig::Misc.NoFlash);
-				ImGui::Checkbox(Lang::MiscText.HitSound, &MenuConfig::Misc.HitSound);
-				ImGui::Checkbox(Lang::MiscText.bmbTimer, &MenuConfig::Misc.bmbTimer);
+				ImGui::Checkbox(Lang::MiscText.SpecCheck, &MiscCFG::WorkInSpec);
+				ImGui::Checkbox(Lang::MiscText.NoFlash, &MiscCFG::NoFlash);
+				ImGui::Checkbox(Lang::MiscText.HitSound, &MiscCFG::HitSound);
+				ImGui::Checkbox(Lang::MiscText.bmbTimer, &MiscCFG::bmbTimer);
 				ImGui::SameLine();
-				ImGui::ColorEdit4("##BombTimerCol", reinterpret_cast<float*>(&MenuConfig::Misc.BombTimerCol), ImGuiColorEditFlags_NoInputs);
-				ImGui::Checkbox(Lang::MiscText.SpecList, &MenuConfig::Misc.SpecList);
+				ImGui::ColorEdit4("##BombTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol), ImGuiColorEditFlags_NoInputs);
+				ImGui::Checkbox(Lang::MiscText.SpecList, &MiscCFG::SpecList);
 				if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
 				{
 					ImGui::SetTooltip("Broken");
@@ -628,9 +629,9 @@ namespace GUI
 				//				ImGui::Checkbox("Invincible", &MenuConfig::infinity);
 
 				ImGui::NextColumn();
-				ImGui::Checkbox(Lang::MiscText.Bhop, &MenuConfig::Misc.BunnyHop);
-				ImGui::Checkbox(Lang::MiscText.Watermark, &MenuConfig::Misc.WaterMark);
-				ImGui::Checkbox(Lang::MiscText.CheatList, &MenuConfig::Misc.CheatList);
+				ImGui::Checkbox(Lang::MiscText.Bhop, &MiscCFG::BunnyHop);
+				ImGui::Checkbox(Lang::MiscText.Watermark, &MiscCFG::WaterMark);
+				ImGui::Checkbox(Lang::MiscText.CheatList, &MiscCFG::CheatList);
 				ImGui::Checkbox(Lang::MiscText.TeamCheck, &MenuConfig::TeamCheck);
 				ImGui::Checkbox(Lang::MiscText.AntiRecord, &MenuConfig::BypassOBS);
 
