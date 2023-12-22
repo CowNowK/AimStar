@@ -16,6 +16,8 @@
 Free and open-source external cheat for CS2, written in C++.
 
 Discord server: [AimShit Club](https://discord.com/invite/VgRrxwesPz)
+
+Most of the code is contributed by users, and the code structure might be very messy. If you try to download and understand the code, you will find a lot of **shitty** logic
 <!--
 I made a discord server, where you can get support and much more! Join to us!
 [**__Discord__**](https://discord.gg/Sw9ejh69GC)-->
