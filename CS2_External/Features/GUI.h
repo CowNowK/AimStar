@@ -311,6 +311,9 @@ namespace GUI
 					ImGui::TextDisabled("Style");
 					ImGui::SameLine();
 					ImGui::Combo("", &MenuConfig::WindowStyle, "Osiris\0AimStar\0");
+					ImGui::NewLine();
+					PutSwitch("Join Us", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::mother);
+					PutSwitch("Source Code", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::fucker);
 					
 
 					ImGui::Columns(1);

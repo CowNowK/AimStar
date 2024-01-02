@@ -289,8 +289,9 @@ void Cheats::Run()
 			AimControl::switchToggle();
 			lastTick = currentTick;
 		}
-			
-			
 	}
+
+	Misc::JoinDiscord();
+	Misc::SourceCode();
 		
 }

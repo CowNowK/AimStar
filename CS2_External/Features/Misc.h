@@ -1,16 +1,16 @@
 #pragma once
 
-#include <Windows.h>
 #include <algorithm>
 #include <string>
 #include <time.h>
+#include <Windows.h>
 
 
-#include "..\OS-ImGui\imgui\imgui.h"
-#include "..\Utils\GlobalVars.h"
-#include "..\MenuConfig.hpp"
 #include "..\AimBot.hpp"
 #include "..\Entity.h"
+#include "..\MenuConfig.hpp"
+#include "..\OS-ImGui\imgui\imgui.h"
+#include "..\Utils\GlobalVars.h"
 
 #pragma comment(lib, "winmm.lib")
 
@@ -49,4 +49,7 @@ namespace Misc
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
 	void NoSmoke(const DWORD64 EntityAddress) noexcept;
 	void SmokeColor(const DWORD64 EntityAddress) noexcept;
+
+	void JoinDiscord() noexcept;
+	void SourceCode() noexcept;
 }
