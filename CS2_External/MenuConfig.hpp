@@ -1,6 +1,7 @@
 #pragma once
-#include "Game.h"
 #include "Bone.h"
+#include "Game.h"
+#include "Utils/Random.h"
 
 namespace MenuConfig
 {
@@ -93,7 +94,7 @@ namespace ESPConfig
 	inline bool MultiColor = false;
 	// 0: normal 1: Flat
 	inline int HeadBoxStyle = 0;
-	inline float BoxRounding = 5.0f;
+	inline float BoxRounding = RandomPara<float>(0.0f, 5.0f);;
 	inline float BoxAlpha = 0.35f;
 
 	inline ImColor BoneColor = ImColor(0, 255, 255, 255);
@@ -107,8 +108,8 @@ namespace ESPConfig
 
 	// Penis Config
 	inline bool ShowPenis = false;
-	inline float PenisLength = 15.f;
-	inline float PenisSize = 1.3f;
+	inline float PenisLength = RandomPara<float>(3.0f, 15.0f);
+	inline float PenisSize = RandomPara<float>(1.3f, 3.0f);
 	inline ImColor PenisColor = ImColor(255, 0, 0, 200);
 }
 

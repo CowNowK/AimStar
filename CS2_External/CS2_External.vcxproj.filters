@@ -134,11 +134,11 @@
     <ClInclude Include="Resources\WeaponIcon.h" />
     <ClInclude Include="Features\BombTimer.h" />
     <ClInclude Include="Features\Misc.h" />
-    <ClInclude Include="Utils\Handles.h" />
     <ClInclude Include="Features\RCS.h" />
     <ClInclude Include="Resources\Language.h" />
     <ClInclude Include="Resources\Images.h" />
     <ClInclude Include="OS-ImGui\stb\stb_image.h" />
+    <ClInclude Include="Utils\Random.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
