@@ -6,7 +6,49 @@
 #include <atlconv.h>
 #define _is_invalid(v) if(v==NULL) return false
 #define _is_invalid(v,n) if(v==NULL) return n
+#define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
 
+typedef struct _CLIENT_ID
+{
+	PVOID UniqueProcess;
+	PVOID UniqueThread;
+} CLIENT_ID, * PCLIENT_ID;
+
+typedef struct _UNICODE_STRING {
+	USHORT Length;
+	USHORT MaximumLength;
+	PWCH   Buffer;
+} UNICODE_STRING, *UNICODE_STRING_Ptr;
+
+typedef struct _SYSTEM_HANDLE_TABLE_ENTRY_INFO
+{
+	ULONG ProcessId;
+	BYTE ObjectTypeNumber;
+	BYTE Flags;
+	USHORT Handle;
+	PVOID Object;
+	ACCESS_MASK GrantedAccess;
+} SYSTEM_HANDLE_TABLE_ENTRY_INFO, * PSYSTEM_HANDLE_TABLE_ENTRY_INFO;
+
+
+typedef struct _OBJECT_ATTRIBUTES {
+	ULONG           Length;
+	HANDLE          RootDirectory;
+	UNICODE_STRING_Ptr ObjectName;
+	ULONG           Attributes;
+	PVOID           SecurityDescriptor;
+	PVOID           SecurityQualityOfService;
+}  OBJECT_ATTRIBUTES, * OBJECT_ATTRIBUTES_Ptr;
+
+typedef struct _SYSTEM_HANDLE_INFORMATION
+{
+	ULONG HandleCount;
+	SYSTEM_HANDLE_TABLE_ENTRY_INFO Handles[1];
+} SYSTEM_HANDLE_INFORMATION, * PSYSTEM_HANDLE_INFORMATION;
+typedef NTSYSAPI NTSTATUS(NTAPI* FUNC_NtOpenProcess)(PHANDLE ProcessHandle,ACCESS_MASK DesiredAccess,OBJECT_ATTRIBUTES_Ptr ObjectAttributes,PCLIENT_ID ClientId);
+typedef NTSTATUS(NTAPI* FUNC_NtQuerySystemInformation)(ULONG SystemInformationClass,PVOID SystemInformation,ULONG SystemInformationLength,PULONG ReturnLength);
+typedef NTSTATUS(NTAPI* FUNC_RtlAdjustPrivilege)(ULONG Privilege,BOOLEAN Enable,BOOLEAN CurrentThread,PBOOLEAN Enabled);
+typedef NTSTATUS(NTAPI* FUNC_NtDuplicateObject)(HANDLE SourceProcessHandle,HANDLE SourceHandle,HANDLE TargetProcessHandle,PHANDLE TargetHandle,ACCESS_MASK DesiredAccess,ULONG Attributes,ULONG Options);
 /*
 	@Liv github.com/TKazer
 */
@@ -28,7 +70,6 @@ enum StatusCode
 class ProcessManager 
 {
 private:
-
 	bool   Attached = false;
 
 public:
@@ -43,7 +84,9 @@ public:
 		//if (hProcess)
 			//CloseHandle(hProcess);
 	}
-
+	SYSTEM_HANDLE_INFORMATION* t_SYSTEM_HANDLE_INFORMATION;
+	HANDLE Source_Process = NULL;
+	HANDLE target_handle = NULL;
 	/// <summary>
 	/// ¸½¼Ó
 	/// </summary>
@@ -53,14 +96,97 @@ public:
 	{
 		ProcessID = this->GetProcessID(ProcessName);
 		_is_invalid(ProcessID, FAILE_PROCESSID);
-
-		hProcess = OpenProcess(PROCESS_ALL_ACCESS | PROCESS_CREATE_THREAD, TRUE, ProcessID);
-		_is_invalid(hProcess, FAILE_HPROCESS);
-
 		ModuleAddress = reinterpret_cast<DWORD64>(this->GetProcessModuleHandle(ProcessName));
 		_is_invalid(ModuleAddress, FAILE_MODULE);
+		auto ObjectAttributes = [](UNICODE_STRING_Ptr ObjectName, HANDLE RootDirectory, ULONG Attributes, PSECURITY_DESCRIPTOR SecurityDescriptor)->_OBJECT_ATTRIBUTES {
+			OBJECT_ATTRIBUTES object;
+			object.Length = sizeof(OBJECT_ATTRIBUTES);
+			object.Attributes = Attributes;
+			object.RootDirectory = RootDirectory;
+			object.SecurityDescriptor = SecurityDescriptor;
+			object.ObjectName = ObjectName;
+			return object;
+		};
 
-		Attached = true;
+		FUNC_RtlAdjustPrivilege f_RtlAdjustPrivilege = (FUNC_RtlAdjustPrivilege)GetProcAddress(GetModuleHandleA("ntdll"), "RtlAdjustPrivilege");
+		FUNC_NtDuplicateObject f_NtDuplicateObject = (FUNC_NtDuplicateObject)GetProcAddress(GetModuleHandleA("ntdll"), "NtDuplicateObject");
+		FUNC_NtOpenProcess f_NtOpenProcess = (FUNC_NtOpenProcess)GetProcAddress(GetModuleHandleA("ntdll"), "NtOpenProcess");
+		FUNC_NtQuerySystemInformation f_NtQuerySystemInformation = (FUNC_NtQuerySystemInformation)GetProcAddress(GetModuleHandleA("ntdll"), "NtQuerySystemInformation");
+
+
+
+
+		_OBJECT_ATTRIBUTES R_Attributes = ObjectAttributes(NULL,NULL,NULL,NULL);
+		CLIENT_ID t_CLIENT_ID= { 0 };
+		boolean OldPriv;
+
+		f_RtlAdjustPrivilege(20, TRUE, FALSE, &OldPriv);
+
+		DWORD Sizeof_SYSTEM_HANDLE_INFORMATION = sizeof(SYSTEM_HANDLE_INFORMATION);
+
+		NTSTATUS NTAPIReturn = NULL;
+		
+		do {
+			delete[] t_SYSTEM_HANDLE_INFORMATION;
+
+			Sizeof_SYSTEM_HANDLE_INFORMATION *= 1.5;
+
+			try
+			{
+				t_SYSTEM_HANDLE_INFORMATION = (PSYSTEM_HANDLE_INFORMATION) new byte[Sizeof_SYSTEM_HANDLE_INFORMATION];
+			}
+			catch (std::bad_alloc)
+			{
+
+				return FAILE_HPROCESS;
+				break;
+			}
+			Sleep(1);
+
+		} while ((NTAPIReturn = f_NtQuerySystemInformation(16, t_SYSTEM_HANDLE_INFORMATION, Sizeof_SYSTEM_HANDLE_INFORMATION, NULL)) == (NTSTATUS)0xC0000004);
+
+		if (!NT_SUCCESS(NTAPIReturn))
+		{
+			return FAILE_HPROCESS;
+		}
+
+		for (int i = 0; i < t_SYSTEM_HANDLE_INFORMATION->HandleCount; ++i) {
+			static int n = i;
+			if (n > 100) {
+				return FAILE_HPROCESS;
+			}
+
+			if (t_SYSTEM_HANDLE_INFORMATION->Handles[i].ObjectTypeNumber != 0x7)
+				continue;
+			if ((HANDLE)t_SYSTEM_HANDLE_INFORMATION->Handles[i].Handle == INVALID_HANDLE_VALUE)
+				continue;
+
+			t_CLIENT_ID.UniqueProcess = (DWORD*)t_SYSTEM_HANDLE_INFORMATION->Handles[i].ProcessId;
+
+			NTAPIReturn = f_NtOpenProcess(&Source_Process,PROCESS_DUP_HANDLE,&R_Attributes,&t_CLIENT_ID);
+
+			if (Source_Process == INVALID_HANDLE_VALUE || !NT_SUCCESS(NTAPIReturn))
+				continue;
+			NTAPIReturn = f_NtDuplicateObject(Source_Process,(HANDLE)t_SYSTEM_HANDLE_INFORMATION->Handles[i].Handle, (HANDLE)(LONG_PTR)-1,&target_handle,PROCESS_ALL_ACCESS,0,0);
+			
+			if (target_handle == INVALID_HANDLE_VALUE || !NT_SUCCESS(NTAPIReturn))
+				continue;
+			
+			if (GetProcessId(target_handle) == ProcessID) {
+				hProcess = target_handle;
+				Attached = true;
+				delete[] t_SYSTEM_HANDLE_INFORMATION;
+				break;
+			}
+			else
+			{
+				CloseHandle(target_handle);
+				CloseHandle(Source_Process);
+				continue;
+			}
+			
+
+		}
 
 		return SUCCEED;
 	}
