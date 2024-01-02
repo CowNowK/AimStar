@@ -159,6 +159,21 @@ namespace GUI
 					
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
+					ImGui::SeparatorText(ICON_FA_GRIN_ALT " ESP Preview");
+					// ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() }, { ImGui::GetCursorPosX() - ImGui::GetColumnWidth() * 0.65f, ImGui::GetCursorPosY() - ImGui::GetFrameHeight() });
+					ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() });
+					// :P
+					ImGui::NewLine();
+					ImGui::NewLine();
+					ImGui::NewLine();
+					ImGui::NewLine();
+					ImGui::NewLine();
+					ImGui::NewLine();
+					ImGui::NewLine();
+					ImGui::NewLine();
+					ImGui::NewLine();
+					//
+
 					ImGui::SeparatorText(ICON_FA_COMPASS" Radar");
 					float RadarPointSizeProportionMin = 0.8f, RadarPointSizeProportionMax = 2.f;
 					float ProportionMin = 500.f, ProportionMax = 3300.f;
@@ -314,7 +329,6 @@ namespace GUI
 					ImGui::NewLine();
 					PutSwitch("Join Us", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::mother);
 					PutSwitch("Source Code", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::fucker);
-					
 
 					ImGui::Columns(1);
 				}

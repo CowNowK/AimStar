@@ -92,7 +92,6 @@ void Cheats::Run()
 		if (!MenuConfig::WindowStyle)
 		{
 			GUI::RenderMenu();
-			ESP::PreviewWindow();
 		}
 		else {
 			GUI::NewGui();
