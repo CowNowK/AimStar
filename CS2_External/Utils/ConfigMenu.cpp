@@ -96,6 +96,25 @@ namespace ConfigMenu {
 			}
 			ImGui::EndPopup();
 		}
+		ImGui::NextColumn();
+		ImGui::SetCursorPosY(24.f);
+		ImGui::SeparatorText("Config");
+		ImGui::TextDisabled("Create config");
+		ImGui::SetNextItemWidth(ComponentWidth + 10);
+		ImGui::InputText(" ", configNameBuffer, sizeof(configNameBuffer));
+		ImGui::NewLine();
+		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() / 4);
+		if (ImGui::Button("Create Config", { 126.f, 30.f }))
+		{
+			std::string configFileName = std::string(configNameBuffer) + ".config";
+			MyConfigSaver::SaveConfig(configFileName);
+		}
+		ImGui::NewLine();
+		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() / 4);
+		if (ImGui::Button("Open Folder", { 126.f, 30.f }))
+		{
+			Gui.OpenWebpage(configDir.c_str());
+		}
 	}
 
 	void RenderConfigMenu(const char *Tab) {
