@@ -23,7 +23,7 @@ Most of the code is contributed by users, and the code structure might be very m
 
 ## ⚠️ Notice
 
-**Isnt working?** -> [**__COMMON ISSUES__**](https://github.com/CowNowK/AimStarCS2/discussions/19)
+**Isnt working?** -> [**__COMMON ISSUES__**](https://github.com/CowNowK/AimStar/wiki)
 
 ***
 > I am so busy that I may not update the code on time. If u have the capability to update or fix bugs, u can pull ur request🤩
