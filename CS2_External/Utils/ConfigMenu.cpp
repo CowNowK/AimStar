@@ -234,6 +234,7 @@ namespace ConfigMenu {
 	}
 
 	void ResetToDefault() {
+		ESPConfig::OutLine = true;
 		ESPConfig::ShowHealthNum = false;
 		ESPConfig::FilledColor = ImColor(255, 255, 255, 255);
 		ESPConfig::FilledColor2 = ImColor(255, 255, 255, 255);

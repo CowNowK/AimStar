@@ -136,7 +136,7 @@ namespace ESP
 			else {
 				if (ESPConfig::MultiColor)
 				{
-					Gui.RectangleFilledGraident({ Rect.x, Rect.y }, { Rect.z, Rect.w }, FlatBoxCol, FlatBoxCol2, Rounding);
+					Gui.RectangleFilledGraident({ Rect.x, Rect.y }, { Rect.z, Rect.w }, ESPConfig::BoxColor, FlatBoxCol, FlatBoxCol2, Rounding);
 				}
 				else
 				{
@@ -149,7 +149,9 @@ namespace ESP
 		{	
 			if (MenuConfig::BoxType == 0 || MenuConfig::BoxType == 1)
 			{
-				Gui.Rectangle({ Rect.x,Rect.y }, { Rect.z,Rect.w }, ESPConfig::BoxColor & IM_COL32_A_MASK, 3, ESPConfig::BoxRounding);
+				if (ESPConfig::OutLine)
+					Gui.Rectangle({ Rect.x,Rect.y }, { Rect.z,Rect.w }, ESPConfig::BoxColor & IM_COL32_A_MASK, 3, ESPConfig::BoxRounding);
+
 				if (((Entity.Pawn.bSpottedByMask & (DWORD64(1) << LocalPlayerControllerIndex)) || (LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << Index))) && ESPConfig::VisibleCheck)
 				{
 					Gui.Rectangle({ Rect.x,Rect.y }, { Rect.z,Rect.w }, ESPConfig::VisibleColor, 1.3, ESPConfig::BoxRounding);

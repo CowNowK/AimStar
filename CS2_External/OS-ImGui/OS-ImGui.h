@@ -22,7 +22,7 @@ namespace OSImGui
 		// ¾ØÐÎ
 		void Rectangle(Vec2 Pos, Vec2 Size, ImColor Color, float Thickness, float Rounding = 0);
 		void RectangleFilled(Vec2 Pos, Vec2 Size, ImColor Color, float Rounding = 0, int Nums = 15);
-		void RectangleFilledGraident(Vec2 Pos, Vec2 Size, ImColor TopColor, ImColor BotColor, float Rounding, int Nums = 15);
+		void RectangleFilledGraident(Vec2 Pos, Vec2 Size, ImColor BgColor, ImColor TopColor, ImColor BotColor, float Rounding, int Nums = 15);
 		// Ïß
 		void Line(Vec2 From, Vec2 To, ImColor Color, float Thickness);
 		// Ô²ÐÎ

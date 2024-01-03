@@ -156,7 +156,6 @@
     <ClInclude Include="Features\GUI.h" />
     <ClInclude Include="Features\Misc.h" />
     <ClInclude Include="Features\Mouse.h" />
-    <ClInclude Include="Features\RCS.h" />
     <ClInclude Include="Features\SpectatorList.h" />
     <ClInclude Include="Features\StyleChanger.h" />
     <ClInclude Include="Font\fontArray.h" />

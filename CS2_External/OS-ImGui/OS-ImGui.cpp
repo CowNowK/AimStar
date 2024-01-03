@@ -219,8 +219,7 @@ namespace OSImGui
         DrawList->PathFillConvex(Color);
     }
 
-    // Graident Rectangle from @Cr1ppl3
-    void OSImGui::RectangleFilledGraident(Vec2 Pos, Vec2 Size, ImColor TopColor, ImColor BotColor, float Rounding, int Nums)
+    void OSImGui::RectangleFilledGraident(Vec2 Pos, Vec2 Size, ImColor BgColor, ImColor TopColor, ImColor BotColor, float Rounding, int Nums)
     {
         ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
         ImDrawCornerFlags rounding_corners = ImDrawCornerFlags_All;
@@ -230,18 +229,7 @@ namespace OSImGui
         Rounding = ImMin<float>(Rounding, fabsf(Size.x) * (((rounding_corners & ImDrawCornerFlags_Top) == ImDrawCornerFlags_Top) || ((rounding_corners & ImDrawCornerFlags_Bot) == ImDrawCornerFlags_Bot) ? 0.5f : 1.0f) - 1.0f);
         Rounding = ImMin<float>(Rounding, fabsf(Size.y) * (((rounding_corners & ImDrawCornerFlags_Left) == ImDrawCornerFlags_Left) || ((rounding_corners & ImDrawCornerFlags_Right) == ImDrawCornerFlags_Right) ? 0.5f : 1.0f) - 1.0f);
 
-        if (Rounding <= 0.0f || rounding_corners == 0)
-        {
-            DrawList->AddRectFilledMultiColor(a, b, TopColor, TopColor, BotColor, BotColor);
-        }
-        else
-        {
-            DrawList->PathArcTo(ImVec2(a.x + Rounding, a.y + Rounding), Rounding, IM_PI, IM_PI / 2.f * 3.f, Nums);
-            DrawList->PathArcTo(ImVec2(b.x - Rounding, a.y + Rounding), Rounding, IM_PI / 2.f * 3.f, IM_PI * 2.f, Nums);
-            DrawList->PathArcTo(ImVec2(b.x - Rounding, b.y - Rounding), Rounding, 0.f, IM_PI / 2.f, Nums);
-            DrawList->PathArcTo(ImVec2(a.x + Rounding, b.y - Rounding), Rounding, IM_PI / 2.f, IM_PI, Nums);
-            DrawList->PathFillConvex(TopColor);
-        }
+        DrawList->AddRectFilledMultiColorRounded(a, b, BgColor, TopColor, TopColor, BotColor, BotColor, Rounding, rounding_corners);
     }
 
     void OSImGui::Line(Vec2 From, Vec2 To, ImColor Color, float Thickness)
