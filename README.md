@@ -21,7 +21,7 @@ Most of the code is contributed by users, and the code structure might be very m
 
 中文文档：[Readme CN](https://github.com/CowNowK/AimStar/blob/main/%E8%87%AA%E8%BF%B0%E6%96%87%E6%A1%A3.md)
 
-Русский язык: [Readme RU](https://github.com/CowNowK/AimStar/blob/main/ПРОЧИТАЙ МЕНЯ.md)
+Русский язык: [Readme RU](https://github.com/CowNowK/AimStar/blob/main/ПРОЧИТАЙМЕНЯ.md)
 
 ## ⚠️ Notice
 
