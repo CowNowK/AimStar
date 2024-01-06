@@ -8,7 +8,7 @@ namespace RCS
 {
 	inline int RCSBullet = 1;
 
-	inline void GetAngles(const CEntity& Local, Vec2& Angles)
+	inline void UpdateAngles(const CEntity& Local, Vec2& Angles)
 	{
 		auto oldPunch = Vec2{ };
 		auto shotsFired = Local.Pawn.ShotsFired;
@@ -48,10 +48,7 @@ namespace RCS
 		{
 			oldPunch.x = oldPunch.y = 0.f;
 		}
-	}
 
-	inline void SetAngles(const CEntity& Local, Vec2& AimAngles, bool isAimbotWorking)
-	{
 		if (Local.Pawn.ShotsFired > RCSBullet)
 		{
 			Vec2 PunchAngle;
@@ -60,8 +57,8 @@ namespace RCS
 			if (!ProcessMgr.ReadMemory<Vec2>(Local.Pawn.AimPunchCache.Data + (Local.Pawn.AimPunchCache.Count - 1) * sizeof(Vec3), PunchAngle))
 				return;
 
-			AimAngles.x = PunchAngle.x;
-			AimAngles.y = PunchAngle.y;
+			Angles.x = PunchAngle.x;
+			Angles.y = PunchAngle.y;
 		}
 	}
 }

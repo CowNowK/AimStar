@@ -54,8 +54,7 @@ namespace AimControl
         // RCS by @Tairitsu
         if (MenuConfig::RCS)
         {
-            RCS::GetAngles(Local, Angles);
-            RCS::SetAngles(Local, Angles, true);
+            RCS::UpdateAngles(Local, Angles);
             float rad = Angles.x * RCSScale.x / 180.f * M_PI;
             float si = sinf(rad);
             float co = cosf(rad);
