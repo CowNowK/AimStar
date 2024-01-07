@@ -33,6 +33,9 @@ namespace StyleChanger
 		case 7:
 			Styles::SquareDark();
 			break;
+		case 8:
+			Styles::Egirl();
+			break;
 		default:
 			break;
 		}
