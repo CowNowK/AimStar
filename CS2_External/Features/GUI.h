@@ -482,6 +482,7 @@ namespace GUI
 					}
 				}
 				ImGui::TextColored(ImColor(101, 255, 0, 255), Lang::AimbotText.Tip);
+				ImGui::Checkbox("Recoil Control", &MenuConfig::RCS);
 				/*
 				ImGui::NewLine();
 				ImGui::SeparatorText("Recoil Control System");
