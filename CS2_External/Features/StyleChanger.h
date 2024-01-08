@@ -36,6 +36,9 @@ namespace StyleChanger
 		case 8:
 			Styles::Egirl();
 			break;
+		case 9:
+			Styles::Trans();
+			break;
 		default:
 			break;
 		}
