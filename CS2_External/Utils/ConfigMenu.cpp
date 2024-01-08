@@ -326,6 +326,7 @@ namespace ConfigMenu {
 		MiscCFG::WaterMark = false;
 		MiscCFG::CheatList = false;
 		MiscCFG::HitSound = false;
+		MiscCFG::FastStop = false;
 
 		ESPConfig::ESPenbled = false;
 

@@ -18,16 +18,14 @@ int main()
 	"Author: CowNow\n"
 	"Source Code: https://github.com/CowNowK/AimStar\n"
 	"\n"
-	"- This features may result in VAC Bans, use at your own risk:\n"
-	"	* NoFlash\n"
 	"- Press [INS] to show or hide Menu.\n"
 	"\n"
 	"#Disclamers:\n"
-	"- Because AimStar has too many users, and there are many derivative cheats that are being sold or free. AimStar may now be detected\n"
 	"- Use at your own risk\n"
+	"- It is highly not recommended to use AimStar on your main account"
 	"\n"
 	"#Contributors: \n"
-	"Shinyaluvs, Nx0Ri, Skarbor, KeysIsCool, Kenny, Cr1ppl3, Tairitsu, tokinaa, faster_bbc, vsantos1, 5mmod, gScream, Hazetick, styx, user1232\n"
+	"Shinyaluvs, Nx0Ri, Skarbor, PedroGoncalves, KeysIsCool, Kenny, Cr1ppl3, Tairitsu, sh1pi, toepas, djsacred, tokinaa, faster_bbc, vsantos1, 5mmod, gScream, Hazetick, styx, user1232, TaKaStuKi.sen\n"
 	"\n"
 	);
 

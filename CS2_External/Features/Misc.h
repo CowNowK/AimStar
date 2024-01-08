@@ -42,10 +42,26 @@ namespace Misc
 		localtime_s(ptm, &now);
 	}
 
+	// Thanks @PedroGoncalves for the suggestion
+	static inline void StopKeyEvent(int WalkKey, bool* KeyStatus, int StopKey, float duration) {
+		if (GetAsyncKeyState(WalkKey) & 0x8000) {
+			*KeyStatus = true;
+		}
+		else {
+			if (*KeyStatus) {
+				keybd_event(StopKey, MapVirtualKey(StopKey, 0), KEYEVENTF_SCANCODE, 0);
+				Sleep(50);
+				keybd_event(StopKey, MapVirtualKey(StopKey, 0), KEYEVENTF_KEYUP, 0);
+				*KeyStatus = false;
+			}
+		}
+	}
+
 	void CheatList() noexcept;
 	void Watermark() noexcept;
 	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void NoFlash(const CEntity& aLocalPlayer) noexcept;
+	void FastStop() noexcept;
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
 	void NoSmoke(const DWORD64 EntityAddress) noexcept;
 	void SmokeColor(const DWORD64 EntityAddress) noexcept;

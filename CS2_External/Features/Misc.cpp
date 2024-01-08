@@ -5,6 +5,11 @@
 
 namespace Misc
 {
+	bool aKeyPressed = false;
+	bool dKeyPressed = false;
+	bool wKeyPressed = false;
+	bool sKeyPressed = false;
+
 	void JoinDiscord() noexcept
 	{
 		if (!MiscCFG::mother)
@@ -45,6 +50,7 @@ namespace Misc
 		CheatText("Crosshair", CrosshairsCFG::ShowCrossHair);
 		CheatText("Headshot Line", MenuConfig::ShowHeadShootLine);
 		CheatText("No Flash", MiscCFG::NoFlash);
+		CheatText("Fast Stop", MiscCFG::FastStop);
 		CheatText("Bhop", MiscCFG::BunnyHop);
 		CheatText("HitSound", MiscCFG::HitSound);
 		CheatText("Bomb Timer", MiscCFG::bmbTimer);
@@ -109,6 +115,23 @@ namespace Misc
 
 		float duration = 0.0f;
 		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashDuration, duration);
+	}
+
+	void FastStop() noexcept
+	{
+		if (!MiscCFG::FastStop)
+			return;
+		// Disable when bhopping
+		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
+			return;
+		// Disable when slow walking
+		if (GetAsyncKeyState(VK_LSHIFT) & 0x8000)
+			return;
+
+		Misc::StopKeyEvent('A', &aKeyPressed, 'D', 50.f);
+		Misc::StopKeyEvent('D', &dKeyPressed, 'A', 50.f);
+		Misc::StopKeyEvent('W', &wKeyPressed, 'S', 50.f);
+		Misc::StopKeyEvent('S', &sKeyPressed, 'W', 50.f);
 	}
 
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept

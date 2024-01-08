@@ -124,6 +124,7 @@ namespace Lang
 		const char* HeadshotLine;
 		const char* SpecCheck;
 		const char* NoFlash;
+		const char* FastStop;
 		const char* HitSound;
 		const char* bmbTimer;
 		const char* SpecList;
@@ -243,6 +244,7 @@ namespace Lang
 		MiscText.HeadshotLine = u8"Headshot Line";
 		MiscText.SpecCheck = u8"Cheat in Spec";
 		MiscText.NoFlash = u8"No Flash";
+		MiscText.FastStop = u8"Fast Stop";
 		MiscText.HitSound = u8"Hit Sound";
 		MiscText.bmbTimer = u8"Bomb Timer";
 		MiscText.SpecList = u8"Spec List";
@@ -1055,6 +1057,7 @@ namespace Lang
 		MiscText.HeadshotLine = u8"爆头线";
 		MiscText.SpecCheck = u8"旁观者保持运行";
 		MiscText.NoFlash = u8"无视闪光弹";
+		MiscText.FastStop = u8"自动急停";
 		MiscText.HitSound = u8"命中音效";
 		MiscText.bmbTimer = u8"C4计时器";
 		MiscText.SpecList = u8"旁观者列表";

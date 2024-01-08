@@ -241,6 +241,7 @@ void Cheats::Run()
 
 	Misc::HitSound(LocalEntity, PreviousTotalHits);
 	Misc::NoFlash(LocalEntity);
+	Misc::FastStop();
 	Misc::Watermark();
 	Misc::CheatList();
 

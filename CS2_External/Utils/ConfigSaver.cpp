@@ -114,6 +114,7 @@ namespace MyConfigSaver {
         configFile << "WaterMark " << MiscCFG::WaterMark << std::endl;
         configFile << "CheatList " << MiscCFG::CheatList << std::endl;
         configFile << "HitSound " << MiscCFG::HitSound << std::endl;
+        configFile << "FastStop " << MiscCFG::FastStop << std::endl;
 
         configFile << "ESPenabled " << ESPConfig::ESPenbled << std::endl;
         configFile << "DrawFov " << ESPConfig::DrawFov << std::endl;
@@ -240,6 +241,7 @@ namespace MyConfigSaver {
                 else if (key == "WaterMark") iss >> MiscCFG::WaterMark;
                 else if (key == "CheatList") iss >> MiscCFG::CheatList;
                 else if (key == "HitSound") iss >> MiscCFG::HitSound;
+                else if (key == "FastStop") iss >> MiscCFG::FastStop;
 
                 else if (key == "ESPenabled") iss >> ESPConfig::ESPenbled;
                 else if (key == "DrawFov") iss >> ESPConfig::DrawFov;
