@@ -247,7 +247,7 @@ namespace ConfigMenu {
 		ESPConfig::VisibleColor = ImColor(255, 196, 0, 255);
 		ESPConfig::VisibleCheck = false;
 		MiscCFG::GlowColor = ImColor(255, 0, 0, 100);;
-		MenuConfig::Glow = false;
+		MiscCFG::EnemySensor = false;
 		MenuConfig::AirJump = false;
 		MenuConfig::MenuStyle = 0;
 		MenuConfig::WindowStyle = 0;
@@ -292,7 +292,7 @@ namespace ConfigMenu {
 		MenuConfig::HeadShootLineColor = ImColor(255, 255, 255, 200);
 		MenuConfig::AimBotHotKey = 0;
 		AimControl::SetHotKey(MenuConfig::AimBotHotKey);
-		MenuConfig::ShowLineToEnemy = false;
+		ESPConfig::ShowLineToEnemy = false;
 		MenuConfig::FovLineSize = 60.0f;
 		TriggerBot::TriggerDelay = 90;
 		TriggerBot::FakeShotDelay = 500;
@@ -301,7 +301,7 @@ namespace ConfigMenu {
 		TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
 		AimControl::RCSScale = ImVec2(1.2f, 1.4f);
 		MenuConfig::FovLineColor = ImVec4(55, 55, 55, 220);
-		MenuConfig::LineToEnemyColor = ImVec4(255, 255, 255, 220);
+		ESPConfig::LineToEnemyColor = ImVec4(255, 255, 255, 220);
 		CrosshairsCFG::ShowCrossHair = false;
 		CrosshairsCFG::CrossHairColor = ImColor(0, 255, 0, 255);
 		CrosshairsCFG::CrossHairSize = 75;

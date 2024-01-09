@@ -147,7 +147,7 @@ namespace GUI
 						PutSwitch("Multi-Color", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::MultiColor, true, "###MultiCol", reinterpret_cast<float*>(&ESPConfig::FilledColor2));
 						PutSwitch("Head Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHeadBox, true, "###HeadBoxCol", reinterpret_cast<float*>(&ESPConfig::HeadBoxColor));
 						PutSwitch("Skeleton", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoneESP, true, "###BoneCol", reinterpret_cast<float*>(&ESPConfig::BoneColor));
-						PutSwitch("Snap Line", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowLineToEnemy, true, "###LineCol", reinterpret_cast<float*>(&MenuConfig::LineToEnemyColor));
+						PutSwitch("Snap Line", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowLineToEnemy, true, "###LineCol", reinterpret_cast<float*>(&ESPConfig::LineToEnemyColor));
 						PutSwitch("Eye Ray", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowEyeRay, true, "###LineCol", reinterpret_cast<float*>(&ESPConfig::EyeRayColor));
 						PutSwitch("Health Bar", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthBar);
 						PutSwitch("Health Number", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthNum);
@@ -315,7 +315,7 @@ namespace GUI
 					PutSwitch("Hit Sound", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::HitSound);
 					PutSwitch("Bomb Timer", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol));
 					PutSwitch("Bunny Hop", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
-					PutSwitch("Enemy Sensor", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::Glow);
+					PutSwitch("Enemy Sensor", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor);
 					PutSwitch("Watermark", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WaterMark);
 					PutSwitch("Cheat list", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::CheatList);
 					PutSwitch("Team Check", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TeamCheck);
@@ -413,12 +413,12 @@ namespace GUI
 				ImGui::Checkbox(Lang::ESPtext.Distance, &ESPConfig::ShowDistance);
 				ImGui::Checkbox(Lang::ESPtext.PlayerName, &ESPConfig::ShowPlayerName);
 
-				ImGui::Checkbox(Lang::ESPtext.SnapLine, &MenuConfig::ShowLineToEnemy);
+				ImGui::Checkbox(Lang::ESPtext.SnapLine, &ESPConfig::ShowLineToEnemy);
 				ImGui::SameLine();
-				ImGui::ColorEdit4("##LineToEnemyColor", reinterpret_cast<float*>(&MenuConfig::LineToEnemyColor), ImGuiColorEditFlags_NoInputs);
+				ImGui::ColorEdit4("##LineToEnemyColor", reinterpret_cast<float*>(&ESPConfig::LineToEnemyColor), ImGuiColorEditFlags_NoInputs);
 				ImGui::SameLine();
 				ImGui::SetNextItemWidth(MenuConfig::ComboWidth);
-				ImGui::Combo(Lang::ESPtext.LinePosList, &MenuConfig::LinePos, "Top\0Center\0Bottom\0");
+				ImGui::Combo(Lang::ESPtext.LinePosList, &ESPConfig::LinePos, "Top\0Center\0Bottom\0");
 				ImGui::Checkbox(Lang::ESPtext.VisCheck, &ESPConfig::VisibleCheck);
 				ImGui::SameLine();
 				ImGui::ColorEdit4("##EspVisCol", reinterpret_cast<float*>(&ESPConfig::VisibleColor), ImGuiColorEditFlags_NoInputs);
@@ -496,7 +496,7 @@ namespace GUI
 			}
 			if (ImGui::BeginTabItem(Lang::GlowText.FeatureName))
 			{
-				Gui.MyCheckBox(Lang::Global.SwitchButton, &MenuConfig::Glow);
+				Gui.MyCheckBox(Lang::Global.SwitchButton, &MiscCFG::EnemySensor);
 				ImGui::EndTabItem();
 			}
 			// Radar menu

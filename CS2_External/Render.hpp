@@ -142,10 +142,10 @@ namespace Render
 
 	void LineToEnemy(ImVec4 Rect, ImColor Color, float Thickness)
 	{
-		if (!MenuConfig::ShowLineToEnemy)
+		if (!ESPConfig::ShowLineToEnemy)
 			return;
 
-		switch (MenuConfig::LinePos)
+		switch (ESPConfig::LinePos)
 		{
 		case 0:
 			Gui.Line({ Rect.x + Rect.z / 2,Rect.y }, { Gui.Window.Size.x / 2,0 }, Color, Thickness);

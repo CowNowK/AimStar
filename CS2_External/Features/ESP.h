@@ -198,7 +198,7 @@ namespace ESP
 		}
 
 
-		Render::LineToEnemy(Rect, MenuConfig::LineToEnemyColor, 1.2);
+		Render::LineToEnemy(Rect, ESPConfig::LineToEnemyColor, 1.2);
 
 		if (ESPConfig::ShowWeaponESP)
 		{
@@ -424,10 +424,10 @@ namespace ESP
 				ImGui::GetWindowDrawList()->AddRectFilled(HBS, HBE, ImColor(96, 246, 113, 220), 30.f, ImDrawCornerFlags_All);
 			}
 		}
-		if (MenuConfig::ShowLineToEnemy) {
+		if (ESPConfig::ShowLineToEnemy) {
 			ImVec2 LineStart, LineEnd;
 			LineStart = { centerPos.x + rectSize.x / 2 , centerPos.y };
-			switch (MenuConfig::LinePos)
+			switch (ESPConfig::LinePos)
 			{
 			case 0:
 				LineEnd = { LineStart.x, LineStart.y - 50 };
@@ -439,7 +439,7 @@ namespace ESP
 				LineEnd = { LineStart.x, LineStart.y + 200 };
 				break;
 			}
-			ImGui::GetWindowDrawList()->AddLine(LineStart, LineEnd, MenuConfig::LineToEnemyColor, 1.8f);
+			ImGui::GetWindowDrawList()->AddLine(LineStart, LineEnd, ESPConfig::LineToEnemyColor, 1.8f);
 		}
 		if (ESPConfig::ShowPlayerName) {
 			if (MenuConfig::BoxType == 1 || MenuConfig::BoxType == 3) {

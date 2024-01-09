@@ -46,8 +46,6 @@ namespace MenuConfig
 	inline int BoxType = 0;
 	// 0: Vertical 1: Horizontal
 	inline int  HealthBarType = 0;
-	// 0: Top 1: Center 2: Bottom
-	inline int  LinePos = 0;
 
 	inline ImColor FovCircleColor = ImColor(180, 255, 0, 255);
 
@@ -66,11 +64,7 @@ namespace MenuConfig
 	inline ImColor FovLineColor = ImColor(55, 55, 55, 220);
 	inline float FovLineSize = 60.f;
 
-	inline bool ShowLineToEnemy = false;
-	inline ImColor LineToEnemyColor = ImColor(255, 255, 255, 220);
-
 	inline bool BypassOBS = false;
-	inline bool Glow = false;
 	inline bool TargetingCrosshairs = false;
 }
 
@@ -97,6 +91,10 @@ namespace ESPConfig
 	inline int HeadBoxStyle = 0;
 	inline float BoxRounding = RandomPara<float>(0.0f, 5.0f);;
 	inline float BoxAlpha = 0.35f;
+	inline bool ShowLineToEnemy = false;
+	inline ImColor LineToEnemyColor = ImColor(255, 255, 255, 220);
+	// 0: Top 1: Center 2: Bottom
+	inline int LinePos = 0;
 
 	inline ImColor BoneColor = ImColor(0, 255, 255, 255);
 	inline ImColor BoxColor = ImColor(255, 80, 0, 255);
@@ -176,6 +174,7 @@ namespace MiscCFG
 	inline bool bmbTimer = false;
 	inline bool FastStop = false;
 	inline bool SpecList = false;
+	inline bool EnemySensor = false;
 	inline ImColor BombTimerCol = ImColor(255, 120, 0, 255);
 	inline ImColor GlowColor = ImColor(255, 0, 0, 100);
 }
