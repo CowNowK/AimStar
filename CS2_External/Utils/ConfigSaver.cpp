@@ -32,7 +32,7 @@ namespace MyConfigSaver {
         configFile << "ESPVisCol " << ESPConfig::VisibleColor.Value.x << " " << ESPConfig::VisibleColor.Value.y << " " << ESPConfig::VisibleColor.Value.z << " " << ESPConfig::VisibleColor.Value.w << std::endl;;
         configFile << "ESPVisCheck " << ESPConfig::VisibleCheck << std::endl;
         configFile << "GlowColor " << MiscCFG::GlowColor.Value.x << " " << MiscCFG::GlowColor.Value.y << " " << MiscCFG::GlowColor.Value.z << " " << MiscCFG::GlowColor.Value.w << std::endl;
-        configFile << "Glow " << MenuConfig::Glow << std::endl;
+        configFile << "Glow " << MiscCFG::EnemySensor << std::endl;
         configFile << "AirJump " << MenuConfig::AirJump << std::endl;
         configFile << "MenuStyle " << MenuConfig::MenuStyle << std::endl;
         configFile << "WindowStyle " << MenuConfig::WindowStyle << std::endl;
@@ -53,7 +53,7 @@ namespace MyConfigSaver {
         configFile << "AimFov " << AimControl::AimFov << std::endl;
         configFile << "FovLineSize " << MenuConfig::FovLineSize << std::endl;
         configFile << "AimBotHotKey " << MenuConfig::AimBotHotKey << std::endl;
-        configFile << "ShowLineToEnemy " << MenuConfig::ShowLineToEnemy << std::endl;
+        configFile << "ShowLineToEnemy " << ESPConfig::ShowLineToEnemy << std::endl;
         configFile << "RCSScale.x " << AimControl::RCSScale.x << std::endl;
         configFile << "RCSScale.y " << AimControl::RCSScale.y << std::endl;
         configFile << "ShowWeaponESP " << ESPConfig::ShowWeaponESP << std::endl;
@@ -69,7 +69,7 @@ namespace MyConfigSaver {
         configFile << "HealthBarType " << MenuConfig::HealthBarType << std::endl;
         configFile << "BoneColor " << ESPConfig::BoneColor.Value.x << " " << ESPConfig::BoneColor.Value.y << " " << ESPConfig::BoneColor.Value.z << " " << ESPConfig::BoneColor.Value.w << std::endl;
         configFile << "FovLineColor " << MenuConfig::FovLineColor.Value.x << " " << MenuConfig::FovLineColor.Value.y << " " << MenuConfig::FovLineColor.Value.z << " " << MenuConfig::FovLineColor.Value.w << std::endl;
-        configFile << "LineToEnemyColor " << MenuConfig::LineToEnemyColor.Value.x << " " << MenuConfig::LineToEnemyColor.Value.y << " " << MenuConfig::LineToEnemyColor.Value.z << " " << MenuConfig::LineToEnemyColor.Value.w << std::endl;
+        configFile << "LineToEnemyColor " << ESPConfig::LineToEnemyColor.Value.x << " " << ESPConfig::LineToEnemyColor.Value.y << " " << ESPConfig::LineToEnemyColor.Value.z << " " << ESPConfig::LineToEnemyColor.Value.w << std::endl;
         configFile << "BoxColor " << ESPConfig::BoxColor.Value.x << " " << ESPConfig::BoxColor.Value.y << " " << ESPConfig::BoxColor.Value.z << " " << ESPConfig::BoxColor.Value.w << std::endl;
         configFile << "EyeRayColor " << ESPConfig::EyeRayColor.Value.x << " " << ESPConfig::EyeRayColor.Value.y << " " << ESPConfig::EyeRayColor.Value.z << " " << ESPConfig::EyeRayColor.Value.w << std::endl;
         configFile << "RadarCrossLineColor " << RadarCFG::RadarCrossLineColor.Value.x << " " << RadarCFG::RadarCrossLineColor.Value.y << " " << RadarCFG::RadarCrossLineColor.Value.z << " " << RadarCFG::RadarCrossLineColor.Value.w << std::endl;
@@ -123,7 +123,7 @@ namespace MyConfigSaver {
         configFile << "PenisColor " << ESPConfig::PenisColor.Value.x << " " << ESPConfig::PenisColor.Value.y << " " << ESPConfig::PenisColor.Value.z << " " << ESPConfig::PenisColor.Value.w << std::endl;
         configFile << "PenisSize " << ESPConfig::PenisSize << std::endl;
         configFile << "PenisLength " << ESPConfig::PenisLength << std::endl;
-        configFile << "SnaplinePos " << MenuConfig::LinePos << std::endl;
+        configFile << "SnaplinePos " << ESPConfig::LinePos << std::endl;
         configFile << "CustomRadar " << RadarCFG::customRadar << std::endl;
         configFile << "MenuStyle " << MenuConfig::MenuStyle << std::endl;
 
@@ -160,7 +160,7 @@ namespace MyConfigSaver {
                 else if (key == "ESPVisCol") iss >> ESPConfig::VisibleColor.Value.x >> ESPConfig::VisibleColor.Value.y >> ESPConfig::VisibleColor.Value.z >> ESPConfig::VisibleColor.Value.w;
                 else if (key == "ESPVisCheck") iss >> ESPConfig::VisibleCheck;
                 else if (key == "GlowColor") iss >> MiscCFG::GlowColor.Value.x >> MiscCFG::GlowColor.Value.y >> MiscCFG::GlowColor.Value.z >> MiscCFG::GlowColor.Value.w;
-                else if (key == "Glow") iss >> MenuConfig::Glow;
+                else if (key == "Glow") iss >> MiscCFG::EnemySensor;
                 else if (key == "AirJump") iss >> MenuConfig::AirJump;
                 else if (key == "MenuStyle") iss >> MenuConfig::MenuStyle;
                 else if (key == "WindowStyle") iss >> MenuConfig::WindowStyle;
@@ -180,7 +180,7 @@ namespace MyConfigSaver {
                 else if (key == "AimFov") iss >> AimControl::AimFov;
                 else if (key == "FovLineSize") iss >> MenuConfig::FovLineSize;
                 else if (key == "AimBotHotKey") { iss >> MenuConfig::AimBotHotKey; AimControl::SetHotKey(MenuConfig::AimBotHotKey); }
-                else if (key == "ShowLineToEnemy") iss >> MenuConfig::ShowLineToEnemy;
+                else if (key == "ShowLineToEnemy") iss >> ESPConfig::ShowLineToEnemy;
                 else if (key == "RCSScale.x") iss >> AimControl::RCSScale.x;
                 else if (key == "RCSScale.y") iss >> AimControl::RCSScale.y;
                 else if (key == "ShowWeaponESP") iss >> ESPConfig::ShowWeaponESP;
@@ -196,7 +196,7 @@ namespace MyConfigSaver {
                 else if (key == "HealthBarType") iss >> MenuConfig::HealthBarType;
                 else if (key == "BoneColor") iss >> ESPConfig::BoneColor.Value.x >> ESPConfig::BoneColor.Value.y >> ESPConfig::BoneColor.Value.z >> ESPConfig::BoneColor.Value.w;
                 else if (key == "FovLineColor") iss >> MenuConfig::FovLineColor.Value.x >> MenuConfig::FovLineColor.Value.y >> MenuConfig::FovLineColor.Value.z >> MenuConfig::FovLineColor.Value.w;
-                else if (key == "LineToEnemyColor") iss >> MenuConfig::LineToEnemyColor.Value.x >> MenuConfig::LineToEnemyColor.Value.y >> MenuConfig::LineToEnemyColor.Value.z >> MenuConfig::LineToEnemyColor.Value.w;
+                else if (key == "LineToEnemyColor") iss >> ESPConfig::LineToEnemyColor.Value.x >> ESPConfig::LineToEnemyColor.Value.y >> ESPConfig::LineToEnemyColor.Value.z >> ESPConfig::LineToEnemyColor.Value.w;
                 else if (key == "BoxColor") iss >> ESPConfig::BoxColor.Value.x >> ESPConfig::BoxColor.Value.y >> ESPConfig::BoxColor.Value.z >> ESPConfig::BoxColor.Value.w;
                 else if (key == "EyeRayColor") iss >> ESPConfig::EyeRayColor.Value.x >> ESPConfig::EyeRayColor.Value.y >> ESPConfig::EyeRayColor.Value.z >> ESPConfig::EyeRayColor.Value.w;
                 else if (key == "CrossLineColor") iss >> RadarCFG::RadarCrossLineColor.Value.x >> RadarCFG::RadarCrossLineColor.Value.y >> RadarCFG::RadarCrossLineColor.Value.z >> RadarCFG::RadarCrossLineColor.Value.w;
@@ -250,7 +250,7 @@ namespace MyConfigSaver {
                 else if (key == "PenisColor") iss >> ESPConfig::PenisColor.Value.x >> ESPConfig::PenisColor.Value.y >> ESPConfig::PenisColor.Value.z >> ESPConfig::PenisColor.Value.w;
                 else if (key == "PenisSize") iss >> ESPConfig::PenisSize;
                 else if (key == "PenisLength") iss >> ESPConfig::PenisLength;
-                else if (key == "SnaplinePos") iss >> MenuConfig::LinePos;
+                else if (key == "SnaplinePos") iss >> ESPConfig::LinePos;
                 else if (key == "CustomRadar") iss >> RadarCFG::customRadar;
                 else if (key == "MenuStyle") iss >> MenuConfig::MenuStyle;
 
