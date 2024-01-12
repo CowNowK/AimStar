@@ -1,5 +1,6 @@
 #pragma once
 
+#include "..\Utils\yaml-cpp\yaml.h"
 #include <string>
 
 namespace MyConfigSaver {

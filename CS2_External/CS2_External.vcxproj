@@ -116,6 +116,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <AdditionalDependencies>$(CoreLibraryDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,7 +139,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)AimStar$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
@@ -194,6 +195,43 @@
     <ClInclude Include="Utils\ProcessManager.hpp" />
     <ClInclude Include="Utils\Random.h" />
     <ClInclude Include="Utils\Style.h" />
+    <ClInclude Include="Utils\yaml-cpp\anchor.h" />
+    <ClInclude Include="Utils\yaml-cpp\binary.h" />
+    <ClInclude Include="Utils\yaml-cpp\contrib\anchordict.h" />
+    <ClInclude Include="Utils\yaml-cpp\contrib\graphbuilder.h" />
+    <ClInclude Include="Utils\yaml-cpp\depthguard.h" />
+    <ClInclude Include="Utils\yaml-cpp\dll.h" />
+    <ClInclude Include="Utils\yaml-cpp\emitfromevents.h" />
+    <ClInclude Include="Utils\yaml-cpp\emitter.h" />
+    <ClInclude Include="Utils\yaml-cpp\emitterdef.h" />
+    <ClInclude Include="Utils\yaml-cpp\emittermanip.h" />
+    <ClInclude Include="Utils\yaml-cpp\emitterstyle.h" />
+    <ClInclude Include="Utils\yaml-cpp\eventhandler.h" />
+    <ClInclude Include="Utils\yaml-cpp\exceptions.h" />
+    <ClInclude Include="Utils\yaml-cpp\mark.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\convert.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\detail\impl.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\detail\iterator.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\detail\iterator_fwd.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\detail\memory.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\detail\node.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\detail\node_data.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\detail\node_iterator.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\detail\node_ref.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\emit.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\impl.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\iterator.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\node.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\parse.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\ptr.h" />
+    <ClInclude Include="Utils\yaml-cpp\node\type.h" />
+    <ClInclude Include="Utils\yaml-cpp\noexcept.h" />
+    <ClInclude Include="Utils\yaml-cpp\null.h" />
+    <ClInclude Include="Utils\yaml-cpp\ostream_wrapper.h" />
+    <ClInclude Include="Utils\yaml-cpp\parser.h" />
+    <ClInclude Include="Utils\yaml-cpp\stlemitter.h" />
+    <ClInclude Include="Utils\yaml-cpp\traits.h" />
+    <ClInclude Include="Utils\yaml-cpp\yaml.h" />
     <ClInclude Include="View.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +273,9 @@
   <ItemGroup>
     <Font Include="Font\fa-regular.ttf" />
     <Font Include="Font\stratum2.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
