@@ -152,7 +152,7 @@ namespace GUI
 						PutSwitch("Health Bar", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthBar);
 						PutSwitch("Health Number", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthNum);
 						PutSwitch("Weapon", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowWeaponESP);
-						PutSwitch("Ammo", 10.f, ImGui::GetFrameHeight() * 1.7, & ESPConfig::AmmoBar);
+						PutSwitch("Ammo", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::AmmoBar);
 						PutSwitch("Distance", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowDistance);
 						PutSwitch("Player Name", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowPlayerName);
 						PutSwitch("Visible Check", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::VisibleCheck, true, "###VisibleCol", reinterpret_cast<float*>(&ESPConfig::VisibleColor));

@@ -9,7 +9,7 @@
 
 namespace MyConfigSaver {
 
-    void SaveConfig(const std::string& filename/*, const std::string& author*/) {
+    void SaveConfig(const std::string& filename, const std::string& author) {
         std::ofstream configFile(MenuConfig::path + '\\' + filename);
         if (!configFile.is_open()) {
             std::cerr << "[Info] Error: Could not open the configuration file." << std::endl;
@@ -18,11 +18,9 @@ namespace MyConfigSaver {
 
         YAML::Emitter emitter;
 
+        emitter << YAML::Comment("AimStar Config File\nVersion: 3.7\nAuthor: " + author);
         emitter << YAML::BeginMap;
 
-        emitter << YAML::Comment("AimStar Config File");
-        emitter << YAML::Comment("Version: 3.7");
-        emitter << YAML::Comment("Author:");
         emitter << YAML::Key << "ESP";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
@@ -218,7 +216,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "b" << YAML::Value << MiscCFG::BombTimerCol.Value.z;
         emitter << YAML::Key << "a" << YAML::Value << MiscCFG::BombTimerCol.Value.w;
         emitter << YAML::EndMap;
-        emitter << YAML::Key << "FastStop" << YAML::Value << MiscCFG::BunnyHop;
+        emitter << YAML::Key << "FastStop" << YAML::Value << MiscCFG::FastStop;
         emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::BunnyHop;
         emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
         emitter << YAML::Key << "TeamCheck" << YAML::Value << MenuConfig::TeamCheck;
@@ -275,6 +273,7 @@ namespace MyConfigSaver {
     void LoadConfig(const std::string& filename) {
         YAML::Node config = YAML::LoadFile(MenuConfig::path + '\\' + filename);
         if (config["ESP"]) {
+            // If you want to make the new version compatible with the old configuration, you can add IsDefine(), like line 284.
             ESPConfig::ESPenabled = config["ESP"]["Enable"].as<bool>();
             ESPConfig::ShowBoneESP = config["ESP"]["BoneESP"].as<bool>();
             ESPConfig::ShowBoxESP = config["ESP"]["BoxESP"].as<bool>();
@@ -282,7 +281,7 @@ namespace MyConfigSaver {
             ESPConfig::ShowLineToEnemy = config["ESP"]["SnapLine"].as<bool>();
             ESPConfig::LinePos = config["ESP"]["LinePos"].as<int>();
             ESPConfig::ShowHealthBar = config["ESP"]["HealthBar"].as<bool>();
-            ESPConfig::AmmoBar = config["ESP"]["AmmoBar"].as<int>();
+            ESPConfig::AmmoBar = config["ESP"]["AmmoBar"].IsDefined() ? config["ESP"]["AmmoBar"].as<bool>() : false;
             ESPConfig::ShowWeaponESP = config["ESP"]["WeaponESP"].as<bool>();
             ESPConfig::ShowEyeRay = config["ESP"]["EyeRay"].as<bool>();
             ESPConfig::ShowPlayerName = config["ESP"]["PlayerName"].as<bool>();

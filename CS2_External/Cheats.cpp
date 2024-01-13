@@ -217,7 +217,7 @@ void Cheats::Run()
 				ImVec2 AmmoBarPos = { Rect.x, Rect.y + Rect.w + 2 };
 				ImVec2 AmmoBarSize = { Rect.z,4 };
 				Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
-				std::cout << Entity.Pawn.Ammo << "/" << Entity.Pawn.MaxAmmo << std::endl;
+
 			}
 
 			// Draw Distance
