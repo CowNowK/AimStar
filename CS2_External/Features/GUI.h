@@ -137,8 +137,8 @@ namespace GUI
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 					ImGui::SeparatorText(ICON_FA_EYE" ESP");
 					float MinRounding = 0.f, MaxRouding = 15.f;
-					PutSwitch("Toggle", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ESPenbled);
-					if (ESPConfig::ESPenbled)
+					PutSwitch("Toggle", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ESPenabled);
+					if (ESPConfig::ESPenabled)
 					{
 						PutSwitch("Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoxESP, true, "###BoxCol", reinterpret_cast<float*>(&ESPConfig::BoxColor));
 						PutSwitch("Outline", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::OutLine);
@@ -152,6 +152,7 @@ namespace GUI
 						PutSwitch("Health Bar", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthBar);
 						PutSwitch("Health Number", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthNum);
 						PutSwitch("Weapon", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowWeaponESP);
+						PutSwitch("Ammo", 10.f, ImGui::GetFrameHeight() * 1.7, & ESPConfig::AmmoBar);
 						PutSwitch("Distance", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowDistance);
 						PutSwitch("Player Name", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowPlayerName);
 						PutSwitch("Visible Check", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::VisibleCheck, true, "###VisibleCol", reinterpret_cast<float*>(&ESPConfig::VisibleColor));
@@ -358,7 +359,7 @@ namespace GUI
 			sprintf_s(TempText, "%s%s", ICON_FA_EYE, Lang::ESPtext.FeatureName);
 			if (ImGui::BeginTabItem(TempText))
 			{
-				Gui.MyCheckBox(Lang::Global.SwitchButton, &ESPConfig::ESPenbled);
+				Gui.MyCheckBox(Lang::Global.SwitchButton, &ESPConfig::ESPenabled);
 				ImGui::Checkbox(Lang::ESPtext.Box, &ESPConfig::ShowBoxESP);
 				ImGui::SameLine();
 				ImGui::ColorEdit4("##BoxColor", reinterpret_cast<float*>(&ESPConfig::BoxColor), ImGuiColorEditFlags_NoInputs);
@@ -408,6 +409,7 @@ namespace GUI
 				ImGui::SameLine();
 				ImGui::SetNextItemWidth(MenuConfig::ComboWidth);
 				ImGui::Combo("##BarStyle", &MenuConfig::HealthBarType, "Vertical\0Top\0");
+				ImGui::Checkbox("Ammo", &ESPConfig::AmmoBar);
 
 				ImGui::Checkbox(Lang::ESPtext.Weapon, &ESPConfig::ShowWeaponESP);
 				ImGui::Checkbox(Lang::ESPtext.Distance, &ESPConfig::ShowDistance);
@@ -670,7 +672,7 @@ namespace GUI
 			{
 				ImGui::TextColored(ImColor(0, 200, 255, 255), Lang::ReadMeText.LastUpdate);
 				ImGui::SameLine();
-				ImGui::TextColored(ImColor(0, 200, 255, 255), "2024-01-08");
+				ImGui::TextColored(ImColor(0, 200, 255, 255), "2024-01-13");
 				sprintf_s(TempText, "%s%s", ICON_FA_COPY, Lang::ReadMeText.SourceButton);
 				Gui.OpenWebpageButton(TempText, "https://github.com/CowNowK/AimStar");
 				ImGui::SameLine();

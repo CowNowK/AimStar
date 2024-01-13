@@ -234,6 +234,7 @@ namespace ConfigMenu {
 	}
 
 	void ResetToDefault() {
+		ESPConfig::AmmoBar = false;
 		ESPConfig::OutLine = true;
 		ESPConfig::ShowHealthNum = false;
 		ESPConfig::FilledColor = ImColor(255, 255, 255, 255);
@@ -328,7 +329,7 @@ namespace ConfigMenu {
 		MiscCFG::HitSound = false;
 		MiscCFG::FastStop = false;
 
-		ESPConfig::ESPenbled = false;
+		ESPConfig::ESPenabled = false;
 
 		ESPConfig::ShowPenis = false;
 		ESPConfig::PenisLength = 15.f;

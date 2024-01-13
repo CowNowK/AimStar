@@ -70,7 +70,8 @@ namespace MenuConfig
 
 namespace ESPConfig
 {
-	inline bool ESPenbled = true;
+	inline bool ESPenabled = true;
+	inline bool AmmoBar = false;
 	inline bool ShowBoneESP = true;
 	inline bool ShowBoxESP = true;
 	inline bool ShowHealthBar = true;

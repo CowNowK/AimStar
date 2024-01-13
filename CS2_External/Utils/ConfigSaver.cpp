@@ -9,7 +9,7 @@
 
 namespace MyConfigSaver {
 
-    void SaveConfig(const std::string& filename) {
+    void SaveConfig(const std::string& filename/*, const std::string& author*/) {
         std::ofstream configFile(MenuConfig::path + '\\' + filename);
         if (!configFile.is_open()) {
             std::cerr << "[Info] Error: Could not open the configuration file." << std::endl;
@@ -20,18 +20,20 @@ namespace MyConfigSaver {
 
         emitter << YAML::BeginMap;
 
-        emitter << YAML::Comment("AimStar Config File, created in 3.7");
+        emitter << YAML::Comment("AimStar Config File");
+        emitter << YAML::Comment("Version: 3.7");
+        emitter << YAML::Comment("Author:");
         emitter << YAML::Key << "ESP";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
-        emitter << YAML::Key << "Enable" << YAML::Value << ESPConfig::ESPenbled;
+        emitter << YAML::Key << "Enable" << YAML::Value << ESPConfig::ESPenabled;
         emitter << YAML::Key << "BoneESP" << YAML::Value << ESPConfig::ShowBoneESP;
         emitter << YAML::Key << "BoxESP" << YAML::Value << ESPConfig::ShowBoxESP;
         emitter << YAML::Key << "BoxType" << YAML::Value << MenuConfig::BoxType;
         emitter << YAML::Key << "SnapLine" << YAML::Value << ESPConfig::ShowLineToEnemy;
         emitter << YAML::Key << "LinePos" << YAML::Value << ESPConfig::LinePos;
         emitter << YAML::Key << "HealthBar" << YAML::Value << ESPConfig::ShowHealthBar;
-        emitter << YAML::Key << "HealthBarType" << YAML::Value << MenuConfig::HealthBarType;
+        emitter << YAML::Key << "AmmoBar" << YAML::Value << ESPConfig::AmmoBar;
         emitter << YAML::Key << "WeaponESP" << YAML::Value << ESPConfig::ShowWeaponESP;
         emitter << YAML::Key << "EyeRay" << YAML::Value << ESPConfig::ShowEyeRay;
         emitter << YAML::Key << "PlayerName" << YAML::Value << ESPConfig::ShowPlayerName;
@@ -273,14 +275,14 @@ namespace MyConfigSaver {
     void LoadConfig(const std::string& filename) {
         YAML::Node config = YAML::LoadFile(MenuConfig::path + '\\' + filename);
         if (config["ESP"]) {
-            ESPConfig::ESPenbled = config["ESP"]["Enable"].as<bool>();
+            ESPConfig::ESPenabled = config["ESP"]["Enable"].as<bool>();
             ESPConfig::ShowBoneESP = config["ESP"]["BoneESP"].as<bool>();
             ESPConfig::ShowBoxESP = config["ESP"]["BoxESP"].as<bool>();
             MenuConfig::BoxType = config["ESP"]["BoxType"].as<int>();
             ESPConfig::ShowLineToEnemy = config["ESP"]["SnapLine"].as<bool>();
             ESPConfig::LinePos = config["ESP"]["LinePos"].as<int>();
             ESPConfig::ShowHealthBar = config["ESP"]["HealthBar"].as<bool>();
-            MenuConfig::HealthBarType = config["ESP"]["HealthBarType"].as<int>();
+            ESPConfig::AmmoBar = config["ESP"]["AmmoBar"].as<int>();
             ESPConfig::ShowWeaponESP = config["ESP"]["WeaponESP"].as<bool>();
             ESPConfig::ShowEyeRay = config["ESP"]["EyeRay"].as<bool>();
             ESPConfig::ShowPlayerName = config["ESP"]["PlayerName"].as<bool>();

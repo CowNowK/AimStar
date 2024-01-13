@@ -40,6 +40,10 @@ bool CEntity::UpdatePawn(const DWORD64& PlayerPawnAddress)
 		return false;
 	if (!this->Pawn.GetHealth())
 		return false;
+	if (!this->Pawn.GetAmmo())
+		return false;
+	if (!this->Pawn.GetMaxAmmo())
+		return false;
 	if (!this->Pawn.GetTeamID())
 		return false;
 	if (!this->Pawn.GetFov())
@@ -175,6 +179,27 @@ bool PlayerPawn::GetPos()
 bool PlayerPawn::GetHealth()
 {
 	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentHealth, this->Health);
+}
+
+bool PlayerPawn::GetAmmo()
+{
+	DWORD64 ClippingWeapon = 0;
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::WeaponBaseData.ClippingWeapon, ClippingWeapon))
+		return false;
+
+	return GetDataAddressWithOffset<int>(ClippingWeapon, Offset::WeaponBaseData.Clip1, this->Ammo);
+}
+
+bool PlayerPawn::GetMaxAmmo()
+{
+	DWORD64 ClippingWeapon = 0;
+	DWORD64 WeaponData = 0;
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::WeaponBaseData.ClippingWeapon, ClippingWeapon))
+		return false;
+	if (!ProcessMgr.ReadMemory<DWORD64>(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData))
+		return false;
+
+	return GetDataAddressWithOffset<int>(WeaponData, Offset::WeaponBaseData.MaxClip, this->MaxAmmo);
 }
 
 bool PlayerPawn::GetFov()

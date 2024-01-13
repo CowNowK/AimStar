@@ -196,7 +196,7 @@ void Cheats::Run()
 			}
 		}
 
-		if (ESPConfig::ESPenbled)
+		if (ESPConfig::ESPenabled)
 		{
 			ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
 			ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
@@ -205,19 +205,19 @@ void Cheats::Run()
 			// Draw HealthBar
 			if (ESPConfig::ShowHealthBar)
 			{
-				ImVec2 HealthBarPos, HealthBarSize;
-				switch (MenuConfig::HealthBarType == 0)
-				{
-				case 0:
-					HealthBarPos = { Rect.x + Rect.z / 2 - 70 / 2,Rect.y - 13 };
-					HealthBarSize = { 70,8 };
-					break;
-				case 1:
-					HealthBarPos = { Rect.x - 6.f,Rect.y };
-					HealthBarSize = { 5 ,Rect.w };
-					break;
-				}
-				Render::DrawHealthBar(EntityAddress, 100, Entity.Pawn.Health, HealthBarPos, HealthBarSize, MenuConfig::HealthBarType);
+				ImVec2 HealthBarPos = { Rect.x - 6.f,Rect.y };
+				ImVec2 HealthBarSize = { 4 ,Rect.w };
+				Render::DrawHealthBar(EntityAddress, 100, Entity.Pawn.Health, HealthBarPos, HealthBarSize);
+			}
+
+			// Draw Ammo
+			// When player is using knife, Ammo = -1.
+			if (ESPConfig::AmmoBar && Entity.Pawn.Ammo != -1)
+			{
+				ImVec2 AmmoBarPos = { Rect.x, Rect.y + Rect.w + 2 };
+				ImVec2 AmmoBarSize = { Rect.z,4 };
+				Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
+				std::cout << Entity.Pawn.Ammo << "/" << Entity.Pawn.MaxAmmo << std::endl;
 			}
 
 			// Draw Distance

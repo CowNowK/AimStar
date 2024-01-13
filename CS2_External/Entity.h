@@ -47,6 +47,8 @@ public:
 	Vec2 AimPunchAngle;
 	C_UTL_VECTOR AimPunchCache;
 	int Health;
+	int Ammo;
+	int MaxAmmo;
 	int TeamID;
 	int Fov;
 	DWORD64 bSpottedByMask;
@@ -65,12 +67,12 @@ public:
 	bool GetSpotted();
 	bool GetFFlags();
 	bool GetAimPunchCache();
+	bool GetAmmo();
+	bool GetMaxAmmo();
 
 	constexpr bool HasFlag(const Flags Flag) const noexcept {
 		return fFlags & (int)Flag;
 	}
-
-	bool GetHealthOnServer();
 };
 
 class CEntity

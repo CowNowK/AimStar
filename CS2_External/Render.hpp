@@ -321,51 +321,48 @@ namespace Render
 	private:
 		using TimePoint_ = std::chrono::steady_clock::time_point;
 	private:
-		// ��ʾ����Ѫ��ʱ��(ms)
 		const int ShowBackUpHealthDuration = 500;
-		// ���Ѫ��
 		float MaxHealth = 0.f;
-		// ��ǰѪ��
 		float CurrentHealth = 0.f;
-		// �������Ѫ����С
 		float LastestBackupHealth = 0.f;
-		// Ѫ������
 		ImVec2 RectPos{};
-		// Ѫ����С
 		ImVec2 RectSize{};
-		// ������ʾ����Ѫ��
 		bool InShowBackupHealth = false;
-		// ��ʾ����Ѫ����ʼʱ���
 		TimePoint_ BackupHealthTimePoint{};
+		int MaxAmmo = 0;
+		int CurrentAmmo = 0;
+
 	public:
 		HealthBar() {}
-		// ����
-		void DrawHealthBar_Horizontal(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size);
-		// ����
-		void DrawHealthBar_Vertical(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size);
+
+		void HealthBarV(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size);
+
+		void AmmoBarH(float MaxAmmo, float CurrentAmmo, ImVec2 Pos, ImVec2 Size);
 	private:
-		// ��ɫ����
+
 		ImColor Mix(ImColor Col_1, ImColor Col_2, float t);
-		// ��һ�׶�Ѫ����ɫ 0.5-1
-		ImColor FirstStageColor = ImColor(96, 246, 113, 220);
-		// �ڶ��׶�Ѫ����ɫ 0.5-0.2
-		ImColor SecondStageColor = ImColor(247, 214, 103, 220);
-		// �����׶�Ѫ����ɫ 0.2-0.0
-		ImColor ThirdStageColor = ImColor(255, 95, 95, 220);
-		// ����Ѫ����ɫ
+
+		ImColor FirstStageColor = ImColor(0, 255, 0, 255);
+
+		ImColor SecondStageColor = ImColor(255, 232, 0, 255);
+
+		ImColor ThirdStageColor = ImColor(255, 39, 0, 255);
+
 		ImColor BackupHealthColor = ImColor(255, 255, 255, 220);
-		// �߿���ɫ
+
 		ImColor FrameColor = ImColor(45, 45, 45, 220);
-		// ������ɫ
-		ImColor BackGroundColor = ImColor(90, 90, 90, 220);
+
+		ImColor BackGroundColor = ImColor(0, 0, 0, 255);
+
+		ImColor AmmoColor = ImColor(255, 255, 0, 255);
 	};
 
-	void HealthBar::DrawHealthBar_Horizontal(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size)
+	void HealthBar::HealthBarV(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size)
 	{
 		auto InRange = [&](float value, float min, float max) -> bool
-		{
-			return value > min && value <= max;
-		};
+			{
+				return value > min && value <= max;
+			};
 
 		ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
 
@@ -374,158 +371,55 @@ namespace Render
 		this->RectPos = Pos;
 		this->RectSize = Size;
 
-		// ռ��
 		float Proportion = CurrentHealth / MaxHealth;
-		// Ѫ��������
-		float Width = RectSize.x * Proportion;
-		// Ѫ������ɫ
-		ImColor Color;
 
-		// ����
-		DrawList->AddRectFilled(RectPos,
-			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
-			BackGroundColor, 5, 15);
-
-		// ��ɫ�л�
-		float Color_Lerp_t = pow(Proportion, 2.5);
-		if (InRange(Proportion, 0.5, 1))
-			Color = Mix(FirstStageColor, SecondStageColor, Color_Lerp_t * 3 - 1);
-		else
-			Color = Mix(SecondStageColor, ThirdStageColor, Color_Lerp_t * 4);
-
-		// �����������Ѫ��
-		if (LastestBackupHealth == 0
-			|| LastestBackupHealth < CurrentHealth)
-			LastestBackupHealth = CurrentHealth;
-
-		if (LastestBackupHealth != CurrentHealth)
-		{
-			if (!InShowBackupHealth)
-			{
-				BackupHealthTimePoint = std::chrono::steady_clock::now();
-				InShowBackupHealth = true;
-			}
-
-			std::chrono::steady_clock::time_point CurrentTime = std::chrono::steady_clock::now();
-			if (CurrentTime - BackupHealthTimePoint > std::chrono::milliseconds(ShowBackUpHealthDuration))
-			{
-				// ��ʱ��ֹͣ��ʾ����Ѫ�������Ҹ����������Ѫ��
-				LastestBackupHealth = CurrentHealth;
-				InShowBackupHealth = false;
-			}
-
-			if (InShowBackupHealth)
-			{
-				// ����Ѫ�����ƿ���
-				float BackupHealthWidth = LastestBackupHealth / MaxHealth * RectSize.x;
-				// ����Ѫ��alpha����
-				float BackupHealthColorAlpha = 1 - 0.95 * (std::chrono::duration_cast<std::chrono::milliseconds>(CurrentTime - BackupHealthTimePoint).count() / (float)ShowBackUpHealthDuration);
-				ImColor BackupHealthColorTemp = BackupHealthColor;
-				BackupHealthColorTemp.Value.w = BackupHealthColorAlpha;
-				// ����Ѫ�����Ȼ���
-				float BackupHealthWidth_Lerp = 1 * (std::chrono::duration_cast<std::chrono::milliseconds>(CurrentTime - BackupHealthTimePoint).count() / (float)ShowBackUpHealthDuration);
-				BackupHealthWidth_Lerp *= (BackupHealthWidth - Width);
-				BackupHealthWidth -= BackupHealthWidth_Lerp;
-				// ����Ѫ��
-				DrawList->AddRectFilled(RectPos,
-					{ RectPos.x + BackupHealthWidth,RectPos.y + RectSize.y },
-					BackupHealthColorTemp, 5);
-			}
-		}
-
-		// Ѫ��
-		DrawList->AddRectFilled(RectPos,
-			{ RectPos.x + Width,RectPos.y + RectSize.y },
-			Color, 5);
-
-		// �߿�
-		DrawList->AddRect(RectPos,
-			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
-			FrameColor, 5, 15, 1);
-	}
-
-	void HealthBar::DrawHealthBar_Vertical(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size)
-	{
-		auto InRange = [&](float value, float min, float max) -> bool
-		{
-			return value > min && value <= max;
-		};
-
-		ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
-
-		this->MaxHealth = MaxHealth;
-		this->CurrentHealth = CurrentHealth;
-		this->RectPos = Pos;
-		this->RectSize = Size;
-
-		// ռ��
-		float Proportion = CurrentHealth / MaxHealth;
-		// Ѫ�����߶�
 		float Height = RectSize.y * Proportion;
-		// Ѫ������ɫ
+
 		ImColor Color;
 
-		// ����
 		DrawList->AddRectFilled(RectPos,
 			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
 			BackGroundColor, 5, 15);
 
-		// ��ɫ�л�
 		float Color_Lerp_t = pow(Proportion, 2.5);
 		if (InRange(Proportion, 0.5, 1))
 			Color = Mix(FirstStageColor, SecondStageColor, Color_Lerp_t * 3 - 1);
 		else
 			Color = Mix(SecondStageColor, ThirdStageColor, Color_Lerp_t * 4);
 
-		// �����������Ѫ��
-		if (LastestBackupHealth == 0
-			|| LastestBackupHealth < CurrentHealth)
-			LastestBackupHealth = CurrentHealth;
-
-		if (LastestBackupHealth != CurrentHealth)
-		{
-			if (!InShowBackupHealth)
-			{
-				BackupHealthTimePoint = std::chrono::steady_clock::now();
-				InShowBackupHealth = true;
-			}
-
-			std::chrono::steady_clock::time_point CurrentTime = std::chrono::steady_clock::now();
-			if (CurrentTime - BackupHealthTimePoint > std::chrono::milliseconds(ShowBackUpHealthDuration))
-			{
-				// ��ʱ��ֹͣ��ʾ����Ѫ�������Ҹ����������Ѫ��
-				LastestBackupHealth = CurrentHealth;
-				InShowBackupHealth = false;
-			}
-
-			if (InShowBackupHealth)
-			{
-				// ����Ѫ�����Ƹ߶�
-				float BackupHealthHeight = LastestBackupHealth / MaxHealth * RectSize.y;
-				// ����Ѫ��alpha����
-				float BackupHealthColorAlpha = 1 - 0.95 * (std::chrono::duration_cast<std::chrono::milliseconds>(CurrentTime - BackupHealthTimePoint).count() / (float)ShowBackUpHealthDuration);
-				ImColor BackupHealthColorTemp = BackupHealthColor;
-				BackupHealthColorTemp.Value.w = BackupHealthColorAlpha;
-				// ����Ѫ���߶Ȼ���
-				float BackupHealthHeight_Lerp = 1 * (std::chrono::duration_cast<std::chrono::milliseconds>(CurrentTime - BackupHealthTimePoint).count() / (float)ShowBackUpHealthDuration);
-				BackupHealthHeight_Lerp *= (BackupHealthHeight - Height);
-				BackupHealthHeight -= BackupHealthHeight_Lerp;
-				// ����Ѫ��
-				DrawList->AddRectFilled({ RectPos.x,RectPos.y + RectSize.y - BackupHealthHeight },
-					{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
-					BackupHealthColorTemp, 5);
-			}
-		}
-
-		// Ѫ��
 		DrawList->AddRectFilled({ RectPos.x,RectPos.y + RectSize.y - Height },
 			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
-			Color, 5);
+			Color, 0);
 
-		// �߿�
 		DrawList->AddRect(RectPos,
 			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
-			FrameColor, 5, 15, 1);
+			FrameColor, 0, 15, 1);
+	}
+
+	void HealthBar::AmmoBarH(float MaxAmmo, float CurrentAmmo, ImVec2 Pos, ImVec2 Size)
+	{
+		ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+
+		this->MaxAmmo = MaxAmmo;
+		this->CurrentAmmo = CurrentAmmo;
+		this->RectPos = Pos;
+		this->RectSize = Size;
+
+		float Proportion = CurrentAmmo / MaxAmmo;
+
+		float Width = RectSize.x * Proportion;
+
+		DrawList->AddRectFilled(RectPos,
+			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
+			BackGroundColor, 5, 15);
+
+		DrawList->AddRectFilled(RectPos,
+			{ RectPos.x + Width,RectPos.y + RectSize.y },
+			AmmoColor, 0);
+
+		DrawList->AddRect(RectPos,
+			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
+			FrameColor, 0, 15, 1);
 	}
 
 	ImColor HealthBar::Mix(ImColor Col_1, ImColor Col_2, float t)
@@ -538,20 +432,24 @@ namespace Render
 		return Col;
 	}
 
-	void DrawHealthBar(DWORD Sign, float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size, bool Horizontal)
+	void DrawHealthBar(DWORD Sign, float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size)
 	{
 		static std::map<DWORD, HealthBar> HealthBarMap;
 		if (!HealthBarMap.count(Sign))
-		{
 			HealthBarMap.insert({ Sign,HealthBar() });
-		}
+
 		if (HealthBarMap.count(Sign))
-		{
-			if (Horizontal)
-				HealthBarMap[Sign].DrawHealthBar_Horizontal(MaxHealth, CurrentHealth, Pos, Size);
-			else
-				HealthBarMap[Sign].DrawHealthBar_Vertical(MaxHealth, CurrentHealth, Pos, Size);
-		}
+			HealthBarMap[Sign].HealthBarV(MaxHealth, CurrentHealth, Pos, Size);
+	}
+
+	void DrawAmmoBar(DWORD Sign, float MaxAmmo, float CurrentAmmo, ImVec2 Pos, ImVec2 Size)
+	{
+		static std::map<DWORD, HealthBar> HealthBarMap;
+		if (!HealthBarMap.count(Sign))
+			HealthBarMap.insert({ Sign,HealthBar() });
+
+		if (HealthBarMap.count(Sign))
+			HealthBarMap[Sign].AmmoBarH(MaxAmmo, CurrentAmmo, Pos, Size);
 	}
 
 	// Update crosshair preset

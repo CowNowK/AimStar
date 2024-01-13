@@ -91,7 +91,7 @@ namespace ESP
 		uintptr_t ClippingWeapon, WeaponData, WeaponNameAddress;
 		ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::Pawn.pClippingWeapon, ClippingWeapon);
 		ProcessMgr.ReadMemory(ClippingWeapon + 0x360, WeaponData);
-		ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.m_szName, WeaponNameAddress);
+		ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.szName, WeaponNameAddress);
 		std::string weaponName = "Invalid Weapon Name";
 
 		if (!WeaponNameAddress)
@@ -205,9 +205,10 @@ namespace ESP
 			if (MenuConfig::HealthBarType == 0 || MenuConfig::HealthBarType == 1)
 			{
 				WeaponIconSize iconSize = weaponIconSizes[Entity.Pawn.WeaponName];
-				ImVec2 textPosition = { Rect.x + (Rect.z - iconSize.width) / 2 + iconSize.offsetX, Rect.y + Rect.w + 1 + iconSize.offsetY };
-
-				//Gui.StrokeText(Entity.Pawn.WeaponName, { Rect.x + Rect.z / 2,Rect.y + Rect.w }, ImColor(255, 255, 255, 255), 14, true);
+				ImVec2 textPosition = { Rect.x + (Rect.z - iconSize.width) / 2 + iconSize.offsetX, Rect.y + Rect.w + 1 + iconSize.offsetY};
+				if (ESPConfig::AmmoBar)
+					textPosition = { textPosition.x, textPosition.y + 5 };
+				// Gui.StrokeText(Entity.Pawn.WeaponName, { Rect.x + Rect.z / 2,Rect.y + Rect.w + 10}, ImColor(255, 255, 255, 255), 14, true);
 				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{ textPosition.x - 1, textPosition.y - 1 }, ImColor(0, 0, 0, 255), weaponIcon.c_str());
 				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{ textPosition.x - 1, textPosition.y + 1 }, ImColor(0, 0, 0, 255), weaponIcon.c_str());
 				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, ImVec2{ textPosition.x + 1, textPosition.y + 1 }, ImColor(0, 0, 0, 255), weaponIcon.c_str());
