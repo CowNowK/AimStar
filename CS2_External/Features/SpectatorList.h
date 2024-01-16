@@ -8,21 +8,32 @@
 namespace SpecList
 {
     float spectatorOffsetY = 0;
-    bool isSpectating(const uint32_t m_hPawn)
+    bool isSpectating(uintptr_t localPlayer, uintptr_t entityList, uintptr_t playerPawn, uintptr_t playerController)
     {
-        uintptr_t pCSPlayerPawn;
-        uintptr_t m_pObserverServices;
-        uintptr_t m_hObserverTarget;
+        uintptr_t m_pObserverServices = 0;
+        uint32_t m_hObserverTarget = 0;
+        uintptr_t targetController = 0;
+        char buffer[128] = { 0 };
+        char const* playerName = { 0 };
+        std::string name;
 
-        ProcessMgr.ReadMemory<uintptr_t>(gGame.GetEntityListEntry() + 120 * (m_hPawn & 0x1FF), pCSPlayerPawn);
-        ProcessMgr.ReadMemory<uintptr_t>(pCSPlayerPawn + 0x10C0, m_pObserverServices);
-        ProcessMgr.ReadMemory<uintptr_t>(m_pObserverServices + 0x44, m_hObserverTarget);
-        if (!m_hObserverTarget == 0) {
-            std::cout << m_hObserverTarget << std::endl;
-            return true;
-        }
+        if (!ProcessMgr.ReadMemory<uintptr_t>(playerPawn + Offset::PlayerController.m_pObserverServices, m_pObserverServices))
+            return false;
+        if (!ProcessMgr.ReadMemory<uint32_t>(m_pObserverServices + Offset::PlayerController.m_hObserverTarget, m_hObserverTarget)) // uint32_t
+            return false;
+        if (!ProcessMgr.ReadMemory<uintptr_t>((entityList + 0x8 * ((m_hObserverTarget & 0x7FFF) >> 9) + 16), targetController))
+            return false;
+        if (!ProcessMgr.ReadMemory<uintptr_t>(targetController + 120 * (m_hObserverTarget & 0x1FF), targetController))
+            return false;
+        if (targetController != localPlayer)
+            return false;
 
-        return false;
+        ProcessMgr.ReadMemory<std::string>(playerController + Offset::Entity.iszPlayerName, name);
+        playerName = name.c_str();
+
+        std::cout << playerName << std::endl;
+
+        return true;
     }
 
     void SpecWindowList(std::vector<std::string> SpectatorList)
@@ -72,5 +83,4 @@ namespace SpecList
         }
         SpecWindowList(spectators);
     }
-
 }
