@@ -12,6 +12,25 @@ namespace fs = std::filesystem;
 
 int main()
 {
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	//Set the text color to green  
+	std::cout << R"(                                                                   
+   ,---,                        ____   .--.--.      ___                       
+  '  .' \       ,--,          ,'  , `./  /    '.  ,--.'|_                     
+ /  ;    '.   ,--.'|       ,-+-,.' _ |  :  /`. /  |  | :,'            __  ,-. 
+:  :       \  |  |,     ,-+-. ;   , |;  |  |--`   :  : ' :          ,' ,'/ /| 
+:  |   /\   \ `--'_    ,--.'|'   |  ||  :  ;_   .;__,'  /   ,--.--. '  | |' | 
+|  :  ' ;.   :,' ,'|  |   |  ,', |  |,\  \    `.|  |   |   /       \|  |   ,' 
+|  |  ;/  \   '  | |  |   | /  | |--'  `----.   :__,'| :  .--.  .-. '  :  /   
+'  :  | \  \ ,|  | :  |   : |  | ,     __ \  \  | '  : |__ \__\/: . |  | '    
+|  |  '  '--' '  : |__|   : |  |/     /  /`--'  / |  | '.'|," .--.; ;  : |    
+|  :  :       |  | '.'|   | |`-'     '--'.     /  ;  :    /  /  ,.  |  , ;    
+|  | ,'       ;  :    |   ;/           `--'---'   |  ,   ;  :   .'   ---'     
+`--''         |  ,   /'---'                        ---`-'|  ,     .-./        
+               ---`-'                                     `--`---'            
+	)" << std::endl; 
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED); //Restore default text color  
+
 
 	std::printf(
 	"AimStar External for CS2\n"
