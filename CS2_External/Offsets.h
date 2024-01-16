@@ -28,6 +28,7 @@ namespace Offset
 
 	struct
 	{
+		DWORD isScoped = 0x13A8;
 		DWORD WeaponServices = 0x10A8;			// C_BasePlayerPawn::m_pWeaponServices
 		DWORD BulletServices = 0x16B8;			// C_CSPlayerPawn::m_pBulletServices
 		DWORD TotalHit = 0x40;
@@ -46,6 +47,7 @@ namespace Offset
 		DWORD iIDEntIndex = 0x1544;
 		DWORD iTeamNum = 0x3BF;
 		DWORD CameraServices = 0x10E0;			// C_BasePlayerPawn::m_pCameraServices
+		DWORD iFov = 0x210;
 		DWORD iFovStart = 0x214;
 		DWORD fFlags = 0x3C8;
 		DWORD bSpottedByMask = 0x1644;			// C_CSPlayerPawnBase::entitySpottedState + EntitySpottedState_t::bSpottedByMask
