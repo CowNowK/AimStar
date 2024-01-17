@@ -326,37 +326,18 @@ namespace ESP
 			rectStartPos = centerPos;
 			rectEndPos = { rectStartPos.x + rectSize.x, rectStartPos.y + rectSize.y };
 
-			if (MenuConfig::BoxType == 0)
+			if (MenuConfig::BoxType == 0 || MenuConfig::BoxType == 2)
 			{
-				if (ESPConfig::MultiColor && ESPConfig::BoxRounding == 0)
-				{
-					ImGui::GetWindowDrawList()->AddRectFilledMultiColor(rectStartPos, rectEndPos, filledBoxColor, filledBoxColor, filledBoxColor2, filledBoxColor2);
-				}
-				else {
-					ImGui::GetWindowDrawList()->AddRectFilled(rectStartPos, rectEndPos, filledBoxColor, ESPConfig::BoxRounding);
-				}
+				if (ESPConfig::MultiColor)
+					ImGui::GetWindowDrawList()->AddRectFilledMultiColorRounded(rectStartPos, rectEndPos, ImGui::GetColorU32(ImGuiCol_ChildBg), filledBoxColor, filledBoxColor, filledBoxColor2, filledBoxColor2, ESPConfig::BoxRounding, ImDrawCornerFlags_All);
 			}
 			else if (MenuConfig::BoxType == 1)
 			{
 				rectStartPos = { centerPos.x + 20, centerPos.y + 15 };
 				rectEndPos = { rectStartPos.x + 50, rectStartPos.y + 132 };
-				if (ESPConfig::MultiColor && ESPConfig::BoxRounding == 0)
-				{
-					ImGui::GetWindowDrawList()->AddRectFilledMultiColor(rectStartPos, rectEndPos, filledBoxColor, filledBoxColor, filledBoxColor2, filledBoxColor2);
-				}
-				else {
-					ImGui::GetWindowDrawList()->AddRectFilled(rectStartPos, rectEndPos, filledBoxColor, ESPConfig::BoxRounding);
-				}
-			}
-			else if (MenuConfig::BoxType == 2)
-			{
-				if (ESPConfig::MultiColor && ESPConfig::BoxRounding == 0)
-				{
-					ImGui::GetWindowDrawList()->AddRectFilledMultiColor(rectStartPos, rectEndPos, filledBoxColor, filledBoxColor, filledBoxColor2, filledBoxColor2);
-				}
-				else {
-					ImGui::GetWindowDrawList()->AddRectFilled(rectStartPos, rectEndPos, filledBoxColor, 0);
-				}
+				if (ESPConfig::MultiColor)
+					ImGui::GetWindowDrawList()->AddRectFilledMultiColorRounded(rectStartPos, rectEndPos, ImGui::GetColorU32(ImGuiCol_ChildBg), filledBoxColor, filledBoxColor, filledBoxColor2, filledBoxColor2, ESPConfig::BoxRounding, ImDrawCornerFlags_All);
+
 			}
 		}
 
@@ -417,9 +398,16 @@ namespace ESP
 		}
 		if (ESPConfig::AmmoBar) {
 			ImU32 yellowColor = IM_COL32(255, 255, 0, 255);
-			ImVec2 ABS(centerPos.x, centerPos.y + rectSize.y + 2);
-			ImVec2 ABE(centerPos.x + rectSize.x, centerPos.y + rectSize.y + 5);
-			ImGui::GetWindowDrawList()->AddRectFilled(ABS, ABE, yellowColor, 0.0f, ImDrawCornerFlags_All);
+			if (MenuConfig::BoxType == 0 || MenuConfig::BoxType == 2) {
+				ImVec2 ABS(centerPos.x, centerPos.y + rectSize.y + 2);
+				ImVec2 ABE(centerPos.x + rectSize.x, centerPos.y + rectSize.y + 5);
+				ImGui::GetWindowDrawList()->AddRectFilled(ABS, ABE, yellowColor, 0.0f, ImDrawCornerFlags_All);
+			}
+			else {
+				ImVec2 ABS(centerPos.x + 20, centerPos.y + rectSize.y);
+				ImVec2 ABE(centerPos.x + rectSize.x - 30, centerPos.y + rectSize.y + 3);
+				ImGui::GetWindowDrawList()->AddRectFilled(ABS, ABE, yellowColor, 0.0f, ImDrawCornerFlags_All);
+			}
 		}
 
 		if (ESPConfig::ShowLineToEnemy) {
@@ -431,7 +419,7 @@ namespace ESP
 				LineEnd = { LineStart.x, LineStart.y - 50 };
 				break;
 			case 1:
-				LineEnd = { Gui.Window.Size.x, Gui.Window.Size.y };
+				LineEnd = { Gui.Window.Size.x / 2, Gui.Window.Size.y / 2 };
 				break;
 			case 2:
 				LineEnd = { LineStart.x, LineStart.y + 200 };
@@ -466,8 +454,7 @@ namespace ESP
 			if (ESPConfig::AmmoBar)
 				centerPos.y += 5;
 			if (MenuConfig::BoxType == 1 || MenuConfig::BoxType == 3) {
-				centerPos.x -= 3;
-				centerPos.y -= 20;
+				centerPos.y -= 17;
 			}
 			if (MenuConfig::HealthBarType == 2) {
 				textPos = { centerPos.x + 27, centerPos.y + 155 };

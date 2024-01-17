@@ -90,7 +90,7 @@ namespace ESPConfig
 	inline bool OutLine = true;
 	// 0: normal 1: Flat
 	inline int HeadBoxStyle = 0;
-	inline float BoxRounding = RandomPara<float>(0.0f, 5.0f);;
+	inline float BoxRounding = RandomPara<float>(0.0f, 3.0f);;
 	inline float BoxAlpha = 0.35f;
 	inline bool ShowLineToEnemy = false;
 	inline ImColor LineToEnemyColor = ImColor(255, 255, 255, 220);

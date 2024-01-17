@@ -136,18 +136,28 @@ namespace GUI
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 					ImGui::SeparatorText(ICON_FA_EYE" ESP");
-					float MinRounding = 0.f, MaxRouding = 15.f;
+					float MinRounding = 0.f, MaxRouding = 5.f;
+					int MinCombo = 0, MaxCombo = 2;
 					PutSwitch("Toggle", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ESPenabled);
 					if (ESPConfig::ESPenabled)
 					{
-						PutSwitch("Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoxESP, true, "###BoxCol", reinterpret_cast<float*>(&ESPConfig::BoxColor));
-						PutSwitch("Outline", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::OutLine);
-						PutSliderFloat("Box Rounding:", 10.f, &ESPConfig::BoxRounding, &MinRounding, &MaxRouding, "%.1f");
+						const char* BoxTypes[] = { "Normal", "Dynamic", "Edge" };
+						const char* LinePos[] = { "Top", "Center", "Bottom" };
+						PutSwitch("Frame", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoxESP, true, "###BoxCol", reinterpret_cast<float*>(&ESPConfig::BoxColor));
+						if (ESPConfig::ShowBoxESP)
+						{
+							PutSwitch("Outline", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::OutLine);
+							PutSliderInt("Box Type:", 10.f, &MenuConfig::BoxType, &MinCombo, &MaxCombo, BoxTypes[MenuConfig::BoxType]);
+							PutSliderFloat("Box Rounding:", 10.f, &ESPConfig::BoxRounding, &MinRounding, &MaxRouding, "%.1f");
+						}
 						PutSwitch("Filled Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::FilledBox, true, "###FilledBoxCol", reinterpret_cast<float*>(&ESPConfig::FilledColor));
-						PutSwitch("Multi-Color", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::MultiColor, true, "###MultiCol", reinterpret_cast<float*>(&ESPConfig::FilledColor2));
+						if (ESPConfig::FilledBox)
+							PutSwitch("Multi-Color", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::MultiColor, true, "###MultiCol", reinterpret_cast<float*>(&ESPConfig::FilledColor2));
 						PutSwitch("Head Box", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHeadBox, true, "###HeadBoxCol", reinterpret_cast<float*>(&ESPConfig::HeadBoxColor));
 						PutSwitch("Skeleton", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoneESP, true, "###BoneCol", reinterpret_cast<float*>(&ESPConfig::BoneColor));
 						PutSwitch("Snap Line", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowLineToEnemy, true, "###LineCol", reinterpret_cast<float*>(&ESPConfig::LineToEnemyColor));
+						if (ESPConfig::ShowLineToEnemy)
+							PutSliderInt("Line Position:", 10.f, &ESPConfig::LinePos, &MinCombo, &MaxCombo, LinePos[ESPConfig::LinePos]);
 						PutSwitch("Eye Ray", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowEyeRay, true, "###LineCol", reinterpret_cast<float*>(&ESPConfig::EyeRayColor));
 						PutSwitch("Health Bar", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthBar);
 						PutSwitch("Health Number", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowHealthNum);
@@ -368,7 +378,7 @@ namespace GUI
 				ImGui::SetNextItemWidth(MenuConfig::ComboWidth);
 				ImGui::Combo("##BoxStyle", &MenuConfig::BoxType, "Normal\0Edge\0Corner\0Corner Edge\0");
 				if (ESPConfig::ShowBoxESP)
-					ImGui::SliderFloat(Lang::ESPtext.BoxRounding, &ESPConfig::BoxRounding, 0.0f, 15.0f, "%.1f", ImGuiSliderFlags_NoInput);
+					ImGui::SliderFloat(Lang::ESPtext.BoxRounding, &ESPConfig::BoxRounding, 0.0f, 5.0f, "%.1f", ImGuiSliderFlags_NoInput);
 
 				ImGui::Checkbox(Lang::ESPtext.FilledBox, &ESPConfig::FilledBox);
 				ImGui::SameLine();
