@@ -62,6 +62,7 @@ namespace Misc
 	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void NoFlash(const CEntity& aLocalPlayer) noexcept;
 	void FastStop() noexcept;
+	void RadarHack(const CEntity& EntityList) noexcept;
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
 	void NoSmoke(const DWORD64 EntityAddress) noexcept;
 	void SmokeColor(const DWORD64 EntityAddress) noexcept;

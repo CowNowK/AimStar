@@ -134,6 +134,14 @@ namespace Misc
 		Misc::StopKeyEvent('S', &sKeyPressed, 'W', 50.f);
 	}
 
+	void RadarHack(const CEntity& EntityList) noexcept
+	{
+		if (!MiscCFG::RadarHack)
+			return;
+
+		bool SpottedStatus = 1;
+		ProcessMgr.WriteMemory(EntityList.Pawn.Address + Offset::Pawn.bSpottedByMask, SpottedStatus);
+	}
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept
 	{
 		// Unfinished

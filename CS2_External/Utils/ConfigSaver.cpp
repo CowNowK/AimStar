@@ -219,6 +219,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "FastStop" << YAML::Value << MiscCFG::FastStop;
         emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::BunnyHop;
         emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
+        emitter << YAML::Key << "RadarHack" << YAML::Value << MiscCFG::RadarHack;
         emitter << YAML::Key << "TeamCheck" << YAML::Value << MenuConfig::TeamCheck;
         emitter << YAML::Key << "AntiRecord" << YAML::Value << MenuConfig::BypassOBS;
         emitter << YAML::EndMap;
@@ -401,6 +402,7 @@ namespace MyConfigSaver {
             MiscCFG::FastStop = config["Misc"]["FastStop"].as<bool>();
             MiscCFG::SpecList = config["Misc"]["SpecList"].as<bool>();
             MiscCFG::EnemySensor = config["Misc"]["Glow"].as<bool>();
+            MiscCFG::RadarHack = config["Misc"]["RadarHack"].IsDefined() ? config["Misc"]["RadarHack"].as<bool>() : false;
             MenuConfig::TeamCheck = config["Misc"]["TeamCheck"].as<bool>();
             MenuConfig::BypassOBS = config["Misc"]["AntiRecord"].as<bool>();
         }

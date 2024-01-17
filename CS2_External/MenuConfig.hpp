@@ -176,6 +176,7 @@ namespace MiscCFG
 	inline bool FastStop = false;
 	inline bool SpecList = false;
 	inline bool EnemySensor = false;
+	inline bool RadarHack = false;
 	inline ImColor BombTimerCol = ImColor(255, 120, 0, 255);
 	inline ImColor GlowColor = ImColor(255, 0, 0, 100);
 }

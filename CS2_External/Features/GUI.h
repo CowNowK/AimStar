@@ -176,7 +176,7 @@ namespace GUI
 					ImGui::NewLine();
 					//
 
-					ImGui::SeparatorText(ICON_FA_COMPASS" Radar");
+					ImGui::SeparatorText(ICON_FA_COMPASS" External Radar");
 					float RadarPointSizeProportionMin = 0.8f, RadarPointSizeProportionMax = 2.f;
 					float ProportionMin = 500.f, ProportionMax = 3300.f;
 					float RadarRangeMin = 100.f, RadarRangeMax = 300.f;
@@ -316,6 +316,7 @@ namespace GUI
 					PutSwitch("Hit Sound", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::HitSound);
 					PutSwitch("Bomb Timer", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol));
 					PutSwitch("Bunny Hop", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
+					PutSwitch("Radar Hack", 10.f, ImGui::GetFrameHeight() * 1.7f, &MiscCFG::RadarHack);
 					PutSwitch("Enemy Sensor", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor);
 					PutSwitch("Watermark", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WaterMark);
 					PutSwitch("Cheat list", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::CheatList);
@@ -644,6 +645,7 @@ namespace GUI
 				ImGui::Checkbox(Lang::MiscText.bmbTimer, &MiscCFG::bmbTimer);
 				ImGui::SameLine();
 				ImGui::ColorEdit4("##BombTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol), ImGuiColorEditFlags_NoInputs);
+				ImGui::Checkbox("Radar Hack", &MiscCFG::RadarHack);
 				ImGui::Checkbox(Lang::MiscText.SpecList, &MiscCFG::SpecList);
 				if (ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
 				{
@@ -672,7 +674,7 @@ namespace GUI
 			{
 				ImGui::TextColored(ImColor(0, 200, 255, 255), Lang::ReadMeText.LastUpdate);
 				ImGui::SameLine();
-				ImGui::TextColored(ImColor(0, 200, 255, 255), "2024-01-13");
+				ImGui::TextColored(ImColor(0, 200, 255, 255), "2024-01-17");
 				sprintf_s(TempText, "%s%s", ICON_FA_COPY, Lang::ReadMeText.SourceButton);
 				Gui.OpenWebpageButton(TempText, "https://github.com/CowNowK/AimStar");
 				ImGui::SameLine();

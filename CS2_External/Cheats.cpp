@@ -166,6 +166,8 @@ void Cheats::Run()
 		// Add entity to radar
 		if (RadarCFG::ShowRadar)
 			Radar.AddPoint(LocalEntity.Pawn.Pos, LocalEntity.Pawn.ViewAngle.y, Entity.Pawn.Pos, ImColor(237, 85, 106, 200), RadarCFG::RadarType, Entity.Pawn.ViewAngle.y);
+		
+		Misc::RadarHack(Entity);
 
 		if (!Entity.IsInScreen())
 			continue;
@@ -242,6 +244,7 @@ void Cheats::Run()
 	Misc::HitSound(LocalEntity, PreviousTotalHits);
 	Misc::NoFlash(LocalEntity);
 	Misc::FastStop();
+	
 	Misc::Watermark();
 	Misc::CheatList();
 
