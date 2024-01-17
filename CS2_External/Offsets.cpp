@@ -28,6 +28,10 @@ bool Offset::UpdateOffsets()
 	if (ClientDLL == 0)
 		return false;
 
+	DWORD64 InputDLL = reinterpret_cast<DWORD64>(ProcessMgr.GetProcessModuleHandle("inputsystem.dll"));
+	if (ClientDLL == 0)
+		return false;
+
 	DWORD64 TempAddress = 0;
 
 	TempAddress = SearchOffsets(Offset::Signatures::EntityList, ClientDLL);
@@ -79,5 +83,11 @@ bool Offset::UpdateOffsets()
 		return false;
 
 	Offset::PlantedC4 = TempAddress - ClientDLL;
+
+	TempAddress = SearchOffsets(Offset::Signatures::InputSystem, InputDLL);
+	if (TempAddress == 0)
+		return false;
+
+	Offset::InputSystem = TempAddress - InputDLL;
 	return true;
 }

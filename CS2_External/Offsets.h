@@ -14,6 +14,7 @@ namespace Offset
 	inline DWORD GlobalVars;
 	inline DWORD InventoryServices;
 	inline DWORD PlantedC4;
+	inline DWORD InputSystem;
 
 	struct
 	{
@@ -119,6 +120,7 @@ namespace Offset
 		const std::string LocalPlayerPawn = "48 8D 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 83 EC ?? 8B 0D";
 		const std::string ForceJump = "48 8B 05 ?? ?? ?? ?? 48 8D 1D ?? ?? ?? ?? 48 89 45";
 		const std::string PlantedC4 = "48 8B 15 ?? ?? ?? ?? FF C0 48 8D 4C 24 40";
+		const std::string InputSystem = "48 89 05 ?? ?? ?? ?? 48 8D 05";
 	}
 
 	bool UpdateOffsets();
