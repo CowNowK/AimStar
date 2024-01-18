@@ -250,6 +250,7 @@ void Cheats::Run()
 	Misc::FovChanger(LocalEntity);
 	Misc::Watermark();
 	Misc::CheatList();	
+	Misc::Jitter(LocalEntity);
 
 	// Fov line
 	Render::DrawFov(LocalEntity, MenuConfig::FovLineSize, MenuConfig::FovLineColor, 1);

@@ -186,6 +186,21 @@ namespace Misc
 		}
 	}
 
+	void Jitter(const CEntity& aLocalPlayer) noexcept
+	{
+
+		DWORD64 MovementServices;
+		bool Ducking = 1, unDuck = 0;
+		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.MovementServices, MovementServices);
+		if (!MiscCFG::Jitter)
+		{
+			ProcessMgr.WriteMemory(MovementServices + 0x1E4, unDuck);
+		}
+		else {
+			ProcessMgr.WriteMemory(MovementServices + 0x1E4, Ducking);
+		}
+	}
+
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept
 	{
 		// Unfinished

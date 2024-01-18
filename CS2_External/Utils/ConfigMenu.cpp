@@ -238,6 +238,7 @@ namespace ConfigMenu {
 	}
 
 	void ResetToDefault() {
+		MiscCFG::Jitter = false;
 		ESPConfig::AmmoBar = false;
 		ESPConfig::OutLine = true;
 		ESPConfig::ShowHealthNum = false;

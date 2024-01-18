@@ -29,10 +29,13 @@ namespace Offset
 
 	struct
 	{
-		DWORD StartAccount = 0x1434;
-		DWORD isScoped = 0x13A8;
+		DWORD MovementServices = 0x10E8;		// C_BasePlayerPawn::m_pMovementServices
 		DWORD WeaponServices = 0x10A8;			// C_BasePlayerPawn::m_pWeaponServices
 		DWORD BulletServices = 0x16B8;			// C_CSPlayerPawn::m_pBulletServices
+		DWORD CameraServices = 0x10E0;			// C_BasePlayerPawn::m_pCameraServices
+
+		DWORD StartAccount = 0x1434;
+		DWORD isScoped = 0x13A8;
 		DWORD TotalHit = 0x40;
 		DWORD Pos = 0x1224;						// C_BasePlayerPawn::m_vOldOrigin
 		DWORD MaxHealth = 0x328;				// C_BaseEntity::m_iMaxHealth
@@ -48,7 +51,6 @@ namespace Offset
 		DWORD aimPunchCache = 0x1740;
 		DWORD iIDEntIndex = 0x1544;
 		DWORD iTeamNum = 0x3BF;
-		DWORD CameraServices = 0x10E0;			// C_BasePlayerPawn::m_pCameraServices
 		DWORD iFov = 0x210;
 		DWORD iFovStart = 0x214;
 		DWORD fFlags = 0x3C8;

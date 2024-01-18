@@ -70,6 +70,8 @@ namespace Misc
 	void NoSmoke(const DWORD64 EntityAddress) noexcept;
 	void SmokeColor(const DWORD64 EntityAddress) noexcept;
 
+	void Jitter(const CEntity& EntityList) noexcept;
+
 	void JoinDiscord() noexcept;
 	void SourceCode() noexcept;
 }

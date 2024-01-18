@@ -337,6 +337,10 @@ namespace GUI
 					PutSwitch("Cheat list", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::CheatList);
 					PutSwitch("Team Check", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TeamCheck);
 
+					ImGui::NewLine();
+					ImGui::SeparatorText(ICON_FA_FUTBOL" Fun");
+					PutSwitch("Jitter", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::Jitter);
+
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(ICON_FA_HEART" Menu Settings");

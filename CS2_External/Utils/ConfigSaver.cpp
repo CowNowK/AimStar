@@ -229,6 +229,7 @@ namespace MyConfigSaver {
         emitter << YAML::EndMap;
         emitter << YAML::Key << "TeamCheck" << YAML::Value << MenuConfig::TeamCheck;
         emitter << YAML::Key << "AntiRecord" << YAML::Value << MenuConfig::BypassOBS;
+        emitter << YAML::Key << "Jitter" << YAML::Value << MiscCFG::Jitter;
         emitter << YAML::EndMap;
 
         emitter << YAML::Key << "Aimbot";
@@ -415,6 +416,7 @@ namespace MyConfigSaver {
             MiscCFG::ShowCashSpent = config["Misc"]["MoneyService"]["ShowCashSpent"].IsDefined() ? config["Misc"]["MoneyService"]["ShowCashSpent"].as<bool>() : false;
             MenuConfig::TeamCheck = config["Misc"]["TeamCheck"].as<bool>();
             MenuConfig::BypassOBS = config["Misc"]["AntiRecord"].as<bool>();
+            MiscCFG::Jitter = config["Misc"]["Jitter"].IsDefined() ? config["Misc"]["Jitter"].as<bool>() : false;;
         }
         if (config["Aimbot"])
         {
