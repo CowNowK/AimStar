@@ -315,12 +315,14 @@ namespace GUI
 
 				if (MenuConfig::WCS.MenuPage == 2)
 				{
+					float FovMin = -5.f, FovMax = 0.f;
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 					ImGui::SeparatorText(ICON_FA_SUN" Misc");
 
 					PutSwitch("Headshot Line", 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowHeadShootLine);
 					PutSwitch("Cheat in Spec", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WorkInSpec);
+					PutSliderFloat("FOV: ", 10.f, &MiscCFG::Fov , &FovMin, &FovMax, "%.1f");
 					PutSwitch("No Flash", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoFlash);
 					PutSwitch("Fast Stop", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::FastStop);
 					PutSwitch("Hit Sound", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::HitSound);
@@ -664,6 +666,8 @@ namespace GUI
 				//				ImGui::Checkbox("Invincible", &MenuConfig::infinity);
 
 				ImGui::NextColumn();
+				// ImGui::SliderFloat("FOV", &MiscCFG::Fov, -5.f, 0.f, "%.1f");
+				ImGui::Checkbox("Spin", &MiscCFG::FovChanger);
 				ImGui::Checkbox(Lang::MiscText.Bhop, &MiscCFG::BunnyHop);
 				ImGui::Checkbox(Lang::MiscText.Watermark, &MiscCFG::WaterMark);
 				ImGui::Checkbox(Lang::MiscText.CheatList, &MiscCFG::CheatList);

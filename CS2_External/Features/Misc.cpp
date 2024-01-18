@@ -142,6 +142,24 @@ namespace Misc
 		bool SpottedStatus = 1;
 		ProcessMgr.WriteMemory(EntityList.Pawn.Address + Offset::Pawn.bSpottedByMask, SpottedStatus);
 	}
+
+	void FovChanger(const CEntity& aLocalPlayer) noexcept
+	{
+		DWORD64 CameraServices = 0;
+		UINT CurrentFOV;
+		bool isScoped;
+		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::Pawn.CameraServices, CameraServices))
+			return;
+
+		float Dfov = MiscCFG::Fov;
+		// ProcessMgr.ReadMemory(CameraServices + Offset::Pawn.iFov, CurrentFOV);
+		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.isScoped, isScoped);
+		if (!isScoped)
+		{
+			ProcessMgr.WriteMemory<float>(CameraServices + Offset::Pawn.iFov, Dfov);
+		}
+	}
+
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept
 	{
 		// Unfinished

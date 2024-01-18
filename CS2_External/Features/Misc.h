@@ -63,6 +63,7 @@ namespace Misc
 	void NoFlash(const CEntity& aLocalPlayer) noexcept;
 	void FastStop() noexcept;
 	void RadarHack(const CEntity& EntityList) noexcept;
+	void FovChanger(const CEntity& aLocalPlayer) noexcept;
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
 	void NoSmoke(const DWORD64 EntityAddress) noexcept;
 	void SmokeColor(const DWORD64 EntityAddress) noexcept;

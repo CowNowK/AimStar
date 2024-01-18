@@ -244,9 +244,9 @@ void Cheats::Run()
 	Misc::HitSound(LocalEntity, PreviousTotalHits);
 	Misc::NoFlash(LocalEntity);
 	Misc::FastStop();
-	
+	Misc::FovChanger(LocalEntity);
 	Misc::Watermark();
-	Misc::CheatList();
+	Misc::CheatList();	
 
 	// Fov line
 	Render::DrawFov(LocalEntity, MenuConfig::FovLineSize, MenuConfig::FovLineColor, 1);
