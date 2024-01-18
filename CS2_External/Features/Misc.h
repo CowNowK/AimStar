@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <sstream>
 #include <string>
 #include <time.h>
 #include <Windows.h>
@@ -64,6 +65,7 @@ namespace Misc
 	void FastStop() noexcept;
 	void RadarHack(const CEntity& EntityList) noexcept;
 	void FovChanger(const CEntity& aLocalPlayer) noexcept;
+	void MoneyService(const CEntity& EntityList) noexcept;
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
 	void NoSmoke(const DWORD64 EntityAddress) noexcept;
 	void SmokeColor(const DWORD64 EntityAddress) noexcept;

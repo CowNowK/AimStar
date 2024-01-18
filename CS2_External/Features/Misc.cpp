@@ -160,6 +160,32 @@ namespace Misc
 		}
 	}
 
+	void MoneyService(const CEntity& EntityList) noexcept
+	{
+		if (!MiscCFG::MoneyService)
+			return;
+
+		ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize;
+
+		ImGui::Begin("Money Services", nullptr, flags);
+		{
+			if (ImGui::TreeNode(EntityList.Controller.PlayerName.c_str()))
+			{
+				std::stringstream ss;
+				ss << "Account: $" << EntityList.Controller.Money;
+				ImGui::TextColored(ImColor(0, 255, 0, 255), ss.str().c_str());
+				if (MiscCFG::ShowCashSpent)
+				{
+					std::stringstream sss;
+					sss << "ThisRound/Total: " << EntityList.Controller.CashSpent << "/" << EntityList.Controller.CashSpentTotal;
+					ImGui::TextColored(ImColor(255, 0, 0, 255), sss.str().c_str());
+				}
+				
+				ImGui::TreePop();
+			}
+		}
+	}
+
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept
 	{
 		// Unfinished

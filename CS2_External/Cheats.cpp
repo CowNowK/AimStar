@@ -157,6 +157,9 @@ void Cheats::Run()
 
 		if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
 			continue;
+
+		Misc::MoneyService(Entity);
+
 		if (!Entity.IsAlive())
 			continue;
 //		if (MenuConfig::VisibleCheck && (!Entity.Pawn.bSpottedByMask > 0))

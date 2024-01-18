@@ -14,12 +14,16 @@ class PlayerController
 {
 public:
 	DWORD64 Address = 0;
+	int Money = 0;
+	int CashSpent = 0;
+	int CashSpentTotal = 0;
 	int TeamID = 0;
 	int Health = 0;
 	int AliveStatus = 0;
 	DWORD Pawn = 0;
 	std::string PlayerName;
 public:
+	bool GetMoney();
 	bool GetTeamID();
 	bool GetHealth();
 	bool GetIsAlive();

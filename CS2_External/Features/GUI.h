@@ -329,6 +329,9 @@ namespace GUI
 					PutSwitch("Bomb Timer", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol));
 					PutSwitch("Bunny Hop", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
 					PutSwitch("Radar Hack", 10.f, ImGui::GetFrameHeight() * 1.7f, &MiscCFG::RadarHack);
+					PutSwitch("Money Service", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::MoneyService);
+					if (MiscCFG::MoneyService)
+						PutSwitch("Show Cash Spent", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ShowCashSpent);
 					PutSwitch("Enemy Sensor", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor);
 					PutSwitch("Watermark", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WaterMark);
 					PutSwitch("Cheat list", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::CheatList);

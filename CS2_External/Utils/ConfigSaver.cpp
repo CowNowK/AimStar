@@ -221,6 +221,12 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::BunnyHop;
         emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
         emitter << YAML::Key << "RadarHack" << YAML::Value << MiscCFG::RadarHack;
+        emitter << YAML::Key << "MoneyService";
+        emitter << YAML::Value;
+        emitter << YAML::BeginMap;
+        emitter << YAML::Key << "Enable" << YAML::Value << MiscCFG::MoneyService;
+        emitter << YAML::Key << "ShowCashSpent" << YAML::Value << MiscCFG::ShowCashSpent;
+        emitter << YAML::EndMap;
         emitter << YAML::Key << "TeamCheck" << YAML::Value << MenuConfig::TeamCheck;
         emitter << YAML::Key << "AntiRecord" << YAML::Value << MenuConfig::BypassOBS;
         emitter << YAML::EndMap;
@@ -405,6 +411,8 @@ namespace MyConfigSaver {
             MiscCFG::SpecList = config["Misc"]["SpecList"].as<bool>();
             MiscCFG::EnemySensor = config["Misc"]["Glow"].as<bool>();
             MiscCFG::RadarHack = config["Misc"]["RadarHack"].IsDefined() ? config["Misc"]["RadarHack"].as<bool>() : false;
+            MiscCFG::MoneyService = config["Misc"]["MoneyService"]["Enable"].IsDefined() ? config["Misc"]["MoneyService"]["Enable"].as<bool>() : false;
+            MiscCFG::ShowCashSpent = config["Misc"]["MoneyService"]["ShowCashSpent"].IsDefined() ? config["Misc"]["MoneyService"]["ShowCashSpent"].as<bool>() : false;
             MenuConfig::TeamCheck = config["Misc"]["TeamCheck"].as<bool>();
             MenuConfig::BypassOBS = config["Misc"]["AntiRecord"].as<bool>();
         }

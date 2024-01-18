@@ -29,6 +29,7 @@ namespace Offset
 
 	struct
 	{
+		DWORD StartAccount = 0x1434;
 		DWORD isScoped = 0x13A8;
 		DWORD WeaponServices = 0x10A8;			// C_BasePlayerPawn::m_pWeaponServices
 		DWORD BulletServices = 0x16B8;			// C_CSPlayerPawn::m_pBulletServices
@@ -96,6 +97,14 @@ namespace Offset
 		DWORD m_flDefuseCountDown = 0xED0;
 		DWORD m_nBombSite = 0xE84;
 	} C4;
+
+	struct
+	{
+		DWORD MoneyServices = 0x700;
+		DWORD Account = 0x40;
+		DWORD TotalCashSpent = 0x48;
+		DWORD CashSpentThisRound = 0x4C;
+	} InGameMoneyServices;
 
 	struct // C_BaseCSGrenadeProjectile
 	{ 

@@ -246,6 +246,8 @@ namespace ConfigMenu {
 		ESPConfig::MultiColor = false;
 		ESPConfig::BoxFilledVisColor = ImColor(0, 0, 255, 255);
 		ESPConfig::FilledVisBox = false;
+		MiscCFG::MoneyService = false;
+		MiscCFG::ShowCashSpent = false;
 		MiscCFG::Fov = 0.f;
 		MiscCFG::RadarHack = false;
 		MiscCFG::SpecList = false;
