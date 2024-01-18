@@ -666,8 +666,7 @@ namespace GUI
 				//				ImGui::Checkbox("Invincible", &MenuConfig::infinity);
 
 				ImGui::NextColumn();
-				// ImGui::SliderFloat("FOV", &MiscCFG::Fov, -5.f, 0.f, "%.1f");
-				ImGui::Checkbox("Spin", &MiscCFG::FovChanger);
+				ImGui::SliderFloat("FOV", &MiscCFG::Fov, -5.f, 0.f, "%.1f");
 				ImGui::Checkbox(Lang::MiscText.Bhop, &MiscCFG::BunnyHop);
 				ImGui::Checkbox(Lang::MiscText.Watermark, &MiscCFG::WaterMark);
 				ImGui::Checkbox(Lang::MiscText.CheatList, &MiscCFG::CheatList);
