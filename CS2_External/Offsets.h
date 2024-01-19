@@ -29,10 +29,11 @@ namespace Offset
 
 	struct
 	{
-		DWORD MovementServices = 0x10E8;		// C_BasePlayerPawn::m_pMovementServices
-		DWORD WeaponServices = 0x10A8;			// C_BasePlayerPawn::m_pWeaponServices
-		DWORD BulletServices = 0x16B8;			// C_CSPlayerPawn::m_pBulletServices
-		DWORD CameraServices = 0x10E0;			// C_BasePlayerPawn::m_pCameraServices
+		DWORD MovementServices = 0x10E8;		// CPlayer_MovementServices*
+		DWORD WeaponServices = 0x10A8;			// CPlayer_WeaponServices*
+		DWORD BulletServices = 0x16B8;			// CCSPlayer_BulletServices*
+		DWORD CameraServices = 0x10E0;			// CPlayer_CameraServices*
+		DWORD pClippingWeapon = 0x12B0;			// C_CSWeaponBase*
 
 		DWORD StartAccount = 0x1434;
 		DWORD isScoped = 0x13A8;
@@ -44,7 +45,6 @@ namespace Offset
 		DWORD BoneArray = 0x1E0;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
 		DWORD angEyeAngles = 0x1518;
 		DWORD vecLastClipCameraPos = 0x1294;
-		DWORD pClippingWeapon = 0x12B0;
 		DWORD iShotsFired = 0x1420;
 		DWORD flFlashDuration = 0x1470;
 		DWORD aimPunchAngle = 0x171C;			// C_CSPlayerPawn::m_aimPunchAngle

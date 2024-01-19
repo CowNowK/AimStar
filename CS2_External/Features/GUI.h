@@ -111,21 +111,40 @@ namespace GUI
 			if (ImGui::IsItemClicked()) {
 				MenuConfig::WCS.MenuPage = 0;
 			}
+			ImGui::GetWindowDrawList()->AddRect(
+				ImVec2(MenuConfig::WCS.Button1Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button1Pos.y + ImGui::GetWindowPos().y), 
+				ImVec2(MenuConfig::WCS.Button1Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button1Pos.y + buttonH + ImGui::GetWindowPos().y), 
+				MenuConfig::WCS.BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+			
 			ImGui::SetCursorPos(MenuConfig::WCS.Button2Pos);
 			ImGui::Image((void*)MenuButton2, ImVec2(buttonW, buttonH));
 			if (ImGui::IsItemClicked()) {
 				MenuConfig::WCS.MenuPage = 1;
 			}
+			ImGui::GetWindowDrawList()->AddRect(
+				ImVec2(MenuConfig::WCS.Button2Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button2Pos.y + ImGui::GetWindowPos().y),
+				ImVec2(MenuConfig::WCS.Button2Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button2Pos.y + buttonH + ImGui::GetWindowPos().y),
+				MenuConfig::WCS.BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+
 			ImGui::SetCursorPos(MenuConfig::WCS.Button3Pos);
 			ImGui::Image((void*)MenuButton3, ImVec2(buttonW, buttonH));
 			if (ImGui::IsItemClicked()) {
 				MenuConfig::WCS.MenuPage = 2;
 			}
+			ImGui::GetWindowDrawList()->AddRect(
+				ImVec2(MenuConfig::WCS.Button3Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button3Pos.y + ImGui::GetWindowPos().y),
+				ImVec2(MenuConfig::WCS.Button3Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button3Pos.y + buttonH + ImGui::GetWindowPos().y),
+				MenuConfig::WCS.BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+
 			ImGui::SetCursorPos(MenuConfig::WCS.Button4Pos);
 			ImGui::Image((void*)MenuButton4, ImVec2(buttonW, buttonH));
 			if (ImGui::IsItemClicked()) {
 				MenuConfig::WCS.MenuPage = 3;
 			}
+			ImGui::GetWindowDrawList()->AddRect(
+				ImVec2(MenuConfig::WCS.Button4Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + ImGui::GetWindowPos().y),
+				ImVec2(MenuConfig::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
+				MenuConfig::WCS.BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);
 			
@@ -329,6 +348,11 @@ namespace GUI
 					PutSwitch("Bomb Timer", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol));
 					PutSwitch("Bunny Hop", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
 					PutSwitch("Radar Hack", 10.f, ImGui::GetFrameHeight() * 1.7f, &MiscCFG::RadarHack);
+					if (MiscCFG::RadarHack)
+					{
+						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
+						ImGui::TextColored(ImColor(255, 50, 0, 255), "Visible Check DISABLED");
+					}
 					PutSwitch("Money Service", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::MoneyService);
 					if (MiscCFG::MoneyService)
 						PutSwitch("Show Cash Spent", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ShowCashSpent);

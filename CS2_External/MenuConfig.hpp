@@ -18,6 +18,7 @@ namespace MenuConfig
 		ImVec2 Button4Pos	= ImVec2(30.f, 142.f + 270.f);
 		ImVec2 ChildPos		= ImVec2(257.f, 20.f);
 		ImVec2 ChildSize	= ImVec2(574.f, 474.f);
+		ImColor BorderColor	= ImColor(255, 204, 0, 255);
 	} WCS;	// Window Component Settings
 
 	// 0: English 1: SimplifiedChinese
