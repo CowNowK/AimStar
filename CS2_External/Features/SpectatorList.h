@@ -8,45 +8,38 @@
 namespace SpecList
 {
     float spectatorOffsetY = 0;
-    bool isSpectating(uintptr_t localPlayer, uintptr_t entityList, uintptr_t playerPawn, uintptr_t playerController)
+    bool isSpectating(const uint32_t m_hPawn)
     {
-        uintptr_t m_pObserverServices = 0;
-        uint32_t m_hObserverTarget = 0;
-        uintptr_t targetController = 0;
-        char buffer[128] = { 0 };
-        char const* playerName = { 0 };
-        std::string name;
+        uintptr_t pCSPlayerPawn, m_pObserverServices, m_hObserverTarget;
+        ProcessMgr.ReadMemory<uintptr_t>(gGame.GetEntityListEntry() + 120 * (m_hPawn & 0x1FF), pCSPlayerPawn);
+        ProcessMgr.ReadMemory<uintptr_t>(pCSPlayerPawn + 0x10C0, m_pObserverServices);
+        ProcessMgr.ReadMemory<uintptr_t>(m_pObserverServices + 0x44, m_hObserverTarget);
+        if (!m_hObserverTarget == 0) {
+            std::cout << m_hObserverTarget << std::endl;
+            return true;
+        }
 
-        if (!ProcessMgr.ReadMemory<uintptr_t>(playerPawn + Offset::PlayerController.m_pObserverServices, m_pObserverServices))
-            return false;
-        if (!ProcessMgr.ReadMemory<uint32_t>(m_pObserverServices + Offset::PlayerController.m_hObserverTarget, m_hObserverTarget)) // uint32_t
-            return false;
-        if (!ProcessMgr.ReadMemory<uintptr_t>((entityList + 0x8 * ((m_hObserverTarget & 0x7FFF) >> 9) + 16), targetController))
-            return false;
-        if (!ProcessMgr.ReadMemory<uintptr_t>(targetController + 120 * (m_hObserverTarget & 0x1FF), targetController))
-            return false;
-        if (targetController != localPlayer)
-            return false;
-
-        ProcessMgr.ReadMemory<std::string>(playerController + Offset::Entity.iszPlayerName, name);
-        playerName = name.c_str();
-
-        std::cout << playerName << std::endl;
-
-        return true;
+        return false;
     }
 
-    void SpecWindowList(std::vector<std::string> SpectatorList)
+    void SpectatorWindowList(const std::vector<std::string>& spectators)
     {
-        ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
-        if (!MenuConfig::ShowMenu)
-            ImGui::SetNextWindowBgAlpha(0.3f);
-        ImGui::SetNextWindowSize(ImVec2(200, 0));
-        ImGui::Begin("Spectator List", nullptr, windowFlags);
+        ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize;
 
-        for (const auto& spectator : SpectatorList)
+        if (ImGui::Begin("Spectators", NULL, flags))
         {
-            ImGui::Text(spectator.c_str());
+
+            float lineSpacing = -15.0f;
+
+
+            for (const auto& spectator : spectators)
+            {
+                ImGui::TextColored(ImColor(0, 255, 0, 255), spectator.c_str());
+                ImGui::SetCursorPosY(ImGui::GetCursorPosY() + lineSpacing);
+            }
+
+
+            ImGui::End();
         }
     }
 
@@ -81,6 +74,5 @@ namespace SpecList
             }
             spectatorCount = 0;
         }
-        SpecWindowList(spectators);
     }
 }
