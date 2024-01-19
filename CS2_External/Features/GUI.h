@@ -12,12 +12,13 @@
 #include "..\Resources\Images.h"
 
 ID3D11ShaderResourceView* AS_Logo = NULL;
+ID3D11ShaderResourceView* NL_Logo = NULL;
 ID3D11ShaderResourceView* MenuButton1 = NULL;
 ID3D11ShaderResourceView* MenuButton2 = NULL;
 ID3D11ShaderResourceView* MenuButton3 = NULL;
 ID3D11ShaderResourceView* MenuButton4 = NULL;
-int LogoW = 0;
-int LogoH = 0;
+int LogoW = 0, LogoH = 0;
+int LogoW2 = 0, LogoH2 = 0;
 int buttonW = 0;
 int buttonH = 0;
 
@@ -28,6 +29,7 @@ namespace GUI
 		if (AS_Logo == NULL)
 		{
 			Gui.LoadTextureFromMemory(Images::AS_Logo, sizeof Images::AS_Logo, &AS_Logo, &LogoW, &LogoH);
+			Gui.LoadTextureFromMemory(Images::NL_Logo, sizeof Images::NL_Logo, &NL_Logo, &LogoW2, &LogoH2);
 			Gui.LoadTextureFromMemory(Images::VisualButton, sizeof Images::VisualButton, &MenuButton1, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::AimbotButton, sizeof Images::AimbotButton, &MenuButton2, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
@@ -96,15 +98,39 @@ namespace GUI
 	void NewGui()
 	{
 		LoadImages();
+		ImColor BorderColor;
+		ImTextureID ImageID;
+		ImVec2 LogoSize, LogoPos;
+		switch (MenuConfig::Theme)
+		{
+		case 0:
+			ImageID = (void*)AS_Logo;
+			LogoSize = ImVec2(LogoW, LogoH);
+			LogoPos = MenuConfig::WCS.LogoPos;
+			BorderColor = MenuConfig::WCS.BorderColor_Yellow;
+			break;
+		case 1:
+			ImageID = (void*)NL_Logo;
+			LogoSize = ImVec2(LogoW2, LogoH2);
+			LogoPos = MenuConfig::WCS.Logo2Pos;
+			BorderColor = MenuConfig::WCS.BorderColor_Purple;
+			break;
+		default:
+			ImageID = (void*)AS_Logo;
+			LogoSize = ImVec2(LogoW, LogoH);
+			LogoPos = MenuConfig::WCS.LogoPos;
+			BorderColor = MenuConfig::WCS.BorderColor_Yellow;
+			break;
+		}
 
 		char TempText[256];
 		ImGuiWindowFlags Flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar;
 		ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - 851.0f) / 2.0f, (ImGui::GetIO().DisplaySize.y - 514.0f) / 2.0f }, ImGuiCond_Once);
 		ImGui::SetNextWindowSize({ 851,514 });
-		ImGui::Begin("AimStar Test", nullptr, Flags);
+		ImGui::Begin("AimStar", nullptr, Flags);
 		{
-			ImGui::SetCursorPos(MenuConfig::WCS.LogoPos);
-			ImGui::Image((void*)AS_Logo, ImVec2(LogoW, LogoH));
+			ImGui::SetCursorPos(LogoPos);
+			ImGui::Image(ImageID, LogoSize);
 
 			ImGui::SetCursorPos(MenuConfig::WCS.Button1Pos);
 			ImGui::Image((void*)MenuButton1, ImVec2(buttonW, buttonH));
@@ -114,7 +140,7 @@ namespace GUI
 			ImGui::GetWindowDrawList()->AddRect(
 				ImVec2(MenuConfig::WCS.Button1Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button1Pos.y + ImGui::GetWindowPos().y), 
 				ImVec2(MenuConfig::WCS.Button1Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button1Pos.y + buttonH + ImGui::GetWindowPos().y), 
-				MenuConfig::WCS.BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 			
 			ImGui::SetCursorPos(MenuConfig::WCS.Button2Pos);
 			ImGui::Image((void*)MenuButton2, ImVec2(buttonW, buttonH));
@@ -124,7 +150,7 @@ namespace GUI
 			ImGui::GetWindowDrawList()->AddRect(
 				ImVec2(MenuConfig::WCS.Button2Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button2Pos.y + ImGui::GetWindowPos().y),
 				ImVec2(MenuConfig::WCS.Button2Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button2Pos.y + buttonH + ImGui::GetWindowPos().y),
-				MenuConfig::WCS.BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(MenuConfig::WCS.Button3Pos);
 			ImGui::Image((void*)MenuButton3, ImVec2(buttonW, buttonH));
@@ -134,7 +160,7 @@ namespace GUI
 			ImGui::GetWindowDrawList()->AddRect(
 				ImVec2(MenuConfig::WCS.Button3Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button3Pos.y + ImGui::GetWindowPos().y),
 				ImVec2(MenuConfig::WCS.Button3Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button3Pos.y + buttonH + ImGui::GetWindowPos().y),
-				MenuConfig::WCS.BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(MenuConfig::WCS.Button4Pos);
 			ImGui::Image((void*)MenuButton4, ImVec2(buttonW, buttonH));
@@ -144,7 +170,7 @@ namespace GUI
 			ImGui::GetWindowDrawList()->AddRect(
 				ImVec2(MenuConfig::WCS.Button4Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + ImGui::GetWindowPos().y),
 				ImVec2(MenuConfig::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
-				MenuConfig::WCS.BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);
 			
@@ -347,6 +373,7 @@ namespace GUI
 					PutSwitch("Hit Sound", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::HitSound);
 					PutSwitch("Bomb Timer", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol));
 					PutSwitch("Bunny Hop", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
+					PutSwitch("Spec List", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::SpecList);
 					PutSwitch("Radar Hack", 10.f, ImGui::GetFrameHeight() * 1.7f, &MiscCFG::RadarHack);
 					if (MiscCFG::RadarHack)
 					{
@@ -363,19 +390,25 @@ namespace GUI
 
 					ImGui::NewLine();
 					ImGui::SeparatorText(ICON_FA_FUTBOL" Fun");
-					PutSwitch("Jitter", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::Jitter);
+					PutSwitch("Fake Duck", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::Jitter);
+					if (MiscCFG::Jitter)
+					{
+						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
+						ImGui::TextColored(ImColor(255, 50, 0, 255), "This might cause BAN");
+					}
 
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(ICON_FA_HEART" Menu Settings");
 					PutSwitch("Anti Record", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::BypassOBS);
-					// ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
-					// ImGui::TextDisabled("Style");
-					// ImGui::SameLine();
-					// ImGui::Combo("", &MenuConfig::WindowStyle, "AimStar\0");
-					// ImGui::NewLine();
-					PutSwitch("Join Us", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::mother);
-					PutSwitch("Source Code", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::fucker);
+					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
+					ImGui::TextDisabled("Theme");
+					ImGui::SameLine();
+					if (ImGui::Combo("", &MenuConfig::Theme, "AimStar\0NeverLose\0"))
+						StyleChanger::UpdateSkin(MenuConfig::Theme);
+					ImGui::NewLine();
+					PutSwitch("Join Us", 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::mother);
+					PutSwitch("Source Code", 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::fucker);
 
 					ImGui::Columns(1);
 				}
