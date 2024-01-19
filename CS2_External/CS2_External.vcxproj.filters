@@ -176,6 +176,18 @@
     <ClInclude Include="Utils\yaml-cpp\stlemitter.h" />
     <ClInclude Include="Utils\yaml-cpp\traits.h" />
     <ClInclude Include="Utils\yaml-cpp\yaml.h" />
+    <ClInclude Include="Resources\Languages\German.h" />
+    <ClInclude Include="Resources\Languages\Ruassian.h" />
+    <ClInclude Include="Resources\Languages\Danish.h" />
+    <ClInclude Include="Resources\Languages\Polish.h" />
+    <ClInclude Include="Resources\Languages\Portuguese.h" />
+    <ClInclude Include="Resources\Languages\Slovak.h" />
+    <ClInclude Include="Resources\Languages\SimplifiedChinese.h" />
+    <ClInclude Include="Resources\Languages\Francais.h" />
+    <ClInclude Include="Resources\Languages\Korean.h" />
+    <ClInclude Include="Resources\Languages\Dutch.h" />
+    <ClInclude Include="Resources\Languages\Turkish.h" />
+    <ClInclude Include="Resources\Languages\Hungarian.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
@@ -241,6 +253,7 @@
     <ClCompile Include="Features\Mouse.cpp" />
     <ClCompile Include="Features\Glow.cpp" />
     <ClCompile Include="Features\Misc.cpp" />
+    <ClCompile Include="Resources\Language.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CS2_External.rc" />
