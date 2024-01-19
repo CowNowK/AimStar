@@ -33,20 +33,24 @@ int main()
 
 
 	std::printf(
-	"AimStar External for CS2\n"
-	"Author: CowNow\n"
-	"Source Code: https://github.com/CowNowK/AimStar\n"
-	"\n"
-	"- Press [INS] to show or hide Menu.\n"
-	"\n"
-	"#Disclamers:\n"
-	"- Use at your own risk\n"
-	"- It is highly not recommended to use AimStar on your main account"
-	"\n"
-	"#Contributors: \n"
-	"Shinyaluvs, Nx0Ri, Skarbor, PedroGoncalves, KeysIsCool, Kenny, Cr1ppl3, Tairitsu, sh1pi, toepas, djsacred, tokinaa, faster_bbc, vsantos1, 5mmod, gScream, Hazetick, styx, user1232, TaKaStuKi.sen\n"
-	"\n"
-	);
+		"AimStar External for CS2\n"
+		"Author: CowNow\n"
+		"Source Code: https://github.com/CowNowK/AimStar\n"
+		"\n"
+		"- Press [INS] to show or hide Menu.\n"
+		"\n");
+
+	std::printf(
+		"#Disclamers:\n"
+		"- Use at your own risk\n"
+		"- It is highly not recommended to use AimStar on your main account"
+		"\n");
+	
+	std::printf(
+		"#Contributors: \n"
+		"Shinyaluvs, Nx0Ri, Skarbor, PedroGoncalves, KeysIsCool, Kenny, Cr1ppl3, Tairitsu, sh1pi, toepas, djsacred, tokinaa, faster_bbc, vsantos1, 5mmod, gScream, Hazetick, styx, user1232, TaKaStuKi.sen\n"
+		"\n");
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
 	auto ProcessStatus = ProcessMgr.Attach("cs2.exe");
 
@@ -61,12 +65,15 @@ int main()
 
 	switch (ProcessStatus) {
 	case 1:
+		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 		std::cout << "[ERROR] Please launch the game first!" << std::endl;
 		goto END;
 	case 2: 
+		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 		std::cout << "[ERROR] Failed to hook process, please run the cheat as Administrator (Right click AimStar > Run as Adminstrator)." << std::endl; 
 		goto END; 
 	case 3:
+		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 		std::cout << "[ERROR] Failed to get module address." << std::endl; 
 		goto END; 
 	default: 
@@ -75,33 +82,34 @@ int main()
 
 	if (!Offset::UpdateOffsets())
 	{
+		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 		std::cout << "[ERROR] Failed to update offsets." << std::endl;
 		goto END;
 	}
 
 	if (!gGame.InitAddress())
 	{
+		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 		std::cout << "[ERROR] Failed to call InitAddress()."<< std::endl;
 		goto END;
 	}
+
+	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);
 	std::cout << "[Game] Process ID: " << ProcessMgr.ProcessID << std::endl;
 	std::cout << "[Game] Client Address: " << gGame.GetClientDLLAddress() << std::endl;
 
-	/*
-	std::cout << "Offset:" << std::endl;
-	std::cout << "--EntityList:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::EntityList << std::endl;
-	std::cout << "--Matrix:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::Matrix << std::endl;
-	std::cout << "--LocalPlayerController:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::LocalPlayerController << std::endl;
-	std::cout << "--ViewAngles:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::ViewAngle << std::endl;
-	std::cout << "--LocalPlayerPawn:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::LocalPlayerPawn << std::endl;
-	*/
-
 	if (fs::exists(MenuConfig::path))
+	{
+		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 		std::cout << "[Info] Config folder connected: " << MenuConfig::path << std::endl;
+	}
 	else
 	{
 		if (fs::create_directory(MenuConfig::path))
+		{
+			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 			std::cout << "[Info] Config folder created: " << MenuConfig::path << std::endl;
+		}
 		else
 		{
 			std::cerr << "[Info] Error: Failed to create the config directory." << std::endl;
@@ -124,7 +132,19 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << "Cheat running successfully!" << std::endl;
-	std::cout << "Have fun..." << std::endl;
+	std::cout << "Have fun..." << std::endl << std::endl;
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED);
+	std::cout << "=======[ Offset List ]=======" << std::endl;
+	std::cout << std::setw(23) << std::left << "EntityList:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::EntityList << std::endl;
+	std::cout << std::setw(23) << std::left << "Matrix:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::Matrix << std::endl;
+	std::cout << std::setw(23) << std::left << "LocalPlayerController:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::LocalPlayerController << std::endl;
+	std::cout << std::setw(23) << std::left << "ViewAngles:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::ViewAngle << std::endl;
+	std::cout << std::setw(23) << std::left << "LocalPlayerPawn:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::LocalPlayerPawn << std::endl;
+	std::cout << std::setw(23) << std::left << "PlantedC4:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::PlantedC4 << std::endl;
+	std::cout << std::setw(23) << std::left << "ForceJump:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::ForceJump << std::endl;
+	std::cout << std::setw(23) << std::left << "SpreadPointer:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::SpreadPointer << std::endl;
+	std::cout << std::endl;
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
 	try
 	{
