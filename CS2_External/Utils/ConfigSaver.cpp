@@ -267,7 +267,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Menu";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
-        emitter << YAML::Key << "Theme" << YAML::Value << MenuConfig::MenuStyle;
+        emitter << YAML::Key << "Theme" << YAML::Value << MenuConfig::Theme;
         emitter << YAML::Key << "WindowStyle" << YAML::Value << MenuConfig::WindowStyle;
         emitter << YAML::EndMap;
 
@@ -444,7 +444,7 @@ namespace MyConfigSaver {
         }
         if (config["Menu"])
         {
-            MenuConfig::MenuStyle = config["Menu"]["Theme"].as<int>();
+            MenuConfig::Theme = config["Menu"]["Theme"].as<int>();
             MenuConfig::WindowStyle = config["Menu"]["WindowStyle"].as<int>();
         }
 

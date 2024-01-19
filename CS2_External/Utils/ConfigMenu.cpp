@@ -259,7 +259,7 @@ namespace ConfigMenu {
 		MiscCFG::GlowColor = ImColor(255, 0, 0, 100);;
 		MiscCFG::EnemySensor = false;
 		MenuConfig::AirJump = false;
-		MenuConfig::MenuStyle = 0;
+		MenuConfig::Theme = 0;
 		MenuConfig::WindowStyle = 0;
 		ESPConfig::BoxAlpha = 0.0f;
 		ESPConfig::ShowPreview = true;
