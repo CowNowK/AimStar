@@ -254,6 +254,7 @@
     <ClCompile Include="Features\Glow.cpp" />
     <ClCompile Include="Features\Misc.cpp" />
     <ClCompile Include="Resources\Language.cpp" />
+    <ClCompile Include="Features\StyleChanger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CS2_External.rc" />

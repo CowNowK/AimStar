@@ -253,6 +253,7 @@
     <ClCompile Include="Features\Glow.cpp" />
     <ClCompile Include="Features\Misc.cpp" />
     <ClCompile Include="Features\Mouse.cpp" />
+    <ClCompile Include="Features\StyleChanger.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Offsets.cpp" />

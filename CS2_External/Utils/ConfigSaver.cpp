@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 #include "ConfigSaver.hpp"
+#include "../Features/StyleChanger.h"
+#include "../Resources/Language.h"
 #include "../MenuConfig.hpp"
 #include "../TriggerBot.h"
 #include "../AimBot.hpp"
@@ -268,7 +270,7 @@ namespace MyConfigSaver {
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
         emitter << YAML::Key << "Theme" << YAML::Value << MenuConfig::Theme;
-        emitter << YAML::Key << "WindowStyle" << YAML::Value << MenuConfig::WindowStyle;
+        emitter << YAML::Key << "Language" << YAML::Value << MenuConfig::Language;
         emitter << YAML::EndMap;
 
         emitter << YAML::EndMap;
@@ -445,10 +447,11 @@ namespace MyConfigSaver {
         if (config["Menu"])
         {
             MenuConfig::Theme = config["Menu"]["Theme"].as<int>();
-            MenuConfig::WindowStyle = config["Menu"]["WindowStyle"].as<int>();
+            MenuConfig::Language = config["Menu"]["Language"].IsDefined() ? config["Menu"]["Language"].as<int>() : 0;
         }
 
-
+        StyleChanger::UpdateSkin(MenuConfig::Theme);
+        Lang::ChangeLang(MenuConfig::Language);
         std::cout << "[Info] Configuration loaded from " << MenuConfig::path + '\\' + filename << std::endl;
     }
 } // namespace ConfigSaver

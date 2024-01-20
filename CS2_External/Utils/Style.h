@@ -3,7 +3,7 @@
 
 namespace Styles
 {
-    void Style_AimStar()
+    inline void Style_AimStar()
     {
         // AimStar style from ImThemes
         ImGuiStyle& style = ImGui::GetStyle();
@@ -94,7 +94,7 @@ namespace Styles
         style.Colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.800000011920929f, 0.800000011920929f, 0.800000011920929f, 0.3499999940395355f);
     }
 
-    void NiggaLose()
+    inline void NiggaLose()
     {
         // NIGGALOSE style from ImThemes
         ImGuiStyle& style = ImGui::GetStyle();
