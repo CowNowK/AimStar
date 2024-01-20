@@ -450,8 +450,10 @@ namespace MyConfigSaver {
             MenuConfig::Language = config["Menu"]["Language"].IsDefined() ? config["Menu"]["Language"].as<int>() : 0;
         }
 
+        AimControl::SetHotKey(MenuConfig::AimBotHotKey);
         StyleChanger::UpdateSkin(MenuConfig::Theme);
         Lang::ChangeLang(MenuConfig::Language);
+
         std::cout << "[Info] Configuration loaded from " << MenuConfig::path + '\\' + filename << std::endl;
     }
 } // namespace ConfigSaver
