@@ -185,6 +185,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Resources\Images.h" />
     <ClInclude Include="Resources\Language.h" />
+    <ClInclude Include="Resources\Languages\Czech.h" />
     <ClInclude Include="Resources\Languages\Danish.h" />
     <ClInclude Include="Resources\Languages\Dutch.h" />
     <ClInclude Include="Resources\Languages\Francais.h" />

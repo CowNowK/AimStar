@@ -12,6 +12,7 @@
 #include "Languages/SimplifiedChinese.h"
 #include "Languages/Slovak.h"
 #include "Languages/Turkish.h"
+#include "Languages/Czech.h"
 
 namespace Lang
 {
@@ -57,6 +58,9 @@ namespace Lang
 			break;
 		case 11:
 			Dutch();
+			break;
+		case 12:
+			Czech();
 			break;
 		default:
 			English();
