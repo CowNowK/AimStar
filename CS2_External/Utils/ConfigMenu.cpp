@@ -38,28 +38,28 @@ namespace ConfigMenu {
 		float ComponentWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x - CursorX * 2;
 
 		ImGui::SetCursorPos(ImVec2(15.f, 24.f));
-		ImGui::SeparatorText("Config");
+		ImGui::SeparatorText(Lang::ConfigText.FeatureName);
 
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
-		ImGui::TextDisabled("Config Files");
+		ImGui::TextDisabled(Lang::ConfigText.MyConfigs);
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::SetNextItemWidth(ComponentWidth);
 		ImGui::ListBox("##ConfigFiles", &selectedConfig, configFilesCStr.data(), configFilesCStr.size());
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
-		if (ImGui::Button("Load Selected", { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
+		if (ImGui::Button(Lang::ConfigText.Load, { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
 		{
 			std::string selectedConfigFile = configFiles[selectedConfig];
 			MyConfigSaver::LoadConfig(selectedConfigFile);
 		}
 		ImGui::SameLine();
-		if (ImGui::Button("Save Selected", { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
+		if (ImGui::Button(Lang::ConfigText.Save, { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
 		{
 			std::string selectedConfigFile = configFiles[selectedConfig];
 			MyConfigSaver::SaveConfig(selectedConfigFile);
 		}
 
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
-		if (ImGui::Button("Delete Selected", { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
+		if (ImGui::Button(Lang::ConfigText.Delete, { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
 			ImGui::OpenPopup("##reallyDelete");
 		if (ImGui::BeginPopup("##reallyDelete"))
 		{
@@ -82,7 +82,7 @@ namespace ConfigMenu {
 			ImGui::EndPopup();
 		}
 		ImGui::SameLine();
-		if (ImGui::Button("Reset Config", { 126.f, 30.f }))
+		if (ImGui::Button(Lang::ConfigText.Reset, { 126.f, 30.f }))
 			ImGui::OpenPopup("##reallyReset");
 		if (ImGui::BeginPopup("##reallyReset"))
 		{
@@ -99,141 +99,25 @@ namespace ConfigMenu {
 		}
 		ImGui::NextColumn();
 		ImGui::SetCursorPosY(24.f);
-		ImGui::SeparatorText("Create Config");
-		ImGui::TextDisabled("Author name");
+		ImGui::SeparatorText(Lang::ConfigText.SeparateLine);
+		ImGui::TextDisabled(Lang::ConfigText.AuthorName);
 		ImGui::SetNextItemWidth(ComponentWidth + 10);
 		ImGui::InputText("###ConfigNameInput", configAuthorBuffer, sizeof(configAuthorBuffer));
-		ImGui::TextDisabled("Config name");
+		ImGui::TextDisabled(Lang::ConfigText.ConfigName);
 		ImGui::SetNextItemWidth(ComponentWidth + 10);
 		ImGui::InputText("###AuthorNameInput", configNameBuffer, sizeof(configNameBuffer));
 		ImGui::NewLine();
 		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() / 4);
-		if (ImGui::Button("Create Config", { 126.f, 30.f }))
+		if (ImGui::Button(Lang::ConfigText.Create, { 126.f, 30.f }))
 		{
 			std::string configFileName = std::string(configNameBuffer) + ".yml";
 			MyConfigSaver::SaveConfig(configFileName, std::string(configAuthorBuffer));
 		}
 		ImGui::NewLine();
 		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() / 4);
-		if (ImGui::Button("Open Folder", { 126.f, 30.f }))
+		if (ImGui::Button(Lang::ConfigText.OpenFolder, { 126.f, 30.f }))
 		{
 			Gui.OpenWebpage(configDir.c_str());
-		}
-	}
-
-	void RenderConfigMenu(const char *Tab) {
-		// Config		
-		if (ImGui::BeginTabItem(Tab))
-		{
-			ImGui::Columns(2, nullptr, false);
-			ImGui::SetColumnOffset(1, 170.0f);
-
-			ImGui::PushItemWidth(160.0f);
-
-			static char configNameBuffer[128] = "NewConfig";
-
-			static int selectedConfig = -1;
-
-			const std::string configDir = MenuConfig::path;
-			static std::vector<std::string> configFiles;
-			std::vector<const char*> configFilesCStr;
-
-			configFiles.clear();
-			for (const auto& entry : std::filesystem::directory_iterator(configDir))
-			{
-				if (entry.is_regular_file() && entry.path().extension() == ".yml")
-				{
-					configFiles.push_back(entry.path().filename().string());
-				}
-			}
-
-			// 将vector转到const char*数组
-			for (const auto& file : configFiles)
-			{
-				configFilesCStr.push_back(file.c_str());
-			}
-
-			// 创建列表框并载入配置文件数组
-			ImGui::ListBox("##ConfigFiles", &selectedConfig, configFilesCStr.data(), configFilesCStr.size());
-
-			ImGui::NextColumn();
-			ImGui::PushItemWidth(100.0f);
-
-			if (ImGui::Button("Load Selected", { 100.0f, 25.0f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
-			{
-				std::string selectedConfigFile = configFiles[selectedConfig];
-				MyConfigSaver::LoadConfig(selectedConfigFile);
-				// Because the style is switched when Combo is activated, the style should be manually updated here
-				// Render::UpdateStyle(MenuConfig::MenuStyle);
-				// Umm...Some problem occured
-			}
-
-			if (ImGui::Button("Save Selected", { 100.0f, 25.0f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
-			{
-				std::string selectedConfigFile = configFiles[selectedConfig];
-				MyConfigSaver::SaveConfig(selectedConfigFile);
-			}
-
-			if (ImGui::Button("Delete Selected", { 100.0f, 25.0f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
-				ImGui::OpenPopup("##reallyDelete");
-
-			if (ImGui::BeginPopup("##reallyDelete"))
-			{
-				ImGui::TextUnformatted("Are you sure?");
-				if (ImGui::Button("No", { 45.0f, 0.0f }))
-					ImGui::CloseCurrentPopup();
-				ImGui::SameLine();
-				if (ImGui::Button("Yes", { 45.0f, 0.0f }))
-				{
-					// Delete
-					std::string selectedConfigFile = configFiles[selectedConfig];
-					std::string fullPath = configDir + "\\" + selectedConfigFile;
-					if (std::remove(fullPath.c_str()) == 0)
-					{
-						configFiles.erase(configFiles.begin() + selectedConfig);
-						selectedConfig = -1;
-					}
-					else
-					{
-					}
-					ImGui::CloseCurrentPopup();
-				}
-			ImGui::EndPopup();
-			}
-
-			if (ImGui::Button("Reset Config", { 100.0f, 25.0f }))
-				ImGui::OpenPopup("##reallyReset");
-			if (ImGui::BeginPopup("##reallyReset"))
-			{
-				ImGui::TextUnformatted("Are you sure?");
-				if (ImGui::Button("No", { 45.0f, 0.0f }))
-					ImGui::CloseCurrentPopup();
-				ImGui::SameLine();
-				if (ImGui::Button("Yes", { 45.0f, 0.0f }))
-				{
-					ConfigMenu::ResetToDefault();
-					ImGui::CloseCurrentPopup();
-				}	
-				ImGui::EndPopup();
-			}
-			ImGui::Columns(1);
-
-			ImGui::SeparatorText("Save Config");
-			ImGui::InputText(" ", configNameBuffer, sizeof(configNameBuffer));
-			ImGui::SameLine();
-			if (ImGui::Button("Create Config", { 100.0f, 25.0f }))
-			{
-				std::string configFileName = std::string(configNameBuffer) + ".yml";
-				MyConfigSaver::SaveConfig(configFileName);
-			}
-			ImGui::SameLine();
-
-			if (ImGui::Button("Open Folder", { 100.0f, 25.0f }))
-			{
-				Gui.OpenWebpage(configDir.c_str());
-			}
-
-			ImGui::EndTabItem();
 		}
 	}
 

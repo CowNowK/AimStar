@@ -3,165 +3,179 @@
 
 namespace Lang
 {
-	struct
+	inline struct Global
 	{
-		const char* Date;
-		const char* Author;
+		inline static const char* Date;
+		inline static const char* Author;
 
-		const char* SwitchButton;
-		const char* FeatureSettings;
+		inline static const char* SwitchButton;
+		inline static const char* FeatureSettings;
 	} Global;
 
-	struct
+	inline struct ESPtext
 	{
-		const char* FeatureName;
-		const char* Box;
-		const char* BoxRounding;
-		const char* FilledBox;
-		const char* FilledAlpha;
-		const char* Skeleton;
-		const char* HeadBox;
-		const char* EyeRay;
-		const char* HealthBar;
-		const char* Weapon;
-		const char* Distance;
-		const char* PlayerName;
-		const char* SnapLine;
-		const char* LinePosList;
-		const char* VisCheck;
-		const char* Preview;
-		const char* CollapseHead;
-		const char* Penis;
-		const char* PenisLength;
-		const char* PenisSize;
-		const char* MultiColor;
-		const char* MultiColTip;
+		inline static const char* Toggle;
+		inline static const char* FeatureName;
+		inline static const char* Box;
+		inline static const char* BoxRounding;
+		inline static const char* FilledBox;
+		inline static const char* FilledAlpha;
+		inline static const char* Skeleton;
+		inline static const char* HeadBox;
+		inline static const char* EyeRay;
+		inline static const char* HealthBar;
+		inline static const char* Weapon;
+		inline static const char* Distance;
+		inline static const char* PlayerName;
+		inline static const char* SnapLine;
+		inline static const char* LinePosList;
+		inline static const char* VisCheck;
+		inline static const char* Preview;
+		inline static const char* CollapseHead;
+		inline static const char* Penis;
+		inline static const char* PenisLength;
+		inline static const char* PenisSize;
+		inline static const char* MultiColor;
+		inline static const char* MultiColTip;
+		inline static const char* Outline;
+		inline static const char* BoxType;
+		inline static const char* HealthNum;
+		inline static const char* Ammo;
 
-		const char* BoxType_Normal;
-		const char* BoxType_Edge;
-		const char* BoxType_Corner1;
-		const char* BoxType_Corner2;
-		const char* BarType_Top;
-		const char* BarType_Vertical;
-		const char* HeadBoxType_Normal;
-		const char* HeadBoxType_Flat;
-		const char* LinePos_1;
-		const char* LinePos_2;
-		const char* LinePos_3;
+		inline static const char* BoxType_Normal;
+		inline static const char* BoxType_Edge;
+		inline static const char* BoxType_Corner;
+		inline static const char* BarType_Top;
+		inline static const char* BarType_Vertical;
+		inline static const char* HeadBoxType_Normal;
+		inline static const char* HeadBoxType_Flat;
+		inline static const char* LinePos_1;
+		inline static const char* LinePos_2;
+		inline static const char* LinePos_3;
 	} ESPtext;
 
-	struct
+	inline struct AimbotText
 	{
-		const char* FeatureName;
-		const char* HotKeyList;
-		const char* Toggle;
-		const char* DrawFov;
-		const char* VisCheck;
-		const char* JumpCheck;
-		const char* FovSlider;
-		const char* SmoothSlider;
-		const char* BoneList;
-		const char* Tip;
+		inline static const char* Enable;
+		inline static const char* FeatureName;
+		inline static const char* HotKeyList;
+		inline static const char* Toggle;
+		inline static const char* DrawFov;
+		inline static const char* VisCheck;
+		inline static const char* JumpCheck;
+		inline static const char* FovSlider;
+		inline static const char* SmoothSlider;
+		inline static const char* BoneList;
+		inline static const char* Tip;
 
-		const char* Bone_1;
-		const char* Bone_2;
-		const char* Bone_3;
-		const char* Bone_4;
+		inline static const char* Bone_1;
+		inline static const char* Bone_2;
+		inline static const char* Bone_3;
+		inline static const char* Bone_4;
 	} AimbotText;
 
-	struct
+	inline struct RadarText
 	{
-		const char* FeatureName;
-	} GlowText;
+		inline static const char* Toggle;
+		inline static const char* FeatureName;
+		inline static const char* StyleList;
+		inline static const char* CustomCheck;
+		inline static const char* CrossLine;
+		inline static const char* SizeSlider;
+		inline static const char* ProportionSlider;
+		inline static const char* RangeSlider;
+		inline static const char* AlphaSlider;
 
-	struct
-	{
-		const char* FeatureName;
-		const char* StyleList;
-		const char* CustomCheck;
-		const char* CrossLine;
-		const char* SizeSlider;
-		const char* ProportionSlider;
-		const char* RangeSlider;
-		const char* AlphaSlider;
-
-		const char* Style_1;
-		const char* Style_2;
-		const char* Style_3;
+		inline static const char* Style_1;
+		inline static const char* Style_2;
+		inline static const char* Style_3;
 	} RadarText;
 
-	struct
+	inline struct TriggerText
 	{
-		const char* FeatureName;
-		const char* HotKeyList;
-		const char* Toggle;
-		const char* DelaySlider;
-		const char* FakeShotSlider;
+		inline static const char* Enable;
+		inline static const char* FeatureName;
+		inline static const char* HotKeyList;
+		inline static const char* Toggle;
+		inline static const char* DelaySlider;
+		inline static const char* FakeShotSlider;
 	} TriggerText;
 
-	struct
+	inline struct CrosshairsText
 	{
-		const char* FeatureName;
-		const char* PresetList;
-		const char* ColorEditor;
-		const char* Dot;
-		const char* DotSizeSlider;
-		const char* Outline;
-		const char* Crossline;
-		const char* hLengthSlider;
-		const char* vLengthSilder;
-		const char* GapSlider;
-		const char* ThicknessSlider;
-		const char* tStyle;
-		const char* Circle;
-		const char* RadiusSlider;
-		const char* TargetCheck;
-		const char* TeamCheck;
+		inline static const char* Toggle;
+		inline static const char* FeatureName;
+		inline static const char* PresetList;
+		inline static const char* ColorEditor;
+		inline static const char* Dot;
+		inline static const char* DotSizeSlider;
+		inline static const char* Outline;
+		inline static const char* Crossline;
+		inline static const char* hLengthSlider;
+		inline static const char* vLengthSilder;
+		inline static const char* GapSlider;
+		inline static const char* ThicknessSlider;
+		inline static const char* tStyle;
+		inline static const char* Circle;
+		inline static const char* RadiusSlider;
+		inline static const char* TargetCheck;
+		inline static const char* TeamCheck;
 	} CrosshairsText;
 
-	struct
+	inline struct MiscText
 	{
-		const char* FeatureName;
-		const char* ThemeList;
-		const char* StyleList;
-		const char* HeadshotLine;
-		const char* SpecCheck;
-		const char* NoFlash;
-		const char* FastStop;
-		const char* HitSound;
-		const char* bmbTimer;
-		const char* SpecList;
-		const char* Bhop;
-		const char* Watermark;
-		const char* CheatList;
-		const char* TeamCheck;
-		const char* AntiRecord;
+		inline static const char* FeatureName;
+		inline static const char* ThemeList;
+		inline static const char* StyleList;
+		inline static const char* HeadshotLine;
+		inline static const char* SpecCheck;
+		inline static const char* NoFlash;
+		inline static const char* FastStop;
+		inline static const char* HitSound;
+		inline static const char* bmbTimer;
+		inline static const char* SpecList;
+		inline static const char* Bhop;
+		inline static const char* Watermark;
+		inline static const char* CheatList;
+		inline static const char* TeamCheck;
+		inline static const char* AntiRecord;
+		inline static const char* MoneyService;
+		inline static const char* ShowCashSpent;
+		inline static const char* EnemySensor;
+		inline static const char* RadarHack;
+		
+		inline static const char* FakeDuck;
 
-		const char* LanguageList;
+		inline static const char* LanguageList;
+
+		inline static const char* VisCheckDisable;
 	} MiscText;
 
-	struct
+	inline struct ConfigText
 	{
-		const char* FeatureName;
-		const char* Load;
-		const char* Save;
-		const char* Delete;
-		const char* Reset;
-		const char* Create;
-		const char* OpenFolder;
-		const char* SeparateLine;
+		inline static const char* FeatureName;
+		inline static const char* Load;
+		inline static const char* Save;
+		inline static const char* Delete;
+		inline static const char* Reset;
+		inline static const char* Create;
+		inline static const char* OpenFolder;
+		inline static const char* SeparateLine;
+		inline static const char* MyConfigs;
+		inline static const char* AuthorName;
+		inline static const char* ConfigName;
 	} ConfigText;
 
-	struct
+	inline struct ReadMeText
 	{
-		const char* FeatureName;
-		const char* LastUpdate;
-		const char* SourceButton;
-		const char* DiscordButton;
-		const char* OffsetsTitle;
+		inline static const char* FeatureName;
+		inline static const char* LastUpdate;
+		inline static const char* SourceButton;
+		inline static const char* DiscordButton;
+		inline static const char* OffsetsTitle;
 	} ReadMeText;
 
-	inline void ChangeLang(int LangIndex);
+	void ChangeLang(int LangIndex);
 
 	inline void English()
 	{
@@ -172,9 +186,10 @@ namespace Lang
 		Global.FeatureSettings = u8"Settings";
 
 		// ESP
+		ESPtext.Toggle = u8"Toggle";
 		ESPtext.FeatureName = u8" ESP";
-		ESPtext.Box = u8"Box";
-		ESPtext.BoxRounding = u8"Box Rounding";
+		ESPtext.Box = u8"Frame";
+		ESPtext.BoxRounding = u8"Box Rounding: ";
 		ESPtext.FilledBox = u8"Filled Box";
 		ESPtext.FilledAlpha = u8"Filled Box Alpha";
 		ESPtext.Skeleton = u8"Skeleton";
@@ -184,8 +199,8 @@ namespace Lang
 		ESPtext.Weapon = u8"Weapon";
 		ESPtext.Distance = u8"Distance";
 		ESPtext.PlayerName = u8"Name";
-		ESPtext.SnapLine = u8"SnapLine";
-		ESPtext.LinePosList = u8"LinePos";
+		ESPtext.SnapLine = u8"Snap Line";
+		ESPtext.LinePosList = u8"Line Position: ";
 		ESPtext.VisCheck = u8"Visible Check";
 		ESPtext.Preview = u8"Preview Window";
 		ESPtext.CollapseHead = u8"SexyESP";
@@ -194,60 +209,72 @@ namespace Lang
 		ESPtext.PenisSize = u8"Size";
 		ESPtext.MultiColor = u8"Multi-Color";
 		ESPtext.MultiColTip = u8"Only work when the box has non-rounded corners.";
+		ESPtext.Outline = u8"Outline";
+		ESPtext.BoxType = u8"Box Type:";
+		ESPtext.HealthNum = u8"Health Number";
+		ESPtext.Ammo = u8"Ammo";
+
+		ESPtext.BoxType_Normal = u8"Normal";
+		ESPtext.BoxType_Edge = u8"Dynamic";
+		ESPtext.BoxType_Corner = u8"Corner";
+		ESPtext.LinePos_1 = u8"Top";
+		ESPtext.LinePos_2 = u8"Center";
+		ESPtext.LinePos_3 = u8"Bottom";
 
 		// Aimbot
+		AimbotText.Enable = u8"Enable Aimbot";
 		AimbotText.FeatureName = u8" Aimbot";
-		AimbotText.HotKeyList = u8"Key";
+		AimbotText.HotKeyList = u8"Hotkey   ";
 		AimbotText.Toggle = u8"Toggle Mode";
 		AimbotText.DrawFov = u8"Draw Fov";
 		AimbotText.VisCheck = u8"Visible Only";
 		AimbotText.JumpCheck = u8"On Ground Only";
-		AimbotText.FovSlider = u8"FOV";
-		AimbotText.SmoothSlider = u8"Smooth";
-		AimbotText.BoneList = u8"Bone";
+		AimbotText.FovSlider = u8"FOV: ";
+		AimbotText.SmoothSlider = u8"Smooth: ";
+		AimbotText.BoneList = u8"Bone       ";
 		AimbotText.Tip = u8"Aimbot will not work while the menu is opened";
 
-		// Glow
-		GlowText.FeatureName = u8" Glow";
-
 		// Radar
+		RadarText.Toggle = u8"Show Radar";
 		RadarText.FeatureName = u8" Radar";
 		RadarText.StyleList = u8"Style";
 		RadarText.CustomCheck = u8"Custom";
 		RadarText.CrossLine = u8"Cross Line";
-		RadarText.SizeSlider = u8"Point Size";
-		RadarText.ProportionSlider = u8"Proportion";
-		RadarText.RangeSlider = u8"Range";
-		RadarText.AlphaSlider = u8"Window Background Alpha";
+		RadarText.SizeSlider = u8"Point Size:";
+		RadarText.ProportionSlider = u8"Proportion:";
+		RadarText.RangeSlider = u8"Range:";
+		RadarText.AlphaSlider = u8"Window Background Alpha:";
 
 		// Triggerbot
+		TriggerText.Enable = u8"Enable Triggerbot";
 		TriggerText.FeatureName = u8" Triggerbot";
-		TriggerText.HotKeyList = u8"HotKey";
+		TriggerText.HotKeyList = u8"Hotkey   ";
 		TriggerText.Toggle = u8"Always Active";
-		TriggerText.DelaySlider = u8"Shot Delay";
-		TriggerText.FakeShotSlider = u8"Shot Duration";
+		TriggerText.DelaySlider = u8"Shot Delay:";
+		TriggerText.FakeShotSlider = u8"Shot Duration:";
 
 		// Crosshairs
+		CrosshairsText.Toggle = u8"Show Crosshairs";
 		CrosshairsText.FeatureName = u8" Crosshairs";
 		CrosshairsText.PresetList = u8"Presets";
 		CrosshairsText.ColorEditor = u8"Crosshairs Color";
 		CrosshairsText.Dot = u8"Center Dot";
-		CrosshairsText.DotSizeSlider = u8"Dot Size";
+		CrosshairsText.DotSizeSlider = u8"Dot Size:";
 		CrosshairsText.Outline = u8"Outline";
-		CrosshairsText.Crossline = u8"Cross Line";
-		CrosshairsText.hLengthSlider = u8"Horizontal Length";
-		CrosshairsText.vLengthSilder = u8"Vertical Length";
-		CrosshairsText.GapSlider = u8"Gap";
-		CrosshairsText.ThicknessSlider = u8"Thickness";
+		CrosshairsText.Crossline = u8"Crossline";
+		CrosshairsText.hLengthSlider = u8"Horizontal Length:";
+		CrosshairsText.vLengthSilder = u8"Vertical Length:";
+		CrosshairsText.GapSlider = u8"Gap:";
+		CrosshairsText.ThicknessSlider = u8"Thickness:";
 		CrosshairsText.tStyle = u8"T Style";
 		CrosshairsText.Circle = u8"Circle";
-		CrosshairsText.RadiusSlider = u8"Circle Radius";
+		CrosshairsText.RadiusSlider = u8"Circle Radius:";
 		CrosshairsText.TargetCheck = u8"Targeting Crosshairs";
 		CrosshairsText.TeamCheck = u8"TeamCheck";
 
 		// Misc
 		MiscText.FeatureName = u8" Misc";
-		MiscText.ThemeList = u8"Theme";
+		MiscText.ThemeList = u8"Theme     ";
 		MiscText.StyleList = u8"Style";
 		MiscText.HeadshotLine = u8"Headshot Line";
 		MiscText.SpecCheck = u8"Cheat in Spec";
@@ -259,26 +286,37 @@ namespace Lang
 		MiscText.Bhop = u8"Bunny Hop";
 		MiscText.Watermark = u8"Watermark";
 		MiscText.CheatList = u8"Cheat List";
-		MiscText.TeamCheck = u8"TeamCheck";
-		MiscText.AntiRecord = u8"Bypass OBS";
+		MiscText.TeamCheck = u8"Team Check";
+		MiscText.AntiRecord = u8"Anti Record";
+		MiscText.MoneyService = u8"Money Services";
+		MiscText.ShowCashSpent = u8"Show Cash Spent";
+		MiscText.EnemySensor = u8"Enemy Sensor";
+		MiscText.RadarHack = u8"Radar Hack";
+		MiscText.FastStop = u8"Fast Stop";
+		MiscText.VisCheckDisable = u8"Visible Check DISABLED";
+
+		MiscText.FakeDuck = u8"Fake Duck";
 
 		MiscText.LanguageList = u8"Language";
 
 		// Config Menu
-		ConfigText.FeatureName = u8" Config";
+		ConfigText.FeatureName = u8"Config";
+		ConfigText.MyConfigs = u8"Config List";
 		ConfigText.Load = u8"Load Selected";
 		ConfigText.Save = u8"Save Selected";
 		ConfigText.Delete = u8"Delete Selected";
 		ConfigText.Reset = u8"Reset Config";
 		ConfigText.Create = u8"Create Config";
 		ConfigText.OpenFolder = u8"Open Folder";
-		ConfigText.SeparateLine = u8"Save Config";
+		ConfigText.SeparateLine = u8"New Config";
+		ConfigText.AuthorName = u8"Author Name";
+		ConfigText.ConfigName = u8"Config Name";
 
 		// Readme Menu
 		ReadMeText.FeatureName = u8" README";
 		ReadMeText.LastUpdate = u8"Last update: ";
-		ReadMeText.SourceButton = u8" Source Code";
-		ReadMeText.DiscordButton = u8" Join Discord";
+		ReadMeText.SourceButton = u8"Source Code";
+		ReadMeText.DiscordButton = u8"Join Discord";
 		ReadMeText.OffsetsTitle = u8"Offsets:";
 	}
 }

@@ -15,7 +15,7 @@
 
 namespace Lang
 {
-	inline void ChangeLang(int LangIndex)
+	void ChangeLang(int LangIndex)
 	{
 		switch (LangIndex)
 		{

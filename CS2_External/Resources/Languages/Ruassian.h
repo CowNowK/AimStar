@@ -12,6 +12,7 @@ namespace Lang
 		Global.FeatureSettings = u8"§¯§Ñ§ã§ä§â§à§Û§Ü§Ú";
 
 		// ESP
+		ESPtext.Toggle = u8"Toggle";
 		ESPtext.FeatureName = u8" ESP (WH)";
 		ESPtext.Box = u8"§°§Ò§Ó§à§Õ§Ü§Ñ";
 		ESPtext.BoxRounding = u8"§°§Ü§â§å§Ô§Ý§Ö§ß§Ú§Ö §à§Ò§Ó§à§Õ§Ü§Ú";
@@ -34,8 +35,20 @@ namespace Lang
 		ESPtext.PenisSize = u8"§²§Ñ§Ù§Þ§Ö§â";
 		ESPtext.MultiColor = u8"§®§å§Ý§î§ä§Ú-§è§Ó§Ö§ä";
 		ESPtext.MultiColTip = u8"§²§Ñ§Ò§à§ä§Ñ§Ö§ä §ä§à§Ý§î§Ü§à §Ü§à§Ô§Õ§Ñ §à§Ò§Ó§à§Õ§Ü§Ñ §ß§Ö §Ú§Þ§Ö§Ö§ä §Ù§Ñ§Ü§â§å§Ô§Ý§Ö§ß§ß§í§Ö §Ü§â§Ñ§ñ.";
+		ESPtext.Outline = u8"Outline";
+		ESPtext.BoxType = u8"Box Type:";
+		ESPtext.HealthNum = u8"Health Number";
+		ESPtext.Ammo = u8"Ammo";
+
+		ESPtext.BoxType_Normal = u8"Normal";
+		ESPtext.BoxType_Edge = u8"Dynamic";
+		ESPtext.BoxType_Corner = u8"Corner";
+		ESPtext.LinePos_1 = u8"Top";
+		ESPtext.LinePos_2 = u8"Center";
+		ESPtext.LinePos_3 = u8"Bottom";
 
 		// Aimbot
+		AimbotText.Enable = u8"Enable Aimbot";
 		AimbotText.FeatureName = u8" §¡§Ú§Þ§Ò§à§ä";
 		AimbotText.HotKeyList = u8"§¤§à§â§ñ§é§Ñ§ñ §Ü§Ý§Ñ§Ó§Ú§ê§Ñ";
 		AimbotText.Toggle = u8"§²§Ö§Ø§Ú§Þ §á§Ö§â§Ö§Ü§Ý§ð§é§Ö§ß§Ú§ñ";
@@ -47,10 +60,8 @@ namespace Lang
 		AimbotText.BoneList = u8"§³§Ü§Ö§Ý§Ö§ä";
 		AimbotText.Tip = u8"§¥§Ý§ñ §â§Ñ§Ò§à§ä§í §¡§Ú§Þ§Ò§à§ä§Ñ §ß§å§Ø§ß§à §Ù§Ñ§Ü§â§í§ä§î §Þ§Ö§ß§ð (Insert)";
 
-		// Glow
-		GlowText.FeatureName = u8" §³§Ó§Ö§é§Ö§ß§Ú§Ö";
-
 		// Radar
+		RadarText.Toggle = u8"Show Radar";
 		RadarText.FeatureName = u8" §²§Ñ§Õ§Ñ§â";
 		RadarText.StyleList = u8"§³§ä§Ú§Ý§î";
 		RadarText.CustomCheck = u8"§¬§Ñ§ã§ä§à§Þ§ß§í§Û";
@@ -61,6 +72,7 @@ namespace Lang
 		RadarText.AlphaSlider = u8"§±§â§à§Ù§â§Ñ§é§ß§à§ã§ä§î §â§Ñ§Õ§Ñ§â§Ñ";
 
 		// Triggerbot
+		TriggerText.Enable = u8"Enable Triggerbot";
 		TriggerText.FeatureName = u8" §´§â§Ú§Ô§Ô§Ö§â§Ò§à§ä";
 		TriggerText.HotKeyList = u8"§¤§à§â§ñ§é§Ñ§ñ §Ü§Ý§Ñ§Ó§Ú§ê§Ñ";
 		TriggerText.Toggle = u8"§£§ã§Ö§Ô§Õ§Ñ §Ñ§Ü§ä§Ú§Ó§Ö§ß";
@@ -68,6 +80,7 @@ namespace Lang
 		TriggerText.FakeShotSlider = u8"§±§â§à§Õ§à§Ý§Ø§Ú§ä§Ö§Ý§î§ß§à§ã§ä§î §Ó§í§ã§ä§â§Ö§Ý§Ñ";
 
 		// Crosshairs
+		CrosshairsText.Toggle = u8"Show Crosshairs";
 		CrosshairsText.FeatureName = u8" §±§â§Ú§è§Ö§Ý§í";
 		CrosshairsText.PresetList = u8"§±§â§Ö§ã§Ö§ä§í";
 		CrosshairsText.ColorEditor = u8"§¸§Ó§Ö§ä§Ñ §á§â§Ú§è§Ö§Ý§Ñ";
@@ -100,6 +113,14 @@ namespace Lang
 		MiscText.CheatList = u8"§³§á§Ú§ã§à§Ü §Ñ§Ü§ä§Ú§Ó§ß§í§ç §é§Ú§ä§à§Ó";
 		MiscText.TeamCheck = u8"§²§Ö§Ø§Ú§Þ §ã§Ó§à§Ú§ç §ß§Ñ§á§Ñ§â§ß§Ú§Ü§à§Ó";
 		MiscText.AntiRecord = u8"§°§Ò§ç§à§Õ §Ù§Ñ§á§Ú§ã§Ú/§Õ§Ö§Þ§à§ß§ã§ä§â§Ñ§è§Ú§Ú";
+		MiscText.MoneyService = u8"Money Services";
+		MiscText.ShowCashSpent = u8"Show Cash Spent";
+		MiscText.EnemySensor = u8"Enemy Sensor";
+		MiscText.RadarHack = u8"Radar Hack";
+		MiscText.FastStop = u8"Fast Stop";
+		MiscText.VisCheckDisable = u8"Visible Check DISABLED";
+
+		MiscText.FakeDuck = u8"Fake Duck";
 
 		MiscText.LanguageList = u8"§Á§Ù§í§Ü";
 
@@ -112,6 +133,8 @@ namespace Lang
 		ConfigText.Create = u8"§³§à§Ù§Õ§Ñ§ä§î §Ü§à§ß§æ§Ú§Ô§å§â§Ñ§è§Ú§ð";
 		ConfigText.OpenFolder = u8"§°§ä§Ü§â§í§ä§î §á§Ñ§á§Ü§å §ã §Ü§à§ß§æ§Ú§Ô§å§â§Ñ§è§Ú§ñ§Þ§Ú";
 		ConfigText.SeparateLine = u8"§³§à§ç§â§Ñ§ß§Ú§ä§î §Ü§à§ß§æ§Ú§Ô§å§â§Ñ§è§Ú§ð";
+		ConfigText.AuthorName = u8"Author Name";
+		ConfigText.ConfigName = u8"Config Name";
 
 		// Readme Menu
 		ReadMeText.FeatureName = u8" §°§´§¬§²§°§«";

@@ -35,6 +35,17 @@ namespace Lang
 		ESPtext.PenisSize = u8"Rozmiar Penisa";
 		ESPtext.MultiColor = u8"Wielokolorowy";
 		ESPtext.MultiColTip = u8"Działa tylko wtedy, gdy pudełko nie ma zaokrąglonych rogów.";
+		ESPtext.Outline = u8"Outline";
+		ESPtext.BoxType = u8"Box Type:";
+		ESPtext.HealthNum = u8"Health Number";
+		ESPtext.Ammo = u8"Ammo";
+
+		ESPtext.BoxType_Normal = u8"Normal";
+		ESPtext.BoxType_Edge = u8"Dynamic";
+		ESPtext.BoxType_Corner = u8"Corner";
+		ESPtext.LinePos_1 = u8"Top";
+		ESPtext.LinePos_2 = u8"Center";
+		ESPtext.LinePos_3 = u8"Bottom";
 
 		// Aimbot
 		AimbotText.FeatureName = u8" Aimbot";
@@ -47,9 +58,6 @@ namespace Lang
 		AimbotText.SmoothSlider = u8"Gładkość";
 		AimbotText.BoneList = u8"Kości";
 		AimbotText.Tip = u8"Aimbot nie będzie działał, gdy menu jest otwarte";
-
-		// Glow
-		GlowText.FeatureName = u8" Podświetlenie";
 
 		// Radar
 		RadarText.FeatureName = u8" Radar";
@@ -113,6 +121,8 @@ namespace Lang
 		ConfigText.Create = u8"Utwórz Konfig";
 		ConfigText.OpenFolder = u8"Otwórz Folder";
 		ConfigText.SeparateLine = u8"Oddziel Linia";
+		ConfigText.AuthorName = u8"Author Name";
+		ConfigText.ConfigName = u8"Config Name";
 
 		// Readme Menu
 		ReadMeText.FeatureName = u8" PRZECZYTAJ";

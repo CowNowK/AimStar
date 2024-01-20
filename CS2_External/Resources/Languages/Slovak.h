@@ -35,6 +35,17 @@ namespace Lang
 		ESPtext.PenisSize = u8"Velkosť";
 		ESPtext.MultiColor = u8"Viacfarebné";
 		ESPtext.MultiColTip = u8"Funguje len vtedy, keď má rámček nezaoblené rohy.";
+		ESPtext.Outline = u8"Outline";
+		ESPtext.BoxType = u8"Box Type:";
+		ESPtext.HealthNum = u8"Health Number";
+		ESPtext.Ammo = u8"Ammo";
+
+		ESPtext.BoxType_Normal = u8"Normal";
+		ESPtext.BoxType_Edge = u8"Dynamic";
+		ESPtext.BoxType_Corner = u8"Corner";
+		ESPtext.LinePos_1 = u8"Top";
+		ESPtext.LinePos_2 = u8"Center";
+		ESPtext.LinePos_3 = u8"Bottom";
 
 		// Aimbot
 		AimbotText.FeatureName = u8" Aimbo";
@@ -47,9 +58,6 @@ namespace Lang
 		AimbotText.SmoothSlider = u8"Hladkosť";
 		AimbotText.BoneList = u8"Kosť";
 		AimbotText.Tip = u8"Aimbot nebude fungovať pokiaľ je menu otvorené";
-
-		// Glow
-		GlowText.FeatureName = u8" Žiarenie";
 
 		// Radar
 		RadarText.FeatureName = u8" Radar";
@@ -113,6 +121,8 @@ namespace Lang
 		ConfigText.Create = u8"Vytvoriť nastavenie";
 		ConfigText.OpenFolder = u8"Otvoriť priečinok";
 		ConfigText.SeparateLine = u8"Uložiť nastavenie";
+		ConfigText.AuthorName = u8"Author Name";
+		ConfigText.ConfigName = u8"Config Name";
 
 		// Readme Menu
 		ReadMeText.FeatureName = u8" Prečítaj ma";

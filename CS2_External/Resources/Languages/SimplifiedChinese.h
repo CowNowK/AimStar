@@ -5,15 +5,16 @@ namespace Lang
 	inline void SimplifiedChinese()
 	{
 		Global.Author = u8"CowNow";
-		Global.Date = u8"2023/11/29";
+		Global.Date = u8"2024/01/19";
 
 		Global.SwitchButton = u8"启用功能";
 		Global.FeatureSettings = u8"详细设置";
 
 		// ESP
+		ESPtext.Toggle = u8"总开关";
 		ESPtext.FeatureName = u8" ESP";
 		ESPtext.Box = u8"方框";
-		ESPtext.BoxRounding = u8"圆角化";
+		ESPtext.BoxRounding = u8"圆角化:";
 		ESPtext.FilledBox = u8"填充方框";
 		ESPtext.FilledAlpha = u8"填充透明度";
 		ESPtext.Skeleton = u8"骨骼";
@@ -24,7 +25,7 @@ namespace Lang
 		ESPtext.Distance = u8"距离";
 		ESPtext.PlayerName = u8"玩家名";
 		ESPtext.SnapLine = u8"射线";
-		ESPtext.LinePosList = u8"射线位置";
+		ESPtext.LinePosList = u8"射线位置:";
 		ESPtext.VisCheck = u8"可视检查";
 		ESPtext.Preview = u8"效果预览";
 		ESPtext.CollapseHead = u8"性感设置";
@@ -33,60 +34,72 @@ namespace Lang
 		ESPtext.PenisSize = u8"牛子粗细";
 		ESPtext.MultiColor = u8"渐变色";
 		ESPtext.MultiColTip = u8"仅在圆角度为0时显示.";
+		ESPtext.Outline = u8"轮廓线";
+		ESPtext.BoxType = u8"方框样式:";
+		ESPtext.HealthNum = u8"生命数字";
+		ESPtext.Ammo = u8"弹夹栏";
+
+		ESPtext.BoxType_Normal = u8"正常";
+		ESPtext.BoxType_Edge = u8"动态";
+		ESPtext.BoxType_Corner = u8"四角";
+		ESPtext.LinePos_1 = u8"顶部";
+		ESPtext.LinePos_2 = u8"中心";
+		ESPtext.LinePos_3 = u8"底部";
 
 		// Aimbot
+		AimbotText.Enable = u8"启用自瞄";
 		AimbotText.FeatureName = u8" 瞄准辅助";
-		AimbotText.HotKeyList = u8"热键";
-		AimbotText.Toggle = u8"热键切换模式";
+		AimbotText.HotKeyList = u8"热键        ";
+		AimbotText.Toggle = u8"开关模式";
 		AimbotText.DrawFov = u8"显示范围";
 		AimbotText.VisCheck = u8"仅可见目标";
 		AimbotText.JumpCheck = u8"仅在地面上";
-		AimbotText.FovSlider = u8"FOV";
-		AimbotText.SmoothSlider = u8"平滑度";
-		AimbotText.BoneList = u8"瞄准部位";
+		AimbotText.FovSlider = u8"FOV: ";
+		AimbotText.SmoothSlider = u8"平滑度: ";
+		AimbotText.BoneList = u8"瞄准部位  ";
 		AimbotText.Tip = u8"此功能在菜单打开时不会工作";
 
-		// Glow
-		GlowText.FeatureName = u8" 发光";
-
 		// Radar
+		RadarText.Toggle = u8"显示雷达";
 		RadarText.FeatureName = u8" 外部雷达";
 		RadarText.StyleList = u8"雷达样式";
 		RadarText.CustomCheck = u8"自定义设置";
 		RadarText.CrossLine = u8"十字线";
-		RadarText.SizeSlider = u8"标记大小";
-		RadarText.ProportionSlider = u8"缩放比例";
-		RadarText.RangeSlider = u8"范围";
-		RadarText.AlphaSlider = u8"窗口透明度";
+		RadarText.SizeSlider = u8"标记大小:";
+		RadarText.ProportionSlider = u8"缩放比例:";
+		RadarText.RangeSlider = u8"范围:";
+		RadarText.AlphaSlider = u8"窗口透明度:";
 
 		// Triggerbot
+		TriggerText.Enable = u8"启用扳机";
 		TriggerText.FeatureName = u8" 自动扳机";
-		TriggerText.HotKeyList = u8"热键";
+		TriggerText.HotKeyList = u8"热键    ";
 		TriggerText.Toggle = u8"保持激活";
-		TriggerText.DelaySlider = u8"延迟射击";
-		TriggerText.FakeShotSlider = u8"射击持续时间";
+		TriggerText.DelaySlider = u8"延迟射击:";
+		TriggerText.FakeShotSlider = u8"射击持续时间:";
 
 		// Crosshairs
+		CrosshairsText.Toggle = u8"显示准星";
 		CrosshairsText.FeatureName = u8" 外部准星";
 		CrosshairsText.PresetList = u8"预设";
 		CrosshairsText.ColorEditor = u8"准星颜色";
 		CrosshairsText.Dot = u8"中心点";
-		CrosshairsText.DotSizeSlider = u8"中心点大小";
+		CrosshairsText.DotSizeSlider = u8"中心点大小:";
 		CrosshairsText.Outline = u8"轮廓线";
 		CrosshairsText.Crossline = u8"十字线";
-		CrosshairsText.hLengthSlider = u8"水平长度";
-		CrosshairsText.vLengthSilder = u8"垂直长度";
-		CrosshairsText.GapSlider = u8"间隙";
-		CrosshairsText.ThicknessSlider = u8"粗细";
+		CrosshairsText.hLengthSlider = u8"水平长度:";
+		CrosshairsText.vLengthSilder = u8"垂直长度:";
+		CrosshairsText.GapSlider = u8"间隙:";
+		CrosshairsText.ThicknessSlider = u8"粗细:";
 		CrosshairsText.tStyle = u8"T形准星";
 		CrosshairsText.Circle = u8"圆环";
-		CrosshairsText.RadiusSlider = u8"圆环半径";
+		CrosshairsText.RadiusSlider = u8"圆环半径:";
 		CrosshairsText.TargetCheck = u8"瞄准变色";
 		CrosshairsText.TeamCheck = u8"队伍检查";
 
 		// Misc
 		MiscText.FeatureName = u8" 杂项功能";
-		MiscText.ThemeList = u8"主题配色";
+		MiscText.ThemeList = u8"主题配色  ";
 		MiscText.StyleList = u8"窗口样式";
 		MiscText.HeadshotLine = u8"爆头线";
 		MiscText.SpecCheck = u8"旁观者保持运行";
@@ -101,9 +114,20 @@ namespace Lang
 		MiscText.TeamCheck = u8"队伍检查";
 		MiscText.AntiRecord = u8"直播模式";
 		MiscText.LanguageList = u8"语言";
+		MiscText.MoneyService = u8"余额助手";
+		MiscText.ShowCashSpent = u8"显示消费";
+		MiscText.EnemySensor = u8"敌人发光";
+		MiscText.RadarHack = u8"雷达透视";
+		MiscText.FastStop = u8"快速急停";
+		MiscText.VisCheckDisable = u8"此功能会干扰可视检查";
+
+		MiscText.FakeDuck = u8"假蹲";
+
+		MiscText.LanguageList = u8"语言选择  ";
 
 		// Config Menu
 		ConfigText.FeatureName = u8" 参数配置";
+		ConfigText.MyConfigs = u8"我的配置";
 		ConfigText.Load = u8"加载选中";
 		ConfigText.Save = u8"保存选中";
 		ConfigText.Delete = u8"删除选中";
@@ -111,12 +135,14 @@ namespace Lang
 		ConfigText.Create = u8"创建配置";
 		ConfigText.OpenFolder = u8"打开文件夹";
 		ConfigText.SeparateLine = u8"新建配置";
+		ConfigText.AuthorName = u8"作者";
+		ConfigText.ConfigName = u8"配置名";
 
 		// Readme Menu
 		ReadMeText.FeatureName = u8" 其他信息";
 		ReadMeText.LastUpdate = u8"最后更新: ";
-		ReadMeText.SourceButton = u8" 开源代码";
-		ReadMeText.DiscordButton = u8" 加入Discord";
+		ReadMeText.SourceButton = u8"开源代码";
+		ReadMeText.DiscordButton = u8"加入Discord";
 		ReadMeText.OffsetsTitle = u8"相关基址: ";
 	}
 }

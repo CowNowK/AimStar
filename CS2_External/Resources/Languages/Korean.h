@@ -33,6 +33,17 @@ namespace Lang
 		ESPtext.PenisSize = u8"크기";
 		ESPtext.MultiColor = u8"멀티 컬러";
 		ESPtext.MultiColTip = u8"상자의 모서리가 둥글지 않은 경우에만 작동합니다.";
+		ESPtext.Outline = u8"Outline";
+		ESPtext.BoxType = u8"Box Type:";
+		ESPtext.HealthNum = u8"Health Number";
+		ESPtext.Ammo = u8"Ammo";
+
+		ESPtext.BoxType_Normal = u8"Normal";
+		ESPtext.BoxType_Edge = u8"Dynamic";
+		ESPtext.BoxType_Corner = u8"Corner";
+		ESPtext.LinePos_1 = u8"Top";
+		ESPtext.LinePos_2 = u8"Center";
+		ESPtext.LinePos_3 = u8"Bottom";
 
 		// Aimbot
 		AimbotText.FeatureName = u8"에임봇";
@@ -44,9 +55,6 @@ namespace Lang
 		AimbotText.SmoothSlider = u8"매끄러운";
 		AimbotText.BoneList = u8"뼈";
 		AimbotText.Tip = u8"메뉴가 열려 있는 동안에는 Aimbot이 작동하지 않습니다.";
-
-		// Glow
-		GlowText.FeatureName = u8" 불타는 듯한 빛깔";
 
 		// Radar
 		RadarText.FeatureName = u8" 레이더";
@@ -110,6 +118,8 @@ namespace Lang
 		ConfigText.Create = u8"구성 만들기";
 		ConfigText.OpenFolder = u8"폴더 열기 ";
 		ConfigText.SeparateLine = u8"구성 저장";
+		ConfigText.AuthorName = u8"Author Name";
+		ConfigText.ConfigName = u8"Config Name";
 
 		// Readme Menu
 		ReadMeText.FeatureName = u8" 주의상황 ";

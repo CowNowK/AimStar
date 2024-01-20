@@ -33,6 +33,17 @@ namespace Lang
 		ESPtext.PenisSize = u8"Taille";
 		ESPtext.MultiColor = u8"Multi-couleurs";
 		ESPtext.MultiColTip = u8"Ne fonctionne que si la boîte a des coins non arrondis.";
+		ESPtext.Outline = u8"Outline";
+		ESPtext.BoxType = u8"Box Type:";
+		ESPtext.HealthNum = u8"Health Number";
+		ESPtext.Ammo = u8"Ammo";
+
+		ESPtext.BoxType_Normal = u8"Normal";
+		ESPtext.BoxType_Edge = u8"Dynamic";
+		ESPtext.BoxType_Corner = u8"Corner";
+		ESPtext.LinePos_1 = u8"Top";
+		ESPtext.LinePos_2 = u8"Center";
+		ESPtext.LinePos_3 = u8"Bottom";
 
 		// Aimbot
 		AimbotText.FeatureName = u8" Visée automatique";
@@ -45,9 +56,6 @@ namespace Lang
 		AimbotText.SmoothSlider = u8"Vitesse";
 		AimbotText.BoneList = u8"Os";
 		AimbotText.Tip = u8"La visée automatique ne fonctionne pas avec la fenetre ouverte";
-
-		// Glow
-		GlowText.FeatureName = u8" Brillance";
 
 		// Radar
 		RadarText.FeatureName = u8" Radar";
@@ -111,6 +119,8 @@ namespace Lang
 		ConfigText.Create = u8"Crée une configuration";
 		ConfigText.OpenFolder = u8"Ouvrir fichier";
 		ConfigText.SeparateLine = u8"Sauvegarder la configuration";
+		ConfigText.AuthorName = u8"Author Name";
+		ConfigText.ConfigName = u8"Config Name";
 
 		// Readme Menu
 		ReadMeText.FeatureName = u8" Lis moi";

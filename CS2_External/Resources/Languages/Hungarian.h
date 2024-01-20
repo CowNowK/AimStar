@@ -31,6 +31,18 @@ namespace Lang
 		ESPtext.Penis = u8"Pénisz megjelenítése";
 		ESPtext.PenisLength = u8"Pénisz hossza";
 		ESPtext.PenisSize = u8"Pénisz mérete";
+		ESPtext.MultiColor = u8"Multi-Color";
+		ESPtext.Outline = u8"Outline";
+		ESPtext.BoxType = u8"Box Type:";
+		ESPtext.HealthNum = u8"Health Number";
+		ESPtext.Ammo = u8"Ammo";
+
+		ESPtext.BoxType_Normal = u8"Normal";
+		ESPtext.BoxType_Edge = u8"Dynamic";
+		ESPtext.BoxType_Corner = u8"Corner";
+		ESPtext.LinePos_1 = u8"Top";
+		ESPtext.LinePos_2 = u8"Center";
+		ESPtext.LinePos_3 = u8"Bottom";
 
 		// Aimbot
 		AimbotText.FeatureName = u8" Célzozzon robot";
@@ -43,9 +55,6 @@ namespace Lang
 		AimbotText.SmoothSlider = u8"Kurva anyád";
 		AimbotText.BoneList = u8"Buta zsidó";
 		AimbotText.Tip = u8"A Célozzon Robot nem fog működni, amíg a menü meg van nyitva, te fasz";
-
-		// Glow
-		GlowText.FeatureName = u8" Központi Hírszerző Ügynökség Mód";
 
 		// Radar
 		RadarText.FeatureName = u8" Madár";
@@ -109,6 +118,8 @@ namespace Lang
 		ConfigText.Create = u8"Te meg buzi";
 		ConfigText.OpenFolder = u8"Nyitott mappa";
 		ConfigText.SeparateLine = u8"Konfiguráció mentése";
+		ConfigText.AuthorName = u8"Author Name";
+		ConfigText.ConfigName = u8"Config Name";
 
 		// Readme Menu
 		ReadMeText.FeatureName = u8" Olvassa el te geci";
