@@ -197,6 +197,7 @@
     <ClInclude Include="Resources\Languages\Ruassian.h" />
     <ClInclude Include="Resources\Languages\SimplifiedChinese.h" />
     <ClInclude Include="Resources\Languages\Slovak.h" />
+    <ClInclude Include="Resources\Languages\Spanish.h" />
     <ClInclude Include="Resources\Languages\Turkish.h" />
     <ClInclude Include="Resources\WeaponIcon.h" />
     <ClInclude Include="TriggerBot.h" />
