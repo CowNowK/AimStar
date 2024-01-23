@@ -194,6 +194,7 @@
     <ClInclude Include="Resources\Languages\Korean.h" />
     <ClInclude Include="Resources\Languages\Polish.h" />
     <ClInclude Include="Resources\Languages\Portuguese.h" />
+    <ClInclude Include="Resources\Languages\Romanian.h" />
     <ClInclude Include="Resources\Languages\Ruassian.h" />
     <ClInclude Include="Resources\Languages\SimplifiedChinese.h" />
     <ClInclude Include="Resources\Languages\Slovak.h" />
