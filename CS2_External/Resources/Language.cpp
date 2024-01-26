@@ -14,6 +14,7 @@
 #include "Languages/Turkish.h"
 #include "Languages/Czech.h"
 #include "Languages/Spanish.h"
+#include "Languages/Romanian.h"
 
 namespace Lang
 {
@@ -65,6 +66,9 @@ namespace Lang
 			break;
 		case 13:
 			Spanish();
+			break;
+		case 14:
+			Romanian();
 			break;
 		default:
 			English();

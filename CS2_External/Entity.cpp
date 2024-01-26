@@ -125,13 +125,13 @@ bool PlayerPawn::GetSpotted()
 bool PlayerPawn::GetWeaponName()
 {
 	DWORD64 WeaponNameAddress = 0;
-	char Buffer[40]{};
+	char Buffer[64]{};
 	
 	WeaponNameAddress = ProcessMgr.TraceAddress(this->Address + Offset::Pawn.pClippingWeapon, { 0x10,0x20 ,0x0 });
 	if (WeaponNameAddress == 0)
 		return false;
 
-	if (!ProcessMgr.ReadMemory(WeaponNameAddress, Buffer, 40))
+	if (!ProcessMgr.ReadMemory(WeaponNameAddress, Buffer, 64))
 		return false;
 
 	WeaponName = std::string(Buffer);

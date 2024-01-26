@@ -190,6 +190,7 @@
     <ClInclude Include="Resources\Languages\Hungarian.h" />
     <ClInclude Include="Resources\Languages\Czech.h" />
     <ClInclude Include="Resources\Languages\Spanish.h" />
+    <ClInclude Include="Resources\Languages\Romanian.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">

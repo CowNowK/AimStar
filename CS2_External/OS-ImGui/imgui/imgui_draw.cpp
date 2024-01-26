@@ -3977,34 +3977,40 @@ const ImWchar*  ImFontAtlas::GetGlyphRangesChineseFull()
 
 const ImWchar* ImFontAtlas::GetGlyphRangesAll()
 {
-    static const ImWchar ranges[] =
-    {
-        0x0020, 0x00FF, // Basic Latin + Latin Supplement
-        0x0100, 0x017F, // Slovak and Polish
-        0x01A0, 0x01A1, // Vietnamese
-        0x01AF, 0x01B0, // Vietnamese
-        0x0370, 0x03FF, // Greek and Coptic
-        0x0400, 0x052F, // Cyrillic + Cyrillic Supplement
-        0x0E00, 0x0E7F, // Thai
-        0x0F00, 0x0FFF, // Tibetan
-        0x1100, 0x11FF, // Korean (Hangul Jamo)
-        0x1EA0, 0x1EF9, // Latin Extended
-        0x2000, 0x206F, // General Punctuation
-        0x2010, 0x205E, // Punctuations
-        0x2DE0, 0x2DFF, // Cyrillic Extended-A
-        0x3000, 0x30FF, // CJK Symbols and Punctuations, Hiragana, Katakana
-        0x3130, 0x318F, // Korean alphabets
-        0x31F0, 0x31FF, // Katakana Phonetic Extensions
-        0xAC00, 0xD7AF, // Korean characters
-        0xA640, 0xA69F, // Cyrillic Extended-B
-        0xA960, 0xA97F, // Koean characters Extended-A
-        0xD7B0, 0xD7FF, // Koean characters Extended-B
-        0xFF00, 0xFFEF, // Half-width characters
-        0xFFFD, 0xFFFD, // Invalid
-        0x4E00, 0x9FAF, // Chinese
-        0,
-    };
-    return &ranges[0];
+    static ImVector<ImWchar> ranges;
+    if (ranges.empty()) {
+        ImFontGlyphRangesBuilder builder;
+        static const ImWchar base_ranges[] =
+        {
+            0x0020, 0x00FF, // Basic Latin + Latin Supplement
+            0x0100, 0x017F, // Slovak and Polish
+            0x01A0, 0x01A1, // Vietnamese
+            0x01AF, 0x01B0, // Vietnamese
+            0x0300, 0x03FF, // Combining Diacritical Marks + Greek/Coptic
+            0x0400, 0x052F, // Cyrillic + Cyrillic Supplement
+            0x0E00, 0x0E7F, // Thai
+            0x0F00, 0x0FFF, // Tibetan
+            0x1100, 0x11FF, // Korean (Hangul Jamo)
+            0x1EA0, 0x1EF9, // Latin Extended
+            0x2000, 0x206F, // General Punctuation
+            0x2010, 0x205E, // Punctuations
+            0x2DE0, 0x2DFF, // Cyrillic Extended-A
+            0x3000, 0x30FF, // CJK Symbols and Punctuations, Hiragana, Katakana
+            0x3130, 0x318F, // Korean alphabets
+            0x31F0, 0x31FF, // Katakana Phonetic Extensions
+            0xAC00, 0xD7AF, // Korean characters
+            0xA640, 0xA69F, // Cyrillic Extended-B
+            0xA960, 0xA97F, // Koean characters Extended-A
+            0xD7B0, 0xD7FF, // Koean characters Extended-B
+            0xFF00, 0xFFEF, // Half-width characters
+            0xFFFD, 0xFFFD, // Invalid
+            0x4E00, 0x9FAF, // Chinese
+            0,
+        };
+        builder.AddRanges(base_ranges);
+        builder.BuildRanges(&ranges);
+    }
+    return ranges.Data;
 }
 
 static void UnpackAccumulativeOffsetsIntoRanges(int base_codepoint, const short* accumulative_offsets, int accumulative_offsets_count, ImWchar* out_ranges)
