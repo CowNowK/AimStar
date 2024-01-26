@@ -204,12 +204,25 @@
     <ClInclude Include="TriggerBot.h" />
     <ClInclude Include="Utils\ConfigMenu.hpp" />
     <ClInclude Include="Utils\ConfigSaver.hpp" />
+    <ClInclude Include="Utils\curl\curl.h" />
+    <ClInclude Include="Utils\curl\curlver.h" />
+    <ClInclude Include="Utils\curl\easy.h" />
+    <ClInclude Include="Utils\curl\header.h" />
+    <ClInclude Include="Utils\curl\mprintf.h" />
+    <ClInclude Include="Utils\curl\multi.h" />
+    <ClInclude Include="Utils\curl\options.h" />
+    <ClInclude Include="Utils\curl\stdcheaders.h" />
+    <ClInclude Include="Utils\curl\system.h" />
+    <ClInclude Include="Utils\curl\typecheck-gcc.h" />
+    <ClInclude Include="Utils\curl\urlapi.h" />
+    <ClInclude Include="Utils\curl\websockets.h" />
     <ClInclude Include="Utils\Format.h" />
     <ClInclude Include="Utils\Globals.hpp" />
     <ClInclude Include="Utils\GlobalVars.h" />
     <ClInclude Include="Utils\ProcessManager.hpp" />
     <ClInclude Include="Utils\Random.h" />
     <ClInclude Include="Utils\Style.h" />
+    <ClInclude Include="Utils\Updater.h" />
     <ClInclude Include="Utils\yaml-cpp\anchor.h" />
     <ClInclude Include="Utils\yaml-cpp\binary.h" />
     <ClInclude Include="Utils\yaml-cpp\contrib\anchordict.h" />
@@ -292,6 +305,7 @@
     <Font Include="Font\stratum2.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="Utils\curl\lib\libcurl_imp.lib" />
     <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
