@@ -1,4 +1,4 @@
-#include "Offsets.h"
+ï»¿#include "Offsets.h"
 #include "Cheats.h"
 #include <iostream>
 #include <stdio.h>
@@ -8,48 +8,43 @@
 #include <KnownFolders.h>
 #include <ShlObj.h>
 
+/*
+Contributors:
+	Shinyaluvs,
+	Nx0Ri,
+	Skarbor,
+	PedroGoncalves,
+	KeysIsCool,
+	Kenny,
+	Cr1ppl3,
+	Tairitsu,
+	sh1pi,
+	toepas,
+	djsacred,
+	tokinaa,
+	faster_bbc,
+	vsantos1,
+	5mmod,
+	gScream,
+	Hazetick,
+	styx,
+	user1232,
+	TaKaStuKi.sen
+*/
+
 namespace fs = std::filesystem;
 
 int main()
 {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
-	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);	//Set the text color to green  
+	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
 	std::cout << R"(                                                                   
-   ,---,                        ____   .--.--.      ___                       
-  '  .' \       ,--,          ,'  , `./  /    '.  ,--.'|_                     
- /  ;    '.   ,--.'|       ,-+-,.' _ |  :  /`. /  |  | :,'            __  ,-. 
-:  :       \  |  |,     ,-+-. ;   , |;  |  |--`   :  : ' :          ,' ,'/ /| 
-:  |   /\   \ `--'_    ,--.'|'   |  ||  :  ;_   .;__,'  /   ,--.--. '  | |' | 
-|  :  ' ;.   :,' ,'|  |   |  ,', |  |,\  \    `.|  |   |   /       \|  |   ,' 
-|  |  ;/  \   '  | |  |   | /  | |--'  `----.   :__,'| :  .--.  .-. '  :  /   
-'  :  | \  \ ,|  | :  |   : |  | ,     __ \  \  | '  : |__ \__\/: . |  | '    
-|  |  '  '--' '  : |__|   : |  |/     /  /`--'  / |  | '.'|," .--.; ;  : |    
-|  :  :       |  | '.'|   | |`-'     '--'.     /  ;  :    /  /  ,.  |  , ;    
-|  | ,'       ;  :    |   ;/           `--'---'   |  ,   ;  :   .'   ---'     
-`--''         |  ,   /'---'                        ---`-'|  ,     .-./        
-               ---`-'                                     `--`---'            
+    ___    _          _____ __            
+   /   |  (_)___ ___ / ___// /_____ ______
+  / /| | / / __ `__ \\__ \/ __/ __ `/ ___/
+ / ___ |/ / / / / / /__/ / /_/ /_/ / /    
+/_/  |_/_/_/ /_/ /_/____/\__/\__,_/_/    
 	)" << std::endl; 
-	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED); //Restore default text color  
-
-
-	std::printf(
-		"AimStar External for CS2\n"
-		"Author: CowNow\n"
-		"Source Code: https://github.com/CowNowK/AimStar\n"
-		"\n"
-		"- Press [INS] to show or hide Menu.\n"
-		"\n");
-
-	std::printf(
-		"#Disclamers:\n"
-		"- Use at your own risk\n"
-		"- It is highly not recommended to use AimStar on your main account"
-		"\n");
-	
-	std::printf(
-		"#Contributors: \n"
-		"Shinyaluvs, Nx0Ri, Skarbor, PedroGoncalves, KeysIsCool, Kenny, Cr1ppl3, Tairitsu, sh1pi, toepas, djsacred, tokinaa, faster_bbc, vsantos1, 5mmod, gScream, Hazetick, styx, user1232, TaKaStuKi.sen\n"
-		"\n");
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
 	auto ProcessStatus = ProcessMgr.Attach("cs2.exe");
@@ -94,20 +89,17 @@ int main()
 		goto END;
 	}
 
-	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);
 	std::cout << "[Game] Process ID: " << ProcessMgr.ProcessID << std::endl;
 	std::cout << "[Game] Client Address: " << gGame.GetClientDLLAddress() << std::endl;
 
 	if (fs::exists(MenuConfig::path))
 	{
-		SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 		std::cout << "[Info] Config folder connected: " << MenuConfig::path << std::endl;
 	}
 	else
 	{
 		if (fs::create_directory(MenuConfig::path))
 		{
-			SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 			std::cout << "[Info] Config folder created: " << MenuConfig::path << std::endl;
 		}
 		else
@@ -131,7 +123,9 @@ int main()
 	}
 
 	std::cout << std::endl;
+	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 	std::cout << "Cheat running successfully!" << std::endl;
+	std::cout << "Press [INS] to show or hide Menu." << std::endl;
 	std::cout << "Have fun..." << std::endl << std::endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED);
 	std::cout << "=======[ Offset List ]=======" << std::endl;
@@ -155,7 +149,7 @@ int main()
 		try
 		{
 			// Perfect World version
-			Gui.AttachAnotherWindow("·´¿Ö¾«Ó¢£ºÈ«Çò¹¥ÊÆ", "SDL_app", Cheats::Run);
+			Gui.AttachAnotherWindow("åæç²¾è‹±ï¼šå…¨çƒæ”»åŠ¿", "SDL_app", Cheats::Run);
 		}
 		catch (OSImGui::OSException& e)
 		{

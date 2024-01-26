@@ -119,6 +119,7 @@ namespace Lang
 		MiscText.RadarHack = u8"Radar Hack";
 		MiscText.FastStop = u8"Fast Stop";
 		MiscText.VisCheckDisable = u8"Visible Check DISABLED";
+		MiscText.NoSmoke = u8"NoSmoke";
 
 		MiscText.FakeDuck = u8"Fake Duck";
 

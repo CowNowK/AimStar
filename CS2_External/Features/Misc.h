@@ -58,16 +58,21 @@ namespace Misc
 		}
 	}
 
+	static inline uintptr_t GetSmokeEntity(int i, uintptr_t EntityListEntry) {
+		uintptr_t Entity = EntityListEntry + 0x78 * (i + 1);
+		return Entity;
+	}
+
 	void CheatList() noexcept;
 	void Watermark() noexcept;
 	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void NoFlash(const CEntity& aLocalPlayer) noexcept;
 	void FastStop() noexcept;
+	void NoSmoke(CGame Game) noexcept;
 	void RadarHack(const CEntity& EntityList) noexcept;
 	void FovChanger(const CEntity& aLocalPlayer) noexcept;
 	void MoneyService(const CEntity& EntityList) noexcept;
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
-	void NoSmoke(const DWORD64 EntityAddress) noexcept;
 	void SmokeColor(const DWORD64 EntityAddress) noexcept;
 
 	void Jitter(const CEntity& EntityList) noexcept;

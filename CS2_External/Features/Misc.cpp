@@ -134,6 +134,25 @@ namespace Misc
 		Misc::StopKeyEvent('S', &sKeyPressed, 'W', 50.f);
 	}
 
+	void NoSmoke(CGame Game) noexcept
+	{
+		if (!MiscCFG::NoSmoke)
+			return;
+
+		for (int i_smoke = 64; i_smoke < 1024; i_smoke++) {
+			uintptr_t SmokeEntity = GetSmokeEntity(i_smoke, Game.GetEntityListEntry());
+
+			uintptr_t ent_base;
+			bool begin = false;
+			int uf = 0;
+
+			ProcessMgr.ReadMemory<uintptr_t>(SmokeEntity, ent_base);
+			ProcessMgr.WriteMemory<bool>(ent_base + Offset::SmokeGrenadeProjectile.bDidSmokeEffect, begin);
+			ProcessMgr.WriteMemory<bool>(ent_base + Offset::SmokeGrenadeProjectile.bSmokeEffectSpawned, begin);
+			ProcessMgr.WriteMemory<int>(ent_base + Offset::SmokeGrenadeProjectile.nSmokeEffectTickBegin, uf);
+		}
+	}
+
 	void RadarHack(const CEntity& EntityList) noexcept
 	{
 		if (!MiscCFG::RadarHack)
@@ -190,6 +209,7 @@ namespace Misc
 	{
 
 		DWORD64 MovementServices;
+		float Tick;
 		bool Ducking = 1, unDuck = 0;
 		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.MovementServices, MovementServices);
 		if (!MiscCFG::Jitter)
@@ -207,15 +227,6 @@ namespace Misc
 		float Gravity;
 		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Entity.GravityScale, Gravity);
 		std::cout << Gravity << std::endl;
-	}
-
-	void NoSmoke(const DWORD64 EntityAddress) noexcept
-	{
-		uintptr_t entbase;
-		bool SmokeStatus = false;
-		int SmokeTime;
-		ProcessMgr.ReadMemory(EntityAddress, entbase);
-		ProcessMgr.WriteMemory<bool>(entbase + Offset::SmokeGrenadeProjectile.bDidSmokeEffect, SmokeStatus);
 	}
 
 	void SmokeColor(const DWORD64 EntityAddress) noexcept
