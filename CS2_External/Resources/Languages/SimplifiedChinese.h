@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "..\Language.h"
 namespace Lang
 {
@@ -7,143 +7,143 @@ namespace Lang
 		Global.Author = u8"CowNow";
 		Global.Date = u8"2024/01/26";
 
-		Global.SwitchButton = u8"ÆôÓÃ¹¦ÄÜ";
-		Global.FeatureSettings = u8"ÏêÏ¸ÉèÖÃ";
+		Global.SwitchButton = u8"å¯ç”¨åŠŸèƒ½";
+		Global.FeatureSettings = u8"è¯¦ç»†è®¾ç½®";
 
 		// ESP
-		ESPtext.Toggle = u8"×Ü¿ª¹Ø";
+		ESPtext.Toggle = u8"æ€»å¼€å…³";
 		ESPtext.FeatureName = u8" ESP";
-		ESPtext.Box = u8"·½¿ò";
-		ESPtext.BoxRounding = u8"Ô²½Ç»¯:";
-		ESPtext.FilledBox = u8"Ìî³ä·½¿ò";
-		ESPtext.FilledAlpha = u8"Ìî³äÍ¸Ã÷¶È";
-		ESPtext.Skeleton = u8"¹Ç÷À";
-		ESPtext.HeadBox = u8"Í·²¿·½¿ò";
-		ESPtext.EyeRay = u8"ÊÓÏß³¯Ïò";
-		ESPtext.HealthBar = u8"ÉúÃüÀ¸";
-		ESPtext.Weapon = u8"ÎäÆ÷";
-		ESPtext.Distance = u8"¾àÀë";
-		ESPtext.PlayerName = u8"Íæ¼ÒÃû";
-		ESPtext.SnapLine = u8"ÉäÏß";
-		ESPtext.LinePosList = u8"ÉäÏßÎ»ÖÃ:";
-		ESPtext.VisCheck = u8"¿ÉÊÓ¼ì²é";
-		ESPtext.Preview = u8"Ğ§¹ûÔ¤ÀÀ";
-		ESPtext.CollapseHead = u8"ĞÔ¸ĞÉèÖÃ";
-		ESPtext.Penis = u8"ÏÔÊ¾Å£×Ó";
-		ESPtext.PenisLength = u8"Å£×Ó³¤¶È";
-		ESPtext.PenisSize = u8"Å£×Ó´ÖÏ¸";
-		ESPtext.MultiColor = u8"½¥±äÉ«";
-		ESPtext.MultiColTip = u8"½öÔÚÔ²½Ç¶ÈÎª0Ê±ÏÔÊ¾.";
-		ESPtext.Outline = u8"ÂÖÀªÏß";
-		ESPtext.BoxType = u8"·½¿òÑùÊ½:";
-		ESPtext.HealthNum = u8"ÉúÃüÊı×Ö";
-		ESPtext.Ammo = u8"µ¯¼ĞÀ¸";
+		ESPtext.Box = u8"æ–¹æ¡†";
+		ESPtext.BoxRounding = u8"åœ†è§’åŒ–:";
+		ESPtext.FilledBox = u8"å¡«å……æ–¹æ¡†";
+		ESPtext.FilledAlpha = u8"å¡«å……é€æ˜åº¦";
+		ESPtext.Skeleton = u8"éª¨éª¼";
+		ESPtext.HeadBox = u8"å¤´éƒ¨æ–¹æ¡†";
+		ESPtext.EyeRay = u8"è§†çº¿æœå‘";
+		ESPtext.HealthBar = u8"ç”Ÿå‘½æ ";
+		ESPtext.Weapon = u8"æ­¦å™¨";
+		ESPtext.Distance = u8"è·ç¦»";
+		ESPtext.PlayerName = u8"ç©å®¶å";
+		ESPtext.SnapLine = u8"å°„çº¿";
+		ESPtext.LinePosList = u8"å°„çº¿ä½ç½®:";
+		ESPtext.VisCheck = u8"å¯è§†æ£€æŸ¥";
+		ESPtext.Preview = u8"æ•ˆæœé¢„è§ˆ";
+		ESPtext.CollapseHead = u8"æ€§æ„Ÿè®¾ç½®";
+		ESPtext.Penis = u8"æ˜¾ç¤ºç‰›å­";
+		ESPtext.PenisLength = u8"ç‰›å­é•¿åº¦";
+		ESPtext.PenisSize = u8"ç‰›å­ç²—ç»†";
+		ESPtext.MultiColor = u8"æ¸å˜è‰²";
+		ESPtext.MultiColTip = u8"ä»…åœ¨åœ†è§’åº¦ä¸º0æ—¶æ˜¾ç¤º.";
+		ESPtext.Outline = u8"è½®å»“çº¿";
+		ESPtext.BoxType = u8"æ–¹æ¡†æ ·å¼:";
+		ESPtext.HealthNum = u8"ç”Ÿå‘½æ•°å­—";
+		ESPtext.Ammo = u8"å¼¹å¤¹æ ";
 
-		ESPtext.BoxType_Normal = u8"Õı³£";
-		ESPtext.BoxType_Edge = u8"¶¯Ì¬";
-		ESPtext.BoxType_Corner = u8"ËÄ½Ç";
-		ESPtext.LinePos_1 = u8"¶¥²¿";
-		ESPtext.LinePos_2 = u8"ÖĞĞÄ";
-		ESPtext.LinePos_3 = u8"µ×²¿";
+		ESPtext.BoxType_Normal = u8"æ­£å¸¸";
+		ESPtext.BoxType_Edge = u8"åŠ¨æ€";
+		ESPtext.BoxType_Corner = u8"å››è§’";
+		ESPtext.LinePos_1 = u8"é¡¶éƒ¨";
+		ESPtext.LinePos_2 = u8"ä¸­å¿ƒ";
+		ESPtext.LinePos_3 = u8"åº•éƒ¨";
 
 		// Aimbot
-		AimbotText.Enable = u8"ÆôÓÃ×ÔÃé";
-		AimbotText.FeatureName = u8" Ãé×¼¸¨Öú";
-		AimbotText.HotKeyList = u8"ÈÈ¼ü        ";
-		AimbotText.Toggle = u8"¿ª¹ØÄ£Ê½";
-		AimbotText.DrawFov = u8"ÏÔÊ¾·¶Î§";
-		AimbotText.VisCheck = u8"½ö¿É¼ûÄ¿±ê";
-		AimbotText.JumpCheck = u8"½öÔÚµØÃæÉÏ";
+		AimbotText.Enable = u8"å¯ç”¨è‡ªç„";
+		AimbotText.FeatureName = u8" ç„å‡†è¾…åŠ©";
+		AimbotText.HotKeyList = u8"çƒ­é”®        ";
+		AimbotText.Toggle = u8"å¼€å…³æ¨¡å¼";
+		AimbotText.DrawFov = u8"æ˜¾ç¤ºèŒƒå›´";
+		AimbotText.VisCheck = u8"ä»…å¯è§ç›®æ ‡";
+		AimbotText.JumpCheck = u8"ä»…åœ¨åœ°é¢ä¸Š";
 		AimbotText.FovSlider = u8"FOV: ";
-		AimbotText.SmoothSlider = u8"Æ½»¬¶È: ";
-		AimbotText.BoneList = u8"Ãé×¼²¿Î»  ";
-		AimbotText.Tip = u8"´Ë¹¦ÄÜÔÚ²Ëµ¥´ò¿ªÊ±²»»á¹¤×÷";
+		AimbotText.SmoothSlider = u8"å¹³æ»‘åº¦: ";
+		AimbotText.BoneList = u8"ç„å‡†éƒ¨ä½  ";
+		AimbotText.Tip = u8"æ­¤åŠŸèƒ½åœ¨èœå•æ‰“å¼€æ—¶ä¸ä¼šå·¥ä½œ";
 
 		// Radar
-		RadarText.Toggle = u8"ÏÔÊ¾À×´ï";
-		RadarText.FeatureName = u8" Íâ²¿À×´ï";
-		RadarText.StyleList = u8"À×´ïÑùÊ½";
-		RadarText.CustomCheck = u8"×Ô¶¨ÒåÉèÖÃ";
-		RadarText.CrossLine = u8"Ê®×ÖÏß";
-		RadarText.SizeSlider = u8"±ê¼Ç´óĞ¡:";
-		RadarText.ProportionSlider = u8"Ëõ·Å±ÈÀı:";
-		RadarText.RangeSlider = u8"·¶Î§:";
-		RadarText.AlphaSlider = u8"´°¿ÚÍ¸Ã÷¶È:";
+		RadarText.Toggle = u8"æ˜¾ç¤ºé›·è¾¾";
+		RadarText.FeatureName = u8" å¤–éƒ¨é›·è¾¾";
+		RadarText.StyleList = u8"é›·è¾¾æ ·å¼";
+		RadarText.CustomCheck = u8"è‡ªå®šä¹‰è®¾ç½®";
+		RadarText.CrossLine = u8"åå­—çº¿";
+		RadarText.SizeSlider = u8"æ ‡è®°å¤§å°:";
+		RadarText.ProportionSlider = u8"ç¼©æ”¾æ¯”ä¾‹:";
+		RadarText.RangeSlider = u8"èŒƒå›´:";
+		RadarText.AlphaSlider = u8"çª—å£é€æ˜åº¦:";
 
 		// Triggerbot
-		TriggerText.Enable = u8"ÆôÓÃ°â»ú";
-		TriggerText.FeatureName = u8" ×Ô¶¯°â»ú";
-		TriggerText.HotKeyList = u8"ÈÈ¼ü    ";
-		TriggerText.Toggle = u8"±£³Ö¼¤»î";
-		TriggerText.DelaySlider = u8"ÑÓ³ÙÉä»÷:";
-		TriggerText.FakeShotSlider = u8"Éä»÷³ÖĞøÊ±¼ä:";
+		TriggerText.Enable = u8"å¯ç”¨æ‰³æœº";
+		TriggerText.FeatureName = u8" è‡ªåŠ¨æ‰³æœº";
+		TriggerText.HotKeyList = u8"çƒ­é”®    ";
+		TriggerText.Toggle = u8"ä¿æŒæ¿€æ´»";
+		TriggerText.DelaySlider = u8"å»¶è¿Ÿå°„å‡»:";
+		TriggerText.FakeShotSlider = u8"å°„å‡»æŒç»­æ—¶é—´:";
 
 		// Crosshairs
-		CrosshairsText.Toggle = u8"ÏÔÊ¾×¼ĞÇ";
-		CrosshairsText.FeatureName = u8" Íâ²¿×¼ĞÇ";
-		CrosshairsText.PresetList = u8"Ô¤Éè";
-		CrosshairsText.ColorEditor = u8"×¼ĞÇÑÕÉ«";
-		CrosshairsText.Dot = u8"ÖĞĞÄµã";
-		CrosshairsText.DotSizeSlider = u8"ÖĞĞÄµã´óĞ¡:";
-		CrosshairsText.Outline = u8"ÂÖÀªÏß";
-		CrosshairsText.Crossline = u8"Ê®×ÖÏß";
-		CrosshairsText.hLengthSlider = u8"Ë®Æ½³¤¶È:";
-		CrosshairsText.vLengthSilder = u8"´¹Ö±³¤¶È:";
-		CrosshairsText.GapSlider = u8"¼äÏ¶:";
-		CrosshairsText.ThicknessSlider = u8"´ÖÏ¸:";
-		CrosshairsText.tStyle = u8"TĞÎ×¼ĞÇ";
-		CrosshairsText.Circle = u8"Ô²»·";
-		CrosshairsText.RadiusSlider = u8"Ô²»·°ë¾¶:";
-		CrosshairsText.TargetCheck = u8"Ãé×¼±äÉ«";
-		CrosshairsText.TeamCheck = u8"¶ÓÎé¼ì²é";
+		CrosshairsText.Toggle = u8"æ˜¾ç¤ºå‡†æ˜Ÿ";
+		CrosshairsText.FeatureName = u8" å¤–éƒ¨å‡†æ˜Ÿ";
+		CrosshairsText.PresetList = u8"é¢„è®¾";
+		CrosshairsText.ColorEditor = u8"å‡†æ˜Ÿé¢œè‰²";
+		CrosshairsText.Dot = u8"ä¸­å¿ƒç‚¹";
+		CrosshairsText.DotSizeSlider = u8"ä¸­å¿ƒç‚¹å¤§å°:";
+		CrosshairsText.Outline = u8"è½®å»“çº¿";
+		CrosshairsText.Crossline = u8"åå­—çº¿";
+		CrosshairsText.hLengthSlider = u8"æ°´å¹³é•¿åº¦:";
+		CrosshairsText.vLengthSilder = u8"å‚ç›´é•¿åº¦:";
+		CrosshairsText.GapSlider = u8"é—´éš™:";
+		CrosshairsText.ThicknessSlider = u8"ç²—ç»†:";
+		CrosshairsText.tStyle = u8"Tå½¢å‡†æ˜Ÿ";
+		CrosshairsText.Circle = u8"åœ†ç¯";
+		CrosshairsText.RadiusSlider = u8"åœ†ç¯åŠå¾„:";
+		CrosshairsText.TargetCheck = u8"ç„å‡†å˜è‰²";
+		CrosshairsText.TeamCheck = u8"é˜Ÿä¼æ£€æŸ¥";
 
 		// Misc
-		MiscText.FeatureName = u8" ÔÓÏî¹¦ÄÜ";
-		MiscText.ThemeList = u8"Ö÷ÌâÅäÉ«  ";
-		MiscText.StyleList = u8"´°¿ÚÑùÊ½";
-		MiscText.HeadshotLine = u8"±¬Í·Ïß";
-		MiscText.SpecCheck = u8"ÅÔ¹ÛÕß±£³ÖÔËĞĞ";
-		MiscText.NoFlash = u8"ÎŞÊÓÉÁ¹âµ¯";
-		MiscText.FastStop = u8"×Ô¶¯¼±Í£";
-		MiscText.HitSound = u8"ÃüÖĞÒôĞ§";
-		MiscText.bmbTimer = u8"C4¼ÆÊ±Æ÷";
-		MiscText.SpecList = u8"ÅÔ¹ÛÕßÁĞ±í";
-		MiscText.Bhop = u8"Á¬Ìø";
-		MiscText.Watermark = u8"Ë®Ó¡¸¡´°";
-		MiscText.CheatList = u8"¹¦ÄÜÁĞ±í";
-		MiscText.TeamCheck = u8"¶ÓÎé¼ì²é";
-		MiscText.AntiRecord = u8"Ö±²¥Ä£Ê½";
-		MiscText.LanguageList = u8"ÓïÑÔ";
-		MiscText.MoneyService = u8"Óà¶îÖúÊÖ";
-		MiscText.ShowCashSpent = u8"ÏÔÊ¾Ïû·Ñ";
-		MiscText.EnemySensor = u8"µĞÈË·¢¹â";
-		MiscText.RadarHack = u8"À×´ïÍ¸ÊÓ";
-		MiscText.FastStop = u8"¿ìËÙ¼±Í£";
-		MiscText.VisCheckDisable = u8"´Ë¹¦ÄÜ»á¸ÉÈÅ¿ÉÊÓ¼ì²é";
-		MiscText.NoSmoke = u8"¹Ø±ÕÑÌÎíµ¯";
+		MiscText.FeatureName = u8" æ‚é¡¹åŠŸèƒ½";
+		MiscText.ThemeList = u8"ä¸»é¢˜é…è‰²  ";
+		MiscText.StyleList = u8"çª—å£æ ·å¼";
+		MiscText.HeadshotLine = u8"çˆ†å¤´çº¿";
+		MiscText.SpecCheck = u8"æ—è§‚è€…ä¿æŒè¿è¡Œ";
+		MiscText.NoFlash = u8"æ— è§†é—ªå…‰å¼¹";
+		MiscText.FastStop = u8"è‡ªåŠ¨æ€¥åœ";
+		MiscText.HitSound = u8"å‘½ä¸­éŸ³æ•ˆ";
+		MiscText.bmbTimer = u8"C4è®¡æ—¶å™¨";
+		MiscText.SpecList = u8"æ—è§‚è€…åˆ—è¡¨";
+		MiscText.Bhop = u8"è¿è·³";
+		MiscText.Watermark = u8"æ°´å°æµ®çª—";
+		MiscText.CheatList = u8"åŠŸèƒ½åˆ—è¡¨";
+		MiscText.TeamCheck = u8"é˜Ÿä¼æ£€æŸ¥";
+		MiscText.AntiRecord = u8"ç›´æ’­æ¨¡å¼";
+		MiscText.LanguageList = u8"è¯­è¨€";
+		MiscText.MoneyService = u8"ä½™é¢åŠ©æ‰‹";
+		MiscText.ShowCashSpent = u8"æ˜¾ç¤ºæ¶ˆè´¹";
+		MiscText.EnemySensor = u8"æ•Œäººå‘å…‰";
+		MiscText.RadarHack = u8"é›·è¾¾é€è§†";
+		MiscText.FastStop = u8"å¿«é€Ÿæ€¥åœ";
+		MiscText.VisCheckDisable = u8"æ­¤åŠŸèƒ½ä¼šå¹²æ‰°å¯è§†æ£€æŸ¥";
+		MiscText.NoSmoke = u8"å…³é—­çƒŸé›¾å¼¹";
 
-		MiscText.FakeDuck = u8"¼Ù¶×";
+		MiscText.FakeDuck = u8"å‡è¹²";
 
-		MiscText.LanguageList = u8"ÓïÑÔÑ¡Ôñ  ";
+		MiscText.LanguageList = u8"è¯­è¨€é€‰æ‹©  ";
 
 		// Config Menu
-		ConfigText.FeatureName = u8" ²ÎÊıÅäÖÃ";
-		ConfigText.MyConfigs = u8"ÎÒµÄÅäÖÃ";
-		ConfigText.Load = u8"¼ÓÔØÑ¡ÖĞ";
-		ConfigText.Save = u8"±£´æÑ¡ÖĞ";
-		ConfigText.Delete = u8"É¾³ıÑ¡ÖĞ";
-		ConfigText.Reset = u8"ÖØÖÃÅäÖÃ";
-		ConfigText.Create = u8"´´½¨ÅäÖÃ";
-		ConfigText.OpenFolder = u8"´ò¿ªÎÄ¼ş¼Ğ";
-		ConfigText.SeparateLine = u8"ĞÂ½¨ÅäÖÃ";
-		ConfigText.AuthorName = u8"×÷Õß";
-		ConfigText.ConfigName = u8"ÅäÖÃÃû";
+		ConfigText.FeatureName = u8" å‚æ•°é…ç½®";
+		ConfigText.MyConfigs = u8"æˆ‘çš„é…ç½®";
+		ConfigText.Load = u8"åŠ è½½é€‰ä¸­";
+		ConfigText.Save = u8"ä¿å­˜é€‰ä¸­";
+		ConfigText.Delete = u8"åˆ é™¤é€‰ä¸­";
+		ConfigText.Reset = u8"é‡ç½®é…ç½®";
+		ConfigText.Create = u8"åˆ›å»ºé…ç½®";
+		ConfigText.OpenFolder = u8"æ‰“å¼€æ–‡ä»¶å¤¹";
+		ConfigText.SeparateLine = u8"æ–°å»ºé…ç½®";
+		ConfigText.AuthorName = u8"ä½œè€…";
+		ConfigText.ConfigName = u8"é…ç½®å";
 
 		// Readme Menu
-		ReadMeText.FeatureName = u8" ÆäËûĞÅÏ¢";
-		ReadMeText.LastUpdate = u8"×îºó¸üĞÂ: ";
-		ReadMeText.SourceButton = u8"¿ªÔ´´úÂë";
-		ReadMeText.DiscordButton = u8"¼ÓÈëDiscord";
-		ReadMeText.OffsetsTitle = u8"Ïà¹Ø»ùÖ·: ";
+		ReadMeText.FeatureName = u8" å…¶ä»–ä¿¡æ¯";
+		ReadMeText.LastUpdate = u8"æœ€åæ›´æ–°: ";
+		ReadMeText.SourceButton = u8"å¼€æºä»£ç ";
+		ReadMeText.DiscordButton = u8"åŠ å…¥Discord";
+		ReadMeText.OffsetsTitle = u8"ç›¸å…³åŸºå€: ";
 	}
 }
