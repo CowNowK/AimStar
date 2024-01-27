@@ -4,8 +4,8 @@ namespace Lang
 {
 	inline void French()
 	{
-		Global.Date = u8"Yashing";
-		Global.Author = u8"27/01/2024";
+		Global.Author = u8"Yashing";
+		Global.Date = u8"27/01/2024";
 
 		Global.SwitchButton = u8"Active";
 		Global.FeatureSettings = u8"Parametres";
