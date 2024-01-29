@@ -265,7 +265,7 @@ void Cheats::Run()
 	Misc::HitSound(LocalEntity, PreviousTotalHits);
 	Misc::NoFlash(LocalEntity);
 	Misc::FastStop();
-	Misc::NoSmoke(gGame);
+	Misc::SmokeManager(gGame);
 	Misc::FovChanger(LocalEntity);
 	Misc::Watermark();
 	Misc::CheatList();	

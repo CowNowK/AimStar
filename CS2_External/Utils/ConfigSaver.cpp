@@ -233,6 +233,14 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "TeamCheck" << YAML::Value << MenuConfig::TeamCheck;
         emitter << YAML::Key << "AntiRecord" << YAML::Value << MenuConfig::BypassOBS;
         emitter << YAML::Key << "Jitter" << YAML::Value << MiscCFG::Jitter;
+        emitter << YAML::Key << "SmokeColor" << YAML::Value << MiscCFG::SmokeColored;
+        emitter << YAML::Value;
+        emitter << YAML::BeginMap;
+        emitter << YAML::Key << "Enable" << YAML::Value << MiscCFG::SmokeColored;
+        emitter << YAML::Key << "r" << YAML::Value << MiscCFG::SmokeColor.Value.x;
+        emitter << YAML::Key << "g" << YAML::Value << MiscCFG::SmokeColor.Value.y;
+        emitter << YAML::Key << "b" << YAML::Value << MiscCFG::SmokeColor.Value.z;
+        emitter << YAML::EndMap;
         emitter << YAML::EndMap;
 
         emitter << YAML::Key << "Aimbot";
@@ -420,7 +428,11 @@ namespace MyConfigSaver {
             MiscCFG::NoSmoke = config["Misc"]["NoSmoke"].IsDefined() ? config["Misc"]["NoSmoke"].as<bool>() : false;
             MenuConfig::TeamCheck = config["Misc"]["TeamCheck"].as<bool>();
             MenuConfig::BypassOBS = config["Misc"]["AntiRecord"].as<bool>();
-            MiscCFG::Jitter = config["Misc"]["Jitter"].IsDefined() ? config["Misc"]["Jitter"].as<bool>() : false;;
+            MiscCFG::Jitter = config["Misc"]["Jitter"].IsDefined() ? config["Misc"]["Jitter"].as<bool>() : false;
+            MiscCFG::SmokeColored = config["Misc"]["SmokeColor"]["Enable"].IsDefined() ? config["Misc"]["SmokeColor"]["Enable"].as<bool>() : false;
+            MiscCFG::SmokeColor.Value.x = config["Misc"]["SmokeColor"]["r"].IsDefined() ? config["Misc"]["SmokeColor"]["r"].as<float>() : 255.f;
+            MiscCFG::SmokeColor.Value.y = config["Misc"]["SmokeColor"]["g"].IsDefined() ? config["Misc"]["SmokeColor"]["g"].as<float>() : 0.f;
+            MiscCFG::SmokeColor.Value.z = config["Misc"]["SmokeColor"]["b"].IsDefined() ? config["Misc"]["SmokeColor"]["b"].as<float>() : 0.f;
         }
         if (config["Aimbot"])
         {

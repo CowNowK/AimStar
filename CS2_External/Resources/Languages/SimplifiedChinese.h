@@ -121,6 +121,7 @@ namespace Lang
 		MiscText.FastStop = u8"快速急停";
 		MiscText.VisCheckDisable = u8"此功能会干扰可视检查";
 		MiscText.NoSmoke = u8"关闭烟雾弹";
+		MiscText.SmokeColor = u8"烟雾弹颜色";
 
 		MiscText.FakeDuck = u8"假蹲";
 

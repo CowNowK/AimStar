@@ -122,6 +122,8 @@ namespace ConfigMenu {
 	}
 
 	void ResetToDefault() {
+		MiscCFG::SmokeColored = false;
+		MiscCFG::SmokeColor = ImColor(255, 0, 0, 255);
 		MiscCFG::NoSmoke = false;
 		MiscCFG::Jitter = false;
 		ESPConfig::AmmoBar = false;
@@ -141,7 +143,6 @@ namespace ConfigMenu {
 		MiscCFG::bmbTimer = false;
 		ESPConfig::VisibleColor = ImColor(255, 196, 0, 255);
 		ESPConfig::VisibleCheck = false;
-		MiscCFG::GlowColor = ImColor(255, 0, 0, 100);;
 		MiscCFG::EnemySensor = false;
 		MenuConfig::AirJump = false;
 		MenuConfig::Theme = 0;

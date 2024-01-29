@@ -68,12 +68,11 @@ namespace Misc
 	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void NoFlash(const CEntity& aLocalPlayer) noexcept;
 	void FastStop() noexcept;
-	void NoSmoke(CGame Game) noexcept;
+	void SmokeManager(CGame Game) noexcept;
 	void RadarHack(const CEntity& EntityList) noexcept;
 	void FovChanger(const CEntity& aLocalPlayer) noexcept;
 	void MoneyService(const CEntity& EntityList) noexcept;
 	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
-	void SmokeColor(const DWORD64 EntityAddress) noexcept;
 
 	void Jitter(const CEntity& EntityList) noexcept;
 

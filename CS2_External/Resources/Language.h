@@ -144,6 +144,7 @@ namespace Lang
 		inline static const char* EnemySensor;
 		inline static const char* RadarHack;
 		inline static const char* NoSmoke;
+		inline static const char* SmokeColor;
 		
 		inline static const char* FakeDuck;
 
@@ -295,7 +296,8 @@ namespace Lang
 		MiscText.RadarHack = u8"Radar Hack";
 		MiscText.FastStop = u8"Fast Stop";
 		MiscText.VisCheckDisable = u8"Visible Check DISABLED";
-		MiscText.NoSmoke = u8"NoSmoke";
+		MiscText.NoSmoke = u8"No Smoke";
+		MiscText.SmokeColor = u8"Smoke Color";
 
 		MiscText.FakeDuck = u8"Fake Duck";
 

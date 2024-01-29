@@ -134,22 +134,43 @@ namespace Misc
 		Misc::StopKeyEvent('S', &sKeyPressed, 'W', 50.f);
 	}
 
-	void NoSmoke(CGame Game) noexcept
+	void SmokeManager(CGame Game) noexcept
 	{
-		if (!MiscCFG::NoSmoke)
+		if (!MiscCFG::NoSmoke && !MiscCFG::SmokeColored)
 			return;
 
 		for (int i_smoke = 64; i_smoke < 1024; i_smoke++) {
 			uintptr_t SmokeEntity = GetSmokeEntity(i_smoke, Game.GetEntityListEntry());
 
-			uintptr_t ent_base;
-			bool begin = false;
-			int uf = 0;
-
+			uintptr_t ent_base, addr;
 			ProcessMgr.ReadMemory<uintptr_t>(SmokeEntity, ent_base);
-			ProcessMgr.WriteMemory<bool>(ent_base + Offset::SmokeGrenadeProjectile.bDidSmokeEffect, begin);
-			ProcessMgr.WriteMemory<bool>(ent_base + Offset::SmokeGrenadeProjectile.bSmokeEffectSpawned, begin);
-			ProcessMgr.WriteMemory<int>(ent_base + Offset::SmokeGrenadeProjectile.nSmokeEffectTickBegin, uf);
+
+			// No Smoke
+			if (MiscCFG::NoSmoke)
+			{
+				bool begin = false;
+				int uf = 0;
+
+				ProcessMgr.WriteMemory<bool>(ent_base + Offset::SmokeGrenadeProjectile.bDidSmokeEffect, begin);
+				ProcessMgr.WriteMemory<bool>(ent_base + Offset::SmokeGrenadeProjectile.bSmokeEffectSpawned, begin);
+				ProcessMgr.WriteMemory<int>(ent_base + Offset::SmokeGrenadeProjectile.nSmokeEffectTickBegin, uf);
+			}
+
+			// Smoke Color
+			if (MiscCFG::SmokeColored)
+			{
+				char toread[32];
+				std::string classname;
+				Vector3 COLOR = { MiscCFG::SmokeColor.Value.x, MiscCFG::SmokeColor.Value.y ,MiscCFG::SmokeColor.Value.z };
+				ProcessMgr.ReadMemory<uintptr_t>(ent_base + 0x10, addr);
+				ProcessMgr.ReadMemory<uintptr_t>(addr + 0x20, addr);
+				ProcessMgr.ReadMemory<char[32]>(addr, toread);
+				classname = toread;
+				if (classname == "smokegrenade_projectile")
+				{
+					ProcessMgr.WriteMemory<Vector3>(ent_base + Offset::SmokeGrenadeProjectile.vSmokeColor, COLOR);
+				}
+			}
 		}
 	}
 
@@ -227,22 +248,5 @@ namespace Misc
 		float Gravity;
 		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Entity.GravityScale, Gravity);
 		std::cout << Gravity << std::endl;
-	}
-
-	void SmokeColor(const DWORD64 EntityAddress) noexcept
-	{
-		uintptr_t entbase, adrr;
-		char toread[32];
-		std::string classname;
-		ProcessMgr.ReadMemory<uintptr_t>((uintptr_t)EntityAddress, entbase);
-		ProcessMgr.ReadMemory<uintptr_t>(entbase + 0x10, adrr);
-		ProcessMgr.ReadMemory<uintptr_t>(adrr + 0x20, adrr);
-		ProcessMgr.ReadMemory<char[32]>(adrr, toread);
-		classname = toread;
-		if (classname == "smokegrenade_projectile")
-		{
-			Vector3 RED_COLOR = { 1.f, 0.f, 0.f };
-			ProcessMgr.WriteMemory<Vector3>(entbase + Offset::SmokeGrenadeProjectile.vSmokeColor, RED_COLOR);
-		}
 	}
 }
