@@ -191,6 +191,19 @@
     <ClInclude Include="Resources\Languages\Czech.h" />
     <ClInclude Include="Resources\Languages\Spanish.h" />
     <ClInclude Include="Resources\Languages\Romanian.h" />
+    <ClInclude Include="Utils\curl\curl.h" />
+    <ClInclude Include="Utils\curl\curlver.h" />
+    <ClInclude Include="Utils\curl\easy.h" />
+    <ClInclude Include="Utils\curl\header.h" />
+    <ClInclude Include="Utils\curl\mprintf.h" />
+    <ClInclude Include="Utils\curl\multi.h" />
+    <ClInclude Include="Utils\curl\options.h" />
+    <ClInclude Include="Utils\curl\stdcheaders.h" />
+    <ClInclude Include="Utils\curl\system.h" />
+    <ClInclude Include="Utils\curl\typecheck-gcc.h" />
+    <ClInclude Include="Utils\curl\urlapi.h" />
+    <ClInclude Include="Utils\curl\websockets.h" />
+    <ClInclude Include="Utils\Updater.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
@@ -267,6 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CS2_External.aps" />
+    <None Include="Utils\curl\lib\libcurl_imp.exp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Font\stratum2.ttf" />
@@ -274,5 +288,6 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />
+    <Library Include="Utils\curl\lib\libcurl_imp.lib" />
   </ItemGroup>
 </Project>

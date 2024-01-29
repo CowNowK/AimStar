@@ -27,16 +27,28 @@ namespace Updater
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 
             res = curl_easy_perform(curl);
-
+            
+            /*
             if (res != CURLE_OK) {
                 std::cerr << "Failed to perform HTTP request: " << curl_easy_strerror(res) << std::endl;
             }
+            */
 
             curl_easy_cleanup(curl);
         }
 
         size_t startPos = readBuffer.find("\"tag_name\":") + 13;
+        if (startPos == std::string::npos) {
+            // std::cerr << "Failed to find \"tag_name\" in the JSON response." << std::endl;
+            return "";
+        }
+
         size_t endPos = readBuffer.find("\"", startPos);
+        if (endPos == std::string::npos) {
+            // std::cerr << "Failed to find closing double quote in the JSON response." << std::endl;
+            return "";
+        }
+
         std::string latestVersion = readBuffer.substr(startPos, endPos - startPos);
 
         return latestVersion;
@@ -44,6 +56,12 @@ namespace Updater
 
     inline void CheckForUpdates() {
         std::string LatestVersion = GetLatestVersionFromGitHub();
+
+        if (LatestVersion == "")
+        {
+            std::cout << "[Info] Failed to check update." << std::endl;
+            return;
+        }
 
         if (LatestVersion != MenuConfig::LocalVersion) {
             std::cout << "A new update is available: " << LatestVersion << std::endl;

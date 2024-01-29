@@ -6,6 +6,7 @@
 #include "..\TriggerBot.h"
 #include "..\Utils\ConfigMenu.hpp"
 #include "..\Utils\ConfigSaver.hpp"
+#include "..\Utils\Updater.h"
 
 #include "StyleChanger.h"
 #include "..\Resources\Language.h"
@@ -28,6 +29,7 @@ namespace GUI
 	{
 		if (AS_Logo == NULL)
 		{
+			Updater::CheckForUpdates();
 			Gui.LoadTextureFromMemory(Images::AS_Logo, sizeof Images::AS_Logo, &AS_Logo, &LogoW, &LogoH);
 			Gui.LoadTextureFromMemory(Images::NL_Logo, sizeof Images::NL_Logo, &NL_Logo, &LogoW2, &LogoH2);
 			Gui.LoadTextureFromMemory(Images::VisualButton, sizeof Images::VisualButton, &MenuButton1, &buttonW, &buttonH);
@@ -344,7 +346,7 @@ namespace GUI
 							ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 							ImGui::TextDisabled(Lang::TriggerText.HotKeyList);
 							ImGui::SameLine();
-							if (ImGui::Combo("###TriggerbotKey", &MenuConfig::TriggerHotKey, "LALT\0LBUTTON\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0"))
+							if (ImGui::Combo("###TriggerbotKey", &MenuConfig::TriggerHotKey, "LALT\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0"))
 							{
 								TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
 							}

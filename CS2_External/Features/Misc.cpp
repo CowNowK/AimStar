@@ -158,7 +158,7 @@ namespace Misc
 		if (!MiscCFG::RadarHack)
 			return;
 
-		bool SpottedStatus = 1;
+		bool SpottedStatus = true;
 		ProcessMgr.WriteMemory(EntityList.Pawn.Address + Offset::Pawn.bSpottedByMask, SpottedStatus);
 	}
 

@@ -299,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CS2_External.aps" />
+    <None Include="Utils\curl\lib\libcurl_imp.exp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Font\fa-regular.ttf" />
