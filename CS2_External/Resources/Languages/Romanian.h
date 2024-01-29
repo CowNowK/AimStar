@@ -117,8 +117,9 @@ namespace Lang
 		MiscText.EnemySensor = u8"Senzor inamic";
 		MiscText.RadarHack = u8"Radar hack";
 		MiscText.FastStop = u8"Stop rapid";
-		MiscText.VisCheckDisable = u8"Verificarea vizibilități OFF";
+		MiscText.VisCheckDisable = u8"Verificarea vizibilități oprită";
 		MiscText.NoSmoke = u8"Fără fum";
+		MiscText.SmokeColor = u8"Culoare fum";
 		MiscText.FakeDuck = u8"Chrouch fals";
 
 		MiscText.LanguageList = u8"Limba";

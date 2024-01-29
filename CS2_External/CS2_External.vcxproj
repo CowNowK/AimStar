@@ -75,6 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>AimStar</TargetName>
+    <LibraryPath>$(ProjectDir)\Utils\curl\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -139,7 +140,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);libcurl_imp.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)AimStar$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
