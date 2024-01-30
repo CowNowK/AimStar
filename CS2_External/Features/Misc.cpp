@@ -185,18 +185,24 @@ namespace Misc
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
 	{
+		if (!MiscCFG::Fov)
+			return;
+
 		DWORD64 CameraServices = 0;
 		UINT CurrentFOV;
 		bool isScoped;
 		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::Pawn.CameraServices, CameraServices))
 			return;
 
-		float Dfov = MiscCFG::Fov;
-		// ProcessMgr.ReadMemory(CameraServices + Offset::Pawn.iFov, CurrentFOV);
+		// UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
+		UINT Desiredfov = 0x8C;
+		ProcessMgr.ReadMemory<UINT>(CameraServices + Offset::Pawn.iFov, CurrentFOV);
+		// std::cout << CurrentFOV << std::endl;
+
 		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.isScoped, isScoped);
 		if (!isScoped)
 		{
-			ProcessMgr.WriteMemory<float>(CameraServices + Offset::Pawn.iFov, Dfov);
+			ProcessMgr.WriteMemory<UINT>(CameraServices + Offset::Pawn.iFov, Desiredfov);
 		}
 	}
 

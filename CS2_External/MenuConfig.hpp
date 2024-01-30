@@ -184,7 +184,7 @@ namespace MiscCFG
 	inline bool ShowCashSpent = false;
 	inline bool NoSmoke = false;
 	inline bool SmokeColored = false;
-	inline float Fov = 0.0f;
+	inline bool Fov = false;
 	inline ImColor BombTimerCol = ImColor(255, 120, 0, 255);
 	inline ImColor SmokeColor = ImColor(255, 0, 0, 255);
 

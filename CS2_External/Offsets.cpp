@@ -90,8 +90,8 @@ bool Offset::UpdateOffsets()
 
 	Offset::InputSystem = TempAddress - InputDLL;
 
-	TempAddress = ProcessMgr.TraceAddress(ClientDLL + 0x1810CB8, { 0x8, 0xC38 });
-	Offset::SpreadPointer = TempAddress;
+	ProcessMgr.ReadMemory(ClientDLL + Offset::LocalPlayerPawn, TempAddress);
+	Offset::Pointer = TempAddress;
 
 	return true;
 }

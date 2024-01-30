@@ -15,7 +15,7 @@ namespace Offset
 	inline DWORD InventoryServices;
 	inline DWORD PlantedC4;
 	inline DWORD InputSystem;
-	inline DWORD SpreadPointer;
+	inline DWORD Pointer;
 
 	struct
 	{
