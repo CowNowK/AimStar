@@ -402,6 +402,8 @@ namespace MyConfigSaver {
         }
         if (config["Misc"])
         {
+            float fov = config["Misc"]["Fov"].IsDefined() ? config["Misc"]["Fov"].as<float>() : 0;
+
             MiscCFG::BunnyHop = config["Misc"]["Bhop"].as<bool>();
             MenuConfig::ShowHeadShootLine = config["Misc"]["HeadShootLine"].as<bool>();
             MenuConfig::HeadShootLineColor.Value.x = config["Misc"]["HeadShootLineColor"]["r"].as<float>();
@@ -409,7 +411,8 @@ namespace MyConfigSaver {
             MenuConfig::HeadShootLineColor.Value.z = config["Misc"]["HeadShootLineColor"]["b"].as<float>();
             MenuConfig::HeadShootLineColor.Value.w = config["Misc"]["HeadShootLineColor"]["a"].as<float>();
             MiscCFG::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
-            MiscCFG::Fov = config["Misc"]["Fov"].IsDefined() ? config["Misc"]["Fov"].as<bool>() : 0;
+            if (fov)
+                MiscCFG::Fov = true;
             MiscCFG::NoFlash = config["Misc"]["NoFlash"].as<bool>();
             MiscCFG::WaterMark = config["Misc"]["Watermark"].as<bool>();
             MiscCFG::CheatList = config["Misc"]["CheatList"].as<bool>();
