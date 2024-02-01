@@ -19,6 +19,7 @@ private:
 		DWORD64 LocalPawn;
 		DWORD64 ServerPawn;
 		DWORD64 ForceJump;
+		DWORD64 ForceCrouch;
 		DWORD64 GlobalVars;
 	}Address;
 
@@ -54,6 +55,8 @@ public:
 
 	bool SetForceJump(int Value);
 	bool GetForceJump(int& Value);
+	bool SetForceCrouch(int Value);
+	bool GetForceCrouch(int& Value);
 };
 
 inline CGame gGame;

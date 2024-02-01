@@ -38,7 +38,7 @@ public:
 	{
 		NONE,
 		IN_AIR = 1 << 0,
-		CROUCHING = 1 << 1
+		IN_CROUCH = 1 << 1
 	};
 
 	DWORD64 Address = 0;

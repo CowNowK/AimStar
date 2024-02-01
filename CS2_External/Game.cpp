@@ -12,6 +12,7 @@ bool CGame::InitAddress()
 	this->Address.LocalPawn = GetClientDLLAddress() + Offset::LocalPlayerPawn;
 	this->Address.ServerPawn = GetServerDLLAddress() + Offset::LocalPlayerPawn;
 	this->Address.ForceJump = GetClientDLLAddress() + Offset::ForceJump;
+	this->Address.ForceCrouch = GetClientDLLAddress() + Offset::ForceCrouch;
 	this->Address.GlobalVars = GetClientDLLAddress() + Offset::GlobalVars;
 
 	return this->Address.ClientDLL != 0;
@@ -101,6 +102,20 @@ bool CGame::SetForceJump(int value)
 bool CGame::GetForceJump(int& value)
 {
 	if (!ProcessMgr.ReadMemory<int>(this->Address.ForceJump, value))
+		return false;
+
+	return true;
+}
+bool CGame::SetForceCrouch(int value)
+{
+	if (!ProcessMgr.WriteMemory<int>(this->Address.ForceCrouch, value))
+		return false;
+
+	return true;
+}
+bool CGame::GetForceCrouch(int& value)
+{
+	if (!ProcessMgr.ReadMemory<int>(this->Address.ForceCrouch, value))
 		return false;
 
 	return true;

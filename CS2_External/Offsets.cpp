@@ -78,6 +78,12 @@ bool Offset::UpdateOffsets()
 
 	Offset::ForceJump = TempAddress + 0x30 - ClientDLL;
 
+	TempAddress = SearchOffsets(Offset::Signatures::ForceCrouch, ClientDLL);
+	if (TempAddress == 0)
+		return false;
+
+	Offset::ForceCrouch = TempAddress + 0x30 - ClientDLL;
+
 	TempAddress = SearchOffsets(Offset::Signatures::PlantedC4, ClientDLL);
 	if (TempAddress == 0)
 		return false;
