@@ -265,11 +265,12 @@ void Cheats::Run()
 	Misc::HitSound(LocalEntity, PreviousTotalHits);
 	Misc::NoFlash(LocalEntity);
 	Misc::FastStop();
-	Misc::SmokeManager(gGame);
+	Misc::NadeManager(gGame);
 	Misc::FovChanger(LocalEntity);
 	Misc::Watermark();
 	Misc::CheatList();	
-	Misc::Jitter(LocalEntity);
+	Misc::FakeDuck(LocalEntity);
+	Misc::BunnyHop(LocalEntity);
 
 	// Fov line
 	Render::DrawFov(LocalEntity, MenuConfig::FovLineSize, MenuConfig::FovLineColor, 1);
@@ -279,11 +280,8 @@ void Cheats::Run()
 	
 	// CrossHair
 	TriggerBot::TargetCheck(LocalEntity);
-	Bunnyhop::AirCheck(LocalEntity);
+	Misc::AirCheck(LocalEntity);
 	RenderCrossHair(ImGui::GetBackgroundDrawList());
-
-	// Bhop
-	Bunnyhop::Run(LocalEntity);
 
 	bmb::RenderWindow();
 

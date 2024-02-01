@@ -1,11 +1,12 @@
 #pragma once
 
 #include <algorithm>
+#include <chrono>
 #include <sstream>
 #include <string>
+#include <thread>
 #include <time.h>
 #include <Windows.h>
-
 
 #include "..\AimBot.hpp"
 #include "..\Entity.h"
@@ -63,18 +64,23 @@ namespace Misc
 		return Entity;
 	}
 
+	inline bool AirCheck(const CEntity& Local)
+	{
+		const bool hasFlagInAir = Local.Pawn.HasFlag(PlayerPawn::Flags::IN_AIR);
+		return hasFlagInAir;
+	}
+
 	void CheatList() noexcept;
 	void Watermark() noexcept;
 	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void NoFlash(const CEntity& aLocalPlayer) noexcept;
 	void FastStop() noexcept;
-	void SmokeManager(CGame Game) noexcept;
+	void NadeManager(CGame Game) noexcept;
 	void RadarHack(const CEntity& EntityList) noexcept;
 	void FovChanger(const CEntity& aLocalPlayer) noexcept;
 	void MoneyService(const CEntity& EntityList) noexcept;
-	void EdgeJump(const CEntity& aLocalPlayer) noexcept;
-
-	void Jitter(const CEntity& EntityList) noexcept;
+	void FakeDuck(const CEntity& EntityList) noexcept;
+	void BunnyHop(const CEntity& aLocalPlayer) noexcept;
 
 	void JoinDiscord() noexcept;
 	void SourceCode() noexcept;

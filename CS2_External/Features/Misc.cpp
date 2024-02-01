@@ -134,8 +134,18 @@ namespace Misc
 		Misc::StopKeyEvent('S', &sKeyPressed, 'W', 50.f);
 	}
 
-	void SmokeManager(CGame Game) noexcept
+	void NadeManager(CGame Game) noexcept
 	{
+		std::vector<std::string> EntityNames = {
+		"smokegrenade_projectile", "weapon_glock", "weapon_smokegrenade", "basemodelentity",
+		"c_cs_player_for_precache", "info_particle_system", "prop_dynamic", "post_processing_volume",
+		"env_player_visibility", "team_intro_terrorist", "c_cs_observer_for_precache",
+		"team_intro_counterterrorist", "point_camera", "sky_camera", "env_sky", "team_select_terrorist",
+		"team_select_counterterrorist", "point_camera", "func_bomb_target", "env_cubemap_fog",
+		"csgo_viewmodel", "cs_minimap_boundary", "cs_gamerules", "cs_player_manager", "vote_controller",
+		"weapon_incgrenade", "molotov_projectile"
+		};
+
 		if (!MiscCFG::NoSmoke && !MiscCFG::SmokeColored)
 			return;
 
@@ -157,7 +167,7 @@ namespace Misc
 			}
 
 			// Smoke Color
-			if (MiscCFG::SmokeColored)
+			if (MiscCFG::SmokeColored || MiscCFG::FireColored)
 			{
 				char toread[32];
 				std::string classname;
@@ -166,10 +176,26 @@ namespace Misc
 				ProcessMgr.ReadMemory<uintptr_t>(addr + 0x20, addr);
 				ProcessMgr.ReadMemory<char[32]>(addr, toread);
 				classname = toread;
+
+				/* 
+				* Filter id to find id
+				if (std::find(EntityNames.begin(), EntityNames.end(), classname) == EntityNames.end())
+					std::cout << classname << std::endl;
+				*/
+
 				if (classname == "smokegrenade_projectile")
 				{
-					ProcessMgr.WriteMemory<Vector3>(ent_base + Offset::SmokeGrenadeProjectile.vSmokeColor, COLOR);
+					if (MiscCFG::SmokeColored)
+						ProcessMgr.WriteMemory<Vector3>(ent_base + Offset::SmokeGrenadeProjectile.vSmokeColor, COLOR);
 				}
+				/* Disabled
+				if (classname == "molotov_projectile")
+				{
+					Vector3 FireColor = { 0,0,0 };
+					ProcessMgr.ReadMemory<Vector3>(ent_base + 0x112C, FireColor);
+					std::cout << FireColor.x << ", " << FireColor.y << ", " << FireColor.z << std::endl;
+						
+				}*/
 			}
 		}
 	}
@@ -232,7 +258,7 @@ namespace Misc
 		}
 	}
 
-	void Jitter(const CEntity& aLocalPlayer) noexcept
+	void FakeDuck(const CEntity& aLocalPlayer) noexcept
 	{
 
 		DWORD64 MovementServices;
@@ -248,11 +274,33 @@ namespace Misc
 		}
 	}
 
-	void EdgeJump(const CEntity& aLocalPlayer) noexcept
+	void BunnyHop(const CEntity& Local) noexcept
 	{
-		// Unfinished
-		float Gravity;
-		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Entity.GravityScale, Gravity);
-		std::cout << Gravity << std::endl;
+		if (!MiscCFG::BunnyHop)
+			return;
+
+		int ForceJump;
+		bool spacePressed = GetAsyncKeyState(VK_SPACE);
+		bool isInAir = AirCheck(Local);
+		gGame.GetForceJump(ForceJump);
+
+		if (spacePressed && isInAir) // AirCheck = 1, is on ground
+		{
+			// As of the latest update (11/8/2023) bhop doesn't work at all with sendinput,
+			// if +jump is sent on the same tick that you land on the ground, the jump won't register.
+			// But you can add 15ms of delay right before your sendinput to fix this problem temporarily
+			std::this_thread::sleep_for(std::chrono::milliseconds(15));
+			// Refer to -> https://www.unknowncheats.me/forum/counter-strike-2-a/609480-sendinput-bhop-inconsistency.html
+			gGame.SetForceJump(65537);
+		}
+
+		else if (spacePressed && !isInAir) // AirCheck = 0, isn't on ground
+		{
+			gGame.SetForceJump(256);
+		}
+		else if (!spacePressed && ForceJump == 65537)
+		{
+			gGame.SetForceJump(256);
+		}
 	}
 }

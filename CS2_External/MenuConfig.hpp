@@ -8,6 +8,8 @@ namespace MenuConfig
 	inline std::string path = "";
 	inline std::string SoundPath = "";
 	inline std::string LocalVersion = "3.9";
+	// Don't change this
+	inline std::string Key = "N5ZF3KG8H6BVQ71T";
 
 	struct {
 		// 0: Visual 1: Aimbot 2: Misc 3: Config
@@ -69,12 +71,16 @@ namespace MenuConfig
 
 	inline bool BypassOBS = false;
 	inline bool TargetingCrosshairs = false;
+
+	// Theme Configs
+	inline ImColor ButtonBorderColor = ImColor(255, 204, 0, 255);
 }
 
 namespace ESPConfig
 {
 	inline bool ESPenabled = true;
 	inline bool AmmoBar = false;
+	inline bool ShowScoping = false;
 	inline bool ShowBoneESP = true;
 	inline bool ShowBoxESP = true;
 	inline bool ShowHealthBar = true;
@@ -184,9 +190,11 @@ namespace MiscCFG
 	inline bool ShowCashSpent = false;
 	inline bool NoSmoke = false;
 	inline bool SmokeColored = false;
+	inline bool FireColored = false;
 	inline bool Fov = false;
 	inline ImColor BombTimerCol = ImColor(255, 120, 0, 255);
 	inline ImColor SmokeColor = ImColor(255, 0, 0, 255);
+	inline ImColor FireColor = ImColor(0, 255, 0, 255);
 
 	inline bool Jitter = false;
 }

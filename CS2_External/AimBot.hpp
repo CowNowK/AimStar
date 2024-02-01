@@ -17,6 +17,7 @@ extern "C" {
 namespace AimControl
 {
     inline int HotKey = VK_LMENU;
+    inline bool ScopeOnly = false;
     inline float AimFov = 5;
     inline float Smooth = 2.0f;
     inline Vec2 RCSScale = { 1.f,1.f };
@@ -36,6 +37,14 @@ namespace AimControl
     {
         if (MenuConfig::ShowMenu)
             return;
+
+        if (AimControl::ScopeOnly)
+        {
+            bool isScoped;
+            ProcessMgr.ReadMemory<bool>(Local.Pawn.Address + Offset::Pawn.isScoped, isScoped);
+            if (!isScoped)
+                return;
+        }
 
         float Yaw, Pitch;
         float Distance, Norm, Length;

@@ -196,6 +196,7 @@ namespace ConfigMenu {
 		MenuConfig::TriggerHotKey = 0;
 		TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
 		AimControl::RCSScale = ImVec2(1.2f, 1.4f);
+		AimControl::ScopeOnly = false;
 		MenuConfig::FovLineColor = ImVec4(55, 55, 55, 220);
 		ESPConfig::LineToEnemyColor = ImVec4(255, 255, 255, 220);
 		CrosshairsCFG::ShowCrossHair = false;

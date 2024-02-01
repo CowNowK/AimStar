@@ -5,7 +5,7 @@ namespace Lang
 	inline void SimplifiedChinese()
 	{
 		Global.Author = u8"CowNow";
-		Global.Date = u8"2024/01/26";
+		Global.Date = u8"2024/02/01";
 
 		Global.SwitchButton = u8"启用功能";
 		Global.FeatureSettings = u8"详细设置";
@@ -58,6 +58,8 @@ namespace Lang
 		AimbotText.SmoothSlider = u8"平滑度: ";
 		AimbotText.BoneList = u8"瞄准部位  ";
 		AimbotText.Tip = u8"此功能在菜单打开时不会工作";
+		AimbotText.ScopeOnly = u8"仅开镜";
+		AimbotText.AimLock = u8"自动锁定";
 
 		// Radar
 		RadarText.Toggle = u8"显示雷达";

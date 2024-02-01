@@ -117,7 +117,6 @@
     </ClInclude>
     <ClInclude Include="Utils\GlobalVars.h" />
     <ClInclude Include="Utils\Format.h" />
-    <ClInclude Include="Bunnyhop.hpp" />
     <ClInclude Include="Utils\Globals.hpp" />
     <ClInclude Include="Font\fontArray.h" />
     <ClInclude Include="Font\IconsFontAwesome6.h" />

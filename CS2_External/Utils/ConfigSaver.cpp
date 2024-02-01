@@ -263,6 +263,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Smooth" << YAML::Value << AimControl::Smooth;
         emitter << YAML::Key << "AimPos" << YAML::Value << MenuConfig::AimPosition;
         emitter << YAML::Key << "VisibleCheck" << YAML::Value << MenuConfig::VisibleCheck;
+        emitter << YAML::Key << "ScopeOnly" << YAML::Value << AimControl::ScopeOnly;
         emitter << YAML::EndMap;
 
         emitter << YAML::Key << "Triggerbot";
@@ -293,7 +294,7 @@ namespace MyConfigSaver {
     void LoadConfig(const std::string& filename) {
         YAML::Node config = YAML::LoadFile(MenuConfig::path + '\\' + filename);
         if (config["ESP"]) {
-            // If you want to make the new version compatible with the old configuration, you can add IsDefine(), like line 284.
+            // If you want to make the new version compatible with the old configuration, you can use "<Config>.IsDefine() ? <Config>.as() : <Default Value>"
             ESPConfig::ESPenabled = config["ESP"]["Enable"].as<bool>();
             ESPConfig::ShowBoneESP = config["ESP"]["BoneESP"].as<bool>();
             ESPConfig::ShowBoxESP = config["ESP"]["BoxESP"].as<bool>();
@@ -302,6 +303,7 @@ namespace MyConfigSaver {
             ESPConfig::LinePos = config["ESP"]["LinePos"].as<int>();
             ESPConfig::ShowHealthBar = config["ESP"]["HealthBar"].as<bool>();
             ESPConfig::AmmoBar = config["ESP"]["AmmoBar"].IsDefined() ? config["ESP"]["AmmoBar"].as<bool>() : false;
+            ESPConfig::ShowScoping = config["ESP"]["Scoping"].IsDefined() ? config["ESP"]["Scoping"].as<bool>() : false;
             ESPConfig::ShowWeaponESP = config["ESP"]["WeaponESP"].as<bool>();
             ESPConfig::ShowEyeRay = config["ESP"]["EyeRay"].as<bool>();
             ESPConfig::ShowPlayerName = config["ESP"]["PlayerName"].as<bool>();
@@ -452,6 +454,7 @@ namespace MyConfigSaver {
             AimControl::Smooth = config["Aimbot"]["Smooth"].as<float>();
             MenuConfig::AimPosition = config["Aimbot"]["AimPos"].as<int>();
             MenuConfig::VisibleCheck = config["Aimbot"]["VisibleCheck"].as<bool>();
+            AimControl::ScopeOnly = config["Aimbot"]["ScopeOnly"].IsDefined() ? config["Aimbot"]["ScopeOnly"].as<bool>() : false;
         }
         if (config["Triggerbot"])
         {
