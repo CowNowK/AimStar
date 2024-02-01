@@ -59,6 +59,21 @@ Most of the code is contributed by users, and the code structure might be very m
 
 ## ⚠️ Disclamers
 - 🚫 **The project is for learning purposes only and strictly prohibited for any illegal activities. Users bear full responsibility for any misuse.**
+Please read the following advice carefully before using Aimstar.
+<details> <summary>Some advice</summary>
+
+- Aimstar is a hobby project, and it should be treated as such. The project aims to enhance the community's learning of process debugging and reverse engineering, and to demonstrate the potential of C++ programming on Windows systems. At the same time, we strongly oppose cheating in video games. If you use Aimstar to cheat, you will not only ruin the fairness and fun of the game, but also damage your own reputation and dignity.
+
+- Cheating in video games may reflect your inner anxiety and dissatisfaction. You may feel that you are not good enough in the game, or that you are ridiculed and rejected by other players. You may hope to improve your game level and social status by cheating, or to bring yourself some happiness and sense of achievement. However, these are superficial and temporary, and cannot really solve your problem.
+
+- Cheating will make you lose the challenge and fun of the game, as well as the respect and trust of other players. Cheating will make you fall into a false self-perception, and make you ignore your true strengths and potential. Cheating will make you miss the opportunity and process of improving yourself through hard work and learning.
+
+- If you want to get rid of the temptation and consequences of cheating, you need to face your psychological state and motivation, and seek professional help and support. Communicating with a psychologist or counselor can help you find more healthy and effective coping strategies, and also help you build a more positive and confident self-image. You can also participate in some beneficial activities and social interactions, such as joining some game communities or clubs, making some like-minded friends, or trying some new games or interests.
+
+- I hope you can recognize the harm and meaninglessness of cheating, and also hope you can enjoy the true fun and value of the game. I appreciate your interest and support for Aimstar, but I also hope you can abide by the rules and ethics of the game, and respect yourself and others. Thank you for your understanding and cooperation. 🙏
+</details>
+
+  
 - Main code forked from [**__Liv__**](https://github.com/TKazer/CS2_External)
 - Features copied from UnknownCheats
   - [Glow](https://www.unknowncheats.me/forum/counter-strike-2-a/604503-glow-external.html)
