@@ -69,6 +69,11 @@ namespace Misc
 		const bool hasFlagInAir = Local.Pawn.HasFlag(PlayerPawn::Flags::IN_AIR);
 		return hasFlagInAir;
 	}
+	inline bool CrouchCheck(const CEntity& Local)
+	{
+		const bool hasFlagDucking = Local.Pawn.HasFlag(PlayerPawn::Flags::IN_CROUCH);
+		return hasFlagDucking;
+	}
 
 	void CheatList() noexcept;
 	void Watermark() noexcept;
@@ -80,7 +85,7 @@ namespace Misc
 	void FovChanger(const CEntity& aLocalPlayer) noexcept;
 	void MoneyService(const CEntity& EntityList) noexcept;
 	void FakeDuck(const CEntity& EntityList) noexcept;
-	void BunnyHop(const CEntity& aLocalPlayer) noexcept;
+	void BunnyHop(const CEntity& Local) noexcept;
 
 	void JoinDiscord() noexcept;
 	void SourceCode() noexcept;
