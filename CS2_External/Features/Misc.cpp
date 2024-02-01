@@ -211,7 +211,7 @@ namespace Misc
 		if (!MiscCFG::MoneyService)
 			return;
 
-		ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize;
+		ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysAutoResize;
 
 		ImGui::Begin("Money Services", nullptr, flags);
 		{
