@@ -395,7 +395,7 @@ namespace GUI
 					PutSwitch(Lang::MiscText.HeadshotLine, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowHeadShootLine);
 					PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WorkInSpec);
 					// PutSliderInt("FOV: ", 10.f, &MiscCFG::Fov , &FovMin, &FovMax, "%d");
-					PutSwitch("FOV Hack", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::Fov);
+					PutSwitch("FOV Hack", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::FovHacker);
 					PutSwitch(Lang::MiscText.NoFlash, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoFlash);
 					PutSwitch(Lang::MiscText.FastStop, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::FastStop);
 					PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoSmoke);
@@ -474,7 +474,6 @@ namespace GUI
 						PutColorEditor("Scrollbar Bg", "###ThemeCol13", 5.f, 0.f, reinterpret_cast<float*>(&ScrollBg));
 						PutColorEditor("Window Bg", "###ThemeCol14", 5.f, 0.f, reinterpret_cast<float*>(&windowBgColor));
 
-						ImGui::NewLine();
 						// Update Color
 						ImGui::GetStyle().Colors[ImGuiCol_Border] = borderColor;
 						ImGui::GetStyle().Colors[ImGuiCol_Button] = ButtonColor;

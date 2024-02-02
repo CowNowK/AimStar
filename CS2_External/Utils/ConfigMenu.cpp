@@ -136,7 +136,7 @@ namespace ConfigMenu {
 		ESPConfig::FilledVisBox = false;
 		MiscCFG::MoneyService = false;
 		MiscCFG::ShowCashSpent = false;
-		MiscCFG::Fov = false;
+		MiscCFG::FovHacker = false;
 		MiscCFG::RadarHack = false;
 		MiscCFG::SpecList = false;
 		MiscCFG::BombTimerCol = ImColor(255, 120, 0, 255);

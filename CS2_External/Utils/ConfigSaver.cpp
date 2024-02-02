@@ -205,7 +205,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "a" << YAML::Value << MenuConfig::HeadShootLineColor.Value.w;
         emitter << YAML::EndMap;
         emitter << YAML::Key << "WorkInSpec" << YAML::Value << MiscCFG::WorkInSpec;
-        emitter << YAML::Key << "Fov" << YAML::Value << MiscCFG::Fov;
+        emitter << YAML::Key << "FovHacker" << YAML::Value << MiscCFG::FovHacker;
         emitter << YAML::Key << "NoFlash" << YAML::Value << MiscCFG::NoFlash;
         emitter << YAML::Key << "Watermark" << YAML::Value << MiscCFG::WaterMark;
         emitter << YAML::Key << "CheatList" << YAML::Value << MiscCFG::CheatList;
@@ -233,7 +233,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "TeamCheck" << YAML::Value << MenuConfig::TeamCheck;
         emitter << YAML::Key << "AntiRecord" << YAML::Value << MenuConfig::BypassOBS;
         emitter << YAML::Key << "Jitter" << YAML::Value << MiscCFG::Jitter;
-        emitter << YAML::Key << "SmokeColor" << YAML::Value << MiscCFG::SmokeColored;
+        emitter << YAML::Key << "SmokeColor";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
         emitter << YAML::Key << "Enable" << YAML::Value << MiscCFG::SmokeColored;
@@ -404,8 +404,6 @@ namespace MyConfigSaver {
         }
         if (config["Misc"])
         {
-            float fov = config["Misc"]["Fov"].IsDefined() ? config["Misc"]["Fov"].as<float>() : 0;
-
             MiscCFG::BunnyHop = config["Misc"]["Bhop"].as<bool>();
             MenuConfig::ShowHeadShootLine = config["Misc"]["HeadShootLine"].as<bool>();
             MenuConfig::HeadShootLineColor.Value.x = config["Misc"]["HeadShootLineColor"]["r"].as<float>();
@@ -413,8 +411,7 @@ namespace MyConfigSaver {
             MenuConfig::HeadShootLineColor.Value.z = config["Misc"]["HeadShootLineColor"]["b"].as<float>();
             MenuConfig::HeadShootLineColor.Value.w = config["Misc"]["HeadShootLineColor"]["a"].as<float>();
             MiscCFG::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
-            if (fov)
-                MiscCFG::Fov = true;
+            MiscCFG::FovHacker = config["Misc"]["FovHacker"].IsDefined() ? config["Misc"]["FovHacker"].as<bool>() : false;
             MiscCFG::NoFlash = config["Misc"]["NoFlash"].as<bool>();
             MiscCFG::WaterMark = config["Misc"]["Watermark"].as<bool>();
             MiscCFG::CheatList = config["Misc"]["CheatList"].as<bool>();

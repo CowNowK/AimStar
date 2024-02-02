@@ -211,7 +211,7 @@ namespace Misc
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
 	{
-		if (!MiscCFG::Fov)
+		if (!MiscCFG::FovHacker)
 			return;
 
 		DWORD64 CameraServices = 0;
