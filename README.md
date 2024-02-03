@@ -74,7 +74,7 @@ Please read the following advice carefully before using Aimstar.
 </details>
 
   
-- Main code forked from [**__Liv__**](https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D)
+- Main code forked from [**__Liv__**](https://github.com/TKazer/CS2_External)
 - Features copied from UnknownCheats
   - [Glow](https://www.unknowncheats.me/forum/counter-strike-2-a/604503-glow-external.html)
   - [Weapon Icon](https://www.unknowncheats.me/forum/counter-strike-2-a/608799-weapon-icon-esp.html)
