@@ -387,15 +387,14 @@ namespace GUI
 
 				if (MenuConfig::WCS.MenuPage == 2)
 				{
-					int FovMin = 58, FovMax = 140;
+					int FovMin = 60, FovMax = 140;
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 					ImGui::SeparatorText(ICON_FA_SUN" Misc");
 
 					PutSwitch(Lang::MiscText.HeadshotLine, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowHeadShootLine);
 					PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WorkInSpec);
-					// PutSliderInt("FOV: ", 10.f, &MiscCFG::Fov , &FovMin, &FovMax, "%d");
-					PutSwitch("FOV Hack", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::FovHacker);
+					PutSliderInt(Lang::MiscText.fovchanger, 10.f, &MiscCFG::Fov , &FovMin, &FovMax, "%d");
 					PutSwitch(Lang::MiscText.NoFlash, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoFlash);
 					PutSwitch(Lang::MiscText.FastStop, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::FastStop);
 					PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoSmoke);

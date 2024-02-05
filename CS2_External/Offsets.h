@@ -53,7 +53,7 @@ namespace Offset
 		DWORD aimPunchCache = 0x1740;
 		DWORD iIDEntIndex = 0x1544;
 		DWORD iTeamNum = 0x3BF;
-		DWORD iFov = 0x210;
+		DWORD DesiredFov = 0x6D4;
 		DWORD iFovStart = 0x214;
 		DWORD fFlags = 0x3C8;
 		DWORD bSpottedByMask = 0x1644;			// C_CSPlayerPawnBase::entitySpottedState + EntitySpottedState_t::bSpottedByMask

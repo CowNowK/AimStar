@@ -211,25 +211,12 @@ namespace Misc
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
 	{
-		if (!MiscCFG::FovHacker)
-			return;
-
 		DWORD64 CameraServices = 0;
-		UINT CurrentFOV;
-		bool isScoped;
 		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::Pawn.CameraServices, CameraServices))
 			return;
 
-		// UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
-		UINT Desiredfov = 0x8C;
-		ProcessMgr.ReadMemory<UINT>(CameraServices + Offset::Pawn.iFov, CurrentFOV);
-		// std::cout << CurrentFOV << std::endl;
-
-		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.isScoped, isScoped);
-		if (!isScoped)
-		{
-			ProcessMgr.WriteMemory<UINT>(CameraServices + Offset::Pawn.iFov, Desiredfov);
-		}
+		UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
+		ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Desiredfov);
 	}
 
 	void MoneyService(const CEntity& EntityList) noexcept

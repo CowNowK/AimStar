@@ -20,7 +20,7 @@ namespace MyConfigSaver {
 
         YAML::Emitter emitter;
 
-        emitter << YAML::Comment("AimStar Config File\nVersion: 3.8\nAuthor: " + author);
+        emitter << YAML::Comment("AimStar Config File\nVersion: 3.9\nAuthor: " + author);
         emitter << YAML::BeginMap;
 
         emitter << YAML::Key << "ESP";
@@ -205,7 +205,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "a" << YAML::Value << MenuConfig::HeadShootLineColor.Value.w;
         emitter << YAML::EndMap;
         emitter << YAML::Key << "WorkInSpec" << YAML::Value << MiscCFG::WorkInSpec;
-        emitter << YAML::Key << "FovHacker" << YAML::Value << MiscCFG::FovHacker;
+        emitter << YAML::Key << "Fov" << YAML::Value << MiscCFG::Fov;
         emitter << YAML::Key << "NoFlash" << YAML::Value << MiscCFG::NoFlash;
         emitter << YAML::Key << "Watermark" << YAML::Value << MiscCFG::WaterMark;
         emitter << YAML::Key << "CheatList" << YAML::Value << MiscCFG::CheatList;
@@ -411,7 +411,7 @@ namespace MyConfigSaver {
             MenuConfig::HeadShootLineColor.Value.z = config["Misc"]["HeadShootLineColor"]["b"].as<float>();
             MenuConfig::HeadShootLineColor.Value.w = config["Misc"]["HeadShootLineColor"]["a"].as<float>();
             MiscCFG::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
-            MiscCFG::FovHacker = config["Misc"]["FovHacker"].IsDefined() ? config["Misc"]["FovHacker"].as<bool>() : false;
+            MiscCFG::FovHacker = config["Misc"]["Fov"].IsDefined() ? config["Misc"]["Fov"].as<int>() : 90;
             MiscCFG::NoFlash = config["Misc"]["NoFlash"].as<bool>();
             MiscCFG::WaterMark = config["Misc"]["Watermark"].as<bool>();
             MiscCFG::CheatList = config["Misc"]["CheatList"].as<bool>();

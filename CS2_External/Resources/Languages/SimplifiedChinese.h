@@ -124,6 +124,7 @@ namespace Lang
 		MiscText.VisCheckDisable = u8"此功能会干扰可视检查";
 		MiscText.NoSmoke = u8"关闭烟雾弹";
 		MiscText.SmokeColor = u8"烟雾弹颜色";
+		MiscText.fovchanger = u8"视角宽度: ";
 
 		MiscText.FakeDuck = u8"假蹲";
 
