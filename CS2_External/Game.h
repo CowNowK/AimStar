@@ -9,6 +9,12 @@ class CGame
 private:
 	struct
 	{
+		DWORD64 ForceJump;
+		DWORD64 ForceCrouch;
+		DWORD64 ForceForward;
+		DWORD64 ForceLeft;
+		DWORD64 ForceRight;
+
 		DWORD64 ServerDLL;
 		DWORD64 ClientDLL;
 		DWORD64 EntityList;
@@ -18,8 +24,6 @@ private:
 		DWORD64 LocalController;
 		DWORD64 LocalPawn;
 		DWORD64 ServerPawn;
-		DWORD64 ForceJump;
-		DWORD64 ForceCrouch;
 		DWORD64 GlobalVars;
 	}Address;
 
@@ -57,6 +61,8 @@ public:
 	bool GetForceJump(int& Value);
 	bool SetForceCrouch(int Value);
 	bool GetForceCrouch(int& Value);
+	bool SetForceMove(int MovingType, int Value);
+	bool GetForceMove(int MovingType, int& Value);
 };
 
 inline CGame gGame;
