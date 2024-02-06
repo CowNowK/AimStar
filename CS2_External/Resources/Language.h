@@ -41,6 +41,7 @@ namespace Lang
 		inline static const char* BoxType;
 		inline static const char* HealthNum;
 		inline static const char* Ammo;
+		inline static const char* ScopedESP;
 
 		inline static const char* BoxType_Normal;
 		inline static const char* BoxType_Edge;
@@ -218,6 +219,7 @@ namespace Lang
 		ESPtext.BoxType = u8"Box Type:";
 		ESPtext.HealthNum = u8"Health Number";
 		ESPtext.Ammo = u8"Ammo";
+		ESPtext.ScopedESP = u8"Show Scoped";
 
 		ESPtext.BoxType_Normal = u8"Normal";
 		ESPtext.BoxType_Edge = u8"Dynamic";

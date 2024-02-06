@@ -479,5 +479,13 @@ namespace ESP
 				ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, textPos, IM_COL32(255, 255, 255, 255), "W");
 			}
 		}
+
+		if (ESPConfig::ShowIsScoped) {
+			if (MenuConfig::BoxType == 1) {
+				centerPos.y += 2;
+				centerPos.x += 25;
+			}
+			ImGui::GetWindowDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 15.0f, centerPos, IM_COL32(200, 255, 255, 255), "s");
+		}
 	}
 }
