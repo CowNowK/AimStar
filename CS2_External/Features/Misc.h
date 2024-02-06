@@ -2,10 +2,13 @@
 
 #include <algorithm>
 #include <chrono>
+#include <cstdlib>
+#include <ctime>
 #include <sstream>
 #include <string>
 #include <thread>
 #include <time.h>
+#include <vector>
 #include <Windows.h>
 
 #include "..\AimBot.hpp"
@@ -18,6 +21,14 @@
 
 namespace Misc
 {
+	static inline std::vector<ImColor> colorList = {
+		ImColor(255, 0, 0),     // Red
+		ImColor(255, 165, 0),   // Orange
+		ImColor(255, 255, 0),   // Yellow
+		ImColor(0, 128, 0),     // Green
+		ImColor(0, 0, 255),     // Purple
+	};
+
 	struct Vector3
 	{
 		float x, y, z;
@@ -31,6 +42,12 @@ namespace Misc
 		std::wstring result(size, L'\0');
 		MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, &result[0], size);
 		return result;
+	}
+
+	static inline ImColor getRandomColor() {
+		srand(time(0));
+		int index = rand() % colorList.size();
+		return colorList[index];
 	}
 
 	static inline void CheatText(const char* Cheat, bool config)
