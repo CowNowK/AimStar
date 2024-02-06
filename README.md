@@ -88,3 +88,4 @@ Please read the following advice carefully before using Aimstar.
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=CowNowK/AimStar&type=Date)](https://star-history.com/#CowNowK/AimStar&Date)
+[press](https://www.youtube.com/watch?v=dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D)
