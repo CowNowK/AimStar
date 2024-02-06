@@ -209,7 +209,6 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Fov" << YAML::Value << MiscCFG::Fov;
         emitter << YAML::Key << "NoFlash" << YAML::Value << MiscCFG::NoFlash;
         emitter << YAML::Key << "Watermark" << YAML::Value << MiscCFG::WaterMark;
-        emitter << YAML::Key << "CheatList" << YAML::Value << MiscCFG::CheatList;
         emitter << YAML::Key << "HitSound" << YAML::Value << MiscCFG::HitSound;
         emitter << YAML::Key << "BombTimer" << YAML::Value << MiscCFG::bmbTimer;
         emitter << YAML::Key << "TimerColor";
@@ -416,7 +415,6 @@ namespace MyConfigSaver {
             MiscCFG::FovHacker = config["Misc"]["Fov"].IsDefined() ? config["Misc"]["Fov"].as<int>() : 90;
             MiscCFG::NoFlash = config["Misc"]["NoFlash"].as<bool>();
             MiscCFG::WaterMark = config["Misc"]["Watermark"].as<bool>();
-            MiscCFG::CheatList = config["Misc"]["CheatList"].as<bool>();
             MiscCFG::HitSound = config["Misc"]["HitSound"].as<bool>();
             MiscCFG::bmbTimer = config["Misc"]["BombTimer"].as<bool>();
             MiscCFG::BombTimerCol.Value.x = config["Misc"]["TimerColor"]["r"].as<float>();

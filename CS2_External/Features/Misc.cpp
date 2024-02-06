@@ -28,37 +28,6 @@ namespace Misc
 		MiscCFG::fucker = !MiscCFG::fucker;
 	}
 
-	void CheatList() noexcept
-	{
-		if (!MiscCFG::CheatList)
-			return;
-
-		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
-		ImGui::SetNextWindowBgAlpha(0.3f);
-		ImGui::SetNextWindowSize(ImVec2(200, 0));
-		ImGui::Begin("Cheats List", nullptr, windowFlags);
-
-		CheatText("ESP", ESPConfig::ESPenabled);
-		if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
-			ImGui::Text("Aimbot [Toggle]");
-		CheatText("RCS", MenuConfig::RCS);
-		CheatText("Glow", MiscCFG::EnemySensor);
-		CheatText("Radar", RadarCFG::ShowRadar);
-		if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
-			ImGui::Text("TriggerBot [Toggle]");
-
-		CheatText("Crosshair", CrosshairsCFG::ShowCrossHair);
-		CheatText("Headshot Line", MenuConfig::ShowHeadShootLine);
-		CheatText("No Flash", MiscCFG::NoFlash);
-		CheatText("Fast Stop", MiscCFG::FastStop);
-		CheatText("Bhop", MiscCFG::BunnyHop);
-		CheatText("HitSound", MiscCFG::HitSound);
-		CheatText("Bomb Timer", MiscCFG::bmbTimer);
-		CheatText("Spec List", MiscCFG::SpecList);
-
-		ImGui::End();
-	}
-
 	void Watermark() noexcept
 	{
 		if (!MiscCFG::WaterMark)

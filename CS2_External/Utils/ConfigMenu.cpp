@@ -222,7 +222,6 @@ namespace ConfigMenu {
 		MiscCFG::WorkInSpec = true;
 		MiscCFG::NoFlash = false;
 		MiscCFG::WaterMark = false;
-		MiscCFG::CheatList = false;
 		MiscCFG::HitSound = false;
 		MiscCFG::FastStop = false;
 

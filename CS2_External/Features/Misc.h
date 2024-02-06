@@ -75,7 +75,6 @@ namespace Misc
 		return hasFlagDucking;
 	}
 
-	void CheatList() noexcept;
 	void Watermark() noexcept;
 	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void NoFlash(const CEntity& aLocalPlayer) noexcept;
