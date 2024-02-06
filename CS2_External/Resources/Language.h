@@ -303,7 +303,7 @@ namespace Lang
 		MiscText.VisCheckDisable = u8"Visible Check DISABLED";
 		MiscText.NoSmoke = u8"No Smoke";
 		MiscText.SmokeColor = u8"Smoke Color";
-		MiscText.fovchanger = u8"Fov Chanegr: ";
+		MiscText.fovchanger = u8"Fov Changer: ";
 
 		MiscText.FakeDuck = u8"Fake Duck";
 
