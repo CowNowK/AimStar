@@ -126,6 +126,7 @@ namespace ConfigMenu {
 		MiscCFG::SmokeColor = ImColor(255, 0, 0, 255);
 		MiscCFG::NoSmoke = false;
 		MiscCFG::Jitter = false;
+		ESPConfig::ShowIsScoped = false;
 		ESPConfig::AmmoBar = false;
 		ESPConfig::OutLine = true;
 		ESPConfig::ShowHealthNum = false;

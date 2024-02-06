@@ -48,6 +48,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "OutLine" << YAML::Value << ESPConfig::OutLine;
         emitter << YAML::Key << "HeadBoxStyle" << YAML::Value << ESPConfig::HeadBoxStyle;
         emitter << YAML::Key << "BoxRounding" << YAML::Value << ESPConfig::BoxRounding;
+        emitter << YAML::Key << "ShowScoped" << YAML::Value << ESPConfig::ShowIsScoped;
         emitter << YAML::Key << "BoneColor";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
@@ -317,6 +318,7 @@ namespace MyConfigSaver {
             ESPConfig::MultiColor = config["ESP"]["MultiColor"].as<bool>();
             ESPConfig::OutLine = config["ESP"]["OutLine"].as<bool>();
             ESPConfig::BoxRounding = config["ESP"]["BoxRounding"].as<float>();
+            ESPConfig::ShowIsScoped = config["ESP"]["ShowScoped"].as<bool>();
             ESPConfig::BoneColor.Value.x = config["ESP"]["BoneColor"]["r"].as<float>();
             ESPConfig::BoneColor.Value.y = config["ESP"]["BoneColor"]["g"].as<float>();
             ESPConfig::BoneColor.Value.z = config["ESP"]["BoneColor"]["b"].as<float>();

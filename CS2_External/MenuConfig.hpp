@@ -97,6 +97,7 @@ namespace ESPConfig
 	inline bool FilledVisBox = false;
 	inline bool MultiColor = false;
 	inline bool OutLine = true;
+	inline bool ShowIsScoped = false;
 	// 0: normal 1: Flat
 	inline int HeadBoxStyle = 0;
 	inline float BoxRounding = RandomPara<float>(0.0f, 3.0f);;
