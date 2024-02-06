@@ -39,14 +39,13 @@ namespace Render
 		
 	}
 
-	void DrawHealth(const CEntity& Entity, ImVec4 Rect)
+	void DrawHealth(int Health, ImVec2 Pos)
 	{
 		if (!ESPConfig::ShowHealthNum)
 			return;
 
-		int health = Entity.Pawn.Health;
-		std::string health_str = Format("%i", health);
-		Gui.StrokeText(health_str, { Rect.x + 2, Rect.y }, ImColor(0, 220, 0, 255), 12, false);
+		std::string health_str = Format("%i", Health);
+		Gui.StrokeText(health_str, Pos, ImColor(0, 220, 0, 255), 12, false);
 	}
 
 	void DrawDistance(const CEntity& LocalEntity, CEntity& Entity, ImVec4 Rect)
@@ -335,7 +334,7 @@ namespace Render
 	public:
 		HealthBar() {}
 
-		void HealthBarV(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size);
+		void HealthBarV(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size, bool ShowNum);
 
 		void AmmoBarH(float MaxAmmo, float CurrentAmmo, ImVec2 Pos, ImVec2 Size);
 	private:
@@ -357,7 +356,7 @@ namespace Render
 		ImColor AmmoColor = ImColor(255, 255, 0, 255);
 	};
 
-	void HealthBar::HealthBarV(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size)
+	void HealthBar::HealthBarV(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size, bool ShowNum)
 	{
 		auto InRange = [&](float value, float min, float max) -> bool
 			{
@@ -394,6 +393,16 @@ namespace Render
 		DrawList->AddRect(RectPos,
 			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
 			FrameColor, 0, 15, 1);
+
+		if (ShowNum)
+		{
+			if (CurrentHealth < MaxHealth)
+			{
+				std::string health_str = Format("%.f", CurrentHealth);
+				Vec2 Pos = { RectPos.x,RectPos.y + RectSize.y - Height };
+				Gui.StrokeText(health_str, Pos, ImColor(255, 255, 255), 13.f, true);
+			}
+		}
 	}
 
 	void HealthBar::AmmoBarH(float MaxAmmo, float CurrentAmmo, ImVec2 Pos, ImVec2 Size)
@@ -439,7 +448,7 @@ namespace Render
 			HealthBarMap.insert({ Sign,HealthBar() });
 
 		if (HealthBarMap.count(Sign))
-			HealthBarMap[Sign].HealthBarV(MaxHealth, CurrentHealth, Pos, Size);
+			HealthBarMap[Sign].HealthBarV(MaxHealth, CurrentHealth, Pos, Size, ESPConfig::ShowHealthNum);
 	}
 
 	void DrawAmmoBar(DWORD Sign, float MaxAmmo, float CurrentAmmo, ImVec2 Pos, ImVec2 Size)

@@ -245,7 +245,6 @@ void Cheats::Run()
 
 			// Draw Distance
 			Render::DrawDistance(LocalEntity, Entity, Rect);
-			Render::DrawHealth(Entity, Rect);
 		}
 		Glow::Run(Entity);
 		// SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);
