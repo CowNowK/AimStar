@@ -24,43 +24,43 @@ namespace Offset
 
 	struct
 	{
-		DWORD Health = 0x32C;
-		DWORD TeamID = 0x3BF;
+		DWORD Health = 0x334;
+		DWORD TeamID = 0x3CB;
 		DWORD IsAlive = 0x7F4;
 		DWORD PlayerPawn = 0x7EC;
-		DWORD iszPlayerName = 0x640;
-		DWORD EnemySensor = 0x13E4;
-		DWORD GravityScale = 0x434;
+		DWORD iszPlayerName = 0x638;
+		DWORD EnemySensor = 0x1440;
+		DWORD GravityScale = 0x444;
 	}Entity;
 
 	struct
 	{
-		DWORD MovementServices = 0x10E8;		// CPlayer_MovementServices*
-		DWORD WeaponServices = 0x10A8;			// CPlayer_WeaponServices*
-		DWORD BulletServices = 0x16B8;			// CCSPlayer_BulletServices*
-		DWORD CameraServices = 0x10E0;			// CPlayer_CameraServices*
-		DWORD pClippingWeapon = 0x12B0;			// C_CSWeaponBase*
+		DWORD MovementServices = 0x1140;		// CPlayer_MovementServices*
+		DWORD WeaponServices = 0x1100;			// CPlayer_WeaponServices*
+		DWORD BulletServices = 0x1718;			// CCSPlayer_BulletServices*
+		DWORD CameraServices = 0x1138;			// CPlayer_CameraServices*
+		DWORD pClippingWeapon = 0x1308;			// C_CSWeaponBase*
 
-		DWORD StartAccount = 0x1434;
-		DWORD isScoped = 0x13A8;
+		DWORD StartAccount = 0x1490;
+		DWORD isScoped = 0x1400;
 		DWORD TotalHit = 0x40;
-		DWORD Pos = 0x1224;						// C_BasePlayerPawn::m_vOldOrigin
-		DWORD MaxHealth = 0x328;				// C_BaseEntity::m_iMaxHealth
-		DWORD CurrentHealth = 0x32C;			// C_BaseEntity::m_iHealth
-		DWORD GameSceneNode = 0x310;			// C_BaseEntity::m_pGameSceneNode
+		DWORD Pos = 0x127C;						// C_BasePlayerPawn::m_vOldOrigin
+		DWORD MaxHealth = 0x330;				// C_BaseEntity::m_iMaxHealth
+		DWORD CurrentHealth = 0x334;			// C_BaseEntity::m_iHealth
+		DWORD GameSceneNode = 0x318;			// C_BaseEntity::m_pGameSceneNode
 		DWORD BoneArray = 0x1E0;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
-		DWORD angEyeAngles = 0x1518;
-		DWORD vecLastClipCameraPos = 0x1294;
-		DWORD iShotsFired = 0x1420;
-		DWORD flFlashDuration = 0x1470;
-		DWORD aimPunchAngle = 0x171C;			// C_CSPlayerPawn::m_aimPunchAngle
-		DWORD aimPunchCache = 0x1740;
-		DWORD iIDEntIndex = 0x1544;
-		DWORD iTeamNum = 0x3BF;
-		DWORD DesiredFov = 0x6D4;
+		DWORD angEyeAngles = 0x1578;
+		DWORD vecLastClipCameraPos = 0x12EC;
+		DWORD iShotsFired = 0x147C;
+		DWORD flFlashDuration = 0x14CC;
+		DWORD aimPunchAngle = 0x177C;			// C_CSPlayerPawn::m_aimPunchAngle
+		DWORD aimPunchCache = 0x17A0;
+		DWORD iIDEntIndex = 0x15A4;
+		DWORD iTeamNum = 0x3CB;
+		DWORD DesiredFov = 0x6CC;
 		DWORD iFovStart = 0x214;
-		DWORD fFlags = 0x3C8;
-		DWORD bSpottedByMask = 0x1644;			// C_CSPlayerPawnBase::entitySpottedState + EntitySpottedState_t::bSpottedByMask
+		DWORD fFlags = 0x3D4;
+		DWORD bSpottedByMask = 0x16A4;			// C_CSPlayerPawnBase::entitySpottedState + EntitySpottedState_t::bSpottedByMask
 	} Pawn;
 
 	struct
@@ -80,35 +80,35 @@ namespace Offset
 
 	struct
 	{
-		DWORD m_hPawn = 0x60C;
-		DWORD m_pObserverServices = 0x10C0;
+		DWORD m_hPawn = 0x604;
+		DWORD m_pObserverServices = 0x1118;
 		DWORD m_hObserverTarget = 0x44;
-		DWORD m_hController = 0x123C;
+		DWORD m_hController = 0x1294;
 	} PlayerController;
 
 	struct
 	{
-		DWORD ClippingWeapon = 0x12B0;
+		DWORD ClippingWeapon = 0x1308;
 		DWORD WeaponDataPTR = 0x360;
-		DWORD szName = 0xC18;
-		DWORD Clip1 = 0x1570;					// C_BasePlayerWeapon::m_iClip1
+		DWORD szName = 0xC20;
+		DWORD Clip1 = 0x15C8;					// C_BasePlayerWeapon::m_iClip1
 		DWORD MaxClip = 0x1FC;					// CBasePlayerWeaponVData::m_iMaxClip1
-		DWORD CycleTime = 0xC34;
-		DWORD Penetration = 0xD3C;
-		DWORD WeaponType = 0x240;
-		DWORD Inaccuracy = 0xC7C;				// CCSWeaponBaseVData::m_flInaccuracyMove
+		DWORD CycleTime = 0xC44;
+		DWORD Penetration = 0xD4C;
+		DWORD WeaponType = 0x248;
+		DWORD Inaccuracy = 0xC8C;				// CCSWeaponBaseVData::m_flInaccuracyMove
 	} WeaponBaseData;
 
 	struct
 	{
-		DWORD m_bBeingDefused = 0xEBC;
-		DWORD m_flDefuseCountDown = 0xED0;
-		DWORD m_nBombSite = 0xE84;
+		DWORD m_bBeingDefused = 0xF14;
+		DWORD m_flDefuseCountDown = 0xF28;
+		DWORD m_nBombSite = 0xEDC;
 	} C4;
 
 	struct
 	{
-		DWORD MoneyServices = 0x700;
+		DWORD MoneyServices = 0x6F8;
 		DWORD Account = 0x40;
 		DWORD TotalCashSpent = 0x48;
 		DWORD CashSpentThisRound = 0x4C;
@@ -116,23 +116,23 @@ namespace Offset
 
 	struct // C_BaseCSGrenadeProjectile
 	{ 
-		DWORD nSmokeEffectTickBegin = 0x1108; // int32_t
-		DWORD bDidSmokeEffect = 0x110C; // bool
-		DWORD nRandomSeed = 0x1110; // int32_t
-		DWORD vSmokeColor = 0x1114; // Vector
-		DWORD vSmokeDetonationPos = 0x1120; // Vector
-		DWORD VoxelFrameData = 0x1130; // CUtlVector<uint8_t>
-		DWORD bSmokeVolumeDataReceived = 0x1148; // bool
-		uintptr_t bSmokeEffectSpawned = 0x1149; // bool
+		DWORD nSmokeEffectTickBegin = 0x1160; // int32_t
+		DWORD bDidSmokeEffect = 0x1164; // bool
+		DWORD nRandomSeed = 1; // int32_t
+		DWORD vSmokeColor = 0x116C; // Vector
+		DWORD vSmokeDetonationPos = 0x1178; // Vector
+		DWORD VoxelFrameData = 0x1188; // CUtlVector<uint8_t>
+		DWORD bSmokeVolumeDataReceived = 0x11A0; // bool
+		uintptr_t bSmokeEffectSpawned = 0x11A1; // bool
 	} SmokeGrenadeProjectile; 
 
 	namespace Signatures
 	{
-		const std::string ForceForward = "48 8B 05 ?? ?? ?? ?? 4C 8D 0D ?? ?? ?? ?? 48 89 45";
-		const std::string ForceLeft = "48 8B 05 ?? ?? ?? ?? 48 8D 0D ?? ?? ?? ?? 44 8B 15";
-		const std::string ForceRight = "48 8B 05 ?? ?? ?? ?? 48 8D 15 ?? ?? ?? ?? 48 89 45";
-		const std::string ForceJump = "48 8B 05 ?? ?? ?? ?? 48 8D 1D ?? ?? ?? ?? 48 89 45";
-		const std::string ForceCrouch = "48 8B 05 ?? ?? ?? ?? 4C 8D 3D ?? ?? ?? ?? 48 89 45";
+		const std::string ForceForward = "48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
+		const std::string ForceLeft = "48 8D 05 ?? ?? ?? ?? 48 89 45 ? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
+		const std::string ForceRight = "48 8D 05 ?? ?? ?? ?? 48 89 45 ? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
+		const std::string ForceJump = "48 8D 05 ?? ?? ?? ?? 48 89 4D ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
+		const std::string ForceCrouch = "48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
 
 		const std::string InventoryServices = "E8 ?? ?? ?? ?? 8B 45 D0 48 8B 55 D8";
 		const std::string GlobalVars = "48 89 0D ?? ?? ?? ?? 48 89 41";
