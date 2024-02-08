@@ -270,6 +270,7 @@ void Cheats::Run()
 	Misc::FakeDuck(LocalEntity);
 	Misc::BunnyHop(LocalEntity);
 	Misc::CheatList();
+	Misc::ForceScope(LocalEntity);
 
 	// Fov line
 	Render::DrawFov(LocalEntity, MenuConfig::FovLineSize, MenuConfig::FovLineColor, 1);

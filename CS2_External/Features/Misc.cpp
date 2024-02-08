@@ -219,6 +219,9 @@ namespace Misc
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
 	{
 		DWORD64 CameraServices = 0;
+		if (Zoom)
+			return;
+
 		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::Pawn.CameraServices, CameraServices))
 			return;
 
@@ -246,7 +249,7 @@ namespace Misc
 					sss << "ThisRound/Total: " << EntityList.Controller.CashSpent << "/" << EntityList.Controller.CashSpentTotal;
 					ImGui::TextColored(ImColor(255, 0, 0, 255), sss.str().c_str());
 				}
-				
+
 				ImGui::TreePop();
 			}
 		}
@@ -295,6 +298,22 @@ namespace Misc
 		else if (!spacePressed && ForceJump == 65537)
 		{
 			gGame.SetForceJump(256);
+		}
+	}
+
+	void ForceScope(const CEntity& aLocalPlayer) noexcept
+	{
+		if (!MiscCFG::ForceScope)
+			return;
+
+		if (GetAsyncKeyState(VK_RBUTTON) & 0x8000)
+		{
+			Zoom = true;
+			UINT Scopefov = 45;
+			ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Scopefov);
+		}
+		else {
+			Zoom = false;
 		}
 	}
 }

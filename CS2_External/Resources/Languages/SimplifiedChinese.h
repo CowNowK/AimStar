@@ -127,6 +127,7 @@ namespace Lang
 		MiscText.NoSmoke = u8"关闭烟雾弹";
 		MiscText.SmokeColor = u8"烟雾弹颜色";
 		MiscText.fovchanger = u8"视角宽度: ";
+		MiscText.ForceScope = u8"右键开镜";
 
 		MiscText.FakeDuck = u8"假蹲";
 
