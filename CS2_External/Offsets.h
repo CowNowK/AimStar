@@ -84,6 +84,8 @@ namespace Offset
 		DWORD m_pObserverServices = 0x1118;
 		DWORD m_hObserverTarget = 0x44;
 		DWORD m_hController = 0x1294;
+		DWORD PawnArmor = 0x7F4;
+		DWORD HasHelmet = 0x7F9;
 	} PlayerController;
 
 	struct

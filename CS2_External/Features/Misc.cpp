@@ -225,6 +225,7 @@ namespace Misc
 
 		UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
 		ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Desiredfov);
+
 	}
 
 	void MoneyService(const CEntity& EntityList) noexcept

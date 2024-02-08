@@ -54,6 +54,7 @@ public:
 	int Health;
 	int Ammo;
 	int MaxAmmo;
+	int Armor;
 	int TeamID;
 	int Fov;
 	DWORD64 bSpottedByMask;
@@ -74,6 +75,7 @@ public:
 	bool GetAimPunchCache();
 	bool GetAmmo();
 	bool GetMaxAmmo();
+	bool GetArmor();
 
 	constexpr bool HasFlag(const Flags Flag) const noexcept {
 		return fFlags & (int)Flag;

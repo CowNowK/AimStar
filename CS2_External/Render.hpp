@@ -330,11 +330,15 @@ namespace Render
 		TimePoint_ BackupHealthTimePoint{};
 		int MaxAmmo = 0;
 		int CurrentAmmo = 0;
+		int MaxArmor = 0;
+		int CurrentArmor = 0;
 
 	public:
 		HealthBar() {}
 
 		void HealthBarV(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size, bool ShowNum);
+
+		void ArmorBarV(bool HasHelmet, float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size, bool ShowNum);
 
 		void AmmoBarH(float MaxAmmo, float CurrentAmmo, ImVec2 Pos, ImVec2 Size);
 	private:
@@ -354,6 +358,9 @@ namespace Render
 		ImColor BackGroundColor = ImColor(0, 0, 0, 255);
 
 		ImColor AmmoColor = ImColor(255, 255, 0, 255);
+
+		ImColor ArmorColor = ImColor(0, 128, 255, 255);
+		ImColor ArmorWithHelmetColor = ImColor(0, 255, 0, 255);
 	};
 
 	void HealthBar::HealthBarV(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size, bool ShowNum)
@@ -401,6 +408,54 @@ namespace Render
 				std::string health_str = Format("%.f", CurrentHealth);
 				Vec2 Pos = { RectPos.x,RectPos.y + RectSize.y - Height };
 				Gui.StrokeText(health_str, Pos, ImColor(255, 255, 255), 13.f, true);
+			}
+		}
+	}
+
+	void HealthBar::ArmorBarV(bool HasHelmet, float MaxArmor, float CurrentArmor, ImVec2 Pos, ImVec2 Size, bool ShowNum)
+	{
+		auto InRange = [&](float value, float min, float max) -> bool
+			{
+				return value > min && value <= max;
+			};
+
+		ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+
+		this->MaxArmor = MaxArmor;
+		this->CurrentArmor = CurrentArmor;
+		this->RectPos = Pos;
+		this->RectSize = Size;
+
+		float Proportion = CurrentArmor / MaxArmor;
+
+		float Height = RectSize.y * Proportion;
+
+		ImColor Color;
+
+		DrawList->AddRectFilled(RectPos,
+			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
+			BackGroundColor, 5, 15);
+
+		if (HasHelmet)
+			Color = ArmorWithHelmetColor;
+		else
+			Color = ArmorColor;
+
+		DrawList->AddRectFilled({ RectPos.x,RectPos.y + RectSize.y - Height },
+			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
+			Color, 0);
+
+		DrawList->AddRect(RectPos,
+			{ RectPos.x + RectSize.x,RectPos.y + RectSize.y },
+			FrameColor, 0, 15, 1);
+
+		if (ShowNum)
+		{
+			if (CurrentArmor < MaxArmor)
+			{
+				std::string armor_str = Format("%.f", CurrentArmor);
+				Vec2 Pos = { RectPos.x,RectPos.y + RectSize.y - Height };
+				Gui.StrokeText(armor_str, Pos, ImColor(255, 255, 255), 13.f, true);
 			}
 		}
 	}
@@ -459,6 +514,16 @@ namespace Render
 
 		if (HealthBarMap.count(Sign))
 			HealthBarMap[Sign].AmmoBarH(MaxAmmo, CurrentAmmo, Pos, Size);
+	}
+
+	void DrawArmorBar(DWORD Sign, float MaxArmor, float CurrentArmor, bool HasHelmet, ImVec2 Pos, ImVec2 Size)
+	{
+		static std::map<DWORD, HealthBar> HealthBarMap;
+		if (!HealthBarMap.count(Sign))
+			HealthBarMap.insert({ Sign,HealthBar() });
+
+		if (HealthBarMap.count(Sign))
+			HealthBarMap[Sign].ArmorBarV(HasHelmet, MaxArmor, CurrentArmor, Pos, Size, ESPConfig::ShowArmorNum);
 	}
 
 	// Update crosshair preset

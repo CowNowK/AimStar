@@ -90,6 +90,8 @@ namespace ESPConfig
 	inline bool DrawFov = false;
 	inline bool ShowDistance = false;
 	inline bool ShowHealthNum = false;
+	inline bool ArmorBar = false;
+	inline bool ShowArmorNum = false;
 	inline bool ShowHeadBox = false;
 	inline bool ShowPreview = true;
 	inline bool VisibleCheck = false;

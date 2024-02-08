@@ -234,14 +234,29 @@ void Cheats::Run()
 			}
 
 			// Draw Ammo
-			// When player is using knife, Ammo = -1.
+			// When player is using knife or nade, Ammo = -1.
 			if (ESPConfig::AmmoBar && Entity.Pawn.Ammo != -1)
 			{
 				ImVec2 AmmoBarPos = { Rect.x, Rect.y + Rect.w + 2 };
 				ImVec2 AmmoBarSize = { Rect.z,4 };
 				Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
-
 			}
+
+			// Draw Armor
+			// It is meaningless to render a empty bar
+			if (ESPConfig::ArmorBar && Entity.Pawn.Armor > 0)
+			{
+				bool HasHelmet;
+				ImVec2 ArmorBarPos;
+				ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
+				if (ESPConfig::ShowHealthBar)
+					ArmorBarPos = { Rect.x - 10.f,Rect.y };
+				else
+					ArmorBarPos = { Rect.x - 6.f,Rect.y };
+				ImVec2 ArmorBarSize = { 4.f,Rect.w };
+				Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
+			}
+
 
 			// Draw Distance
 			Render::DrawDistance(LocalEntity, Entity, Rect);

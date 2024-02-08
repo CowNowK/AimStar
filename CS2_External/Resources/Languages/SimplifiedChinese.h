@@ -36,9 +36,11 @@ namespace Lang
 		ESPtext.MultiColTip = u8"仅在圆角度为0时显示.";
 		ESPtext.Outline = u8"轮廓线";
 		ESPtext.BoxType = u8"方框样式:";
-		ESPtext.HealthNum = u8"生命数字";
+		ESPtext.HealthNum = u8"生命数值";
 		ESPtext.Ammo = u8"弹夹栏";
 		ESPtext.ScopedESP = u8"开镜状态";
+		ESPtext.ShowArmorBar = u8"盔甲栏";
+		ESPtext.ArmorNum = u8"盔甲数值";
 
 		ESPtext.BoxType_Normal = u8"正常";
 		ESPtext.BoxType_Edge = u8"动态";

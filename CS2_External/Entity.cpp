@@ -46,6 +46,8 @@ bool CEntity::UpdatePawn(const DWORD64& PlayerPawnAddress)
 		return false;
 	if (!this->Pawn.GetMaxAmmo())
 		return false;
+	if (!this->Pawn.GetArmor())
+		return false;
 	if (!this->Pawn.GetTeamID())
 		return false;
 	if (!this->Pawn.GetFov())
@@ -196,6 +198,11 @@ bool PlayerPawn::GetPos()
 bool PlayerPawn::GetHealth()
 {
 	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentHealth, this->Health);
+}
+
+bool PlayerPawn::GetArmor()
+{
+	return GetDataAddressWithOffset<int>(Address, 0x1570, this->Armor);
 }
 
 bool PlayerPawn::GetAmmo()
