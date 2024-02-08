@@ -264,6 +264,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "AimPos" << YAML::Value << MenuConfig::AimPosition;
         emitter << YAML::Key << "VisibleCheck" << YAML::Value << MenuConfig::VisibleCheck;
         emitter << YAML::Key << "ScopeOnly" << YAML::Value << AimControl::ScopeOnly;
+        emitter << YAML::Key << "AutoShot" << YAML::Value << AimControl::AutoShot;
         emitter << YAML::EndMap;
 
         emitter << YAML::Key << "Triggerbot";
@@ -452,6 +453,7 @@ namespace MyConfigSaver {
             MenuConfig::AimPosition = config["Aimbot"]["AimPos"].as<int>();
             MenuConfig::VisibleCheck = config["Aimbot"]["VisibleCheck"].as<bool>();
             AimControl::ScopeOnly = config["Aimbot"]["ScopeOnly"].IsDefined() ? config["Aimbot"]["ScopeOnly"].as<bool>() : false;
+            AimControl::AutoShot = config["Aimbot"]["AutoShot"].IsDefined() ? config["Aimbot"]["AutoShot"].as<bool>() : false;
         }
         if (config["Triggerbot"])
         {

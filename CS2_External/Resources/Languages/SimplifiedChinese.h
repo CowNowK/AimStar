@@ -61,6 +61,7 @@ namespace Lang
 		AimbotText.Tip = u8"此功能在菜单打开时不会工作";
 		AimbotText.ScopeOnly = u8"仅开镜";
 		AimbotText.AimLock = u8"自动锁定";
+		AimbotText.AutoShot = u8"自动开火";
 
 		// Radar
 		RadarText.Toggle = u8"显示雷达";

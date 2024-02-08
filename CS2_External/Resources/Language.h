@@ -70,6 +70,7 @@ namespace Lang
 		inline static const char* Tip;
 		inline static const char* ScopeOnly;
 		inline static const char* AimLock;
+		inline static const char* AutoShot;
 
 		inline static const char* Bone_1;
 		inline static const char* Bone_2;
@@ -242,6 +243,7 @@ namespace Lang
 		AimbotText.Tip = u8"Aimbot will not work while the menu is opened";
 		AimbotText.ScopeOnly = u8"Scope Only";
 		AimbotText.AimLock = u8"Aim Lock";
+		AimbotText.AutoShot = u8"Auto Shot";
 
 		// Radar
 		RadarText.Toggle = u8"Show Radar";
