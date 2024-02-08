@@ -28,6 +28,44 @@ namespace Misc
 		MiscCFG::fucker = !MiscCFG::fucker;
 	}
 
+	void CheatList() noexcept
+	{
+		if (!MiscCFG::CheatList)
+			return;
+
+		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
+		ImGui::SetNextWindowBgAlpha(0.3f);
+		ImGui::SetNextWindowSize(ImVec2(200, 0));
+		ImGui::Begin("Cheats List", nullptr, windowFlags);
+
+		if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
+			ImGui::Text("Aimbot [Toggle]");
+		CheatText("Anti Record", MenuConfig::BypassOBS);
+		CheatText("Bhop", MiscCFG::BunnyHop);
+		CheatText("Bomb Timer", MiscCFG::bmbTimer);
+		CheatText("Crosshair", CrosshairsCFG::ShowCrossHair);
+		CheatText("Enemy Sensor", MiscCFG::EnemySensor);
+		CheatText("ESP", ESPConfig::ESPenabled);
+		CheatText("External Radar", RadarCFG::ShowRadar);
+		CheatText("Fake Duck", MiscCFG::Jitter);
+		CheatText("Fast Stop", MiscCFG::FastStop);
+		if (MiscCFG::Fov != 90)
+			ImGui::Text("Fov Changer");
+		CheatText("Headshot Line", MenuConfig::ShowHeadShootLine);
+		CheatText("HitSound", MiscCFG::HitSound);
+		CheatText("Money Service", MiscCFG::MoneyService);
+		CheatText("No Flash", MiscCFG::NoFlash);
+		CheatText("No Smoke", MiscCFG::NoSmoke);
+		CheatText("Radar Hack", MiscCFG::RadarHack);
+		CheatText("RCS", MenuConfig::RCS);
+		CheatText("Smoke Color", MiscCFG::SmokeColored);
+		CheatText("Spec List", MiscCFG::SpecList);
+		if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
+			ImGui::Text("TriggerBot [Toggle]");
+
+		ImGui::End();
+	}
+
 	void Watermark() noexcept
 	{
 		if (!MiscCFG::WaterMark)

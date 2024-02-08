@@ -102,6 +102,7 @@ namespace Misc
 	void MoneyService(const CEntity& EntityList) noexcept;
 	void FakeDuck(const CEntity& EntityList) noexcept;
 	void BunnyHop(const CEntity& Local) noexcept;
+	void CheatList() noexcept;
 
 	void JoinDiscord() noexcept;
 	void SourceCode() noexcept;
