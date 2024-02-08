@@ -26,8 +26,8 @@ namespace Offset
 	{
 		DWORD Health = 0x334;
 		DWORD TeamID = 0x3CB;
-		DWORD IsAlive = 0x7F4;
-		DWORD PlayerPawn = 0x7EC;
+		DWORD IsAlive = 0x7EC;
+		DWORD PlayerPawn = 0x7E4;
 		DWORD iszPlayerName = 0x638;
 		DWORD EnemySensor = 0x1440;
 		DWORD GravityScale = 0x444;
@@ -89,7 +89,7 @@ namespace Offset
 	struct
 	{
 		DWORD ClippingWeapon = 0x1308;
-		DWORD WeaponDataPTR = 0x360;
+		DWORD WeaponDataPTR = 0x368;
 		DWORD szName = 0xC20;
 		DWORD Clip1 = 0x15C8;					// C_BasePlayerWeapon::m_iClip1
 		DWORD MaxClip = 0x1FC;					// CBasePlayerWeaponVData::m_iMaxClip1
