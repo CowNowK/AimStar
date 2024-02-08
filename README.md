@@ -14,6 +14,8 @@
 
 ## ❗ Info
 
+**GAME UPDATED, WAITING CHEAT UPDATE**
+
 Free and open-source external cheat for CS2, written in C++.
 
 Discord server: [AimShit Club](https://discord.com/invite/VgRrxwesPz)
