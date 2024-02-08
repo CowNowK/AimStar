@@ -177,7 +177,6 @@ namespace MiscCFG
 
 	inline bool BunnyHop = false;
 	inline bool WorkInSpec = true;
-	inline bool NoFlash = false;
 	inline bool WaterMark = false;
 	inline bool HitSound = false;
 	inline bool SkinChanger = false;
@@ -195,6 +194,7 @@ namespace MiscCFG
 	inline bool CheatList = false;
 	inline bool ForceScope = false;
 	inline int Fov = 90;
+	inline float FlashImmunity = 0;
 	inline ImColor BombTimerCol = ImColor(255, 120, 0, 255);
 	inline ImColor SmokeColor = ImColor(255, 0, 0, 255);
 	inline ImColor FireColor = ImColor(0, 255, 0, 255);

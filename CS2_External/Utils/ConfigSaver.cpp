@@ -207,7 +207,7 @@ namespace MyConfigSaver {
         emitter << YAML::EndMap;
         emitter << YAML::Key << "WorkInSpec" << YAML::Value << MiscCFG::WorkInSpec;
         emitter << YAML::Key << "Fov" << YAML::Value << MiscCFG::Fov;
-        emitter << YAML::Key << "NoFlash" << YAML::Value << MiscCFG::NoFlash;
+        emitter << YAML::Key << "FlashImmunity" << YAML::Value << MiscCFG::FlashImmunity;
         emitter << YAML::Key << "CheatList" << YAML::Value << MiscCFG::CheatList;
         emitter << YAML::Key << "Watermark" << YAML::Value << MiscCFG::WaterMark;
         emitter << YAML::Key << "HitSound" << YAML::Value << MiscCFG::HitSound;
@@ -415,7 +415,7 @@ namespace MyConfigSaver {
             MenuConfig::HeadShootLineColor.Value.w = config["Misc"]["HeadShootLineColor"]["a"].as<float>();
             MiscCFG::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
             MiscCFG::FovHacker = config["Misc"]["Fov"].IsDefined() ? config["Misc"]["Fov"].as<int>() : 90;
-            MiscCFG::NoFlash = config["Misc"]["NoFlash"].as<bool>();
+            MiscCFG::FlashImmunity = config["Misc"]["FlashImmunity"].IsDefined() ? config["Misc"]["FlashImmunity"].as<float>() : 0.f;
             MiscCFG::CheatList = config["Misc"]["CheatList"].IsDefined() ? config["Misc"]["CheatList"].as<bool>() : false;
             MiscCFG::WaterMark = config["Misc"]["Watermark"].as<bool>();
             MiscCFG::HitSound = config["Misc"]["HitSound"].as<bool>();

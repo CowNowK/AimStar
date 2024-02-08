@@ -122,6 +122,7 @@ namespace ConfigMenu {
 	}
 
 	void ResetToDefault() {
+		MiscCFG::FlashImmunity = 0.f;
 		MiscCFG::SmokeColored = false;
 		MiscCFG::SmokeColor = ImColor(255, 0, 0, 255);
 		MiscCFG::NoSmoke = false;
@@ -221,7 +222,6 @@ namespace ConfigMenu {
 		CrosshairsCFG::TeamCheck = true;
 		MiscCFG::BunnyHop = false;
 		MiscCFG::WorkInSpec = true;
-		MiscCFG::NoFlash = false;
 		MiscCFG::WaterMark = false;
 		MiscCFG::CheatList = false;
 		MiscCFG::HitSound = false;

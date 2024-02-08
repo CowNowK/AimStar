@@ -151,6 +151,7 @@ namespace Lang
 		inline static const char* SmokeColor;
 		inline static const char* fovchanger;
 		inline static const char* ForceScope;
+		inline static const char* FlashImmunity;
 		
 		inline static const char* FakeDuck;
 
@@ -310,6 +311,7 @@ namespace Lang
 		MiscText.SmokeColor = u8"Smoke Color";
 		MiscText.fovchanger = u8"Fov Changer: ";
 		MiscText.ForceScope = u8"Force Scope";
+		MiscText.FlashImmunity = u8"Flash Immunity: ";
 
 		MiscText.FakeDuck = u8"Fake Duck";
 

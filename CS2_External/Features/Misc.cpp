@@ -49,12 +49,13 @@ namespace Misc
 		CheatText("External Radar", RadarCFG::ShowRadar);
 		CheatText("Fake Duck", MiscCFG::Jitter);
 		CheatText("Fast Stop", MiscCFG::FastStop);
+		if (MiscCFG::FlashImmunity != 0)
+			ImGui::Text("Flash Immunity");
 		if (MiscCFG::Fov != 90)
 			ImGui::Text("Fov Changer");
 		CheatText("Headshot Line", MenuConfig::ShowHeadShootLine);
 		CheatText("HitSound", MiscCFG::HitSound);
 		CheatText("Money Service", MiscCFG::MoneyService);
-		CheatText("No Flash", MiscCFG::NoFlash);
 		CheatText("No Smoke", MiscCFG::NoSmoke);
 		CheatText("Radar Hack", MiscCFG::RadarHack);
 		CheatText("RCS", MenuConfig::RCS);
@@ -115,13 +116,10 @@ namespace Misc
 		PreviousTotalHits = totalHits;
 	}
 
-	void NoFlash(const CEntity& aLocalPlayer) noexcept
+	void FlashImmunity(const CEntity& aLocalPlayer) noexcept
 	{
-		if (!MiscCFG::NoFlash)
-			return;
-
-		float duration = 0.0f;
-		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashDuration, duration);
+		float MaxAlpha = 255.f - MiscCFG::FlashImmunity;
+		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
 	}
 
 	void FastStop() noexcept

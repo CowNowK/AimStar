@@ -262,7 +262,7 @@ void Cheats::Run()
 		TriggerBot::Run(LocalEntity);	
 
 	Misc::HitSound(LocalEntity, PreviousTotalHits);
-	Misc::NoFlash(LocalEntity);
+	Misc::FlashImmunity(LocalEntity);
 	Misc::FastStop();
 	Misc::NadeManager(gGame);
 	Misc::FovChanger(LocalEntity);

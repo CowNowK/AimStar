@@ -390,11 +390,13 @@ namespace GUI
 				if (MenuConfig::WCS.MenuPage == 2)
 				{
 					int FovMin = 60, FovMax = 140;
+					float FlashMin = 0.f, FlashMax = 255.f;
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 					ImGui::SeparatorText(ICON_FA_SUN" Misc");
 
 					PutSliderInt(Lang::MiscText.fovchanger, 10.f, &MiscCFG::Fov, &FovMin, &FovMax, "%d");
+					PutSliderFloat(Lang::MiscText.FlashImmunity, 10.f, &MiscCFG::FlashImmunity, &FlashMin, &FlashMax, "%.f");
 					PutSwitch(Lang::MiscText.Bhop, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
 					PutSwitch(Lang::MiscText.bmbTimer, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol));
 					PutSwitch(Lang::MiscText.CheatList, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::CheatList);
@@ -406,7 +408,6 @@ namespace GUI
 					PutSwitch(Lang::MiscText.MoneyService, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::MoneyService);
 					if (MiscCFG::MoneyService)
 						PutSwitch(Lang::MiscText.ShowCashSpent, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ShowCashSpent);
-					PutSwitch(Lang::MiscText.NoFlash, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoFlash);
 					PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoSmoke);
 					PutSwitch(Lang::MiscText.RadarHack, 10.f, ImGui::GetFrameHeight() * 1.7f, &MiscCFG::RadarHack);
 					if (MiscCFG::RadarHack)
