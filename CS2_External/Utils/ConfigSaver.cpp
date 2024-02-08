@@ -416,7 +416,7 @@ namespace MyConfigSaver {
             MiscCFG::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
             MiscCFG::FovHacker = config["Misc"]["Fov"].IsDefined() ? config["Misc"]["Fov"].as<int>() : 90;
             MiscCFG::NoFlash = config["Misc"]["NoFlash"].as<bool>();
-            MiscCFG::CheatList = config["Misc"]["CheatList"].as<bool>();
+            MiscCFG::CheatList = config["Misc"]["CheatList"].IsDefined() ? config["Misc"]["CheatList"].as<bool>() : false;
             MiscCFG::WaterMark = config["Misc"]["Watermark"].as<bool>();
             MiscCFG::HitSound = config["Misc"]["HitSound"].as<bool>();
             MiscCFG::bmbTimer = config["Misc"]["BombTimer"].as<bool>();
