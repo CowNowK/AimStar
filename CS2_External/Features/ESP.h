@@ -410,6 +410,26 @@ namespace ESP
 				ImGui::GetWindowDrawList()->AddRectFilled(HBS, HBE, greenColor, 0.0f, ImDrawCornerFlags_All);
 			}
 		}
+		if (ESPConfig::ArmorBar) {
+			ImU32 blueColor = IM_COL32(0, 128, 255, 255);
+			ImVec2 ABPos = centerPos;
+			ImVec2 ABSize = rectSize;
+				
+			if (MenuConfig::BoxType == 1 || MenuConfig::BoxType == 3) {
+				ABPos = { centerPos.x + 20, centerPos.y + 15 };
+				ABSize = { rectSize.x - 2, rectSize.y - 18 };
+			}
+
+			if (ESPConfig::ShowHealthBar)
+			{
+				ABPos.x -= 4;
+				ABSize.x -= 4;
+			}
+			ImVec2 ABS(ABPos.x - 6, ABPos.y);
+			ImVec2 ABE(ABPos.x - 3, ABPos.y + ABSize.y);
+			ImGui::GetWindowDrawList()->AddRectFilled(ABS, ABE, blueColor, 0.0f, ImDrawCornerFlags_All);
+			
+		}
 		if (ESPConfig::AmmoBar) {
 			ImU32 yellowColor = IM_COL32(255, 255, 0, 255);
 			if (MenuConfig::BoxType == 0 || MenuConfig::BoxType == 2) {
