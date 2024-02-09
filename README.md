@@ -14,8 +14,6 @@
 
 ## ❗ Info
 
-**GAME UPDATED, WAITING CHEAT UPDATE**
-
 Free and open-source external cheat for CS2, written in C++.
 
 Discord server: [AimShit Club](https://discord.com/invite/VgRrxwesPz)
@@ -90,3 +88,9 @@ Please read the following advice carefully before using Aimstar.
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=CowNowK/AimStar&type=Date)](https://star-history.com/#CowNowK/AimStar&Date)
+
+## 💲 Best Resell
+
+这个拼多多商家已经将免费的AimStar以35元永久的价格售出了10万份
+
+![1f76f67174ee54af569f0ea8dc64963](https://github.com/CowNowK/AimStar/assets/133740174/f032647a-b648-4b9b-986e-3288e22d3d0f)
