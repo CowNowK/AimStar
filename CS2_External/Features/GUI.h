@@ -498,8 +498,15 @@ namespace GUI
 					}
 
 					ImGui::NewLine();
-					PutSwitch(Lang::ReadMeText.DiscordButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::mother);
-					PutSwitch(Lang::ReadMeText.SourceButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::fucker);
+					
+					if (ImGui::Button(Lang::ReadMeText.DiscordButton, ImVec2(ImGui::CalcItemWidth(), ImGui::GetFrameHeight() * 1.7)))
+						ShellExecuteA(NULL, "open", "https://discord.com/invite/VgRrxwesPz", NULL, NULL, SW_SHOWNORMAL);
+
+					ImGui::Spacing();
+
+					if (ImGui::Button(Lang::ReadMeText.SourceButton, ImVec2(ImGui::CalcItemWidth(), ImGui::GetFrameHeight() * 1.7)))
+						ShellExecuteA(NULL, "open", "https://github.com/CowNowK/AimStar", NULL, NULL, SW_SHOWNORMAL);
+
 
 					ImGui::Columns(1);
 				}
