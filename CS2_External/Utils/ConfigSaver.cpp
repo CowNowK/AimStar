@@ -250,7 +250,7 @@ namespace MyConfigSaver {
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
         emitter << YAML::Key << "Enable" << YAML::Value << MenuConfig::AimBot;
-        emitter << YAML::Key << "AutoLock" << YAML::Value << MenuConfig::AimAlways;
+        emitter << YAML::Key << "AimLock" << YAML::Value << AimControl::AimLock;
         emitter << YAML::Key << "ToggleMode" << YAML::Value << MenuConfig::AimToggleMode;
         emitter << YAML::Key << "Hotkey" << YAML::Value << MenuConfig::AimBotHotKey;
         emitter << YAML::Key << "Fov" << YAML::Value << AimControl::AimFov;
@@ -446,7 +446,7 @@ namespace MyConfigSaver {
         if (config["Aimbot"])
         {
             MenuConfig::AimBot = config["Aimbot"]["Enable"].as<bool>();
-            MenuConfig::AimAlways = config["Aimbot"]["AutoLock"].as<bool>();
+            MenuConfig::AimAlways = config["Aimbot"]["AimLock"].IsDefined() ? config["Aimbot"]["AimLock"].as<bool>() : false;
             MenuConfig::AimToggleMode = config["Aimbot"]["ToggleMode"].as<bool>();
             MenuConfig::AimBotHotKey = config["Aimbot"]["Hotkey"].as<int>();
             AimControl::AimFov = config["Aimbot"]["Fov"].as<float>();

@@ -105,6 +105,7 @@ namespace ESPConfig
 	inline float BoxRounding = RandomPara<float>(0.0f, 3.0f);;
 	inline float BoxAlpha = 0.35f;
 	inline bool ShowLineToEnemy = false;
+	inline int RenderDistance = 50;
 	inline ImColor LineToEnemyColor = ImColor(255, 255, 255, 220);
 	// 0: Top 1: Center 2: Bottom
 	inline int LinePos = 0;
