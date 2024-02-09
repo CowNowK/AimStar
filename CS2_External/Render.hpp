@@ -360,7 +360,7 @@ namespace Render
 		ImColor AmmoColor = ImColor(255, 255, 0, 255);
 
 		ImColor ArmorColor = ImColor(0, 128, 255, 255);
-		ImColor ArmorWithHelmetColor = ImColor(0, 255, 0, 255);
+		ImColor ArmorWithHelmetColor = ImColor(255, 0, 255, 255);
 	};
 
 	void HealthBar::HealthBarV(float MaxHealth, float CurrentHealth, ImVec2 Pos, ImVec2 Size, bool ShowNum)
