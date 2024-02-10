@@ -19,6 +19,7 @@ jobs:
         run: |
           del AimStar-dev-*.exe
           ren AimStar.exe AimStar-dev-${{github.sha}}.exe
+        working-directory: .\x64\Release\
       - name: Upload the output
         uses: actions/upload-artifact@v2
         with:
