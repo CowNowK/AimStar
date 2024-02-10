@@ -17,8 +17,8 @@ jobs:
         run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
       - name: Rename EXE to AimStar-dev-${{github.sha}}.exe
         run: |
-          del AimStar-dev-*.exe
-          ren AimStar.exe AimStar-dev-${{github.sha}}.exe
+          del AimStar-*.exe
+          ren AimStar.exe AimStar-${{github.sha}}.exe
         working-directory: .\x64\Release\
       - name: Upload the output
         uses: actions/upload-artifact@v2
@@ -38,19 +38,20 @@ jobs:
       - name: Run latest-tag
         uses: EndBug/latest-tag@84c87607fcb948bcef069c9a27445e653113979f
         with:
-          ref: ci
+          ref: autobuild
       - name: automatic Release ci
         uses: softprops/action-gh-release@v1
         with:
-          name: ci [${{github.sha}}]
-          tag_name: ci
+          name: autobuild [${{github.sha}}]
+          tag_name: autobuild
           body: |
             **This release has been built by Github Actions**
             [Link to build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-            Full Commit Hash:
+            Full Commit Hash of Latest autobuild:
             ```
             ${{github.sha}}
             ```
+            No support for any autobuild version except the latest autobuild
           files: |
-            AimStar-dev-${{github.sha}}.exe
+            AimStar-${{github.sha}}.exe
           prerelease: true
