@@ -68,7 +68,7 @@ namespace Misc
 		ImGui::End();
 	}
 
-	void Watermark() noexcept
+	void Watermark(const CEntity& LocalPlayer) noexcept
 	{
 		if (!MiscCFG::WaterMark)
 			return;
@@ -84,8 +84,12 @@ namespace Misc
 		FrameRate = ImGui::GetIO().Framerate;
 		getCurrentTime(&ptm);
 
-		ImGui::Text("AimStar | %d fps | %02d:%02d:%02d",
+		int playerPing;
+		ProcessMgr.ReadMemory(LocalPlayer.Controller.Address + 0x718, playerPing);
+
+		ImGui::Text("AimStar | %d fps | %d ms | %02d:%02d:%02d",
 			FrameRate != 0.0f ? static_cast<int>(FrameRate) : 0,
+			playerPing,
 			ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
 		ImGui::End();
 	}

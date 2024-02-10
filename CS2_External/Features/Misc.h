@@ -94,7 +94,7 @@ namespace Misc
 		return hasFlagDucking;
 	}
 
-	void Watermark() noexcept;
+	void Watermark(const CEntity& aLocalPlayer) noexcept;
 	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept;
 	void FastStop() noexcept;

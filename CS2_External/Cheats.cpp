@@ -282,7 +282,7 @@ void Cheats::Run()
 	Misc::FastStop();
 	Misc::NadeManager(gGame);
 	Misc::FovChanger(LocalEntity);
-	Misc::Watermark();
+	Misc::Watermark(LocalEntity);
 	Misc::FakeDuck(LocalEntity);
 	Misc::BunnyHop(LocalEntity);
 	Misc::CheatList();
