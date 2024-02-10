@@ -15,10 +15,32 @@ jobs:
         uses: microsoft/setup-msbuild@v1
       - name: Build with MSBuild
         run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
-      - name: Zip the output
-        run: Compress-Archive -Path .\x64\Release\* -DestinationPath pre-release.zip
+      - name: Rename EXE to AimStar-dev-${{github.sha}}.exe
+        run: |
+          del AimStar-dev-*.exe
+          ren AimStar.exe AimStar-dev-${{github.sha}}.exe
       - name: Upload the output
         uses: actions/upload-artifact@v2
         with:
-          name: output
-          path: pre-release.zip
+          name: ci
+          path: .\x64\Release\*
+      - name: automatic Release ci
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ci [${{github.sha}}]
+          tag_name: ci
+          body: |
+            **This release has been built by Github Actions**
+            [Link to build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+            Build SHA256:
+            ```
+            ${{ steps.build_sha.outputs.build_sha }}
+            ```
+            
+            Full Commit Hash:
+            ```
+            ${{github.sha}}
+            ```
+          files: |
+            AimStar-dev-${{github.sha}}.exe
