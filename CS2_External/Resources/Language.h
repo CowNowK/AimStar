@@ -247,6 +247,7 @@ namespace Lang
 		AimbotText.VisCheck = u8"Visible Only";
 		AimbotText.JumpCheck = u8"On Ground Only";
 		AimbotText.FovSlider = u8"FOV: ";
+		AimbotText.FovMinSlider = u8"MinFOV: ";
 		AimbotText.SmoothSlider = u8"Smooth: ";
 		AimbotText.BoneList = u8"Bone       ";
 		AimbotText.Tip = u8"Aimbot will not work while the menu is opened";
