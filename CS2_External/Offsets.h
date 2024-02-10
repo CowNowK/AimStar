@@ -91,7 +91,7 @@ namespace Offset
 
 	struct
 	{
-		DWORD ClippingWeapon = 0x1308;
+		DWORD ClippingWeapon = 0x1308;			// WeaponBase
 		DWORD WeaponDataPTR = 0x368;
 		DWORD szName = 0xC20;
 		DWORD Clip1 = 0x15C8;					// C_BasePlayerWeapon::m_iClip1
@@ -100,6 +100,7 @@ namespace Offset
 		DWORD Penetration = 0xD4C;
 		DWORD WeaponType = 0x248;
 		DWORD Inaccuracy = 0xC8C;				// CCSWeaponBaseVData::m_flInaccuracyMove
+		DWORD inReload = 0x1744;
 	} WeaponBaseData;
 
 	struct

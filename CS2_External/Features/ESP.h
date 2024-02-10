@@ -90,7 +90,7 @@ namespace ESP
 	{
 		uintptr_t ClippingWeapon, WeaponData, WeaponNameAddress;
 		ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::Pawn.pClippingWeapon, ClippingWeapon);
-		ProcessMgr.ReadMemory(ClippingWeapon + 0x360, WeaponData);
+		ProcessMgr.ReadMemory(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData);
 		ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.szName, WeaponNameAddress);
 		std::string weaponName = "Invalid Weapon Name";
 

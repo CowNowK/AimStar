@@ -21,7 +21,7 @@
 
 namespace Misc
 {
-	inline bool Zoom;
+	inline bool Zoom = false;
 
 	static inline std::vector<ImColor> colorList = {
 		ImColor(255, 0, 0),     // Red
