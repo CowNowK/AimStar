@@ -38,5 +38,5 @@ jobs:
             ${{github.sha}}
             ```
           files: |
-            AimStar-dev-${{github.sha}}.exe
+            .\x64\Release\AimStar-dev-${{github.sha}}.exe
           prerelease: true
