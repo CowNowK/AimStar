@@ -25,6 +25,16 @@ jobs:
         with:
           name: ci
           path: .\x64\Release\*
+  create_release:
+    runs-on: ubuntu-latest
+    name: Create Release
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ci
+      
       - name: automatic Release ci
         uses: softprops/action-gh-release@v1
         with:
@@ -38,5 +48,5 @@ jobs:
             ${{github.sha}}
             ```
           files: |
-            .\x64\Release\AimStar-dev-${{github.sha}}.exe
+            ci.zip
           prerelease: true
