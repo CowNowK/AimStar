@@ -27,6 +27,7 @@ jobs:
           path: .\x64\Release\*
   create_release:
     runs-on: ubuntu-latest
+    needs: build
     name: Create Release
     steps:
       - uses: actions/checkout@v3
