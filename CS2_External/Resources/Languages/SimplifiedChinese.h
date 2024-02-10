@@ -59,6 +59,7 @@ namespace Lang
 		AimbotText.VisCheck = u8"仅可见目标";
 		AimbotText.JumpCheck = u8"仅在地面上";
 		AimbotText.FovSlider = u8"FOV: ";
+		AimbotText.FovMinSlider = u8"最小FOV: ";
 		AimbotText.SmoothSlider = u8"平滑度: ";
 		AimbotText.BoneList = u8"瞄准部位  ";
 		AimbotText.Tip = u8"此功能在菜单打开时不会工作";
