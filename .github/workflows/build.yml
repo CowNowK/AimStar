@@ -1,0 +1,20 @@
+name: build x64 release
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup MSBuild path
+        uses: microsoft/setup-msbuild@v1
+      - name: Build with MSBuild
+        run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
+      - name: Zip the output
+        run: Compress-Archive -Path .\x64\Release\* -DestinationPath pre-release.zip
+      - name: Upload the output
+        uses: actions/upload-artifact@v2
+        with:
+          name: output
+          path: pre-release.zip
