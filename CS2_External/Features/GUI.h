@@ -338,6 +338,7 @@ namespace GUI
 						PutSwitch(Lang::AimbotText.ScopeOnly, 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::ScopeOnly);
 						PutSwitch(Lang::AimbotText.AutoShot, 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::AutoShot);
 						PutSliderFloat(Lang::AimbotText.FovSlider, 10.f, &AimControl::AimFov, &FovMin, &FovMax, "%.1f");
+						PutSliderFloat(Lang::AimbotText.FovMinSlider, 10.f, &AimControl::AimFovMin, &FovMin, &FovMax, "%.1f");
 						PutSliderFloat(Lang::AimbotText.SmoothSlider, 10.f, &AimControl::Smooth, &SmoothMin, &SmoothMax, "%.1f");
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 						ImGui::TextDisabled(Lang::AimbotText.BoneList);

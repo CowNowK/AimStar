@@ -68,6 +68,7 @@ namespace Lang
 		inline static const char* VisCheck;
 		inline static const char* JumpCheck;
 		inline static const char* FovSlider;
+		inline static const char* FovMinSlider;
 		inline static const char* SmoothSlider;
 		inline static const char* BoneList;
 		inline static const char* Tip;
