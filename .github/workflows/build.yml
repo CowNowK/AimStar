@@ -33,15 +33,10 @@ jobs:
           body: |
             **This release has been built by Github Actions**
             [Link to build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-
-            Build SHA256:
-            ```
-            ${{ steps.build_sha.outputs.build_sha }}
-            ```
-            
             Full Commit Hash:
             ```
             ${{github.sha}}
             ```
           files: |
             AimStar-dev-${{github.sha}}.exe
+          prerelease: true
