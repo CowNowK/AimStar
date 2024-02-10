@@ -1,14 +1,15 @@
 #pragma once
 
 #include "..\Utils\yaml-cpp\yaml.h"
+#include "..\OS-ImGui\imgui\imgui.h"
 #include <string>
 
 namespace MyConfigSaver {
     extern void SaveConfig(const std::string& filename, const std::string& author = "");
     extern void LoadConfig(const std::string& filename);
 
-    /*
-    extern uint32_t ImColorToUInt32(const ImColor& color)
+    
+    inline uint32_t ImColorToUInt32(const ImColor& color)
     {
         uint32_t r = static_cast<uint32_t>(color.Value.x * 255);
         uint32_t g = static_cast<uint32_t>(color.Value.y * 255) << 8;
@@ -18,7 +19,7 @@ namespace MyConfigSaver {
         return r | g | b | a;
     }
 
-    extern void UInt32ToImColor(uint32_t value, float& r, float& g, float& b, float& a)
+    inline void UInt32ToImColor(uint32_t value, float& r, float& g, float& b, float& a)
     {
         r = static_cast<float>(value & 0xFF) / 255.0f;
         g = static_cast<float>((value >> 8) & 0xFF) / 255.0f;
@@ -26,5 +27,5 @@ namespace MyConfigSaver {
         a = static_cast<float>((value >> 24) & 0xFF) / 255.0f;
         return;
     }
-    */
+    
 }

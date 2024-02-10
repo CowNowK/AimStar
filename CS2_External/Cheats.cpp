@@ -287,6 +287,11 @@ void Cheats::Run()
 	Misc::CheatList();
 	Misc::ForceScope(LocalEntity);
 
+	/*
+	bool a;
+	ProcessMgr.ReadMemory(LocalEntity.Pawn.Address + Offset::Pawn.iShotsFired, a);
+	std::cout << a << std::endl;*/
+
 	// Fov line
 	Render::DrawFov(LocalEntity, MenuConfig::FovLineSize, MenuConfig::FovLineColor, 1);
 
