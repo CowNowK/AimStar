@@ -115,7 +115,7 @@ namespace Lang
 		MiscText.HitSound = u8"命中音效";
 		MiscText.bmbTimer = u8"C4计时器";
 		MiscText.SpecList = u8"旁观者列表";
-		MiscText.Bhop = u8"连跳";
+		MiscText.Bhop = u8"自动连跳";
 		MiscText.Watermark = u8"水印浮窗";
 		MiscText.CheatList = u8"功能列表";
 		MiscText.TeamCheck = u8"队伍检查";

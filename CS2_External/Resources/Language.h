@@ -302,7 +302,7 @@ namespace Lang
 		MiscText.HitSound = u8"Hit Sound";
 		MiscText.bmbTimer = u8"Bomb Timer";
 		MiscText.SpecList = u8"Spec List";
-		MiscText.Bhop = u8"Bunny Hop";
+		MiscText.Bhop = u8"Auto Jump";
 		MiscText.Watermark = u8"Watermark";
 		MiscText.CheatList = u8"Cheat List";
 		MiscText.TeamCheck = u8"Team Check";
