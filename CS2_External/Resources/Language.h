@@ -44,6 +44,7 @@ namespace Lang
 		inline static const char* ScopedESP;
 		inline static const char* ShowArmorBar;
 		inline static const char* ArmorNum;
+		inline static const char* RenderDistance;
 
 		inline static const char* BoxType_Normal;
 		inline static const char* BoxType_Edge;
@@ -227,6 +228,7 @@ namespace Lang
 		ESPtext.ScopedESP = u8"Show Scoped";
 		ESPtext.ShowArmorBar = u8"Armor Bar";
 		ESPtext.ArmorNum = u8"Armor Number";
+		ESPtext.RenderDistance = u8"Maximum Render Distance: ";
 
 		ESPtext.BoxType_Normal = u8"Normal";
 		ESPtext.BoxType_Edge = u8"Dynamic";

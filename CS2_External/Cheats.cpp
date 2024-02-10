@@ -222,44 +222,45 @@ void Cheats::Run()
 		if (ESPConfig::ESPenabled)
 		{
 			ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
-			ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
-			
-				
-			// Draw HealthBar
-			if (ESPConfig::ShowHealthBar)
-			{
-				ImVec2 HealthBarPos = { Rect.x - 6.f,Rect.y };
-				ImVec2 HealthBarSize = { 4 ,Rect.w };
-				Render::DrawHealthBar(EntityAddress, 100, Entity.Pawn.Health, HealthBarPos, HealthBarSize);
-			}
+			int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
 
-			// Draw Ammo
-			// When player is using knife or nade, Ammo = -1.
-			if (ESPConfig::AmmoBar && Entity.Pawn.Ammo != -1)
+			if (distance <= ESPConfig::RenderDistance)
 			{
-				ImVec2 AmmoBarPos = { Rect.x, Rect.y + Rect.w + 2 };
-				ImVec2 AmmoBarSize = { Rect.z,4 };
-				Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
-			}
+				ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
+				Render::DrawDistance(LocalEntity, Entity, Rect);
 
-			// Draw Armor
-			// It is meaningless to render a empty bar
-			if (ESPConfig::ArmorBar && Entity.Pawn.Armor > 0)
-			{
-				bool HasHelmet;
-				ImVec2 ArmorBarPos;
-				ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
+				// Draw HealthBar
 				if (ESPConfig::ShowHealthBar)
-					ArmorBarPos = { Rect.x - 10.f,Rect.y };
-				else
-					ArmorBarPos = { Rect.x - 6.f,Rect.y };
-				ImVec2 ArmorBarSize = { 4.f,Rect.w };
-				Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
+				{
+					ImVec2 HealthBarPos = { Rect.x - 6.f,Rect.y };
+					ImVec2 HealthBarSize = { 4 ,Rect.w };
+					Render::DrawHealthBar(EntityAddress, 100, Entity.Pawn.Health, HealthBarPos, HealthBarSize);
+				}
+
+				// Draw Ammo
+				// When player is using knife or nade, Ammo = -1.
+				if (ESPConfig::AmmoBar && Entity.Pawn.Ammo != -1)
+				{
+					ImVec2 AmmoBarPos = { Rect.x, Rect.y + Rect.w + 2 };
+					ImVec2 AmmoBarSize = { Rect.z,4 };
+					Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
+				}
+
+				// Draw Armor
+				// It is meaningless to render a empty bar
+				if (ESPConfig::ArmorBar && Entity.Pawn.Armor > 0)
+				{
+					bool HasHelmet;
+					ImVec2 ArmorBarPos;
+					ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
+					if (ESPConfig::ShowHealthBar)
+						ArmorBarPos = { Rect.x - 10.f,Rect.y };
+					else
+						ArmorBarPos = { Rect.x - 6.f,Rect.y };
+					ImVec2 ArmorBarSize = { 4.f,Rect.w };
+					Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
+				}
 			}
-
-
-			// Draw Distance
-			Render::DrawDistance(LocalEntity, Entity, Rect);
 		}
 		Glow::Run(Entity);
 		// SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);

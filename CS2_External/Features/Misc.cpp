@@ -51,6 +51,7 @@ namespace Misc
 		CheatText("Fast Stop", MiscCFG::FastStop);
 		if (MiscCFG::FlashImmunity != 0)
 			ImGui::Text("Flash Immunity");
+		CheatText("Force Scope", MiscCFG::ForceScope);
 		if (MiscCFG::Fov != 90)
 			ImGui::Text("Fov Changer");
 		CheatText("Headshot Line", MenuConfig::ShowHeadShootLine);

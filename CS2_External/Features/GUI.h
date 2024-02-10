@@ -206,6 +206,7 @@ namespace GUI
 					ImGui::SeparatorText(ICON_FA_EYE" ESP");
 					float MinRounding = 0.f, MaxRouding = 5.f;
 					int MinCombo = 0, MaxCombo = 2;
+					int MinDis = 5, MaxDis = 80;
 					PutSwitch(Lang::ESPtext.Toggle, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ESPenabled);
 					if (ESPConfig::ESPenabled)
 					{
@@ -239,6 +240,7 @@ namespace GUI
 						PutSwitch(Lang::ESPtext.PlayerName, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowPlayerName);
 						PutSwitch(Lang::ESPtext.ScopedESP, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowIsScoped);
 						PutSwitch(Lang::ESPtext.VisCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::VisibleCheck, true, "###VisibleCol", reinterpret_cast<float*>(&ESPConfig::VisibleColor));
+						PutSliderInt(Lang::ESPtext.RenderDistance, 10.f, &ESPConfig::RenderDistance, &MinDis, &MaxDis, "%dm");
 					}
 					
 					ImGui::NextColumn();

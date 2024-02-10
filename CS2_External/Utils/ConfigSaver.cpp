@@ -51,6 +51,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "ShowScoped" << YAML::Value << ESPConfig::ShowIsScoped;
         emitter << YAML::Key << "ArmorBar" << YAML::Value << ESPConfig::ArmorBar;
         emitter << YAML::Key << "ArmorNum" << YAML::Value << ESPConfig::ShowArmorNum;
+        emitter << YAML::Key << "MaxRenderDistance" << YAML::Value << ESPConfig::RenderDistance;
         emitter << YAML::Key << "BoneColor";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
@@ -324,6 +325,7 @@ namespace MyConfigSaver {
             ESPConfig::ShowIsScoped = config["ESP"]["ShowScoped"].IsDefined() ? config["ESP"]["ShowScoped"].as<bool>() : false;
             ESPConfig::ArmorBar = config["ESP"]["ArmorBar"].IsDefined() ? config["ESP"]["ArmorBar"].as<bool>() : false;
             ESPConfig::ShowArmorNum = config["ESP"]["ArmorNum"].IsDefined() ? config["ESP"]["ArmorNum"].as<bool>() : false;
+            ESPConfig::RenderDistance = config["ESP"]["MaxRenderDistance"].IsDefined() ? config["ESP"]["MaxRenderDistance"].as<int>() : 80;
             ESPConfig::BoneColor.Value.x = config["ESP"]["BoneColor"]["r"].as<float>();
             ESPConfig::BoneColor.Value.y = config["ESP"]["BoneColor"]["g"].as<float>();
             ESPConfig::BoneColor.Value.z = config["ESP"]["BoneColor"]["b"].as<float>();

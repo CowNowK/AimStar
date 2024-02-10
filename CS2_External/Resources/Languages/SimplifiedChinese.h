@@ -41,6 +41,7 @@ namespace Lang
 		ESPtext.ScopedESP = u8"开镜状态";
 		ESPtext.ShowArmorBar = u8"盔甲栏";
 		ESPtext.ArmorNum = u8"盔甲数值";
+		ESPtext.RenderDistance = u8"最大绘制距离: ";
 
 		ESPtext.BoxType_Normal = u8"正常";
 		ESPtext.BoxType_Edge = u8"动态";

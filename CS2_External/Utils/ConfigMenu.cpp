@@ -123,6 +123,7 @@ namespace ConfigMenu {
 
 	void ResetToDefault() {
 		AimControl::AimLock = false;
+		ESPConfig::RenderDistance = 80;
 		ESPConfig::ArmorBar = false;
 		ESPConfig::ShowArmorNum = false;
 		MiscCFG::FlashImmunity = 0.f;
