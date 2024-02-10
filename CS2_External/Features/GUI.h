@@ -498,8 +498,10 @@ namespace GUI
 					}
 
 					ImGui::NewLine();
+					
 					PutSwitch(Lang::ReadMeText.DiscordButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::mother);
 					PutSwitch(Lang::ReadMeText.SourceButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::fucker);
+
 
 					ImGui::Columns(1);
 				}
