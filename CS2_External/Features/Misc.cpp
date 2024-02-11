@@ -78,19 +78,32 @@ namespace Misc
 		ImGui::SetNextWindowBgAlpha(0.3f);
 		ImGui::Begin("Watermark", nullptr, windowFlags);
 
+		// Cheat FPS
 		static auto FrameRate = 1.0f;
-		struct tm ptm;
-		//	FrameRate = 0.9f * FrameRate + 0.1f * GV.GetFrameCount();
 		FrameRate = ImGui::GetIO().Framerate;
+
+		// Current Time
+		struct tm ptm;
 		getCurrentTime(&ptm);
 
+		// Player Ping
 		int playerPing;
 		ProcessMgr.ReadMemory(LocalPlayer.Controller.Address + 0x718, playerPing);
 
-		ImGui::Text("AimStar | %d fps | %d ms | %02d:%02d:%02d",
+		// Player Pos
+		Vec3 Pos = LocalPlayer.Pawn.Pos;
+
+		// Player Angle
+		Vec2 Angle = LocalPlayer.Pawn.ViewAngle;
+
+		ImGui::Text("%d FPS | %d ms | %02d:%02d:%02d",
 			FrameRate != 0.0f ? static_cast<int>(FrameRate) : 0,
 			playerPing,
 			ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
+		ImGui::NewLine();
+		ImGui::Text("Pos: %.2f, %.2f, %.2f", Pos.x, Pos.y, Pos.z);
+		ImGui::Text("Angel: %.2f, %.2f", Angle.x, Angle.y);
+
 		ImGui::End();
 	}
 
