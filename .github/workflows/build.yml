@@ -55,3 +55,4 @@ jobs:
           files: |
             AimStar-${{github.sha}}.exe
           prerelease: true
+          
