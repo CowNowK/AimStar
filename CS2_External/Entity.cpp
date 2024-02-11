@@ -133,7 +133,7 @@ bool PlayerPawn::GetWeaponName()
 	if (WeaponNameAddress == 0)
 		return false;
 
-	if (!ProcessMgr.ReadMemory(WeaponNameAddress, Buffer, 64))
+	if (!ProcessMgr.ReadMemory(WeaponNameAddress, Buffer, 525))
 		return false;
 
 	WeaponName = std::string(Buffer);
