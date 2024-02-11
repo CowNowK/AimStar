@@ -467,9 +467,16 @@ namespace GUI
 						ImColor HeaderActive = ImGui::GetStyleColorVec4(ImGuiCol_HeaderActive);
 						ImColor HeaderHovered = ImGui::GetStyleColorVec4(ImGuiCol_HeaderHovered);
 						ImColor ScrollBg = ImGui::GetStyleColorVec4(ImGuiCol_ScrollbarBg);
+
+						ImColor FeatureName = ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled);
+						ImColor Text = ImGui::GetStyleColorVec4(ImGuiCol_Text);
+						ImColor Separator = ImGui::GetStyleColorVec4(ImGuiCol_Separator);
 						// ########################################
 						ImGui::SeparatorText("Theme Color Settings");
 						PutColorEditor("Button Border", "###ThemeCol1", 5.f, 0.f, reinterpret_cast<float*>(&MenuConfig::ButtonBorderColor));
+						PutColorEditor("FeatureName", "###ThemeCol16", 5.f, 0.f, reinterpret_cast<float*>(&FeatureName));
+						PutColorEditor("Text", "###ThemeCol17", 5.f, 0.f, reinterpret_cast<float*>(&Text));
+
 						PutColorEditor("Border", "###ThemeCol2", 5.f, 0.f, reinterpret_cast<float*>(&borderColor));
 						PutColorEditor("Button", "###ThemeCol3", 5.f, 0.f, reinterpret_cast<float*>(&ButtonColor));
 						PutColorEditor("Button Hovered", "###ThemeCol4", 5.f, 0.f, reinterpret_cast<float*>(&ButtonHovered));
@@ -482,7 +489,8 @@ namespace GUI
 						PutColorEditor("Header Active", "###ThemeCol11", 5.f, 0.f, reinterpret_cast<float*>(&HeaderActive));
 						PutColorEditor("Header Hovered", "###ThemeCol12", 5.f, 0.f, reinterpret_cast<float*>(&HeaderHovered));
 						PutColorEditor("Scrollbar Bg", "###ThemeCol13", 5.f, 0.f, reinterpret_cast<float*>(&ScrollBg));
-						PutColorEditor("Window Bg", "###ThemeCol14", 5.f, 0.f, reinterpret_cast<float*>(&windowBgColor));
+						PutColorEditor("Separator", "###ThemeCol14", 5.f, 0.f, reinterpret_cast<float*>(&Separator));
+						PutColorEditor("Window Bg", "###ThemeCol15", 5.f, 0.f, reinterpret_cast<float*>(&windowBgColor));
 
 						// Update Color
 						ImGui::GetStyle().Colors[ImGuiCol_Border] = borderColor;
@@ -498,6 +506,10 @@ namespace GUI
 						ImGui::GetStyle().Colors[ImGuiCol_HeaderActive] = HeaderActive;
 						ImGui::GetStyle().Colors[ImGuiCol_HeaderHovered] = HeaderHovered;
 						ImGui::GetStyle().Colors[ImGuiCol_ScrollbarBg] = ScrollBg;
+
+						ImGui::GetStyle().Colors[ImGuiCol_TextDisabled] = FeatureName;
+						ImGui::GetStyle().Colors[ImGuiCol_Text] = Text;
+						ImGui::GetStyle().Colors[ImGuiCol_Separator] = Separator;
 					}
 
 					ImGui::NewLine();

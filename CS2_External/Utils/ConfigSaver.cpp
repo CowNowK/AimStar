@@ -289,6 +289,50 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Language" << YAML::Value << MenuConfig::Language;
         emitter << YAML::EndMap;
 
+        // Custom Theme Saver
+        if (MenuConfig::Theme == 2)
+        {
+            ImColor windowBgColor = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
+            ImColor borderColor = ImGui::GetStyleColorVec4(ImGuiCol_Border);
+            ImColor childBgColor = ImGui::GetStyleColorVec4(ImGuiCol_ChildBg);
+            ImColor ButtonColor = ImGui::GetStyleColorVec4(ImGuiCol_Button);
+            ImColor ButtonHovered = ImGui::GetStyleColorVec4(ImGuiCol_ButtonHovered);
+            ImColor ButtonActive = ImGui::GetStyleColorVec4(ImGuiCol_ButtonActive);
+            ImColor FrameBgColor = ImGui::GetStyleColorVec4(ImGuiCol_FrameBg);
+            ImColor FrameHovered = ImGui::GetStyleColorVec4(ImGuiCol_FrameBgHovered);
+            ImColor FrameActive = ImGui::GetStyleColorVec4(ImGuiCol_FrameBgActive);
+            ImColor Header = ImGui::GetStyleColorVec4(ImGuiCol_Header);
+            ImColor HeaderActive = ImGui::GetStyleColorVec4(ImGuiCol_HeaderActive);
+            ImColor HeaderHovered = ImGui::GetStyleColorVec4(ImGuiCol_HeaderHovered);
+            ImColor ScrollBg = ImGui::GetStyleColorVec4(ImGuiCol_ScrollbarBg);
+
+            ImColor FeatureName = ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled);
+            ImColor Text = ImGui::GetStyleColorVec4(ImGuiCol_Text);
+            ImColor Separator = ImGui::GetStyleColorVec4(ImGuiCol_Separator);
+
+            emitter << YAML::Key << "Custom Theme";
+            emitter << YAML::Value;
+            emitter << YAML::BeginMap;
+            emitter << YAML::Key << "Button Border" << YAML::Value << ImColorToUInt32(MenuConfig::ButtonBorderColor);
+            emitter << YAML::Key << "Feature Name" << YAML::Value << ImColorToUInt32(FeatureName);
+            emitter << YAML::Key << "Text" << YAML::Value << ImColorToUInt32(Text);
+            emitter << YAML::Key << "Border" << YAML::Value << ImColorToUInt32(borderColor);
+            emitter << YAML::Key << "Button" << YAML::Value << ImColorToUInt32(ButtonColor);
+            emitter << YAML::Key << "Button Hovered" << YAML::Value << ImColorToUInt32(ButtonHovered);
+            emitter << YAML::Key << "Button Active" << YAML::Value << ImColorToUInt32(ButtonActive);
+            emitter << YAML::Key << "Child Window Bg" << YAML::Value << ImColorToUInt32(childBgColor);
+            emitter << YAML::Key << "Frame Bg" << YAML::Value << ImColorToUInt32(FrameBgColor);
+            emitter << YAML::Key << "Frame Bg Hovered" << YAML::Value << ImColorToUInt32(FrameHovered);
+            emitter << YAML::Key << "Frame Bg Active" << YAML::Value << ImColorToUInt32(FrameActive);
+            emitter << YAML::Key << "Header" << YAML::Value << ImColorToUInt32(Header);
+            emitter << YAML::Key << "Header Hovered" << YAML::Value << ImColorToUInt32(HeaderHovered);
+            emitter << YAML::Key << "Header Active" << YAML::Value << ImColorToUInt32(HeaderActive);
+            emitter << YAML::Key << "Scrollbar Bg" << YAML::Value << ImColorToUInt32(ScrollBg);
+            emitter << YAML::Key << "Separator" << YAML::Value << ImColorToUInt32(Separator);
+            emitter << YAML::Key << "Window Bg" << YAML::Value << ImColorToUInt32(windowBgColor);
+            emitter << YAML::EndMap;
+        }
+
         emitter << YAML::EndMap;
 
         configFile << emitter.c_str();
@@ -479,8 +523,72 @@ namespace MyConfigSaver {
             MenuConfig::Language = config["Menu"]["Language"].IsDefined() ? config["Menu"]["Language"].as<int>() : 0;
         }
 
+        if (MenuConfig::Theme == 2)
+        {
+            // Custom Theme Loader
+            if (config["Custom Theme"])
+            {
+                ImColor windowBgColor = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
+                ImColor borderColor = ImGui::GetStyleColorVec4(ImGuiCol_Border);
+                ImColor childBgColor = ImGui::GetStyleColorVec4(ImGuiCol_ChildBg);
+                ImColor ButtonColor = ImGui::GetStyleColorVec4(ImGuiCol_Button);
+                ImColor ButtonHovered = ImGui::GetStyleColorVec4(ImGuiCol_ButtonHovered);
+                ImColor ButtonActive = ImGui::GetStyleColorVec4(ImGuiCol_ButtonActive);
+                ImColor FrameBgColor = ImGui::GetStyleColorVec4(ImGuiCol_FrameBg);
+                ImColor FrameHovered = ImGui::GetStyleColorVec4(ImGuiCol_FrameBgHovered);
+                ImColor FrameActive = ImGui::GetStyleColorVec4(ImGuiCol_FrameBgActive);
+                ImColor Header = ImGui::GetStyleColorVec4(ImGuiCol_Header);
+                ImColor HeaderActive = ImGui::GetStyleColorVec4(ImGuiCol_HeaderActive);
+                ImColor HeaderHovered = ImGui::GetStyleColorVec4(ImGuiCol_HeaderHovered);
+                ImColor ScrollBg = ImGui::GetStyleColorVec4(ImGuiCol_ScrollbarBg);
+
+                ImColor FeatureName = ImGui::GetStyleColorVec4(ImGuiCol_TextDisabled);
+                ImColor Text = ImGui::GetStyleColorVec4(ImGuiCol_Text);
+                ImColor Separator = ImGui::GetStyleColorVec4(ImGuiCol_Separator);
+
+                MenuConfig::ButtonBorderColor = UInt32ToImColor(config["Custom Theme"]["Button Border"].as<uint32_t>());
+                FeatureName = UInt32ToImColor(config["Custom Theme"]["Feature Name"].as<uint32_t>());
+                Text = UInt32ToImColor(config["Custom Theme"]["Text"].as<uint32_t>());
+                Separator = UInt32ToImColor(config["Custom Theme"]["Separator"].as<uint32_t>());
+                windowBgColor = UInt32ToImColor(config["Custom Theme"]["Window Bg"].as<uint32_t>());
+                borderColor = UInt32ToImColor(config["Custom Theme"]["Border"].as<uint32_t>());
+                childBgColor = UInt32ToImColor(config["Custom Theme"]["Child Window Bg"].as<uint32_t>());
+                ButtonColor = UInt32ToImColor(config["Custom Theme"]["Button"].as<uint32_t>());
+                ButtonHovered = UInt32ToImColor(config["Custom Theme"]["Button Hovered"].as<uint32_t>());
+                ButtonActive = UInt32ToImColor(config["Custom Theme"]["Button Active"].as<uint32_t>());
+                FrameBgColor = UInt32ToImColor(config["Custom Theme"]["Frame Bg"].as<uint32_t>());
+                FrameHovered = UInt32ToImColor(config["Custom Theme"]["Frame Bg Hovered"].as<uint32_t>());
+                FrameActive = UInt32ToImColor(config["Custom Theme"]["Frame Bg Active"].as<uint32_t>());
+                Header = UInt32ToImColor(config["Custom Theme"]["Header"].as<uint32_t>());
+                HeaderActive = UInt32ToImColor(config["Custom Theme"]["Header Active"].as<uint32_t>());
+                HeaderHovered = UInt32ToImColor(config["Custom Theme"]["Header Hovered"].as<uint32_t>());
+                ScrollBg = UInt32ToImColor(config["Custom Theme"]["Scrollbar Bg"].as<uint32_t>());
+
+                // Update Color
+                ImGui::GetStyle().Colors[ImGuiCol_Border] = borderColor;
+                ImGui::GetStyle().Colors[ImGuiCol_Button] = ButtonColor;
+                ImGui::GetStyle().Colors[ImGuiCol_ButtonActive] = ButtonActive;
+                ImGui::GetStyle().Colors[ImGuiCol_ButtonHovered] = ButtonHovered;
+                ImGui::GetStyle().Colors[ImGuiCol_FrameBg] = FrameBgColor;
+                ImGui::GetStyle().Colors[ImGuiCol_FrameBgHovered] = FrameHovered;
+                ImGui::GetStyle().Colors[ImGuiCol_FrameBgActive] = FrameActive;
+                ImGui::GetStyle().Colors[ImGuiCol_WindowBg] = windowBgColor;
+                ImGui::GetStyle().Colors[ImGuiCol_ChildBg] = childBgColor;
+                ImGui::GetStyle().Colors[ImGuiCol_Header] = Header;
+                ImGui::GetStyle().Colors[ImGuiCol_HeaderActive] = HeaderActive;
+                ImGui::GetStyle().Colors[ImGuiCol_HeaderHovered] = HeaderHovered;
+                ImGui::GetStyle().Colors[ImGuiCol_ScrollbarBg] = ScrollBg;
+
+                ImGui::GetStyle().Colors[ImGuiCol_TextDisabled] = FeatureName;
+                ImGui::GetStyle().Colors[ImGuiCol_Text] = Text;
+                ImGui::GetStyle().Colors[ImGuiCol_Separator] = Separator;
+            }
+        }
+        else {
+            StyleChanger::UpdateSkin(MenuConfig::Theme);
+        }
+
         AimControl::SetHotKey(MenuConfig::AimBotHotKey);
-        StyleChanger::UpdateSkin(MenuConfig::Theme);
         Lang::ChangeLang(MenuConfig::Language);
 
         std::cout << "[Info] Configuration loaded from " << MenuConfig::path + '\\' + filename << std::endl;

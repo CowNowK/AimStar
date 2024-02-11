@@ -7,7 +7,6 @@
 namespace MyConfigSaver {
     extern void SaveConfig(const std::string& filename, const std::string& author = "");
     extern void LoadConfig(const std::string& filename);
-
     
     inline uint32_t ImColorToUInt32(const ImColor& color)
     {
@@ -19,13 +18,14 @@ namespace MyConfigSaver {
         return r | g | b | a;
     }
 
-    inline void UInt32ToImColor(uint32_t value, float& r, float& g, float& b, float& a)
+    inline ImColor UInt32ToImColor(uint32_t value)
     {
-        r = static_cast<float>(value & 0xFF) / 255.0f;
-        g = static_cast<float>((value >> 8) & 0xFF) / 255.0f;
-        b = static_cast<float>((value >> 16) & 0xFF) / 255.0f;
-        a = static_cast<float>((value >> 24) & 0xFF) / 255.0f;
-        return;
+        ImColor TempColor;
+        TempColor.Value.x = static_cast<float>(value & 0xFF) / 255.0f;
+        TempColor.Value.y = static_cast<float>((value >> 8) & 0xFF) / 255.0f;
+        TempColor.Value.z = static_cast<float>((value >> 16) & 0xFF) / 255.0f;
+        TempColor.Value.w = static_cast<float>((value >> 24) & 0xFF) / 255.0f;
+        return TempColor;
     }
     
 }
