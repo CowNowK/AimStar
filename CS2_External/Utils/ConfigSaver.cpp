@@ -255,6 +255,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "ToggleMode" << YAML::Value << MenuConfig::AimToggleMode;
         emitter << YAML::Key << "Hotkey" << YAML::Value << MenuConfig::AimBotHotKey;
         emitter << YAML::Key << "Fov" << YAML::Value << AimControl::AimFov;
+        emitter << YAML::Key << "FovMin" << YAML::Value << AimControl::AimFovMin;
         emitter << YAML::Key << "FovCircle" << YAML::Value << ESPConfig::DrawFov;
         emitter << YAML::Key << "CircleColor";
         emitter << YAML::Value;
@@ -452,6 +453,7 @@ namespace MyConfigSaver {
             MenuConfig::AimToggleMode = config["Aimbot"]["ToggleMode"].as<bool>();
             MenuConfig::AimBotHotKey = config["Aimbot"]["Hotkey"].as<int>();
             AimControl::AimFov = config["Aimbot"]["Fov"].as<float>();
+            AimControl::AimFovMin = config["Aimbot"]["FovMin"].as<float>();
             ESPConfig::DrawFov = config["Aimbot"]["FovCircle"].as<bool>();
             MenuConfig::FovCircleColor.Value.x = config["Aimbot"]["CircleColor"]["r"].as<float>();
             MenuConfig::FovCircleColor.Value.y = config["Aimbot"]["CircleColor"]["g"].as<float>();

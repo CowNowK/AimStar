@@ -68,6 +68,7 @@ namespace Lang
 		inline static const char* VisCheck;
 		inline static const char* JumpCheck;
 		inline static const char* FovSlider;
+		inline static const char* FovMinSlider;
 		inline static const char* SmoothSlider;
 		inline static const char* BoneList;
 		inline static const char* Tip;
@@ -246,6 +247,7 @@ namespace Lang
 		AimbotText.VisCheck = u8"Visible Only";
 		AimbotText.JumpCheck = u8"On Ground Only";
 		AimbotText.FovSlider = u8"FOV: ";
+		AimbotText.FovMinSlider = u8"MinFOV: ";
 		AimbotText.SmoothSlider = u8"Smooth: ";
 		AimbotText.BoneList = u8"Bone       ";
 		AimbotText.Tip = u8"Aimbot will not work while the menu is opened";
