@@ -453,7 +453,7 @@ namespace MyConfigSaver {
             MenuConfig::AimToggleMode = config["Aimbot"]["ToggleMode"].as<bool>();
             MenuConfig::AimBotHotKey = config["Aimbot"]["Hotkey"].as<int>();
             AimControl::AimFov = config["Aimbot"]["Fov"].as<float>();
-            AimControl::AimFovMin = config["Aimbot"]["FovMin"].as<float>();
+            AimControl::AimFovMin = config["Aimbot"]["FovMin"].IsDefined() ? config["Aimbot"]["FovMin"].as<float>() : .5f;
             ESPConfig::DrawFov = config["Aimbot"]["FovCircle"].as<bool>();
             MenuConfig::FovCircleColor.Value.x = config["Aimbot"]["CircleColor"]["r"].as<float>();
             MenuConfig::FovCircleColor.Value.y = config["Aimbot"]["CircleColor"]["g"].as<float>();
