@@ -71,16 +71,22 @@ int main()
 	auto ProcessStatus = ProcessMgr.Attach("cs2.exe");
 
 	string time, code;
-	
+	int RetTimes;
 	//cout << "local utc = " << time << endl;
 	cout << "!!If you paid money for this software, you may have been scammed!!" << endl;
 	cout << "Please visit https://aimstar.tkm.icu/ to get the otp code" << endl;
+	RETRY:
 	cout << "Plz enter your otp code: " << endl;
 	string input;
 	cin >> input;
 	CodeGenerate(time, code);
 	if (input != code) {
 		cout << "otp code error!!" << endl;
+		if (RetTimes < 3){
+			RetTimes++;
+			goto RETRY;
+		}
+		else
 		goto END;
 	} 
 
