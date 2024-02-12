@@ -3,7 +3,11 @@
 #include "..\MenuConfig.hpp"
 #include "..\Cheats.h"
 #include "GetWeaponIcon.h"
+#include "..\Resources\8964.h"
 #define ICON_FA_EYE "\xef\x81\xae"
+
+ID3D11ShaderResourceView* winniethepooh_srv = NULL;
+int winnie_h = 0, winnie_w = 0;
 
 namespace ESP
 {
@@ -194,6 +198,12 @@ namespace ESP
 					Gui.Line({ Rect.x + Rect.z, Rect.y + Rect.w }, { Rect.x + Rect.z - Rect.z * 0.25f, Rect.y + Rect.w }, ESPConfig::BoxColor, 1.3f);
 					Gui.Line({ Rect.x + Rect.z, Rect.y + Rect.w }, { Rect.x + Rect.z, Rect.y + Rect.w - Rect.w * 0.25f }, ESPConfig::BoxColor, 1.3f);
 				}
+			}
+			if (ESPConfig::winniethepool) {
+				if (winniethepooh_srv == nullptr) {
+					Gui.LoadTextureFromMemory(winniethepooh_image, sizeof winniethepooh_image, &winniethepooh_srv, &winnie_h, &winnie_w);
+				}
+				ImGui::GetBackgroundDrawList()->AddImage(winniethepooh_srv, ImVec2(Rect.x,Rect.y), { ImVec2(Rect.x,Rect.y).x+ImVec2(Rect.z,Rect.w).x,ImVec2(Rect.x,Rect.y).y + ImVec2(Rect.z,Rect.w).y });
 			}
 		}
 

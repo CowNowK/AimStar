@@ -18,10 +18,12 @@ ID3D11ShaderResourceView* MenuButton1 = NULL;
 ID3D11ShaderResourceView* MenuButton2 = NULL;
 ID3D11ShaderResourceView* MenuButton3 = NULL;
 ID3D11ShaderResourceView* MenuButton4 = NULL;
+
 int LogoW = 0, LogoH = 0;
 int LogoW2 = 0, LogoH2 = 0;
 int buttonW = 0;
 int buttonH = 0;
+
 
 namespace GUI
 {

@@ -203,6 +203,7 @@
     <ClInclude Include="Utils\curl\urlapi.h" />
     <ClInclude Include="Utils\curl\websockets.h" />
     <ClInclude Include="Utils\Updater.h" />
+    <ClInclude Include="Resources\8964.h" />
     <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
   </ItemGroup>
   <ItemGroup>

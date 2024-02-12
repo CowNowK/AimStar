@@ -184,6 +184,7 @@
     <ClInclude Include="Radar\Radar.h" />
     <ClInclude Include="Render.hpp" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Resources\8964.h" />
     <ClInclude Include="Resources\Images.h" />
     <ClInclude Include="Resources\Language.h" />
     <ClInclude Include="Resources\Languages\Czech.h" />
