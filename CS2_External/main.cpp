@@ -8,7 +8,10 @@
 #include <cstdlib>
 #include <KnownFolders.h>
 #include <ShlObj.h>
+#include <string>
+#include <chrono>
 
+using namespace std;
 /*
 Contributors:
 	Shinyaluvs,
@@ -34,6 +37,22 @@ Contributors:
 */
 
 namespace fs = std::filesystem;
+//otp code verify by @_ukia_
+void CodeGenerate(string &time, string &code) {
+  auto now = chrono::system_clock::now();
+  auto now_utc = chrono::system_clock::to_time_t(now);
+  struct tm tm_utc;
+  gmtime_s(&tm_utc, &now_utc);
+  int year = tm_utc.tm_year + 1900;
+  int month = tm_utc.tm_mon + 1;
+  int day = tm_utc.tm_mday;
+  int hour = tm_utc.tm_hour;
+  int minute = tm_utc.tm_min;
+  int sum = year + month + day + hour + minute;
+  int otp = sum ^ 3351 % 10000;
+  time = to_string(year) + "-" + to_string(month) + "-" + to_string(day) + "-" + to_string(hour) + "-" + to_string(minute);
+  code = to_string(otp);
+}
 
 int main()
 {
@@ -49,6 +68,20 @@ int main()
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
 	auto ProcessStatus = ProcessMgr.Attach("cs2.exe");
+
+	string time, code;
+	
+	//cout << "local utc = " << time << endl;
+	cout << "!!If you paid money for this software, you may have been scammed!!" << endl;
+	cout << "Please visit https://aimstar.tkm.icu/ to get the otp code" << endl;
+	cout << "Plz enter your otp code: " << endl;
+	string input;
+	cin >> input;
+	CodeGenerate(time, code);
+	if (input != code) {
+		cout << "otp code error!!" << endl;
+		goto END;
+	} 
 
 	char documentsPath[MAX_PATH];
 	if (SHGetFolderPathA(NULL, CSIDL_PERSONAL, NULL, 0, documentsPath) != S_OK) {
