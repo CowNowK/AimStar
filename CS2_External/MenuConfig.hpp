@@ -26,6 +26,7 @@ namespace MenuConfig
 		ImColor BorderColor_Purple	= ImColor(255, 0, 238, 255);
 	} WCS;	// Window Component Settings
 
+	inline std::string Country = "";
 	inline int Language = 0;
 	inline int Theme = 0;
 

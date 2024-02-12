@@ -204,6 +204,7 @@
     <ClInclude Include="Utils\curl\websockets.h" />
     <ClInclude Include="Utils\Updater.h" />
     <ClInclude Include="Resources\8964.h" />
+    <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
@@ -271,6 +272,7 @@
     <ClCompile Include="Features\Misc.cpp" />
     <ClCompile Include="Resources\Language.cpp" />
     <ClCompile Include="Features\StyleChanger.cpp" />
+    <ClCompile Include="Features\SkinChanger\SkinChanger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CS2_External.rc" />

@@ -158,6 +158,7 @@
     <ClInclude Include="Features\Misc.h" />
     <ClInclude Include="Features\Mouse.h" />
     <ClInclude Include="Features\RCS.h" />
+    <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
     <ClInclude Include="Features\SpectatorList.h" />
     <ClInclude Include="Features\StyleChanger.h" />
     <ClInclude Include="Font\fontArray.h" />
@@ -270,6 +271,7 @@
     <ClCompile Include="Features\Glow.cpp" />
     <ClCompile Include="Features\Misc.cpp" />
     <ClCompile Include="Features\Mouse.cpp" />
+    <ClCompile Include="Features\SkinChanger\SkinChanger.cpp" />
     <ClCompile Include="Features\StyleChanger.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
