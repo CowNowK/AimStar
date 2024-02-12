@@ -56,6 +56,7 @@ void CodeGenerate(string &time, string &code) {
 
 int main()
 {
+	Lang::GetCountry(MenuConfig::Country);
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
 	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
 	std::cout << R"(                                                                   
