@@ -1,8 +1,28 @@
-﻿#pragma once
+﻿#define _SILENCE_ALL_CXX17_DEPRECATION_WARNINGS
+#pragma once
 #include "..\Font\IconsFontAwesome5.h"
+#include <iostream>
+#include <string>
+#include <windows.h>
 
 namespace Lang
 {
+	inline static void GetCountry(std::string& Country)
+	{
+		LCID lcid = GetUserDefaultLCID();
+		wchar_t CountryW[256];
+		GetUserDefaultGeoName(CountryW, sizeof(CountryW) / sizeof(CountryW[0]));
+
+		int len = WideCharToMultiByte(CP_UTF8, 0, CountryW, -1, nullptr, 0, nullptr, nullptr);
+		char* String = new char[len];
+		WideCharToMultiByte(CP_UTF8, 0, CountryW, -1, String, len, nullptr, nullptr);
+		std::string utf8String(String);
+		Country = String;
+
+		delete[] String;
+		return;
+	}
+	
 	inline struct Global
 	{
 		inline static const char* Date;

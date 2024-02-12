@@ -96,11 +96,11 @@ namespace Misc
 		// Player Angle
 		Vec2 Angle = LocalPlayer.Pawn.ViewAngle;
 
+		ImGui::Text("AimStar");
 		ImGui::Text("%d FPS | %d ms | %02d:%02d:%02d",
 			FrameRate != 0.0f ? static_cast<int>(FrameRate) : 0,
 			playerPing,
 			ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
-		ImGui::NewLine();
 		ImGui::Text("Pos: %.2f, %.2f, %.2f", Pos.x, Pos.y, Pos.z);
 		ImGui::Text("Angel: %.2f, %.2f", Angle.x, Angle.y);
 

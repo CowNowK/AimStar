@@ -1,5 +1,6 @@
 ﻿#include "Offsets.h"
 #include "Cheats.h"
+#include "Resources/Language.h"
 #include <iostream>
 #include <stdio.h>
 #include <iomanip>
