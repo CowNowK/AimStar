@@ -83,6 +83,7 @@ namespace ESPConfig
 	inline bool ShowScoping = false;
 	inline bool ShowBoneESP = true;
 	inline bool ShowBoxESP = true;
+	inline bool winniethepool = true;
 	inline bool ShowHealthBar = true;
 	inline bool ShowWeaponESP = false;
 	inline bool ShowEyeRay = false;
