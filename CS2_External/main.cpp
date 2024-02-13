@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <string>
 #include <windows.h>
+#include <shellapi.h>
 
 using namespace std;
 /*
@@ -233,7 +234,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 	CodeGenerate(time, code);
 
 	switch (message) {
-	case WM_CREATE:
+        case WM_CREATE:
 	{
 		CreateWindowW(L"STATIC", L"Please enter your OTP code:",
 			WS_VISIBLE | WS_CHILD | SS_CENTER,
@@ -244,6 +245,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 		CreateWindowW(L"BUTTON", L"Verify",
 			WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
 			150, 90, 100, 30, hwnd, (HMENU)1, NULL, NULL);
+		CreateWindowW(L"BUTTON", L"Get OTP",
+			WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+			50, 90, 100, 30, hwnd, (HMENU)3, NULL, NULL);
 		break;
 	}
 	case WM_COMMAND:
@@ -271,6 +275,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 				system("cls");
 				Cheat();
 			}
+		}
+		if (LOWORD(wParam) == 3)
+		{
+			ShellExecute(NULL, TEXT("open"), TEXT("https://aimstar.tkm.icu"), NULL, NULL, SW_SHOWNORMAL);
 		}
 		break;
 	}
