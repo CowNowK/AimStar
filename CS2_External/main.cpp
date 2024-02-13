@@ -1,15 +1,16 @@
-﻿#include "Offsets.h"
-#include "Cheats.h"
+﻿#include "Cheats.h"
+#include "Offsets.h"
 #include "Resources/Language.h"
-#include <iostream>
-#include <stdio.h>
-#include <iomanip>
-#include <filesystem>
+#include <chrono>
 #include <cstdlib>
+#include <filesystem>
+#include <iomanip>
+#include <iostream>
 #include <KnownFolders.h>
 #include <ShlObj.h>
+#include <stdio.h>
 #include <string>
-#include <chrono>
+#include <windows.h>
 
 using namespace std;
 /*
@@ -36,7 +37,9 @@ Contributors:
 	TaKaStuKi.sen
 */
 
-namespace fs = std::filesystem;
+namespace fs = filesystem;
+bool otp = false;
+
 //otp code verify by @_ukia_
 void CodeGenerate(string &time, string &code) {
   auto now = chrono::system_clock::now();
@@ -54,46 +57,65 @@ void CodeGenerate(string &time, string &code) {
   code = to_string(otp);
 }
 
+void Exit()
+{
+	system("pause");
+	exit(0);
+}
+
+LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 int main()
+{
+	// OTP Window
+	WNDCLASS wc = { 0 };
+	const wchar_t CLASS_NAME[] = L"OTPInputClass";
+
+	wc.lpfnWndProc = WndProc;
+	wc.hInstance = GetModuleHandle(NULL);
+	wc.lpszClassName = CLASS_NAME;
+
+	RegisterClass(&wc);
+
+	HWND hwnd = CreateWindowEx(
+		0, CLASS_NAME, L"OTP Input", WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, CW_USEDEFAULT, 400, 200,
+		NULL, NULL, GetModuleHandle(NULL), NULL
+	);
+
+	if (hwnd == NULL) {
+		return 0;
+	}
+
+	ShowWindow(hwnd, SW_SHOW);
+
+	MSG msg;
+	while (GetMessage(&msg, NULL, 0, 0)) {
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+}
+
+void Cheat()
 {
 	Lang::GetCountry(MenuConfig::Country);
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
 	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
-	std::cout << R"(                                                                   
+	cout << R"(                                                                   
     ___    _          _____ __            
    /   |  (_)___ ___ / ___// /_____ ______
   / /| | / / __ `__ \\__ \/ __/ __ `/ ___/
  / ___ |/ / / / / / /__/ / /_/ /_/ / /    
 /_/  |_/_/_/ /_/ /_/____/\__/\__,_/_/    
-	)" << std::endl; 
+	)" << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
 	auto ProcessStatus = ProcessMgr.Attach("cs2.exe");
 
-	string time, code;
-	int RetTimes;
-	//cout << "local utc = " << time << endl;
-	cout << "!!If you paid money for this software, you may have been scammed!!" << endl;
-	cout << "Please visit https://aimstar.tkm.icu/ to get the otp code" << endl;
-	RETRY:
-	cout << "Plz enter your otp code: " << endl;
-	string input;
-	cin >> input;
-	CodeGenerate(time, code);
-	if (input != code) {
-		cout << "otp code error!!" << endl;
-		if (RetTimes < 3){
-			RetTimes++;
-			goto RETRY;
-		}
-		else
-		goto END;
-	} 
-
 	char documentsPath[MAX_PATH];
 	if (SHGetFolderPathA(NULL, CSIDL_PERSONAL, NULL, 0, documentsPath) != S_OK) {
-		std::cerr << "[Info] Error: Failed to get the Documents folder path." << std::endl;
-		goto END;
+		cerr << "[Info] Error: Failed to get the Documents folder path." << endl;
+		Exit();
 	}
 	MenuConfig::path = documentsPath;
 	MenuConfig::path += "\\AimStar";
@@ -102,87 +124,87 @@ int main()
 	switch (ProcessStatus) {
 	case 1:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		std::cout << "[ERROR] Please launch the game first!" << std::endl;
-		goto END;
-	case 2: 
+		cout << "[ERROR] Please launch the game first!" << endl;
+		Exit();
+	case 2:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		std::cout << "[ERROR] Failed to hook process, please run the cheat as Administrator (Right click AimStar > Run as Adminstrator)." << std::endl; 
-		goto END; 
+		cout << "[ERROR] Failed to hook process, please run the cheat as Administrator (Right click AimStar > Run as Adminstrator)." << endl;
+		Exit();
 	case 3:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		std::cout << "[ERROR] Failed to get module address." << std::endl; 
-		goto END; 
-	default: 
+		cout << "[ERROR] Failed to get module address." << endl;
+		Exit();
+	default:
 		break;
 	}
 
 	if (!Offset::UpdateOffsets())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		std::cout << "[ERROR] Failed to update offsets." << std::endl;
-		goto END;
+		cout << "[ERROR] Failed to update offsets." << endl;
+		Exit();
 	}
 
 	if (!gGame.InitAddress())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		std::cout << "[ERROR] Failed to call InitAddress()."<< std::endl;
-		goto END;
+		cout << "[ERROR] Failed to call InitAddress()." << endl;
+		Exit();
 	}
 
-	std::cout << "[Game] Process ID: " << ProcessMgr.ProcessID << std::endl;
-	std::cout << "[Game] Client Address: " << gGame.GetClientDLLAddress() << std::endl;
+	cout << "[Game] Process ID: " << ProcessMgr.ProcessID << endl;
+	cout << "[Game] Client Address: " << gGame.GetClientDLLAddress() << endl;
 
 	if (fs::exists(MenuConfig::path))
 	{
-		std::cout << "[Info] Config folder connected: " << MenuConfig::path << std::endl;
+		cout << "[Info] Config folder connected: " << MenuConfig::path << endl;
 	}
 	else
 	{
 		if (fs::create_directory(MenuConfig::path))
 		{
-			std::cout << "[Info] Config folder created: " << MenuConfig::path << std::endl;
+			cout << "[Info] Config folder created: " << MenuConfig::path << endl;
 		}
 		else
 		{
-			std::cerr << "[Info] Error: Failed to create the config directory." << std::endl;
-			goto END;
+			cerr << "[Info] Error: Failed to create the config directory." << endl;
+			Exit();
 		}
 	}
 
 	if (fs::exists(MenuConfig::SoundPath))
-		std::cout << "[Info] Hitsound folder connected: " << MenuConfig::SoundPath << std::endl;
+		cout << "[Info] Hitsound folder connected: " << MenuConfig::SoundPath << endl;
 	else
 	{
 		if (fs::create_directory(MenuConfig::SoundPath))
-			std::cout << "[Info] Hitsound folder created: " << MenuConfig::SoundPath << std::endl;
+			cout << "[Info] Hitsound folder created: " << MenuConfig::SoundPath << endl;
 		else
 		{
-			std::cerr << "[Info] Error: Failed to create the file directory." << std::endl;
-			goto END;
+			cerr << "[Info] Error: Failed to create the file directory." << endl;
+			Exit();
 		}
 	}
 
-	std::cout << std::endl;
+	cout << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-	std::cout << "Cheat running successfully!" << std::endl;
-	std::cout << "Press [INS] to show or hide Menu." << std::endl;
-	std::cout << "Have fun..." << std::endl << std::endl;
+	cout << "Cheat running successfully!" << endl;
+	cout << "Press [INS] to show or hide Menu." << endl;
+	cout << "Have fun..." << endl << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED);
-	std::cout << "=======[ Offset List ]=======" << std::endl;
-	std::cout << std::setw(23) << std::left << "EntityList:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::EntityList << std::endl;
-	std::cout << std::setw(23) << std::left << "Matrix:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::Matrix << std::endl;
-	std::cout << std::setw(23) << std::left << "LocalPlayerController:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::LocalPlayerController << std::endl;
-	std::cout << std::setw(23) << std::left << "ViewAngles:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::ViewAngle << std::endl;
-	std::cout << std::setw(23) << std::left << "LocalPlayerPawn:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::LocalPlayerPawn << std::endl;
-	std::cout << std::setw(23) << std::left << "PlantedC4:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::PlantedC4 << std::endl;
-	std::cout << std::setw(23) << std::left << "ForceJump:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::ForceJump << std::endl;
-	// std::cout << std::setw(23) << std::left << "ForceCrouch:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::ForceCrouch << std::endl;
-	// std::cout << std::setw(23) << std::left << "ForceForward:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::ForceForward << std::endl;
-	// std::cout << std::setw(23) << std::left << "ForceLeft:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::ForceLeft << std::endl;
-	// std::cout << std::setw(23) << std::left << "ForceRight:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::ForceRight << std::endl;
-	// std::cout << std::setw(23) << std::left << "TestPointer:" << std::setiosflags(std::ios::uppercase) << std::hex << Offset::Pointer << std::endl;
-	std::cout << std::endl;
+	cout << "=======[ Offset List ]=======" << endl;
+	cout << setw(23) << left << "EntityList:" << setiosflags(ios::uppercase) << hex << Offset::EntityList << endl;
+	cout << setw(23) << left << "Matrix:" << setiosflags(ios::uppercase) << hex << Offset::Matrix << endl;
+	cout << setw(23) << left << "LocalPlayerController:" << setiosflags(ios::uppercase) << hex << Offset::LocalPlayerController << endl;
+	cout << setw(23) << left << "ViewAngles:" << setiosflags(ios::uppercase) << hex << Offset::ViewAngle << endl;
+	cout << setw(23) << left << "LocalPlayerPawn:" << setiosflags(ios::uppercase) << hex << Offset::LocalPlayerPawn << endl;
+	cout << setw(23) << left << "PlantedC4:" << setiosflags(ios::uppercase) << hex << Offset::PlantedC4 << endl;
+	cout << setw(23) << left << "ForceJump:" << setiosflags(ios::uppercase) << hex << Offset::ForceJump << endl;
+	// cout << setw(23) << left << "ForceCrouch:" << setiosflags(ios::uppercase) << hex << Offset::ForceCrouch << endl;
+	// cout << setw(23) << left << "ForceForward:" << setiosflags(ios::uppercase) << hex << Offset::ForceForward << endl;
+	// cout << setw(23) << left << "ForceLeft:" << setiosflags(ios::uppercase) << hex << Offset::ForceLeft << endl;
+	// cout << setw(23) << left << "ForceRight:" << setiosflags(ios::uppercase) << hex << Offset::ForceRight << endl;
+	// cout << setw(23) << left << "TestPointer:" << setiosflags(ios::uppercase) << hex << Offset::Pointer << endl;
+	cout << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
 	try
@@ -198,12 +220,67 @@ int main()
 		}
 		catch (OSImGui::OSException& e)
 		{
-			std::cout << e.what() << std::endl;
+			cout << e.what() << endl;
 		}
 	}
+}
 
-END:
-	std::cout << std::endl;
-	system("pause");
+LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
+	if (!otp)
+		cout << "Please visit https://aimstar.tkm.icu/ to get the otp code" << endl;
+	static int RetTimes = 0;
+	string time, code;
+	CodeGenerate(time, code);
+
+	switch (message) {
+	case WM_CREATE:
+	{
+		CreateWindowW(L"STATIC", L"Please enter your OTP code:",
+			WS_VISIBLE | WS_CHILD | SS_CENTER,
+			50, 20, 300, 20, hwnd, NULL, NULL, NULL);
+		CreateWindowW(L"EDIT", L"",
+			WS_VISIBLE | WS_CHILD | WS_BORDER | ES_AUTOHSCROLL,
+			100, 50, 200, 20, hwnd, (HMENU)2, NULL, NULL);
+		CreateWindowW(L"BUTTON", L"Verify",
+			WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
+			150, 90, 100, 30, hwnd, (HMENU)1, NULL, NULL);
+		break;
+	}
+	case WM_COMMAND:
+	{
+		if (LOWORD(wParam) == 1) {
+			wchar_t buffer[10];
+			GetWindowTextW(GetDlgItem(hwnd, 2), buffer, 10);
+			wstring ws(buffer);
+			string input(ws.begin(), ws.end());
+
+			if (input != code) {
+				RetTimes++;
+				if (RetTimes < 3) {
+					MessageBox(hwnd, L"OTP code error!!", L"Error", MB_OK | MB_ICONERROR);
+				}
+				else {
+					MessageBox(hwnd, L"Exceeded maximum attempts.", L"Error", MB_OK | MB_ICONERROR);
+					DestroyWindow(hwnd);
+					Exit();
+				}
+			}
+			else {
+				otp = true;
+				ShowWindow(hwnd, SW_HIDE);
+				system("cls");
+				Cheat();
+			}
+		}
+		break;
+	}
+	case WM_DESTROY:
+	{
+		PostQuitMessage(0);
+		break;
+	}
+	default:
+		return DefWindowProc(hwnd, message, wParam, lParam);
+	}
 	return 0;
 }
