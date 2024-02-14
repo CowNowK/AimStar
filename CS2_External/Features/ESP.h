@@ -19,7 +19,8 @@ namespace ESP
 		float offsetY;
 	};
 	std::unordered_map<std::string, WeaponIconSize> weaponIconSizes = {
-		{"knife", {20.0f, 20.0f, -8.0f, 0.0f}},
+		{"t_knife", {20.0f, 20.0f, -8.0f, 0.0f}},
+		{"ct_knife", {20.0f, 20.0f, -8.0f, 0.0f}},
 		{"deagle", {20.0f, 20.0f, -8.0f, 0.0f}},
 		{"elite", {20.0f, 20.0f, 0.0f, 0.0f}},
 		{"fiveseven", {20.0f, 20.0f, 0.0f, 0.0f}},

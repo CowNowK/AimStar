@@ -19,8 +19,8 @@ const char* GunIcon(const std::string weapon)
 	};
 
 	// Добавляем оружия и их значки в соответствии с вашим списком
-	gunIcons["knife"] = "]";
-	gunIcons["knife_t"] = "[";
+	gunIcons["ct_knife"] = "]";
+	gunIcons["t_knife"] = "[";
 	gunIcons["deagle"] = "A";
 	gunIcons["elite"] = "B";
 	gunIcons["fiveseven"] = "C";
