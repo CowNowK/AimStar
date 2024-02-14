@@ -252,8 +252,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 	if (!otp)
 		cout << "Please enter your OTP code!" << endl;
 	static int RetTimes = 0;
-	string time, code;
-	CodeGenerate(time, code);
 
 	switch (message) {
         case WM_CREATE:
@@ -279,6 +277,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 			GetWindowTextW(GetDlgItem(hwnd, 2), buffer, 10);
 			wstring ws(buffer);
 			string input(ws.begin(), ws.end());
+			string time, code;
+			CodeGenerate(time, code);
 
 			if (input != code) {
 				RetTimes++;
