@@ -79,7 +79,7 @@ int main()
 	RegisterClass(&wc);
 
 	HWND hwnd = CreateWindowEx(
-		0, CLASS_NAME, L"OTP Input", WS_OVERLAPPEDWINDOW,
+		0, CLASS_NAME, L"Verify", WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, CW_USEDEFAULT, 400, 200,
 		NULL, NULL, GetModuleHandle(NULL), NULL
 	);
@@ -228,7 +228,7 @@ void Cheat()
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	if (!otp)
-		cout << "Please visit https://aimstar.tkm.icu/ to get the otp code" << endl;
+		cout << "Please enter your OTP code!" << endl;
 	static int RetTimes = 0;
 	string time, code;
 	CodeGenerate(time, code);
@@ -244,10 +244,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 			100, 50, 200, 20, hwnd, (HMENU)2, NULL, NULL);
 		CreateWindowW(L"BUTTON", L"Verify",
 			WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
-			150, 90, 100, 30, hwnd, (HMENU)1, NULL, NULL);
+			215, 90, 70, 30, hwnd, (HMENU)1, NULL, NULL);
 		CreateWindowW(L"BUTTON", L"Get OTP",
 			WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
-			50, 90, 100, 30, hwnd, (HMENU)3, NULL, NULL);
+			115, 90, 70, 30, hwnd, (HMENU)3, NULL, NULL);
 		break;
 	}
 	case WM_COMMAND:
