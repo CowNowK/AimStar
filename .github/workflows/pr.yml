@@ -1,0 +1,15 @@
+name: buildcheck x64 release
+
+on: 
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup MSBuild path
+        uses: microsoft/setup-msbuild@v1
+      - name: Build with MSBuild
+        run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
