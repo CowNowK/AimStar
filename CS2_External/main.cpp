@@ -1,9 +1,11 @@
-﻿#include "Cheats.h"
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include "Cheats.h"
 #include "Offsets.h"
 #include "Resources/Language.h"
 #include <chrono>
 #include <cstdlib>
 #include <filesystem>
+#include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <KnownFolders.h>
@@ -40,6 +42,7 @@ Contributors:
 
 namespace fs = filesystem;
 bool otp = false;
+string fileName;
 
 //otp code verify by @_ukia_
 void CodeGenerate(string &time, string &code) {
@@ -65,37 +68,6 @@ void Exit()
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
-
-int main()
-{
-	// OTP Window
-	WNDCLASS wc = { 0 };
-	const wchar_t CLASS_NAME[] = L"OTPInputClass";
-
-	wc.lpfnWndProc = WndProc;
-	wc.hInstance = GetModuleHandle(NULL);
-	wc.lpszClassName = CLASS_NAME;
-
-	RegisterClass(&wc);
-
-	HWND hwnd = CreateWindowEx(
-		0, CLASS_NAME, L"Verify", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 400, 200,
-		NULL, NULL, GetModuleHandle(NULL), NULL
-	);
-
-	if (hwnd == NULL) {
-		return 0;
-	}
-
-	ShowWindow(hwnd, SW_SHOW);
-
-	MSG msg;
-	while (GetMessage(&msg, NULL, 0, 0)) {
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
-}
 
 void Cheat()
 {
@@ -226,6 +198,56 @@ void Cheat()
 	}
 }
 
+int main()
+{
+	const char* tempPath = std::getenv("TMP");
+	if (tempPath != nullptr)
+	{
+		fileName = std::string(tempPath) + "/aimstar";
+
+		ifstream infile(fileName);
+		if (infile.good())
+			otp = true;
+		else
+			otp = false;
+	}
+
+	if (otp)
+	{
+		Cheat();
+	}
+	else
+	{
+		// OTP Window
+		WNDCLASS wc = { 0 };
+		const wchar_t CLASS_NAME[] = L"OTPInputClass";
+
+		wc.lpfnWndProc = WndProc;
+		wc.hInstance = GetModuleHandle(NULL);
+		wc.lpszClassName = CLASS_NAME;
+
+		RegisterClass(&wc);
+
+		HWND hwnd = CreateWindowEx(
+			0, CLASS_NAME, L"Verify", WS_OVERLAPPEDWINDOW,
+			CW_USEDEFAULT, CW_USEDEFAULT, 400, 200,
+			NULL, NULL, GetModuleHandle(NULL), NULL
+		);
+
+		if (hwnd == NULL) {
+			return 0;
+		}
+
+		ShowWindow(hwnd, SW_SHOW);
+
+		MSG msg;
+		while (GetMessage(&msg, NULL, 0, 0)) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+	}
+}
+
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	if (!otp)
 		cout << "Please enter your OTP code!" << endl;
@@ -271,6 +293,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 			}
 			else {
 				otp = true;
+				std::ofstream outfile(fileName);
+				outfile.close();
 				ShowWindow(hwnd, SW_HIDE);
 				system("cls");
 				Cheat();
