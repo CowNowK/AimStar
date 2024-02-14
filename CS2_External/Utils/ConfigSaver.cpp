@@ -156,6 +156,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Thickness" << YAML::Value << CrosshairsCFG::Thickness;
         emitter << YAML::Key << "DotSize" << YAML::Value << CrosshairsCFG::DotSize;
         emitter << YAML::Key << "CircleRadius" << YAML::Value << CrosshairsCFG::CircleRadius;
+        emitter << YAML::Key << "TargetCheck" << YAML::Value << MenuConfig::TargetingCrosshairs;
         emitter << YAML::Key << "CrosshairsColor";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
@@ -432,6 +433,7 @@ namespace MyConfigSaver {
             CrosshairsCFG::Thickness = config["Crosshairs"]["Thickness"].as<int>();
             CrosshairsCFG::DotSize = config["Crosshairs"]["DotSize"].as<float>();
             CrosshairsCFG::CircleRadius = config["Crosshairs"]["CircleRadius"].as<float>();
+            MenuConfig::TargetingCrosshairs = config["Crosshairs"]["TargetCheck"].IsDefined() ? config["Crosshairs"]["TargetCheck"].as<bool>() : false;
             CrosshairsCFG::CrossHairColor.Value.x = config["Crosshairs"]["CrosshairsColor"]["r"].as<float>();
             CrosshairsCFG::CrossHairColor.Value.y = config["Crosshairs"]["CrosshairsColor"]["g"].as<float>();
             CrosshairsCFG::CrossHairColor.Value.z = config["Crosshairs"]["CrosshairsColor"]["b"].as<float>();
