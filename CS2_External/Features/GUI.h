@@ -438,8 +438,14 @@ namespace GUI
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 						ImGui::TextColored(ImColor(255, 50, 0, 255), "This might cause BAN");
 					}
-					if (MenuConfig::Country == "CN" && ESPConfig::winniethepool && MenuConfig::Language == 6)
+					if (MenuConfig::Country == "CN" && MenuConfig::Language == 6 && ESPConfig::winniethepool)
+					{
 						PutSwitch("Winnie", 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::winniethepool);
+					}
+					else
+					{
+						ESPConfig::winniethepool = false;
+					}
 
 
 					ImGui::NextColumn();
