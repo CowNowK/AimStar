@@ -18,12 +18,13 @@ ID3D11ShaderResourceView* MenuButton1 = NULL;
 ID3D11ShaderResourceView* MenuButton2 = NULL;
 ID3D11ShaderResourceView* MenuButton3 = NULL;
 ID3D11ShaderResourceView* MenuButton4 = NULL;
+ID3D11ShaderResourceView* HitboxImage = NULL;
 
 int LogoW = 0, LogoH = 0;
 int LogoW2 = 0, LogoH2 = 0;
 int buttonW = 0;
 int buttonH = 0;
-
+int hitboxW = 0, hitboxH = 0;
 
 namespace GUI
 {
@@ -38,6 +39,7 @@ namespace GUI
 			Gui.LoadTextureFromMemory(Images::AimbotButton, sizeof Images::AimbotButton, &MenuButton2, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ConfigButton, sizeof Images::ConfigButton, &MenuButton4, &buttonW, &buttonH);
+			Gui.LoadTextureFromMemory(Images::ZekamashiImg, sizeof Images::ZekamashiImg, &HitboxImage, &hitboxW, &hitboxH);
 		}
 	}
 
@@ -318,7 +320,8 @@ namespace GUI
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 					ImGui::SeparatorText(ICON_FA_USER" Aimbot");
-					float FovMin = 0.f, FovMax = 25.f;
+
+					float FovMin = 0.f, FovMax = 25.f, MinFovMax = 1.f;
 					float SmoothMin = 0.4f, SmoothMax = 5.f;
 					PutSwitch(Lang::AimbotText.Enable, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::AimBot);
 					if (MenuConfig::AimBot)
@@ -339,11 +342,12 @@ namespace GUI
 						PutSwitch(Lang::AimbotText.VisCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::VisibleCheck);
 						PutSwitch(Lang::AimbotText.ScopeOnly, 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::ScopeOnly);
 						PutSwitch(Lang::AimbotText.AutoShot, 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::AutoShot);
-						PutSliderFloat(Lang::AimbotText.FovSlider, 10.f, &AimControl::AimFov, &FovMin, &FovMax, "%.1f");
-						PutSliderFloat(Lang::AimbotText.FovMinSlider, 10.f, &AimControl::AimFovMin, &FovMin, &AimControl::AimFov, "%.1f");
+						PutSliderFloat(Lang::AimbotText.FovSlider, 10.f, &AimControl::AimFov, &AimControl::AimFovMin, &FovMax, "%.1f");
+						PutSliderFloat(Lang::AimbotText.FovMinSlider, 10.f, &AimControl::AimFovMin, &FovMin, &MinFovMax, "%.1f");
 						PutSliderFloat(Lang::AimbotText.SmoothSlider, 10.f, &AimControl::Smooth, &SmoothMin, &SmoothMax, "%.1f");
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 						ImGui::TextDisabled(Lang::AimbotText.BoneList);
+						/*
 						ImGui::SameLine();
 						if (ImGui::Combo("###AimPos", &MenuConfig::AimPosition, "Head\0Neck\0Chest\0Penis\0"))
 						{
@@ -365,6 +369,22 @@ namespace GUI
 								break;
 							}
 						}
+						*/
+						ImVec2 StartPos = ImGui::GetCursorScreenPos();
+						ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 202, StartPos.y + 62)); ImGui::RadioButton(" ", &MenuConfig::AimPosition, 0);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103), ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 40, StartPos.y + 91)); ImGui::RadioButton("  ", &MenuConfig::AimPosition, 1);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141), ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 192, StartPos.y + 129)); ImGui::RadioButton("   ", &MenuConfig::AimPosition, 2);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 44, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 188)); ImGui::RadioButton("    ", &MenuConfig::AimPosition, 3);
+						//ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
+
+
+
+						
 					}
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
