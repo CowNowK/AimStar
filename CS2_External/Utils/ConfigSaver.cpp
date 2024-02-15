@@ -605,6 +605,7 @@ namespace MyConfigSaver {
         }
 
         AimControl::SetHotKey(MenuConfig::AimBotHotKey);
+        TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
         Lang::ChangeLang(MenuConfig::Language);
 
         std::cout << "[Info] Configuration loaded from " << MenuConfig::path + '\\' + filename << std::endl;
