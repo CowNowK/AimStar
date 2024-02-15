@@ -319,7 +319,7 @@ namespace GUI
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 					ImGui::SeparatorText(ICON_FA_USER" Aimbot");
 					float FovMin = 0.f, FovMax = 25.f;
-					float SmoothMin = 0.f, SmoothMax = 5.f;
+					float SmoothMin = 0.4f, SmoothMax = 5.f;
 					PutSwitch(Lang::AimbotText.Enable, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::AimBot);
 					if (MenuConfig::AimBot)
 					{
