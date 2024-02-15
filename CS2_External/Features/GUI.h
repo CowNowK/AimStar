@@ -40,7 +40,7 @@ namespace GUI
 			Gui.LoadTextureFromMemory(Images::AimbotButton, sizeof Images::AimbotButton, &MenuButton2, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ConfigButton, sizeof Images::ConfigButton, &MenuButton4, &buttonW, &buttonH);
-			Gui.LoadTextureFromMemory(xiongda_image, sizeof xiongda_image, &HitboxImage, &hitboxW, &hitboxH);
+			Gui.LoadTextureFromMemory(zekamashi_img, sizeof zekamashi_img, &HitboxImage, &hitboxW, &hitboxH);
 		}
 	}
 
@@ -372,14 +372,14 @@ namespace GUI
 						*/
 						ImVec2 StartPos = ImGui::GetCursorScreenPos();
 						ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 125, StartPos.y + 75), ImVec2(StartPos.x + 200, StartPos.y + 75), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 197, StartPos.y + 63)); ImGui::RadioButton(" ", &MenuConfig::AimPosition, 0);
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 125, StartPos.y + 100), ImVec2(StartPos.x + 50, StartPos.y + 100), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 31, StartPos.y + 88)); ImGui::RadioButton("  ", &MenuConfig::AimPosition, 1);
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 125, StartPos.y + 140), ImVec2(StartPos.x + 200, StartPos.y + 140), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 197, StartPos.y + 128)); ImGui::RadioButton("   ", &MenuConfig::AimPosition, 2);
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 125, StartPos.y + 200), ImVec2(StartPos.x + 50, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 31, StartPos.y + 188)); ImGui::RadioButton("    ", &MenuConfig::AimPosition, 3);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 202, StartPos.y + 62)); ImGui::RadioButton(" ", &MenuConfig::AimPosition, 0);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103), ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 40, StartPos.y + 91)); ImGui::RadioButton("  ", &MenuConfig::AimPosition, 1);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141), ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 192, StartPos.y + 129)); ImGui::RadioButton("   ", &MenuConfig::AimPosition, 2);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 44, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 188)); ImGui::RadioButton("    ", &MenuConfig::AimPosition, 3);
 						//ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
 
 
