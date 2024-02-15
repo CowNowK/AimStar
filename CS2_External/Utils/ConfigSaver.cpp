@@ -273,6 +273,14 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "AutoShot" << YAML::Value << AimControl::AutoShot;
         emitter << YAML::EndMap;
 
+        emitter << YAML::Key << "Recoil Control System";
+        emitter << YAML::Value;
+        emitter << YAML::BeginMap;
+        emitter << YAML::Key << "Enable" << YAML::Value << MenuConfig::RCS;
+        emitter << YAML::Key << "Yaw" << YAML::Value << RCS::RCSScale.x;
+        emitter << YAML::Key << "Pitch" << YAML::Value << RCS::RCSScale.y;
+        emitter << YAML::EndMap;
+
         emitter << YAML::Key << "Triggerbot";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
@@ -510,6 +518,12 @@ namespace MyConfigSaver {
             MenuConfig::VisibleCheck = config["Aimbot"]["VisibleCheck"].as<bool>();
             AimControl::ScopeOnly = config["Aimbot"]["ScopeOnly"].IsDefined() ? config["Aimbot"]["ScopeOnly"].as<bool>() : false;
             AimControl::AutoShot = config["Aimbot"]["AutoShot"].IsDefined() ? config["Aimbot"]["AutoShot"].as<bool>() : false;
+        }
+        if (config["Recoil Control System"])
+        {
+            MenuConfig::RCS = config["Recoil Control System"]["Enable"].IsDefined() ? config["Recoil Control System"]["Enable"].as<bool>() : false;
+            RCS::RCSScale.x = config["Recoil Control System"]["Yaw"].IsDefined() ? config["Recoil Control System"]["Yaw"].as<float>() : 1.f;
+            RCS::RCSScale.y = config["Recoil Control System"]["Pitch"].IsDefined() ? config["Recoil Control System"]["Pitch"].as<float>() : 1.f;
         }
         if (config["Triggerbot"])
         {

@@ -2,18 +2,13 @@
 #include "Cheats.h"
 #include "Offsets.h"
 #include "Resources/Language.h"
+#include "Utils/Initial/Init.h"
 #include <chrono>
-#include <cstdlib>
 #include <filesystem>
-#include <fstream>
 #include <iomanip>
-#include <iostream>
 #include <KnownFolders.h>
 #include <ShlObj.h>
 #include <stdio.h>
-#include <string>
-#include <windows.h>
-#include <shellapi.h>
 
 using namespace std;
 /*
@@ -44,23 +39,6 @@ namespace fs = filesystem;
 bool otp = false;
 string fileName;
 
-//otp code verify by @_ukia_
-void CodeGenerate(string &time, string &code) {
-  auto now = chrono::system_clock::now();
-  auto now_utc = chrono::system_clock::to_time_t(now);
-  struct tm tm_utc;
-  gmtime_s(&tm_utc, &now_utc);
-  int year = tm_utc.tm_year + 1900;
-  int month = tm_utc.tm_mon + 1;
-  int day = tm_utc.tm_mday;
-  int hour = tm_utc.tm_hour;
-  int minute = tm_utc.tm_min;
-  int sum = year + month + day + hour + minute;
-  int otp = sum ^ 3351 % 10000;
-  time = to_string(year) + "-" + to_string(month) + "-" + to_string(day) + "-" + to_string(hour) + "-" + to_string(minute);
-  code = to_string(otp);
-}
-
 void Exit()
 {
 	system("pause");
@@ -71,7 +49,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 void Cheat()
 {
-	Lang::GetCountry(MenuConfig::Country);
+	if(Init::Verify::CheckWindowVersion())
+		Lang::GetCountry(MenuConfig::Country);
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
 	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
 	cout << R"(                                                                   
@@ -172,6 +151,7 @@ void Cheat()
 	cout << setw(23) << left << "LocalPlayerPawn:" << setiosflags(ios::uppercase) << hex << Offset::LocalPlayerPawn << endl;
 	cout << setw(23) << left << "PlantedC4:" << setiosflags(ios::uppercase) << hex << Offset::PlantedC4 << endl;
 	cout << setw(23) << left << "ForceJump:" << setiosflags(ios::uppercase) << hex << Offset::ForceJump << endl;
+	cout << setw(23) << left << "Sensitivity:" << setiosflags(ios::uppercase) << hex << Offset::Sensitivity << endl;
 	// cout << setw(23) << left << "ForceCrouch:" << setiosflags(ios::uppercase) << hex << Offset::ForceCrouch << endl;
 	// cout << setw(23) << left << "ForceForward:" << setiosflags(ios::uppercase) << hex << Offset::ForceForward << endl;
 	// cout << setw(23) << left << "ForceLeft:" << setiosflags(ios::uppercase) << hex << Offset::ForceLeft << endl;
@@ -203,13 +183,8 @@ int main()
 	const char* tempPath = std::getenv("TMP");
 	if (tempPath != nullptr)
 	{
-		fileName = std::string(tempPath) + "\\aimstar.vfy";
-
-		ifstream infile(fileName);
-		if (infile.good())
-			otp = true;
-		else
-			otp = false;
+		fileName = std::string(tempPath) + "\\Aimstar";
+		otp = Init::Verify::isVerified(fileName);
 	}
 
 	if (otp)
@@ -278,7 +253,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 			wstring ws(buffer);
 			string input(ws.begin(), ws.end());
 			string time, code;
-			CodeGenerate(time, code);
+			Init::Verify::CodeGenerate(time, code);
 
 			if (input != code) {
 				RetTimes++;
@@ -288,6 +263,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 				else {
 					MessageBox(hwnd, L"Exceeded maximum attempts.", L"Error", MB_OK | MB_ICONERROR);
 					DestroyWindow(hwnd);
+					Init::Client::QuitGame();
 					Exit();
 				}
 			}

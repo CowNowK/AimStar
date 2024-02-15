@@ -120,6 +120,14 @@ bool CEntity::UpdatePawn(const DWORD64& PlayerPawnAddress)
 	return true;
 }
 
+bool CEntity::UpdateClientData()
+{
+	if (!this->Client.GetSensitivity())
+		return false;
+
+	return true;
+}
+
 bool PlayerController::GetMoney()
 {
 	DWORD64 MoneyServices;
@@ -306,4 +314,18 @@ CBone CEntity::GetBone() const
 	if (this->Pawn.Address == 0)
 		return CBone{};
 	return this->Pawn.BoneData;
+}
+
+bool Client::GetSensitivity()
+{
+	DWORD64 dwSensitivity;
+	float flSensitivity;
+	ProcessMgr.ReadMemory(gGame.GetClientDLLAddress() + Offset::Sensitivity, dwSensitivity);
+	if (ProcessMgr.ReadMemory(dwSensitivity + 0x40, flSensitivity))
+	{
+		this->Sensitivity = flSensitivity;
+		return true;
+	}
+	else
+		return false;
 }
