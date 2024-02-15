@@ -203,7 +203,7 @@ int main()
 	const char* tempPath = std::getenv("TMP");
 	if (tempPath != nullptr)
 	{
-		fileName = std::string(tempPath) + "/aimstar";
+		fileName = std::string(tempPath) + "\\aimstar.vfy";
 
 		ifstream infile(fileName);
 		if (infile.good())
@@ -302,7 +302,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 		}
 		if (LOWORD(wParam) == 3)
 		{
-			ShellExecute(NULL, TEXT("open"), TEXT("https://aimstar.tkm.icu"), NULL, NULL, SW_SHOWNORMAL);
+			ShellExecuteA(NULL, "open", "https://aimstar.tkm.icu", NULL, NULL, SW_SHOWNORMAL);
+			// ShellExecute(NULL, TEXT("open"), TEXT("https://aimstar.tkm.icu"), NULL, NULL, SW_SHOWNORMAL);
 		}
 		break;
 	}
