@@ -20,6 +20,7 @@ namespace Offset
 	inline DWORD InventoryServices;
 	inline DWORD PlantedC4;
 	inline DWORD InputSystem;
+	inline DWORD Sensitivity;
 	inline DWORD Pointer;
 
 	struct
@@ -168,6 +169,7 @@ namespace Offset
 		const std::string LocalPlayerPawn = "48 8D 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 83 EC ?? 8B 0D";
 		const std::string PlantedC4 = "48 8B 15 ?? ?? ?? ?? FF C0 48 8D 4C 24 40";
 		const std::string InputSystem = "48 89 05 ?? ?? ?? ?? 48 8D 05";
+		const std::string dwSensitivity = "48 8B 05 ?? ?? ?? ?? 48 8B 40 ?? F3 0F 10 00 F3 0F 59 86";
 	}
 
 	bool UpdateOffsets();

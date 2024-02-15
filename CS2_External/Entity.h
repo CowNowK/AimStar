@@ -83,15 +83,26 @@ public:
 	}
 };
 
+class Client
+{
+public:
+	float Sensitivity;
+
+public:
+	bool GetSensitivity();
+};
+
 class CEntity
 {
 public:
 	PlayerController Controller;
 	PlayerPawn Pawn;
+	Client Client;
 public:
 	// 更新数据
 	bool UpdateController(const DWORD64& PlayerControllerAddress);
 	bool UpdatePawn(const DWORD64& PlayerPawnAddress);
+	bool UpdateClientData();
 	// 是否存活
 	bool IsAlive();
 	// 是否在屏幕内
