@@ -205,7 +205,6 @@
     <ClInclude Include="Utils\Updater.h" />
     <ClInclude Include="Resources\8964.h" />
     <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
-    <ClInclude Include="Resources\Hitbox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">

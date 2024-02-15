@@ -11,7 +11,6 @@
 #include "StyleChanger.h"
 #include "..\Resources\Language.h"
 #include "..\Resources\Images.h"
-#include "..\Resources\Hitbox.h"
 
 ID3D11ShaderResourceView* AS_Logo = NULL;
 ID3D11ShaderResourceView* NL_Logo = NULL;
@@ -40,7 +39,7 @@ namespace GUI
 			Gui.LoadTextureFromMemory(Images::AimbotButton, sizeof Images::AimbotButton, &MenuButton2, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ConfigButton, sizeof Images::ConfigButton, &MenuButton4, &buttonW, &buttonH);
-			Gui.LoadTextureFromMemory(zekamashi_img, sizeof zekamashi_img, &HitboxImage, &hitboxW, &hitboxH);
+			Gui.LoadTextureFromMemory(Images::ZekamashiImg, sizeof Images::ZekamashiImg, &HitboxImage, &hitboxW, &hitboxH);
 		}
 	}
 
