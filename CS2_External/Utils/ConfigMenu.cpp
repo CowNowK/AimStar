@@ -201,7 +201,7 @@ namespace ConfigMenu {
 		RCS::RCSBullet = 1;
 		MenuConfig::TriggerHotKey = 0;
 		TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
-		AimControl::RCSScale = ImVec2(1.2f, 1.4f);
+		RCS::RCSScale = ImVec2(1.2f, 1.4f);
 		AimControl::ScopeOnly = false;
 		AimControl::AutoShot = false;
 		MenuConfig::FovLineColor = ImVec4(55, 55, 55, 220);

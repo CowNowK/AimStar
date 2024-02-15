@@ -111,6 +111,7 @@ void Cheats::Run()
 	// LocalEntity
 	CEntity LocalEntity, ServerEntity;
 	static int LocalPlayerControllerIndex = 1;
+	LocalEntity.UpdateClientData();
 	if (!LocalEntity.UpdateController(LocalControllerAddress))
 		return;
 	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MiscCFG::WorkInSpec)
@@ -301,7 +302,7 @@ void Cheats::Run()
 	RenderCrossHair(ImGui::GetBackgroundDrawList());
 
 	bmb::RenderWindow();
-
+	RCS::RecoilControl(LocalEntity);
 	// Aimbot
 	if (MenuConfig::AimBot)
 	{
@@ -334,5 +335,4 @@ void Cheats::Run()
 
 	Misc::JoinDiscord();
 	Misc::SourceCode();
-		
 }

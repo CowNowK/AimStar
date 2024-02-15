@@ -23,7 +23,6 @@ namespace AimControl
     inline float AimFov = 5;
     inline float AimFovMin = .5f;
     inline float Smooth = 2.0f;
-    inline Vec2 RCSScale = { 1.f,1.f };
     inline std::vector<int> HotKeyList{ VK_LMENU, VK_LBUTTON, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL };
 
     inline void SetHotKey(int Index)
@@ -72,14 +71,14 @@ namespace AimControl
         if (MenuConfig::RCS)
         {
             RCS::UpdateAngles(Local, Angles);
-            float rad = Angles.x * RCSScale.x / 180.f * M_PI;
+            float rad = Angles.x * RCS::RCSScale.x / 180.f * M_PI;
             float si = sinf(rad);
             float co = cosf(rad);
 
             float z = OppPos.z * co + Distance * si;
             float d = (Distance * co - OppPos.z * si) / Distance;
 
-            rad = -Angles.y * RCSScale.y / 180.f * M_PI;
+            rad = -Angles.y * RCS::RCSScale.y / 180.f * M_PI;
             si = sinf(rad);
             co = cosf(rad);
 
