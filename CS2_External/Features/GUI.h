@@ -11,6 +11,7 @@
 #include "StyleChanger.h"
 #include "..\Resources\Language.h"
 #include "..\Resources\Images.h"
+#include "..\Resources\Hitbox.h"
 
 ID3D11ShaderResourceView* AS_Logo = NULL;
 ID3D11ShaderResourceView* NL_Logo = NULL;
@@ -18,12 +19,13 @@ ID3D11ShaderResourceView* MenuButton1 = NULL;
 ID3D11ShaderResourceView* MenuButton2 = NULL;
 ID3D11ShaderResourceView* MenuButton3 = NULL;
 ID3D11ShaderResourceView* MenuButton4 = NULL;
+ID3D11ShaderResourceView* HitboxImage = NULL;
 
 int LogoW = 0, LogoH = 0;
 int LogoW2 = 0, LogoH2 = 0;
 int buttonW = 0;
 int buttonH = 0;
-
+int hitboxW = 0, hitboxH = 0;
 
 namespace GUI
 {
@@ -38,6 +40,7 @@ namespace GUI
 			Gui.LoadTextureFromMemory(Images::AimbotButton, sizeof Images::AimbotButton, &MenuButton2, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::ConfigButton, sizeof Images::ConfigButton, &MenuButton4, &buttonW, &buttonH);
+			Gui.LoadTextureFromMemory(xiongda_image, sizeof xiongda_image, &HitboxImage, &hitboxW, &hitboxH);
 		}
 	}
 
@@ -365,6 +368,7 @@ namespace GUI
 								break;
 							}
 						}
+						ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
 					}
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
