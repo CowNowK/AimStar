@@ -347,6 +347,7 @@ namespace GUI
 						PutSliderFloat(Lang::AimbotText.SmoothSlider, 10.f, &AimControl::Smooth, &SmoothMin, &SmoothMax, "%.1f");
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 						ImGui::TextDisabled(Lang::AimbotText.BoneList);
+						/*
 						ImGui::SameLine();
 						if (ImGui::Combo("###AimPos", &MenuConfig::AimPosition, "Head\0Neck\0Chest\0Penis\0"))
 						{
@@ -368,7 +369,22 @@ namespace GUI
 								break;
 							}
 						}
+						*/
+						ImVec2 StartPos = ImGui::GetCursorScreenPos();
 						ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 125, StartPos.y + 75), ImVec2(StartPos.x + 200, StartPos.y + 75), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 197, StartPos.y + 63)); ImGui::RadioButton(" ", &MenuConfig::AimPosition, 0);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 125, StartPos.y + 100), ImVec2(StartPos.x + 50, StartPos.y + 100), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 31, StartPos.y + 88)); ImGui::RadioButton("  ", &MenuConfig::AimPosition, 1);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 125, StartPos.y + 140), ImVec2(StartPos.x + 200, StartPos.y + 140), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 197, StartPos.y + 128)); ImGui::RadioButton("   ", &MenuConfig::AimPosition, 2);
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 125, StartPos.y + 200), ImVec2(StartPos.x + 50, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 31, StartPos.y + 188)); ImGui::RadioButton("    ", &MenuConfig::AimPosition, 3);
+						//ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
+
+
+
+						
 					}
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
