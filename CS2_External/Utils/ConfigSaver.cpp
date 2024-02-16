@@ -506,8 +506,8 @@ namespace MyConfigSaver {
             MenuConfig::AimBot = config["Aimbot"]["Enable"].as<bool>();
             AimControl::AimLock = config["Aimbot"]["AimLock"].IsDefined() ? config["Aimbot"]["AimLock"].as<bool>() : false;
             MenuConfig::AimToggleMode = config["Aimbot"]["ToggleMode"].as<bool>();
-            MenuConfig::AimBotHotKey = config["Aimbot"]["Hotkey"].as<int>();
-            AimControl::AimBullet = config["Aimbot"]["AimBullet"].as<int>();
+            MenuConfig::AimBotHotKey = config["Aimbot"]["Hotkey"].IsDefined() ? config["Aimbot"]["Hotkey"].as<int>() : 0;
+            AimControl::AimBullet = config["Aimbot"]["AimBullet"].IsDefined() ? config["Aimbot"]["AimBullet"].as<int>() : 0;
             AimControl::AimFov = config["Aimbot"]["Fov"].as<float>();
             AimControl::AimFovMin = config["Aimbot"]["FovMin"].IsDefined() ? config["Aimbot"]["FovMin"].as<float>() : .5f;
             ESPConfig::DrawFov = config["Aimbot"]["FovCircle"].as<bool>();
