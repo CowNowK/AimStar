@@ -80,14 +80,14 @@ namespace AimControl
         if (MenuConfig::RCS)
         {
             RCS::UpdateAngles(Local, Angles);
-            float rad = Angles.x * RCS::RCSScale.x / 180.f * M_PI;
+            float rad = Angles.x * RCS::RCSScale.x / 360.f * M_PI;
             float si = sinf(rad);
             float co = cosf(rad);
 
             float z = OppPos.z * co + Distance * si;
             float d = (Distance * co - OppPos.z * si) / Distance;
 
-            rad = -Angles.y * RCS::RCSScale.y / 180.f * M_PI;
+            rad = -Angles.y * RCS::RCSScale.y / 360.f * M_PI;
             si = sinf(rad);
             co = cosf(rad);
 
