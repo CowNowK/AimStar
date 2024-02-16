@@ -277,7 +277,7 @@ namespace Lang
 		AimbotText.FovSlider = u8"FOV: ";
 		AimbotText.FovMinSlider = u8"MinFOV: ";
 		AimbotText.SmoothSlider = u8"Smooth: ";
-		AimbotText.BoneList = u8"Bone       ";
+		AimbotText.BoneList = u8"Hitbox";
 		AimbotText.Tip = u8"Aimbot will not work while the menu is opened";
 		AimbotText.ScopeOnly = u8"Scope Only";
 		AimbotText.AimLock = u8"Aim Lock";
