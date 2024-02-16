@@ -389,7 +389,10 @@ namespace GUI
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(ICON_FA_ARROW_ALT_CIRCLE_DOWN " RCS");
+					float recoilMin = 0.f, recoilMax = 2.f;
 					PutSwitch("Enable RCS", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::RCS);
+					PutSliderFloat("Yaw: ", 5.f, &RCS::RCSScale.x, &recoilMin, &recoilMax, "%.2f");
+					PutSliderFloat("Pitch: ", 5.f, &RCS::RCSScale.y, &recoilMin, &recoilMax, "%.2f");
 
 					ImGui::NewLine();
 					ImGui::SeparatorText(ICON_FA_HAND_POINTER" Triggerbot");
