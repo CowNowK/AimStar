@@ -26,6 +26,8 @@ namespace AimControl
     inline float Smooth = 2.0f;
     inline std::vector<int> HotKeyList{ VK_LMENU, VK_LBUTTON, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL };
 
+    inline bool HasTarget = false;
+
     inline void SetHotKey(int Index)
     {
         HotKey = HotKeyList.at(Index);
@@ -44,15 +46,20 @@ namespace AimControl
         //int isFired;
         //ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
         //if (!isFired && !AimLock)
-        if (Local.Pawn.ShotsFired < AimBullet && !AimLock)
+        if (Local.Pawn.ShotsFired < AimBullet && !AimLock) {
+            HasTarget = false;
             return;
+        }
+            
 
         if (AimControl::ScopeOnly)
         {
             bool isScoped;
             ProcessMgr.ReadMemory<bool>(Local.Pawn.Address + Offset::Pawn.isScoped, isScoped);
-            if (!isScoped)
+            if (!isScoped) {
+                HasTarget = false;
                 return;
+            }
         }
 
         float Yaw, Pitch;
@@ -101,6 +108,7 @@ namespace AimControl
 
         if (Norm < AimFov && Norm > AimFovMin)
         {
+            HasTarget = true;
             // Shake Fixed by @Sweely
             if (ScreenPos.x != ScreenCenterX)
             {
@@ -136,7 +144,7 @@ namespace AimControl
             TargetX /= (Smooth * SpeedFactor);
             TargetY /= (Smooth * SpeedFactor);
             // by Skarbor
-            
+
             if (ScreenPos.x != ScreenCenterX)
             {
                 TargetX = (ScreenPos.x > ScreenCenterX) ? -(ScreenCenterX - ScreenPos.x) : ScreenPos.x - ScreenCenterX;
@@ -160,7 +168,7 @@ namespace AimControl
                 mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
         }
-        else if (MenuConfig::RCS)
-            RCS::RecoilControl(Local);
+        else
+            HasTarget = false;
     }
 }
