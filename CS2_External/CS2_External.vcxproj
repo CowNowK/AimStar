@@ -207,6 +207,7 @@
     <ClInclude Include="TriggerBot.h" />
     <ClInclude Include="Utils\ConfigMenu.hpp" />
     <ClInclude Include="Utils\ConfigSaver.hpp" />
+    <ClInclude Include="Utils\cpp-httplib\httplib.h" />
     <ClInclude Include="Utils\curl\curl.h" />
     <ClInclude Include="Utils\curl\curlver.h" />
     <ClInclude Include="Utils\curl\easy.h" />
@@ -223,6 +224,7 @@
     <ClInclude Include="Utils\Globals.hpp" />
     <ClInclude Include="Utils\GlobalVars.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
+    <ClInclude Include="Utils\json\json.hpp" />
     <ClInclude Include="Utils\ProcessManager.hpp" />
     <ClInclude Include="Utils\Random.h" />
     <ClInclude Include="Utils\Style.h" />

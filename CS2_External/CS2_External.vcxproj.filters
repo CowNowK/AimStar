@@ -207,6 +207,8 @@
     <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
     <ClInclude Include="Resources\Sounds.h" />
+    <ClInclude Include="Utils\cpp-httplib\httplib.h" />
+    <ClInclude Include="Utils\json\json.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
