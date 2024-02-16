@@ -11,6 +11,7 @@
 #include <vector>
 #include <Windows.h>
 
+#include "..\Resources\Sounds.h"
 #include "..\AimBot.hpp"
 #include "..\Entity.h"
 #include "..\MenuConfig.hpp"

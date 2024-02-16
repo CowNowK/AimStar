@@ -6,7 +6,6 @@
 namespace MenuConfig
 {
 	inline std::string path = "";
-	inline std::string SoundPath = "";
 	inline std::string LocalVersion = "3.9";
 	// Don't change this
 	inline std::string Key = "N5ZF3KG8H6BVQ71T";

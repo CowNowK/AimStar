@@ -71,7 +71,6 @@ void Cheat()
 	}
 	MenuConfig::path = documentsPath;
 	MenuConfig::path += "\\AimStar";
-	MenuConfig::SoundPath = MenuConfig::path + "\\Sounds";
 
 	switch (ProcessStatus) {
 	case 1:
@@ -120,19 +119,6 @@ void Cheat()
 		else
 		{
 			cerr << "[Info] Error: Failed to create the config directory." << endl;
-			Exit();
-		}
-	}
-
-	if (fs::exists(MenuConfig::SoundPath))
-		cout << "[Info] Hitsound folder connected: " << MenuConfig::SoundPath << endl;
-	else
-	{
-		if (fs::create_directory(MenuConfig::SoundPath))
-			cout << "[Info] Hitsound folder created: " << MenuConfig::SoundPath << endl;
-		else
-		{
-			cerr << "[Info] Error: Failed to create the file directory." << endl;
 			Exit();
 		}
 	}

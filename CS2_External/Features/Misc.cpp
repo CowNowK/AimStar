@@ -112,9 +112,6 @@ namespace Misc
 		if (!MiscCFG::HitSound)
 			return;
 
-		std::string soundDir = MenuConfig::SoundPath + "\\Hit.wav";
-		std::wstring sound = Misc::STR2LPCWSTR(soundDir);
-
 		uintptr_t pBulletServices;
 		int totalHits;
 		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.BulletServices, pBulletServices);
@@ -128,7 +125,7 @@ namespace Misc
 			else
 			{
 				// Play the HitSound
-				PlaySoundW(sound.c_str(), NULL, SND_FILENAME | SND_ASYNC);
+				PlaySoundA(reinterpret_cast<char*>(skeet_sound), NULL, SND_ASYNC | SND_MEMORY);
 			}
 		}
 		PreviousTotalHits = totalHits;

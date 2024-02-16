@@ -206,6 +206,7 @@
     <ClInclude Include="Resources\8964.h" />
     <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
+    <ClInclude Include="Resources\Sounds.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
