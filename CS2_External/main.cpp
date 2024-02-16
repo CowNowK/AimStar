@@ -3,6 +3,7 @@
 #include "Offsets.h"
 #include "Resources/Language.h"
 #include "Utils/Initial/Init.h"
+#include "Utils/OffsetsUpdater.h"
 #include <chrono>
 #include <filesystem>
 #include <iomanip>
@@ -166,6 +167,7 @@ void Cheat()
 
 int main()
 {
+	Updater::UpdateOffsets();
 	const char* tempPath = std::getenv("TMP");
 	if (tempPath != nullptr)
 	{

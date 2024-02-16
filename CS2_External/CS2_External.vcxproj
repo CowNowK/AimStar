@@ -225,10 +225,10 @@
     <ClInclude Include="Utils\GlobalVars.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
     <ClInclude Include="Utils\json\json.hpp" />
+    <ClInclude Include="Utils\OffsetsUpdater.h" />
     <ClInclude Include="Utils\ProcessManager.hpp" />
     <ClInclude Include="Utils\Random.h" />
     <ClInclude Include="Utils\Style.h" />
-    <ClInclude Include="Utils\Updater.h" />
     <ClInclude Include="Utils\yaml-cpp\anchor.h" />
     <ClInclude Include="Utils\yaml-cpp\binary.h" />
     <ClInclude Include="Utils\yaml-cpp\contrib\anchordict.h" />

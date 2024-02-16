@@ -202,13 +202,13 @@
     <ClInclude Include="Utils\curl\typecheck-gcc.h" />
     <ClInclude Include="Utils\curl\urlapi.h" />
     <ClInclude Include="Utils\curl\websockets.h" />
-    <ClInclude Include="Utils\Updater.h" />
     <ClInclude Include="Resources\8964.h" />
     <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
     <ClInclude Include="Resources\Sounds.h" />
     <ClInclude Include="Utils\cpp-httplib\httplib.h" />
     <ClInclude Include="Utils\json\json.hpp" />
+    <ClInclude Include="Utils\OffsetsUpdater.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">

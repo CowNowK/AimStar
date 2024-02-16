@@ -6,7 +6,6 @@
 #include "..\TriggerBot.h"
 #include "..\Utils\ConfigMenu.hpp"
 #include "..\Utils\ConfigSaver.hpp"
-#include "..\Utils\Updater.h"
 
 #include "StyleChanger.h"
 #include "..\Resources\Language.h"
