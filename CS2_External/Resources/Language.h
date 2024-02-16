@@ -95,6 +95,7 @@ namespace Lang
 		inline static const char* ScopeOnly;
 		inline static const char* AimLock;
 		inline static const char* AutoShot;
+		inline static const char* BulletSlider;
 
 		inline static const char* Bone_1;
 		inline static const char* Bone_2;
@@ -274,6 +275,8 @@ namespace Lang
 		AimbotText.ScopeOnly = u8"Scope Only";
 		AimbotText.AimLock = u8"Aim Lock";
 		AimbotText.AutoShot = u8"Auto Shot";
+		AimbotText.BulletSlider = u8"Start Bullet";
+
 
 		// Radar
 		RadarText.Toggle = u8"Show Radar";

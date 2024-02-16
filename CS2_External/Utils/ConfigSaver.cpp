@@ -254,7 +254,8 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Enable" << YAML::Value << MenuConfig::AimBot;
         emitter << YAML::Key << "AimLock" << YAML::Value << AimControl::AimLock;
         emitter << YAML::Key << "ToggleMode" << YAML::Value << MenuConfig::AimToggleMode;
-        emitter << YAML::Key << "Hotkey" << YAML::Value << MenuConfig::AimBotHotKey;
+        emitter << YAML::Key << "Hotkey" << YAML::Value << MenuConfig::AimBotHotKey; 
+        emitter << YAML::Key << "AimBullet" << YAML::Value << AimControl::AimBullet;
         emitter << YAML::Key << "Fov" << YAML::Value << AimControl::AimFov;
         emitter << YAML::Key << "FovMin" << YAML::Value << AimControl::AimFovMin;
         emitter << YAML::Key << "FovCircle" << YAML::Value << ESPConfig::DrawFov;
@@ -506,6 +507,7 @@ namespace MyConfigSaver {
             AimControl::AimLock = config["Aimbot"]["AimLock"].IsDefined() ? config["Aimbot"]["AimLock"].as<bool>() : false;
             MenuConfig::AimToggleMode = config["Aimbot"]["ToggleMode"].as<bool>();
             MenuConfig::AimBotHotKey = config["Aimbot"]["Hotkey"].as<int>();
+            AimControl::AimBullet = config["Aimbot"]["AimBullet"].as<int>();
             AimControl::AimFov = config["Aimbot"]["Fov"].as<float>();
             AimControl::AimFovMin = config["Aimbot"]["FovMin"].IsDefined() ? config["Aimbot"]["FovMin"].as<float>() : .5f;
             ESPConfig::DrawFov = config["Aimbot"]["FovCircle"].as<bool>();
