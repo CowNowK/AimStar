@@ -17,6 +17,7 @@ extern "C" {
 namespace AimControl
 {
     inline int HotKey = VK_LMENU;
+    inline int AimBullet = 1;
     inline bool ScopeOnly = false;
     inline bool AutoShot = false;
     inline bool AimLock = false;
@@ -40,9 +41,10 @@ namespace AimControl
         if (MenuConfig::ShowMenu)
             return;
 
-        int isFired;
-        ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
-        if (!isFired && !AimLock)
+        //int isFired;
+        //ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
+        //if (!isFired && !AimLock)
+        if (Local.Pawn.ShotsFired < AimBullet && !AimLock)
             return;
 
         if (AimControl::ScopeOnly)
@@ -158,5 +160,7 @@ namespace AimControl
                 mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
         }
+        else if (MenuConfig::RCS)
+            RCS::RecoilControl(Local);
     }
 }

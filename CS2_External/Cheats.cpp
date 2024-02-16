@@ -302,7 +302,7 @@ void Cheats::Run()
 	RenderCrossHair(ImGui::GetBackgroundDrawList());
 
 	bmb::RenderWindow();
-	RCS::RecoilControl(LocalEntity);
+	
 	// Aimbot
 	if (MenuConfig::AimBot)
 	{
@@ -332,7 +332,9 @@ void Cheats::Run()
 			lastTick = currentTick;
 		}
 	}
-
+	if (AimPos == Vec3(0, 0, 0) || !MenuConfig::AimBot)
+		RCS::RecoilControl(LocalEntity);
+	
 	Misc::JoinDiscord();
 	Misc::SourceCode();
 }

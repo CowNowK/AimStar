@@ -65,7 +65,7 @@ namespace RCS
 
 	inline void RecoilControl(CEntity LocalPlayer)
 	{
-		if (!MenuConfig::RCS || MenuConfig::AimBot)
+		if (!MenuConfig::RCS)
 			return;
 
 		static Vec2 OldPunch;
