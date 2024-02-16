@@ -167,7 +167,6 @@ namespace ConfigMenu {
 		ESPConfig::ShowPlayerName = true;
 		ESPConfig::BoxRounding = 0.0f;
 		MenuConfig::AimBot = false;
-		MenuConfig::AimAlways = false;
 		MenuConfig::AimToggleMode = false;
 		MenuConfig::AimPosition = 0;
 		MenuConfig::AimPositionIndex = BONEINDEX::head;

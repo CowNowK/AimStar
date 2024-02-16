@@ -503,7 +503,7 @@ namespace MyConfigSaver {
         if (config["Aimbot"])
         {
             MenuConfig::AimBot = config["Aimbot"]["Enable"].as<bool>();
-            MenuConfig::AimAlways = config["Aimbot"]["AimLock"].IsDefined() ? config["Aimbot"]["AimLock"].as<bool>() : false;
+            AimControl::AimLock = config["Aimbot"]["AimLock"].IsDefined() ? config["Aimbot"]["AimLock"].as<bool>() : false;
             MenuConfig::AimToggleMode = config["Aimbot"]["ToggleMode"].as<bool>();
             MenuConfig::AimBotHotKey = config["Aimbot"]["Hotkey"].as<int>();
             AimControl::AimFov = config["Aimbot"]["Fov"].as<float>();
