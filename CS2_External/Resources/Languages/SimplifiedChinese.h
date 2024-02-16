@@ -66,6 +66,12 @@ namespace Lang
 		AimbotText.ScopeOnly = u8"仅开镜";
 		AimbotText.AimLock = u8"自动锁定";
 		AimbotText.AutoShot = u8"自动开火";
+		AimbotText.BulletSlider = u8"从第几发开始: ";
+
+		// RCS
+		RCStext.Toggle = u8"后坐控制";
+		RCStext.Yaw = u8"水平强度: ";
+		RCStext.Pitch = u8"垂直强度: ";
 
 		// Radar
 		RadarText.Toggle = u8"显示雷达";

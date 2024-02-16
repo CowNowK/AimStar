@@ -374,13 +374,13 @@ namespace GUI
 						ImVec2 StartPos = ImGui::GetCursorScreenPos();
 						ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 202, StartPos.y + 62)); ImGui::RadioButton(" ", &MenuConfig::AimPosition, 0);
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 202, StartPos.y + 62)); ImGui::RadioButton("###Head", &MenuConfig::AimPosition, 0);
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103), ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 40, StartPos.y + 91)); ImGui::RadioButton("  ", &MenuConfig::AimPosition, 1);
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 40, StartPos.y + 91)); ImGui::RadioButton("###Neck", &MenuConfig::AimPosition, 1);
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141), ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 192, StartPos.y + 129)); ImGui::RadioButton("   ", &MenuConfig::AimPosition, 2);
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 192, StartPos.y + 129)); ImGui::RadioButton("###Chest", &MenuConfig::AimPosition, 2);
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 44, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 188)); ImGui::RadioButton("    ", &MenuConfig::AimPosition, 3);
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 188)); ImGui::RadioButton("###Penis", &MenuConfig::AimPosition, 3);
 						//ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
 
 
@@ -391,14 +391,15 @@ namespace GUI
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(ICON_FA_ARROW_ALT_CIRCLE_DOWN " RCS");
 					float recoilMin = 0.f, recoilMax = 2.f;
-					PutSwitch("Enable RCS", 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::RCS);
+					PutSwitch(Lang::RCStext.Toggle, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::RCS);
 					if (MenuConfig::RCS) {
-						PutSliderFloat("Yaw: ", 5.f, &RCS::RCSScale.x, &recoilMin, &recoilMax, "%.2f");
-						PutSliderFloat("Pitch: ", 5.f, &RCS::RCSScale.y, &recoilMin, &recoilMax, "%.2f");
+						PutSliderFloat(Lang::RCStext.Yaw, 5.f, &RCS::RCSScale.x, &recoilMin, &recoilMax, "%.2f");
+						PutSliderFloat(Lang::RCStext.Pitch, 5.f, &RCS::RCSScale.y, &recoilMin, &recoilMax, "%.2f");
 						float scalex = (2.22 - RCS::RCSScale.x) *.5f;
 						float scaley = (2.12 - RCS::RCSScale.y) *.5f;//Simulate reasonable error values
 						ImVec2 BulletPos = ImGui::GetCursorScreenPos();
 
+						// Example Preview
 						ImVec2 BulletPos0, BulletPos1, BulletPos2, BulletPos3, BulletPos4, BulletPos5, BulletPos6, BulletPos7, BulletPos8, BulletPos9, BulletPos10, BulletPos11, BulletPos12, BulletPos13, BulletPos14, BulletPos15;
 						BulletPos.y += 123 * scaley;
 						BulletPos0.x = BulletPos.x + 125; BulletPos0.y = BulletPos.y + 5;

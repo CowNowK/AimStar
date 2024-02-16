@@ -103,6 +103,13 @@ namespace Lang
 		inline static const char* Bone_4;
 	} AimbotText;
 
+	inline struct RCStext
+	{
+		inline static const char* Toggle;
+		inline static const char* Yaw;
+		inline static const char* Pitch;
+	} RCStext;
+
 	inline struct RadarText
 	{
 		inline static const char* Toggle;
@@ -275,8 +282,12 @@ namespace Lang
 		AimbotText.ScopeOnly = u8"Scope Only";
 		AimbotText.AimLock = u8"Aim Lock";
 		AimbotText.AutoShot = u8"Auto Shot";
-		AimbotText.BulletSlider = u8"Start Bullet";
+		AimbotText.BulletSlider = u8"Start Bullet: ";
 
+		// RCS
+		RCStext.Toggle = u8"Recoil Control";
+		RCStext.Yaw = u8"Yaw: ";
+		RCStext.Pitch = u8"Pitch: ";
 
 		// Radar
 		RadarText.Toggle = u8"Show Radar";
