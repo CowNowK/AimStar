@@ -167,7 +167,7 @@ void Cheat()
 
 int main()
 {
-	Updater::UpdateOffsets();
+	
 	const char* tempPath = std::getenv("TMP");
 	if (tempPath != nullptr)
 	{
