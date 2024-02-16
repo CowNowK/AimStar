@@ -44,13 +44,14 @@ namespace RCS
 			newAngles.x += ScreenCenterX;
 			newAngles.y += ScreenCenterY;
 			Angles = newAngles;
+			oldPunch = aimPunch;
 		}
 		else
 		{
 			oldPunch.x = oldPunch.y = 0.f;
 		}
 
-		if (Local.Pawn.ShotsFired > RCSBullet)
+		if (true/*Local.Pawn.ShotsFired > RCSBullet*/)
 		{
 			Vec2 PunchAngle;
 			if (Local.Pawn.AimPunchCache.Count <= 0 && Local.Pawn.AimPunchCache.Count > 0xFFFF)
@@ -70,7 +71,7 @@ namespace RCS
 
 		static Vec2 OldPunch;
 
-		if (LocalPlayer.Pawn.ShotsFired > 1)
+		if (LocalPlayer.Pawn.ShotsFired > RCSBullet)
 		{
 			Vec2 viewAngles = LocalPlayer.Pawn.ViewAngle;
 			Vec2 delta = viewAngles - (viewAngles + (OldPunch - (LocalPlayer.Pawn.AimPunchAngle * 2.f)));
