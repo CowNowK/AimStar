@@ -225,7 +225,6 @@
     <ClInclude Include="Utils\GlobalVars.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
     <ClInclude Include="Utils\json\json.hpp" />
-    <ClInclude Include="Utils\OffsetsUpdater.h" />
     <ClInclude Include="Utils\ProcessManager.hpp" />
     <ClInclude Include="Utils\Random.h" />
     <ClInclude Include="Utils\Style.h" />
