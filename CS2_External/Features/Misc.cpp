@@ -133,6 +133,9 @@ namespace Misc
 
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept
 	{
+		if (MenuConfig::SafeMode)
+			return;
+
 		float MaxAlpha = 255.f - MiscCFG::FlashImmunity;
 		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
 	}
@@ -156,6 +159,9 @@ namespace Misc
 
 	void NadeManager(CGame Game) noexcept
 	{
+		if (MenuConfig::SafeMode)
+			return;
+
 		std::vector<std::string> EntityNames = {
 		"smokegrenade_projectile", "weapon_glock", "weapon_smokegrenade", "basemodelentity",
 		"c_cs_player_for_precache", "info_particle_system", "prop_dynamic", "post_processing_volume",
@@ -222,6 +228,9 @@ namespace Misc
 
 	void RadarHack(const CEntity& EntityList) noexcept
 	{
+		if (MenuConfig::SafeMode)
+			return;
+
 		if (!MiscCFG::RadarHack)
 			return;
 
@@ -231,6 +240,9 @@ namespace Misc
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
 	{
+		if (MenuConfig::SafeMode)
+			return;
+
 		DWORD64 CameraServices = 0;
 		if (Zoom)
 			return;
@@ -318,6 +330,9 @@ namespace Misc
 	std::string OldWeaponCache;
 	void ForceScope(const CEntity& aLocalPlayer) noexcept
 	{
+		if (MenuConfig::SafeMode)
+			return;
+
 		if (!MiscCFG::ForceScope)
 			return;
 

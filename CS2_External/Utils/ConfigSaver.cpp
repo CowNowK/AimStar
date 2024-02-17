@@ -295,6 +295,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Menu";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
+        emitter << YAML::Key << "SafeMode" << YAML::Value << MenuConfig::SafeMode;
         emitter << YAML::Key << "Theme" << YAML::Value << MenuConfig::Theme;
         emitter << YAML::Key << "Language" << YAML::Value << MenuConfig::Language;
         emitter << YAML::EndMap;
@@ -537,6 +538,7 @@ namespace MyConfigSaver {
         }
         if (config["Menu"])
         {
+            MenuConfig::SafeMode = config["Menu"]["SafeMode"].IsDefined() ? config["Menu"]["SafeMode"].as<bool>() : true;
             MenuConfig::Theme = config["Menu"]["Theme"].as<int>();
             MenuConfig::Language = config["Menu"]["Language"].IsDefined() ? config["Menu"]["Language"].as<int>() : 0;
         }
