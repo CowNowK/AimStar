@@ -535,7 +535,7 @@ namespace MyConfigSaver {
             MenuConfig::TriggerHotKey = config["Triggerbot"]["Hotkey"].as<int>();
             TriggerBot::TriggerDelay = config["Triggerbot"]["Delay"].as<float>();
             TriggerBot::FakeShotDelay = config["Triggerbot"]["FakeShot"].as<float>();
-            TriggerBot::ScopeOnly = config["Triggerbot"]["ScopeOnly"].IsDefined() ? config["Triggerbot"]["ScopeOnly"].as<bool> : false;
+            TriggerBot::ScopeOnly = config["Triggerbot"]["ScopeOnly"].IsDefined() ? config["Triggerbot"]["ScopeOnly"].as<bool>() : false;
             MenuConfig::TriggerAlways = config["Triggerbot"]["AutoMode"].as<bool>();
         }
         if (config["Menu"])
