@@ -29,6 +29,15 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	if (!Entity.UpdatePawn(PawnAddress))
 		return;
 
+	if (ScopeOnly)
+	{
+		bool isScoped;
+		ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::Pawn.isScoped, isScoped);
+		if (!isScoped) {
+			return;
+		}
+	}
+
 	if (MenuConfig::TeamCheck)
 		AllowShoot = LocalEntity.Pawn.TeamID != Entity.Pawn.TeamID && Entity.Pawn.Health > 0;
 	else
