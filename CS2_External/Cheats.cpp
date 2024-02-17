@@ -225,7 +225,7 @@ void Cheats::Run()
 			ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
 			int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
 
-			if (distance <= ESPConfig::RenderDistance)
+			if (distance == 0 || (distance <= ESPConfig::RenderDistance && distance > 0))
 			{
 				ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
 				Render::DrawDistance(LocalEntity, Entity, Rect);
