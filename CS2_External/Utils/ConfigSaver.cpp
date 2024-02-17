@@ -456,14 +456,14 @@ namespace MyConfigSaver {
         }
         if (config["Radar"])
         {
-            RadarCFG::ShowRadar = config["Radar"]["Enable"].as<bool>();
-            RadarCFG::RadarType = config["Radar"]["Type"].as<int>();
-            RadarCFG::RadarRange = config["Radar"]["Range"].as<float>();
-            RadarCFG::Proportion = config["Radar"]["Proportion"].as<float>();
-            RadarCFG::RadarPointSizeProportion = config["Radar"]["PointProportion"].as<float>();
-            RadarCFG::RadarBgAlpha = config["Radar"]["Alpha"].as<float>();
-            RadarCFG::customRadar = config["Radar"]["Custom"].as<bool>();
-            RadarCFG::ShowRadarCrossLine = config["Radar"]["Crossline"].as<bool>();
+            RadarCFG::ShowRadar = config["Radar"]["Enable"].IsDefined() ? config["Radar"]["Enable"].as<bool>() : false;
+            RadarCFG::RadarType = config["Radar"]["Type"].IsDefined() ? config["Radar"]["Type"].as<int>() : 2;
+            RadarCFG::RadarRange = config["Radar"]["Range"].IsDefined() ? config["Radar"]["Range"].as<float>() : 150.f;
+            RadarCFG::Proportion = config["Radar"]["Proportion"].IsDefined() ? config["Radar"]["Proportion"].as<float>() : 3300.f;
+            RadarCFG::RadarPointSizeProportion = config["Radar"]["PointProportion"].IsDefined() ? config["Radar"]["PointProportion"].as<float>() : 1.f;
+            RadarCFG::RadarBgAlpha = config["Radar"]["Alpha"].IsDefined() ? config["Radar"]["Alpha"].as<float>() : 0.1f;
+            RadarCFG::customRadar = config["Radar"]["Custom"].IsDefined() ? config["Radar"]["Custom"].as<bool>() : false;
+            RadarCFG::ShowRadarCrossLine = config["Radar"]["Crossline"].IsDefined() ? config["Radar"]["Crossline"].as<bool>() : false;
             RadarCFG::RadarCrossLineColor.Value.x = config["Radar"]["CrosslineColor"]["r"].as<float>();
             RadarCFG::RadarCrossLineColor.Value.y = config["Radar"]["CrosslineColor"]["g"].as<float>();
             RadarCFG::RadarCrossLineColor.Value.z = config["Radar"]["CrosslineColor"]["b"].as<float>();
@@ -471,32 +471,32 @@ namespace MyConfigSaver {
         }
         if (config["Misc"])
         {
-            MiscCFG::BunnyHop = config["Misc"]["Bhop"].as<bool>();
-            MenuConfig::ShowHeadShootLine = config["Misc"]["HeadShootLine"].as<bool>();
+            MiscCFG::BunnyHop = config["Misc"]["Bhop"].IsDefined() ? config["Misc"]["Bhop"].as<bool>() : false;
+            MenuConfig::ShowHeadShootLine = config["Misc"]["HeadShootLine"].IsDefined() ? config["Misc"]["HeadShootLine"].as<bool>() : false;
             MenuConfig::HeadShootLineColor.Value.x = config["Misc"]["HeadShootLineColor"]["r"].as<float>();
             MenuConfig::HeadShootLineColor.Value.y = config["Misc"]["HeadShootLineColor"]["g"].as<float>();
             MenuConfig::HeadShootLineColor.Value.z = config["Misc"]["HeadShootLineColor"]["b"].as<float>();
             MenuConfig::HeadShootLineColor.Value.w = config["Misc"]["HeadShootLineColor"]["a"].as<float>();
-            MiscCFG::WorkInSpec = config["Misc"]["WorkInSpec"].as<bool>();
+            MiscCFG::WorkInSpec = config["Misc"]["WorkInSpec"].IsDefined() ? config["Misc"]["WorkInSpec"].as<bool>() : false;
             MiscCFG::FovHacker = config["Misc"]["Fov"].IsDefined() ? config["Misc"]["Fov"].as<int>() : 90;
             MiscCFG::FlashImmunity = config["Misc"]["FlashImmunity"].IsDefined() ? config["Misc"]["FlashImmunity"].as<float>() : 0.f;
             MiscCFG::CheatList = config["Misc"]["CheatList"].IsDefined() ? config["Misc"]["CheatList"].as<bool>() : false;
-            MiscCFG::WaterMark = config["Misc"]["Watermark"].as<bool>();
-            MiscCFG::HitSound = config["Misc"]["HitSound"].as<bool>();
-            MiscCFG::bmbTimer = config["Misc"]["BombTimer"].as<bool>();
+            MiscCFG::WaterMark = config["Misc"]["Watermark"].IsDefined() ? config["Misc"]["Watermark"].as<bool>() : false;
+            MiscCFG::HitSound = config["Misc"]["HitSound"].IsDefined() ? config["Misc"]["HitSound"].as<bool>() : false;
+            MiscCFG::bmbTimer = config["Misc"]["BombTimer"].IsDefined() ? config["Misc"]["BombTimer"].as<bool>() : false;
             MiscCFG::BombTimerCol.Value.x = config["Misc"]["TimerColor"]["r"].as<float>();
             MiscCFG::BombTimerCol.Value.y = config["Misc"]["TimerColor"]["g"].as<float>();
             MiscCFG::BombTimerCol.Value.z = config["Misc"]["TimerColor"]["b"].as<float>();
             MiscCFG::BombTimerCol.Value.w = config["Misc"]["TimerColor"]["a"].as<float>();
-            MiscCFG::FastStop = config["Misc"]["FastStop"].as<bool>();
-            MiscCFG::SpecList = config["Misc"]["SpecList"].as<bool>();
-            MiscCFG::EnemySensor = config["Misc"]["Glow"].as<bool>();
-            MiscCFG::RadarHack = config["Misc"]["RadarHack"].IsDefined() ? config["Misc"]["RadarHack"].as<bool>() : false;
+            MiscCFG::FastStop = config["Misc"]["FastStop"].IsDefined() ? config["Misc"]["FastStop"].as<bool>() : false;
+            MiscCFG::SpecList = config["Misc"]["SpecList"].IsDefined() ? config["Misc"]["SpecList"].as<bool>() : false;
+            MiscCFG::EnemySensor = config["Misc"]["CheatList"].IsDefined() ? config["Misc"]["Glow"].as<bool>() : false;
+            MiscCFG::RadarHack = config["Misc"]["Glow"].IsDefined() ? config["Misc"]["RadarHack"].as<bool>() : false;
             MiscCFG::MoneyService = config["Misc"]["MoneyService"]["Enable"].IsDefined() ? config["Misc"]["MoneyService"]["Enable"].as<bool>() : false;
             MiscCFG::ShowCashSpent = config["Misc"]["MoneyService"]["ShowCashSpent"].IsDefined() ? config["Misc"]["MoneyService"]["ShowCashSpent"].as<bool>() : false;
             MiscCFG::NoSmoke = config["Misc"]["NoSmoke"].IsDefined() ? config["Misc"]["NoSmoke"].as<bool>() : false;
-            MenuConfig::TeamCheck = config["Misc"]["TeamCheck"].as<bool>();
-            MenuConfig::BypassOBS = config["Misc"]["AntiRecord"].as<bool>();
+            MenuConfig::TeamCheck = config["Misc"]["TeamCheck"].IsDefined() ? config["Misc"]["TeamCheck"].as<bool>() : true;
+            MenuConfig::BypassOBS = config["Misc"]["AntiRecord"].IsDefined() ? config["Misc"]["AntiRecord"].as<bool>() : false;
             MiscCFG::Jitter = config["Misc"]["Jitter"].IsDefined() ? config["Misc"]["Jitter"].as<bool>() : false;
             MiscCFG::SmokeColored = config["Misc"]["SmokeColor"]["Enable"].IsDefined() ? config["Misc"]["SmokeColor"]["Enable"].as<bool>() : false;
             MiscCFG::SmokeColor.Value.x = config["Misc"]["SmokeColor"]["r"].IsDefined() ? config["Misc"]["SmokeColor"]["r"].as<float>() : 255.f;
@@ -505,21 +505,21 @@ namespace MyConfigSaver {
         }
         if (config["Aimbot"])
         {
-            MenuConfig::AimBot = config["Aimbot"]["Enable"].as<bool>();
+            MenuConfig::AimBot = config["Aimbot"]["Enable"].IsDefined() ? config["Aimbot"]["Enable"].as<bool>() : false;
             AimControl::AimLock = config["Aimbot"]["AimLock"].IsDefined() ? config["Aimbot"]["AimLock"].as<bool>() : false;
-            MenuConfig::AimToggleMode = config["Aimbot"]["ToggleMode"].as<bool>();
+            MenuConfig::AimToggleMode = config["Aimbot"]["ToggleMode"].IsDefined() ? config["Aimbot"]["ToggleMode"].as<bool>() : false;
             MenuConfig::AimBotHotKey = config["Aimbot"]["Hotkey"].IsDefined() ? config["Aimbot"]["Hotkey"].as<int>() : 0;
             AimControl::AimBullet = config["Aimbot"]["AimBullet"].IsDefined() ? config["Aimbot"]["AimBullet"].as<int>() : 0;
-            AimControl::AimFov = config["Aimbot"]["Fov"].as<float>();
+            AimControl::AimFov = config["Aimbot"]["Fov"].IsDefined() ? config["Aimbot"]["Fov"].as<float>() : 5.f;
             AimControl::AimFovMin = config["Aimbot"]["FovMin"].IsDefined() ? config["Aimbot"]["FovMin"].as<float>() : .5f;
-            ESPConfig::DrawFov = config["Aimbot"]["FovCircle"].as<bool>();
+            ESPConfig::DrawFov = config["Aimbot"]["FovCircle"].IsDefined() ? config["Aimbot"]["FovCircle"].as<bool>() : false;
             MenuConfig::FovCircleColor.Value.x = config["Aimbot"]["CircleColor"]["r"].as<float>();
             MenuConfig::FovCircleColor.Value.y = config["Aimbot"]["CircleColor"]["g"].as<float>();
             MenuConfig::FovCircleColor.Value.z = config["Aimbot"]["CircleColor"]["b"].as<float>();
             MenuConfig::FovCircleColor.Value.w = config["Aimbot"]["CircleColor"]["a"].as<float>();
-            AimControl::Smooth = config["Aimbot"]["Smooth"].as<float>();
-            MenuConfig::AimPosition = config["Aimbot"]["AimPos"].as<int>();
-            MenuConfig::VisibleCheck = config["Aimbot"]["VisibleCheck"].as<bool>();
+            AimControl::Smooth = config["Aimbot"]["Smooth"].IsDefined() ? config["Aimbot"]["Smooth"].as<float>() : 2.f;
+            MenuConfig::AimPosition = config["Aimbot"]["AimPos"].IsDefined() ? config["Aimbot"]["AimPos"].as<int>() : 0;
+            MenuConfig::VisibleCheck = config["Aimbot"]["VisibleCheck"].IsDefined() ? config["Aimbot"]["VisibleCheck"].as<bool>() : true;
             AimControl::ScopeOnly = config["Aimbot"]["ScopeOnly"].IsDefined() ? config["Aimbot"]["ScopeOnly"].as<bool>() : false;
             AimControl::AutoShot = config["Aimbot"]["AutoShot"].IsDefined() ? config["Aimbot"]["AutoShot"].as<bool>() : false;
         }
@@ -531,17 +531,17 @@ namespace MyConfigSaver {
         }
         if (config["Triggerbot"])
         {
-            MenuConfig::TriggerBot = config["Triggerbot"]["Enable"].as<bool>();
-            MenuConfig::TriggerHotKey = config["Triggerbot"]["Hotkey"].as<int>();
-            TriggerBot::TriggerDelay = config["Triggerbot"]["Delay"].as<float>();
-            TriggerBot::FakeShotDelay = config["Triggerbot"]["FakeShot"].as<float>();
+            MenuConfig::TriggerBot = config["Triggerbot"]["Enable"].IsDefined() ? config["Triggerbot"]["Enable"].as<bool>() : false;
+            MenuConfig::TriggerHotKey = config["Triggerbot"]["Hotkey"].IsDefined() ? config["Triggerbot"]["Enable"].as<int>() : 0;
+            TriggerBot::TriggerDelay = config["Triggerbot"]["Delay"].IsDefined() ? config["Triggerbot"]["Delay"].as<int>() : 20;
+            TriggerBot::FakeShotDelay = config["Triggerbot"]["FakeShot"].IsDefined() ? config["Triggerbot"]["FakeShot"].as<int>() : 200;
             TriggerBot::ScopeOnly = config["Triggerbot"]["ScopeOnly"].IsDefined() ? config["Triggerbot"]["ScopeOnly"].as<bool>() : false;
             MenuConfig::TriggerAlways = config["Triggerbot"]["AutoMode"].as<bool>();
         }
         if (config["Menu"])
         {
             MenuConfig::SafeMode = config["Menu"]["SafeMode"].IsDefined() ? config["Menu"]["SafeMode"].as<bool>() : true;
-            MenuConfig::Theme = config["Menu"]["Theme"].as<int>();
+            MenuConfig::Theme = config["Menu"]["Theme"].IsDefined() ? config["Menu"]["Theme"].as<int>() : 0;
             MenuConfig::Language = config["Menu"]["Language"].IsDefined() ? config["Menu"]["Language"].as<int>() : 0;
         }
 
