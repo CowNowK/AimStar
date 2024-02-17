@@ -171,4 +171,39 @@ namespace AimControl
         else
             HasTarget = false;
     }
+
+    inline void ragebot(const CEntity& Local, Vec3 LocalPos, Vec3 AimPos)
+    {
+        float Yaw, Pitch;
+        float Distance, Norm;
+        Vec3 OppPos;
+
+        OppPos = AimPos - LocalPos;
+
+        Distance = sqrt(pow(OppPos.x, 2) + pow(OppPos.y, 2));
+
+        Yaw = atan2f(OppPos.y, OppPos.x) * 57.295779513 - Local.Pawn.ViewAngle.y;
+        Pitch = -atan(OppPos.z / Distance) * 57.295779513 - Local.Pawn.ViewAngle.x;
+        Norm = sqrt(pow(Yaw, 2) + pow(Pitch, 2));
+        if (Norm > AimFov)
+            return;
+
+        Yaw += Local.Pawn.ViewAngle.y;
+        Pitch += Local.Pawn.ViewAngle.x;
+
+        // Recoil control
+        if (Local.Pawn.ShotsFired > AimBullet)
+        {
+            Vec2 PunchAngle;
+            if (Local.Pawn.AimPunchCache.Count <= 0 && Local.Pawn.AimPunchCache.Count > 0xFFFF)
+                return;
+            if (!ProcessMgr.ReadMemory<Vec2>(Local.Pawn.AimPunchCache.Data + (Local.Pawn.AimPunchCache.Count - 1) * sizeof(Vec3), PunchAngle))
+                return;
+
+            Yaw = Yaw - PunchAngle.y * RCS::RCSScale.x;
+            Pitch = Pitch - PunchAngle.x * RCS::RCSScale.y;
+        }
+
+        gGame.SetViewAngle(Yaw, Pitch);
+    }
 }
