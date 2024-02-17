@@ -133,6 +133,7 @@ namespace Lang
 		inline static const char* FeatureName;
 		inline static const char* HotKeyList;
 		inline static const char* Toggle;
+		inline static const char* ScopeOnly;
 		inline static const char* DelaySlider;
 		inline static const char* FakeShotSlider;
 	} TriggerText;
@@ -305,6 +306,7 @@ namespace Lang
 		TriggerText.FeatureName = u8" Triggerbot";
 		TriggerText.HotKeyList = u8"Hotkey   ";
 		TriggerText.Toggle = u8"Always Active";
+		TriggerText.ScopeOnly = u8"Scope Only";
 		TriggerText.DelaySlider = u8"Shot Delay:";
 		TriggerText.FakeShotSlider = u8"Shot Duration:";
 

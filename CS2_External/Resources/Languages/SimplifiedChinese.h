@@ -89,6 +89,7 @@ namespace Lang
 		TriggerText.FeatureName = u8" 自动扳机";
 		TriggerText.HotKeyList = u8"热键    ";
 		TriggerText.Toggle = u8"保持激活";
+		TriggerText.ScopeOnly = u8"仅开镜";
 		TriggerText.DelaySlider = u8"延迟射击:";
 		TriggerText.FakeShotSlider = u8"射击持续时间:";
 
