@@ -97,24 +97,28 @@ namespace ConfigMenu {
 			}
 			ImGui::EndPopup();
 		}
-		ImGui::NextColumn();
-		ImGui::SetCursorPosY(24.f);
+
+		ImGui::NewLine();
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::SeparatorText(Lang::ConfigText.SeparateLine);
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::TextDisabled(Lang::ConfigText.AuthorName);
-		ImGui::SetNextItemWidth(ComponentWidth + 10);
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::SetNextItemWidth(ComponentWidth + 8);
 		ImGui::InputText("###ConfigNameInput", configAuthorBuffer, sizeof(configAuthorBuffer));
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::TextDisabled(Lang::ConfigText.ConfigName);
-		ImGui::SetNextItemWidth(ComponentWidth + 10);
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::SetNextItemWidth(ComponentWidth + 8);
 		ImGui::InputText("###AuthorNameInput", configNameBuffer, sizeof(configNameBuffer));
 		ImGui::NewLine();
-		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() / 4);
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		if (ImGui::Button(Lang::ConfigText.Create, { 126.f, 30.f }))
 		{
 			std::string configFileName = std::string(configNameBuffer) + ".yml";
 			MyConfigSaver::SaveConfig(configFileName, std::string(configAuthorBuffer));
 		}
-		ImGui::NewLine();
-		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() / 4);
+		ImGui::SameLine();
 		if (ImGui::Button(Lang::ConfigText.OpenFolder, { 126.f, 30.f }))
 		{
 			Gui.OpenWebpage(configDir.c_str());

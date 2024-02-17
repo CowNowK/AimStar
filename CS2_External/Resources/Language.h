@@ -360,15 +360,15 @@ namespace Lang
 		MiscText.LanguageList = u8"Language";
 
 		// Config Menu
-		ConfigText.FeatureName = u8"Config";
+		ConfigText.FeatureName = u8"Config Loader";
 		ConfigText.MyConfigs = u8"Config List";
 		ConfigText.Load = u8"Load Selected";
 		ConfigText.Save = u8"Save Selected";
 		ConfigText.Delete = u8"Delete Selected";
 		ConfigText.Reset = u8"Reset Config";
-		ConfigText.Create = u8"Create Config";
+		ConfigText.Create = u8"Create";
 		ConfigText.OpenFolder = u8"Open Folder";
-		ConfigText.SeparateLine = u8"New Config";
+		ConfigText.SeparateLine = u8"Create Config";
 		ConfigText.AuthorName = u8"Author Name";
 		ConfigText.ConfigName = u8"Config Name";
 
