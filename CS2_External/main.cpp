@@ -167,7 +167,6 @@ void Cheat()
 
 int main()
 {
-	
 	const char* tempPath = std::getenv("TMP");
 	if (tempPath != nullptr)
 	{
