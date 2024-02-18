@@ -198,6 +198,12 @@ namespace GUI
 				ImVec2(MenuConfig::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
+			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5);
+			if (MenuConfig::SafeMode)
+				ImGui::TextColored(ImColor(50, 255, 0, 255), "Safe Mode ON");
+			else
+				ImGui::TextColored(ImColor(255, 25, 0, 255), "Safe Mode OFF");
+
 			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);
 			
 			ImGui::BeginChild("Page", MenuConfig::WCS.ChildSize);
