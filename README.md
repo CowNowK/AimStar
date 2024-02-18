@@ -14,7 +14,7 @@
 
 ## ❗ Info
 
-[**朱平你妈死了哈哈**](https://github.com/CowNowK/AimStar/blob/main/Guides/Resellers.md)
+[**zxq你妈死了哈哈**](https://github.com/CowNowK/AimStar/blob/main/Guides/Resellers.md)
 
 Free and open-source external cheat for CS2, written in C++. - Available for Windows8.1+
 
