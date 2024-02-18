@@ -392,6 +392,7 @@ namespace Misc
 		ImGui::SetNextWindowPos({ 0, 0 }, ImGuiCond_Always);
 		ImGui::SetNextWindowSize({ Gui.Window.Size.x, Gui.Window.Size.y }, ImGuiCond_Always);
 		ImGui::SetNextWindowBgAlpha(0.f);
+		ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0, 0, 0, 0));
 		ImGui::Begin("##background", nullptr, ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoDecoration);
 
 		ImVec2 windowPos = ImGui::GetWindowPos();
@@ -403,6 +404,9 @@ namespace Misc
 			ImGui::GetBackgroundDrawList()->
 				AddRectFilled(windowPos, ImVec2(windowPos.x + windowSize.x, windowPos.y + windowSize.y), IM_COL32(0, 0, 0, MiscCFG::NightModeAlpha));
 		}
+
+		ImGui::End();
+		ImGui::PopStyleColor();
 			
 	}
 }
