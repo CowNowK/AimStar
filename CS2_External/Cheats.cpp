@@ -336,9 +336,6 @@ void Cheats::Run()
 	if (AimControl::HasTarget == false || AimPos == Vec3(0, 0, 0) || !MenuConfig::AimBot)
 		RCS::RecoilControl(LocalEntity);
 	
-	float Flash;
-	ProcessMgr.ReadMemory(LocalEntity.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, Flash);
-	std::cout << Flash << std::endl;
 	Misc::JoinDiscord();
 	Misc::SourceCode();
 }
