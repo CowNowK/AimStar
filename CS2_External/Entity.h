@@ -60,6 +60,8 @@ public:
 	int Fov;
 	DWORD64 bSpottedByMask;
 	int fFlags;
+	float FlashDuration;
+	bool isDefusing;
 
 public:
 	bool GetPos();
@@ -77,6 +79,8 @@ public:
 	bool GetAmmo();
 	bool GetMaxAmmo();
 	bool GetArmor();
+	bool GetDefusing();
+	bool GetFlashDuration();
 
 	constexpr bool HasFlag(const Flags Flag) const noexcept {
 		return fFlags & (int)Flag;

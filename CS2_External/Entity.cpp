@@ -112,6 +112,10 @@ bool CEntity::UpdatePawn(const DWORD64& PlayerPawnAddress)
 		return false;
 	if (!this->Pawn.GetFFlags())
 		return false;
+	if (!this->Pawn.GetDefusing())
+		return false;
+	if (!this->Pawn.GetFlashDuration())
+		return false;
 	if (!this->Pawn.GetAimPunchCache())
 		return false;
 	if (!this->Pawn.BoneData.UpdateAllBoneData(PlayerPawnAddress))
@@ -297,6 +301,16 @@ bool PlayerPawn::GetFov()
 bool PlayerPawn::GetFFlags()
 {
 	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.fFlags, this->fFlags);
+}
+
+bool PlayerPawn::GetDefusing()
+{
+	return ProcessMgr.ReadMemory(Address + Offset::C4.m_bBeingDefused, this->isDefusing);
+}
+
+bool PlayerPawn::GetFlashDuration()
+{
+	return ProcessMgr.ReadMemory(Address + Offset::Pawn.flFlashDuration, this->FlashDuration);
 }
 
 bool CEntity::IsAlive()

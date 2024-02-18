@@ -272,6 +272,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Smooth" << YAML::Value << AimControl::Smooth;
         emitter << YAML::Key << "AimPos" << YAML::Value << MenuConfig::AimPosition;
         emitter << YAML::Key << "VisibleCheck" << YAML::Value << MenuConfig::VisibleCheck;
+        emitter << YAML::Key << "IgnoreFlash" << YAML::Value << AimControl::IgnoreFlash;
         emitter << YAML::Key << "ScopeOnly" << YAML::Value << AimControl::ScopeOnly;
         emitter << YAML::Key << "AutoShot" << YAML::Value << AimControl::AutoShot;
         emitter << YAML::EndMap;
@@ -525,6 +526,7 @@ namespace MyConfigSaver {
             AimControl::Smooth = config["Aimbot"]["Smooth"].IsDefined() ? config["Aimbot"]["Smooth"].as<float>() : 2.f;
             MenuConfig::AimPosition = config["Aimbot"]["AimPos"].IsDefined() ? config["Aimbot"]["AimPos"].as<int>() : 0;
             MenuConfig::VisibleCheck = config["Aimbot"]["VisibleCheck"].IsDefined() ? config["Aimbot"]["VisibleCheck"].as<bool>() : true;
+            AimControl::IgnoreFlash = config["Aimbot"]["IgnoreFlash"].IsDefined() ? config["Aimbot"]["IgnoreFlash"].as<bool>() : false;
             AimControl::ScopeOnly = config["Aimbot"]["ScopeOnly"].IsDefined() ? config["Aimbot"]["ScopeOnly"].as<bool>() : false;
             AimControl::AutoShot = config["Aimbot"]["AutoShot"].IsDefined() ? config["Aimbot"]["AutoShot"].as<bool>() : false;
         }

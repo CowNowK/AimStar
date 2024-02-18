@@ -96,6 +96,7 @@ namespace Lang
 		inline static const char* AimLock;
 		inline static const char* AutoShot;
 		inline static const char* BulletSlider;
+		inline static const char* IgnoreFlash;
 
 		inline static const char* Bone_1;
 		inline static const char* Bone_2;
@@ -289,6 +290,7 @@ namespace Lang
 		AimbotText.AimLock = u8"Aim Lock";
 		AimbotText.AutoShot = u8"Auto Shot";
 		AimbotText.BulletSlider = u8"Start Bullet: ";
+		AimbotText.IgnoreFlash = u8"Ignore Flash";
 
 		// RCS
 		RCStext.Toggle = u8"Recoil Control";

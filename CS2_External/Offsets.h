@@ -56,6 +56,7 @@ namespace Offset
 		DWORD vecLastClipCameraPos = 0x12EC;
 		DWORD iShotsFired = 0x147C;
 		DWORD flFlashMaxAlpha = 0x14C8;
+		DWORD flFlashDuration = 0x14CC;
 		DWORD aimPunchAngle = 0x177C;			// C_CSPlayerPawn::m_aimPunchAngle
 		DWORD aimPunchCache = 0x17A0;
 		DWORD iIDEntIndex = 0x15A4;

@@ -21,6 +21,7 @@ namespace AimControl
     inline bool ScopeOnly = false;
     inline bool AutoShot = false;
     inline bool AimLock = false;
+    inline bool IgnoreFlash = false;
     inline float AimFov = 5;
     inline float AimFovMin = .5f;
     inline float Smooth = 2.0f;
@@ -46,7 +47,7 @@ namespace AimControl
         //int isFired;
         //ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
         //if (!isFired && !AimLock)
-        if (Local.Pawn.ShotsFired < AimBullet && !AimLock) {
+        if (Local.Pawn.ShotsFired <= AimBullet && !AimLock) {
             HasTarget = false;
             return;
         }
@@ -61,6 +62,9 @@ namespace AimControl
                 return;
             }
         }
+
+        if (!IgnoreFlash && Local.Pawn.FlashDuration > 0.f)
+            return;
 
         float Yaw, Pitch;
         float Distance, Norm, Length;
