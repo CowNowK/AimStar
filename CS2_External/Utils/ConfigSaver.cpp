@@ -20,7 +20,7 @@ namespace MyConfigSaver {
 
         YAML::Emitter emitter;
 
-        emitter << YAML::Comment("AimStar Config File\nVersion: 4.0\nAuthor: " + author);
+        emitter << YAML::Comment("AimStar Config File\nVersion: 4.2\nAuthor: " + author);
         emitter << YAML::BeginMap;
 
         emitter << YAML::Key << "ESP";
@@ -532,7 +532,7 @@ namespace MyConfigSaver {
         if (config["Triggerbot"])
         {
             MenuConfig::TriggerBot = config["Triggerbot"]["Enable"].IsDefined() ? config["Triggerbot"]["Enable"].as<bool>() : false;
-            MenuConfig::TriggerHotKey = config["Triggerbot"]["Hotkey"].IsDefined() ? config["Triggerbot"]["Enable"].as<int>() : 0;
+            MenuConfig::TriggerHotKey = config["Triggerbot"]["Hotkey"].IsDefined() ? config["Triggerbot"]["Hotkey"].as<int>() : 0;
             TriggerBot::TriggerDelay = config["Triggerbot"]["Delay"].IsDefined() ? config["Triggerbot"]["Delay"].as<int>() : 20;
             TriggerBot::FakeShotDelay = config["Triggerbot"]["FakeShot"].IsDefined() ? config["Triggerbot"]["FakeShot"].as<int>() : 200;
             TriggerBot::ScopeOnly = config["Triggerbot"]["ScopeOnly"].IsDefined() ? config["Triggerbot"]["ScopeOnly"].as<bool>() : false;
