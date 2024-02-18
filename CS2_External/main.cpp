@@ -211,7 +211,7 @@ int main()
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	if (!otp)
-		cout << "Please enter your OTP code!" << endl;
+		cout << "Please enter your OTP code! Get the OTP code from: https://aimstar.tkm.icu" << endl;
 	static int RetTimes = 0;
 
 	switch (message) {
