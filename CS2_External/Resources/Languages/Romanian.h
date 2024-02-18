@@ -38,7 +38,8 @@ namespace Lang
 		ESPtext.BoxType = u8"Tipul ramei:";
 		ESPtext.HealthNum = u8"Număr HP";
 		ESPtext.Ammo = u8"Muniție";
-
+		ESPtext.RenderDistance = u8"Distanță maximă de render: ";
+		
 		ESPtext.BoxType_Normal = u8"Normal";
 		ESPtext.BoxType_Edge = u8"Dinamic";
 		ESPtext.BoxType_Corner = u8"Colțuri";
@@ -58,7 +59,17 @@ namespace Lang
 		AimbotText.SmoothSlider = u8"Finețe";
 		AimbotText.BoneList = u8"Hitbox-uri";
 		AimbotText.Tip = u8"Aimbot-ul merge numai când meniul este închis";
-
+		AimbotText.ScopeOnly = u8"Numai scope";
+		AimbotText.AimLock = u8"Aim Lock";
+		AimbotText.AutoShot = u8"Trage automat";
+		AimbotText.BulletSlider = u8"Glonț de pornire: ";
+		AimbotText.IgnoreFlash = u8"Ignoră Flash";
+		
+		// RCS
+		RCStext.Toggle = u8"Recoil Control";
+		RCStext.Yaw = u8"Yaw: ";
+		RCStext.Pitch = u8"Pitch: ";
+		
 		// Radar
 		RadarText.Toggle = u8"Radar";
 		RadarText.FeatureName = u8"Radar";
@@ -120,6 +131,11 @@ namespace Lang
 		MiscText.VisCheckDisable = u8"Verificarea vizibilități oprită";
 		MiscText.NoSmoke = u8"Fără fum";
 		MiscText.SmokeColor = u8"Culoare fum";
+		MiscText.fovchanger = u8"Schimbare FOV:";
+		MiscText.ForceScope = u8"Forțează zoom";
+		MistText.FlashImmunity = u8"Imunitate flash";
+		MiscText.NigthMode = u8"Mod noapte";
+		MiscText.Alpha = u8"Alpha";
 		MiscText.FakeDuck = u8"Chrouch fals";
 
 		MiscText.LanguageList = u8"Limba";
@@ -137,6 +153,9 @@ namespace Lang
 		ConfigText.AuthorName = u8"Autor";
 		ConfigText.ConfigName = u8"Configurare";
 
+		ConfigText.SafeMode = u8"Mod siguranță";
+		ConfigText.SafeModeHoveredTip = u8"Dezactivează toate funcțiile care modifică memoria jocului";
+		
 		// Menu s informacemi
 		ReadMeText.FeatureName = u8"Citeștemă";
 		ReadMeText.LastUpdate = u8"Ultimul update: ";
