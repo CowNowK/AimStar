@@ -210,6 +210,24 @@ void Cheats::Run()
 				Gui.Text(std::to_string(BoneIndex), ScreenPos, ImColor(255, 255, 255, 255));
 			}
 		}*/
+		//update Bone select
+		switch (MenuConfig::AimPosition)
+							{
+							case 0:
+								MenuConfig::AimPositionIndex = BONEINDEX::head;
+								break;
+							case 1:
+								MenuConfig::AimPositionIndex = BONEINDEX::neck_0;
+								break;
+							case 2:
+								MenuConfig::AimPositionIndex = BONEINDEX::spine_1;
+								break;
+							case 3:
+								MenuConfig::AimPositionIndex = BONEINDEX::pelvis;
+								break;
+							default:
+								break;
+							}
 		DistanceToSight = Entity.GetBone().BonePosList[BONEINDEX::head].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
 
 
