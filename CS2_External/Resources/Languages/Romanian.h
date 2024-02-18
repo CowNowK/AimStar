@@ -133,8 +133,8 @@ namespace Lang
 		MiscText.SmokeColor = u8"Culoare fum";
 		MiscText.fovchanger = u8"Schimbare FOV:";
 		MiscText.ForceScope = u8"Forțează zoom";
-		MistText.FlashImmunity = u8"Imunitate flash";
-		MiscText.NigthMode = u8"Mod noapte";
+		MiscText.FlashImmunity = u8"Imunitate flash";
+		MiscText.NightMode = u8"Mod noapte";
 		MiscText.Alpha = u8"Alpha";
 		MiscText.FakeDuck = u8"Chrouch fals";
 
