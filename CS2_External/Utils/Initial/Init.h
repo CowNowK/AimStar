@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include <windows.h>
+#include <tchar.h>
 #include <shellapi.h>
 #include <iostream>
 #include <string>
@@ -61,6 +62,19 @@ namespace Init
     class Client
     {
     public:
+        static bool isGameWindowActive() {
+            HWND hwnd_cs2 = FindWindow(NULL, TEXT("Counter-Strike 2"));
+            HWND hwnd_perfectworld = FindWindow(NULL, TEXT("反恐精英：全球攻势"));
+
+            if (hwnd_cs2 != NULL || hwnd_perfectworld != NULL) {
+                HWND foreground_window = GetForegroundWindow();
+                if (foreground_window == hwnd_cs2 || foreground_window == hwnd_perfectworld) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         static void Exit()
         {
             system("pause");

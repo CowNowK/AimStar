@@ -7,6 +7,8 @@
 #include "Render.hpp"
 #include "MenuConfig.hpp"
 
+#include "Utils/Initial/Init.h"
+
 #include "Features/ESP.h"
 #include "Features/GUI.h"
 #include "Features/RCS.H"
@@ -91,8 +93,12 @@ void Cheats::Run()
 	{
 		GUI::NewGui();
 	}
+
+	if (!Init::Client::isGameWindowActive() && !MenuConfig::ShowMenu)
+		return;
+
+	// The overlay should be rendered at the bottom
 	Misc::NightMode();
-		
 
 	// Update matrix
 	if(!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix,64))
