@@ -471,11 +471,15 @@ namespace GUI
 				if (MenuConfig::WCS.MenuPage == 2)
 				{
 					int FovMin = 60, FovMax = 140;
+					int NightMin = 0, NightMax = 150;
 					float FlashMin = 0.f, FlashMax = 255.f;
 					ImGui::Columns(2, nullptr, false);
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 					ImGui::SeparatorText(ICON_FA_SUN" Misc");
 
+					PutSwitch(Lang::MiscText.NightMode, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NightMode);
+					if (MiscCFG::NightMode)
+						PutSliderInt(Lang::MiscText.Alpha, 10.f, &MiscCFG::NightModeAlpha, &NightMin, &NightMax, "%d");
 					if (!MenuConfig::SafeMode)
 					{
 						PutSliderInt(Lang::MiscText.fovchanger, 10.f, &MiscCFG::Fov, &FovMin, &FovMax, "%d");

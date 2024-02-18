@@ -131,6 +131,8 @@ namespace ConfigMenu {
 		ESPConfig::RenderDistance = 80;
 		ESPConfig::ArmorBar = false;
 		ESPConfig::ShowArmorNum = false;
+		MiscCFG::NightModeAlpha = 0;
+		MiscCFG::NightMode = false;
 		MiscCFG::FlashImmunity = 0.f;
 		MiscCFG::SmokeColored = false;
 		MiscCFG::SmokeColor = ImColor(255, 0, 0, 255);

@@ -140,6 +140,8 @@ namespace Lang
 		MiscText.fovchanger = u8"视角宽度: ";
 		MiscText.ForceScope = u8"右键开镜";
 		MiscText.FlashImmunity = u8"闪光免疫程度: ";
+		MiscText.NightMode = u8"夜间模式";
+		MiscText.NightMode = u8"透明度: ";
 
 		MiscText.FakeDuck = u8"假蹲";
 

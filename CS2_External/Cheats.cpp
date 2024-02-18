@@ -91,6 +91,7 @@ void Cheats::Run()
 	{
 		GUI::NewGui();
 	}
+	Misc::NightMode();
 		
 
 	// Update matrix

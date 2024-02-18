@@ -198,6 +198,8 @@ namespace MiscCFG
 	inline bool FovHacker = false;
 	inline bool CheatList = false;
 	inline bool ForceScope = false;
+	inline bool NightMode = false;
+	inline int NightModeAlpha = 0.f;
 	inline int Fov = 90;
 	inline float FlashImmunity = 0;
 	inline ImColor BombTimerCol = ImColor(255, 120, 0, 255);

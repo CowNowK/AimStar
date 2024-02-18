@@ -235,6 +235,8 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "ShowCashSpent" << YAML::Value << MiscCFG::ShowCashSpent;
         emitter << YAML::EndMap;
         emitter << YAML::Key << "NoSmoke" << YAML::Value << MiscCFG::NoSmoke;
+        emitter << YAML::Key << "NightMode" << YAML::Value << MiscCFG::NightMode;
+        emitter << YAML::Key << "NightModeAlpha" << YAML::Value << MiscCFG::NightModeAlpha;
         emitter << YAML::Key << "TeamCheck" << YAML::Value << MenuConfig::TeamCheck;
         emitter << YAML::Key << "AntiRecord" << YAML::Value << MenuConfig::BypassOBS;
         emitter << YAML::Key << "Jitter" << YAML::Value << MiscCFG::Jitter;
@@ -495,6 +497,9 @@ namespace MyConfigSaver {
             MiscCFG::MoneyService = config["Misc"]["MoneyService"]["Enable"].IsDefined() ? config["Misc"]["MoneyService"]["Enable"].as<bool>() : false;
             MiscCFG::ShowCashSpent = config["Misc"]["MoneyService"]["ShowCashSpent"].IsDefined() ? config["Misc"]["MoneyService"]["ShowCashSpent"].as<bool>() : false;
             MiscCFG::NoSmoke = config["Misc"]["NoSmoke"].IsDefined() ? config["Misc"]["NoSmoke"].as<bool>() : false;
+            MiscCFG::NightMode = config["Misc"]["NightMode"].IsDefined() ? config["Misc"]["NightMode"].as<bool>() : false;
+            MiscCFG::NightModeAlpha = config["Misc"]["NightModeAlpha"].IsDefined() ? config["Misc"]["NightModeAlpha"].as<int>() : 0;
+
             MenuConfig::TeamCheck = config["Misc"]["TeamCheck"].IsDefined() ? config["Misc"]["TeamCheck"].as<bool>() : true;
             MenuConfig::BypassOBS = config["Misc"]["AntiRecord"].IsDefined() ? config["Misc"]["AntiRecord"].as<bool>() : false;
             MiscCFG::Jitter = config["Misc"]["Jitter"].IsDefined() ? config["Misc"]["Jitter"].as<bool>() : false;
