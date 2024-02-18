@@ -206,6 +206,9 @@ namespace Lang
 		inline static const char* MyConfigs;
 		inline static const char* AuthorName;
 		inline static const char* ConfigName;
+
+		inline static const char* SafeMode;
+		inline static const char* SafeModeHoveredTip;
 	} ConfigText;
 
 	inline struct ReadMeText
@@ -373,6 +376,9 @@ namespace Lang
 		ConfigText.SeparateLine = u8"Create Config";
 		ConfigText.AuthorName = u8"Author Name";
 		ConfigText.ConfigName = u8"Config Name";
+
+		ConfigText.SafeMode = u8"Safe Mode";
+		ConfigText.SafeModeHoveredTip = u8"Disable all unsafe functions that modify game's memory";
 
 		// Readme Menu
 		ReadMeText.FeatureName = u8" README";

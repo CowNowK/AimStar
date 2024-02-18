@@ -158,6 +158,9 @@ namespace Lang
 		ConfigText.AuthorName = u8"作者";
 		ConfigText.ConfigName = u8"配置名";
 
+		ConfigText.SafeMode = u8"安全模式";
+		ConfigText.SafeModeHoveredTip = u8"禁用所有修改游戏数据的功能";
+
 		// Readme Menu
 		ReadMeText.FeatureName = u8" 其他信息";
 		ReadMeText.LastUpdate = u8"最后更新: ";
