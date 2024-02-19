@@ -6,6 +6,8 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <chrono>
+#include <thread>
 
 namespace Init
 {
@@ -73,6 +75,11 @@ namespace Init
                 }
             }
             return false;
+        }
+
+        static void SleepGameTick(int TickCount)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(15 * TickCount));
         }
 
         static void Exit()
