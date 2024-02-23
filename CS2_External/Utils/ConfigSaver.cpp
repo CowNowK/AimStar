@@ -20,7 +20,7 @@ namespace MyConfigSaver {
 
         YAML::Emitter emitter;
 
-        emitter << YAML::Comment("AimStar Config File\nVersion: 4.2\nAuthor: " + author);
+        emitter << YAML::Comment("AimStar Config File\nVersion: 4.3\nAuthor: " + author);
         emitter << YAML::BeginMap;
 
         emitter << YAML::Key << "ESP";
@@ -254,6 +254,7 @@ namespace MyConfigSaver {
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
         emitter << YAML::Key << "Enable" << YAML::Value << MenuConfig::AimBot;
+        emitter << YAML::Key << "Ragebot" << YAML::Value << AimControl::Rage;
         emitter << YAML::Key << "AimLock" << YAML::Value << AimControl::AimLock;
         emitter << YAML::Key << "ToggleMode" << YAML::Value << MenuConfig::AimToggleMode;
         emitter << YAML::Key << "Hotkey" << YAML::Value << MenuConfig::AimBotHotKey; 
@@ -512,6 +513,7 @@ namespace MyConfigSaver {
         if (config["Aimbot"])
         {
             MenuConfig::AimBot = config["Aimbot"]["Enable"].IsDefined() ? config["Aimbot"]["Enable"].as<bool>() : false;
+            AimControl::Rage = config["Aimbot"]["Ragebot"].IsDefined() ? config["Aimbot"]["Ragebot"].as<bool>() : false;
             AimControl::AimLock = config["Aimbot"]["AimLock"].IsDefined() ? config["Aimbot"]["AimLock"].as<bool>() : false;
             MenuConfig::AimToggleMode = config["Aimbot"]["ToggleMode"].IsDefined() ? config["Aimbot"]["ToggleMode"].as<bool>() : false;
             MenuConfig::AimBotHotKey = config["Aimbot"]["Hotkey"].IsDefined() ? config["Aimbot"]["Hotkey"].as<int>() : 0;

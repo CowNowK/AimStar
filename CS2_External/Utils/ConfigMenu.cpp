@@ -127,6 +127,7 @@ namespace ConfigMenu {
 
 	void ResetToDefault() {
 		TriggerBot::ScopeOnly = false;
+		AimControl::Rage = false;
 		AimControl::IgnoreFlash = false;
 		AimControl::AimLock = false;
 		ESPConfig::RenderDistance = 80;

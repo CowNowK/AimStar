@@ -329,7 +329,10 @@ void Cheats::Run()
 		{
 			if (AimPosList.size() != 0)
 			{
-				AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+				if (AimControl::Rage && !MenuConfig::SafeMode)
+					AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+				else
+					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
 			}
 		}
 		else
@@ -338,8 +341,10 @@ void Cheats::Run()
 			{
 				if (AimPosList.size() != 0)
 				{
-					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
-					// AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+					if (AimControl::Rage && !MenuConfig::SafeMode)
+						AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+					else
+						AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
 				}
 			}
 		}
