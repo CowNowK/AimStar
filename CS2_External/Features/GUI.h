@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "..\MenuConfig.hpp"
 #include "..\Render.hpp"
-#include "..\AimBot.hpp"
+#include "..\Features\Aimbot\Legitbot.hpp"
 #include "..\Radar\Radar.h"
 #include "..\TriggerBot.h"
 #include "..\Utils\ConfigMenu.hpp"
@@ -25,8 +25,29 @@ int buttonW = 0;
 int buttonH = 0;
 int hitboxW = 0, hitboxH = 0;
 
+// checkbox for hitbox
+bool checkbox1 = false;
+bool checkbox2 = false;
+bool checkbox3 = false;
+bool checkbox4 = false;
+
 namespace GUI
 {
+	inline std::vector<int> HitboxList;
+	void addHitbox(int BoneIndex)
+	{
+		HitboxList.push_back(BoneIndex);
+	}
+	void removeHitbox(int BoneIndex)
+	{
+		for (auto it = HitboxList.begin(); it != HitboxList.end(); ++it) {
+			if (*it == BoneIndex) {
+				HitboxList.erase(it);
+				break;
+			}
+		}
+	}
+
 	void LoadImages()
 	{
 		if (AS_Logo == NULL)
@@ -381,17 +402,50 @@ namespace GUI
 						ImVec2 StartPos = ImGui::GetCursorScreenPos();
 						ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 202, StartPos.y + 62)); ImGui::RadioButton("###Head", &MenuConfig::AimPosition, 0);
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 202, StartPos.y + 62)); 
+						if (ImGui::Checkbox("###Head", &checkbox1))
+						{
+							if (checkbox1) {
+								addHitbox(BONEINDEX::head);
+							}
+							else {
+								removeHitbox(BONEINDEX::head);
+							}
+						}
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103), ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 40, StartPos.y + 91)); ImGui::RadioButton("###Neck", &MenuConfig::AimPosition, 1);
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 40, StartPos.y + 91));
+						if (ImGui::Checkbox("###Neck", &checkbox2))
+						{
+							if (checkbox2) {
+								addHitbox(BONEINDEX::neck_0);
+							}
+							else {
+								removeHitbox(BONEINDEX::neck_0);
+							}
+						}
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141), ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 192, StartPos.y + 129)); ImGui::RadioButton("###Chest", &MenuConfig::AimPosition, 2);
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 192, StartPos.y + 129));
+						if (ImGui::Checkbox("###Chest", &checkbox3))
+						{
+							if (checkbox3) {
+								addHitbox(BONEINDEX::spine_1);
+							}
+							else {
+								removeHitbox(BONEINDEX::spine_1);
+							}
+						}
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 44, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 188)); ImGui::RadioButton("###Penis", &MenuConfig::AimPosition, 3);
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 188));
+						if (ImGui::Checkbox("###Penis", &checkbox4))
+						{
+							if (checkbox4) {
+								addHitbox(BONEINDEX::pelvis);
+							}
+							else {
+								removeHitbox(BONEINDEX::pelvis);
+							}
+						}
 						//ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
-
-
-
 						
 					}
 					ImGui::NextColumn();

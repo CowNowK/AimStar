@@ -43,6 +43,7 @@ namespace MenuConfig
 	// 0: head 1: neck 3: spine
 	inline int  AimPosition = 0;
 	inline DWORD  AimPositionIndex = BONEINDEX::head;
+	inline std::vector<int> HitboxList;
 	inline bool VisibleCheck = true;
 
 	inline bool RCS = false;

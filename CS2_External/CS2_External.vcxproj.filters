@@ -93,7 +93,7 @@
     <ClInclude Include="Render.hpp">
       <Filter>Cheats</Filter>
     </ClInclude>
-    <ClInclude Include="AimBot.hpp">
+    <ClInclude Include="Features\Aimbot\Ragebot.hpp">
       <Filter>Cheats</Filter>
     </ClInclude>
     <ClInclude Include="Offsets.h">
@@ -208,7 +208,7 @@
     <ClInclude Include="Resources\Sounds.h" />
     <ClInclude Include="Utils\cpp-httplib\httplib.h" />
     <ClInclude Include="Utils\json\json.hpp" />
-    <ClInclude Include="Utils\OffsetsUpdater.h" />
+    <ClInclude Include="Features\Aimbot\Legitbot.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">

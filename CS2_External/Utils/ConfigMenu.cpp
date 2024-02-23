@@ -2,7 +2,7 @@
 #include "../MenuConfig.hpp"
 #include "ConfigSaver.hpp"
 #include "../TriggerBot.h"
-#include "../AimBot.hpp"
+#include "../Features/Aimbot/Legitbot.hpp"
 #include <filesystem>
 #include <string>
 #include "../Font/IconsFontAwesome5.h"

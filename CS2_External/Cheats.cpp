@@ -131,8 +131,8 @@ void Cheats::Run()
 	float DistanceToSight = 0;
 	float MaxAimDistance = 100000;
 	Vec3  HeadPos{ 0,0,0 };
-	Vec3  AimPos{ 0,0,0 };
 	Vec2  Angles{ 0,0 };
+	std::vector<Vec3> AimPosList;
 
 	// Radar Data
 	Base_Radar Radar;
@@ -210,38 +210,30 @@ void Cheats::Run()
 				Gui.Text(std::to_string(BoneIndex), ScreenPos, ImColor(255, 255, 255, 255));
 			}
 		}*/
+
 		//update Bone select
-		switch (MenuConfig::AimPosition)
-							{
-							case 0:
-								MenuConfig::AimPositionIndex = BONEINDEX::head;
-								break;
-							case 1:
-								MenuConfig::AimPositionIndex = BONEINDEX::neck_0;
-								break;
-							case 2:
-								MenuConfig::AimPositionIndex = BONEINDEX::spine_1;
-								break;
-							case 3:
-								MenuConfig::AimPositionIndex = BONEINDEX::pelvis;
-								break;
-							default:
-								break;
-							}
-		DistanceToSight = Entity.GetBone().BonePosList[BONEINDEX::head].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
-
-
-		if (DistanceToSight < MaxAimDistance)
+		if (GUI::HitboxList.size() != 0)
 		{
-			MaxAimDistance = DistanceToSight;
-
-			if (!MenuConfig::VisibleCheck ||
-				Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
-				LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (i)))
+			for (int i = 0; i < GUI::HitboxList.size(); i++)
 			{
-				AimPos = Entity.GetBone().BonePosList[MenuConfig::AimPositionIndex].Pos;
-				if (MenuConfig::AimPositionIndex == BONEINDEX::head)
-					AimPos.z -= 1.f;
+				Vec3 TempPos;
+				DistanceToSight = Entity.GetBone().BonePosList[GUI::HitboxList[i]].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
+
+				if (DistanceToSight < MaxAimDistance)
+				{
+					MaxAimDistance = DistanceToSight;
+
+					if (!MenuConfig::VisibleCheck ||
+						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
+						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (i)))
+					{
+						TempPos = Entity.GetBone().BonePosList[GUI::HitboxList[i]].Pos;
+						if (GUI::HitboxList[i] == BONEINDEX::head)
+							TempPos.z -= 1.f;
+
+						AimPosList.push_back(TempPos);
+					}
+				}
 			}
 		}
 
@@ -335,18 +327,19 @@ void Cheats::Run()
 
 		if (MenuConfig::AimAlways)
 		{
-			if (AimPos != Vec3(0, 0, 0))
+			if (AimPosList.size() != 0)
 			{
-				AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPos);
+				AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
 			}
 		}
 		else
 		{
 			if (GetAsyncKeyState(AimControl::HotKey))
 			{
-				if (AimPos != Vec3(0, 0, 0))
+				if (AimPosList.size() != 0)
 				{
-					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPos);
+					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+					// AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
 				}
 			}
 		}
@@ -357,7 +350,7 @@ void Cheats::Run()
 			lastTick = currentTick;
 		}
 	}
-	if (AimControl::HasTarget == false || AimPos == Vec3(0, 0, 0) || !MenuConfig::AimBot)
+	if (AimControl::HasTarget == false || AimPosList.size() != 0 || !MenuConfig::AimBot)
 		RCS::RecoilControl(LocalEntity);
 	
 	Misc::JoinDiscord();

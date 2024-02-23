@@ -11,8 +11,8 @@
 #include <vector>
 #include <Windows.h>
 
+#include "Aimbot\Legitbot.hpp"
 #include "..\Resources\Sounds.h"
-#include "..\AimBot.hpp"
 #include "..\Entity.h"
 #include "..\MenuConfig.hpp"
 #include "..\OS-ImGui\imgui\imgui.h"

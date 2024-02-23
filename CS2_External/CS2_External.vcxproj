@@ -145,10 +145,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AimBot.hpp" />
+    <ClInclude Include="Features\Aimbot\Ragebot.hpp" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="Cheats.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Features\Aimbot\Legitbot.hpp" />
     <ClInclude Include="Features\BombTimer.h" />
     <ClInclude Include="Features\Debugger.h" />
     <ClInclude Include="Features\ESP.h" />
