@@ -34,6 +34,35 @@ bool checkbox5 = false;
 
 namespace GUI
 {
+	inline void InitHitboxList()
+	{
+		if (MenuConfig::HitboxUpdated)
+			return;
+
+		auto HitboxList = AimControl::HitboxList;
+
+		auto it = std::find(HitboxList.begin(), HitboxList.end(), BONEINDEX::head);
+		if (it != HitboxList.end())
+			checkbox1 = true;
+
+		it = std::find(HitboxList.begin(), HitboxList.end(), BONEINDEX::neck_0);
+		if (it != HitboxList.end())
+			checkbox2 = true;
+
+		it = std::find(HitboxList.begin(), HitboxList.end(), BONEINDEX::spine_1);
+		if (it != HitboxList.end())
+			checkbox3 = true;
+
+		it = std::find(HitboxList.begin(), HitboxList.end(), BONEINDEX::spine_2);
+		if (it != HitboxList.end())
+			checkbox4 = true;
+
+		it = std::find(HitboxList.begin(), HitboxList.end(), BONEINDEX::pelvis);
+		if (it != HitboxList.end())
+			checkbox5 = true;
+
+		MenuConfig::HitboxUpdated = false;
+	}
 	void addHitbox(int BoneIndex)
 	{
 		AimControl::HitboxList.push_back(BoneIndex);
@@ -436,7 +465,7 @@ namespace GUI
 						}
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 167), ImVec2(StartPos.x + 44, StartPos.y + 167), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
 						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 155));
-						if (ImGui::Checkbox("###Penis", &checkbox4))
+						if (ImGui::Checkbox("###Stomache", &checkbox4))
 						{
 							if (checkbox4) {
 								addHitbox(BONEINDEX::spine_2);

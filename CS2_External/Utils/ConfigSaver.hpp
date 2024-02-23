@@ -31,9 +31,9 @@ namespace MyConfigSaver {
     static std::vector<int> ReadVectorFromYAML(const YAML::Node& node) {
         std::vector<int> result;
 
-        if (node.IsDefined()) {
-            for (const auto& element : node) {
-                result.push_back(element.as<int>());
+        if (node.IsDefined() && node.IsSequence()) {
+            for (const auto& i : node) {
+                result.push_back(i.as<int>());
             }
         }
         return result;
