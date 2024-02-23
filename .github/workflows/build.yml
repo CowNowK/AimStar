@@ -1,4 +1,4 @@
-name: build x64 release
+name: build x64 release ci
 
 on: 
   push:
@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup MSBuild path
         uses: microsoft/setup-msbuild@v1
       - name: Build with MSBuild
@@ -21,7 +21,7 @@ jobs:
           ren AimStar.exe AimStar-${{github.sha}}.exe
         working-directory: .\x64\Release\
       - name: Upload the output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: ci
           path: .\x64\Release\*
@@ -30,7 +30,7 @@ jobs:
     needs: build
     name: Create Release
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
