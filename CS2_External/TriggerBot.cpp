@@ -29,6 +29,9 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	if (!Entity.UpdatePawn(PawnAddress))
 		return;
 
+	if (!IgnoreFlash && LocalEntity.Pawn.FlashDuration > 0.f)
+		return;
+
 	if (ScopeOnly)
 	{
 		bool isScoped;

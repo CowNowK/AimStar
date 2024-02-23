@@ -294,6 +294,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Delay" << YAML::Value << TriggerBot::TriggerDelay;
         emitter << YAML::Key << "FakeShot" << YAML::Value << TriggerBot::FakeShotDelay;
         emitter << YAML::Key << "ScopeOnly" << YAML::Value << TriggerBot::ScopeOnly;
+        emitter << YAML::Key << "IgnoreFlash" << YAML::Value << TriggerBot::IgnoreFlash;
         emitter << YAML::Key << "AutoMode" << YAML::Value << MenuConfig::TriggerAlways;
         emitter << YAML::EndMap;
 
@@ -545,6 +546,7 @@ namespace MyConfigSaver {
             TriggerBot::TriggerDelay = config["Triggerbot"]["Delay"].IsDefined() ? config["Triggerbot"]["Delay"].as<int>() : 20;
             TriggerBot::FakeShotDelay = config["Triggerbot"]["FakeShot"].IsDefined() ? config["Triggerbot"]["FakeShot"].as<int>() : 200;
             TriggerBot::ScopeOnly = config["Triggerbot"]["ScopeOnly"].IsDefined() ? config["Triggerbot"]["ScopeOnly"].as<bool>() : false;
+            TriggerBot::IgnoreFlash = config["Triggerbot"]["IgnoreFlash"].IsDefined() ? config["Triggerbot"]["IgnoreFlash"].as<bool>() : false;
             MenuConfig::TriggerAlways = config["Triggerbot"]["AutoMode"].as<bool>();
         }
         if (config["Menu"])

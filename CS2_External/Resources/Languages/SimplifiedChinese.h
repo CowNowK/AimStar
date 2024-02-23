@@ -68,6 +68,7 @@ namespace Lang
 		AimbotText.AutoShot = u8"自动开火";
 		AimbotText.BulletSlider = u8"从第几发开始: ";
 		AimbotText.IgnoreFlash = u8"无视闪光";
+		AimbotText.Ragebot = u8"红锁 (慎用)";
 
 		// RCS
 		RCStext.Toggle = u8"后坐控制";

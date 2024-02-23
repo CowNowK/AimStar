@@ -11,6 +11,7 @@ namespace TriggerBot
 	inline int TriggerDelay = 90; // ms
 	inline int FakeShotDelay = 200; // ms
 	inline bool ScopeOnly = false;
+	inline bool IgnoreFlash = false;
 	inline int HotKey = VK_LMENU;
 	inline std::vector<int> HotKeyList{VK_LMENU, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL};
 

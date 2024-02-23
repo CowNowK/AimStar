@@ -126,6 +126,7 @@ namespace ConfigMenu {
 	}
 
 	void ResetToDefault() {
+		TriggerBot::IgnoreFlash = false;
 		TriggerBot::ScopeOnly = false;
 		AimControl::Rage = false;
 		AimControl::IgnoreFlash = false;
