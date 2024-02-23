@@ -30,6 +30,7 @@ bool checkbox1 = false;
 bool checkbox2 = false;
 bool checkbox3 = false;
 bool checkbox4 = false;
+bool checkbox5 = false;
 
 namespace GUI
 {
@@ -434,9 +435,20 @@ namespace GUI
 								removeHitbox(BONEINDEX::spine_1);
 							}
 						}
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 44, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 188));
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 167), ImVec2(StartPos.x + 44, StartPos.y + 167), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 155));
 						if (ImGui::Checkbox("###Penis", &checkbox4))
+						{
+							if (checkbox4) {
+								addHitbox(BONEINDEX::spine_2);
+							}
+							else {
+								removeHitbox(BONEINDEX::spine_2);
+							}
+						}
+						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 195, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 192, StartPos.y + 188));
+						if (ImGui::Checkbox("###Penis", &checkbox5))
 						{
 							if (checkbox4) {
 								addHitbox(BONEINDEX::pelvis);
