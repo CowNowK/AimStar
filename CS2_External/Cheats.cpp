@@ -212,12 +212,12 @@ void Cheats::Run()
 		}*/
 
 		//update Bone select
-		if (GUI::HitboxList.size() != 0)
+		if (AimControl::HitboxList.size() != 0)
 		{
-			for (int i = 0; i < GUI::HitboxList.size(); i++)
+			for (int i = 0; i < AimControl::HitboxList.size(); i++)
 			{
 				Vec3 TempPos;
-				DistanceToSight = Entity.GetBone().BonePosList[GUI::HitboxList[i]].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
+				DistanceToSight = Entity.GetBone().BonePosList[AimControl::HitboxList[i]].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
 
 				if (DistanceToSight < MaxAimDistance)
 				{
@@ -227,8 +227,8 @@ void Cheats::Run()
 						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
 						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (i)))
 					{
-						TempPos = Entity.GetBone().BonePosList[GUI::HitboxList[i]].Pos;
-						if (GUI::HitboxList[i] == BONEINDEX::head)
+						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[i]].Pos;
+						if (AimControl::HitboxList[i] == BONEINDEX::head)
 							TempPos.z -= 1.f;
 
 						AimPosList.push_back(TempPos);

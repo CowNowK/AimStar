@@ -34,16 +34,15 @@ bool checkbox5 = false;
 
 namespace GUI
 {
-	inline std::vector<int> HitboxList;
 	void addHitbox(int BoneIndex)
 	{
-		HitboxList.push_back(BoneIndex);
+		AimControl::HitboxList.push_back(BoneIndex);
 	}
 	void removeHitbox(int BoneIndex)
 	{
-		for (auto it = HitboxList.begin(); it != HitboxList.end(); ++it) {
+		for (auto it = AimControl::HitboxList.begin(); it != AimControl::HitboxList.end(); ++it) {
 			if (*it == BoneIndex) {
-				HitboxList.erase(it);
+				AimControl::HitboxList.erase(it);
 				break;
 			}
 		}

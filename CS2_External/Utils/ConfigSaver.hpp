@@ -8,7 +8,7 @@ namespace MyConfigSaver {
     extern void SaveConfig(const std::string& filename, const std::string& author = "");
     extern void LoadConfig(const std::string& filename);
     
-    inline uint32_t ImColorToUInt32(const ImColor& color)
+    static uint32_t ImColorToUInt32(const ImColor& color)
     {
         uint32_t r = static_cast<uint32_t>(color.Value.x * 255);
         uint32_t g = static_cast<uint32_t>(color.Value.y * 255) << 8;
@@ -18,7 +18,7 @@ namespace MyConfigSaver {
         return r | g | b | a;
     }
 
-    inline ImColor UInt32ToImColor(uint32_t value)
+    static ImColor UInt32ToImColor(uint32_t value)
     {
         ImColor TempColor;
         TempColor.Value.x = static_cast<float>(value & 0xFF) / 255.0f;
@@ -28,4 +28,14 @@ namespace MyConfigSaver {
         return TempColor;
     }
     
+    static std::vector<int> ReadVectorFromYAML(const YAML::Node& node) {
+        std::vector<int> result;
+
+        if (node.IsDefined()) {
+            for (const auto& element : node) {
+                result.push_back(element.as<int>());
+            }
+        }
+        return result;
+    }
 }

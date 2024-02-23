@@ -26,6 +26,7 @@ namespace AimControl
     inline float AimFov = 5;
     inline float AimFovMin = .5f;
     inline float Smooth = 2.0f;
+    inline std::vector<int> HitboxList;
     inline std::vector<int> HotKeyList{ VK_LMENU, VK_LBUTTON, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL };
 
     inline bool HasTarget = false;
