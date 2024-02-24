@@ -34,7 +34,7 @@ Most of the code is contributed by users, and the code structure might be very m
 > I am so busy that I may not update the code on time. If u have the capability to update or fix bugs, u can pull ur request🤩
 ***
 ## 📸 Preview
-![](/Image1.png)
+![](/Image2.png)
 
 ## 📋 Features
 
