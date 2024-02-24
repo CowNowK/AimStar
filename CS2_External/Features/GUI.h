@@ -634,7 +634,7 @@ namespace GUI
 					ImGui::TextDisabled(Lang::MiscText.LanguageList);
 					ImGui::SameLine();
 					if (ImGui::Combo("###Language", &MenuConfig::Language,
-						"English\0Danish\0German\0Polish\0Portuguese\0Russian\0Simplified Chinese\0Slovak\0French\0Turkish\0Hungarian\0Dutch\0Cezch\0Spanish\0Romanian\0"))
+						"English\0Danish\0German\0Polish\0Portuguese\0Russian\0Simplified Chinese\0Slovak\0French\0Turkish\0Hungarian\0Dutch\0Cezch\0Spanish\0Romanian\0Greek\0"))
 						Lang::ChangeLang(MenuConfig::Language);
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);

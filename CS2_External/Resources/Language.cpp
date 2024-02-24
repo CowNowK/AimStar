@@ -4,6 +4,7 @@
 #include "Languages/Dutch.h"
 #include "Languages/Francais.h"
 #include "Languages/German.h"
+#include "Languages/Greek.h"
 #include "Languages/Hungarian.h"
 #include "Languages/Korean.h"
 #include "Languages/Polish.h"
@@ -70,9 +71,11 @@ namespace Lang
 		case 14:
 			Romanian();
 			break;
+		case 15:
+			Greek();
+			break;
 		default:
 			English();
-			break;
 		}
 	}
 }

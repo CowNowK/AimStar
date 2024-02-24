@@ -209,6 +209,7 @@
     <ClInclude Include="Utils\cpp-httplib\httplib.h" />
     <ClInclude Include="Utils\json\json.hpp" />
     <ClInclude Include="Features\Aimbot\Legitbot.hpp" />
+    <ClInclude Include="Resources\Languages\Greek.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">

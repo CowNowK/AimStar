@@ -193,6 +193,7 @@
     <ClInclude Include="Resources\Languages\Dutch.h" />
     <ClInclude Include="Resources\Languages\Francais.h" />
     <ClInclude Include="Resources\Languages\German.h" />
+    <ClInclude Include="Resources\Languages\Greek.h" />
     <ClInclude Include="Resources\Languages\Hungarian.h" />
     <ClInclude Include="Resources\Languages\Korean.h" />
     <ClInclude Include="Resources\Languages\Polish.h" />
