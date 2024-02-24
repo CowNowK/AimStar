@@ -26,7 +26,7 @@ int buttonH = 0;
 int hitboxW = 0, hitboxH = 0;
 
 // checkbox for hitbox
-bool checkbox1 = false;
+bool checkbox1 = true;
 bool checkbox2 = false;
 bool checkbox3 = false;
 bool checkbox4 = false;
@@ -493,7 +493,7 @@ namespace GUI
 							}
 						}
 						//ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
-						
+						std::cout << AimControl::HitboxList.size() << std::endl;
 					}
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
