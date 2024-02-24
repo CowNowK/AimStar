@@ -21,7 +21,7 @@ jobs:
           ren AimStar.exe AimStar-${{github.sha}}.exe
         working-directory: .\x64\Release\
       - name: Upload the output
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: ci
           path: .\x64\Release\*
