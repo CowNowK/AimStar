@@ -5,7 +5,7 @@ namespace Lang
 	inline void SimplifiedChinese()
 	{
 		Global.Author = u8"CowNow";
-		Global.Date = u8"2024/02/01";
+		Global.Date = u8"2024/02/25";
 
 		Global.SwitchButton = u8"启用功能";
 		Global.FeatureSettings = u8"详细设置";
@@ -143,7 +143,7 @@ namespace Lang
 		MiscText.ForceScope = u8"右键开镜";
 		MiscText.FlashImmunity = u8"闪光免疫程度: ";
 		MiscText.NightMode = u8"夜间模式";
-		MiscText.NightMode = u8"透明度: ";
+		MiscText.Alpha = u8"透明度: ";
 
 		MiscText.FakeDuck = u8"假蹲";
 
