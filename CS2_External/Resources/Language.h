@@ -346,7 +346,7 @@ namespace Lang
 		MiscText.SpecCheck = u8"Cheat in Spec";
 		MiscText.NoFlash = u8"No Flash";
 		MiscText.FastStop = u8"Fast Stop";
-		MiscText.HitSound = u8"Hit Sound";
+		MiscText.HitSound = u8"Hit Sound  ";
 		MiscText.bmbTimer = u8"Bomb Timer";
 		MiscText.SpecList = u8"Spec List";
 		MiscText.Bhop = u8"Auto Jump";

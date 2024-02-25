@@ -237,7 +237,7 @@ namespace ConfigMenu {
 		MiscCFG::WorkInSpec = true;
 		MiscCFG::WaterMark = false;
 		MiscCFG::CheatList = false;
-		MiscCFG::HitSound = false;
+		MiscCFG::HitSound = 0;
 		MiscCFG::FastStop = false;
 
 		ESPConfig::ESPenabled = false;

@@ -184,7 +184,7 @@ namespace MiscCFG
 	inline bool BunnyHop = false;
 	inline bool WorkInSpec = true;
 	inline bool WaterMark = false;
-	inline bool HitSound = false;
+	inline int	HitSound = 0;
 	inline bool SkinChanger = false;
 	inline bool bmbTimer = false;
 	inline bool FastStop = false;

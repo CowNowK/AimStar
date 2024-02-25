@@ -214,7 +214,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "FlashImmunity" << YAML::Value << MiscCFG::FlashImmunity;
         emitter << YAML::Key << "CheatList" << YAML::Value << MiscCFG::CheatList;
         emitter << YAML::Key << "Watermark" << YAML::Value << MiscCFG::WaterMark;
-        emitter << YAML::Key << "HitSound" << YAML::Value << MiscCFG::HitSound;
+        emitter << YAML::Key << "HitSounds" << YAML::Value << MiscCFG::HitSound;
         emitter << YAML::Key << "BombTimer" << YAML::Value << MiscCFG::bmbTimer;
         emitter << YAML::Key << "TimerColor";
         emitter << YAML::Value;
@@ -487,7 +487,7 @@ namespace MyConfigSaver {
             MiscCFG::FlashImmunity = config["Misc"]["FlashImmunity"].IsDefined() ? config["Misc"]["FlashImmunity"].as<float>() : 0.f;
             MiscCFG::CheatList = config["Misc"]["CheatList"].IsDefined() ? config["Misc"]["CheatList"].as<bool>() : false;
             MiscCFG::WaterMark = config["Misc"]["Watermark"].IsDefined() ? config["Misc"]["Watermark"].as<bool>() : false;
-            MiscCFG::HitSound = config["Misc"]["HitSound"].IsDefined() ? config["Misc"]["HitSound"].as<bool>() : false;
+            MiscCFG::HitSound = config["Misc"]["HitSounds"].IsDefined() ? config["Misc"]["HitSounds"].as<int>() : 0;
             MiscCFG::bmbTimer = config["Misc"]["BombTimer"].IsDefined() ? config["Misc"]["BombTimer"].as<bool>() : false;
             MiscCFG::BombTimerCol.Value.x = config["Misc"]["TimerColor"]["r"].as<float>();
             MiscCFG::BombTimerCol.Value.y = config["Misc"]["TimerColor"]["g"].as<float>();
@@ -527,7 +527,7 @@ namespace MyConfigSaver {
             MenuConfig::FovCircleColor.Value.z = config["Aimbot"]["CircleColor"]["b"].as<float>();
             MenuConfig::FovCircleColor.Value.w = config["Aimbot"]["CircleColor"]["a"].as<float>();
             AimControl::Smooth = config["Aimbot"]["Smooth"].IsDefined() ? config["Aimbot"]["Smooth"].as<float>() : 2.f;
-            AimControl::HitboxList = ReadVectorFromYAML(config["Aimbot"]["Hitboxes"]);
+            // AimControl::HitboxList = ReadVectorFromYAML(config["Aimbot"]["Hitboxes"]);
             MenuConfig::VisibleCheck = config["Aimbot"]["VisibleCheck"].IsDefined() ? config["Aimbot"]["VisibleCheck"].as<bool>() : true;
             AimControl::IgnoreFlash = config["Aimbot"]["IgnoreFlash"].IsDefined() ? config["Aimbot"]["IgnoreFlash"].as<bool>() : false;
             AimControl::ScopeOnly = config["Aimbot"]["ScopeOnly"].IsDefined() ? config["Aimbot"]["ScopeOnly"].as<bool>() : false;

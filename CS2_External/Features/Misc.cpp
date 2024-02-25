@@ -125,7 +125,24 @@ namespace Misc
 			else
 			{
 				// Play the HitSound
-				PlaySoundA(reinterpret_cast<char*>(skeet_sound), NULL, SND_ASYNC | SND_MEMORY);
+				switch (MiscCFG::HitSound)
+				{
+				case 1:
+					PlaySoundA(reinterpret_cast<char*>(neverlose_sound), NULL, SND_ASYNC | SND_MEMORY);
+					break;
+				case 2:
+					PlaySoundA(reinterpret_cast<char*>(skeet_sound), NULL, SND_ASYNC | SND_MEMORY);
+					break;
+				case 3:
+					PlaySoundA(reinterpret_cast<char*>(Fuck), NULL, SND_ASYNC | SND_MEMORY);
+					break;
+				case 4:
+					PlaySoundA(reinterpret_cast<char*>(Senpai), NULL, SND_ASYNC | SND_MEMORY);
+					break;
+				default:
+					break;
+				}
+				
 			}
 		}
 		PreviousTotalHits = totalHits;

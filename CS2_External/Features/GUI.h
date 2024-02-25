@@ -499,7 +499,6 @@ namespace GUI
 							}
 						}
 						//ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
-						std::cout << AimControl::HitboxList.size() << std::endl;
 					}
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
@@ -602,7 +601,11 @@ namespace GUI
 					if (!MenuConfig::SafeMode)
 						PutSwitch(Lang::MiscText.ForceScope, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ForceScope);
 					PutSwitch(Lang::MiscText.HeadshotLine, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::ShowHeadShootLine);
-					PutSwitch(Lang::MiscText.HitSound, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::HitSound);
+					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
+					ImGui::TextDisabled(Lang::MiscText.HitSound);
+					ImGui::SameLine();
+					ImGui::SetNextItemWidth(170.f);
+					ImGui::Combo("###HitSounds", &MiscCFG::HitSound, "None\0Neverlose\0Skeet\0Fuck\0Senpai\0");
 					PutSwitch(Lang::MiscText.MoneyService, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::MoneyService);
 					if (MiscCFG::MoneyService)
 						PutSwitch(Lang::MiscText.ShowCashSpent, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ShowCashSpent);
