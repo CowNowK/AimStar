@@ -106,4 +106,8 @@ Please read the following advice carefully before using Aimstar.
 ![Screenshot_2024-02-29-02-43-07-667_com taobao idlefish](https://github.com/CowNowK/AimStar/assets/65479796/f1832d98-8381-4a1e-bd48-9323d4e0cc0b)
 ![Screenshot_2024-02-29-02-43-04-859_com taobao idlefish](https://github.com/CowNowK/AimStar/assets/65479796/5ca6e6c3-2ad0-4f0e-ab0b-71c828188699)
 
+张国华先生
+![Screenshot_2024-02-29-03-03-29-207_com taobao idlefish-edit](https://github.com/CowNowK/AimStar/assets/65479796/ed31b09c-8878-4ab7-8add-0f92a180aa3e)
+![Screenshot_2024-02-29-03-03-40-673_com taobao idlefish-edit](https://github.com/CowNowK/AimStar/assets/65479796/a16fc131-7db4-40cc-a51a-76dbef9ef2c3)
+
 </details>
