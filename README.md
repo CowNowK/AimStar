@@ -97,8 +97,9 @@ Please read the following advice carefully before using Aimstar.
 
 ![1f76f67174ee54af569f0ea8dc64963](https://github.com/CowNowK/AimStar/assets/133740174/f032647a-b648-4b9b-986e-3288e22d3d0f)
 <details><summary>圈钱大蛇实名鉴赏</summary>
+  
 司晓鹏先生
-  ![Screenshot_2024-02-29-02-38-04-598_com taobao idlefish](https://github.com/CowNowK/AimStar/assets/65479796/38e02274-bf54-471c-ac3e-b52450890424)
+![Screenshot_2024-02-29-02-38-04-598_com taobao idlefish](https://github.com/CowNowK/AimStar/assets/65479796/38e02274-bf54-471c-ac3e-b52450890424)
 ![Screenshot_2024-02-29-02-37-55-626_com taobao idlefish](https://github.com/CowNowK/AimStar/assets/65479796/0b0c2907-c956-4b76-bb2e-e25e5a5782af)
 
 张海先生
