@@ -44,7 +44,7 @@ jobs:
         with:
           ref: autobuild
       - name: automatic Release ci
-        uses: softpropsaction-gh-release@master
+        uses: softprops/action-gh-release@master
         with:
           name: autobuild [${{github.sha}}]
           tag_name: autobuild
