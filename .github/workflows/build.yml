@@ -62,6 +62,6 @@ jobs:
             ```
             No support for any autobuild version except the latest autobuild
           files: |
-            AimStar-${{github.sha}}.exe
+            AimStar-${{github.sha}}.zip
           prerelease: true
           
