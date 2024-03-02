@@ -103,6 +103,7 @@ namespace Misc
 			ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
 		ImGui::Text("Pos: %.2f, %.2f, %.2f", Pos.x, Pos.y, Pos.z);
 		ImGui::Text("Angel: %.2f, %.2f", Angle.x, Angle.y);
+		ImGui::Text("Vel: %.2f", LocalPlayer.Pawn.Speed);
 
 		ImGui::End();
 	}

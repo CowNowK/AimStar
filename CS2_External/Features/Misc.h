@@ -1,9 +1,11 @@
 #pragma once
+#define _USE_MATH_DEFINES
 
 #include <algorithm>
 #include <chrono>
 #include <cstdlib>
 #include <ctime>
+#include <math.h>
 #include <sstream>
 #include <string>
 #include <thread>

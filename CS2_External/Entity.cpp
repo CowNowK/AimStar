@@ -116,6 +116,8 @@ bool CEntity::UpdatePawn(const DWORD64& PlayerPawnAddress)
 		return false;
 	if (!this->Pawn.GetFlashDuration())
 		return false;
+	if (!this->Pawn.GetVelocity())
+		return false;
 	if (!this->Pawn.GetAimPunchCache())
 		return false;
 	if (!this->Pawn.BoneData.UpdateAllBoneData(PlayerPawnAddress))
@@ -311,6 +313,15 @@ bool PlayerPawn::GetDefusing()
 bool PlayerPawn::GetFlashDuration()
 {
 	return ProcessMgr.ReadMemory(Address + Offset::Pawn.flFlashDuration, this->FlashDuration);
+}
+
+bool PlayerPawn::GetVelocity()
+{
+	Vec3 Velocity;
+	if (!ProcessMgr.ReadMemory(Address + Offset::Pawn.AbsVelocity, Velocity))
+		return false;
+	this->Speed = sqrt(Velocity.x * Velocity.x + Velocity.y * Velocity.y);
+	return true;
 }
 
 bool CEntity::IsAlive()
