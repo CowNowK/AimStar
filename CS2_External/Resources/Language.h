@@ -354,7 +354,7 @@ namespace Lang
 		MiscText.AntiRecord = u8"Anti Record";
 		MiscText.MoneyService = u8"Money Services";
 		MiscText.ShowCashSpent = u8"Show Cash Spent";
-		MiscText.EnemySensor = u8"Enemy Sensor";
+		MiscText.EnemySensor = u8"Glow";
 		MiscText.RadarHack = u8"Radar Hack";
 		MiscText.FastStop = u8"Fast Stop";
 		MiscText.VisCheckDisable = u8"Visible Check DISABLED";
