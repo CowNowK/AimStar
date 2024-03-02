@@ -10,9 +10,9 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@main
       - name: Setup MSBuild path
-        uses: microsoft/setup-msbuild@v1
+        uses: microsoft/setup-msbuild@main
       - name: Build with MSBuild
         run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
       - name: Rename EXE to AimStar-dev-${{github.sha}}.exe
@@ -21,7 +21,7 @@ jobs:
           ren AimStar.exe AimStar-${{github.sha}}.exe
         working-directory: .\x64\Release\
       - name: Upload the output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@main
         with:
           name: ci
           path: .\x64\Release\*
@@ -30,9 +30,9 @@ jobs:
     needs: build
     name: Create Release
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@main
       - name: Download Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@main
         with:
           name: ci
       - name: Delete tag

@@ -8,8 +8,8 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@main
       - name: Setup MSBuild path
-        uses: microsoft/setup-msbuild@v1
+        uses: microsoft/setup-msbuild@main
       - name: Build with MSBuild
         run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
