@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup MSBuild path
-        uses: microsoft/setup-msbuild@v1
+        uses: microsoft/setup-msbuild@v1.0.2
       - name: Build with MSBuild
         run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
       - name: Rename EXE to AimStar-dev-${{github.sha}}.exe
