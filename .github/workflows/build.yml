@@ -35,6 +35,11 @@ jobs:
         uses: actions/download-artifact@main
         with:
           name: ci
+      - name: Zip Artifact
+        uses: vimtor/action-zip@master
+        with:
+          files: AimStar-${{github.sha}}.exe
+          dest: AimStar-${{github.sha}}.zip
       - name: Delete tag
         run: gh release delete autobuild --cleanup-tag
         env:
