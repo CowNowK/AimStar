@@ -224,8 +224,6 @@ namespace Lang
 		inline static const char* OffsetsTitle;
 	} ReadMeText;
 
-	void ChangeLang(int LangIndex);
-
 	inline void English()
 	{
 		Global.Date = u8"None";

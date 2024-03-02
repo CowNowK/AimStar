@@ -303,7 +303,6 @@ namespace MyConfigSaver {
         emitter << YAML::BeginMap;
         emitter << YAML::Key << "SafeMode" << YAML::Value << MenuConfig::SafeMode;
         emitter << YAML::Key << "Theme" << YAML::Value << MenuConfig::Theme;
-        emitter << YAML::Key << "Language" << YAML::Value << MenuConfig::Language;
         emitter << YAML::EndMap;
 
         // Custom Theme Saver
@@ -553,7 +552,6 @@ namespace MyConfigSaver {
         {
             MenuConfig::SafeMode = config["Menu"]["SafeMode"].IsDefined() ? config["Menu"]["SafeMode"].as<bool>() : true;
             MenuConfig::Theme = config["Menu"]["Theme"].IsDefined() ? config["Menu"]["Theme"].as<int>() : 0;
-            MenuConfig::Language = config["Menu"]["Language"].IsDefined() ? config["Menu"]["Language"].as<int>() : 0;
         }
 
         if (MenuConfig::Theme == 2)
@@ -623,7 +621,6 @@ namespace MyConfigSaver {
 
         AimControl::SetHotKey(MenuConfig::AimBotHotKey);
         TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
-        Lang::ChangeLang(MenuConfig::Language);
         MenuConfig::HitboxUpdated = false;
 
         std::cout << "[Info] Configuration loaded from " << MenuConfig::path + '\\' + filename << std::endl;

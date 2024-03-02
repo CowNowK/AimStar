@@ -638,12 +638,6 @@ namespace GUI
 					ImGui::SeparatorText(ICON_FA_HEART" Menu Settings");
 					PutSwitch(Lang::MiscText.AntiRecord, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::BypassOBS);
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
-					ImGui::TextDisabled(Lang::MiscText.LanguageList);
-					ImGui::SameLine();
-					if (ImGui::Combo("###Language", &MenuConfig::Language,
-						"English\0Danish\0German\0Polish\0Portuguese\0Russian\0Simplified Chinese\0Slovak\0French\0Turkish\0Hungarian\0Dutch\0Cezch\0Spanish\0Romanian\0Greek\0"))
-						Lang::ChangeLang(MenuConfig::Language);
-					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);
 					ImGui::SameLine();
 					if (ImGui::Combo("###Theme", &MenuConfig::Theme, "AimStar\0NeverLose\0Custom\0"))
