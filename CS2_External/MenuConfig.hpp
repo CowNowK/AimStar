@@ -178,9 +178,6 @@ namespace RadarCFG
 
 namespace MiscCFG
 {
-	inline bool mother = false;
-	inline bool fucker = false;
-
 	inline bool BunnyHop = false;
 	inline bool WorkInSpec = true;
 	inline bool WaterMark = false;

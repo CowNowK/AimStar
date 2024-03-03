@@ -357,7 +357,4 @@ void Cheats::Run()
 	}
 	if (AimControl::HasTarget == false || AimPosList.size() != 0 || !MenuConfig::AimBot)
 		RCS::RecoilControl(LocalEntity);
-	
-	Misc::JoinDiscord();
-	Misc::SourceCode();
 }

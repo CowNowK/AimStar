@@ -10,24 +10,6 @@ namespace Misc
 	bool wKeyPressed = false;
 	bool sKeyPressed = false;
 
-	void JoinDiscord() noexcept
-	{
-		if (!MiscCFG::mother)
-			return;
-
-		ShellExecuteA(NULL, "open", "https://discord.com/invite/VgRrxwesPz", NULL, NULL, SW_SHOWNORMAL);
-		MiscCFG::mother = !MiscCFG::mother;
-	}
-
-	void SourceCode() noexcept
-	{
-		if (!MiscCFG::fucker)
-			return;
-
-		ShellExecuteA(NULL, "open", "https://github.com/CowNowK/AimStar", NULL, NULL, SW_SHOWNORMAL);
-		MiscCFG::fucker = !MiscCFG::fucker;
-	}
-
 	void CheatList() noexcept
 	{
 		if (!MiscCFG::CheatList)

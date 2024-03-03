@@ -694,9 +694,19 @@ namespace GUI
 
 					ImGui::NewLine();
 					
-					PutSwitch(Lang::ReadMeText.DiscordButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::mother);
-					PutSwitch(Lang::ReadMeText.SourceButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::fucker);
+					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
+					if (ImGui::Button(ICON_FA_COPY " Source Code", { ImGui::GetColumnWidth() - 20.f, 25.f }))
+						Gui.OpenWebpage("https://github.com/CowNowK/AimStar");
+					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
+					if (ImGui::Button(ICON_FA_COMMENT_DOTS " Join Discord", { ImGui::GetColumnWidth() - 20.f, 25.f }))
+						Gui.OpenWebpage("https://discord.com/invite/VgRrxwesPz");
 
+					if (MenuConfig::Country == "CN")
+					{
+						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
+						if (ImGui::Button(ICON_FA_COMMENT_DOTS " QQ Group", { ImGui::GetColumnWidth() - 20.f, 25.f }))
+							Gui.OpenWebpage("https://qm.qq.com/cgi-bin/qm/qr?k=bdYSbTfM9OBycOQw3PrEkRm9B_-s3cLj&jump_from=webapi&authKey=losu+2q8xDQCrHR00oG7vU2q8Bmc+PNFxZhWwODUULf4I0c6K+/uIXSya3Vmk/XA");
+					}
 					ImGui::NewLine();
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() / 4);
 					if (ImGui::Button("Safe Exit", { 125.f, 25.f }))
