@@ -313,17 +313,7 @@ namespace GUI
 					ImGui::SeparatorText(ICON_FA_GRIN_ALT " ESP Preview");
 					// ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() }, { ImGui::GetCursorPosX() - ImGui::GetColumnWidth() * 0.65f, ImGui::GetCursorPosY() - ImGui::GetFrameHeight() });
 					ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() });
-					// :P
-					ImGui::NewLine();
-					ImGui::NewLine();
-					ImGui::NewLine();
-					ImGui::NewLine();
-					ImGui::NewLine();
-					ImGui::NewLine();
-					ImGui::NewLine();
-					ImGui::NewLine();
-					ImGui::NewLine();
-					//
+					ImGui::Dummy({ 0.f, ImGui::GetFrameHeight() * 9 });
 
 					ImGui::SeparatorText(ICON_FA_COMPASS" External Radar");
 					float RadarPointSizeProportionMin = 0.8f, RadarPointSizeProportionMax = 2.f;
@@ -706,6 +696,11 @@ namespace GUI
 					
 					PutSwitch(Lang::ReadMeText.DiscordButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::mother);
 					PutSwitch(Lang::ReadMeText.SourceButton, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::fucker);
+
+					ImGui::NewLine();
+					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() / 4);
+					if (ImGui::Button("Safe Exit", { 125.f, 25.f }))
+						Init::Client::Exit();
 
 
 					ImGui::Columns(1);

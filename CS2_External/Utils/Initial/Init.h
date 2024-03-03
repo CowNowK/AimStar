@@ -84,7 +84,6 @@ namespace Init
 
         static void Exit()
         {
-            system("pause");
             exit(0);
         }
 
