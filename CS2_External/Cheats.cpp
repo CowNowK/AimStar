@@ -78,6 +78,113 @@ void Cheats::RenderCrossHair(ImDrawList* drawList) noexcept
 		Render::DrawCrossHair(drawList, ImVec2(ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2), ImGui::ColorConvertFloat4ToU32(CrosshairsCFG::CrossHairColor));
 }
 
+void Cheats::AimbotThread(CEntity& LocalEntity, std::vector<Vec3>& AimPosList)
+{
+	if (MenuConfig::AimBot)
+	{
+		Render::DrawFovCircle(LocalEntity);
+
+		if (MenuConfig::AimAlways)
+		{
+			if (AimPosList.size() != 0)
+			{
+				if (AimControl::Rage && !MenuConfig::SafeMode)
+					AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+				else
+					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+			}
+		}
+		else
+		{
+			if (GetAsyncKeyState(AimControl::HotKey))
+			{
+				if (AimPosList.size() != 0)
+				{
+					if (AimControl::Rage && !MenuConfig::SafeMode)
+						AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+					else
+						AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
+				}
+			}
+		}
+
+		static DWORD lastTick = 0;
+		DWORD currentTick = GetTickCount();
+
+		if (MenuConfig::AimToggleMode && (GetAsyncKeyState(AimControl::HotKey) & 0x8000) && currentTick - lastTick >= 200)
+		{
+			AimControl::switchToggle();
+			lastTick = currentTick;
+		}
+	}
+	if (AimControl::HasTarget == false || AimPosList.size() != 0 || !MenuConfig::AimBot)
+		RCS::RecoilControl(LocalEntity);
+}
+
+void Cheats::MiscThread(CEntity& LocalEntity)
+{
+	bmb::RenderWindow();
+
+	Misc::HitSound(LocalEntity, PreviousTotalHits);
+	Misc::FlashImmunity(LocalEntity);
+	Misc::FastStop();
+	Misc::NadeManager(gGame);
+	Misc::FovChanger(LocalEntity);
+	Misc::Watermark(LocalEntity);
+	Misc::FakeDuck(LocalEntity);
+	Misc::BunnyHop(LocalEntity);
+	Misc::CheatList();
+	Misc::ForceScope(LocalEntity);
+}
+
+void Cheats::espThread(CEntity Entity, CEntity LocalEntity, int LocalPlayerControllerIndex, DWORD64 EntityAddress, int LoopIndex)
+{
+	if (!ESPConfig::ESPenabled)
+		return;
+
+	ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
+	int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
+
+	if (ESPConfig::RenderDistance == 0 || (distance <= ESPConfig::RenderDistance && ESPConfig::RenderDistance > 0))
+	{
+		ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, LoopIndex);
+		Render::DrawDistance(LocalEntity, Entity, Rect);
+
+		// Draw HealthBar
+		if (ESPConfig::ShowHealthBar)
+		{
+			ImVec2 HealthBarPos = { Rect.x - 6.f,Rect.y };
+			ImVec2 HealthBarSize = { 4 ,Rect.w };
+			Render::DrawHealthBar(EntityAddress, 100, Entity.Pawn.Health, HealthBarPos, HealthBarSize);
+		}
+
+		// Draw Ammo
+		// When player is using knife or nade, Ammo = -1.
+		if (ESPConfig::AmmoBar && Entity.Pawn.Ammo != -1)
+		{
+			ImVec2 AmmoBarPos = { Rect.x, Rect.y + Rect.w + 2 };
+			ImVec2 AmmoBarSize = { Rect.z,4 };
+			Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
+		}
+
+		// Draw Armor
+		// It is meaningless to render a empty bar
+		if (ESPConfig::ArmorBar && Entity.Pawn.Armor > 0)
+		{
+			bool HasHelmet;
+			ImVec2 ArmorBarPos;
+			ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
+			if (ESPConfig::ShowHealthBar)
+				ArmorBarPos = { Rect.x - 10.f,Rect.y };
+			else
+				ArmorBarPos = { Rect.x - 6.f,Rect.y };
+			ImVec2 ArmorBarSize = { 4.f,Rect.w };
+			Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
+		}
+	}
+	return;
+}
+
 void Cheats::Run()
 {	
 	// Show menu
@@ -138,6 +245,9 @@ void Cheats::Run()
 	Base_Radar Radar;
 	if (RadarCFG::ShowRadar)
 		RadarSetting(Radar);
+
+	std::thread aimbot(AimbotThread, std::ref(LocalEntity), std::ref(AimPosList));
+	std::thread misc(MiscThread, std::ref(LocalEntity));
 
 	for (int i = 0; i < 64; i++)
 	{
@@ -201,15 +311,7 @@ void Cheats::Run()
 		if (!Entity.IsInScreen())
 			continue;
 
-		// Bone Debug
-	/*	for (int BoneIndex = 0; BoneIndex < Entity.BoneData.BonePosList.size(); BoneIndex++)
-		{
-			Vec2 ScreenPos{};
-			if (gGame.View.WorldToScreen(Entity.BoneData.BonePosList[BoneIndex].Pos, ScreenPos))
-			{
-				Gui.Text(std::to_string(BoneIndex), ScreenPos, ImColor(255, 255, 255, 255));
-			}
-		}*/
+		std::thread RenderESP(espThread, Entity, LocalEntity, LocalPlayerControllerIndex, EntityAddress, i);
 
 		//update Bone select
 		if (AimControl::HitboxList.size() != 0)
@@ -236,51 +338,8 @@ void Cheats::Run()
 				}
 			}
 		}
-
-		if (ESPConfig::ESPenabled)
-		{
-			ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
-			int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
-
-			if (ESPConfig::RenderDistance == 0 || (distance <= ESPConfig::RenderDistance && ESPConfig::RenderDistance > 0))
-			{
-				ESP::RenderPlayerESP(LocalEntity, Entity, Rect, LocalPlayerControllerIndex, i);
-				Render::DrawDistance(LocalEntity, Entity, Rect);
-
-				// Draw HealthBar
-				if (ESPConfig::ShowHealthBar)
-				{
-					ImVec2 HealthBarPos = { Rect.x - 6.f,Rect.y };
-					ImVec2 HealthBarSize = { 4 ,Rect.w };
-					Render::DrawHealthBar(EntityAddress, 100, Entity.Pawn.Health, HealthBarPos, HealthBarSize);
-				}
-
-				// Draw Ammo
-				// When player is using knife or nade, Ammo = -1.
-				if (ESPConfig::AmmoBar && Entity.Pawn.Ammo != -1)
-				{
-					ImVec2 AmmoBarPos = { Rect.x, Rect.y + Rect.w + 2 };
-					ImVec2 AmmoBarSize = { Rect.z,4 };
-					Render::DrawAmmoBar(EntityAddress, Entity.Pawn.MaxAmmo, Entity.Pawn.Ammo, AmmoBarPos, AmmoBarSize);
-				}
-
-				// Draw Armor
-				// It is meaningless to render a empty bar
-				if (ESPConfig::ArmorBar && Entity.Pawn.Armor > 0)
-				{
-					bool HasHelmet;
-					ImVec2 ArmorBarPos;
-					ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
-					if (ESPConfig::ShowHealthBar)
-						ArmorBarPos = { Rect.x - 10.f,Rect.y };
-					else
-						ArmorBarPos = { Rect.x - 6.f,Rect.y };
-					ImVec2 ArmorBarSize = { 4.f,Rect.w };
-					Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
-				}
-			}
-		}
 		Glow::Run(Entity);
+		RenderESP.join();
 		// SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);
 	}
 	
@@ -295,18 +354,6 @@ void Cheats::Run()
 	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways))
 		TriggerBot::Run(LocalEntity);	
 
-	Misc::HitSound(LocalEntity, PreviousTotalHits);
-	Misc::FlashImmunity(LocalEntity);
-	Misc::FastStop();
-	Misc::NadeManager(gGame);
-	Misc::FovChanger(LocalEntity);
-	Misc::Watermark(LocalEntity);
-	Misc::FakeDuck(LocalEntity);
-	Misc::BunnyHop(LocalEntity);
-	Misc::CheatList();
-	Misc::ForceScope(LocalEntity);
-
-
 	// Fov line
 	Render::DrawFov(LocalEntity, MenuConfig::FovLineSize, MenuConfig::FovLineColor, 1);
 
@@ -318,43 +365,7 @@ void Cheats::Run()
 	Misc::AirCheck(LocalEntity);
 	RenderCrossHair(ImGui::GetBackgroundDrawList());
 
-	bmb::RenderWindow();
-	
-	// Aimbot
-	if (MenuConfig::AimBot)
-	{
-		Render::DrawFovCircle(LocalEntity);
+	aimbot.join();
+	misc.join();
 
-		if (MenuConfig::AimAlways)
-		{
-			if (AimPosList.size() != 0)
-			{
-				if (AimControl::Rage && !MenuConfig::SafeMode)
-					AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
-				else
-					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
-			}
-		}
-		else
-		{
-			if (GetAsyncKeyState(AimControl::HotKey))
-			{
-				if (AimPosList.size() != 0)
-				{
-					if (AimControl::Rage && !MenuConfig::SafeMode)
-						AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
-					else
-						AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
-				}
-			}
-		}
-
-		if (MenuConfig::AimToggleMode && (GetAsyncKeyState(AimControl::HotKey) & 0x8000) && currentTick - lastTick >= 200)
-		{
-			AimControl::switchToggle();
-			lastTick = currentTick;
-		}
-	}
-	if (AimControl::HasTarget == false || AimPosList.size() != 0 || !MenuConfig::AimBot)
-		RCS::RecoilControl(LocalEntity);
 }

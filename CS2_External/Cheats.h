@@ -1,4 +1,6 @@
 #pragma once
+#include <thread>
+#include <mutex>
 #include "Game.h"
 #include "Entity.h"
 #include "Features\Aimbot\Legitbot.hpp"
@@ -18,6 +20,10 @@ namespace Cheats
 	void RadarSetting(Base_Radar& Radar);
 
 	void Run();
+
+	void espThread(CEntity Entity, CEntity LocalEntity, int LocalPlayerControllerIndex, DWORD64 EntityAddress, int LoopIndex);
+	void AimbotThread(CEntity& LocalEntity, std::vector<Vec3>& AimPosList);
+	void MiscThread(CEntity& LocalEntity);
 }
 
 struct {
