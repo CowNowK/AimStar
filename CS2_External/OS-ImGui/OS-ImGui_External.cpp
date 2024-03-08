@@ -177,7 +177,7 @@ namespace OSImGui
             g_Device.g_pd3dDeviceContext->ClearRenderTargetView(g_Device.g_mainRenderTargetView, clear_color_with_alpha);
             ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-            g_Device.g_pSwapChain->Present(1, 0); // Present with vs
+            g_Device.g_pSwapChain->Present(0, 0); // Present with vs
         }
         CleanImGui();
     }
