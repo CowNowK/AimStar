@@ -64,6 +64,15 @@ namespace Init
     class Client
     {
     public:
+        // Get the maximum framerate with vsync
+        static int getMaxFrameRate() {
+            HDC hdc = GetDC(NULL);
+            int rate = GetDeviceCaps(hdc, VREFRESH);
+            ReleaseDC(NULL, hdc);
+            return rate;
+        }
+
+        // Check if the game window is activated
         static bool isGameWindowActive() {
             HWND hwnd_cs2 = FindWindow(NULL, TEXT("Counter-Strike 2"));
             HWND hwnd_perfectworld = FindWindow(NULL, TEXT("反恐精英：全球攻势"));

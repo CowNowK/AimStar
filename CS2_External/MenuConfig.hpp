@@ -26,6 +26,7 @@ namespace MenuConfig
 	} WCS;	// Window Component Settings
 
 	inline std::string Country = "";
+	inline int MaxFrameRate = 60;
 	inline int Language = 0;
 	inline int Theme = 0;
 	inline bool SafeMode = true;

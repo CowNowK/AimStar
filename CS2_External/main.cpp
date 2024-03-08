@@ -49,8 +49,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 void Cheat()
 {
-	if(Init::Verify::CheckWindowVersion())
+	if (Init::Verify::CheckWindowVersion())
+	{
 		Lang::GetCountry(MenuConfig::Country);
+		MenuConfig::MaxFrameRate = Init::Client::getMaxFrameRate();
+	}
+		
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
 	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
 	cout << R"(                                                                   

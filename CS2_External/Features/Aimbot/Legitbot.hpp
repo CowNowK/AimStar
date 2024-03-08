@@ -2,6 +2,8 @@
 #define _USE_MATH_DEFINES
 #define MAXV 10000e9
 #include <math.h>
+#include <thread>
+#include <chrono>
 #include "..\..\Game.h"
 #include "..\..\Entity.h"
 #include "..\..\MenuConfig.hpp"
@@ -181,12 +183,16 @@ namespace AimControl
                     TargetY = (TargetY + ScreenCenterY > ScreenCenterY * 2 || TargetY + ScreenCenterY < 0) ? 0 : TargetY;
                 }
             }
+
             mouse_event(MOUSEEVENTF_MOVE, TargetX, TargetY, NULL, NULL);
             if (AutoShot)
             {
                 mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
                 mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
+
+            int AimInterval = round(1000.0 / MenuConfig::MaxFrameRate);
+            std::this_thread::sleep_for(std::chrono::milliseconds(AimInterval));
         }
         else
             HasTarget = false;
