@@ -209,6 +209,7 @@
     <ClInclude Include="Utils\Format.h" />
     <ClInclude Include="Utils\Globals.hpp" />
     <ClInclude Include="Utils\GlobalVars.h" />
+    <ClInclude Include="Utils\Initial\system.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
     <ClInclude Include="Utils\json\json.hpp" />
     <ClInclude Include="Utils\ProcessManager.hpp" />

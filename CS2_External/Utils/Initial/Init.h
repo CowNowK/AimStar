@@ -1,13 +1,11 @@
 #pragma once
 #include <fstream>
-#include <windows.h>
 #include <tchar.h>
 #include <shellapi.h>
-#include <iostream>
-#include <string>
 #include <cstdlib>
 #include <chrono>
 #include <thread>
+#include "system.h"
 
 namespace Init
 {
@@ -70,6 +68,14 @@ namespace Init
             int rate = GetDeviceCaps(hdc, VREFRESH);
             ReleaseDC(NULL, hdc);
             return rate;
+        }
+
+        // Get the HWID
+        static std::string GenerateHWID() {
+            std::string macAddress = GetMACAddress();
+            std::string serialNum = GetHardDiskSerial();
+
+            return macAddress + serialNum;
         }
 
         // Check if the game window is activated

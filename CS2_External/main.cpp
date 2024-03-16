@@ -49,6 +49,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 void Cheat()
 {
+	MenuConfig::HWID = Init::Client::GenerateHWID();
 	if (Init::Verify::CheckWindowVersion())
 	{
 		Lang::GetCountry(MenuConfig::Country);
