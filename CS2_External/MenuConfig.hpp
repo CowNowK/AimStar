@@ -30,7 +30,7 @@ namespace MenuConfig
 	inline int MaxFrameRate = 60;
 	inline int Language = 0;
 	inline int Theme = 0;
-	inline bool SafeMode = true;
+	inline bool SafeMode = false;
 
 	inline bool AirJump = false;
 	inline float ComboWidth = 100.f;
