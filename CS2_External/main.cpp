@@ -98,7 +98,7 @@ void Cheat()
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 		cout << "[ERROR] Failed to update offsets." << endl;
-		//Exit();
+		Exit();
 	}
 
 	if (!gGame.InitAddress())
