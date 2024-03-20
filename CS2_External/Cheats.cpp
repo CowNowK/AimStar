@@ -321,40 +321,24 @@ void Cheats::Run()
 	bmb::RenderWindow();
 	
 	// Aimbot
-	if (MenuConfig::AimBot)
-	{
+	if (MenuConfig::AimBot) {
 		Render::DrawFovCircle(LocalEntity);
 
-		if (MenuConfig::AimAlways)
-		{
-			if (AimPosList.size() != 0)
-			{
+		if (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)) {
+			if (AimPosList.size() != 0) {
 				if (AimControl::Rage && !MenuConfig::SafeMode)
 					AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
 				else
 					AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
 			}
 		}
-		else
-		{
-			if (GetAsyncKeyState(AimControl::HotKey))
-			{
-				if (AimPosList.size() != 0)
-				{
-					if (AimControl::Rage && !MenuConfig::SafeMode)
-						AimControl::Ragebot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
-					else
-						AimControl::AimBot(LocalEntity, LocalEntity.Pawn.CameraPos, AimPosList);
-				}
-			}
-		}
 
-		if (MenuConfig::AimToggleMode && (GetAsyncKeyState(AimControl::HotKey) & 0x8000) && currentTick - lastTick >= 200)
-		{
+		if (MenuConfig::AimToggleMode && (GetAsyncKeyState(AimControl::HotKey) & 0x8000) && currentTick - lastTick >= 200) {
 			AimControl::switchToggle();
 			lastTick = currentTick;
 		}
 	}
-	if (AimControl::HasTarget == false || AimPosList.size() != 0 || !MenuConfig::AimBot)
+	else {
 		RCS::RecoilControl(LocalEntity);
+	}
 }
