@@ -1,32 +1,38 @@
 #include "Bone.h"
 
-bool CBone::UpdateAllBoneData(const DWORD64& EntityPawnAddress)
-{
-	if (EntityPawnAddress == 0)
-		return false;
-	this->EntityPawnAddress = EntityPawnAddress;
+bool CBone::UpdateAllBoneData(const DWORD64& EntityPawnAddress) {
+    if (EntityPawnAddress == 0) {
+        return false;
+    }
+    this->EntityPawnAddress = EntityPawnAddress;
 
-	DWORD64 GameSceneNode = 0;
-	DWORD64 BoneArrayAddress = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnAddress + Offset::Pawn.GameSceneNode, GameSceneNode))
-		return false;
-	if (!ProcessMgr.ReadMemory<DWORD64>(GameSceneNode + Offset::Pawn.BoneArray, BoneArrayAddress))
-		return false;
+    DWORD64 GameSceneNode = 0;
+    DWORD64 BoneArrayAddress = 0;
+    if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnAddress + Offset::Pawn.GameSceneNode, GameSceneNode)) {
+        return false;
+    }
+    if (!ProcessMgr.ReadMemory<DWORD64>(GameSceneNode + Offset::Pawn.BoneArray, BoneArrayAddress)) {
+        return false;
+    }
 
-	BoneJointData BoneArray[30]{};
-	if (!ProcessMgr.ReadMemory(BoneArrayAddress, BoneArray, 30 * sizeof(BoneJointData)))
-		return false;
+    constexpr size_t NUM_BONES = 30;
+    BoneJointData BoneArray[NUM_BONES]{};
+    if (!ProcessMgr.ReadMemory(BoneArrayAddress, BoneArray, NUM_BONES * sizeof(BoneJointData))) {
+        return false;
+    }
 
-	for (int i = 0; i < 30; i++)
-	{
-		Vec2 ScreenPos;
-		bool IsVisible = false;
+    BonePosList.clear();
 
-		if (gGame.View.WorldToScreen(BoneArray[i].Pos, ScreenPos))
-			IsVisible = true;
+    for (const auto& bone : BoneArray) {
+        Vec2 ScreenPos;
+        bool IsVisible = false;
 
-		this->BonePosList.push_back({ BoneArray[i].Pos ,ScreenPos,IsVisible });
-	}
+        if (gGame.View.WorldToScreen(bone.Pos, ScreenPos)) {
+            IsVisible = true;
+        }
 
-	return this->BonePosList.size() > 0;
+        this->BonePosList.push_back({ bone.Pos, ScreenPos, IsVisible });
+    }
+
+    return !BonePosList.empty();
 }
