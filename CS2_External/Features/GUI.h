@@ -34,6 +34,17 @@ bool checkbox5 = false;
 
 namespace GUI
 {
+	void LoadDefaultConfig()
+	{
+		if (!MenuConfig::defaultConfig)
+			return;
+
+		MyConfigSaver::LoadConfig("default.yml");
+		std::cout << "[Info] Default configuration loaded!" << std::endl;
+
+		MenuConfig::defaultConfig = false;
+	}
+
 	inline void InitHitboxList()
 	{
 		if (MenuConfig::HitboxUpdated)
@@ -734,5 +745,7 @@ namespace GUI
 				}
 			} ImGui::EndChild();
 		} ImGui::End();
+
+		LoadDefaultConfig();
 	}
 }

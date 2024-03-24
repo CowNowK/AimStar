@@ -3,6 +3,7 @@
 #include "Offsets.h"
 #include "Resources/Language.h"
 #include "Utils/Initial/Init.h"
+#include "Utils/ConfigSaver.hpp"
 #include <chrono>
 #include <filesystem>
 #include <iomanip>
@@ -126,6 +127,13 @@ void Cheat()
 			cerr << "[Info] Error: Failed to create the config directory." << endl;
 			Exit();
 		}
+	}
+
+	ifstream defaultConfig(MenuConfig::path + "\\default.yml");
+	if (defaultConfig.is_open())
+	{
+		MenuConfig::defaultConfig = true;
+		defaultConfig.close();		
 	}
 
 	cout << endl;

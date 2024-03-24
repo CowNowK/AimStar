@@ -49,6 +49,7 @@ namespace ConfigMenu {
 		if (ImGui::Button(Lang::ConfigText.Load, { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
 		{
 			std::string selectedConfigFile = configFiles[selectedConfig];
+			std::cout << selectedConfigFile << std::endl;
 			MyConfigSaver::LoadConfig(selectedConfigFile);
 		}
 		ImGui::SameLine();
@@ -105,12 +106,12 @@ namespace ConfigMenu {
 		ImGui::TextDisabled(Lang::ConfigText.AuthorName);
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::SetNextItemWidth(ComponentWidth + 8);
-		ImGui::InputText("###ConfigNameInput", configAuthorBuffer, sizeof(configAuthorBuffer));
+		ImGui::InputText("###ConfigNameInput", configNameBuffer, sizeof(configNameBuffer));
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::TextDisabled(Lang::ConfigText.ConfigName);
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::SetNextItemWidth(ComponentWidth + 8);
-		ImGui::InputText("###AuthorNameInput", configNameBuffer, sizeof(configNameBuffer));
+		ImGui::InputText("###AuthorNameInput", configAuthorBuffer, sizeof(configAuthorBuffer));
 		ImGui::NewLine();
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		if (ImGui::Button(Lang::ConfigText.Create, { 126.f, 30.f }))
