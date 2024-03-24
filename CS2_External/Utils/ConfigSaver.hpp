@@ -7,6 +7,12 @@
 namespace MyConfigSaver {
     extern void SaveConfig(const std::string& filename, const std::string& author = "");
     extern void LoadConfig(const std::string& filename);
+
+    template <typename T>
+    static T ReadData(const YAML::Node& node, T defaultValue)
+    {
+        return node.IsDefined() ? node.as<T>() : defaultValue;
+    }
     
     static uint32_t ImColorToUInt32(const ImColor& color)
     {
