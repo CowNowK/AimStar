@@ -250,5 +250,7 @@ namespace ConfigMenu {
 
 		ESPConfig::DrawFov = false;
 		MenuConfig::FovCircleColor = ImColor(255, 255, 255, 255);
+
+		MenuConfig::MaxRenderFPS = 1200;
 	}
 }

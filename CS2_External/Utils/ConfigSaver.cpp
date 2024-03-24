@@ -302,6 +302,7 @@ namespace MyConfigSaver {
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
         emitter << YAML::Key << "SafeMode" << YAML::Value << MenuConfig::SafeMode;
+        emitter << YAML::Key << "RenderFrameLimit" << YAML::Value << MenuConfig::MaxRenderFPS;
         emitter << YAML::Key << "Theme" << YAML::Value << MenuConfig::Theme;
         emitter << YAML::EndMap;
 
@@ -551,6 +552,7 @@ namespace MyConfigSaver {
         if (config["Menu"])
         {
             MenuConfig::SafeMode = config["Menu"]["SafeMode"].IsDefined() ? config["Menu"]["SafeMode"].as<bool>() : true;
+            MenuConfig::MaxRenderFPS = config["Menu"]["RenderFrameLimit"].IsDefined() ? config["Menu"]["RenderFrameLimit"].as<int>() : MenuConfig::MaxFrameRate;
             MenuConfig::Theme = config["Menu"]["Theme"].IsDefined() ? config["Menu"]["Theme"].as<int>() : 0;
         }
 
