@@ -212,6 +212,7 @@ namespace Lang
 		inline static const char* ConfigName;
 
 		inline static const char* SafeMode;
+		inline static const char* fpsCap;
 		inline static const char* SafeModeHoveredTip;
 	} ConfigText;
 
@@ -384,6 +385,7 @@ namespace Lang
 		ConfigText.ConfigName = u8"Config Name";
 
 		ConfigText.SafeMode = u8"Safe Mode";
+		ConfigText.fpsCap = u8"Frame Limit: ";
 		ConfigText.SafeModeHoveredTip = u8"Disable all unsafe functions that modify game's memory";
 
 		// Readme Menu

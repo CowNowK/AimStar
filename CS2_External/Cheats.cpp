@@ -341,4 +341,11 @@ void Cheats::Run()
 	else {
 		RCS::RecoilControl(LocalEntity);
 	}
+
+	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
+	if (currentFPS > MenuConfig::MaxRenderFPS)
+	{
+		int FrameWait = round(1000.0 / MenuConfig::MaxRenderFPS);
+		std::this_thread::sleep_for(std::chrono::milliseconds(FrameWait));
+	}
 }

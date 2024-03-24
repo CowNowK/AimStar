@@ -723,10 +723,12 @@ namespace GUI
 					ImGui::Columns(2, nullptr, false);
 					ConfigMenu::RenderCFGmenu();
 
+					int FPS = 1200;
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText("Cheat Settings");
 					PutSwitch(Lang::ConfigText.SafeMode, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::SafeMode, false, nullptr, nullptr, Lang::ConfigText.SafeModeHoveredTip);
+					PutSliderInt(Lang::ConfigText.fpsCap, 5.f, &MenuConfig::MaxRenderFPS, &MenuConfig::MaxFrameRate, &FPS, "%d");
 
 					ImGui::Columns(1);
 				}
