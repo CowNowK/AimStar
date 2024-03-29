@@ -85,7 +85,11 @@ Please read the following advice carefully before using Aimstar.
   - Visible Check Box
   - Corner Box
   - Mouse Aimbot
-- Major help from Shinyaluvs
+- Features ported from [Swedz C#](https://www.youtube.com/@SwedishTwat)
+  - Money Service
+  - Speed Hack
+  - Jump Throw 
+- Major help from Shinyaluvs and Ukia
 
 ## ⭐ Star History
 
