@@ -135,6 +135,7 @@ namespace ConfigMenu {
 		ESPConfig::RenderDistance = 80;
 		ESPConfig::ArmorBar = false;
 		ESPConfig::ShowArmorNum = false;
+		MiscCFG::jumpthrow = false;
 		MiscCFG::NightModeAlpha = 0;
 		MiscCFG::NightMode = false;
 		MiscCFG::FlashImmunity = 0.f;

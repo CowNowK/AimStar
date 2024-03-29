@@ -609,6 +609,7 @@ namespace GUI
 					ImGui::SameLine();
 					ImGui::SetNextItemWidth(170.f);
 					ImGui::Combo("###HitSounds", &MiscCFG::HitSound, "None\0Neverlose\0Skeet\0Fuck\0Senpai\0");
+					PutSwitch(Lang::MiscText.JumpThrow, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::jumpthrow);
 					PutSwitch(Lang::MiscText.MoneyService, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::MoneyService);
 					if (MiscCFG::MoneyService)
 						PutSwitch(Lang::MiscText.ShowCashSpent, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ShowCashSpent);
@@ -720,6 +721,7 @@ namespace GUI
 						if (ImGui::Button(ICON_FA_COMMENT_DOTS " QQ Group", { ImGui::GetColumnWidth() - 20.f, 25.f }))
 							Gui.OpenWebpage("https://qm.qq.com/cgi-bin/qm/qr?k=bdYSbTfM9OBycOQw3PrEkRm9B_-s3cLj&jump_from=webapi&authKey=losu+2q8xDQCrHR00oG7vU2q8Bmc+PNFxZhWwODUULf4I0c6K+/uIXSya3Vmk/XA");
 					}
+
 					ImGui::NewLine();
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + ImGui::GetColumnWidth() / 4);
 					if (ImGui::Button("Safe Exit", { 125.f, 25.f }))

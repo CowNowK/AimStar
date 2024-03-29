@@ -20,7 +20,7 @@ namespace MyConfigSaver {
 
         YAML::Emitter emitter;
 
-        emitter << YAML::Comment("AimStar Config File\nVersion: 4.3\nAuthor: " + author);
+        emitter << YAML::Comment("AimStar Config File\nVersion: 4.4\nAuthor: " + author);
         emitter << YAML::BeginMap;
 
         emitter << YAML::Key << "ESP";
@@ -237,6 +237,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "NoSmoke" << YAML::Value << MiscCFG::NoSmoke;
         emitter << YAML::Key << "NightMode" << YAML::Value << MiscCFG::NightMode;
         emitter << YAML::Key << "NightModeAlpha" << YAML::Value << MiscCFG::NightModeAlpha;
+        emitter << YAML::Key << "JumpThrow" << YAML::Value << MiscCFG::jumpthrow;
         emitter << YAML::Key << "TeamCheck" << YAML::Value << MenuConfig::TeamCheck;
         emitter << YAML::Key << "AntiRecord" << YAML::Value << MenuConfig::BypassOBS;
         emitter << YAML::Key << "Jitter" << YAML::Value << MiscCFG::Jitter;
@@ -481,6 +482,7 @@ namespace MyConfigSaver {
             MiscCFG::NoSmoke = ReadData(config["Misc"]["NoSmoke"], false);
             MiscCFG::NightMode = ReadData(config["Misc"]["NightMode"], false);
             MiscCFG::NightModeAlpha = ReadData(config["Misc"]["NightModeAlpha"], 0);
+            MiscCFG::jumpthrow = ReadData(config["Misc"]["JumpThrow"], false);
             MenuConfig::TeamCheck = ReadData(config["Misc"]["TeamCheck"], true);
             MenuConfig::BypassOBS = ReadData(config["Misc"]["AntiRecord"], false);
             MiscCFG::Jitter = ReadData(config["Misc"]["Jitter"], false);

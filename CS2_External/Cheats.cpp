@@ -305,6 +305,7 @@ void Cheats::Run()
 	Misc::BunnyHop(LocalEntity);
 	Misc::CheatList();
 	Misc::ForceScope(LocalEntity);
+	Misc::JumpThrow(LocalEntity);
 
 
 	// Fov line

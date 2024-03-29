@@ -201,6 +201,7 @@ namespace MiscCFG
 	inline bool CheatList = false;
 	inline bool ForceScope = false;
 	inline bool NightMode = false;
+	inline bool jumpthrow = false;
 	inline int NightModeAlpha = 0.f;
 	inline int Fov = 90;
 	inline float FlashImmunity = 0;

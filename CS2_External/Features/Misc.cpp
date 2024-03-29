@@ -409,4 +409,25 @@ namespace Misc
 		ImGui::PopStyleColor();
 			
 	}
+
+	void JumpThrow(const CEntity& Local) noexcept
+	{
+		if (!MiscCFG::jumpthrow)
+			return;
+
+		bool isOnGround = AirCheck(Local);
+		if (!isOnGround)
+		{
+			Vec3 Velocity;
+			ProcessMgr.ReadMemory<Vec3>(Local.Pawn.Address + Offset::Pawn.AbsVelocity, Velocity);
+
+			if (Velocity.z > 16.f || Velocity.z < -16.f)
+				return;
+
+			std::cout << Velocity.z << std::endl;
+			mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
+			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+			
+		}
+	}
 }

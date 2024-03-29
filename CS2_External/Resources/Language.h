@@ -189,6 +189,7 @@ namespace Lang
 		inline static const char* FlashImmunity;
 		inline static const char* NightMode;
 		inline static const char* Alpha;
+		inline static const char* JumpThrow;
 		
 		inline static const char* FakeDuck;
 
@@ -366,6 +367,7 @@ namespace Lang
 		MiscText.FlashImmunity = u8"Flash Immunity: ";
 		MiscText.NightMode = u8"Night Mode";
 		MiscText.Alpha = u8"Alpha: ";
+		MiscText.JumpThrow = u8"Jump Throw";
 
 		MiscText.FakeDuck = u8"Fake Duck";
 
