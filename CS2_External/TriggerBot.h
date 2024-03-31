@@ -14,6 +14,7 @@ namespace TriggerBot
 	inline bool IgnoreFlash = false;
 	inline int HotKey = VK_LMENU;
 	inline std::vector<int> HotKeyList{VK_LMENU, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL};
+	inline std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
 
 	inline void SetHotKey(int Index)
 	{
@@ -21,7 +22,6 @@ namespace TriggerBot
 	}
 
 	// Triggerbot
-	void ReleaseMouseButton();
 	void Run(const CEntity& LocalEntity);
 	void TargetCheck(const CEntity& LocalEntity) noexcept;
 }
