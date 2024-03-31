@@ -343,6 +343,8 @@ void Cheats::Run()
 		RCS::RecoilControl(LocalEntity);
 	}
 
+	GUI::InitHitboxList();
+
 	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
 	if (currentFPS > MenuConfig::MaxRenderFPS)
 	{

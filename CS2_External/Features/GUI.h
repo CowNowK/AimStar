@@ -72,7 +72,7 @@ namespace GUI
 		if (it != HitboxList.end())
 			checkbox5 = true;
 
-		MenuConfig::HitboxUpdated = false;
+		MenuConfig::HitboxUpdated = true;
 	}
 	void addHitbox(int BoneIndex)
 	{

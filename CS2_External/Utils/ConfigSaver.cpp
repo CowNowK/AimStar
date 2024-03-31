@@ -507,6 +507,7 @@ namespace MyConfigSaver {
             MenuConfig::FovCircleColor.Value.z = ReadData(config["Aimbot"]["CircleColor"]["b"], 0.f);
             MenuConfig::FovCircleColor.Value.w = ReadData(config["Aimbot"]["CircleColor"]["a"], 0.f);
             AimControl::Smooth = ReadData(config["Aimbot"]["Smooth"], 2.f);
+            AimControl::HitboxList = LoadVector(config["Aimbot"]["Hitboxes"], { BONEINDEX::head });
             MenuConfig::VisibleCheck = ReadData(config["Aimbot"]["VisibleCheck"], true);
             AimControl::IgnoreFlash = ReadData(config["Aimbot"]["IgnoreFlash"], false);
             AimControl::ScopeOnly = ReadData(config["Aimbot"]["ScopeOnly"], false);
