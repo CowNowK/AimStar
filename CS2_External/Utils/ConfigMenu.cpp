@@ -103,12 +103,12 @@ namespace ConfigMenu {
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::SeparatorText(Lang::ConfigText.SeparateLine);
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
-		ImGui::TextDisabled(Lang::ConfigText.AuthorName);
+		ImGui::TextDisabled(Lang::ConfigText.ConfigName);
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::SetNextItemWidth(ComponentWidth + 8);
 		ImGui::InputText("###ConfigNameInput", configNameBuffer, sizeof(configNameBuffer));
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
-		ImGui::TextDisabled(Lang::ConfigText.ConfigName);
+		ImGui::TextDisabled(Lang::ConfigText.AuthorName);
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::SetNextItemWidth(ComponentWidth + 8);
 		ImGui::InputText("###AuthorNameInput", configAuthorBuffer, sizeof(configAuthorBuffer));

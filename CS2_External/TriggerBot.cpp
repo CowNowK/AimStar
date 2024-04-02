@@ -6,12 +6,6 @@ DWORD64 PawnAddress = 0;
 CEntity Entity;
 bool AllowShoot = false;
 
-void TriggerBot::ReleaseMouseButton()
-{
-	std::this_thread::sleep_for(std::chrono::milliseconds(FakeShotDelay));
-	mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-}
-
 void TriggerBot::Run(const CEntity& LocalEntity)
 {
     DWORD uHandle;
@@ -51,18 +45,17 @@ void TriggerBot::Run(const CEntity& LocalEntity)
     if (!AllowShoot)
         return;
 
-    static std::chrono::time_point LastTimePoint = std::chrono::steady_clock::now();
-    auto CurTimePoint = std::chrono::steady_clock::now();
-    if (CurTimePoint - LastTimePoint >= std::chrono::milliseconds(TriggerDelay))
+    std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
+    std::chrono::duration<double, std::milli> elapsed_milliseconds = now - start;
+    if (elapsed_milliseconds.count() >= FakeShotDelay)
     {
         const bool isAlreadyShooting = GetAsyncKeyState(VK_LBUTTON) < 0;
         if (!isAlreadyShooting)
         {
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
-            std::this_thread::sleep_for(std::chrono::milliseconds(FakeShotDelay));
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
+            start = std::chrono::system_clock::now();
         }
-        LastTimePoint = CurTimePoint;
     }
 }
 
