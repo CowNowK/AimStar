@@ -178,8 +178,9 @@ void Cheat()
 	}
 }
 
-int main()
+int main(void)
 {
+
 	const char* tempPath = std::getenv("TMP");
 	if (tempPath != nullptr)
 	{
@@ -190,6 +191,7 @@ int main()
 	if (otp)
 	{
 		Cheat();
+		return 0;
 	}
 	else
 	{
@@ -221,11 +223,17 @@ int main()
 			DispatchMessage(&msg);
 		}
 	}
+
+	return 0;
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	if (!otp)
+	//bool showed = false;
+	if (!otp /*&& !showed*/)
+	{
 		cout << "Please enter your OTP code! Get the OTP code from: https://aimstar.tkm.icu" << endl;
+		//showed = true;
+	}
 	static int RetTimes = 0;
 
 	switch (message) {
