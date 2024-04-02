@@ -16,6 +16,7 @@ using namespace std;
 Contributors:
 	Shinyaluvs,
 	Nx0Ri,
+	ByteCorum,
 	Skarbor,
 	PedroGoncalves,
 	KeysIsCool,
