@@ -83,7 +83,7 @@ void Cheats::Run()
 	// Show menu
 	static DWORD lastTick = 0; 
 	DWORD currentTick = GetTickCount(); 
-	if ((GetAsyncKeyState(VK_INSERT) & 0x8000) && currentTick - lastTick >= 150) {
+	if ((GetAsyncKeyState(VK_INSERT) & 0x8000) && currentTick - lastTick >= 250) {
 		MenuConfig::ShowMenu = !MenuConfig::ShowMenu;
 		lastTick = currentTick;
 	}
