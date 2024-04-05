@@ -338,7 +338,7 @@ namespace Lang
 		CrosshairsText.TargetCheck = u8"Targeting Crosshairs";
 		CrosshairsText.TeamCheck = u8"TeamCheck";
 
-		// Misc
+		// Misc 
 		MiscText.FeatureName = u8" Misc";
 		MiscText.ThemeList = u8"Skin       ";
 		MiscText.StyleList = u8"Style";
