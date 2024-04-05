@@ -144,6 +144,7 @@ namespace Lang
 		MiscText.FlashImmunity = u8"闪光免疫程度: ";
 		MiscText.NightMode = u8"夜间模式";
 		MiscText.Alpha = u8"透明度: ";
+		MiscText.JumpThrow = u8"自动跳投"；
 
 		MiscText.FakeDuck = u8"假蹲";
 
