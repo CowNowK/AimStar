@@ -144,7 +144,7 @@ namespace Lang
 		MiscText.FlashImmunity = u8"闪光免疫程度: ";
 		MiscText.NightMode = u8"夜间模式";
 		MiscText.Alpha = u8"透明度: ";
-		MiscText.JumpThrow = u8"自动跳投"；
+		MiscText.JumpThrow = u8"自动跳投";
 
 		MiscText.FakeDuck = u8"假蹲";
 
@@ -164,6 +164,7 @@ namespace Lang
 		ConfigText.ConfigName = u8"配置名";
 
 		ConfigText.SafeMode = u8"安全模式";
+		ConfigText.fpsCap = u8"渲染帧率限制: ";
 		ConfigText.SafeModeHoveredTip = u8"禁用所有修改游戏数据的功能";
 
 		// Readme Menu
