@@ -655,7 +655,7 @@ namespace GUI
 					ImGui::SameLine();
 					if (ImGui::Combo("###Theme", &MenuConfig::Theme, "AimStar\0NeverLose\0AIMWARE\0Custom\0"))
 						StyleChanger::UpdateSkin(MenuConfig::Theme);
-					if (MenuConfig::Theme == 4)
+					if (MenuConfig::Theme == 3)
 					{	
 						ImColor windowBgColor = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
 						ImColor borderColor = ImGui::GetStyleColorVec4(ImGuiCol_Border);
