@@ -424,10 +424,8 @@ namespace Misc
 			if (Velocity.z > 16.f || Velocity.z < -16.f)
 				return;
 
-			std::cout << Velocity.z << std::endl;
 			mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
 			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-			
 		}
 	}
 }

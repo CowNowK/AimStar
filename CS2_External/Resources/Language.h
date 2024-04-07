@@ -338,15 +338,15 @@ namespace Lang
 		CrosshairsText.TargetCheck = u8"Targeting Crosshairs";
 		CrosshairsText.TeamCheck = u8"TeamCheck";
 
-		// Misc
+		// Misc 
 		MiscText.FeatureName = u8" Misc";
-		MiscText.ThemeList = u8"Theme     ";
+		MiscText.ThemeList = u8"Skin       ";
 		MiscText.StyleList = u8"Style";
 		MiscText.HeadshotLine = u8"Headshot Line";
 		MiscText.SpecCheck = u8"Cheat in Spec";
 		MiscText.NoFlash = u8"No Flash";
 		MiscText.FastStop = u8"Fast Stop";
-		MiscText.HitSound = u8"Hit Sound  ";
+		MiscText.HitSound = u8"Hit Sound ";
 		MiscText.bmbTimer = u8"Bomb Timer";
 		MiscText.SpecList = u8"Spec List";
 		MiscText.Bhop = u8"Auto Jump";

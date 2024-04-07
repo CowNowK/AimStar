@@ -11,6 +11,9 @@ namespace StyleChanger
 		case 1:
 			Styles::NiggaLose();
 			break;
+		case 2:
+			Styles::aimwaste();
+			break;
 		default:
 			break;
 		}

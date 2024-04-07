@@ -46,6 +46,7 @@ namespace Offset
 		DWORD ViewModel = 0x40;				// CCSPlayer_ViewModelServices::m_hViewModel
 		DWORD StartAccount = 0x1490;
 		DWORD isScoped = 0x1400;
+		DWORD isDefusing = 0x1408;
 		DWORD TotalHit = 0x40;
 		DWORD Pos = 0x127C;						// C_BasePlayerPawn::m_vOldOrigin
 		DWORD MaxHealth = 0x330;				// C_BaseEntity::m_iMaxHealth
@@ -66,6 +67,7 @@ namespace Offset
 		DWORD fFlags = 0x3D4;
 		DWORD bSpottedByMask = 0x1698 + 0xC;	// C_CSPlayerPawnBase::entitySpottedState + EntitySpottedState_t::bSpottedByMask
 		DWORD AbsVelocity = 0x3D8;
+		DWORD IsBuying = 0x17CA;
 	} Pawn;
 
 	struct
@@ -146,7 +148,7 @@ namespace Offset
 	{ 
 		DWORD nSmokeEffectTickBegin = 0x1160; // int32_t
 		DWORD bDidSmokeEffect = 0x1164; // bool
-		DWORD nRandomSeed = 1; // int32_t
+		DWORD nRandomSeed = 0x1168; // int32_t
 		DWORD vSmokeColor = 0x116C; // Vector
 		DWORD vSmokeDetonationPos = 0x1178; // Vector
 		DWORD VoxelFrameData = 0x1188; // CUtlVector<uint8_t>
@@ -162,7 +164,7 @@ namespace Offset
 		const std::string ForceJump = "48 8D 05 ?? ?? ?? ?? 48 89 4D ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
 		const std::string ForceCrouch = "48 8D 05 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 ?? E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 83 EC ?? 66 C7 44 24";
 
-                const std::string LocalPlayerPawn = "48 8D 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 83 EC ?? 8B 0D";
+		const std::string LocalPlayerPawn = "48 8D 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 83 EC ?? 8B 0D";
 		const std::string InventoryServices = "E8 ?? ?? ?? ?? 8B 45 D0 48 8B 55 D8";
 		const std::string GlobalVars = "48 89 15 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 85 D2";
 		const std::string EntityList = "48 8B 0D ?? ?? ?? ?? 48 89 7C 24 ?? 8B FA C1 EB";

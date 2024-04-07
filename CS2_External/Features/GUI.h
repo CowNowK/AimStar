@@ -13,6 +13,7 @@
 
 ID3D11ShaderResourceView* AS_Logo = NULL;
 ID3D11ShaderResourceView* NL_Logo = NULL;
+ID3D11ShaderResourceView* AW_Logo = NULL;
 ID3D11ShaderResourceView* MenuButton1 = NULL;
 ID3D11ShaderResourceView* MenuButton2 = NULL;
 ID3D11ShaderResourceView* MenuButton3 = NULL;
@@ -21,6 +22,7 @@ ID3D11ShaderResourceView* HitboxImage = NULL;
 
 int LogoW = 0, LogoH = 0;
 int LogoW2 = 0, LogoH2 = 0;
+int LogoW3 = 0, LogoH3 = 0;
 int buttonW = 0;
 int buttonH = 0;
 int hitboxW = 0, hitboxH = 0;
@@ -95,6 +97,7 @@ namespace GUI
 			// Updater::CheckForUpdates();
 			Gui.LoadTextureFromMemory(Images::AS_Logo, sizeof Images::AS_Logo, &AS_Logo, &LogoW, &LogoH);
 			Gui.LoadTextureFromMemory(Images::NL_Logo, sizeof Images::NL_Logo, &NL_Logo, &LogoW2, &LogoH2);
+			Gui.LoadTextureFromMemory(Images::AW_Logo, sizeof Images::AW_Logo, &AW_Logo, &LogoW3, &LogoH3);
 			Gui.LoadTextureFromMemory(Images::VisualButton, sizeof Images::VisualButton, &MenuButton1, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::AimbotButton, sizeof Images::AimbotButton, &MenuButton2, &buttonW, &buttonH);
 			Gui.LoadTextureFromMemory(Images::MiscButton, sizeof Images::MiscButton, &MenuButton3, &buttonW, &buttonH);
@@ -196,6 +199,12 @@ namespace GUI
 			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Purple;
 			break;
 		case 2:
+			ImageID = (void*)AW_Logo;
+			LogoSize = ImVec2(LogoW3, LogoH3);
+			LogoPos = MenuConfig::WCS.Logo3Pos;
+			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Red;
+			break;
+		case 3:
 			ImageID = (void*)AS_Logo;
 			LogoSize = ImVec2(LogoW, LogoH);
 			LogoPos = MenuConfig::WCS.LogoPos;
@@ -644,9 +653,9 @@ namespace GUI
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);
 					ImGui::SameLine();
-					if (ImGui::Combo("###Theme", &MenuConfig::Theme, "AimStar\0NeverLose\0Custom\0"))
+					if (ImGui::Combo("###Theme", &MenuConfig::Theme, "AimStar\0NeverLose\0AIMWARE\0Custom\0"))
 						StyleChanger::UpdateSkin(MenuConfig::Theme);
-					if (MenuConfig::Theme == 2)
+					if (MenuConfig::Theme == 3)
 					{	
 						ImColor windowBgColor = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
 						ImColor borderColor = ImGui::GetStyleColorVec4(ImGuiCol_Border);
