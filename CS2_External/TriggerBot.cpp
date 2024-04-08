@@ -46,15 +46,22 @@ void TriggerBot::Run(const CEntity& LocalEntity)
         return;
 
     std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
-    std::chrono::duration<double, std::milli> elapsed_milliseconds = now - start;
-    if (elapsed_milliseconds.count() >= FakeShotDelay)
+    std::chrono::duration<double, std::milli> difference = now - timepoint;
+    if (!recorded && difference.count() >= FakeShotDelay)
+    {
+        startTime = std::chrono::system_clock::now();
+        recorded = true;
+    }
+    std::chrono::duration<double, std::milli> difference1 = now - startTime;
+    if (difference.count() >= FakeShotDelay && difference1.count() >= TriggerDelay)
     {
         const bool isAlreadyShooting = GetAsyncKeyState(VK_LBUTTON) < 0;
         if (!isAlreadyShooting)
         {
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
-            start = std::chrono::system_clock::now();
+            timepoint = std::chrono::system_clock::now();
+            recorded = false;
         }
     }
 }

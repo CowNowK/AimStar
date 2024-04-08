@@ -456,7 +456,7 @@ namespace GUI
 						ImVec2 StartPos = ImGui::GetCursorScreenPos();
 						ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 202, StartPos.y + 62)); 
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 203, StartPos.y + 63)); 
 						if (ImGui::Checkbox("###Head", &checkbox1))
 						{
 							if (checkbox1) {
@@ -467,7 +467,7 @@ namespace GUI
 							}
 						}
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103), ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 40, StartPos.y + 91));
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 39, StartPos.y + 92));
 						if (ImGui::Checkbox("###Neck", &checkbox2))
 						{
 							if (checkbox2) {
@@ -478,7 +478,7 @@ namespace GUI
 							}
 						}
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141), ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 192, StartPos.y + 129));
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 130));
 						if (ImGui::Checkbox("###Chest", &checkbox3))
 						{
 							if (checkbox3) {
@@ -489,7 +489,7 @@ namespace GUI
 							}
 						}
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 167), ImVec2(StartPos.x + 44, StartPos.y + 167), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 25, StartPos.y + 155));
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 24, StartPos.y + 156));
 						if (ImGui::Checkbox("###Stomache", &checkbox4))
 						{
 							if (checkbox4) {
@@ -500,7 +500,7 @@ namespace GUI
 							}
 						}
 						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 195, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 192, StartPos.y + 188));
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 189));
 						if (ImGui::Checkbox("###Penis", &checkbox5))
 						{
 							if (checkbox4) {
@@ -616,7 +616,7 @@ namespace GUI
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 					ImGui::TextDisabled(Lang::MiscText.HitSound);
 					ImGui::SameLine();
-					ImGui::SetNextItemWidth(170.f);
+					ImGui::SetNextItemWidth(165.f);
 					ImGui::Combo("###HitSounds", &MiscCFG::HitSound, "None\0Neverlose\0Skeet\0Fuck\0Senpai\0");
 					PutSwitch(Lang::MiscText.JumpThrow, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::jumpthrow);
 					PutSwitch(Lang::MiscText.MoneyService, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::MoneyService);

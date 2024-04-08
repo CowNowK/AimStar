@@ -54,7 +54,7 @@ namespace bmb
 		ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - 200.0f) / 2.0f, 80.0f }, ImGuiCond_Once);
 		ImGui::SetNextWindowSize({ windowWidth, 0 }, ImGuiCond_Once);
 		if (!MenuConfig::ShowMenu)
-			ImGui::SetNextWindowBgAlpha(0.3f);
+			ImGui::SetNextWindowBgAlpha(0.5f);
 		ImGui::Begin("Bomb Timer", nullptr, flags);
 
 		ProcessMgr.ReadMemory(plantedAddress, isBombPlanted);
