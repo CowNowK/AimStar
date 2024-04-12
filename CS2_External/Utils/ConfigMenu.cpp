@@ -208,7 +208,7 @@ namespace ConfigMenu {
 		ESPConfig::ShowLineToEnemy = false;
 		MenuConfig::FovLineSize = 60.0f;
 		TriggerBot::TriggerDelay = 90;
-		TriggerBot::FakeShotDelay = 500;
+		TriggerBot::ShotDuration = 500;
 		RCS::RCSBullet = 1;
 		MenuConfig::TriggerHotKey = 0;
 		TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);

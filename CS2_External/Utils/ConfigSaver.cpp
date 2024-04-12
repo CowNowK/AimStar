@@ -293,7 +293,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Enable" << YAML::Value << MenuConfig::TriggerBot;
         emitter << YAML::Key << "Hotkey" << YAML::Value << MenuConfig::TriggerHotKey;
         emitter << YAML::Key << "Delay" << YAML::Value << TriggerBot::TriggerDelay;
-        emitter << YAML::Key << "FakeShot" << YAML::Value << TriggerBot::FakeShotDelay;
+        emitter << YAML::Key << "FakeShot" << YAML::Value << TriggerBot::ShotDuration;
         emitter << YAML::Key << "ScopeOnly" << YAML::Value << TriggerBot::ScopeOnly;
         emitter << YAML::Key << "IgnoreFlash" << YAML::Value << TriggerBot::IgnoreFlash;
         emitter << YAML::Key << "AutoMode" << YAML::Value << MenuConfig::TriggerAlways;
@@ -540,7 +540,7 @@ namespace MyConfigSaver {
             MenuConfig::TriggerBot = ReadData(config["Triggerbot"]["Enable"], false);
             MenuConfig::TriggerHotKey = ReadData(config["Triggerbot"]["Hotkey"], 0);
             TriggerBot::TriggerDelay = ReadData(config["Triggerbot"]["Delay"], 20);
-            TriggerBot::FakeShotDelay = ReadData(config["Triggerbot"]["FakeShot"], 200);
+            TriggerBot::ShotDuration = ReadData(config["Triggerbot"]["FakeShot"], 200);
             TriggerBot::ScopeOnly = ReadData(config["Triggerbot"]["ScopeOnly"], false);
             TriggerBot::IgnoreFlash = ReadData(config["Triggerbot"]["IgnoreFlash"], false);
             MenuConfig::TriggerAlways = ReadData(config["Triggerbot"]["AutoMode"], false);
