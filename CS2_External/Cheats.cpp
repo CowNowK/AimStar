@@ -245,10 +245,7 @@ void Cheats::Run()
 					bool HasHelmet;
 					ImVec2 ArmorBarPos;
 					ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
-					if (ESPConfig::ShowHealthBar)
-						ArmorBarPos = { Rect.x - 10.f,Rect.y };
-					else
-						ArmorBarPos = { Rect.x - 6.f,Rect.y };
+					ArmorBarPos = { Rect.x + Rect.z + 2.f,Rect.y };
 					ImVec2 ArmorBarSize = { 4.f,Rect.w };
 					Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
 				}
