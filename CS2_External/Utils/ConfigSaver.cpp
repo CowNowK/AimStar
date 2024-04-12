@@ -225,7 +225,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "a" << YAML::Value << MiscCFG::BombTimerCol.Value.w;
         emitter << YAML::EndMap;
         emitter << YAML::Key << "FastStop" << YAML::Value << MiscCFG::FastStop;
-        emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::BunnyHop;
+        emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::SpecList;
         emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
         emitter << YAML::Key << "RadarHack" << YAML::Value << MiscCFG::RadarHack;
         emitter << YAML::Key << "MoneyService";

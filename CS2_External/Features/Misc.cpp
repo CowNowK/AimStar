@@ -428,4 +428,30 @@ namespace Misc
 			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 		}
 	}
+
+	void SpectatorList(const CEntity& Local, const CEntity& Entity) {
+		if (!MiscCFG::SpecList)
+			return;
+
+		std::vector<std::string> spectators;
+
+		DWORD64 l_pawn, l_observe, l_spec;
+		ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.m_pObserverServices, l_pawn);
+		ProcessMgr.ReadMemory(l_pawn + Offset::PlayerController.m_hObserverTarget, l_observe);
+		ProcessMgr.ReadMemory(l_observe + Offset::PlayerController.m_hController, l_spec);
+
+		std::cout << l_pawn << std::endl;
+
+		if (l_observe == Local.Pawn.Address) {
+			spectators.push_back(Entity.Controller.PlayerName);
+		}
+
+		if (spectators.empty())
+			return;
+
+		for (size_t i{}; i < spectators.size(); ++i) {
+			auto msg = spectators[i];
+			Gui.StrokeText(msg.substr(0, 24), ImVec2(Gui.Window.Size.x / 2, Gui.Window.Size.y / 2), 18.f, true);
+		}
+	}
 }

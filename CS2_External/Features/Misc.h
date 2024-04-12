@@ -111,4 +111,5 @@ namespace Misc
 	void ForceScope(const CEntity& aLocalPlayer) noexcept;
 	void NightMode() noexcept;
 	void JumpThrow(const CEntity& Local) noexcept;
+	void SpectatorList(const CEntity& Local, const CEntity& Entity);
 }
