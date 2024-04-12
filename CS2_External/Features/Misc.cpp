@@ -142,7 +142,7 @@ namespace Misc
 		// Update Hit Marker
 		if (hitmarker.alpha > 0.f)
 		{
-			std::cout << hitmarker.alpha << std::endl;
+			// std::cout << hitmarker.alpha << std::endl;
 			auto now = std::chrono::steady_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - hitmarker.startTime).count();
 			if (duration >= 2000)
