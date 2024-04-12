@@ -40,6 +40,11 @@ namespace Misc
 		Vector3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 	};
 
+	struct Hitmarker {
+		float alpha;
+		std::chrono::steady_clock::time_point startTime;
+	};
+
 	// Convert std::string into std::wstring
 	static inline std::wstring STR2LPCWSTR(const std::string& str)
 	{
@@ -98,10 +103,11 @@ namespace Misc
 	}
 
 	void Watermark(const CEntity& aLocalPlayer) noexcept;
-	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
+	void HitMarker(float Size, float Gap);
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept;
 	void FastStop() noexcept;
 	void NadeManager(CGame Game) noexcept;
+	void HitManager(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void RadarHack(const CEntity& EntityList) noexcept;
 	void FovChanger(const CEntity& aLocalPlayer) noexcept;
 	void MoneyService(const CEntity& EntityList) noexcept;

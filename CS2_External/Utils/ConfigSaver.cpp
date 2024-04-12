@@ -214,6 +214,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "FlashImmunity" << YAML::Value << MiscCFG::FlashImmunity;
         emitter << YAML::Key << "CheatList" << YAML::Value << MiscCFG::CheatList;
         emitter << YAML::Key << "Watermark" << YAML::Value << MiscCFG::WaterMark;
+        emitter << YAML::Key << "HitMarker" << YAML::Value << MiscCFG::HitMarker;
         emitter << YAML::Key << "HitSounds" << YAML::Value << MiscCFG::HitSound;
         emitter << YAML::Key << "BombTimer" << YAML::Value << MiscCFG::bmbTimer;
         emitter << YAML::Key << "TimerColor";
@@ -483,6 +484,7 @@ namespace MyConfigSaver {
             MiscCFG::FlashImmunity = ReadData(config["Misc"]["FlashImmunity"], 0.f);
             MiscCFG::CheatList = ReadData(config["Misc"]["CheatList"], false);
             MiscCFG::WaterMark = ReadData(config["Misc"]["Watermark"], false);
+            MiscCFG::HitMarker = ReadData(config["Misc"]["HitMarker"], false);
             MiscCFG::HitSound = ReadData(config["Misc"]["HitSounds"], 0);
             MiscCFG::bmbTimer = ReadData(config["Misc"]["BombTimer"], false);
             MiscCFG::BombTimerCol.Value.x = ReadData(config["Misc"]["TimerColor"]["r"], 0.f);

@@ -266,7 +266,8 @@ void Cheats::Run()
 	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways))
 		TriggerBot::Run(LocalEntity);	
 
-	Misc::HitSound(LocalEntity, PreviousTotalHits);
+	Misc::HitManager(LocalEntity, PreviousTotalHits);
+	Misc::HitMarker(10.f, 10.f);
 	Misc::FlashImmunity(LocalEntity);
 	Misc::FastStop();
 	Misc::NadeManager(gGame);

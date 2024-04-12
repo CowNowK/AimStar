@@ -207,6 +207,7 @@ namespace MiscCFG
 	inline int NightModeAlpha = 0.f;
 	inline int Fov = 90;
 	inline float FlashImmunity = 0;
+	inline bool HitMarker = false;
 	inline ImColor BombTimerCol = ImColor(255, 120, 0, 255);
 	inline ImColor SmokeColor = ImColor(255, 0, 0, 255);
 	inline ImColor FireColor = ImColor(0, 255, 0, 255);

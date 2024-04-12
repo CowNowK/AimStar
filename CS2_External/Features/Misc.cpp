@@ -5,6 +5,8 @@
 
 namespace Misc
 {
+	Hitmarker hitmarker;
+
 	bool aKeyPressed = false;
 	bool dKeyPressed = false;
 	bool wKeyPressed = false;
@@ -90,45 +92,80 @@ namespace Misc
 		ImGui::End();
 	}
 
-	void HitSound(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept
+	void HitManager(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept
 	{
-		if (!MiscCFG::HitSound)
-			return;
+		if (MiscCFG::HitMarker || MiscCFG::HitSound)
+		{
+			uintptr_t pBulletServices;
+			int totalHits;
+			ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.BulletServices, pBulletServices);
+			ProcessMgr.ReadMemory(pBulletServices + Offset::Pawn.TotalHit, totalHits);
 
-		uintptr_t pBulletServices;
-		int totalHits;
-		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.BulletServices, pBulletServices);
-		ProcessMgr.ReadMemory(pBulletServices + Offset::Pawn.TotalHit, totalHits);
-
-		if (totalHits != PreviousTotalHits) {
-			if (totalHits == 0 && PreviousTotalHits != 0)
-			{
-				// `totalHits` changed from non-zero to zero, do not play hitsound
-			}
-			else
-			{
-				// Play the HitSound
-				switch (MiscCFG::HitSound)
+			if (totalHits != PreviousTotalHits) {
+				if (totalHits == 0 && PreviousTotalHits != 0)
 				{
-				case 1:
-					PlaySoundA(reinterpret_cast<char*>(neverlose_sound), NULL, SND_ASYNC | SND_MEMORY);
-					break;
-				case 2:
-					PlaySoundA(reinterpret_cast<char*>(skeet_sound), NULL, SND_ASYNC | SND_MEMORY);
-					break;
-				case 3:
-					PlaySoundA(reinterpret_cast<char*>(Fuck), NULL, SND_ASYNC | SND_MEMORY);
-					break;
-				case 4:
-					PlaySoundA(reinterpret_cast<char*>(Senpai), NULL, SND_ASYNC | SND_MEMORY);
-					break;
-				default:
-					break;
+					// `totalHits` changed from non-zero to zero, do nothing
 				}
-				
+				else
+				{
+					// Hit Marker
+					if (MiscCFG::HitMarker)
+					{
+						hitmarker.alpha = 255.f;
+						hitmarker.startTime = std::chrono::steady_clock::now();
+					}
+
+					// Hit Sound
+					switch (MiscCFG::HitSound)
+					{
+					case 1:
+						PlaySoundA(reinterpret_cast<char*>(neverlose_sound), NULL, SND_ASYNC | SND_MEMORY);
+						break;
+					case 2:
+						PlaySoundA(reinterpret_cast<char*>(skeet_sound), NULL, SND_ASYNC | SND_MEMORY);
+						break;
+					case 3:
+						PlaySoundA(reinterpret_cast<char*>(Fuck), NULL, SND_ASYNC | SND_MEMORY);
+						break;
+					case 4:
+						PlaySoundA(reinterpret_cast<char*>(Senpai), NULL, SND_ASYNC | SND_MEMORY);
+						break;
+					default:
+						break;
+					}
+
+				}
 			}
+			PreviousTotalHits = totalHits;
 		}
-		PreviousTotalHits = totalHits;
+
+		// Update Hit Marker
+		if (hitmarker.alpha > 0.f)
+		{
+			std::cout << hitmarker.alpha << std::endl;
+			auto now = std::chrono::steady_clock::now();
+			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - hitmarker.startTime).count();
+			if (duration >= 2000)
+				hitmarker.alpha = 0;
+			else
+				hitmarker.alpha = 255 * (1 - duration / 2000.f);
+		}
+	}
+
+	void HitMarker(float Size, float Gap)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		ImVec2 center = ImVec2(Gui.Window.Size.x / 2, Gui.Window.Size.y / 2);
+
+		if (hitmarker.alpha > 0.f)
+		{
+			ImColor col = ImColor(255.f, 0.f, 0.f, hitmarker.alpha);
+
+			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x - Size, center.y - Size), ImVec2(center.x - Gap, center.y - Gap), col, 1.4f);
+			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x - Size, center.y + Size), ImVec2(center.x - Gap, center.y + Gap), col, 1.4f);
+			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x + Size, center.y - Size), ImVec2(center.x + Gap, center.y - Gap), col, 1.4f);
+			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x + Size, center.y + Size), ImVec2(center.x + Gap, center.y + Gap), col, 1.4f);
+		}
 	}
 
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept
