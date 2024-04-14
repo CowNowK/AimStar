@@ -1,4 +1,6 @@
 ﻿#pragma once
+#include <functional>
+
 #include "..\MenuConfig.hpp"
 #include "..\Render.hpp"
 #include "..\Features\Aimbot\Legitbot.hpp"
@@ -113,6 +115,16 @@ namespace GUI
 		float ColumnContentWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x;
 		float checkboxPosX = ImGui::GetColumnOffset() + ColumnContentWidth - ContentWidth;
 		ImGui::SetCursorPosX(checkboxPosX);
+	}
+	void SettingButton(const char* label, float CursorX, std::function<void()> onClick)
+	{
+		float CurrentCursorX = ImGui::GetCursorPosX();
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX + ImGui::CalcTextSize(label).x);
+		ImGui::SameLine();
+		if (ImGui::Button(ICON_FA_SUN))
+		{
+			onClick();
+		}
 	}
 	void PutSwitch(const char* string, float CursorX, float ContentWidth, bool* v, bool ColorEditor = false, const char* lable = NULL, float col[4] = NULL, const char* Tip = NULL)
 	{
