@@ -145,10 +145,10 @@ namespace Misc
 			// std::cout << hitmarker.alpha << std::endl;
 			auto now = std::chrono::steady_clock::now();
 			auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - hitmarker.startTime).count();
-			if (duration >= 2000)
+			if (duration >= 500.f)
 				hitmarker.alpha = 0;
 			else
-				hitmarker.alpha = 255 * (1 - duration / 2000.f);
+				hitmarker.alpha = 1.f - duration / 500.f;
 		}
 	}
 
@@ -159,8 +159,12 @@ namespace Misc
 
 		if (hitmarker.alpha > 0.f)
 		{
-			ImColor col = ImColor(255.f, 0.f, 0.f, hitmarker.alpha);
+			ImColor col = ImColor(255.f, 255.f, 255.f, hitmarker.alpha);
 
+			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x - Size, center.y - Size), ImVec2(center.x - Gap, center.y - Gap), col & IM_COL32_A_MASK, 2.4f);
+			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x - Size, center.y + Size), ImVec2(center.x - Gap, center.y + Gap), col & IM_COL32_A_MASK, 2.4f);
+			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x + Size, center.y - Size), ImVec2(center.x + Gap, center.y - Gap), col & IM_COL32_A_MASK, 2.4f);
+			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x + Size, center.y + Size), ImVec2(center.x + Gap, center.y + Gap), col & IM_COL32_A_MASK, 2.4f);
 			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x - Size, center.y - Size), ImVec2(center.x - Gap, center.y - Gap), col, 1.4f);
 			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x - Size, center.y + Size), ImVec2(center.x - Gap, center.y + Gap), col, 1.4f);
 			ImGui::GetBackgroundDrawList()->AddLine(ImVec2(center.x + Size, center.y - Size), ImVec2(center.x + Gap, center.y - Gap), col, 1.4f);
