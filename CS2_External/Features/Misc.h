@@ -34,6 +34,8 @@ namespace Misc
 		ImColor(0, 0, 255),     // Purple
 	};
 
+	inline std::vector<std::string> Nades = { "smokegrenade", "flashbang", "hegrenade", "molotov", "decoy", "incgrenade" };
+
 	struct Vector3
 	{
 		float x, y, z;

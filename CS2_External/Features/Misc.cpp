@@ -456,13 +456,17 @@ namespace Misc
 		if (!MiscCFG::jumpthrow)
 			return;
 
+		std::string PlayerWeapon = Local.Pawn.WeaponName;
+		if (std::find(Nades.begin(), Nades.end(), PlayerWeapon) == Nades.end())
+			return;
+
 		bool isOnGround = AirCheck(Local);
 		if (!isOnGround)
 		{
 			Vec3 Velocity;
 			ProcessMgr.ReadMemory<Vec3>(Local.Pawn.Address + Offset::Pawn.AbsVelocity, Velocity);
 
-			if (Velocity.z > 16.f || Velocity.z < -16.f)
+			if (Velocity.z > 250.f || Velocity.z < 200.f)
 				return;
 
 			mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0);
