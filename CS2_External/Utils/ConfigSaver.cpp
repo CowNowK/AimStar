@@ -214,6 +214,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "FlashImmunity" << YAML::Value << MiscCFG::FlashImmunity;
         emitter << YAML::Key << "CheatList" << YAML::Value << MiscCFG::CheatList;
         emitter << YAML::Key << "Watermark" << YAML::Value << MiscCFG::WaterMark;
+        emitter << YAML::Key << "HitMarker" << YAML::Value << MiscCFG::HitMarker;
         emitter << YAML::Key << "HitSounds" << YAML::Value << MiscCFG::HitSound;
         emitter << YAML::Key << "BombTimer" << YAML::Value << MiscCFG::bmbTimer;
         emitter << YAML::Key << "TimerColor";
@@ -225,7 +226,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "a" << YAML::Value << MiscCFG::BombTimerCol.Value.w;
         emitter << YAML::EndMap;
         emitter << YAML::Key << "FastStop" << YAML::Value << MiscCFG::FastStop;
-        emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::BunnyHop;
+        emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::SpecList;
         emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
         emitter << YAML::Key << "RadarHack" << YAML::Value << MiscCFG::RadarHack;
         emitter << YAML::Key << "MoneyService";
@@ -293,7 +294,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Enable" << YAML::Value << MenuConfig::TriggerBot;
         emitter << YAML::Key << "Hotkey" << YAML::Value << MenuConfig::TriggerHotKey;
         emitter << YAML::Key << "Delay" << YAML::Value << TriggerBot::TriggerDelay;
-        emitter << YAML::Key << "FakeShot" << YAML::Value << TriggerBot::FakeShotDelay;
+        emitter << YAML::Key << "FakeShot" << YAML::Value << TriggerBot::ShotDuration;
         emitter << YAML::Key << "ScopeOnly" << YAML::Value << TriggerBot::ScopeOnly;
         emitter << YAML::Key << "IgnoreFlash" << YAML::Value << TriggerBot::IgnoreFlash;
         emitter << YAML::Key << "AutoMode" << YAML::Value << MenuConfig::TriggerAlways;
@@ -483,6 +484,7 @@ namespace MyConfigSaver {
             MiscCFG::FlashImmunity = ReadData(config["Misc"]["FlashImmunity"], 0.f);
             MiscCFG::CheatList = ReadData(config["Misc"]["CheatList"], false);
             MiscCFG::WaterMark = ReadData(config["Misc"]["Watermark"], false);
+            MiscCFG::HitMarker = ReadData(config["Misc"]["HitMarker"], false);
             MiscCFG::HitSound = ReadData(config["Misc"]["HitSounds"], 0);
             MiscCFG::bmbTimer = ReadData(config["Misc"]["BombTimer"], false);
             MiscCFG::BombTimerCol.Value.x = ReadData(config["Misc"]["TimerColor"]["r"], 0.f);
@@ -540,7 +542,7 @@ namespace MyConfigSaver {
             MenuConfig::TriggerBot = ReadData(config["Triggerbot"]["Enable"], false);
             MenuConfig::TriggerHotKey = ReadData(config["Triggerbot"]["Hotkey"], 0);
             TriggerBot::TriggerDelay = ReadData(config["Triggerbot"]["Delay"], 20);
-            TriggerBot::FakeShotDelay = ReadData(config["Triggerbot"]["FakeShot"], 200);
+            TriggerBot::ShotDuration = ReadData(config["Triggerbot"]["FakeShot"], 200);
             TriggerBot::ScopeOnly = ReadData(config["Triggerbot"]["ScopeOnly"], false);
             TriggerBot::IgnoreFlash = ReadData(config["Triggerbot"]["IgnoreFlash"], false);
             MenuConfig::TriggerAlways = ReadData(config["Triggerbot"]["AutoMode"], false);

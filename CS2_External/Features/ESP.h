@@ -416,8 +416,8 @@ namespace ESP
 				HBSize = { rectSize.x - 2, rectSize.y - 18 };
 			}
 			if (MenuConfig::HealthBarType == 0) {
-				ImVec2 HBS(HBPos.x - 6, HBPos.y);
-				ImVec2 HBE(HBPos.x - 3, HBPos.y + HBSize.y);
+				ImVec2 HBS(HBPos.x - 6, HBPos.y - 2);
+				ImVec2 HBE(HBPos.x - 3, HBPos.y + HBSize.y - 2);
 				ImGui::GetWindowDrawList()->AddRectFilled(HBS, HBE, greenColor, 0.0f, ImDrawCornerFlags_All);
 			}
 		}
@@ -431,13 +431,8 @@ namespace ESP
 				ABSize = { rectSize.x - 2, rectSize.y - 18 };
 			}
 
-			if (ESPConfig::ShowHealthBar)
-			{
-				ABPos.x -= 4;
-				ABSize.x -= 4;
-			}
-			ImVec2 ABS(ABPos.x - 6, ABPos.y);
-			ImVec2 ABE(ABPos.x - 3, ABPos.y + ABSize.y);
+			ImVec2 ABS(ABPos.x + 6 + rectSize.x, ABPos.y - 2);
+			ImVec2 ABE(ABPos.x + 3 + rectSize.x, ABPos.y + ABSize.y - 2);
 			ImGui::GetWindowDrawList()->AddRectFilled(ABS, ABE, blueColor, 0.0f, ImDrawCornerFlags_All);
 			
 		}
@@ -467,7 +462,8 @@ namespace ESP
 				LineEnd = { Gui.Window.Size.x / 2, Gui.Window.Size.y / 2 };
 				break;
 			case 2:
-				LineEnd = { LineStart.x, LineStart.y + 200 };
+				LineStart = { centerPos.x + rectSize.x / 2 , centerPos.y + rectSize.y };
+				LineEnd = { LineStart.x, LineStart.y + 20.f };
 				break;
 			}
 			ImGui::GetWindowDrawList()->AddLine(LineStart, LineEnd, ESPConfig::LineToEnemyColor, 1.8f);

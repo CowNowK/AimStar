@@ -155,32 +155,6 @@ void Cheats::Run()
 		if (!Entity.UpdatePawn(Entity.Pawn.Address))
 			continue;
 
-		std::vector<std::string> spectators;
-		if (MiscCFG::SpecList && !MenuConfig::ShowMenu)
-		{
-			int spectatorCount = 0;
-			uint32_t m_hPawn;
-			uintptr_t pCSPlayerPawn, m_pObserverServices;
-			ProcessMgr.ReadMemory<uint32_t>(Entity.Controller.Address + 0x5BC, m_hPawn);
-			ProcessMgr.ReadMemory<uintptr_t>(gGame.GetEntityListEntry() + 120 * (m_hPawn & 0x1FF), pCSPlayerPawn);
-			ProcessMgr.ReadMemory<uintptr_t>(pCSPlayerPawn + Offset::PlayerController.m_pObserverServices, m_pObserverServices);
-
-			if (m_pObserverServices)
-			{
-				uint32_t m_hObserverTarget;
-				uintptr_t list_entry, pController;
-				ProcessMgr.ReadMemory<uint32_t>(m_pObserverServices + Offset::PlayerController.m_hObserverTarget, m_hObserverTarget);
-				ProcessMgr.ReadMemory<uintptr_t>(EntityAddress + 0x8 * ((m_hObserverTarget & 0x7FFF) >> 9) + 0x10, list_entry);
-				ProcessMgr.ReadMemory<uintptr_t>(gGame.GetEntityListEntry() + 120 * (m_hObserverTarget & 0x1FF), pController);
-
-				if (pController == LocalEntity.Pawn.Address)
-				{
-					spectators.push_back(Entity.Controller.PlayerName);
-				}
-			}
-		}
-		// It not work rn.
-		// SpecList::SpectatorWindowList(spectators);
 		if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
 			continue;
 
@@ -271,17 +245,14 @@ void Cheats::Run()
 					bool HasHelmet;
 					ImVec2 ArmorBarPos;
 					ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.HasHelmet, HasHelmet);
-					if (ESPConfig::ShowHealthBar)
-						ArmorBarPos = { Rect.x - 10.f,Rect.y };
-					else
-						ArmorBarPos = { Rect.x - 6.f,Rect.y };
+					ArmorBarPos = { Rect.x + Rect.z + 2.f,Rect.y };
 					ImVec2 ArmorBarSize = { 4.f,Rect.w };
 					Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, HasHelmet, ArmorBarPos, ArmorBarSize);
 				}
 			}
 		}
 		Glow::Run(Entity);
-		// SpecList::GetSpectatorList(Entity, LocalEntity, EntityAddress);
+		// Misc::SpectatorList(LocalEntity, Entity);
 	}
 	
 	// Radar render
@@ -295,7 +266,8 @@ void Cheats::Run()
 	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways))
 		TriggerBot::Run(LocalEntity);	
 
-	Misc::HitSound(LocalEntity, PreviousTotalHits);
+	Misc::HitManager(LocalEntity, PreviousTotalHits);
+	Misc::HitMarker(30.f, 10.f);
 	Misc::FlashImmunity(LocalEntity);
 	Misc::FastStop();
 	Misc::NadeManager(gGame);

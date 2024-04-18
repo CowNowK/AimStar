@@ -14,8 +14,6 @@
 
 ## ❗ Info
 
-[**zxq你妈死了哈哈**](https://github.com/CowNowK/AimStar/blob/main/Guides/Resellers.md)
-
 Free and open-source external cheat for CS2, written in C++. - Available for Windows8.1+
 
 Discord server: [AimShit Club](https://discord.com/invite/VgRrxwesPz)
@@ -117,4 +115,15 @@ Please read the following advice carefully before using Aimstar.
 <img src="https://github.com/CowNowK/AimStar/assets/65479796/ed31b09c-8878-4ab7-8add-0f92a180aa3e" alt="张海先生" style="width:315px;height:538ox;">
 <img src="https://github.com/CowNowK/AimStar/assets/65479796/a16fc131-7db4-40cc-a51a-76dbef9ef2c3" alt="张海先生" style="width:315px;height:538ox;">
 
+</details>
+
+## ✈️ User group analysis
+The data comes from monitoring the otp generator web page on cloudflare.
+<details>
+
+Nearly two thousand people use otp generation every day. Most of them are Internet cafe users, and many of them are new users. Combined with regional analysis, we can conclude that aimstar has hundreds of new users every day.
+
+Users mainly come from China, Turkey, the Russian Federation, the United States and Southeast Asia, with Chinese users and Turkish users accounting for the majority.
+
+In March to April 2024, we detected abnormal traffic in Germany, Japan, and the United States. Does this mean that aimstar has potential competitors in these countries?
 </details>
