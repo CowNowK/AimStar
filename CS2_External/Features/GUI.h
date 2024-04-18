@@ -635,8 +635,8 @@ namespace GUI
 						PutSwitch(Lang::MiscText.ShowCashSpent, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ShowCashSpent);
 					if (!MenuConfig::SafeMode)
 					{
-						PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoSmoke);
-						PutSwitch(Lang::MiscText.SmokeColor, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::SmokeColored, true, "###SmokeColor", reinterpret_cast<float*>(&MiscCFG::SmokeColor));
+						//PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoSmoke);
+						//PutSwitch(Lang::MiscText.SmokeColor, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::SmokeColored, true, "###SmokeColor", reinterpret_cast<float*>(&MiscCFG::SmokeColor));
 					}
 					PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WorkInSpec);
 					
