@@ -73,8 +73,8 @@ Please read the following advice carefully before using Aimstar.
 - I hope you can recognize the harm and meaninglessness of cheating, and also hope you can enjoy the true fun and value of the game. I appreciate your interest and support for Aimstar, but I also hope you can abide by the rules and ethics of the game, and respect yourself and others. Thank you for your understanding and cooperation. 🙏
 </details>
 
-  
-- Main code forked from [**__Liv__**](https://github.com/TKazer/CS2_External)
+## 💡 Credits
+- Main code forked from [**__Liv__**](https://github.com/TKazer/CS2_External), and **Major help** from Shinyaluvs and Ukia
 - Features copied from UnknownCheats
   - [Glow](https://www.unknowncheats.me/forum/counter-strike-2-a/604503-glow-external.html)
   - [Weapon Icon](https://www.unknowncheats.me/forum/counter-strike-2-a/608799-weapon-icon-esp.html)
@@ -86,8 +86,8 @@ Please read the following advice carefully before using Aimstar.
 - Features ported from [Swedz C#](https://www.youtube.com/@SwedishTwat)
   - Money Service
   - Speed Hack
-  - Jump Throw 
-- Major help from Shinyaluvs and Ukia
+  - Jump Throw
+- Other references: [Novax](https://github.com/PhillipThePaster/Novax), [Infestation](https://github.com/vsaint1/cs2-infestation), [Evo](https://github.com/dumitru1216/cs2-external-evo)
 
 ## ⭐ Star History
 
