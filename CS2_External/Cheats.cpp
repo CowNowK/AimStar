@@ -270,7 +270,6 @@ void Cheats::Run()
 	Misc::HitMarker(30.f, 10.f);
 	Misc::FlashImmunity(LocalEntity);
 	Misc::FastStop();
-	Misc::NadeManager(gGame);
 	Misc::FovChanger(LocalEntity);
 	Misc::Watermark(LocalEntity);
 	Misc::FakeDuck(LocalEntity);

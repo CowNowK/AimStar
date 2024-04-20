@@ -198,6 +198,7 @@ namespace Misc
 		Misc::StopKeyEvent('S', &sKeyPressed, 'W', 50.f);
 	}
 
+	// This feature was removed temporarily from Cheats.hpp, because it may crash the game
 	void NadeManager(CGame Game) noexcept
 	{
 		if (MenuConfig::SafeMode)
