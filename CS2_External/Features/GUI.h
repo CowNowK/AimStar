@@ -144,6 +144,24 @@ namespace GUI
 		Gui.SwitchButton(string, v);
 		ImGui::PopID();
 	}
+	// return true when extended button clicked
+	bool SwitchExtendedButton(const char* string, float CursorX, float ContentWidth, bool* v, const char* ButtonText, const char* Tip = NULL)
+	{
+		ImGui::PushID(string);
+		float CurrentCursorX = ImGui::GetCursorPosX();
+		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
+		ImGui::TextDisabled(string);
+		if (Tip && ImGui::IsItemHovered())
+			ImGui::SetTooltip(Tip);
+		ImGui::SameLine();
+		ImVec2 TempCursorPos = ImGui::GetCursorPos();
+		AlignRight(ContentWidth);
+		Gui.SwitchButton(string, v);
+		ImGui::PopID();
+
+		ImGui::SetCursorPos(TempCursorPos);
+		return ImGui::Button(ButtonText);
+	}
 	void PutColorEditor(const char* text, const char* lable, float CursorX, float ContentWidth, float col[4], const char* Tip = NULL)
 	{
 		ImGui::PushID(text);
@@ -608,9 +626,13 @@ namespace GUI
 					ImGui::SetCursorPos(ImVec2(15.f, 24.f));
 					ImGui::SeparatorText(ICON_FA_SUN" Misc");
 
-					PutSwitch(Lang::MiscText.NightMode, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NightMode);
-					if (MiscCFG::NightMode)
+					if (SwitchExtendedButton(Lang::MiscText.NightMode, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NightMode, "..."))
+						ImGui::OpenPopup("##NightModeSettings");
+					ImGui::SetNextWindowSize(ImVec2(ImGui::GetColumnWidth(), 0));
+					if (ImGui::BeginPopup("##NightModeSettings")) {
 						PutSliderInt(Lang::MiscText.Alpha, 10.f, &MiscCFG::NightModeAlpha, &NightMin, &NightMax, "%d");
+						ImGui::EndPopup();
+					}
 					if (!MenuConfig::SafeMode)
 					{
 						PutSliderInt(Lang::MiscText.fovchanger, 10.f, &MiscCFG::Fov, &FovMin, &FovMax, "%d");
@@ -629,15 +651,11 @@ namespace GUI
 					ImGui::SetNextItemWidth(165.f);
 					ImGui::Combo("###HitSounds", &MiscCFG::HitSound, "None\0Neverlose\0Skeet\0Fuck\0Senpai\0");
 					PutSwitch("Hit Marker", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::HitMarker);
+					// SwitchExtendedButton("Hit Marker", 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::HitMarker, "...");
 					PutSwitch(Lang::MiscText.JumpThrow, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::jumpthrow);
 					PutSwitch(Lang::MiscText.MoneyService, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::MoneyService);
 					if (MiscCFG::MoneyService)
 						PutSwitch(Lang::MiscText.ShowCashSpent, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ShowCashSpent);
-					if (!MenuConfig::SafeMode)
-					{
-						//PutSwitch(Lang::MiscText.NoSmoke, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::NoSmoke);
-						//PutSwitch(Lang::MiscText.SmokeColor, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::SmokeColored, true, "###SmokeColor", reinterpret_cast<float*>(&MiscCFG::SmokeColor));
-					}
 					PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WorkInSpec);
 					
 					// PutSwitch(Lang::MiscText.SpecList, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::SpecList);
