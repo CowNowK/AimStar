@@ -268,7 +268,7 @@ bool PlayerPawn::GetHealth()
 
 bool PlayerPawn::GetArmor()
 {
-	return GetDataAddressWithOffset<int>(Address, 0x1568, this->Armor);
+	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentArmor, this->Armor);
 }
 
 bool PlayerPawn::GetAmmo()
