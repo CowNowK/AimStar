@@ -15,7 +15,7 @@ jobs:
         uses: microsoft/setup-msbuild@main
       - name: Build with MSBuild
         run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
-      - name: Rename EXE to AimStar-dev-${{github.sha}}.exe
+      - name: Rename EXE to AimStar-${{github.sha}}.exe
         run: |
           del AimStar-*.exe
           ren AimStar.exe AimStar-${{github.sha}}.exe
@@ -25,20 +25,36 @@ jobs:
         with:
           name: ci
           path: .\x64\Release\*
+  buildllvm:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Set up Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Compile with llvm
+        run: msbuild CS2_External.sln /p:Configuration=Release /p:Platform="x64" /p:CLToolExe=clang-cl.exe /p:CLToolPath="C:\Program Files\LLVM\bin"
+      - name: Rename EXE to LLVM-AimStar-${{github.sha}}.exe
+        run: |
+          del LLVM-AimStar-*.exe
+          ren AimStar.exe LLVM-AimStar-${{github.sha}}.exe
+        working-directory: .\x64\Release\
+      - name: Upload the output
+        uses: actions/upload-artifact@main
+        with:
+          name: llvm
+          path: .\x64\Release\*
   create_release:
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build,buildllvm]
     name: Create Release
     steps:
       - uses: actions/checkout@main
       - name: Download Artifact
         uses: actions/download-artifact@main
-        with:
-          name: ci
       - name: Zip Artifact
         uses: vimtor/action-zip@master
         with:
-          files: AimStar-${{github.sha}}.exe
+          files: *.exe
           dest: AimStar-Autobuild.zip
       - name: Delete tag
         run: gh release delete autobuild --cleanup-tag
