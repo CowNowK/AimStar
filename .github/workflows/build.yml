@@ -51,6 +51,9 @@ jobs:
       - uses: actions/checkout@main
       - name: Download Artifact
         uses: actions/download-artifact@main
+          with: 
+            pattern: *.exe
+      - run: ls -R
       - name: Zip ci
         uses: vimtor/action-zip@master
         with:
