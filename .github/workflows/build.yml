@@ -55,12 +55,12 @@ jobs:
       - name: Zip ci
         uses: vimtor/action-zip@master
         with:
-          files: AimStar-${{github.sha}}.exe           
+          files: ./ci/AimStar-${{github.sha}}.exe           
           dest: AimStar-Autobuild.zip
       - name: Zip llvm ci
         uses: vimtor/action-zip@master
         with:
-          files: LLVM-AimStar-${{github.sha}}.exe           
+          files: ./llvm/LLVM-AimStar-${{github.sha}}.exe           
           dest: AimStar-LLVM-Autobuild.zip
       - name: Delete tag
         run: gh release delete autobuild --cleanup-tag
