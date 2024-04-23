@@ -51,11 +51,16 @@ jobs:
       - uses: actions/checkout@main
       - name: Download Artifact
         uses: actions/download-artifact@main
-      - name: Zip Artifact
+      - name: Zip ci
         uses: vimtor/action-zip@master
         with:
-          files: AimStar-${{github.sha}}.exe LLVM-AimStar-${{github.sha}}.exe           
+          files: AimStar-${{github.sha}}.exe           
           dest: AimStar-Autobuild.zip
+      - name: Zip llvm ci
+        uses: vimtor/action-zip@master
+        with:
+          files: LLVM-AimStar-${{github.sha}}.exe           
+          dest: AimStar-LLVM-Autobuild.zip
       - name: Delete tag
         run: gh release delete autobuild --cleanup-tag
         env:
@@ -79,5 +84,6 @@ jobs:
             No support for any autobuild version except the latest autobuild
           files: |
             AimStar-Autobuild.zip
+            AimStar-LLVM-Autobuild.zip
           prerelease: true
           
