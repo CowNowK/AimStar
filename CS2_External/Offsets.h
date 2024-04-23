@@ -60,7 +60,7 @@ namespace Offset
 		DWORD flFlashDuration = 0x14CC;
 		DWORD aimPunchAngle = 0x1774;			// C_CSPlayerPawn::m_aimPunchAngle
 		DWORD aimPunchCache = 0x1798;
-		DWORD iIDEntIndex = 0x15A4;
+		DWORD iIDEntIndex = 0x159C;
 		DWORD iTeamNum = 0x3CB;
 		DWORD DesiredFov = 0x6CC;
 		DWORD iFovStart = 0x214;
