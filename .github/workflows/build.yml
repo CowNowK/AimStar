@@ -54,9 +54,7 @@ jobs:
       - name: Zip Artifact
         uses: vimtor/action-zip@master
         with:
-          files: |
-            AimStar-${{github.sha}}.exe
-            LLVM-AimStar-${{github.sha}}.exe           
+          files: AimStar-${{github.sha}}.exe LLVM-AimStar-${{github.sha}}.exe           
           dest: AimStar-Autobuild.zip
       - name: Delete tag
         run: gh release delete autobuild --cleanup-tag
