@@ -53,7 +53,7 @@ namespace Offset
 		DWORD MaxHealth = 0x330;				// C_BaseEntity::m_iMaxHealth
 		DWORD CurrentHealth = 0x334;// C_BaseEntity::m_iHealth
 		DWORD GameSceneNode = 0x318;			// C_BaseEntity::m_pGameSceneNode
-		DWORD BoneArray = 0x1E0;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
+		DWORD BoneArray = 0x160 + 0x80;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
 		DWORD angEyeAngles = 0x1570;
 		DWORD vecLastClipCameraPos = 0x12EC;
 		DWORD iShotsFired = 0x147C;
