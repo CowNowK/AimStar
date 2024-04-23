@@ -1,0 +1,16 @@
+name: buildcheck x64 release llvm
+
+on: 
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@main
+      name: C++ CI with Visual Studio LLVM
+    - name: Set up Developer Command Prompt
+      uses: ilammy/msvc-dev-cmd@master
+    - name: Compile with MSBuild
+      run: msbuild CS2_External.sln /p:Configuration=Release /p:Platform="x64" /p:CLToolExe=clang-cl.exe /p:CLToolPath="C:\Program Files\LLVM\bin"
