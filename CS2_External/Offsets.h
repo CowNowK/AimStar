@@ -38,7 +38,7 @@ namespace Offset
 	{
 		DWORD MovementServices = 0x1140;		// CPlayer_MovementServices*
 		DWORD WeaponServices = 0x1100;			// CPlayer_WeaponServices*
-		DWORD BulletServices = 0x1718;			// CCSPlayer_BulletServices*
+		DWORD BulletServices = 0x1710;			// CCSPlayer_BulletServices*
 		DWORD CameraServices = 0x1138;			// CPlayer_CameraServices*
 		DWORD ViewModelServices = 0x12C8;		// CPlayer_ViewModelServices*
 		DWORD pClippingWeapon = 0x1308;			// C_CSWeaponBase*
@@ -58,8 +58,8 @@ namespace Offset
 		DWORD iShotsFired = 0x147C;
 		DWORD flFlashMaxAlpha = 0x14C8;
 		DWORD flFlashDuration = 0x14CC;
-		DWORD aimPunchAngle = 0x177C;			// C_CSPlayerPawn::m_aimPunchAngle
-		DWORD aimPunchCache = 0x17A0;
+		DWORD aimPunchAngle = 0x1774;			// C_CSPlayerPawn::m_aimPunchAngle
+		DWORD aimPunchCache = 0x1798;
 		DWORD iIDEntIndex = 0x15A4;
 		DWORD iTeamNum = 0x3CB;
 		DWORD DesiredFov = 0x6CC;
@@ -67,7 +67,7 @@ namespace Offset
 		DWORD fFlags = 0x3D4;
 		DWORD bSpottedByMask = 0x1698 + 0xC;	// C_CSPlayerPawnBase::entitySpottedState + EntitySpottedState_t::bSpottedByMask
 		DWORD AbsVelocity = 0x3D8;
-		DWORD IsBuying = 0x17CA;
+		DWORD IsBuying = 0x17C2;
 	} Pawn;
 
 	struct
