@@ -55,8 +55,8 @@ jobs:
         uses: vimtor/action-zip@master
         with:
           files: |
-                AimStar-${{github.sha}}.exe
-                LLVM-AimStar-${{github.sha}}.exe           
+            AimStar-${{github.sha}}.exe
+            LLVM-AimStar-${{github.sha}}.exe           
           dest: AimStar-Autobuild.zip
       - name: Delete tag
         run: gh release delete autobuild --cleanup-tag
