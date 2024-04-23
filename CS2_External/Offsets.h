@@ -53,7 +53,7 @@ namespace Offset
 		DWORD CurrentHealth = 0x334;			// C_BaseEntity::m_iHealth
 		DWORD GameSceneNode = 0x318;			// C_BaseEntity::m_pGameSceneNode
 		DWORD BoneArray = 0x1E0;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
-		DWORD angEyeAngles = 0x1578;
+		DWORD angEyeAngles = 0x1570;
 		DWORD vecLastClipCameraPos = 0x12EC;
 		DWORD iShotsFired = 0x147C;
 		DWORD flFlashMaxAlpha = 0x14C4;
@@ -65,7 +65,7 @@ namespace Offset
 		DWORD DesiredFov = 0x6CC;
 		DWORD iFovStart = 0x214;
 		DWORD fFlags = 0x3D4;
-		DWORD bSpottedByMask = 0x1698 + 0xC;	// C_CSPlayerPawnBase::entitySpottedState + EntitySpottedState_t::bSpottedByMask
+		DWORD bSpottedByMask = 0x1690 + 0xC;	// C_CSPlayerPawnBase::entitySpottedState + EntitySpottedState_t::bSpottedByMask
 		DWORD AbsVelocity = 0x3D8;
 		DWORD IsBuying = 0x17C2;
 	} Pawn;
