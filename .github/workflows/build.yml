@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: Set up Developer Command Prompt
-        uses: ilammy/msvc-dev-cmd@master
+        uses: ilammy/msvc-dev-cmd@v1
       - name: Compile with llvm
         run: msbuild CS2_External.sln /p:Configuration=Release /p:Platform="x64" /p:CLToolExe=clang-cl.exe /p:CLToolPath="C:\Program Files\LLVM\bin"
       - name: Rename EXE to LLVM-AimStar-${{github.sha}}.exe
