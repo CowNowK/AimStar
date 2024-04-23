@@ -48,9 +48,10 @@ namespace Offset
 		DWORD isScoped = 0x1400;
 		DWORD isDefusing = 0x1408;
 		DWORD TotalHit = 0x40;
-		DWORD Pos = 0x127C;						// C_BasePlayerPawn::m_vOldOrigin
+		DWORD Pos = 0x127C;// C_BasePlayerPawn::m_vOldOrigin
+		DWORD CurrentArmor = 0x1568;// C_BasePlayerPawn::m_ArmorValue
 		DWORD MaxHealth = 0x330;				// C_BaseEntity::m_iMaxHealth
-		DWORD CurrentHealth = 0x334;			// C_BaseEntity::m_iHealth
+		DWORD CurrentHealth = 0x334;// C_BaseEntity::m_iHealth
 		DWORD GameSceneNode = 0x318;			// C_BaseEntity::m_pGameSceneNode
 		DWORD BoneArray = 0x1E0;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
 		DWORD angEyeAngles = 0x1570;
