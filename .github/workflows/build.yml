@@ -76,13 +76,14 @@ jobs:
           name: autobuild [${{github.sha}}]
           tag_name: autobuild
           body: |
-            **This release has been built by Github Actions**
+            **This release has been built by Github Actions, and may contains some issues**
             [Link to build](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
             Full Commit Hash of Latest autobuild:
             ```
             ${{github.sha}}
             ```
             No support for any autobuild version except the latest autobuild
+            Try llvm build if msvc build doesn't works right
           files: |
             AimStar-Autobuild.zip
             AimStar-LLVM-Autobuild.zip
