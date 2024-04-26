@@ -27,13 +27,13 @@ namespace Offset
 
 	struct
 	{
-		DWORD Health = 0x334;
-		DWORD TeamID = 0x3CB;
-		DWORD IsAlive = 0x7EC;
-		DWORD PlayerPawn = 0x7E4;
-		DWORD iszPlayerName = 0x638;
-		//DWORD EnemySensor = 0x1440;
-		DWORD GravityScale = 0x444;
+		//DWORD Health = 0x334;
+		//DWORD TeamID = 0x3CB;
+		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
+		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
+		DWORD iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
+		//outdated DWORD EnemySensor = 0x1440;
+		DWORD GravityScale = cs2_dumper::schemas::client_dll::C_BaseEntity::m_flGravityScale;
 	}Entity;
 
 	struct
