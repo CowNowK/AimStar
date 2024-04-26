@@ -38,12 +38,12 @@ namespace Offset
 
 	struct
 	{
-		DWORD MovementServices = 0x1140;		// CPlayer_MovementServices*
-		DWORD WeaponServices = 0x1100;			// CPlayer_WeaponServices*
-		DWORD BulletServices = 0x1470;			// CCSPlayer_BulletServices*
-		DWORD CameraServices = 0x1138;			// CPlayer_CameraServices*
-		DWORD ViewModelServices = 0x12C0;		// CPlayer_ViewModelServices*
-		DWORD pClippingWeapon = 0x12F8;			// C_CSWeaponBase*
+		DWORD MovementServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pMovementServices;		// CPlayer_MovementServices*
+		DWORD WeaponServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pWeaponServices;			// CPlayer_WeaponServices*
+		DWORD BulletServices = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_pBulletServices;			// CCSPlayer_BulletServices*
+		DWORD CameraServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pCameraServices;			// CPlayer_CameraServices*
+		DWORD ViewModelServices = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_pViewModelServices;		// CPlayer_ViewModelServices*
+		DWORD pClippingWeapon = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_pClippingWeapon;			// C_CSWeaponBase*
 
 		DWORD ViewModel = 0x40;				// CCSPlayer_ViewModelServices::m_hViewModel
 		DWORD StartAccount = 0x1490;
