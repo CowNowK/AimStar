@@ -32,7 +32,7 @@ namespace Offset
 		DWORD IsAlive = 0x7EC;
 		DWORD PlayerPawn = 0x7E4;
 		DWORD iszPlayerName = 0x638;
-		DWORD EnemySensor = 0x1440;
+		//DWORD EnemySensor = 0x1440;
 		DWORD GravityScale = 0x444;
 	}Entity;
 
