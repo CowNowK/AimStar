@@ -251,7 +251,7 @@ void Cheats::Run()
 				}
 			}
 		}
-		Glow::Run(Entity);
+		// Glow::Run(Entity);
 		// Misc::SpectatorList(LocalEntity, Entity);
 	}
 	
