@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include "Utils/ProcessManager.hpp"
 #include "Utils/Helpers.h"
+#include "a2x/offsets.hpp"
+#include "a2x/client.dll.hpp"
 
 namespace Offset
 {
@@ -11,7 +13,7 @@ namespace Offset
 	inline DWORD ForceLeft;
 	inline DWORD ForceRight;
 
-	inline DWORD EntityList;
+	inline DWORD EntityList = cs2_dumper::offsets::client_dll::dwEntityList;
 	inline DWORD Matrix;
 	inline DWORD ViewAngle;
 	inline DWORD LocalPlayerController;
@@ -25,50 +27,50 @@ namespace Offset
 
 	struct
 	{
-		DWORD Health = 0x334;
-		DWORD TeamID = 0x3CB;
-		DWORD IsAlive = 0x7EC;
-		DWORD PlayerPawn = 0x7E4;
-		DWORD iszPlayerName = 0x638;
-		DWORD EnemySensor = 0x1440;
-		DWORD GravityScale = 0x444;
+		//DWORD Health = 0x334;
+		//DWORD TeamID = 0x3CB;
+		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
+		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
+		DWORD iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
+		//outdated DWORD EnemySensor = 0x1440;
+		DWORD GravityScale = cs2_dumper::schemas::client_dll::C_BaseEntity::m_flGravityScale;
 	}Entity;
 
 	struct
 	{
-		DWORD MovementServices = 0x1140;		// CPlayer_MovementServices*
-		DWORD WeaponServices = 0x1100;			// CPlayer_WeaponServices*
-		DWORD BulletServices = 0x1470;			// CCSPlayer_BulletServices*
-		DWORD CameraServices = 0x1138;			// CPlayer_CameraServices*
-		DWORD ViewModelServices = 0x12C0;		// CPlayer_ViewModelServices*
-		DWORD pClippingWeapon = 0x12F8;			// C_CSWeaponBase*
+		DWORD MovementServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pMovementServices;		// CPlayer_MovementServices*
+		DWORD WeaponServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pWeaponServices;			// CPlayer_WeaponServices*
+		DWORD BulletServices = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_pBulletServices;			// CCSPlayer_BulletServices*
+		DWORD CameraServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pCameraServices;			// CPlayer_CameraServices*
+		DWORD ViewModelServices = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_pViewModelServices;		// CPlayer_ViewModelServices*
+		DWORD pClippingWeapon = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_pClippingWeapon;			// C_CSWeaponBase*
 
-		DWORD ViewModel = 0x40;				// CCSPlayer_ViewModelServices::m_hViewModel
-		DWORD StartAccount = 0x1490;
-		DWORD isScoped = 0x2290;
-		DWORD isDefusing = 0x2292;
-		DWORD TotalHit = 0x40;
-		DWORD Pos = 0x127C;// C_BasePlayerPawn::m_vOldOrigin
-		DWORD CurrentArmor = 0x22C0;// C_BasePlayerPawn::m_ArmorValue
-		DWORD MaxHealth = 0x330;				// C_BaseEntity::m_iMaxHealth
-		DWORD CurrentHealth = 0x334;// C_BaseEntity::m_iHealth
-		DWORD GameSceneNode = 0x318;			// C_BaseEntity::m_pGameSceneNode
-		DWORD BoneArray = 0x160 + 0x80;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
-		DWORD angEyeAngles = 0x1390;
-		DWORD vecLastClipCameraPos = 0x12DC;
-		DWORD iShotsFired = 0x22A4;
-		DWORD flFlashMaxAlpha = 0x1360;
-		DWORD flFlashDuration = 0x1364;
-		DWORD aimPunchAngle = 0x14D4;			// C_CSPlayerPawn::m_aimPunchAngle
-		DWORD aimPunchCache = 0x14F8;
-		DWORD iIDEntIndex = 0x13B0;
-		DWORD iTeamNum = 0x3CB;
-		DWORD DesiredFov = 0x6CC;
-		DWORD iFovStart = 0x214;
-		DWORD fFlags = 0x3D4;
-		DWORD bSpottedByMask = 0x2278 + 0xC;	// C_CSPlayerPawnBase::entitySpottedState + EntitySpottedState_t::bSpottedByMask
-		DWORD AbsVelocity = 0x3D8;
-		DWORD IsBuying = 0x1522;
+		DWORD ViewModel = cs2_dumper::schemas::client_dll::CCSPlayer_ViewModelServices::m_hViewModel;				// CCSPlayer_ViewModelServices::m_hViewModel
+		//wahss diz? DWORD StartAccount = 0x1490;
+		DWORD isScoped = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsScoped;
+		DWORD isDefusing = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsDefusing;
+		DWORD TotalHit = cs2_dumper::schemas::client_dll::CCSPlayer_BulletServices::m_totalHitsOnServer;
+		DWORD Pos = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_vOldOrigin;// C_BasePlayerPawn::m_vOldOrigin
+		DWORD CurrentArmor = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_ArmorValue;// C_CSPlayerPawn::m_ArmorValue
+		DWORD MaxHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iMaxHealth;				// C_BaseEntity::m_iMaxHealth
+		DWORD CurrentHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iHealth;// C_BaseEntity::m_iHealth
+		DWORD GameSceneNode = cs2_dumper::schemas::client_dll::C_BaseEntity::m_pGameSceneNode;			// C_BaseEntity::m_pGameSceneNode
+		DWORD BoneArray = cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
+		DWORD angEyeAngles = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_angEyeAngles;
+		DWORD vecLastClipCameraPos = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_vecLastClipCameraPos;
+		DWORD iShotsFired = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_iShotsFired;
+		DWORD flFlashMaxAlpha = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_flFlashMaxAlpha;
+		DWORD flFlashDuration = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_flFlashDuration;
+		DWORD aimPunchAngle = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchAngle;			// C_CSPlayerPawn::m_aimPunchAngle
+		DWORD aimPunchCache = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchCache;
+		DWORD iIDEntIndex = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_iIDEntIndex;
+		DWORD iTeamNum = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iTeamNum;
+		DWORD DesiredFov = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iDesiredFOV;
+		DWORD iFovStart = cs2_dumper::schemas::client_dll::CCSPlayerBase_CameraServices::m_iFOVStart;
+		DWORD fFlags = cs2_dumper::schemas::client_dll::C_BaseEntity::m_fFlags;
+		DWORD bSpottedByMask = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_entitySpottedState + cs2_dumper::schemas::client_dll::EntitySpottedState_t::m_bSpottedByMask;	// C_CSPlayerPawn::entitySpottedState + EntitySpottedState_t::bSpottedByMask
+		DWORD AbsVelocity = cs2_dumper::schemas::client_dll::C_BaseEntity::m_vecAbsVelocity;
+		DWORD IsBuying = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsBuyMenuOpen;
 	} Pawn;
 
 	struct
@@ -112,7 +114,7 @@ namespace Offset
 
 	struct
 	{
-		DWORD ClippingWeapon = 0x12F8;			// WeaponBase
+		//DWORD ClippingWeapon = Offset::Pawn.pClippingWeapon;			// WeaponBase
 		DWORD WeaponDataPTR = 0x368;
 		DWORD szName = 0xC20;
 		DWORD Clip1 = 0x15C8;					// C_BasePlayerWeapon::m_iClip1
@@ -168,7 +170,7 @@ namespace Offset
 		const std::string LocalPlayerPawn = "48 8D 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 83 EC ?? 8B 0D";
 		const std::string InventoryServices = "E8 ?? ?? ?? ?? 8B 45 D0 48 8B 55 D8";
 		const std::string GlobalVars = "48 89 15 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 85 D2";
-		const std::string EntityList = "48 8B 0D ?? ?? ?? ?? 48 89 7C 24 ?? 8B FA C1 EB";
+		//const std::string EntityList = "48 8B 0D ?? ?? ?? ?? 48 89 7C 24 ?? 8B FA C1 EB";
 		const std::string LocalPlayerController = "48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? 8B 88";
 		const std::string ViewAngles = "48 8B 0D ?? ?? ?? ?? 48 8B 01 48 FF 60 30";
 		const std::string ViewMatrix = "48 8D 0D ?? ?? ?? ?? 48 C1 E0 06";
