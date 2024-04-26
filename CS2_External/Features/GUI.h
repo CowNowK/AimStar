@@ -354,7 +354,7 @@ namespace GUI
 						if (!MenuConfig::SafeMode)
 						{
 							ImGui::NewLine();
-							PutSwitch(Lang::MiscText.EnemySensor, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor);
+							//PutSwitch(Lang::MiscText.EnemySensor, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor);
 						}
 					}
 					
