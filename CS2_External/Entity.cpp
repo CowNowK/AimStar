@@ -156,7 +156,7 @@ bool PlayerController::GetTeamID()
 
 bool PlayerController::GetHealth()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Entity.Health, this->Health);
+	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentHealth, this->Health);
 }
 
 bool PlayerController::GetIsAlive()
