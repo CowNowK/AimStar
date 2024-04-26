@@ -13,7 +13,7 @@ namespace Offset
 	inline DWORD ForceLeft;
 	inline DWORD ForceRight;
 
-	inline DWORD EntityList = cs2_dumper::schemas::client_dll::dwEntityList;
+	inline DWORD EntityList = cs2_dumper::offsets::client_dll::dwEntityList;
 	inline DWORD Matrix;
 	inline DWORD ViewAngle;
 	inline DWORD LocalPlayerController;
