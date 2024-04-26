@@ -49,6 +49,20 @@ void Exit()
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
+void rndmTitle()
+{
+	constexpr int length = 25;
+	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	TCHAR title[length + 1]{};
+
+	for (int j = 0; j != length; j++)
+	{
+		title[j] += characters[rand() % 62];
+	}
+
+	SetConsoleTitle(title);
+}
+
 void Cheat()
 {
 	MenuConfig::HWID = Init::Client::GenerateHWID();
@@ -60,6 +74,7 @@ void Cheat()
 		
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
 	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
+	rndmTitle();
 	cout << R"(                                                                   
     ___    _          _____ __            
    /   |  (_)___ ___ / ___// /_____ ______
