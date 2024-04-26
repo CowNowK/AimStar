@@ -284,7 +284,7 @@ bool PlayerPawn::GetMaxAmmo()
 {
 	DWORD64 ClippingWeapon = 0;
 	DWORD64 WeaponData = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::WeaponBaseData.ClippingWeapon, ClippingWeapon))
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.pClippingWeapon, ClippingWeapon))
 		return false;
 	if (!ProcessMgr.ReadMemory<DWORD64>(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData))
 		return false;
