@@ -75,10 +75,10 @@ bool Offset::UpdateOffsets()
 	TempAddress = SearchOffsets(Offset::Signatures::ForceJump, ClientDLL);
 	if (TempAddress == 0)
 		return false;
-
+/*
 	Offset::ForceJump = TempAddress + 0x30 - ClientDLL;
 
-	/*
+	
 	TempAddress = SearchOffsets(Offset::Signatures::ForceCrouch, ClientDLL);
 	if (TempAddress == 0)
 		return false;
