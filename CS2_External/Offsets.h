@@ -134,29 +134,29 @@ namespace Offset
 
 	struct
 	{
-		DWORD m_bBeingDefused = 0xF14;
-		DWORD m_flDefuseCountDown = 0xF28;
-		DWORD m_nBombSite = 0xEDC;
+		DWORD m_bBeingDefused = cs2_dumper::schemas::client_dll::C_PlantedC4::m_bBeingDefused;
+		DWORD m_flDefuseCountDown = cs2_dumper::schemas::client_dll::C_PlantedC4::m_flDefuseCountDown;
+		DWORD m_nBombSite = cs2_dumper::schemas::client_dll::C_PlantedC4::m_nBombSite;
 	} C4;
 
 	struct
 	{
-		DWORD MoneyServices = 0x6F8;
-		DWORD Account = 0x40;
-		DWORD TotalCashSpent = 0x48;
-		DWORD CashSpentThisRound = 0x4C;
+		DWORD MoneyServices = cs2_dumper::schemas::client_dll::CCSPlayerController::m_pInGameMoneyServices;
+		DWORD Account = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iAccount;
+		DWORD TotalCashSpent = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iTotalCashSpent;
+		DWORD CashSpentThisRound = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iCashSpentThisRound;
 	} InGameMoneyServices;
 
 	struct // C_BaseCSGrenadeProjectile
 	{ 
-		DWORD nSmokeEffectTickBegin = 0x1160; // int32_t
-		DWORD bDidSmokeEffect = 0x1164; // bool
-		DWORD nRandomSeed = 0x1168; // int32_t
-		DWORD vSmokeColor = 0x116C; // Vector
-		DWORD vSmokeDetonationPos = 0x1178; // Vector
-		DWORD VoxelFrameData = 0x1188; // CUtlVector<uint8_t>
-		DWORD bSmokeVolumeDataReceived = 0x11A0; // bool
-		uintptr_t bSmokeEffectSpawned = 0x11A1; // bool
+		DWORD nSmokeEffectTickBegin = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_nSmokeEffectTickBegin; // int32_t
+		DWORD bDidSmokeEffect = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bDidSmokeEffect; // bool
+		DWORD nRandomSeed = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_nRandomSeed; // int32_t
+		DWORD vSmokeColor = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_vSmokeColor; // Vector
+		DWORD vSmokeDetonationPos = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_vSmokeDetonationPos; // Vector
+		DWORD VoxelFrameData = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_VoxelFrameData; // CUtlVector<uint8_t>
+		DWORD bSmokeVolumeDataReceived = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeVolumeDataReceived; // bool
+		uintptr_t bSmokeEffectSpawned = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeEffectSpawned; // bool
 	} SmokeGrenadeProjectile; 
 
 	namespace Signatures
