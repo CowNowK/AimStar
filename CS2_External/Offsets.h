@@ -4,14 +4,15 @@
 #include "Utils/Helpers.h"
 #include "a2x/offsets.hpp"
 #include "a2x/client.dll.hpp"
+#include "a2x/buttons.hpp"
 
 namespace Offset
 {
-	inline DWORD ForceJump;
-	inline DWORD ForceCrouch;
-	inline DWORD ForceForward;
-	inline DWORD ForceLeft;
-	inline DWORD ForceRight;
+	inline DWORD ForceJump = cs2_dumper::buttons::jump;
+	inline DWORD ForceCrouch = cs2_dumper::buttons::duck;
+	inline DWORD ForceForward = cs2_dumper::buttons::forward;
+	inline DWORD ForceLeft = cs2_dumper::buttons::left;
+	inline DWORD ForceRight = cs2_dumper::buttons::right;
 
 	inline DWORD EntityList = cs2_dumper::offsets::client_dll::dwEntityList;
 	inline DWORD Matrix;
@@ -27,8 +28,8 @@ namespace Offset
 
 	struct
 	{
-		//DWORD Health = 0x334;
-		//DWORD TeamID = 0x3CB;
+		//DWORD Health = Offset::Pawn.CurrentHealth;
+		//DWORD TeamID = Offset::Pawn.iTeamNum;
 		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
 		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
 		DWORD iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
@@ -90,83 +91,84 @@ namespace Offset
 
 	struct
 	{
-		DWORD m_hPawn = 0x604;
-		DWORD m_pObserverServices = 0x1118;
-		DWORD m_hObserverTarget = 0x44;
-		DWORD m_hController = 0x1294;
-		DWORD PawnArmor = 0x7F4;
-		DWORD HasDefuser = 0x7F8;
-		DWORD HasHelmet = 0x7F9;
+		DWORD m_hPawn = cs2_dumper::schemas::client_dll::CBasePlayerController::m_hPawn;
+		DWORD m_pObserverServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pObserverServices;
+		DWORD m_hObserverTarget = cs2_dumper::schemas::client_dll::CPlayer_ObserverServices::m_hObserverTarget;
+		DWORD m_hController = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_hController;
+		DWORD PawnArmor = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPawnArmor;
+		DWORD HasDefuser = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasDefuser;
+		DWORD HasHelmet = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasHelmet;
 	} PlayerController;
 
 	struct
 	{
-		DWORD AttributeManager = 0x1098;		// C_AttributeContainer
-		DWORD FallbackPaintKit = 0x1548;
-		DWORD FallbackSeed = 0x154C;
-		DWORD FallbackWear = 0x1550;
-		DWORD FallbackStatTrak = 0x1554;
-		DWORD szCustomName = 0x2D0;
+		DWORD AttributeManager = cs2_dumper::schemas::client_dll::C_EconEntity::m_AttributeManager;		// C_AttributeContainer
+		DWORD FallbackPaintKit = cs2_dumper::schemas::client_dll::C_EconEntity::m_nFallbackPaintKit;
+		DWORD FallbackSeed = cs2_dumper::schemas::client_dll::C_EconEntity::m_nFallbackSeed;
+		DWORD FallbackWear = cs2_dumper::schemas::client_dll::C_EconEntity::m_flFallbackWear;
+		DWORD FallbackStatTrak = cs2_dumper::schemas::client_dll::C_EconEntity::m_nFallbackStatTrak;
+		DWORD szCustomName = cs2_dumper::schemas::client_dll::C_EconItemView::m_szCustomName;
 
-		DWORD EntityQuality = 0x1BC;			// EconItemView::m_iEntityQuality
-		DWORD ItemIDHigh = 0x1D0;				// EconItemView::m_iItemIDHigh
+		DWORD EntityQuality = cs2_dumper::schemas::client_dll::C_EconItemView::m_iEntityQuality;			// EconItemView::m_iEntityQuality
+		DWORD ItemIDHigh = cs2_dumper::schemas::client_dll::C_EconItemView::m_iItemIDHigh;				// EconItemView::m_iItemIDHigh
 	} EconEntity;
 
 	struct
 	{
 		//DWORD ClippingWeapon = Offset::Pawn.pClippingWeapon;			// WeaponBase
 		DWORD WeaponDataPTR = 0x368;
-		DWORD szName = 0xC20;
-		DWORD Clip1 = 0x15C8;					// C_BasePlayerWeapon::m_iClip1
-		DWORD MaxClip = 0x1FC;					// CBasePlayerWeaponVData::m_iMaxClip1
-		DWORD CycleTime = 0xC44;
-		DWORD Penetration = 0xD4C;
-		DWORD WeaponType = 0x248;
-		DWORD Inaccuracy = 0xC8C;				// CCSWeaponBaseVData::m_flInaccuracyMove
-		DWORD inReload = 0x1744;
+		DWORD szName = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_szName;
+		DWORD Clip1 = cs2_dumper::schemas::client_dll::C_BasePlayerWeapon::m_iClip1;					// C_BasePlayerWeapon::m_iClip1
+		DWORD MaxClip = cs2_dumper::schemas::client_dll::CBasePlayerWeaponVData::m_iMaxClip1;					// CBasePlayerWeaponVData::m_iMaxClip1
+		DWORD CycleTime = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_flCycleTime;
+		DWORD Penetration = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_flPenetration;
+		DWORD WeaponType = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_WeaponType;
+		DWORD Inaccuracy = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_flInaccuracyMove;				// CCSWeaponBaseVData::m_flInaccuracyMove
+		DWORD inReload = cs2_dumper::schemas::client_dll::C_CSWeaponBase::m_bInReload;
 
 		DWORD WeaponSize = 0x50;
-		DWORD ActiveWeapon = 0x58;
-		DWORD Item = 0x50;						// C_AttributeContainer::m_Item
-		DWORD ItemDefinitionIndex = 0x1BA;
-		DWORD m_MeshGroupMask = 0x180;			// CModelState::m_MeshGroupMask
+		DWORD ActiveWeapon = cs2_dumper::schemas::client_dll::CPlayer_WeaponServices::m_hActiveWeapon;
+		DWORD Item = cs2_dumper::schemas::client_dll::C_AttributeContainer::m_Item;						// C_AttributeContainer::m_Item
+		DWORD ItemDefinitionIndex = cs2_dumper::schemas::client_dll::C_EconItemView::m_iItemDefinitionIndex;
+		DWORD m_MeshGroupMask = cs2_dumper::schemas::client_dll::CModelState::m_MeshGroupMask;			// CModelState::m_MeshGroupMask
 	} WeaponBaseData;
 
 	struct
 	{
-		DWORD m_bBeingDefused = 0xF14;
-		DWORD m_flDefuseCountDown = 0xF28;
-		DWORD m_nBombSite = 0xEDC;
+		DWORD m_bBeingDefused = cs2_dumper::schemas::client_dll::C_PlantedC4::m_bBeingDefused;
+		DWORD m_flDefuseCountDown = cs2_dumper::schemas::client_dll::C_PlantedC4::m_flDefuseCountDown;
+		DWORD m_nBombSite = cs2_dumper::schemas::client_dll::C_PlantedC4::m_nBombSite;
 	} C4;
 
 	struct
 	{
-		DWORD MoneyServices = 0x6F8;
-		DWORD Account = 0x40;
-		DWORD TotalCashSpent = 0x48;
-		DWORD CashSpentThisRound = 0x4C;
+		DWORD MoneyServices = cs2_dumper::schemas::client_dll::CCSPlayerController::m_pInGameMoneyServices;
+		DWORD Account = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iAccount;
+		DWORD TotalCashSpent = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iTotalCashSpent;
+		DWORD CashSpentThisRound = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iCashSpentThisRound;
 	} InGameMoneyServices;
 
 	struct // C_BaseCSGrenadeProjectile
 	{ 
-		DWORD nSmokeEffectTickBegin = 0x1160; // int32_t
-		DWORD bDidSmokeEffect = 0x1164; // bool
-		DWORD nRandomSeed = 0x1168; // int32_t
-		DWORD vSmokeColor = 0x116C; // Vector
-		DWORD vSmokeDetonationPos = 0x1178; // Vector
-		DWORD VoxelFrameData = 0x1188; // CUtlVector<uint8_t>
-		DWORD bSmokeVolumeDataReceived = 0x11A0; // bool
-		uintptr_t bSmokeEffectSpawned = 0x11A1; // bool
+		DWORD nSmokeEffectTickBegin = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_nSmokeEffectTickBegin; // int32_t
+		DWORD bDidSmokeEffect = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bDidSmokeEffect; // bool
+		DWORD nRandomSeed = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_nRandomSeed; // int32_t
+		DWORD vSmokeColor = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_vSmokeColor; // Vector
+		DWORD vSmokeDetonationPos = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_vSmokeDetonationPos; // Vector
+		DWORD VoxelFrameData = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_VoxelFrameData; // CUtlVector<uint8_t>
+		DWORD bSmokeVolumeDataReceived = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeVolumeDataReceived; // bool
+		uintptr_t bSmokeEffectSpawned = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeEffectSpawned; // bool
 	} SmokeGrenadeProjectile; 
 
 	namespace Signatures
 	{
+/*
 		const std::string ForceForward = "48 8D 05 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 ?? E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 81 EC";
 		const std::string ForceLeft = "48 8D 05 ?? ?? ?? ?? 48 89 45 ? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
 		const std::string ForceRight = "48 8D 05 ?? ?? ?? ?? 48 89 45 ? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
 		const std::string ForceJump = "48 8D 05 ?? ?? ?? ?? 48 89 4D ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
 		const std::string ForceCrouch = "48 8D 05 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 ?? E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 83 EC ?? 66 C7 44 24";
-
+*/
 		const std::string LocalPlayerPawn = "48 8D 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 83 EC ?? 8B 0D";
 		const std::string InventoryServices = "E8 ?? ?? ?? ?? 8B 45 D0 48 8B 55 D8";
 		const std::string GlobalVars = "48 89 15 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 85 D2";
