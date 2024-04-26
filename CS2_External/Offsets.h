@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "Utils/ProcessManager.hpp"
 #include "Utils/Helpers.h"
+#include "a2x/client.dll.hpp"
 
 namespace Offset
 {
