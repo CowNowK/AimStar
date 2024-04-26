@@ -151,7 +151,7 @@ bool PlayerController::GetMoney()
 
 bool PlayerController::GetTeamID()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Entity.TeamID, this->TeamID);
+	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.iTeamNum, this->TeamID);
 }
 
 bool PlayerController::GetHealth()
