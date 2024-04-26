@@ -27,8 +27,8 @@ namespace Offset
 
 	struct
 	{
-		//DWORD Health = 0x334;
-		//DWORD TeamID = 0x3CB;
+		//DWORD Health = Offset::Pawn.CurrentHealth;
+		//DWORD TeamID = Offset::Pawn.iTeamNum;
 		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
 		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
 		DWORD iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
