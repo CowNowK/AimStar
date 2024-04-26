@@ -90,46 +90,46 @@ namespace Offset
 
 	struct
 	{
-		DWORD m_hPawn = 0x604;
-		DWORD m_pObserverServices = 0x1118;
-		DWORD m_hObserverTarget = 0x44;
-		DWORD m_hController = 0x1294;
-		DWORD PawnArmor = 0x7F4;
-		DWORD HasDefuser = 0x7F8;
-		DWORD HasHelmet = 0x7F9;
+		DWORD m_hPawn = cs2_dumper::schemas::client_dll::CBasePlayerController::m_hPawn;
+		DWORD m_pObserverServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pObserverServices;
+		DWORD m_hObserverTarget = cs2_dumper::schemas::client_dll::CPlayer_ObserverServices::m_hObserverTarget;
+		DWORD m_hController = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_hController;
+		DWORD PawnArmor = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPawnArmor;
+		DWORD HasDefuser = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasDefuser;
+		DWORD HasHelmet = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasHelmet;
 	} PlayerController;
 
 	struct
 	{
-		DWORD AttributeManager = 0x1098;		// C_AttributeContainer
-		DWORD FallbackPaintKit = 0x1548;
-		DWORD FallbackSeed = 0x154C;
-		DWORD FallbackWear = 0x1550;
-		DWORD FallbackStatTrak = 0x1554;
-		DWORD szCustomName = 0x2D0;
+		DWORD AttributeManager = cs2_dumper::schemas::client_dll::C_EconEntity::m_AttributeManager;		// C_AttributeContainer
+		DWORD FallbackPaintKit = cs2_dumper::schemas::client_dll::C_EconEntity::m_nFallbackPaintKit;
+		DWORD FallbackSeed = cs2_dumper::schemas::client_dll::C_EconEntity::m_nFallbackSeed;
+		DWORD FallbackWear = cs2_dumper::schemas::client_dll::C_EconEntity::m_flFallbackWear;
+		DWORD FallbackStatTrak = cs2_dumper::schemas::client_dll::C_EconEntity::m_nFallbackStatTrak;
+		DWORD szCustomName = cs2_dumper::schemas::client_dll::C_EconItemView::m_szCustomName;
 
-		DWORD EntityQuality = 0x1BC;			// EconItemView::m_iEntityQuality
-		DWORD ItemIDHigh = 0x1D0;				// EconItemView::m_iItemIDHigh
+		DWORD EntityQuality = cs2_dumper::schemas::client_dll::C_EconItemView::m_iEntityQuality;			// EconItemView::m_iEntityQuality
+		DWORD ItemIDHigh = cs2_dumper::schemas::client_dll::C_EconItemView::m_iItemIDHigh;				// EconItemView::m_iItemIDHigh
 	} EconEntity;
 
 	struct
 	{
 		//DWORD ClippingWeapon = Offset::Pawn.pClippingWeapon;			// WeaponBase
 		DWORD WeaponDataPTR = 0x368;
-		DWORD szName = 0xC20;
-		DWORD Clip1 = 0x15C8;					// C_BasePlayerWeapon::m_iClip1
-		DWORD MaxClip = 0x1FC;					// CBasePlayerWeaponVData::m_iMaxClip1
-		DWORD CycleTime = 0xC44;
-		DWORD Penetration = 0xD4C;
-		DWORD WeaponType = 0x248;
-		DWORD Inaccuracy = 0xC8C;				// CCSWeaponBaseVData::m_flInaccuracyMove
-		DWORD inReload = 0x1744;
+		DWORD szName = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_szName;
+		DWORD Clip1 = cs2_dumper::schemas::client_dll::C_BasePlayerWeapon::m_iClip1;					// C_BasePlayerWeapon::m_iClip1
+		DWORD MaxClip = cs2_dumper::schemas::client_dll::CBasePlayerWeaponVData::m_iMaxClip1;					// CBasePlayerWeaponVData::m_iMaxClip1
+		DWORD CycleTime = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_flCycleTime;
+		DWORD Penetration = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_flPenetration;
+		DWORD WeaponType = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_WeaponType;
+		DWORD Inaccuracy = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_flInaccuracyMove;				// CCSWeaponBaseVData::m_flInaccuracyMove
+		DWORD inReload = cs2_dumper::schemas::client_dll::C_CSWeaponBase::m_bInReload;
 
 		DWORD WeaponSize = 0x50;
-		DWORD ActiveWeapon = 0x58;
-		DWORD Item = 0x50;						// C_AttributeContainer::m_Item
-		DWORD ItemDefinitionIndex = 0x1BA;
-		DWORD m_MeshGroupMask = 0x180;			// CModelState::m_MeshGroupMask
+		DWORD ActiveWeapon = cs2_dumper::schemas::client_dll::CPlayer_WeaponServices::m_hActiveWeapon;
+		DWORD Item = cs2_dumper::schemas::client_dll::C_AttributeContainer::m_Item;						// C_AttributeContainer::m_Item
+		DWORD ItemDefinitionIndex = cs2_dumper::schemas::client_dll::C_EconItemView::m_iItemDefinitionIndex;
+		DWORD m_MeshGroupMask = cs2_dumper::schemas::client_dll::CModelState::m_MeshGroupMask;			// CModelState::m_MeshGroupMask
 	} WeaponBaseData;
 
 	struct
