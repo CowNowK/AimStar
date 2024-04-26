@@ -34,9 +34,9 @@ bool Offset::UpdateOffsets()
 
 	DWORD64 TempAddress = 0;
 
-	TempAddress = SearchOffsets(Offset::Signatures::EntityList, ClientDLL);
-	if (TempAddress == 0)
-		return false;
+	//TempAddress = SearchOffsets(Offset::Signatures::EntityList, ClientDLL);
+	//if (TempAddress == 0)
+		//return false;
 
 	Offset::EntityList = TempAddress - ClientDLL;
 
