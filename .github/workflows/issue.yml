@@ -1,0 +1,21 @@
+name: Issue Comment Bot
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  comment-on-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment on issue
+        uses: actions/github-script@v2
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Thank you for opening this issue! Please always try the latest autobuild. Also, if there has been a recent Counter-Strike 2 update, please be patient while we update the offsets.'
+            })
