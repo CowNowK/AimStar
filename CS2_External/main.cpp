@@ -184,8 +184,7 @@ void Cheat()
 		try
 		{
 			// Perfect World version
-			Gui.AttachAnotherWindow("反恐精英：全球攻势", "SDL_app", Cheats::Run);
-		}
+			Gui.AttachAnotherWindow("\u53cd\u6050\u7cbe\u82f1\uff1a\u5168\u7403\u653b\u52bf", "SDL_app", Cheats::Run);		}
 		catch (OSImGui::OSException& e)
 		{
 			cout << e.what() << endl;
