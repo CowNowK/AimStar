@@ -14,7 +14,7 @@ namespace Offset
 	inline DWORD ForceLeft = cs2_dumper::buttons::left;
 	inline DWORD ForceRight = cs2_dumper::buttons::right;
 
-	inline DWORD EntityList = cs2_dumper::offsets::client_dll::dwEntityList;
+	inline DWORD EntityList;// = cs2_dumper::offsets::client_dll::dwEntityList;
 	inline DWORD Matrix;
 	inline DWORD ViewAngle;
 	inline DWORD LocalPlayerController;
@@ -172,7 +172,7 @@ namespace Offset
 		const std::string LocalPlayerPawn = "48 8D 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 83 EC ?? 8B 0D";
 		const std::string InventoryServices = "E8 ?? ?? ?? ?? 8B 45 D0 48 8B 55 D8";
 		const std::string GlobalVars = "48 89 15 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 85 D2";
-		//const std::string EntityList = "48 8B 0D ?? ?? ?? ?? 48 89 7C 24 ?? 8B FA C1 EB";
+		const std::string EntityList = "48 8B 0D ?? ?? ?? ?? 48 89 7C 24 ?? 8B FA C1 EB";
 		const std::string LocalPlayerController = "48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? 8B 88";
 		const std::string ViewAngles = "48 8B 0D ?? ?? ?? ?? 48 8B 01 48 FF 60 30";
 		const std::string ViewMatrix = "48 8D 0D ?? ?? ?? ?? 48 C1 E0 06";
