@@ -81,7 +81,7 @@ namespace Init
         // Check if the game window is activated
         static bool isGameWindowActive() {
             HWND hwnd_cs2 = FindWindow(NULL, TEXT("Counter-Strike 2"));
-            HWND hwnd_perfectworld = FindWindow(NULL, TEXT("反恐精英：全球攻势"));
+            HWND hwnd_perfectworld = FindWindow(NULL, TEXT("\u53cd\u6050\u7cbe\u82f1\uff1a\u5168\u7403\u653b\u52bf"));
 
             if (hwnd_cs2 != NULL || hwnd_perfectworld != NULL) {
                 HWND foreground_window = GetForegroundWindow();

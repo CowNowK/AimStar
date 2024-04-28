@@ -86,7 +86,7 @@ namespace Misc
 			playerPing,
 			ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
 		ImGui::Text("Pos: %.2f, %.2f, %.2f", Pos.x, Pos.y, Pos.z);
-		ImGui::Text("Angel: %.2f, %.2f", Angle.x, Angle.y);
+		ImGui::Text("Angle: %.2f, %.2f", Angle.x, Angle.y);
 		ImGui::Text("Vel: %.2f", LocalPlayer.Pawn.Speed);
 
 		ImGui::End();
@@ -198,6 +198,7 @@ namespace Misc
 		Misc::StopKeyEvent('S', &sKeyPressed, 'W', 50.f);
 	}
 
+	// This feature was removed temporarily from Cheats.hpp, because it may crash the game
 	void NadeManager(CGame Game) noexcept
 	{
 		if (MenuConfig::SafeMode)
