@@ -6,7 +6,7 @@
 namespace MenuConfig
 {
 	inline std::string path = "";
-	inline std::string LocalVersion = "4.2.2";
+	inline std::string LocalVersion = "4.4.1";
 	// Don't change this
 	inline std::string Key = "N5ZF3KG8H6BVQ71T";
 	inline std::string HWID = "";
@@ -33,7 +33,7 @@ namespace MenuConfig
 	inline bool defaultConfig = false;
 	inline int Language = 0;
 	inline int Theme = 0;
-	inline bool SafeMode = false;
+	inline bool SafeMode = true;
 	inline int MaxRenderFPS = 144;
 
 	inline bool AirJump = false;
