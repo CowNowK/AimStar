@@ -9,9 +9,9 @@
 #define _is_invalid(v,n) if(v==NULL) return n
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
 
-class MenuConfig;
-extern bool MenuConfig::SafeMode;
-
+namespace MenuConfig {
+    extern bool SafeMode;
+}
 typedef struct _CLIENT_ID
 {
 	PVOID UniqueProcess;
