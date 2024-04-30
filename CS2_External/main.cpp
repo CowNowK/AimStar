@@ -49,7 +49,7 @@ void Exit()
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-void rndmTitle()
+void RandomTitle()
 {
 	constexpr int length = 25;
 	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
@@ -74,7 +74,8 @@ void Cheat()
 		
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
 	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
-	rndmTitle();
+	srand((unsigned)time(NULL));
+	RandomTitle();
 	cout << R"(                                                                   
     ___    _          _____ __            
    /   |  (_)___ ___ / ___// /_____ ______
