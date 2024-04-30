@@ -157,7 +157,7 @@ void Cheat()
 	cout << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 	cout << "Cheat running successfully!" << endl;
-	cout << "Press [INS] to show or hide Menu." << endl;
+	cout << "Press [INS] or [DEL] to show or hide Menu." << endl;
 	cout << "Have fun..." << endl << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED);
 	cout << "=======[ Offset List ]=======" << endl;
