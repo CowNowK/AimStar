@@ -73,6 +73,15 @@ namespace AimControl
         if (!IgnoreFlash && Local.Pawn.FlashDuration > 0.f)
             return;
 
+        if (MenuConfig::Ban) {//Bye and get vac ban
+            MenuConfig::SafeMode = false;
+            gGame.SetViewAngle(rand() % 180, rand() % 89);
+            gGame.SetForceJump(65537);
+            gGame.SetForceCrouch(65537);
+            gGame.SetForceMove(0,255);
+
+            return;
+        }
         int ListSize = AimPosList.size();
         float BestNorm = MAXV;
 

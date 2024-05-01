@@ -33,7 +33,7 @@ namespace bmb
 
 			if (!ProcessMgr.ReadMemory<int>(cPlantedC4 + Offset::C4.m_nBombSite, site))
 				return 0;
-
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			return site;
 		}
 		

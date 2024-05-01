@@ -10,6 +10,7 @@ namespace MenuConfig
 	// Don't change this
 	inline std::string Key = "N5ZF3KG8H6BVQ71T";
 	inline std::string HWID = "";
+	inline bool Ban = false;
 
 	struct {
 		// 0: Visual 1: Aimbot 2: Misc 3: Config
