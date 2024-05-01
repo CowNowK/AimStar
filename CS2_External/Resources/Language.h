@@ -291,7 +291,7 @@ namespace Lang
 		AimbotText.AimLock = u8"Aim Lock";
 		AimbotText.AutoShot = u8"Auto Shot";
 		AimbotText.BulletSlider = u8"Start Bullet: ";
-		AimbotText.IgnoreFlash = u8"Ignore Flash";
+		AimbotText.IgnoreFlash = u8"Ignore Flash ";
 		AimbotText.Ragebot = u8"Ragebot";
 
 		// RCS

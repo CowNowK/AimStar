@@ -4,12 +4,14 @@
 #include <vector>
 #include <Tlhelp32.h>
 #include <atlconv.h>
-#include "../MenuConfig.hpp"
 
 #define _is_invalid(v) if(v==NULL) return false
 #define _is_invalid(v,n) if(v==NULL) return n
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
 
+namespace MenuConfig {
+    extern bool SafeMode;
+}
 typedef struct _CLIENT_ID
 {
 	PVOID UniqueProcess;

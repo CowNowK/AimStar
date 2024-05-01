@@ -49,10 +49,10 @@ void Exit()
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-void rndmTitle()
+void RandomTitle()
 {
 	constexpr int length = 25;
-	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`-=~!@#$%^&*()_+,./;'[]|{}:?");
 	TCHAR title[length + 1]{};
 
 	for (int j = 0; j != length; j++)
@@ -74,7 +74,8 @@ void Cheat()
 		
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);	//Gets a standard output device handle  
 	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);	//Set the text color to green  
-	rndmTitle();
+	srand((unsigned)time(NULL));
+	RandomTitle();
 	cout << R"(                                                                   
     ___    _          _____ __            
    /   |  (_)___ ___ / ___// /_____ ______
@@ -82,6 +83,7 @@ void Cheat()
  / ___ |/ / / / / / /__/ / /_/ /_/ / /    
 /_/  |_/_/_/ /_/ /_/____/\__/\__,_/_/    
 	)" << endl;
+	printf("Build-%s-%s\n", __DATE__, __TIME__);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
 	auto ProcessStatus = ProcessMgr.Attach("cs2.exe");
@@ -155,7 +157,7 @@ void Cheat()
 	cout << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 	cout << "Cheat running successfully!" << endl;
-	cout << "Press [INS] to show or hide Menu." << endl;
+	cout << "Press [INS] or [DEL] to show or hide Menu." << endl;
 	cout << "Have fun..." << endl << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED);
 	cout << "=======[ Offset List ]=======" << endl;

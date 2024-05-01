@@ -298,11 +298,15 @@ namespace GUI
 				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5);
+
+
+
 			if (MenuConfig::SafeMode)
 				ImGui::TextColored(ImColor(50, 255, 0, 255), "Safe Mode ON");
 			else
 				ImGui::TextColored(ImColor(255, 25, 0, 255), "Safe Mode OFF");
-
+			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 105));
+			ImGui::Text("Build-%s-%s", __DATE__, __TIME__);
 			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);
 			
 			ImGui::BeginChild("Page", MenuConfig::WCS.ChildSize);
@@ -633,8 +637,8 @@ namespace GUI
 					{
 						PutSliderInt(Lang::MiscText.fovchanger, 10.f, &MiscCFG::Fov, &FovMin, &FovMax, "%d");
 						PutSliderFloat(Lang::MiscText.FlashImmunity, 10.f, &MiscCFG::FlashImmunity, &FlashMin, &FlashMax, "%.f");
+						PutSwitch(Lang::MiscText.Bhop, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
 					}
-					PutSwitch(Lang::MiscText.Bhop, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::BunnyHop);
 					PutSwitch(Lang::MiscText.bmbTimer, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::bmbTimer, true, "###bmbTimerCol", reinterpret_cast<float*>(&MiscCFG::BombTimerCol));
 					PutSwitch(Lang::MiscText.CheatList, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::CheatList);
 					PutSwitch(Lang::MiscText.FastStop, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::FastStop);
