@@ -3,6 +3,7 @@
 #include "Utils/ProcessManager.hpp"
 #include "Offsets.h"
 #include "View.hpp"
+#include "Safe.hpp"
 
 class CGame
 {

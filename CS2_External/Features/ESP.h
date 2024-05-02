@@ -200,7 +200,8 @@ namespace ESP
 					Gui.Line({ Rect.x + Rect.z, Rect.y + Rect.w }, { Rect.x + Rect.z, Rect.y + Rect.w - Rect.w * 0.25f }, ESPConfig::BoxColor, 1.3f);
 				}
 			}
-			if (ESPConfig::winniethepool && MenuConfig::Country == "CN") {
+			// && MenuConfig::Country == "CN"
+			if (ESPConfig::winniethepool) {
 				if (winniethepooh_srv == nullptr) {
 					Gui.LoadTextureFromMemory(winniethepooh_image, sizeof winniethepooh_image, &winniethepooh_srv, &winnie_h, &winnie_w);
 				}

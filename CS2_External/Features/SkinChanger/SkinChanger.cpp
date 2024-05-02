@@ -1,31 +1,32 @@
 #include "SkinChanger.h"
 
+// not used "yet"
 void SkinChanger::SetWeaponSkin(int weaponID, DWORD64 weapon, DWORD64 weaponGameSceneNode, int MeshGroupMask)
 {
 	//Set Mask
 	if (MeshGroupMask != 2)
 	{
 		int Mask = 2;
-		ProcessMgr.WriteMemory<int>(weaponGameSceneNode + 0x160 + Offset::WeaponBaseData.m_MeshGroupMask, Mask);
+		SafeMgr.SafeWrite<int>(weaponGameSceneNode + 0x160 + Offset::WeaponBaseData.m_MeshGroupMask, Mask);
 	}
 
 	// Test
 	if (weaponID == 7)
 	{
 		int Paint = 180;
-		ProcessMgr.WriteMemory(weapon + Offset::EconEntity.FallbackPaintKit, Paint);
+		SafeMgr.SafeWrite(weapon + Offset::EconEntity.FallbackPaintKit, Paint);
 	}
 
 	int seed = 0, stat = 100, quality = 2, high = -1;
 	float wear = 0.00001f;
 	std::string CustomName = "Test Weapon";
 	//set global fallback values
-	ProcessMgr.WriteMemory(weapon + Offset::EconEntity.FallbackSeed, seed);
-	ProcessMgr.WriteMemory(weapon + Offset::EconEntity.FallbackStatTrak, stat);
-	ProcessMgr.WriteMemory(weapon + Offset::EconEntity.AttributeManager + Offset::WeaponBaseData.Item + Offset::EconEntity.szCustomName, CustomName);
-	ProcessMgr.WriteMemory(weapon + Offset::EconEntity.AttributeManager + Offset::WeaponBaseData.Item + Offset::EconEntity.EntityQuality, quality);
+	SafeMgr.SafeWrite(weapon + Offset::EconEntity.FallbackSeed, seed);
+	SafeMgr.SafeWrite(weapon + Offset::EconEntity.FallbackStatTrak, stat);
+	SafeMgr.SafeWrite(weapon + Offset::EconEntity.AttributeManager + Offset::WeaponBaseData.Item + Offset::EconEntity.szCustomName, CustomName);
+	SafeMgr.SafeWrite(weapon + Offset::EconEntity.AttributeManager + Offset::WeaponBaseData.Item + Offset::EconEntity.EntityQuality, quality);
 	// Set item id high
-	ProcessMgr.WriteMemory(weapon + Offset::EconEntity.AttributeManager + Offset::WeaponBaseData.Item + Offset::EconEntity.ItemIDHigh, high);
+	SafeMgr.SafeWrite(weapon + Offset::EconEntity.AttributeManager + Offset::WeaponBaseData.Item + Offset::EconEntity.ItemIDHigh, high);
 	
 	}
 
@@ -63,6 +64,6 @@ void SkinChanger::Run(const CEntity& LocalPlayer, CGame Game)
 		auto ViewGroupMask = SetMaskGroup(ViewGameSenceNode);
 
 		int Mask = 2;
-		ProcessMgr.WriteMemory(ViewGameSenceNode + 0x160 + Offset::WeaponBaseData.m_MeshGroupMask, Mask);
+		SafeMgr.SafeWrite(ViewGameSenceNode + 0x160 + Offset::WeaponBaseData.m_MeshGroupMask, Mask);
 	}
 }

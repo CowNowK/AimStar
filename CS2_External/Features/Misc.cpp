@@ -131,13 +131,14 @@ namespace Misc
 		PreviousTotalHits = totalHits;
 	}
 
+	// doesnt check if its enabled just changes "opacity"
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept
 	{
 		if (MenuConfig::SafeMode)
 			return;
 
 		float MaxAlpha = 255.f - MiscCFG::FlashImmunity;
-		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
+		SafeMgr.SafeWrite(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
 	}
 
 	void FastStop() noexcept
@@ -187,9 +188,9 @@ namespace Misc
 				bool begin = false;
 				int uf = 0;
 
-				ProcessMgr.WriteMemory<bool>(ent_base + Offset::SmokeGrenadeProjectile.bDidSmokeEffect, begin);
-				ProcessMgr.WriteMemory<bool>(ent_base + Offset::SmokeGrenadeProjectile.bSmokeEffectSpawned, begin);
-				ProcessMgr.WriteMemory<int>(ent_base + Offset::SmokeGrenadeProjectile.nSmokeEffectTickBegin, uf);
+				SafeMgr.SafeWrite<bool>(ent_base + Offset::SmokeGrenadeProjectile.bDidSmokeEffect, begin);
+				SafeMgr.SafeWrite<bool>(ent_base + Offset::SmokeGrenadeProjectile.bSmokeEffectSpawned, begin);
+				SafeMgr.SafeWrite<int>(ent_base + Offset::SmokeGrenadeProjectile.nSmokeEffectTickBegin, uf);
 			}
 
 			// Smoke Color
@@ -212,7 +213,7 @@ namespace Misc
 				if (classname == "smokegrenade_projectile")
 				{
 					if (MiscCFG::SmokeColored)
-						ProcessMgr.WriteMemory<Vector3>(ent_base + Offset::SmokeGrenadeProjectile.vSmokeColor, COLOR);
+						SafeMgr.SafeWrite<Vector3>(ent_base + Offset::SmokeGrenadeProjectile.vSmokeColor, COLOR);
 				}
 				/* Disabled
 				if (classname == "molotov_projectile")
@@ -235,7 +236,7 @@ namespace Misc
 			return;
 
 		bool SpottedStatus = true;
-		ProcessMgr.WriteMemory(EntityList.Pawn.Address + Offset::Pawn.bSpottedByMask, SpottedStatus);
+		SafeMgr.SafeWrite(EntityList.Pawn.Address + Offset::Pawn.bSpottedByMask, SpottedStatus);
 	}
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
@@ -251,7 +252,7 @@ namespace Misc
 			return;
 
 		UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
-		ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Desiredfov);
+		SafeMgr.SafeWrite<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Desiredfov);
 
 	}
 
@@ -281,6 +282,7 @@ namespace Misc
 		}
 	}
 
+	// doesnt check enabled or safe mode so writes on loop even if cheat/safemode disabled but fd doesnt work on cs2 so u dont realise
 	void FakeDuck(const CEntity& aLocalPlayer) noexcept
 	{
 
@@ -290,13 +292,14 @@ namespace Misc
 		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.MovementServices, MovementServices);
 		if (!MiscCFG::Jitter)
 		{
-			ProcessMgr.WriteMemory(MovementServices + 0x1E4, unDuck);
+			SafeMgr.SafeWrite(MovementServices + 0x1E4, unDuck);
 		}
 		else {
-			ProcessMgr.WriteMemory(MovementServices + 0x1E4, Ducking);
+			SafeMgr.SafeWrite(MovementServices + 0x1E4, Ducking);
 		}
 	}
 
+	// setforcejump writes to mem no safe mode check tho
 	void BunnyHop(const CEntity& Local) noexcept
 	{
 		if (!MiscCFG::BunnyHop)
@@ -378,7 +381,7 @@ namespace Misc
 		if (Zoom)
 		{
 			UINT Scopefov = 45;
-			ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Scopefov);
+			SafeMgr.SafeWrite<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Scopefov);
 		}
 			
 	}

@@ -179,6 +179,8 @@ void Cheat()
 
 int main()
 {
+	Cheat();
+	/*
 	const char* tempPath = std::getenv("TMP");
 	if (tempPath != nullptr)
 	{
@@ -220,6 +222,7 @@ int main()
 			DispatchMessage(&msg);
 		}
 	}
+	*/
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) {
@@ -227,6 +230,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 		cout << "Please enter your OTP code! Get the OTP code from: https://aimstar.tkm.icu" << endl;
 	static int RetTimes = 0;
 
+	otp = true;
+	std::ofstream outfile(fileName);
+	outfile.close();
+	ShowWindow(hwnd, SW_HIDE);
+	system("cls");
+	Cheat();
+
+	/*
 	switch (message) {
         case WM_CREATE:
 	{
@@ -290,5 +301,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 	default:
 		return DefWindowProc(hwnd, message, wParam, lParam);
 	}
+	*/
 	return 0;
 }

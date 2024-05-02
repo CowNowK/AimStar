@@ -89,7 +89,7 @@ bool CGame::SetViewAngle(float Yaw, float Pitch)
 {
 	Vec2 Angle{ Pitch,Yaw };
 
-	if (!ProcessMgr.WriteMemory<Vec2>(this->Address.ViewAngle, Angle))
+	if (!SafeMgr.SafeWrite<Vec2>(this->Address.ViewAngle, Angle))
 		return false;
 
 	return true;
@@ -97,7 +97,7 @@ bool CGame::SetViewAngle(float Yaw, float Pitch)
 
 bool CGame::SetForceJump(int value)
 {
-	if (!ProcessMgr.WriteMemory<int>(this->Address.ForceJump, value))
+	if (!SafeMgr.SafeWrite<int>(this->Address.ForceJump, value))
 		return false;
 
 	return true;
@@ -111,7 +111,7 @@ bool CGame::GetForceJump(int& value)
 }
 bool CGame::SetForceCrouch(int value)
 {
-	if (!ProcessMgr.WriteMemory<int>(this->Address.ForceCrouch, value))
+	if (!SafeMgr.SafeWrite<int>(this->Address.ForceCrouch, value))
 		return false;
 
 	return true;
@@ -130,13 +130,13 @@ bool CGame::SetForceMove(int MovingType, int Value)
 	switch (MovingType)
 	{
 	case 0:
-		if (!ProcessMgr.WriteMemory<int>(this->Address.ForceForward, Value)) return false;
+		if (!SafeMgr.SafeWrite<int>(this->Address.ForceForward, Value)) return false;
 		break;
 	case 1:
-		if (!ProcessMgr.WriteMemory<int>(this->Address.ForceLeft, Value)) return false;
+		if (!SafeMgr.SafeWrite<int>(this->Address.ForceLeft, Value)) return false;
 		break;
 	case 2:
-		if (!ProcessMgr.WriteMemory<int>(this->Address.ForceRight, Value)) return false;
+		if (!SafeMgr.SafeWrite<int>(this->Address.ForceRight, Value)) return false;
 		break;
 	default:
 		return false;

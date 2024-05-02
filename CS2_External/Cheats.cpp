@@ -295,6 +295,7 @@ void Cheats::Run()
 	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways))
 		TriggerBot::Run(LocalEntity);	
 
+	// most of these dont check safe mode even tho they write, some of them dont even check if they are enabled so they write every loop lmao
 	Misc::HitSound(LocalEntity, PreviousTotalHits);
 	Misc::FlashImmunity(LocalEntity);
 	Misc::FastStop();
