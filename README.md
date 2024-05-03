@@ -126,4 +126,7 @@ Nearly two thousand people use otp generation every day. Most of them are Intern
 Users mainly come from China, Turkey, the Russian Federation, the United States and Southeast Asia, with Chinese users and Turkish users accounting for the majority.
 
 In March to April 2024, we detected abnormal traffic in Germany, Japan, and the United States. Does this mean that aimstar has potential competitors in these countries? (imaging over 80k japs using AimStar in 12hrs xd)
+
+![Screenshot_2024-05-03-23-59-47-257_com android chrome-edit](https://github.com/CowNowK/AimStar/assets/65479796/566fc6d9-0d1a-40ad-900b-802b60f732d0)
+
 </details>
