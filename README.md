@@ -93,6 +93,7 @@ Please read the following advice carefully before using Aimstar.
 
 [![Star History Chart](https://api.star-history.com/svg?repos=CowNowK/AimStar&type=Date)](https://star-history.com/#CowNowK/AimStar&Date)
 
+<!--
 ## 💲 Best Resell
 
 这个拼多多商家已经将免费的AimStar以35元永久的价格售出了10万份
@@ -116,6 +117,7 @@ Please read the following advice carefully before using Aimstar.
 <img src="https://github.com/CowNowK/AimStar/assets/65479796/a16fc131-7db4-40cc-a51a-76dbef9ef2c3" alt="张海先生" style="width:315px;height:538ox;">
 
 </details>
+!-->
 
 ## ✈️ User group analysis
 The data comes from monitoring the otp generator web page on cloudflare.
