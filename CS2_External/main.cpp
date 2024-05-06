@@ -10,7 +10,8 @@
 #include <KnownFolders.h>
 #include <ShlObj.h>
 #include <stdio.h>
-
+#include "Utils/curl/curl.h"
+#include "Utils/json/json.hpp"
 using namespace std;
 /*
 Contributors:
@@ -57,15 +58,63 @@ void RandomTitle()
 
 	for (int j = 0; j != length; j++)
 	{
-		title[j] += characters[rand() % 62];
+		title[j] += characters[rand() % 95];
 	}
 
 	SetConsoleTitle(title);
 }
 
+
+using json = nlohmann::json;
+
+
+static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
+	((std::string*)userp)->append((char*)contents, size * nmemb);
+	return size * nmemb;
+}
+
+
+
+bool checkHWIDFromURL(const std::string& url, const std::string& hwid) {
+	CURL* curl;
+	CURLcode res;
+	std::string readBuffer;
+	json jData;
+
+	curl = curl_easy_init();
+	if (curl) {
+		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+
+
+		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+
+		res = curl_easy_perform(curl);
+		curl_easy_cleanup(curl);
+
+		if (res != CURLE_OK) {
+			std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << '\n';
+			return false;
+		}
+
+		jData = json::parse(readBuffer);
+	}
+
+	for (const auto& element : jData) {
+		if (element.get<std::string>() == hwid) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void Cheat()
 {
 	MenuConfig::HWID = Init::Client::GenerateHWID();
+	if (checkHWIDFromURL("https://gh-proxy.com/https://raw.githubusercontent.com/South-Haruna-Institute-of-Technology/timebase-otp/main/drm", MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
+		MenuConfig::Ban = true;
 	if (Init::Verify::CheckWindowVersion())
 	{
 		Lang::GetCountry(MenuConfig::Country);
@@ -186,7 +235,8 @@ void Cheat()
 		try
 		{
 			// Perfect World version
-			Gui.AttachAnotherWindow("\u53cd\u6050\u7cbe\u82f1\uff1a\u5168\u7403\u653b\u52bf", "SDL_app", Cheats::Run);		}
+			Gui.AttachAnotherWindow("\u53cd\u6050\u7cbe\u82f1\uff1a\u5168\u7403\u653b\u52bf", "SDL_app", Cheats::Run);
+		}
 		catch (OSImGui::OSException& e)
 		{
 			cout << e.what() << endl;

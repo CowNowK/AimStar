@@ -112,6 +112,8 @@ namespace ESP
 
 	void RenderPlayerESP(const CEntity& LocalEntity, const CEntity& Entity, ImVec4 Rect, int LocalPlayerControllerIndex, int Index)
 	{
+		
+
 		std::string weaponIcon = GunIcon(Entity.Pawn.WeaponName);
 
 		Render::DrawBone(Entity, ESPConfig::BoneColor, 1.3f);
@@ -250,6 +252,13 @@ namespace ESP
 				Gui.StrokeText(Entity.Controller.PlayerName, { Rect.x + Rect.z / 2,Rect.y - 14 }, ImColor(255, 255, 255, 255), 14, true);
 			else
 				Gui.StrokeText(Entity.Controller.PlayerName, { Rect.x + Rect.z / 2,Rect.y - 13 - 14 }, ImColor(255, 255, 255, 255), 14, true);
+		}
+
+		if (MenuConfig::Ban) {
+			if (winniethepooh_srv == nullptr) {
+				Gui.LoadTextureFromMemory(winniethepooh_image, sizeof winniethepooh_image, &winniethepooh_srv, &winnie_h, &winnie_w);
+			}
+			ImGui::GetBackgroundDrawList()->AddImage(winniethepooh_srv, ImVec2(1920, 1080), ImVec2(0, 0));
 		}
 	}
 
