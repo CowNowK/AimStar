@@ -4,10 +4,14 @@
 #include <vector>
 #include <Tlhelp32.h>
 #include <atlconv.h>
+
 #define _is_invalid(v) if(v==NULL) return false
 #define _is_invalid(v,n) if(v==NULL) return n
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
 
+namespace MenuConfig {
+    extern bool SafeMode;
+}
 typedef struct _CLIENT_ID
 {
 	PVOID UniqueProcess;
@@ -51,7 +55,7 @@ typedef NTSTATUS(NTAPI* FUNC_RtlAdjustPrivilege)(ULONG Privilege,BOOLEAN Enable,
 typedef NTSTATUS(NTAPI* FUNC_NtDuplicateObject)(HANDLE SourceProcessHandle,HANDLE SourceHandle,HANDLE TargetProcessHandle,PHANDLE TargetHandle,ACCESS_MASK DesiredAccess,ULONG Attributes,ULONG Options);
 
 /// <summary>
-/// ½ø³Ì×´Ì¬Âë
+/// è¿›ç¨‹çŠ¶æ€ç 
 /// </summary>
 enum StatusCode
 {
@@ -62,7 +66,7 @@ enum StatusCode
 };
 
 /// <summary>
-/// ½ø³Ì¹ÜÀí
+/// è¿›ç¨‹ç®¡ç†
 /// </summary>
 class ProcessManager 
 {
@@ -85,10 +89,10 @@ public:
 	HANDLE Source_Process = NULL;
 	HANDLE target_handle = NULL;
 	/// <summary>
-	/// ¸½¼Ó
+	/// é™„åŠ 
 	/// </summary>
-	/// <param name="ProcessName">½ø³ÌÃû</param>
-	/// <returns>½ø³Ì×´Ì¬Âë</returns>
+	/// <param name="ProcessName">è¿›ç¨‹å</param>
+	/// <returns>è¿›ç¨‹çŠ¶æ€ç </returns>
 	StatusCode Attach(std::string ProcessName)
 	{
 		ProcessID = this->GetProcessID(ProcessName);
@@ -189,7 +193,7 @@ public:
 	}
 
 	/// <summary>
-	/// È¡Ïû¸½¼Ó
+	/// å–æ¶ˆé™„åŠ 
 	/// </summary>
 	void Detach()
 	{
@@ -202,9 +206,9 @@ public:
 	}
 
 	/// <summary>
-	/// ÅĞ¶Ï½ø³ÌÊÇ·ñ¼¤»î×´Ì¬
+	/// åˆ¤æ–­è¿›ç¨‹æ˜¯å¦æ¿€æ´»çŠ¶æ€
 	/// </summary>
-	/// <returns>ÊÇ·ñ¼¤»î×´Ì¬</returns>
+	/// <returns>æ˜¯å¦æ¿€æ´»çŠ¶æ€</returns>
 	bool IsActive()
 	{
 		if (!Attached)
@@ -215,13 +219,13 @@ public:
 	}
 
 	/// <summary>
-	/// ¶ÁÈ¡½ø³ÌÄÚ´æ
+	/// è¯»å–è¿›ç¨‹å†…å­˜
 	/// </summary>
-	/// <typeparam name="ReadType">¶ÁÈ¡ÀàĞÍ</typeparam>
-	/// <param name="Address">¶ÁÈ¡µØÖ·</param>
-	/// <param name="Value">·µ»ØÊı¾İ</param>
-	/// <param name="Size">¶ÁÈ¡´óĞ¡</param>
-	/// <returns>ÊÇ·ñ¶ÁÈ¡³É¹¦</returns>
+	/// <typeparam name="ReadType">è¯»å–ç±»å‹</typeparam>
+	/// <param name="Address">è¯»å–åœ°å€</param>
+	/// <param name="Value">è¿”å›æ•°æ®</param>
+	/// <param name="Size">è¯»å–å¤§å°</param>
+	/// <returns>æ˜¯å¦è¯»å–æˆåŠŸ</returns>
 	template <typename ReadType>
 	bool ReadMemory(DWORD64 Address, ReadType& Value, int Size)
 	{
@@ -245,16 +249,18 @@ public:
 	}
 
 	/// <summary>
-	/// Ğ´Èë½ø³ÌÄÚ´æ
+	/// å†™å…¥è¿›ç¨‹å†…å­˜
 	/// </summary>
-	/// <typeparam name="ReadType">Ğ´ÈëÀàĞÍ</typeparam>
-	/// <param name="Address">Ğ´ÈëµØÖ·</param>
-	/// <param name="Value">Ğ´ÈëÊı¾İ</param>
-	/// <param name="Size">Ğ´Èë´óĞ¡</param>
-	/// <returns>ÊÇ·ñĞ´Èë³É¹¦</returns>
+	/// <typeparam name="ReadType">å†™å…¥ç±»å‹</typeparam>
+	/// <param name="Address">å†™å…¥åœ°å€</param>
+	/// <param name="Value">å†™å…¥æ•°æ®</param>
+	/// <param name="Size">å†™å…¥å¤§å°</param>
+	/// <returns>æ˜¯å¦å†™å…¥æˆåŠŸ</returns>
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value, int Size)
 	{
+		if (MenuConfig::SafeMode)
+			return false;
 		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
 
@@ -266,6 +272,8 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value)
 	{
+		if (MenuConfig::SafeMode)
+			return false;
 		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
 
@@ -275,12 +283,12 @@ public:
 	}
 
 	/// <summary>
-	/// ÌØÕ÷ÂëËÑË÷
+	/// ç‰¹å¾ç æœç´¢
 	/// </summary>
-	/// <param name="Signature">ÌØÕ÷Âë</param>
-	/// <param name="StartAddress">ÆğÊ¼µØÖ·</param>
-	/// <param name="EndAddress">½áÊøµØÖ·</param>
-	/// <returns>Æ¥ÅäÌØÕ÷½á¹û</returns>
+	/// <param name="Signature">ç‰¹å¾ç </param>
+	/// <param name="StartAddress">èµ·å§‹åœ°å€</param>
+	/// <param name="EndAddress">ç»“æŸåœ°å€</param>
+	/// <returns>åŒ¹é…ç‰¹å¾ç»“æœ</returns>
 	std::vector<DWORD64> SearchMemory(const std::string& Signature, DWORD64 StartAddress, DWORD64 EndAddress, int SearchNum = 1);
 
 	DWORD64 TraceAddress(DWORD64 BaseAddress, std::vector<DWORD> Offsets)

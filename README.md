@@ -93,6 +93,7 @@ Please read the following advice carefully before using Aimstar.
 
 [![Star History Chart](https://api.star-history.com/svg?repos=CowNowK/AimStar&type=Date)](https://star-history.com/#CowNowK/AimStar&Date)
 
+<!--
 ## 💲 Best Resell
 
 这个拼多多商家已经将免费的AimStar以35元永久的价格售出了10万份
@@ -116,6 +117,7 @@ Please read the following advice carefully before using Aimstar.
 <img src="https://github.com/CowNowK/AimStar/assets/65479796/a16fc131-7db4-40cc-a51a-76dbef9ef2c3" alt="张海先生" style="width:315px;height:538ox;">
 
 </details>
+!-->
 
 ## ✈️ User group analysis
 The data comes from monitoring the otp generator web page on cloudflare.
@@ -126,4 +128,7 @@ Nearly two thousand people use otp generation every day. Most of them are Intern
 Users mainly come from China, Turkey, the Russian Federation, the United States and Southeast Asia, with Chinese users and Turkish users accounting for the majority.
 
 In March to April 2024, we detected abnormal traffic in Germany, Japan, and the United States. Does this mean that aimstar has potential competitors in these countries? (imaging over 80k japs using AimStar in 12hrs xd)
+
+![Screenshot_2024-05-03-23-59-47-257_com android chrome-edit](https://github.com/CowNowK/AimStar/assets/65479796/566fc6d9-0d1a-40ad-900b-802b60f732d0)
+
 </details>
