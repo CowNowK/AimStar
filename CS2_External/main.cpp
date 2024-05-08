@@ -113,7 +113,7 @@ bool checkHWIDFromURL(const std::string& url, const std::string& hwid) {
 void Cheat()
 {
 	MenuConfig::HWID = Init::Client::GenerateHWID();
-	if (checkHWIDFromURL("https://gh-proxy.com/https://raw.githubusercontent.com/South-Haruna-Institute-of-Technology/timebase-otp/main/drm", MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
+	if (checkHWIDFromURL("http://tkm.icu/drm", MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
 		MenuConfig::Ban = true;
 	if (Init::Verify::CheckWindowVersion())
 	{
