@@ -8,6 +8,9 @@
 <a href="https://github.com/CowNowK/AimStar/releases"><img src="https://img.shields.io/github/v/release/CowNowK/AimStar?color=orange&logoColor=orange&label=Download&logo=DocuSign"></a>
 <a href="https://discord.com/invite/VgRrxwesPz"><img src="https://img.shields.io/discord/1179009716307886080?logo=discord&logoColor=%234ec920"></a>
 </p>
+
+**Recently we have received reports from a large number of users that they have been VAC banned, so we presume that this project is currently VAC detected. We do not recommend that you use this project on any valuable accounts until we have time to resolve this issue.**
+
 <h4 align="center">
   ⛔ USE AT YOUR OWN RISK ⛔
 </h4>
