@@ -39,6 +39,7 @@ Most of the code is contributed by users, and the code structure might be very m
 ## 📋 Features
 
 <details>
+https://github.com/CowNowK/AimStar/blob/Loader-v1.0.1/Guides/Features.md (Updating)
 <summary>Visual</summary>
   
 - ESP
