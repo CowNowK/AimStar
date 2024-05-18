@@ -24,6 +24,7 @@
     <ProjectGuid>{82688835-fba1-418a-9ad2-9a2d94c0fd47}</ProjectGuid>
     <RootNamespace>CS2External</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>AimStar</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

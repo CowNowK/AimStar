@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CS2_External", "CS2_External\CS2_External.vcxproj", "{82688835-FBA1-418A-9AD2-9A2D94C0FD47}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Driver", "Driver\Driver.vcxproj", "{03A54C0D-698C-4A15-900B-02F662317FAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x64.Build.0 = Release|x64
 		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x86.ActiveCfg = Release|Win32
 		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x86.Build.0 = Release|Win32
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Debug|x64.ActiveCfg = Debug|x64
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Debug|x64.Build.0 = Debug|x64
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Debug|x86.ActiveCfg = Debug|Win32
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Debug|x86.Build.0 = Debug|Win32
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Release|x64.ActiveCfg = Release|x64
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Release|x64.Build.0 = Release|x64
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Release|x86.ActiveCfg = Release|Win32
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
