@@ -14,12 +14,12 @@ jobs:
       - name: Setup MSBuild path
         uses: microsoft/setup-msbuild@main
       - name: Build with MSBuild
-        run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
+        run: msbuild CS2_External\CS2_External.vcxproj /p:Configuration=Release /p:Platform=x64
       - name: Rename EXE to AimStar-${{github.sha}}.exe
         run: |
           del AimStar-*.exe
           ren AimStar.exe AimStar-${{github.sha}}.exe
-        working-directory: .\x64\Release\
+        working-directory: CS2_External\x64\Release\
       - name: Upload the output
         uses: actions/upload-artifact@main
         with:
@@ -32,12 +32,12 @@ jobs:
       - name: Set up Developer Command Prompt
         uses: ilammy/msvc-dev-cmd@v1
       - name: Compile with llvm
-        run: msbuild CS2_External.sln /p:Configuration=Release /p:Platform="x64" /p:CLToolExe=clang-cl.exe /p:CLToolPath="C:\Program Files\LLVM\bin"
+        run: msbuild CS2_External\CS2_External.vcxproj /p:Configuration=Release /p:Platform="x64" /p:CLToolExe=clang-cl.exe /p:CLToolPath="C:\Program Files\LLVM\bin"
       - name: Rename EXE to LLVM-AimStar-${{github.sha}}.exe
         run: |
           del LLVM-AimStar-*.exe
           ren AimStar.exe LLVM-AimStar-${{github.sha}}.exe
-        working-directory: .\x64\Release\
+        working-directory: CS2_External\x64\Release\
       - name: Upload the output
         uses: actions/upload-artifact@main
         with:
