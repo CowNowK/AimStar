@@ -88,7 +88,10 @@ namespace utils
         case WINDOWS_20H2:
             return 0x0388;
             break;
-        case WINDOWS_21H1:
+        case WINDOWS_21H2:
+            return 0x0388;
+            break;
+        case WINDOWS_22H2:
             return 0x0388;
             break;
         default:
