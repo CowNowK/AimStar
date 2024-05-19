@@ -198,6 +198,7 @@
     <ClInclude Include="Utils\XorStr.hpp" />
     <ClInclude Include="Utils\driver.hpp" />
     <ClInclude Include="Utils\XorStr.h" />
+    <ClInclude Include="Utils\OffsetsUpdater.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
