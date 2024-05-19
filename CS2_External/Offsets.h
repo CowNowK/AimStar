@@ -10,9 +10,6 @@
 
 namespace Offset
 {
-	inline std::string dumper_offsets = "https://raw.githubusercontent.com/a2x/cs2-dumper/main/output/offsets.json";
-	inline std::string dumper_buttons = "https://raw.githubusercontent.com/a2x/cs2-dumper/main/output/buttons.json";
-
 	inline DWORD ForceJump = cs2_dumper::buttons::jump;
 	inline DWORD ForceCrouch = cs2_dumper::buttons::duck;
 	inline DWORD ForceForward = cs2_dumper::buttons::forward;

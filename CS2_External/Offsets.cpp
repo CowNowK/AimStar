@@ -1,4 +1,8 @@
 #include "Offsets.h"
+#include "MenuConfig.hpp"
+#include <filesystem>
+
+namespace fs = std::filesystem;
 
 DWORD64 SearchOffsets(std::string Signature, DWORD64 ModuleAddress)
 {
@@ -21,6 +25,17 @@ DWORD64 SearchOffsets(std::string Signature, DWORD64 ModuleAddress)
 bool Offset::UpdateOffsets()
 {
 	using namespace Updater;
+
+	std::string offsetPath = MenuConfig::path + "\\Offsets";
+	if (!fs::exists(offsetPath)) {
+		std::cerr << "Failed to locate offsets directory: " << offsetPath << std::endl;
+		return false;
+	}
+
+	std::string dumper_offsets = offsetPath + "\\offsets.json";
+	std::string dumper_buttons = offsetPath + "\\buttons.json";
+	std::string dumper_client = offsetPath + "\\client.json";
+
 	std::map<std::string, int> offsets, buttons;
 	OffsetsParser(offsets, dumper_offsets, "client.dll");
 	OffsetsParser(offsets, dumper_offsets, "inputsystem.dll");
