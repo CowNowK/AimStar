@@ -9,18 +9,6 @@
 
 namespace Updater
 {
-    static size_t WriteCallback(void* Contents, size_t Size, size_t nmemb, std::string* s) {
-        size_t newLength = Size * nmemb;
-        try {
-            s->append((char*)Contents, newLength);
-        }
-        catch (std::bad_alloc& e) {
-            // Used to handle out of memory errors
-            return 0;
-        }
-        return newLength;
-    }
-
     inline void OffsetsParser(std::map<std::string, int>& map, const std::string& dataPath, const std::string& moduleName) {
         std::ifstream file(dataPath);
         if (!file.is_open()) {
