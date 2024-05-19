@@ -1,4 +1,9 @@
 #pragma once
+#include <cstdint>
+#include <cstdio>
+#include <libloaderapi.h>
+#include <string>
+#include <vadefs.h>
 
 class _driver
 {
