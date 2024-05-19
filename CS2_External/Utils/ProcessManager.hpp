@@ -99,7 +99,7 @@ public:
 		ProcessID = this->GetProcessID(ProcessName);
 		_is_invalid(ProcessID, FAILE_PROCESSID);
 		driver.initdriver(ProcessID);
-		std::cout << (uintptr_t)driver.client_address();
+		// std::cout << (uintptr_t)driver.client_address() << std::endl;
 
 		hProcess = OpenProcess(PROCESS_ALL_ACCESS | PROCESS_CREATE_THREAD, TRUE, ProcessID);
 		_is_invalid(hProcess, FAILE_HPROCESS);

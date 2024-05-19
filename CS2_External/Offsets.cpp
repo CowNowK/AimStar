@@ -41,7 +41,6 @@ bool Offset::UpdateOffsets()
 	OffsetsParser(offsets, dumper_offsets, "inputsystem.dll");
 	OffsetsParser(buttons, dumper_buttons, "client.dll");
 
-
 	Offset::EntityList = GetOffset(offsets, "dwEntityList");
 	Offset::LocalPlayerController = GetOffset(offsets, "dwLocalPlayerController");
 	Offset::Matrix = GetOffset(offsets, "dwViewMatrix");
