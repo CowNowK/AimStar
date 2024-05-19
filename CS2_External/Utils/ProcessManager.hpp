@@ -10,7 +10,7 @@
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
 
 namespace MenuConfig {
-    extern bool SafeMode;
+	extern bool SafeMode;
 }
 typedef struct _CLIENT_ID
 {
@@ -22,7 +22,7 @@ typedef struct _UNICODE_STRING {
 	USHORT Length;
 	USHORT MaximumLength;
 	PWCH   Buffer;
-} UNICODE_STRING, *UNICODE_STRING_Ptr;
+} UNICODE_STRING, * UNICODE_STRING_Ptr;
 
 typedef struct _SYSTEM_HANDLE_TABLE_ENTRY_INFO
 {
@@ -49,10 +49,10 @@ typedef struct _SYSTEM_HANDLE_INFORMATION
 	ULONG HandleCount;
 	SYSTEM_HANDLE_TABLE_ENTRY_INFO Handles[1];
 } SYSTEM_HANDLE_INFORMATION, * PSYSTEM_HANDLE_INFORMATION;
-typedef NTSYSAPI NTSTATUS(NTAPI* FUNC_NtOpenProcess)(PHANDLE ProcessHandle,ACCESS_MASK DesiredAccess,OBJECT_ATTRIBUTES_Ptr ObjectAttributes,PCLIENT_ID ClientId);
-typedef NTSTATUS(NTAPI* FUNC_NtQuerySystemInformation)(ULONG SystemInformationClass,PVOID SystemInformation,ULONG SystemInformationLength,PULONG ReturnLength);
-typedef NTSTATUS(NTAPI* FUNC_RtlAdjustPrivilege)(ULONG Privilege,BOOLEAN Enable,BOOLEAN CurrentThread,PBOOLEAN Enabled);
-typedef NTSTATUS(NTAPI* FUNC_NtDuplicateObject)(HANDLE SourceProcessHandle,HANDLE SourceHandle,HANDLE TargetProcessHandle,PHANDLE TargetHandle,ACCESS_MASK DesiredAccess,ULONG Attributes,ULONG Options);
+typedef NTSYSAPI NTSTATUS(NTAPI* FUNC_NtOpenProcess)(PHANDLE ProcessHandle, ACCESS_MASK DesiredAccess, OBJECT_ATTRIBUTES_Ptr ObjectAttributes, PCLIENT_ID ClientId);
+typedef NTSTATUS(NTAPI* FUNC_NtQuerySystemInformation)(ULONG SystemInformationClass, PVOID SystemInformation, ULONG SystemInformationLength, PULONG ReturnLength);
+typedef NTSTATUS(NTAPI* FUNC_RtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
+typedef NTSTATUS(NTAPI* FUNC_NtDuplicateObject)(HANDLE SourceProcessHandle, HANDLE SourceHandle, HANDLE TargetProcessHandle, PHANDLE TargetHandle, ACCESS_MASK DesiredAccess, ULONG Attributes, ULONG Options);
 
 /// <summary>
 /// 进程状态码
@@ -68,7 +68,7 @@ enum StatusCode
 /// <summary>
 /// 进程管理
 /// </summary>
-class ProcessManager 
+class ProcessManager
 {
 private:
 	bool   Attached = false;
@@ -107,7 +107,7 @@ public:
 			object.SecurityDescriptor = SecurityDescriptor;
 			object.ObjectName = ObjectName;
 			return object;
-		};
+			};
 
 		FUNC_RtlAdjustPrivilege f_RtlAdjustPrivilege = (FUNC_RtlAdjustPrivilege)GetProcAddress(GetModuleHandleA("ntdll"), "RtlAdjustPrivilege");
 		FUNC_NtDuplicateObject f_NtDuplicateObject = (FUNC_NtDuplicateObject)GetProcAddress(GetModuleHandleA("ntdll"), "NtDuplicateObject");
@@ -117,8 +117,8 @@ public:
 
 
 
-		_OBJECT_ATTRIBUTES R_Attributes = ObjectAttributes(NULL,NULL,NULL,NULL);
-		CLIENT_ID t_CLIENT_ID= { 0 };
+		_OBJECT_ATTRIBUTES R_Attributes = ObjectAttributes(NULL, NULL, NULL, NULL);
+		CLIENT_ID t_CLIENT_ID = { 0 };
 		boolean OldPriv;
 
 		f_RtlAdjustPrivilege(20, TRUE, FALSE, &OldPriv);
@@ -126,7 +126,7 @@ public:
 		DWORD Sizeof_SYSTEM_HANDLE_INFORMATION = sizeof(SYSTEM_HANDLE_INFORMATION);
 
 		NTSTATUS NTAPIReturn = NULL;
-		
+
 		do {
 			delete[] t_SYSTEM_HANDLE_INFORMATION;
 
@@ -164,15 +164,15 @@ public:
 
 			t_CLIENT_ID.UniqueProcess = (DWORD*)t_SYSTEM_HANDLE_INFORMATION->Handles[i].ProcessId;
 
-			NTAPIReturn = f_NtOpenProcess(&Source_Process,PROCESS_DUP_HANDLE,&R_Attributes,&t_CLIENT_ID);
+			NTAPIReturn = f_NtOpenProcess(&Source_Process, PROCESS_DUP_HANDLE, &R_Attributes, &t_CLIENT_ID);
 
 			if (Source_Process == INVALID_HANDLE_VALUE || !NT_SUCCESS(NTAPIReturn))
 				continue;
-			NTAPIReturn = f_NtDuplicateObject(Source_Process,(HANDLE)t_SYSTEM_HANDLE_INFORMATION->Handles[i].Handle, (HANDLE)(LONG_PTR)-1,&target_handle,PROCESS_ALL_ACCESS,0,0);
-			
+			NTAPIReturn = f_NtDuplicateObject(Source_Process, (HANDLE)t_SYSTEM_HANDLE_INFORMATION->Handles[i].Handle, (HANDLE)(LONG_PTR)-1, &target_handle, PROCESS_ALL_ACCESS, 0, 0);
+
 			if (target_handle == INVALID_HANDLE_VALUE || !NT_SUCCESS(NTAPIReturn))
 				continue;
-			
+
 			if (GetProcessId(target_handle) == ProcessID) {
 				hProcess = target_handle;
 				Attached = true;
@@ -185,7 +185,7 @@ public:
 				CloseHandle(Source_Process);
 				continue;
 			}
-			
+
 
 		}
 
@@ -229,7 +229,7 @@ public:
 	template <typename ReadType>
 	bool ReadMemory(DWORD64 Address, ReadType& Value, int Size)
 	{
-		_is_invalid(hProcess,false);
+		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
 
 		if (ReadProcessMemory(hProcess, reinterpret_cast<LPCVOID>(Address), &Value, Size, 0))
@@ -293,8 +293,8 @@ public:
 
 	DWORD64 TraceAddress(DWORD64 BaseAddress, std::vector<DWORD> Offsets)
 	{
-		_is_invalid(hProcess,0);
-		_is_invalid(ProcessID,0);
+		_is_invalid(hProcess, 0);
+		_is_invalid(ProcessID, 0);
 		DWORD64 Address = 0;
 
 		if (Offsets.size() == 0)
@@ -302,7 +302,7 @@ public:
 
 		if (!ReadMemory<DWORD64>(BaseAddress, Address))
 			return 0;
-	
+
 		for (int i = 0; i < Offsets.size() - 1; i++)
 		{
 			if (!ReadMemory<DWORD64>(Address + Offsets[i], Address))

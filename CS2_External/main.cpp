@@ -114,7 +114,7 @@ void Cheat()
 {
 	MenuConfig::HWID = Init::Client::GenerateHWID();
 	//if (checkHWIDFromURL("http://aimstar.tkm.icu/drm", MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
-		//MenuConfig::Ban = true;
+	//	MenuConfig::Ban = true;
 	if (Init::Verify::CheckWindowVersion())
 	{
 		Lang::GetCountry(MenuConfig::Country);
