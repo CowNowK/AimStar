@@ -27,19 +27,19 @@ Most of the code is contributed by users, and the code structure might be very m
 
 Русский язык: [Readme RU](https://github.com/CowNowK/AimStar/blob/main/ПРОЧИТАЙМЕНЯ.md)
 
+> **Due to some force majeure disease factors that happened to me personally, I am unable to maintain the repo in time. I apologize for your understanding.**
+
 ## ⚠️ Notice
 
 **Isnt working?** -> [**__COMMON ISSUES__**](https://github.com/CowNowK/AimStar/wiki)
 
-***
-> I am so busy that I may not update the code on time. If u have the capability to update or fix bugs, u can pull ur request🤩
-***
 ## 📸 Preview
 ![](/Image2.png)
 
 ## 📋 Features
 
 <details>
+https://github.com/CowNowK/AimStar/blob/Loader-v1.0.1/Guides/Features.md (Updating)
 <summary>Visual</summary>
   
 - ESP
