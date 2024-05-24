@@ -27,7 +27,7 @@ struct BoneJointData
 {
 	Vec3 Pos;
         float Scale;
-	char pad[0x14];
+	char pad[0x10];
 };
 
 struct BoneJointPos
