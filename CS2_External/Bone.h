@@ -26,7 +26,8 @@ enum BONEINDEX : DWORD
 struct BoneJointData
 {
 	Vec3 Pos;
-	char pad[0x14];
+        float Scale;
+	char pad[0x10];
 };
 
 struct BoneJointPos
@@ -48,16 +49,16 @@ public:
 
 namespace BoneJointList
 {
-	// ¼¹¹Ç
+	// Â¼Â¹Â¹Ã‡
 	inline std::list<DWORD> Trunk = { neck_0,spine_2, pelvis};
-	// ×ó±Û
+	// Ã—Ã³Â±Ã›
 	inline std::list<DWORD> LeftArm = { neck_0,  arm_upper_L, arm_lower_L, hand_L };
-	// ÓÒ±Û
+	// Ã“Ã’Â±Ã›
 	inline std::list<DWORD> RightArm = { neck_0, arm_upper_R,arm_lower_R, hand_R };
-	// ×óÍÈ	
+	// Ã—Ã³ÃÃˆ	
 	inline std::list<DWORD> LeftLeg = { pelvis, leg_upper_L , leg_lower_L, ankle_L };
-	// ÓÒÍÈ
+	// Ã“Ã’ÃÃˆ
 	inline std::list<DWORD> RightLeg = { pelvis, leg_upper_R , leg_lower_R, ankle_R };
-	// ×ÜÁĞ±í
+	// Ã—ÃœÃÃÂ±Ã­
 	inline std::vector<std::list<DWORD>> List = { Trunk, LeftArm, RightArm, LeftLeg, RightLeg };
 }
