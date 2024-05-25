@@ -60,7 +60,7 @@ namespace Offset
 		DWORD MaxHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iMaxHealth;				// C_BaseEntity::m_iMaxHealth
 		DWORD CurrentHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iHealth;// C_BaseEntity::m_iHealth
 		DWORD GameSceneNode = cs2_dumper::schemas::client_dll::C_BaseEntity::m_pGameSceneNode;			// C_BaseEntity::m_pGameSceneNode
-		DWORD BoneArray = cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + 0x80;//cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
+		DWORD BoneArray = 0x1F0; // cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;//cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
 		DWORD angEyeAngles = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_angEyeAngles;
 		DWORD vecLastClipCameraPos = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_vecLastClipCameraPos;
 		DWORD iShotsFired = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_iShotsFired;
@@ -120,7 +120,7 @@ namespace Offset
 	struct
 	{
 		//DWORD ClippingWeapon = Offset::Pawn.pClippingWeapon;			// WeaponBase
-		DWORD WeaponDataPTR = 0x368;
+		DWORD WeaponDataPTR = 0x360; // cs2_dumper::schemas::client_dll::C_BaseEntity::m_nSubclassID + 0x08
 		DWORD szName = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_szName;
 		DWORD Clip1 = cs2_dumper::schemas::client_dll::C_BasePlayerWeapon::m_iClip1;					// C_BasePlayerWeapon::m_iClip1
 		DWORD MaxClip = cs2_dumper::schemas::client_dll::CBasePlayerWeaponVData::m_iMaxClip1;					// CBasePlayerWeaponVData::m_iMaxClip1

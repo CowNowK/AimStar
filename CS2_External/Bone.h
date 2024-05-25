@@ -26,7 +26,7 @@ enum BONEINDEX : DWORD
 struct BoneJointData
 {
 	Vec3 Pos;
-        float Scale;
+    float Scale;
 	char pad[0x10];
 };
 
