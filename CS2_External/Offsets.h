@@ -120,7 +120,7 @@ namespace Offset
 	struct
 	{
 		//DWORD ClippingWeapon = Offset::Pawn.pClippingWeapon;			// WeaponBase
-		DWORD WeaponDataPTR = 0x360; // cs2_dumper::schemas::client_dll::C_BaseEntity::m_nSubclassID + 0x08
+		DWORD WeaponDataPTR = cs2_dumper::schemas::client_dll::C_BaseEntity::m_nSubclassID + 0x08;
 		DWORD szName = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_szName;
 		DWORD Clip1 = cs2_dumper::schemas::client_dll::C_BasePlayerWeapon::m_iClip1;					// C_BasePlayerWeapon::m_iClip1
 		DWORD MaxClip = cs2_dumper::schemas::client_dll::CBasePlayerWeaponVData::m_iMaxClip1;					// CBasePlayerWeaponVData::m_iMaxClip1
