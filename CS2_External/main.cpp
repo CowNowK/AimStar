@@ -1,4 +1,5 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+
+#define _CRT_SECURE_NO_WARNINGS
 #include "Cheats.h"
 #include "Offsets.h"
 #include "Resources/Language.h"
@@ -161,14 +162,14 @@ void Cheat()
 	default:
 		break;
 	}
-
+/*
 	if (!Offset::UpdateOffsets())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 		cout << "[ERROR] Failed to update offsets." << endl;
 		Exit();
 	}
-
+*/
 	if (!gGame.InitAddress())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
