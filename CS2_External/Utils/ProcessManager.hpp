@@ -453,6 +453,9 @@ public:
 		else if (ModuleName == "engine2.dll" || ModuleName == "engine.dll") {
 			return (HMODULE)driver.engine_address();
 		}
+		else if (ModuleName == "inputsystem.dll") {
+			return (HMODULE)driver.input_address();
+		}
 		else {
 			return (HMODULE)driver.client_address();
 		}

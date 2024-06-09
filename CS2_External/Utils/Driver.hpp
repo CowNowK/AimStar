@@ -123,6 +123,16 @@ public:
 		_engineaddress = out.client_base;
 		return out.client_base;
 	}
+
+	auto input_address() -> ULONG64
+	{
+		_requests out = { 0 };
+		out.request_key = INPUT_BASE;
+		out.src_pid = _processid;
+		NtUserGetPointerProprietaryId(reinterpret_cast<uintptr_t>(&out));
+		_engineaddress = out.client_base;
+		return out.client_base;
+	}
 };
 
 inline _driver driver;
