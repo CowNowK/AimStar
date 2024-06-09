@@ -133,6 +133,10 @@ void Cheat()
  / ___ |/ / / / / / /__/ / /_/ /_/ / /    
 /_/  |_/_/_/ /_/ /_/____/\__/\__,_/_/    
 	)" << endl;
+#ifdef USERMODE
+
+	cout << "[WARN] You are using usermode version, you may get banned as VAC detected)." << endl;
+#endif // USERMODE
 	printf("Build-%s-%s\n", __DATE__, __TIME__);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 

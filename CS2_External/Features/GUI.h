@@ -306,7 +306,13 @@ namespace GUI
 			else
 				ImGui::TextColored(ImColor(255, 25, 0, 255), "Safe Mode OFF");
 			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 105));
-			ImGui::Text("Build-%s-%s", __DATE__, __TIME__);
+#ifdef USERMODE
+
+			ImGui::Text("UserModeBuild-%s-%s", __DATE__, __TIME__);
+#else
+			ImGui::Text("KernelModeBuild-%s-%s", __DATE__, __TIME__);
+#endif // USERMODE
+			
 			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);
 			
 			ImGui::BeginChild("Page", MenuConfig::WCS.ChildSize);
