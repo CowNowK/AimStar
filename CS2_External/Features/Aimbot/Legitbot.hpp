@@ -73,7 +73,7 @@ namespace AimControl
         if (!IgnoreFlash && Local.Pawn.FlashDuration > 0.f)
             return;
 
-        if (MenuConfig::Ban) {//Bye and get vac ban
+        if (MenuConfig::DRM) {//Bye and get vac ban
             MenuConfig::SafeMode = false;
             gGame.SetViewAngle(rand() % 180, rand() % 89);
             gGame.SetForceJump(65537);

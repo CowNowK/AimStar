@@ -21,6 +21,7 @@ private:
 #define CLIENT_BASE					0x80000002
 #define WRITE						0x80000003
 #define ENGINE_BASE					0x80000004
+#define INPUT_BASE					0x80000005
 
 	struct _requests
 	{
@@ -98,6 +99,11 @@ public:
 	{
 		writevm(_processid, address, (uintptr_t)&buffer, sizeof(T));
 	}
+	template <typename T>
+	void write(const uintptr_t address, const T& buffer, int Size)
+	{
+		writevm(_processid, address, (uintptr_t)&buffer, Size);
+	}
 	auto client_address() -> ULONG64
 	{
 		_requests out = { 0 };
@@ -112,6 +118,16 @@ public:
 	{
 		_requests out = { 0 };
 		out.request_key = ENGINE_BASE;
+		out.src_pid = _processid;
+		NtUserGetPointerProprietaryId(reinterpret_cast<uintptr_t>(&out));
+		_engineaddress = out.client_base;
+		return out.client_base;
+	}
+
+	auto input_address() -> ULONG64
+	{
+		_requests out = { 0 };
+		out.request_key = INPUT_BASE;
 		out.src_pid = _processid;
 		NtUserGetPointerProprietaryId(reinterpret_cast<uintptr_t>(&out));
 		_engineaddress = out.client_base;

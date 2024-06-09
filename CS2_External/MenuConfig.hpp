@@ -6,9 +6,9 @@
 namespace MenuConfig
 {
 	inline std::string path = "";
-	inline std::string LocalVersion = "4.5";
+	inline std::string LocalVersion = "4.6.0";
 	inline std::string HWID = "";
-	inline bool Ban = false;
+	inline bool DRM = false;
 
 	struct {
 		// 0: Visual 1: Aimbot 2: Misc 3: Config

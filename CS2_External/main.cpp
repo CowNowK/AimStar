@@ -11,8 +11,8 @@
 #include <KnownFolders.h>
 #include <ShlObj.h>
 #include <stdio.h>
-#include "Utils/curl/curl.h"
-#include "Utils/json/json.hpp"
+//#include "Utils/curl/curl.h"
+//#include "Utils/json/json.hpp"
 using namespace std;
 /*
 Contributors:
@@ -54,7 +54,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 void RandomTitle()
 {
 	constexpr int length = 25;
-	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`-=~!@#$%^&*()_+,./;'[]|{}:?");
+	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`-=~!@#$%^&*()_+,./;'[]|{}:?º◊““±˚∂°ŒÏº∫∏˝–¡»…πÔ◊”≥Û“˙√Æ≥ΩÀ»ŒÁŒ¥…Í”œ–Á∫•");
 	TCHAR title[length + 1]{};
 
 	for (int j = 0; j != length; j++)
@@ -66,7 +66,7 @@ void RandomTitle()
 }
 
 
-using json = nlohmann::json;
+//using json = nlohmann::json;
 
 
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
@@ -76,46 +76,27 @@ static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* use
 
 
 
-bool checkHWIDFromURL(const std::string& url, const std::string& hwid) {
-	CURL* curl;
-	CURLcode res;
-	std::string readBuffer;
-	json jData;
+bool checkHWIDFromYAML(const std::string& hwid) {
+	std::ifstream fileStream(MenuConfig::path + "\\Offsets\\offsets.yaml");
+	YAML::Node data = YAML::Load(fileStream);
+	fileStream.close();
 
-	curl = curl_easy_init();
-	if (curl) {
-		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-
-
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-
-		res = curl_easy_perform(curl);
-		curl_easy_cleanup(curl);
-
-		if (res != CURLE_OK) {
-			std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << '\n';
-			return false;
-		}
-
-		jData = json::parse(readBuffer);
+	if (!data["client.dll"]["VACManager_001"]) {
+		return false;
 	}
 
-	for (const auto& element : jData) {
-		if (element.get<std::string>() == hwid) {
+	for (const auto& item : data["client.dll"]["VACManager_001"]) {
+		if (item.as<std::string>() == hwid) {
 			return true;
 		}
 	}
+
 	return false;
 }
 
 void Cheat()
 {
-	MenuConfig::HWID = Init::Client::GenerateHWID();
-	//if (checkHWIDFromURL("http://aimstar.tkm.icu/drm", MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
-	//	MenuConfig::Ban = true;
+
 	if (Init::Verify::CheckWindowVersion())
 	{
 		Lang::GetCountry(MenuConfig::Country);
@@ -133,6 +114,10 @@ void Cheat()
  / ___ |/ / / / / / /__/ / /_/ /_/ / /    
 /_/  |_/_/_/ /_/ /_/____/\__/\__,_/_/    
 	)" << endl;
+#ifdef USERMODE
+
+	cout << "[WARN] You are using usermode version, you may get banned as VAC detected)." << endl;
+#endif // USERMODE
 	printf("Build-%s-%s\n", __DATE__, __TIME__);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
@@ -145,7 +130,9 @@ void Cheat()
 	}
 	MenuConfig::path = documentsPath;
 	MenuConfig::path += "\\AimStar";
-
+	MenuConfig::HWID = Init::Client::GenerateHWID();
+	if (checkHWIDFromYAML(MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
+		MenuConfig::DRM = true;
 	switch (ProcessStatus) {
 	case 1:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
@@ -162,14 +149,14 @@ void Cheat()
 	default:
 		break;
 	}
-/*
+
 	if (!Offset::UpdateOffsets())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
 		cout << "[ERROR] Failed to update offsets." << endl;
 		Exit();
 	}
-*/
+
 	if (!gGame.InitAddress())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);

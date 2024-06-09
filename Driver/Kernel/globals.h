@@ -12,6 +12,8 @@
 #define DRIVER_READVM				0x80000001
 #define CLIENT_BASE					0x80000002
 #define WRITE					0x80000003
+#define ENGINE_BASE					0x80000004
+#define INPUT_BASE					0x80000005
 
 static const uint64_t mask = (~0xfull << 8) & 0xfffffffffull;
 
