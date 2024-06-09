@@ -202,8 +202,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(CoreLibraryDependencies);libcurl_imp.lib</AdditionalDependencies>
       <OutputFile>$(OutDir)AimStar$(TargetExt)</OutputFile>
-      <UACExecutionLevel>AsInvoker</UACExecutionLevel>
-      <EnableUAC>false</EnableUAC>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <EnableUAC>true</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Ring3|x64'">
