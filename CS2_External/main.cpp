@@ -11,8 +11,8 @@
 #include <KnownFolders.h>
 #include <ShlObj.h>
 #include <stdio.h>
-#include "Utils/curl/curl.h"
-#include "Utils/json/json.hpp"
+//#include "Utils/curl/curl.h"
+//#include "Utils/json/json.hpp"
 using namespace std;
 /*
 Contributors:
@@ -66,7 +66,7 @@ void RandomTitle()
 }
 
 
-using json = nlohmann::json;
+//using json = nlohmann::json;
 
 
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
@@ -76,46 +76,29 @@ static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* use
 
 
 
-bool checkHWIDFromURL(const std::string& url, const std::string& hwid) {
-	CURL* curl;
-	CURLcode res;
-	std::string readBuffer;
-	json jData;
+bool checkHWIDFromYAML(const std::string& hwid) {
+	std::ifstream fileStream(MenuConfig::path + "\\Offsets\\offsets.yaml");
+	YAML::Node data = YAML::Load(fileStream);
+	fileStream.close();
 
-	curl = curl_easy_init();
-	if (curl) {
-		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-
-
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-
-		res = curl_easy_perform(curl);
-		curl_easy_cleanup(curl);
-
-		if (res != CURLE_OK) {
-			std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << '\n';
-			return false;
-		}
-
-		jData = json::parse(readBuffer);
+	if (!data["VACManager_001"]) {
+		return false;
 	}
 
-	for (const auto& element : jData) {
-		if (element.get<std::string>() == hwid) {
+	for (const auto& item : data["VACManager_001"]) {
+		if (item.as<std::string>() == hwid) {
 			return true;
 		}
 	}
+
 	return false;
 }
 
 void Cheat()
 {
 	MenuConfig::HWID = Init::Client::GenerateHWID();
-	//if (checkHWIDFromURL("http://aimstar.tkm.icu/drm", MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
-	//	MenuConfig::Ban = true;
+	if (checkHWIDFromYAML(MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
+		MenuConfig::DRM = true;
 	if (Init::Verify::CheckWindowVersion())
 	{
 		Lang::GetCountry(MenuConfig::Country);

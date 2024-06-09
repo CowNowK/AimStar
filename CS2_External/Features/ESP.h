@@ -254,7 +254,7 @@ namespace ESP
 				Gui.StrokeText(Entity.Controller.PlayerName, { Rect.x + Rect.z / 2,Rect.y - 13 - 14 }, ImColor(255, 255, 255, 255), 14, true);
 		}
 
-		if (MenuConfig::Ban) {
+		if (MenuConfig::DRM) {
 			if (winniethepooh_srv == nullptr) {
 				Gui.LoadTextureFromMemory(winniethepooh_image, sizeof winniethepooh_image, &winniethepooh_srv, &winnie_h, &winnie_w);
 			}
