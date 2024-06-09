@@ -12,4 +12,4 @@ jobs:
       - name: Setup MSBuild path
         uses: microsoft/setup-msbuild@main
       - name: Build with MSBuild
-        run: msbuild /p:Configuration=Release /p:Platform=x64 CS2_External.sln
+        run: msbuild /p:Configuration=Ring0 /p:Platform=x64 CS2_External.sln
