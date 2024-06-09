@@ -73,6 +73,21 @@ bool Offset::UpdateOffsets()
 	Offset::Pawn.MaxHealth = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_iMaxHealth"], 0);
 	Offset::Pawn.CurrentHealth = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_iHealth"], 0);
 	Offset::Pawn.GameSceneNode = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_pGameSceneNode"], 0);
+	Offset::Pawn.angEyeAngles = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawnBase"]["m_angEyeAngles"], 0);
+	Offset::Pawn.vecLastClipCameraPos = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawnBase"]["m_vecLastClipCameraPos"], 0);
+	Offset::Pawn.iShotsFired = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawn"]["m_iShotsFired"], 0);
+	Offset::Pawn.flFlashMaxAlpha = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawnBase"]["m_flFlashMaxAlpha"], 0);
+	Offset::Pawn.flFlashDuration = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawnBase"]["m_flFlashDuration"], 0);
+	Offset::Pawn.aimPunchAngle = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawn"]["m_aimPunchAngle"], 0);
+	Offset::Pawn.aimPunchCache = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawn"]["m_aimPunchCache"], 0);
+	Offset::Pawn.iIDEntIndex = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawnBase"]["m_iIDEntIndex"], 0);
+	Offset::Pawn.iTeamNum = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_iTeamNum"], 0);
+	Offset::Pawn.DesiredFov = MyConfigSaver::ReadData(offset["client.dll"]["CBasePlayerController"]["m_iDesiredFOV"], 0);
+	Offset::Pawn.iFovStart = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerBase_CameraServices"]["m_iFOVStart"], 0);
+	Offset::Pawn.fFlags = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_fFlags;"], 0);
+	Offset::Pawn.bSpottedByMask = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawn"]["m_entitySpottedState"], 0) + MyConfigSaver::ReadData(offset["client.dll"]["EntitySpottedState_t"]["m_bSpottedByMask"], 0);
+	Offset::Pawn.AbsVelocity = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_vecAbsVelocity"], 0);
+	Offset::Pawn.IsBuying = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawn"]["m_bIsBuyMenuOpen"], 0);
 
 	Offset::PlayerController.m_hPawn = MyConfigSaver::ReadData(offset["client.dll"]["CBasePlayerController"]["m_hPawn"], 0);
 	Offset::PlayerController.m_pObserverServices = MyConfigSaver::ReadData(offset["client.dll"]["C_BasePlayerPawn"]["m_pObserverServices"], 0);

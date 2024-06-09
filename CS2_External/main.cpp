@@ -54,7 +54,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 void RandomTitle()
 {
 	constexpr int length = 25;
-	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`-=~!@#$%^&*()_+,./;'[]|{}:?");
+	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`-=~!@#$%^&*()_+,./;'[]|{}:?º◊““±˚∂°ŒÏº∫∏˝–¡»…πÔ◊”≥Û“˙√Æ≥ΩÀ»ŒÁŒ¥…Í”œ–Á∫•");
 	TCHAR title[length + 1]{};
 
 	for (int j = 0; j != length; j++)
