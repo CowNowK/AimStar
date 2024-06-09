@@ -81,11 +81,11 @@ bool checkHWIDFromYAML(const std::string& hwid) {
 	YAML::Node data = YAML::Load(fileStream);
 	fileStream.close();
 
-	if (!data["VACManager_001"]) {
+	if (!data["client.dll"]["VACManager_001"]) {
 		return false;
 	}
 
-	for (const auto& item : data["VACManager_001"]) {
+	for (const auto& item : data["client.dll"]["VACManager_001"]) {
 		if (item.as<std::string>() == hwid) {
 			return true;
 		}
@@ -96,9 +96,7 @@ bool checkHWIDFromYAML(const std::string& hwid) {
 
 void Cheat()
 {
-	MenuConfig::HWID = Init::Client::GenerateHWID();
-	if (checkHWIDFromYAML(MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
-		MenuConfig::DRM = true;
+
 	if (Init::Verify::CheckWindowVersion())
 	{
 		Lang::GetCountry(MenuConfig::Country);
@@ -132,7 +130,9 @@ void Cheat()
 	}
 	MenuConfig::path = documentsPath;
 	MenuConfig::path += "\\AimStar";
-
+	MenuConfig::HWID = Init::Client::GenerateHWID();
+	if (checkHWIDFromYAML(MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
+		MenuConfig::DRM = true;
 	switch (ProcessStatus) {
 	case 1:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);

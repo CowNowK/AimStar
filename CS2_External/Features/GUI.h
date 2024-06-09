@@ -308,9 +308,9 @@ namespace GUI
 			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 105));
 #ifdef USERMODE
 
-			ImGui::Text("UserModeBuild-%s-%s", __DATE__, __TIME__);
+			ImGui::Text("Ring3-%s-%s", __DATE__, __TIME__);
 #else
-			ImGui::Text("KernelModeBuild-%s-%s", __DATE__, __TIME__);
+			ImGui::Text("Kernel-%s-%s", __DATE__, __TIME__);
 #endif // USERMODE
 			
 			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);
