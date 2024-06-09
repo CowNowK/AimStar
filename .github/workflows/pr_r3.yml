@@ -1,0 +1,15 @@
+name: buildcheck x64 release
+
+on: 
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Setup MSBuild path
+        uses: microsoft/setup-msbuild@main
+      - name: Build with MSBuild
+        run: msbuild /p:Configuration=Ring3 /p:Platform=x64 .\CS2_External\CS2_External.vcxproj
