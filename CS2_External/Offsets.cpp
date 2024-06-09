@@ -30,11 +30,21 @@ bool Offset::UpdateOffsets()
 	std::string offsetPath = MenuConfig::path + "\\Offsets\\offsets.yaml";
 
 	if (!fs::exists(offsetPath)) {
-		std::cerr << "Failed to locate offsets directory: " << offsetPath << std::endl;
-		return false;
-	}
+		if (fs::create_directory(MenuConfig::path + "\\Offsets"))
+		{
+			std::cout << "[Info] offsets folder created: " << MenuConfig::path + "\\Offsets" << std::endl;
+			std::cout << "       please visit https://aimstar.tkm.icu/updater to get the latest offset file." << std::endl;
+		}
+		else
+		{
+			std::cerr << "Failed to locate offsets file: " << offsetPath << std::endl;
+			return false;
+		}
 
-	YAML::Node offset = YAML::LoadFile(offsetPath);
+	}
+	std::ifstream offsetStream(MenuConfig::path + "\\Offsets\\offsets.yaml");
+	YAML::Node offset = YAML::Load(offsetStream);
+	offsetStream.close();
 
 	Offset::EntityList = MyConfigSaver::ReadData(offset["client.dll"]["dwEntityList"], 0);
 	Offset::LocalPlayerController = MyConfigSaver::ReadData(offset["client.dll"]["dwLocalPlayerController"], 0);
@@ -89,6 +99,20 @@ bool Offset::UpdateOffsets()
 	Offset::Pawn.AbsVelocity = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_vecAbsVelocity"], 0);
 	Offset::Pawn.IsBuying = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawn"]["m_bIsBuyMenuOpen"], 0);
 
+	Offset::WeaponBaseData.WeaponDataPTR = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_nSubclassID"],0) + 0x08;
+	Offset::WeaponBaseData.szName = MyConfigSaver::ReadData(offset["client.dll"]["CCSWeaponBaseVData"]["m_szName"], 0);
+	Offset::WeaponBaseData.Clip1 = MyConfigSaver::ReadData(offset["client.dll"]["C_BasePlayerWeapon"]["m_iClip1"], 0);
+	Offset::WeaponBaseData.MaxClip = MyConfigSaver::ReadData(offset["client.dll"]["CBasePlayerWeaponVData"]["m_iMaxClip1"], 0);
+	Offset::WeaponBaseData.CycleTime = MyConfigSaver::ReadData(offset["client.dll"]["CCSWeaponBaseVData"]["m_flCycleTime"], 0);
+	Offset::WeaponBaseData.Penetration = MyConfigSaver::ReadData(offset["client.dll"]["CCSWeaponBaseVData"]["m_flPenetration"], 0);
+	Offset::WeaponBaseData.WeaponType = MyConfigSaver::ReadData(offset["client.dll"]["CCSWeaponBaseVData"]["m_WeaponType"], 0);
+	Offset::WeaponBaseData.Inaccuracy = MyConfigSaver::ReadData(offset["client.dll"]["CCSWeaponBaseVData"]["m_flInaccuracyMove"], 0);
+	Offset::WeaponBaseData.inReload = MyConfigSaver::ReadData(offset["client.dll"]["C_CSWeaponBase"]["m_bInReload"], 0);
+	Offset::WeaponBaseData.ActiveWeapon = MyConfigSaver::ReadData(offset["client.dll"]["CPlayer_WeaponServices"]["m_hActiveWeapon"], 0);
+	Offset::WeaponBaseData.Item = MyConfigSaver::ReadData(offset["client.dll"]["C_AttributeContainer"]["m_Item"], 0);
+	Offset::WeaponBaseData.ItemDefinitionIndex = MyConfigSaver::ReadData(offset["client.dll"]["C_EconItemView"]["m_iItemDefinitionIndex"], 0);
+	Offset::WeaponBaseData.m_MeshGroupMask = MyConfigSaver::ReadData(offset["client.dll"]["CModelState"]["m_MeshGroupMask"], 0);
+
 	Offset::PlayerController.m_hPawn = MyConfigSaver::ReadData(offset["client.dll"]["CBasePlayerController"]["m_hPawn"], 0);
 	Offset::PlayerController.m_pObserverServices = MyConfigSaver::ReadData(offset["client.dll"]["C_BasePlayerPawn"]["m_pObserverServices"], 0);
 	Offset::PlayerController.m_hObserverTarget = MyConfigSaver::ReadData(offset["client.dll"]["CPlayer_ObserverServices"]["m_hObserverTarget"], 0);
@@ -96,6 +120,33 @@ bool Offset::UpdateOffsets()
 	Offset::PlayerController.PawnArmor = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController"]["m_iPawnArmor"], 0);
 	Offset::PlayerController.HasDefuser = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController"]["m_bPawnHasDefuser"], 0);
 	Offset::PlayerController.HasHelmet = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController"]["m_bPawnHasHelmet"], 0);
+
+	Offset::C4.m_bBeingDefused = MyConfigSaver::ReadData(offset["client.dll"]["C_PlantedC4"]["m_bBeingDefused"], 0);
+	Offset::C4.m_flDefuseCountDown = MyConfigSaver::ReadData(offset["client.dll"]["C_PlantedC4"]["m_flDefuseCountDown"], 0);
+	Offset::C4.m_nBombSite = MyConfigSaver::ReadData(offset["client.dll"]["C_PlantedC4"]["m_nBombSite"], 0);
+
+	Offset::InGameMoneyServices.MoneyServices = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController"]["m_pInGameMoneyServices"], 0);
+	Offset::InGameMoneyServices.Account = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController_InGameMoneyServices"]["m_iAccount"], 0);
+	Offset::InGameMoneyServices.TotalCashSpent = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController_InGameMoneyServices"]["m_iTotalCashSpent"], 0);
+	Offset::InGameMoneyServices.CashSpentThisRound = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController_InGameMoneyServices"]["m_iCashSpentThisRound"], 0);
+
+	Offset::SmokeGrenadeProjectile.nSmokeEffectTickBegin = MyConfigSaver::ReadData(offset["client.dll"]["C_SmokeGrenadeProjectile"]["m_nSmokeEffectTickBegin"], 0);
+	Offset::SmokeGrenadeProjectile.bDidSmokeEffect = MyConfigSaver::ReadData(offset["client.dll"]["C_SmokeGrenadeProjectile"]["m_bDidSmokeEffect"], 0);
+	Offset::SmokeGrenadeProjectile.nRandomSeed = MyConfigSaver::ReadData(offset["client.dll"]["C_SmokeGrenadeProjectile"]["m_nRandomSeed"], 0);
+	Offset::SmokeGrenadeProjectile.vSmokeColor = MyConfigSaver::ReadData(offset["client.dll"]["C_SmokeGrenadeProjectile"]["m_vSmokeColor"], 0);
+	Offset::SmokeGrenadeProjectile.vSmokeDetonationPos = MyConfigSaver::ReadData(offset["client.dll"]["C_SmokeGrenadeProjectile"]["m_vSmokeDetonationPos"], 0);
+	Offset::SmokeGrenadeProjectile.VoxelFrameData = MyConfigSaver::ReadData(offset["client.dll"]["C_SmokeGrenadeProjectile"]["m_VoxelFrameData"], 0);
+	Offset::SmokeGrenadeProjectile.bSmokeVolumeDataReceived = MyConfigSaver::ReadData(offset["client.dll"]["C_SmokeGrenadeProjectile"]["m_bSmokeVolumeDataReceived"], 0);
+	Offset::SmokeGrenadeProjectile.bSmokeEffectSpawned = MyConfigSaver::ReadData(offset["client.dll"]["C_SmokeGrenadeProjectile"]["m_bSmokeEffectSpawned"], 0);
+
+	Offset::EconEntity.AttributeManager = MyConfigSaver::ReadData(offset["client.dll"]["C_EconEntity"]["m_AttributeManager"], 0);
+	Offset::EconEntity.FallbackPaintKit = MyConfigSaver::ReadData(offset["client.dll"]["C_EconEntity"]["m_nFallbackPaintKit"], 0);
+	Offset::EconEntity.FallbackSeed = MyConfigSaver::ReadData(offset["client.dll"]["C_EconEntity"]["m_nFallbackSeed"], 0);
+	Offset::EconEntity.FallbackWear = MyConfigSaver::ReadData(offset["client.dll"]["C_EconEntity"]["m_flFallbackWear"], 0);
+	Offset::EconEntity.FallbackStatTrak = MyConfigSaver::ReadData(offset["client.dll"]["C_EconEntity"]["m_nFallbackStatTrak"], 0);
+	Offset::EconEntity.szCustomName = MyConfigSaver::ReadData(offset["client.dll"]["C_EconItemView"]["m_szCustomName"], 0);
+	Offset::EconEntity.EntityQuality = MyConfigSaver::ReadData(offset["client.dll"]["C_EconItemView"]["m_iEntityQuality"], 0);
+	Offset::EconEntity.ItemIDHigh = MyConfigSaver::ReadData(offset["client.dll"]["C_EconItemView"]["m_iItemIDHigh"], 0);
 
 	return true;
 }
