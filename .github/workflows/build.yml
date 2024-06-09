@@ -19,12 +19,12 @@ jobs:
         run: |
           del AimStar-Ring3-*.exe
           ren AimStar-Ring3.exe AimStar-Ring3-${{github.sha}}.exe
-        working-directory: CS2_External\x64\Release\
+        working-directory: CS2_External\x64\Ring3\
       - name: Upload the output
         uses: actions/upload-artifact@main
         with:
           name: ci
-          path: CS2_External\x64\Release\*
+          path: CS2_External\x64\Ring3\*
   buildKernel:
     runs-on: windows-latest
     steps:
@@ -37,12 +37,12 @@ jobs:
         run: |
           del AimStar-Ring0-*.exe
           ren AimStar-Ring0.exe AimStar-Ring0-${{github.sha}}.exe
-        working-directory: CS2_External\x64\Release\
+        working-directory: CS2_External\x64\Ring0\
       - name: Upload the output
         uses: actions/upload-artifact@main
         with:
           name: cir0
-          path: CS2_External\x64\Release\*
+          path: CS2_External\x64\Ring0\*
   buildllvm:
     runs-on: windows-latest
     steps:
@@ -55,12 +55,12 @@ jobs:
         run: |
           del LLVM-AimStar-Ring3-*.exe
           ren AimStar-Ring3.exe LLVM-AimStar-Ring3-${{github.sha}}.exe
-        working-directory: CS2_External\x64\Release\
+        working-directory: CS2_External\x64\Ring3\
       - name: Upload the output
         uses: actions/upload-artifact@main
         with:
           name: llvm
-          path: CS2_External\x64\Release\*
+          path: CS2_External\x64\Ring3\*
   create_release:
     runs-on: ubuntu-latest
     needs: [build, buildKernel, buildllvm]
