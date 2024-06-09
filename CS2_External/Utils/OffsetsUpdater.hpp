@@ -9,6 +9,7 @@
 
 namespace Updater
 {
+    /*
     inline void OffsetsParser(std::map<std::string, int>& map, const std::string& dataPath, const std::string& moduleName) {
         std::ifstream file(dataPath);
         if (!file.is_open()) {
@@ -42,5 +43,5 @@ namespace Updater
             std::cerr << "Offset [" << Name << "] not found." << std::endl;
             return -1;
         }
-    }
+    }*/
 }

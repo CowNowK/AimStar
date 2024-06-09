@@ -8,8 +8,10 @@
 
 #include "Utils/OffsetsUpdater.hpp"
 
+
 namespace Offset
 {
+
 	inline DWORD ForceJump = cs2_dumper::buttons::jump;
 	inline DWORD ForceCrouch = cs2_dumper::buttons::duck;
 	inline DWORD ForceForward = cs2_dumper::buttons::forward;
@@ -30,12 +32,9 @@ namespace Offset
 
 	struct
 	{
-		//DWORD Health = Offset::Pawn.CurrentHealth;
-		//DWORD TeamID = Offset::Pawn.iTeamNum;
 		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
 		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
 		DWORD iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
-		//outdated DWORD EnemySensor = 0x1440;
 		DWORD GravityScale = cs2_dumper::schemas::client_dll::C_BaseEntity::m_flGravityScale;
 	}Entity;
 
@@ -119,7 +118,6 @@ namespace Offset
 
 	struct
 	{
-		//DWORD ClippingWeapon = Offset::Pawn.pClippingWeapon;			// WeaponBase
 		DWORD WeaponDataPTR = cs2_dumper::schemas::client_dll::C_BaseEntity::m_nSubclassID + 0x08;
 		DWORD szName = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_szName;
 		DWORD Clip1 = cs2_dumper::schemas::client_dll::C_BasePlayerWeapon::m_iClip1;					// C_BasePlayerWeapon::m_iClip1
@@ -163,26 +161,6 @@ namespace Offset
 		DWORD bSmokeVolumeDataReceived = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeVolumeDataReceived; // bool
 		uintptr_t bSmokeEffectSpawned = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeEffectSpawned; // bool
 	} SmokeGrenadeProjectile; 
-
-	namespace Signatures
-	{
-/*
-		const std::string ForceForward = "48 8D 05 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 ?? E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 81 EC";
-		const std::string ForceLeft = "48 8D 05 ?? ?? ?? ?? 48 89 45 ? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
-		const std::string ForceRight = "48 8D 05 ?? ?? ?? ?? 48 89 45 ? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
-		const std::string ForceJump = "48 8D 05 ?? ?? ?? ?? 48 89 4D ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
-		const std::string ForceCrouch = "48 8D 05 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 ?? E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 83 EC ?? 66 C7 44 24";
-*/
-		const std::string LocalPlayerPawn = "48 8D 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 83 EC ?? 8B 0D";
-		const std::string InventoryServices = "E8 ?? ?? ?? ?? 8B 45 D0 48 8B 55 D8";
-		const std::string GlobalVars = "48 89 15 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 85 D2";
-		const std::string EntityList = "48 8B 0D ?? ?? ?? ?? 48 89 7C 24 ?? 8B FA C1 EB";
-		const std::string LocalPlayerController = "48 89 05 ?? ?? ?? ?? 8B 9E";
-		const std::string ViewAngles = "48 8B 0D ?? ?? ?? ?? 48 8B 01 48 FF 60 30";
-		const std::string ViewMatrix = "48 8D 0D ?? ?? ?? ?? 48 C1 E0 06";
-		const std::string PlantedC4 = "48 8B 15 ?? ?? ?? ?? FF C0 48 8D 4C 24 40";
-		const std::string InputSystem = "48 89 05 ?? ?? ?? ?? 48 8D 05";
-		const std::string dwSensitivity = "48 8B 05 ?? ?? ?? ?? 48 8B 40 ?? F3 41 0F 59 F4";}
 
 	bool UpdateOffsets();
 }

@@ -4,6 +4,7 @@
 #include <vector>
 #include <Tlhelp32.h>
 #include <atlconv.h>
+#include "driver.hpp"
 
 #define _is_invalid(v) if(v==NULL) return false
 #define _is_invalid(v,n) if(v==NULL) return n
@@ -82,8 +83,8 @@ public:
 public:
 	~ProcessManager()
 	{
-		//if (hProcess)
-			//CloseHandle(hProcess);
+		if (hProcess)
+			CloseHandle(hProcess);
 	}
 	SYSTEM_HANDLE_INFORMATION* t_SYSTEM_HANDLE_INFORMATION;
 	HANDLE Source_Process = NULL;
@@ -93,6 +94,7 @@ public:
 	/// </summary>
 	/// <param name="ProcessName">进程名</param>
 	/// <returns>进程状态码</returns>
+#ifdef USERMODE
 	StatusCode Attach(std::string ProcessName)
 	{
 		ProcessID = this->GetProcessID(ProcessName);
@@ -190,11 +192,29 @@ public:
 		}
 
 		return SUCCEED;
-	}
+			}
+#else
+	StatusCode Attach(std::string ProcessName)
+	{
+		ProcessID = this->GetProcessID(ProcessName);
+		_is_invalid(ProcessID, FAILE_PROCESSID);
 
-	/// <summary>
-	/// 取消附加
-	/// </summary>
+		driver.initdriver(ProcessID);
+		std::cout << (uintptr_t)driver.client_address() << std::endl;
+
+		Attached = true;
+
+		return SUCCEED;
+	}
+#endif // USERMODE
+
+
+
+
+#ifdef USERMODE
+/// <summary>
+/// 取消附加
+/// </summary>
 	void Detach()
 	{
 		if (hProcess)
@@ -205,10 +225,10 @@ public:
 		Attached = false;
 	}
 
-	/// <summary>
-	/// 判断进程是否激活状态
-	/// </summary>
-	/// <returns>是否激活状态</returns>
+/// <summary>
+/// 判断进程是否激活状态
+/// </summary>
+/// <returns>是否激活状态</returns>
 	bool IsActive()
 	{
 		if (!Attached)
@@ -217,15 +237,14 @@ public:
 		GetExitCodeProcess(hProcess, &ExitCode);
 		return ExitCode == STILL_ACTIVE;
 	}
-
-	/// <summary>
-	/// 读取进程内存
-	/// </summary>
-	/// <typeparam name="ReadType">读取类型</typeparam>
-	/// <param name="Address">读取地址</param>
-	/// <param name="Value">返回数据</param>
-	/// <param name="Size">读取大小</param>
-	/// <returns>是否读取成功</returns>
+/// <summary>
+/// 读取进程内存
+/// </summary>
+/// <typeparam name="ReadType">读取类型</typeparam>
+/// <param name="Address">读取地址</param>
+/// <param name="Value">返回数据</param>
+/// <param name="Size">读取大小</param>
+/// <returns>是否读取成功</returns>
 	template <typename ReadType>
 	bool ReadMemory(DWORD64 Address, ReadType& Value, int Size)
 	{
@@ -282,6 +301,60 @@ public:
 		return false;
 	}
 
+#else
+	/// <summary>
+	/// 读取进程内存
+	/// </summary>
+	/// <typeparam name="ReadType">读取类型</typeparam>
+	/// <param name="Address">读取地址</param>
+	/// <param name="Value">返回数据</param>
+	/// <param name="Size">读取大小</param>
+	/// <returns>是否读取成功</returns>
+
+
+
+	template <typename ReadType>
+	bool ReadMemory(DWORD64 Address, ReadType& Value, int Size)
+	{
+		ReadType buffer;
+		driver.readsize((uintptr_t)Address, &Value, Size);
+		return true;
+	}
+
+	template <typename ReadType>
+	bool ReadMemory(DWORD64 Address, ReadType& Value)
+	{
+		ReadType buffer;
+		driver.readsize((uintptr_t)Address, &Value, sizeof(ReadType));
+		return true;
+	}
+
+	/// <summary>
+	/// 写入进程内存
+	/// </summary>
+	/// <typeparam name="ReadType">写入类型</typeparam>
+	/// <param name="Address">写入地址</param>
+	/// <param name="Value">写入数据</param>
+	/// <param name="Size">写入大小</param>
+	/// <returns>是否写入成功</returns>
+	template <typename ReadType>
+	bool WriteMemory(DWORD64 Address, ReadType& Value, int Size)
+	{
+		if (MenuConfig::SafeMode)
+			return false;
+		driver.write((uintptr_t)Address, Value, Size);
+		return true;
+	}
+
+	template <typename ReadType>
+	bool WriteMemory(DWORD64 Address, ReadType& Value)
+	{
+		if (MenuConfig::SafeMode)
+			return false;
+		driver.write((uintptr_t)Address, Value);
+		return true;
+	}
+#endif // USERMODE
 	/// <summary>
 	/// 特征码搜索
 	/// </summary>
@@ -291,25 +364,7 @@ public:
 	/// <returns>匹配特征结果</returns>
 	std::vector<DWORD64> SearchMemory(const std::string& Signature, DWORD64 StartAddress, DWORD64 EndAddress, int SearchNum = 1);
 
-	DWORD64 TraceAddress(DWORD64 BaseAddress, std::vector<DWORD> Offsets)
-	{
-		_is_invalid(hProcess, 0);
-		_is_invalid(ProcessID, 0);
-		DWORD64 Address = 0;
 
-		if (Offsets.size() == 0)
-			return BaseAddress;
-
-		if (!ReadMemory<DWORD64>(BaseAddress, Address))
-			return 0;
-
-		for (int i = 0; i < Offsets.size() - 1; i++)
-		{
-			if (!ReadMemory<DWORD64>(Address + Offsets[i], Address))
-				return 0;
-		}
-		return Address == 0 ? 0 : Address + Offsets[Offsets.size() - 1];
-	}
 
 public:
 
@@ -330,6 +385,26 @@ public:
 		CloseHandle(hSnapshot);
 		return 0;
 	}
+#ifdef USERMODE
+	DWORD64 TraceAddress(DWORD64 BaseAddress, std::vector<DWORD> Offsets)
+	{
+		_is_invalid(hProcess, 0);
+		_is_invalid(ProcessID, 0);
+		DWORD64 Address = 0;
+
+		if (Offsets.size() == 0)
+			return BaseAddress;
+
+		if (!ReadMemory<DWORD64>(BaseAddress, Address))
+			return 0;
+
+		for (int i = 0; i < Offsets.size() - 1; i++)
+		{
+			if (!ReadMemory<DWORD64>(Address + Offsets[i], Address))
+				return 0;
+		}
+		return Address == 0 ? 0 : Address + Offsets[Offsets.size() - 1];
+	}
 
 	HMODULE GetProcessModuleHandle(std::string ModuleName)
 	{
@@ -348,7 +423,42 @@ public:
 		CloseHandle(hSnapshot);
 		return 0;
 	}
+#else
 
+	DWORD64 TraceAddress(DWORD64 BaseAddress, std::vector<DWORD> Offsets)
+	{
+		//_is_invalid(hProcess, 0);
+		_is_invalid(ProcessID, 0);
+		DWORD64 Address = 0;
+
+		if (Offsets.size() == 0)
+			return BaseAddress;
+
+		if (!ReadMemory<DWORD64>(BaseAddress, Address))
+			return 0;
+
+		for (int i = 0; i < Offsets.size() - 1; i++)
+		{
+			if (!ReadMemory<DWORD64>(Address + Offsets[i], Address))
+				return 0;
+		}
+		return Address == 0 ? 0 : Address + Offsets[Offsets.size() - 1];
+	}
+
+	HMODULE GetProcessModuleHandle(std::string ModuleName)
+	{
+		if (ModuleName == "client.dll") {
+			return (HMODULE)driver.client_address();
+		}
+		else if (ModuleName == "engine2.dll" || ModuleName == "engine.dll") {
+			return (HMODULE)driver.engine_address();
+		}
+		else {
+			return (HMODULE)driver.client_address();
+		}
+	}
+#endif // USERMODE
 };
+
 
 inline ProcessManager ProcessMgr;

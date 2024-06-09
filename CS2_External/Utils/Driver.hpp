@@ -98,6 +98,11 @@ public:
 	{
 		writevm(_processid, address, (uintptr_t)&buffer, sizeof(T));
 	}
+	template <typename T>
+	void write(const uintptr_t address, const T& buffer, int Size)
+	{
+		writevm(_processid, address, (uintptr_t)&buffer, Size);
+	}
 	auto client_address() -> ULONG64
 	{
 		_requests out = { 0 };

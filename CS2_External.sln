@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CS2_External", "CS2_External\CS2_External.vcxproj", "{82688835-FBA1-418A-9AD2-9A2D94C0FD47}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AimStar", "CS2_External\CS2_External.vcxproj", "{82688835-FBA1-418A-9AD2-9A2D94C0FD47}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Driver", "Driver\Driver.vcxproj", "{03A54C0D-698C-4A15-900B-02F662317FAC}"
 EndProject
@@ -13,16 +13,22 @@ Global
 		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
+		Ring3|x64 = Ring3|x64
+		Ring3|x86 = Ring3|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Debug|x64.ActiveCfg = Debug|x64
 		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Debug|x64.Build.0 = Debug|x64
 		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Debug|x86.ActiveCfg = Debug|Win32
 		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Debug|x86.Build.0 = Debug|Win32
-		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x64.ActiveCfg = Release|x64
-		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x64.Build.0 = Release|x64
-		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x86.ActiveCfg = Release|Win32
-		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x86.Build.0 = Release|Win32
+		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x64.ActiveCfg = Ring0|x64
+		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x64.Build.0 = Ring0|x64
+		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x86.ActiveCfg = Ring0|Win32
+		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Release|x86.Build.0 = Ring0|Win32
+		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Ring3|x64.ActiveCfg = Ring0|x64
+		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Ring3|x64.Build.0 = Ring0|x64
+		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Ring3|x86.ActiveCfg = Ring3|Win32
+		{82688835-FBA1-418A-9AD2-9A2D94C0FD47}.Ring3|x86.Build.0 = Ring3|Win32
 		{03A54C0D-698C-4A15-900B-02F662317FAC}.Debug|x64.ActiveCfg = Debug|x64
 		{03A54C0D-698C-4A15-900B-02F662317FAC}.Debug|x64.Build.0 = Debug|x64
 		{03A54C0D-698C-4A15-900B-02F662317FAC}.Debug|x86.ActiveCfg = Debug|Win32
@@ -31,6 +37,10 @@ Global
 		{03A54C0D-698C-4A15-900B-02F662317FAC}.Release|x64.Build.0 = Release|x64
 		{03A54C0D-698C-4A15-900B-02F662317FAC}.Release|x86.ActiveCfg = Release|Win32
 		{03A54C0D-698C-4A15-900B-02F662317FAC}.Release|x86.Build.0 = Release|Win32
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Ring3|x64.ActiveCfg = Release|x64
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Ring3|x64.Build.0 = Release|x64
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Ring3|x86.ActiveCfg = Release|Win32
+		{03A54C0D-698C-4A15-900B-02F662317FAC}.Ring3|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

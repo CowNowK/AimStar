@@ -31,8 +31,12 @@
 *.out
 *.app
 /CS2_External/x64/Release
+/CS2_External/x64/Ring0
+/CS2_External/x64/Ring3
 /.vs/AimStar/v17
 /x64/Release
+/x64/Ring0
+/x64/Ring3
 /.vs/CS2_External
 /CS2_External/imgui.ini
 /.vs/VSWorkspaceState.json
@@ -62,3 +66,10 @@ CS2_External/x64/Debug/CS2_External.tlog/CL.command.1.tlog
 CS2_External/x64/Debug/CS2_External.res
 /Driver/x64/Release
 /Driver/x64/Debug
+
+*.tlog
+*.iobj
+*.ipdb
+*.pdb
+*.recipe
+*.lastbuildstate
