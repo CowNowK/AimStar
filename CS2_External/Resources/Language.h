@@ -396,5 +396,8 @@ namespace Lang
 		ReadMeText.SourceButton = u8"Source Code";
 		ReadMeText.DiscordButton = u8"Join Discord";
 		ReadMeText.OffsetsTitle = u8"Offsets:";
+		return;
 	}
+
+
 }

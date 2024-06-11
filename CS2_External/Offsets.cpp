@@ -42,7 +42,7 @@ bool Offset::UpdateOffsets()
 		}
 
 	}
-	std::ifstream offsetStream(MenuConfig::path + "\\Offsets\\offsets.yaml");
+	std::ifstream offsetStream(offsetPath);
 	YAML::Node offset = YAML::Load(offsetStream);
 	offsetStream.close();
 

@@ -11,6 +11,7 @@
 #include <KnownFolders.h>
 #include <ShlObj.h>
 #include <stdio.h>
+using namespace Lang;
 //#include "Utils/curl/curl.h"
 //#include "Utils/json/json.hpp"
 using namespace std;
@@ -94,6 +95,22 @@ bool checkHWIDFromYAML(const std::string& hwid) {
 	return false;
 }
 
+void UpdateLang()
+{
+
+	std::string langPath = MenuConfig::path + "\\Languages\\lang.yaml";
+
+	if (!std::filesystem::exists(langPath)) {
+		English();
+		return;
+	}
+	std::ifstream langStream(langPath);
+	YAML::Node langs = YAML::Load(langStream);
+	langStream.close();
+
+	//const_cast<char*>(langs["node"].as<std::string>().c_str());
+	return;
+}
 void Cheat()
 {
 
@@ -190,7 +207,8 @@ void Cheat()
 		MenuConfig::defaultConfig = true;
 		defaultConfig.close();		
 	}
-
+	// Language initialize
+	UpdateLang();
 	cout << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 	cout << "Cheat running successfully!" << endl;
