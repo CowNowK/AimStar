@@ -4,13 +4,12 @@
 #include <libloaderapi.h>
 #include <string>
 #include <vadefs.h>
+constexpr ULONG ioctl_call_driver = CTL_CODE(FILE_DEVICE_UNKNOWN, 0x775, METHOD_BUFFERED, FILE_SPECIAL_ACCESS);
 
 class _driver
 {
 private:
-	typedef INT64(*Nt_UserGetPointerProprietaryId)(uintptr_t);
-	Nt_UserGetPointerProprietaryId NtUserGetPointerProprietaryId = nullptr;
-
+	HANDLE _driver_handle;
 	int _processid;
 	ULONG64 _clientaddress;
 	ULONG64 _engineaddress;
@@ -43,22 +42,21 @@ private:
 		if (src_pid == 0 || src_addr == 0) return;
 
 		_requests out = { src_pid, src_addr, dst_addr, size, DRIVER_READVM };
-		NtUserGetPointerProprietaryId(reinterpret_cast<uintptr_t>(&out));
+		DeviceIoControl(_driver_handle, ioctl_call_driver, &out, sizeof(out), nullptr, 0, nullptr, nullptr);
 	}
 	auto writevm(uint32_t src_pid, uint64_t src_addr, uint64_t dst_addr, size_t size) -> void
 	{
 		if (src_pid == 0 || dst_addr == 0) return;
 
 		_requests out = { src_pid, src_addr, dst_addr, size, WRITE };
-		NtUserGetPointerProprietaryId(reinterpret_cast<uintptr_t>(&out));
+		DeviceIoControl(_driver_handle, ioctl_call_driver, &out, sizeof(out), nullptr, 0, nullptr, nullptr);
 	}
 public:
 	auto initdriver(int processid) -> void
 	{
-		NtUserGetPointerProprietaryId = (Nt_UserGetPointerProprietaryId)GetProcAddress(LoadLibraryA("win32u.dll"), "NtUserGetPointerProprietaryId");
-		if (NtUserGetPointerProprietaryId != 0)
+		_driver_handle = CreateFileA("\\\\.\\AimStarDriver", GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr); //get a handle to our driver
+		if (_driver_handle != INVALID_HANDLE_VALUE)
 		{
-			printf("> NtUserGetPointerProprietaryId: %p\n", NtUserGetPointerProprietaryId);
 			_processid = processid;
 		}
 	}
@@ -109,7 +107,7 @@ public:
 		_requests out = { 0 };
 		out.request_key = CLIENT_BASE;
 		out.src_pid = _processid;
-		NtUserGetPointerProprietaryId(reinterpret_cast<uintptr_t>(&out));
+		DeviceIoControl(_driver_handle, ioctl_call_driver, &out, sizeof(out), &out, sizeof(out), nullptr, nullptr);
 		_clientaddress = out.client_base;
 		return out.client_base;
 	}
@@ -119,7 +117,7 @@ public:
 		_requests out = { 0 };
 		out.request_key = ENGINE_BASE;
 		out.src_pid = _processid;
-		NtUserGetPointerProprietaryId(reinterpret_cast<uintptr_t>(&out));
+		DeviceIoControl(_driver_handle, ioctl_call_driver, &out, sizeof(out), &out, sizeof(out), nullptr, nullptr);
 		_engineaddress = out.client_base;
 		return out.client_base;
 	}
@@ -129,7 +127,7 @@ public:
 		_requests out = { 0 };
 		out.request_key = INPUT_BASE;
 		out.src_pid = _processid;
-		NtUserGetPointerProprietaryId(reinterpret_cast<uintptr_t>(&out));
+		DeviceIoControl(_driver_handle, ioctl_call_driver, &out, sizeof(out), &out, sizeof(out), nullptr, nullptr);
 		_engineaddress = out.client_base;
 		return out.client_base;
 	}

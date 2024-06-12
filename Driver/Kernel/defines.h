@@ -2,6 +2,8 @@
 #define rva(instruction, size) ( instruction + size + *reinterpret_cast<long*>(instruction + (size - sizeof(long))))
 #define size_align(size) ((size + 0xFFF) & 0xFFFFFFFFFFFFF000)
 #define to_lower_c(ch) ((ch >= 'A' && ch <= 'Z') ? (ch + 32) : ch)
+constexpr ULONG ioctl_call_driver = CTL_CODE(FILE_DEVICE_UNKNOWN, 0x775, METHOD_BUFFERED, FILE_SPECIAL_ACCESS);
+
 
 #include <ntddmou.h>
 
@@ -253,4 +255,5 @@ extern "C"
 	__declspec(dllimport) NTSTATUS __stdcall ZwQuerySystemInformation(SYSTEM_INFORMATION_CLASS, void*, unsigned long, unsigned long*);
 	__declspec(dllimport) void* __stdcall RtlFindExportedRoutineByName(void*, PCCH);
 	NTSYSAPI NTSTATUS NTAPI ObReferenceObjectByName(_In_ PUNICODE_STRING ObjectName, _In_ ULONG Attributes, _In_opt_ PACCESS_STATE AccessState, _In_opt_ ACCESS_MASK DesiredAccess, _In_ POBJECT_TYPE ObjectType, _In_ KPROCESSOR_MODE AccessMode, _Inout_opt_ PVOID ParseContext, _Out_ PVOID* Object);
+	NTKERNELAPI NTSTATUS IoCreateDriver(PUNICODE_STRING DriverName, PDRIVER_INITIALIZE InitializationFunction);
 }

@@ -110,8 +110,38 @@ auto requesthandler(_requests* pstruct) -> bool
 	return true;
 }
 
-auto hooked_function(uintptr_t rcx) -> void
+auto default_dispatch(PDEVICE_OBJECT device_obj, PIRP irp) -> NTSTATUS
 {
-	_requests* in = (_requests*)rcx;
-	requesthandler(in);
+	irp->IoStatus.Status = STATUS_SUCCESS;
+	irp->IoStatus.Information = 0;
+	IoCompleteRequest(irp, IO_NO_INCREMENT);
+	return STATUS_SUCCESS;
+}
+
+auto ioctl_dispatch(PDEVICE_OBJECT device_obj, PIRP irp	) -> NTSTATUS
+{
+	irp->IoStatus.Status = STATUS_SUCCESS;
+	irp->IoStatus.Information = 0;
+	auto stack = IoGetCurrentIrpStackLocation(irp);
+	auto buffer = (_requests*)irp->AssociatedIrp.SystemBuffer;
+	auto length = stack->Parameters.DeviceIoControl.InputBufferLength;
+	auto ctl_code = stack->Parameters.DeviceIoControl.IoControlCode;
+	if (length >= sizeof(_requests))
+	{
+		if (ctl_code == ioctl_call_driver && requesthandler(buffer))
+		{
+			irp->IoStatus.Information = sizeof(_requests);
+			irp->IoStatus.Status = STATUS_SUCCESS;
+		}
+		else
+		{
+			irp->IoStatus.Status = STATUS_INVALID_DEVICE_REQUEST;
+		}
+	}
+	else
+	{
+		irp->IoStatus.Status = STATUS_BUFFER_TOO_SMALL;
+	}
+	IoCompleteRequest(irp, IO_NO_INCREMENT);
+	return irp->IoStatus.Status;
 }
