@@ -276,7 +276,7 @@ void Cheats::Run()
 	}
 
 	// TriggerBot
-	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways))
+	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways) && !MenuConfig::ShowMenu)
 		TriggerBot::Run(LocalEntity);	
 
 	Misc::HitManager(LocalEntity, PreviousTotalHits);
