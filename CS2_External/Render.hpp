@@ -64,8 +64,8 @@ namespace Render
 			return;
 
 		Vec2 CenterPoint = Gui.Window.Size / 2;
-		float Radius = tan(AimControl::AimFov / 180.f * M_PI / 2.f) / tan(LocalEntity.Pawn.Fov / 180.f * M_PI / 2.f) * Gui.Window.Size.x;
-		float MinRadius = tan(AimControl::AimFovMin / 180.f * M_PI / 2.f) / tan(LocalEntity.Pawn.Fov / 180.f * M_PI / 2.f) * Gui.Window.Size.x;
+		float Radius = tan(AimControl::AimFov / 180.f * M_PI / 2.f) / tan(LocalEntity.Pawn.Fov / 180.f * M_PI / 2.f) * Gui.Window.Size.x / 2.f;
+		float MinRadius = tan(AimControl::AimFovMin / 180.f * M_PI / 2.f) / tan(LocalEntity.Pawn.Fov / 180.f * M_PI / 2.f) * Gui.Window.Size.x / 2.f;
 		Gui.Circle(CenterPoint, Radius, MenuConfig::FovCircleColor, 1);
 		Gui.Circle(CenterPoint, MinRadius, MenuConfig::FovCircleColor, 1);
 	}
