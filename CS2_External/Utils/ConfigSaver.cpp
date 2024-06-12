@@ -274,7 +274,7 @@ namespace MyConfigSaver {
         emitter << YAML::EndMap;
         emitter << YAML::Key << "Smooth" << YAML::Value << AimControl::Smooth;
         emitter << YAML::Key << "Hitboxes" << YAML::Value << AimControl::HitboxList;
-        emitter << YAML::Key << "SprayHitboxe" << YAML::Value << MenuConfig::SparyPosition;
+        emitter << YAML::Key << "SprayHitbox" << YAML::Value << MenuConfig::SparyPosition;
         emitter << YAML::Key << "VisibleCheck" << YAML::Value << MenuConfig::VisibleCheck;
         emitter << YAML::Key << "IgnoreFlash" << YAML::Value << AimControl::IgnoreFlash;
         emitter << YAML::Key << "ScopeOnly" << YAML::Value << AimControl::ScopeOnly;

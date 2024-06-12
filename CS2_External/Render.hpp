@@ -192,6 +192,8 @@ namespace Render
 		if (!MenuConfig::ShowHeadShootLine)
 			return;
 
+		float View = 0.f;
+
 		Vec2 Pos;
 		Pos.x = Gui.Window.Size.x / 2;
 		Pos.y = Gui.Window.Size.y / 2.0f - Gui.Window.Size.y / (2.0f * std::sin(LocalEntity.Pawn.Fov * M_PI / 180.0f) / std::sin(90.0f * M_PI / 180.0f)) * std::sin(LocalEntity.Pawn.ViewAngle.x * M_PI / 180.0f) / std::sin(90.0f * M_PI / 180.0f);
