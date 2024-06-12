@@ -192,8 +192,21 @@ void Cheats::Run()
 			{
 				Vec3 TempPos;
 				DistanceToSight = Entity.GetBone().BonePosList[AimControl::HitboxList[i]].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
-
-				if (DistanceToSight < MaxAimDistance)
+				if (LocalEntity.Pawn.ShotsFired >= AimControl::AimBullet + 1 && MenuConfig::SparyPosition != 0)
+				{
+					if (!MenuConfig::VisibleCheck ||
+						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
+						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (i)))
+					{
+						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[i]].Pos;
+						if (AimControl::HitboxList[i] == MenuConfig::SparyPositionIndex){
+							if (AimControl::HitboxList[i] == BONEINDEX::head)
+								TempPos.z -= 1.f;
+							AimPosList.push_back(TempPos);
+						}
+					}
+				}
+				else if (DistanceToSight < MaxAimDistance)
 				{
 					MaxAimDistance = DistanceToSight;
 

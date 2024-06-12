@@ -544,7 +544,32 @@ namespace GUI
 								removeHitbox(BONEINDEX::pelvis);
 							}
 						}
-						//ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
+						ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
+						ImGui::TextDisabled(Lang::AimbotText.SprayBoneList);
+						ImGui::SameLine();
+						if (ImGui::Combo("###SparyPos", &MenuConfig::SparyPosition, "Nearest\0Head\0Neck\0Chest\0Penis\0"))
+						{
+							switch (MenuConfig::SparyPosition)
+							{
+							case 0:
+								MenuConfig::SparyPositionIndex = 0xff;
+								break;
+							case 1:
+								MenuConfig::SparyPositionIndex = BONEINDEX::head;
+								break;
+							case 2:
+								MenuConfig::SparyPositionIndex = BONEINDEX::neck_0;
+								break;
+							case 3:
+								MenuConfig::SparyPositionIndex = BONEINDEX::spine_1;
+								break;
+							case 4:
+								MenuConfig::SparyPositionIndex = BONEINDEX::pelvis;
+								break;
+							default:
+								break;
+							}
+						}
 					}
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);

@@ -91,6 +91,7 @@ namespace Lang
 		inline static const char* FovMinSlider;
 		inline static const char* SmoothSlider;
 		inline static const char* BoneList;
+		inline static const char* SprayBoneList;
 		inline static const char* Tip;
 		inline static const char* ScopeOnly;
 		inline static const char* AimLock;
@@ -286,6 +287,7 @@ namespace Lang
 		AimbotText.FovMinSlider = u8"MinFOV: ";
 		AimbotText.SmoothSlider = u8"Smooth: ";
 		AimbotText.BoneList = u8"Hitbox";
+		AimbotText.SprayBoneList = u8"Spray";
 		AimbotText.Tip = u8"Aimbot will not work while the menu is opened";
 		AimbotText.ScopeOnly = u8"Scope Only";
 		AimbotText.AimLock = u8"Aim Lock";
