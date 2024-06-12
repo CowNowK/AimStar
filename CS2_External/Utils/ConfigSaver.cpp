@@ -274,6 +274,7 @@ namespace MyConfigSaver {
         emitter << YAML::EndMap;
         emitter << YAML::Key << "Smooth" << YAML::Value << AimControl::Smooth;
         emitter << YAML::Key << "Hitboxes" << YAML::Value << AimControl::HitboxList;
+        emitter << YAML::Key << "SprayHitboxe" << YAML::Value << MenuConfig::SparyPosition;
         emitter << YAML::Key << "VisibleCheck" << YAML::Value << MenuConfig::VisibleCheck;
         emitter << YAML::Key << "IgnoreFlash" << YAML::Value << AimControl::IgnoreFlash;
         emitter << YAML::Key << "ScopeOnly" << YAML::Value << AimControl::ScopeOnly;
@@ -526,6 +527,7 @@ namespace MyConfigSaver {
             MenuConfig::FovCircleColor.Value.w = ReadData(config["Aimbot"]["CircleColor"]["a"], 0.f);
             AimControl::Smooth = ReadData(config["Aimbot"]["Smooth"], 2.f);
             AimControl::HitboxList = LoadVector(config["Aimbot"]["Hitboxes"], { BONEINDEX::head });
+            MenuConfig::SparyPosition = ReadData(config["Aimbot"]["SprayHitbox"], 0);
             MenuConfig::VisibleCheck = ReadData(config["Aimbot"]["VisibleCheck"], true);
             AimControl::IgnoreFlash = ReadData(config["Aimbot"]["IgnoreFlash"], false);
             AimControl::ScopeOnly = ReadData(config["Aimbot"]["ScopeOnly"], false);
