@@ -108,6 +108,7 @@ bool Offset::UpdateOffsets()
 	Offset::WeaponBaseData.WeaponType = MyConfigSaver::ReadData(offset["client.dll"]["CCSWeaponBaseVData"]["m_WeaponType"], 0);
 	Offset::WeaponBaseData.Inaccuracy = MyConfigSaver::ReadData(offset["client.dll"]["CCSWeaponBaseVData"]["m_flInaccuracyMove"], 0);
 	Offset::WeaponBaseData.inReload = MyConfigSaver::ReadData(offset["client.dll"]["C_CSWeaponBase"]["m_bInReload"], 0);
+	Offset::WeaponBaseData.m_nNumBullets = MyConfigSaver::ReadData(offset["client.dll"]["CCSWeaponBaseVData"]["m_nNumBullets"], 0);
 	Offset::WeaponBaseData.ActiveWeapon = MyConfigSaver::ReadData(offset["client.dll"]["CPlayer_WeaponServices"]["m_hActiveWeapon"], 0);
 	Offset::WeaponBaseData.Item = MyConfigSaver::ReadData(offset["client.dll"]["C_AttributeContainer"]["m_Item"], 0);
 	Offset::WeaponBaseData.ItemDefinitionIndex = MyConfigSaver::ReadData(offset["client.dll"]["C_EconItemView"]["m_iItemDefinitionIndex"], 0);

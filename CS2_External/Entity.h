@@ -55,6 +55,7 @@ public:
 	C_UTL_VECTOR AimPunchCache;
 	int Health;
 	int Ammo;
+	int Bullet;
 	int MaxAmmo;
 	int Armor;
 	int TeamID;
@@ -78,6 +79,7 @@ public:
 	bool GetFFlags();
 	bool GetAimPunchCache();
 	bool GetAmmo();
+	bool GetBullet();
 	bool GetMaxAmmo();
 	bool GetArmor();
 	bool GetDefusing();

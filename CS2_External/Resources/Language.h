@@ -137,6 +137,7 @@ namespace Lang
 		inline static const char* HotKeyList;
 		inline static const char* Toggle;
 		inline static const char* ScopeOnly;
+		inline static const char* IgnoreFlash;
 		inline static const char* DelaySlider;
 		inline static const char* FakeShotSlider;
 	} TriggerText;
@@ -289,7 +290,7 @@ namespace Lang
 		AimbotText.BoneList = u8"Hitbox";
 		AimbotText.SprayBoneList = u8"Spray";
 		AimbotText.Tip = u8"Aimbot will not work while the menu is opened";
-		AimbotText.ScopeOnly = u8"Scope Only";
+		AimbotText.ScopeOnly = u8"Scope Only ";
 		AimbotText.AimLock = u8"Aim Lock";
 		AimbotText.AutoShot = u8"Auto Shot";
 		AimbotText.BulletSlider = u8"Start Bullet: ";
@@ -317,7 +318,8 @@ namespace Lang
 		TriggerText.FeatureName = u8" Triggerbot";
 		TriggerText.HotKeyList = u8"Hotkey   ";
 		TriggerText.Toggle = u8"Always Active";
-		TriggerText.ScopeOnly = u8"Scope Only";
+		TriggerText.ScopeOnly = u8"Scope Only"; 
+		TriggerText.IgnoreFlash = u8"Ignore Flash";
 		TriggerText.DelaySlider = u8"Shot Delay:";
 		TriggerText.FakeShotSlider = u8"Shot Duration:";
 

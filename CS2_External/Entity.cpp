@@ -279,7 +279,14 @@ bool PlayerPawn::GetAmmo()
 
 	return GetDataAddressWithOffset<int>(ClippingWeapon, Offset::WeaponBaseData.Clip1, this->Ammo);
 }
+bool PlayerPawn::GetBullet()
+{
+	DWORD64 ClippingWeapon = 0;
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.pClippingWeapon, ClippingWeapon))
+		return false;
 
+	return GetDataAddressWithOffset<int>(ClippingWeapon, Offset::WeaponBaseData.Clip1, this->Bullet);
+}
 bool PlayerPawn::GetMaxAmmo()
 {
 	DWORD64 ClippingWeapon = 0;
