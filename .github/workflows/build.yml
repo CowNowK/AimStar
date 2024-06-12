@@ -89,7 +89,7 @@ jobs:
         uses: vimtor/action-zip@master
         with:
           files: ./cike/Driver.sys
-          dest: AimStar-R0-Autobuild.zip    
+          dest: AimStar-Driver-Autobuild.zip    
       - name: Zip llvm ci
         uses: vimtor/action-zip@master
         with:
@@ -119,6 +119,7 @@ jobs:
           #  Try llvm build if msvc build doesn't works right
           files: |
             AimStar-R0-Autobuild.zip
+            AimStar-Driver-Autobuild.zip
             AimStar-R3-Autobuild.zip
             AimStar-LLVM-Autobuild.zip
           prerelease: true
