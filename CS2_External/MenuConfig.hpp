@@ -6,7 +6,7 @@
 namespace MenuConfig
 {
 	inline std::string path = "";
-	inline std::string LocalVersion = "4.6.1";
+	inline std::string LocalVersion = "4.6.2";
 	inline std::string HWID = "";
 	inline bool DRM = false;
 

@@ -30,7 +30,7 @@ bool Offset::UpdateOffsets()
 	std::string offsetPath = MenuConfig::path + "\\Offsets\\offsets.yaml";
 
 	if (!fs::exists(offsetPath)) {
-		if (fs::create_directory(MenuConfig::path + "\\Offsets"))
+		if (fs::create_directories(MenuConfig::path + "\\Offsets"))
 		{
 			std::cout << "[Info] offsets folder created: " << MenuConfig::path + "\\Offsets" << std::endl;
 			std::cout << "       please visit https://aimstar.tkm.icu/updater to get the latest offset file." << std::endl;

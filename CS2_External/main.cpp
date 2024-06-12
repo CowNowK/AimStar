@@ -190,7 +190,7 @@ void Cheat()
 	}
 	else
 	{
-		if (fs::create_directory(MenuConfig::path))
+		if (fs::create_directories(MenuConfig::path))
 		{
 			cout << "[Info] Config folder created: " << MenuConfig::path << endl;
 		}
