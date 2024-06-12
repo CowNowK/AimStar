@@ -32,7 +32,7 @@ jobs:
       - name: Setup MSBuild path
         uses: microsoft/setup-msbuild@main
       - name: Build with MSBuild
-        run: msbuild CS2_External\CS2_External.vcxproj /p:Configuration=Ring0 /p:Platform=x64
+        run: msbuild CS2_External.sln /p:Configuration=Ring0 /p:Platform=x64
       - name: Rename EXE to AimStar-Ring0-${{github.sha}}.exe
         run: |
           del AimStar-Ring0-*.exe
