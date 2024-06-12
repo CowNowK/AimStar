@@ -37,12 +37,17 @@ jobs:
         run: |
           del AimStar-Ring0-*.exe
           ren AimStar-Ring0.exe AimStar-Ring0-${{github.sha}}.exe
-        working-directory: CS2_External\x64\Ring0\
+        working-directory: x64\Ring0\
       - name: Upload the output
         uses: actions/upload-artifact@main
         with:
           name: cir0
-          path: CS2_External\x64\Ring0\*
+          path: x64\Ring0\*
+      - name: Upload the kernel
+        uses: actions/upload-artifact@main
+        with:
+          name: cike
+          path: x64\Release\*
   buildllvm:
     runs-on: windows-latest
     steps:
@@ -78,7 +83,12 @@ jobs:
       - name: Zip cir0
         uses: vimtor/action-zip@master
         with:
-          files: ./cir0/AimStar-Ring0-${{github.sha}}.exe          
+          files: ./cir0/AimStar-Ring0-${{github.sha}}.exe
+          dest: AimStar-R0-Autobuild.zip
+      - name: Zip cike
+        uses: vimtor/action-zip@master
+        with:
+          files: ./cike/Driver.sys
           dest: AimStar-R0-Autobuild.zip    
       - name: Zip llvm ci
         uses: vimtor/action-zip@master
