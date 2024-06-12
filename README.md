@@ -9,7 +9,7 @@
 <a href="https://discord.com/invite/VgRrxwesPz"><img src="https://img.shields.io/discord/1179009716307886080?logo=discord&logoColor=%234ec920"></a>
 </p>
 
-**Yes, there is a large leap AimStar with other much nicer software. However, we shall never stop our step.**
+**Yes, there is a large leap other much nicer software than AimStar. However, we shall never stop our step.**
 
 <h4 align="center">
   ⛔ USE AT YOUR OWN RISK ⛔
