@@ -80,11 +80,11 @@ jobs:
         with:
           files: ./cir0/AimStar-Ring0-${{github.sha}}.exe          
           dest: AimStar-R0-Autobuild.zip    
-      #- name: Zip llvm ci
-      #  uses: vimtor/action-zip@master
-      #  with:
-      #    files: ./llvm/LLVM-AimStar-Ring3-${{github.sha}}.exe         
-      #    dest: AimStar-LLVM-Autobuild.zip
+      - name: Zip llvm ci
+        uses: vimtor/action-zip@master
+        with:
+          files: ./llvm/LLVM-AimStar-Ring3-${{github.sha}}.exe         
+          dest: AimStar-LLVM-Autobuild.zip
       - name: Delete tag
         run: gh release delete autobuild --cleanup-tag
         env:
@@ -110,6 +110,6 @@ jobs:
           files: |
             AimStar-R0-Autobuild.zip
             AimStar-R3-Autobuild.zip
-          #  AimStar-LLVM-Autobuild.zip
+            AimStar-LLVM-Autobuild.zip
           prerelease: true
           
