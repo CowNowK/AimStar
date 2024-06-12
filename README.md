@@ -9,7 +9,7 @@
 <a href="https://discord.com/invite/VgRrxwesPz"><img src="https://img.shields.io/discord/1179009716307886080?logo=discord&logoColor=%234ec920"></a>
 </p>
 
-**Recently we have received reports from a large number of users that they have been VAC banned, so we presume that this project is currently VAC detected. We do not recommend that you use this project on any valuable accounts until we have time to resolve this issue.**
+**Yes, there is a large leap AimStar with other much nicer software. However, we shall never stop our step.**
 
 <h4 align="center">
   ⛔ USE AT YOUR OWN RISK ⛔
