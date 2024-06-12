@@ -1,4 +1,4 @@
-
+ï»¿
 #define _CRT_SECURE_NO_WARNINGS
 #include "Cheats.h"
 #include "Offsets.h"
@@ -55,7 +55,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 void RandomTitle()
 {
 	constexpr int length = 25;
-	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`-=~!@#$%^&*()_+,./;'[]|{}:?¼×ÒÒ±û¶¡Îì¼º¸ıĞÁÈÉ¹ï×Ó³óÒúÃ®³½ËÈÎçÎ´ÉêÓÏĞçº¥");
+	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`-=~!@#$%^&*()_+,./;'[]|{}:?ç”²ä¹™ä¸™ä¸æˆŠå·±åºšè¾›å£¬ç™¸å­ä¸‘å¯…å¯è¾°å·³åˆæœªç”³é…‰æˆŒäº¥");
 	TCHAR title[length + 1]{};
 
 	for (int j = 0; j != length; j++)
