@@ -4,6 +4,7 @@
 #include "..\Cheats.h"
 #include "GetWeaponIcon.h"
 #include "..\Resources\8964.h"
+#include "../Utils/XorStr.h"
 #define ICON_FA_EYE "\xef\x81\xae"
 
 ID3D11ShaderResourceView* winniethepooh_srv = NULL;
@@ -97,11 +98,11 @@ namespace ESP
 		ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::Pawn.pClippingWeapon, ClippingWeapon);
 		ProcessMgr.ReadMemory(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData);
 		ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.szName, WeaponNameAddress);
-		std::string weaponName = "Invalid Weapon Name";
+		std::string weaponName = XorStr("Invalid Weapon Name");
 
 		if (!WeaponNameAddress)
 		{
-			weaponName = "NULL";
+			weaponName = XorStr("NULL");
 		}
 		else {
 			weaponName = Entity.Pawn.WeaponName;
@@ -484,11 +485,11 @@ namespace ESP
 			}
 			if (MenuConfig::HealthBarType == 0 || MenuConfig::HealthBarType == 2) {
 				ImVec2 textPos(centerPos.x + 30, centerPos.y - 18);
-				ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 255, 255, 255), "Player");
+				ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 255, 255, 255), XorStr("Player"));
 			}
 			if (MenuConfig::HealthBarType == 1) {
 				ImVec2 textPos(centerPos.x + 30, centerPos.y - 22);
-				ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 255, 255, 255), "Player");
+				ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 255, 255, 255), XorStr("Player"));
 			}
 		}
 		if (ESPConfig::ShowDistance) {
@@ -497,7 +498,7 @@ namespace ESP
 			{
 				textPos = { textPos.x - 27, textPos.y };
 			}
-			ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 204, 0, 255), "20m");
+			ImGui::GetWindowDrawList()->AddText(textPos, IM_COL32(255, 204, 0, 255), XorStr("1337m"));
 		}
 		if (ESPConfig::ShowWeaponESP) {
 			ImVec2 textPos(0, 0);

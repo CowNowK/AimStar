@@ -2,6 +2,7 @@
 #include "MenuConfig.hpp"
 #include "Utils/ConfigSaver.hpp"
 #include <filesystem>
+#include "Utils/XorStr.h"
 
 namespace fs = std::filesystem;
 
@@ -26,17 +27,17 @@ DWORD64 SearchOffsets(std::string Signature, DWORD64 ModuleAddress)
 bool Offset::UpdateOffsets()
 {
 
-	std::string offsetPath = MenuConfig::path + "\\Offsets\\offsets.yaml";
+	std::string offsetPath = MenuConfig::path + XorStr("\\Offsets\\offsets.yaml");
 
 	if (!fs::exists(offsetPath)) {
-		if (fs::create_directories(MenuConfig::path + "\\Offsets"))
+		if (fs::create_directories(MenuConfig::path + XorStr("\\Offsets")))
 		{
-			std::cout << "[Info] offsets folder created: " << MenuConfig::path + "\\Offsets" << std::endl;
-			std::cout << "       please visit https://aimstar.tkm.icu/updater to get the latest offset file." << std::endl;
+			std::cout << XorStr("[Info] offsets folder created: ") << MenuConfig::path + XorStr("\\Offsets") << std::endl;
+			std::cout << XorStr("       please visit https://aimstar.tkm.icu/updater to get the latest offset file.") << std::endl;
 		}
 		else
 		{
-			std::cerr << "Failed to locate offsets file: " << offsetPath << std::endl;
+			std::cerr << XorStr("Failed to locate offsets file: ") << offsetPath << std::endl;
 			return false;
 		}
 

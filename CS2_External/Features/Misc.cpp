@@ -2,6 +2,7 @@
 #include "..\Resources\Language.h"
 #include <iostream>
 #include <Shellapi.h>
+#include "../Utils/XorStr.h"
 
 namespace Misc
 {
@@ -20,34 +21,34 @@ namespace Misc
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
 		ImGui::SetNextWindowBgAlpha(0.3f);
 		ImGui::SetNextWindowSize(ImVec2(200, 0));
-		ImGui::Begin("Cheats List", nullptr, windowFlags);
+		ImGui::Begin(XorStr("Cheats List"), nullptr, windowFlags);
 
 		if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
-			ImGui::Text("Aimbot [Toggle]");
-		CheatText("Anti Record", MenuConfig::BypassOBS);
-		CheatText("Bhop", MiscCFG::BunnyHop);
-		CheatText("Bomb Timer", MiscCFG::bmbTimer);
-		CheatText("Crosshair", CrosshairsCFG::ShowCrossHair);
-		CheatText("Enemy Sensor", MiscCFG::EnemySensor);
-		CheatText("ESP", ESPConfig::ESPenabled);
-		CheatText("External Radar", RadarCFG::ShowRadar);
-		CheatText("Fake Duck", MiscCFG::Jitter);
-		CheatText("Fast Stop", MiscCFG::FastStop);
+			ImGui::Text(XorStr("Aimbot [Toggle]"));
+		CheatText(XorStr("Anti Record"), MenuConfig::BypassOBS);
+		CheatText(XorStr("Bhop"), MiscCFG::BunnyHop);
+		CheatText(XorStr("Bomb Timer"), MiscCFG::bmbTimer);
+		CheatText(XorStr("Crosshair"), CrosshairsCFG::ShowCrossHair);
+		CheatText(XorStr("Enemy Sensor"), MiscCFG::EnemySensor);
+		CheatText(XorStr("ESP"), ESPConfig::ESPenabled);
+		CheatText(XorStr("External Radar"), RadarCFG::ShowRadar);
+		CheatText(XorStr("Fake Duck"), MiscCFG::Jitter);
+		CheatText(XorStr("Fast Stop"), MiscCFG::FastStop);
 		if (MiscCFG::FlashImmunity != 0)
-			ImGui::Text("Flash Immunity");
-		CheatText("Force Scope", MiscCFG::ForceScope);
+			ImGui::Text(XorStr("Flash Immunity"));
+		CheatText(XorStr("Force Scope"), MiscCFG::ForceScope);
 		if (MiscCFG::Fov != 90)
-			ImGui::Text("Fov Changer");
-		CheatText("Headshot Line", MenuConfig::ShowHeadShootLine);
-		CheatText("HitSound", MiscCFG::HitSound);
-		CheatText("Money Service", MiscCFG::MoneyService);
-		CheatText("No Smoke", MiscCFG::NoSmoke);
-		CheatText("Radar Hack", MiscCFG::RadarHack);
-		CheatText("RCS", MenuConfig::RCS);
-		CheatText("Smoke Color", MiscCFG::SmokeColored);
-		CheatText("Spec List", MiscCFG::SpecList);
+			ImGui::Text(XorStr("Fov Changer"));
+		CheatText(XorStr("Headshot Line"), MenuConfig::ShowHeadShootLine);
+		CheatText(XorStr("HitSound"), MiscCFG::HitSound);
+		CheatText(XorStr("Money Service"), MiscCFG::MoneyService);
+		CheatText(XorStr("No Smoke"), MiscCFG::NoSmoke);
+		CheatText(XorStr("Radar Hack"), MiscCFG::RadarHack);
+		CheatText(XorStr("RCS"), MenuConfig::RCS);
+		CheatText(XorStr("Smoke Color"), MiscCFG::SmokeColored);
+		CheatText(XorStr("Spec List"), MiscCFG::SpecList);
 		if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
-			ImGui::Text("TriggerBot [Toggle]");
+			ImGui::Text(XorStr("TriggerBot [Toggle]"));
 
 		ImGui::End();
 	}
@@ -60,7 +61,7 @@ namespace Misc
 		//	globalvars GV;
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
 		ImGui::SetNextWindowBgAlpha(0.5f);
-		ImGui::Begin("Watermark", nullptr, windowFlags);
+		ImGui::Begin(XorStr("Watermark"), nullptr, windowFlags);
 
 		// Cheat FPS
 		static auto FrameRate = 1.0f;
@@ -80,14 +81,14 @@ namespace Misc
 		// Player Angle
 		Vec2 Angle = LocalPlayer.Pawn.ViewAngle;
 
-		ImGui::Text("AimStar");
-		ImGui::Text("%d FPS | %d ms | %02d:%02d:%02d",
+		ImGui::Text(XorStr("AimStar"));
+		ImGui::Text(XorStr("%d FPS | %d ms | %02d:%02d:%02d"),
 			FrameRate != 0.0f ? static_cast<int>(FrameRate) : 0,
 			playerPing,
 			ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
-		ImGui::Text("Pos: %.2f, %.2f, %.2f", Pos.x, Pos.y, Pos.z);
-		ImGui::Text("Angle: %.2f, %.2f", Angle.x, Angle.y);
-		ImGui::Text("Vel: %.2f", LocalPlayer.Pawn.Speed);
+		ImGui::Text(XorStr("Pos: %.2f, %.2f, %.2f"), Pos.x, Pos.y, Pos.z);
+		ImGui::Text(XorStr("Angle: %.2f, %.2f"), Angle.x, Angle.y);
+		ImGui::Text(XorStr("Vel: %.2f"), LocalPlayer.Pawn.Speed);
 
 		ImGui::End();
 	}
@@ -197,7 +198,7 @@ namespace Misc
 		Misc::StopKeyEvent('W', &wKeyPressed, 'S', 50.f);
 		Misc::StopKeyEvent('S', &sKeyPressed, 'W', 50.f);
 	}
-
+	/*
 	// This feature was removed temporarily from Cheats.hpp, because it may crash the game
 	void NadeManager(CGame Game) noexcept
 	{
@@ -205,13 +206,13 @@ namespace Misc
 			return;
 
 		std::vector<std::string> EntityNames = {
-		"smokegrenade_projectile", "weapon_glock", "weapon_smokegrenade", "basemodelentity",
-		"c_cs_player_for_precache", "info_particle_system", "prop_dynamic", "post_processing_volume",
-		"env_player_visibility", "team_intro_terrorist", "c_cs_observer_for_precache",
-		"team_intro_counterterrorist", "point_camera", "sky_camera", "env_sky", "team_select_terrorist",
-		"team_select_counterterrorist", "point_camera", "func_bomb_target", "env_cubemap_fog",
-		"csgo_viewmodel", "cs_minimap_boundary", "cs_gamerules", "cs_player_manager", "vote_controller",
-		"weapon_incgrenade", "molotov_projectile"
+		XorStr("smokegrenade_projectile"), XorStr("weapon_glock"), XorStr("weapon_smokegrenade"), XorStr("basemodelentity"),
+		XorStr("c_cs_player_for_precache"), XorStr("info_particle_system"), XorStr("prop_dynamic"), XorStr("post_processing_volume"),
+		XorStr("env_player_visibility"), XorStr("team_intro_terrorist"), XorStr("c_cs_observer_for_precache"),
+		XorStr("team_intro_counterterrorist"), XorStr("point_camera"), XorStr("sky_camera"), XorStr("env_sky"), XorStr("team_select_terrorist"),
+		XorStr("team_select_counterterrorist"), XorStr("point_camera"), XorStr("func_bomb_target"), XorStr("env_cubemap_fog"),
+		XorStr("csgo_viewmodel"), XorStr("cs_minimap_boundary"), XorStr("cs_gamerules"), XorStr("cs_player_manager"), XorStr("vote_controller"),
+		XorStr("weapon_incgrenade"), XorStr("molotov_projectile")
 		};
 
 		if (!MiscCFG::NoSmoke && !MiscCFG::SmokeColored)
@@ -245,29 +246,29 @@ namespace Misc
 				ProcessMgr.ReadMemory<char[32]>(addr, toread);
 				classname = toread;
 
-				/* 
-				* Filter id to find id
+				
+				// Filter id to find id
 				if (std::find(EntityNames.begin(), EntityNames.end(), classname) == EntityNames.end())
 					std::cout << classname << std::endl;
-				*/
+				
 
-				if (classname == "smokegrenade_projectile")
+				if (classname == XorStr("smokegrenade_projectile"))
 				{
 					if (MiscCFG::SmokeColored)
 						ProcessMgr.WriteMemory<Vector3>(ent_base + Offset::SmokeGrenadeProjectile.vSmokeColor, COLOR);
 				}
-				/* Disabled
+				 Disabled
 				if (classname == "molotov_projectile")
 				{
 					Vector3 FireColor = { 0,0,0 };
 					ProcessMgr.ReadMemory<Vector3>(ent_base + 0x112C, FireColor);
 					std::cout << FireColor.x << ", " << FireColor.y << ", " << FireColor.z << std::endl;
 						
-				}*/
+				}
 			}
 		}
 	}
-
+	*/
 	void RadarHack(const CEntity& EntityList) noexcept
 	{
 		if (MenuConfig::SafeMode)
@@ -304,17 +305,17 @@ namespace Misc
 
 		ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysAutoResize;
 
-		ImGui::Begin("Money Services", nullptr, flags);
+		ImGui::Begin(XorStr("Money Services"), nullptr, flags);
 		{
 			if (ImGui::TreeNode(EntityList.Controller.PlayerName.c_str()))
 			{
 				std::stringstream ss;
-				ss << "Account: $" << EntityList.Controller.Money;
+				ss << XorStr("Account: $") << EntityList.Controller.Money;
 				ImGui::TextColored(ImColor(0, 255, 0, 255), ss.str().c_str());
 				if (MiscCFG::ShowCashSpent)
 				{
 					std::stringstream sss;
-					sss << "ThisRound/Total: " << EntityList.Controller.CashSpent << "/" << EntityList.Controller.CashSpentTotal;
+					sss << XorStr("ThisRound/Total: ") << EntityList.Controller.CashSpent << XorStr("/") << EntityList.Controller.CashSpentTotal;
 					ImGui::TextColored(ImColor(255, 0, 0, 255), sss.str().c_str());
 				}
 
@@ -388,9 +389,9 @@ namespace Misc
 
 		// When players hold these weapons, don't Scope
 		std::vector<std::string> WeaponNames = {
-		"smokegrenade", "flashbang", "hegrenade", "molotov", "decoy", "incgrenade", 
-		"awp", "ssg08", "aug", "sg556", 
-		"knife", "c4"
+		XorStr("smokegrenade"), XorStr("flashbang"), XorStr("hegrenade"), XorStr("molotov"), XorStr("decoy"), XorStr("incgrenade"),
+		XorStr("awp"), XorStr("ssg08"), XorStr("aug"), XorStr("sg556"),
+		XorStr("knife"), XorStr("c4")
 		};
 		if (std::find(WeaponNames.begin(), WeaponNames.end(), PlayerWeapon) != WeaponNames.end())
 			return;
@@ -435,11 +436,11 @@ namespace Misc
 		ImGui::SetNextWindowSize({ Gui.Window.Size.x, Gui.Window.Size.y }, ImGuiCond_Always);
 		ImGui::SetNextWindowBgAlpha(0.f);
 		ImGui::PushStyleColor(ImGuiCol_Border, ImVec4(0, 0, 0, 0));
-		ImGui::Begin("##background", nullptr, ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoDecoration);
+		ImGui::Begin(XorStr("##background"), nullptr, ImGuiWindowFlags_NoInputs | ImGuiWindowFlags_NoDecoration);
 
 		ImVec2 windowPos = ImGui::GetWindowPos();
 		ImVec2 windowSize = ImGui::GetWindowSize();
-		ImGui::TextColored(ImColor(255, 255, 255, 200), "Night Mode Overlay");
+		ImGui::TextColored(ImColor(255, 255, 255, 200), XorStr("Night Mode Overlay"));
 
 		if (MiscCFG::NightModeAlpha)
 		{

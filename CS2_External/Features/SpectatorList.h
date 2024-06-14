@@ -26,7 +26,7 @@ namespace SpecList
     {
         ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize;
 
-        if (ImGui::Begin("Spectators", NULL, flags))
+        if (ImGui::Begin(XorStr("Spectators"), NULL, flags))
         {
 
             float lineSpacing = -15.0f;

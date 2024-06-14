@@ -14,6 +14,7 @@
 #include "Features/RCS.H"
 #include "Features/BombTimer.h"
 #include "Features/SpectatorList.h"
+#include "Utils/XorStr.h"
 
 int PreviousTotalHits = 0;
 
@@ -37,7 +38,7 @@ void Cheats::RadarSetting(Base_Radar& Radar)
 {
 	// Radar window
 	ImGui::SetNextWindowBgAlpha(RadarCFG::RadarBgAlpha);
-	ImGui::Begin("Radar", 0, ImGuiWindowFlags_NoResize);
+	ImGui::Begin(XorStr("Radar"), 0, ImGuiWindowFlags_NoResize);
 	ImGui::SetWindowSize({ RadarCFG::RadarRange * 2,RadarCFG::RadarRange * 2 });
 	
 	if (!RadarCFG::customRadar)
