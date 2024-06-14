@@ -271,6 +271,8 @@ bool PlayerPawn::GetArmor()
 	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentArmor, this->Armor);
 }
 
+
+
 bool PlayerPawn::GetAmmo()
 {
 	DWORD64 ClippingWeapon = 0;

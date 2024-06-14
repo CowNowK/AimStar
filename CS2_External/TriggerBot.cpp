@@ -5,6 +5,7 @@ DWORD64 ListEntry = 0;
 DWORD64 PawnAddress = 0;
 CEntity Entity;
 bool AllowShoot = false;
+bool WaitForNoAttack = false;
 
 void TriggerBot::ReleaseMouseButton()
 {
@@ -14,6 +15,10 @@ void TriggerBot::ReleaseMouseButton()
 
 void TriggerBot::Run(const CEntity& LocalEntity)
 {
+	if (LocalEntity.Controller.AliveStatus == 0)
+		return;
+	if (!ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::Pawn.m_bWaitForNoAttack, WaitForNoAttack))
+		return;
 	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::Pawn.iIDEntIndex, uHandle))
 		return;
 	if (uHandle == -1)

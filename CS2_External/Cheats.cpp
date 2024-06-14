@@ -144,7 +144,7 @@ void Cheats::Run()
 		CEntity Entity;
 		DWORD64 EntityAddress = 0;
 		if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListEntry() + (i + 1) * 0x78, EntityAddress))
-			continue;
+			continue; 
 		if (EntityAddress == LocalEntity.Controller.Address)
 		{
 			LocalPlayerControllerIndex = i;

@@ -65,6 +65,7 @@ public:
 	float FlashDuration;
 	bool isDefusing;
 
+
 public:
 	bool GetPos();
 	bool GetViewAngle();

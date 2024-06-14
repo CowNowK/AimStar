@@ -98,6 +98,7 @@ bool Offset::UpdateOffsets()
 	Offset::Pawn.bSpottedByMask = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawn"]["m_entitySpottedState"], 0) + MyConfigSaver::ReadData(offset["client.dll"]["EntitySpottedState_t"]["m_bSpottedByMask"], 0);
 	Offset::Pawn.AbsVelocity = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_vecAbsVelocity"], 0);
 	Offset::Pawn.IsBuying = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawn"]["m_bIsBuyMenuOpen"], 0);
+	Offset::Pawn.m_bWaitForNoAttack = MyConfigSaver::ReadData(offset["client.dll"]["C_CSPlayerPawn"]["m_bWaitForNoAttack"], 0);
 
 	Offset::WeaponBaseData.WeaponDataPTR = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_nSubclassID"],0) + 0x08;
 	Offset::WeaponBaseData.szName = MyConfigSaver::ReadData(offset["client.dll"]["CCSWeaponBaseVData"]["m_szName"], 0);
