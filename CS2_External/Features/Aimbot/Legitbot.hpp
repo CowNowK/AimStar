@@ -134,8 +134,6 @@ namespace AimControl
 
             if (Norm < BestNorm)
                 BestNorm = Norm;
-            if (Yaw <= 0.0015 && Pitch <= 0.0015)
-                return;
 
             gGame.View.WorldToScreen(Vec3(AimPosList[i]), ScreenPos);
         }
