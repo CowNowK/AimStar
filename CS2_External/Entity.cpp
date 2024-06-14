@@ -66,6 +66,8 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 		return false;
 	if (!this->Controller.GetIsAlive())
 		return false;
+	if (!this->Controller.GetIsCtrlBot())
+		return false;
 	if (!this->Controller.GetTeamID())
 		return false;
 	if (!this->Controller.GetPlayerName())
@@ -164,13 +166,17 @@ bool PlayerController::GetIsAlive()
 	return GetDataAddressWithOffset<int>(Address, Offset::Entity.IsAlive, this->AliveStatus);
 }
 
+bool PlayerController::GetIsCtrlBot()
+{
+	return GetDataAddressWithOffset<int>(Address, Offset::Entity.m_bControllingBot, this->CtrlBot);
+}
+
 bool PlayerController::GetPlayerName()
 {
 	char Buffer[MAX_PATH]{};
 
 	if (!ProcessMgr.ReadMemory(Address + Offset::Entity.iszPlayerName, Buffer, MAX_PATH))
 		return false;
-
 	this->PlayerName = Buffer;
 	if (this->PlayerName.empty())
 		this->PlayerName = "Name_None";
@@ -335,7 +341,12 @@ bool PlayerPawn::GetVelocity()
 
 bool CEntity::IsAlive()
 {
-	return this->Controller.AliveStatus == 1 && this->Pawn.Health > 0;
+	return (this->Controller.AliveStatus == 1 || this->Controller.CtrlBot == 1) && this->Pawn.Health > 0;
+}
+
+bool CEntity::ESPAlive()
+{
+	return this->Pawn.Health > 0;
 }
 
 bool CEntity::IsInScreen()

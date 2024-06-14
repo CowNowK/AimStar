@@ -61,9 +61,11 @@ bool Offset::UpdateOffsets()
 	Offset::ForceLeft = MyConfigSaver::ReadData(offset["client.dll"]["left"], 0);
 	Offset::ForceRight = MyConfigSaver::ReadData(offset["client.dll"]["right"], 0);
 
-	Offset::Entity.IsAlive = MyConfigSaver::ReadData(offset["client.dll"]["CBasePlayerController"]["m_bPawnIsAlive"], 0);
-	Offset::Entity.PlayerPawn = MyConfigSaver::ReadData(offset["client.dll"]["CBasePlayerController"]["m_hPlayerPawn"], 0);
+	Offset::Entity.IsAlive = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController"]["m_bPawnIsAlive"], 0);
+	Offset::Entity.m_bControllingBot = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController"]["m_bControllingBot"], 0); 
+	Offset::Entity.PlayerPawn = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController"]["m_hPlayerPawn"], 0);
 	Offset::Entity.iszPlayerName = MyConfigSaver::ReadData(offset["client.dll"]["CBasePlayerController"]["m_iszPlayerName"], 0);
+	Offset::Entity.m_sSanitizedPlayerName = MyConfigSaver::ReadData(offset["client.dll"]["CCSPlayerController"]["m_sSanitizedPlayerName"], 0);
 	Offset::Entity.GravityScale = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_flGravityScal"], 0);
 	Offset::Entity.GlowFunction = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client.dll"]["CGlowProperty"]["m_bGlowing"], 0);
 	Offset::Entity.GlowColorOverride = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client.dll"]["CGlowProperty"]["m_glowColorOverride"], 0);

@@ -21,6 +21,7 @@ public:
 	int TeamID = 0;
 	int Health = 0;
 	int AliveStatus = 0;
+	int CtrlBot = 0;
 	DWORD Pawn = 0;
 	std::string PlayerName;
 public:
@@ -28,6 +29,7 @@ public:
 	bool GetTeamID();
 	bool GetHealth();
 	bool GetIsAlive();
+	bool GetIsCtrlBot();
 	bool GetPlayerName();
 	DWORD64 GetPlayerPawnAddress();
 };
@@ -114,6 +116,7 @@ public:
 	bool UpdateClientData();
 	// 是否存活
 	bool IsAlive();
+	bool ESPAlive();
 	// 是否在屏幕内
 	bool IsInScreen();
 	// 获取骨骼数据

@@ -154,13 +154,13 @@ void Cheats::Run()
 			continue;
 		if (!Entity.UpdatePawn(Entity.Pawn.Address))
 			continue;
-
+		Misc::SpectatorList(LocalEntity, Entity);
 		if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
 			continue;
 
 		Misc::MoneyService(Entity);
 
-		if (!Entity.IsAlive())
+		if (!Entity.ESPAlive())
 			continue;
 //		if (MenuConfig::VisibleCheck && (!Entity.Pawn.bSpottedByMask > 0))
 //			continue;
@@ -267,7 +267,7 @@ void Cheats::Run()
 			}
 		}
 		Glow::Run(Entity);
-		// Misc::SpectatorList(LocalEntity, Entity);
+
 	}
 	
 	// Radar render
