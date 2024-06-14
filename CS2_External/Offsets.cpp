@@ -65,6 +65,8 @@ bool Offset::UpdateOffsets()
 	Offset::Entity.PlayerPawn = MyConfigSaver::ReadData(offset["client.dll"]["CBasePlayerController"]["m_hPlayerPawn"], 0);
 	Offset::Entity.iszPlayerName = MyConfigSaver::ReadData(offset["client.dll"]["CBasePlayerController"]["m_iszPlayerName"], 0);
 	Offset::Entity.GravityScale = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseEntity"]["m_flGravityScal"], 0);
+	Offset::Entity.GlowFunction = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client.dll"]["CGlowProperty"]["m_bGlowing"], 0);
+	Offset::Entity.GlowColorOverride = MyConfigSaver::ReadData(offset["client.dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client.dll"]["CGlowProperty"]["m_glowColorOverride"], 0);
 
 	Offset::Pawn.MovementServices = MyConfigSaver::ReadData(offset["client.dll"]["C_BasePlayerPawn"]["m_pMovementServices"], 0);
 	Offset::Pawn.WeaponServices = MyConfigSaver::ReadData(offset["client.dll"]["C_BasePlayerPawn"]["m_pWeaponServices"], 0);

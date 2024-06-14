@@ -4,5 +4,5 @@
 
 namespace Glow
 {
-	void Run(const CEntity& aLocalPlayer);
+	void Run(const CEntity& Entity);
 }

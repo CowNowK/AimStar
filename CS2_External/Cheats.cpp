@@ -221,6 +221,8 @@ void Cheats::Run()
 						AimPosList.push_back(TempPos);
 					}
 				}
+				else
+					continue;
 			}
 		}
 
@@ -264,7 +266,7 @@ void Cheats::Run()
 				}
 			}
 		}
-		// Glow::Run(Entity);
+		Glow::Run(Entity);
 		// Misc::SpectatorList(LocalEntity, Entity);
 	}
 	

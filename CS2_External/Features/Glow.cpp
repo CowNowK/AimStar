@@ -1,18 +1,18 @@
 #include "Glow.h"
 #include <thread>
 
-void Glow::Run(const CEntity& aLocalPlayer)
+void Glow::Run(const CEntity& Entity)
 {
-	return;
-	/*
-	float on = 86400.f;
-	float off = 0.f;
+	int on = 1;
+	int off = 0;
+	DWORD color = 0x800000FF;
 	if (!MiscCFG::EnemySensor)
 	{
-		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Entity.EnemySensor, off);
+		ProcessMgr.WriteMemory(Entity.Pawn.Address + Offset::Entity.GlowFunction, off);
 	}
 	else {
-		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Entity.EnemySensor, on);
-	}outdated*/
-	
+		ProcessMgr.WriteMemory(Entity.Pawn.Address + Offset::Entity.GlowFunction, on);
+		ProcessMgr.WriteMemory(Entity.Pawn.Address + Offset::Entity.GlowColorOverride, color);
+	}
+	return;
 }
