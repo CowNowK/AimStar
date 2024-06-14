@@ -227,7 +227,7 @@ namespace MyConfigSaver {
         emitter << YAML::EndMap;
         emitter << YAML::Key << "FastStop" << YAML::Value << MiscCFG::FastStop;
         emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::SpecList;
-        // emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
+         emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
         emitter << YAML::Key << "RadarHack" << YAML::Value << MiscCFG::RadarHack;
         emitter << YAML::Key << "MoneyService";
         emitter << YAML::Value;
@@ -494,7 +494,7 @@ namespace MyConfigSaver {
             MiscCFG::BombTimerCol.Value.w = ReadData(config["Misc"]["TimerColor"]["a"], 0.f);
             MiscCFG::FastStop = ReadData(config["Misc"]["FastStop"], false);
             MiscCFG::SpecList = ReadData(config["Misc"]["SpecList"], false);
-            // MiscCFG::EnemySensor = ReadData(config["Misc"]["Glow"], false);
+            MiscCFG::EnemySensor = ReadData(config["Misc"]["Glow"], false);
             MiscCFG::RadarHack = ReadData(config["Misc"]["RadarHack"], false);
             MiscCFG::MoneyService = ReadData(config["Misc"]["MoneyService"]["Enable"], false);
             MiscCFG::ShowCashSpent = ReadData(config["Misc"]["MoneyService"]["ShowCashSpent"], false);
