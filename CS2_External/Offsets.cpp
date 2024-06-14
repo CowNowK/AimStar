@@ -25,7 +25,6 @@ DWORD64 SearchOffsets(std::string Signature, DWORD64 ModuleAddress)
 
 bool Offset::UpdateOffsets()
 {
-	using namespace Updater;
 
 	std::string offsetPath = MenuConfig::path + "\\Offsets\\offsets.yaml";
 
@@ -42,9 +41,7 @@ bool Offset::UpdateOffsets()
 		}
 
 	}
-	std::ifstream offsetStream(offsetPath);
-	YAML::Node offset = YAML::Load(offsetStream);
-	offsetStream.close();
+	YAML::Node offset = YAML::LoadFile(offsetPath);
 
 	Offset::EntityList = MyConfigSaver::ReadData(offset["client.dll"]["dwEntityList"], 0);
 	Offset::LocalPlayerController = MyConfigSaver::ReadData(offset["client.dll"]["dwLocalPlayerController"], 0);

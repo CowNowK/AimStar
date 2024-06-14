@@ -200,7 +200,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);libcurl_imp.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <EnableUAC>true</EnableUAC>
     </Link>
@@ -227,7 +227,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);libcurl_imp.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
   </ItemDefinitionGroup>
@@ -280,27 +280,12 @@
     <ClInclude Include="TriggerBot.h" />
     <ClInclude Include="Utils\ConfigMenu.hpp" />
     <ClInclude Include="Utils\ConfigSaver.hpp" />
-    <ClInclude Include="Utils\cpp-httplib\httplib.h" />
-    <ClInclude Include="Utils\curl\curl.h" />
-    <ClInclude Include="Utils\curl\curlver.h" />
-    <ClInclude Include="Utils\curl\easy.h" />
-    <ClInclude Include="Utils\curl\header.h" />
-    <ClInclude Include="Utils\curl\mprintf.h" />
-    <ClInclude Include="Utils\curl\multi.h" />
-    <ClInclude Include="Utils\curl\options.h" />
-    <ClInclude Include="Utils\curl\stdcheaders.h" />
-    <ClInclude Include="Utils\curl\system.h" />
-    <ClInclude Include="Utils\curl\typecheck-gcc.h" />
-    <ClInclude Include="Utils\curl\urlapi.h" />
-    <ClInclude Include="Utils\curl\websockets.h" />
     <ClInclude Include="Utils\driver.hpp" />
     <ClInclude Include="Utils\Format.h" />
     <ClInclude Include="Utils\Globals.hpp" />
     <ClInclude Include="Utils\GlobalVars.h" />
     <ClInclude Include="Utils\Initial\system.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
-    <ClInclude Include="Utils\json\json.hpp" />
-    <ClInclude Include="Utils\OffsetsUpdater.hpp" />
     <ClInclude Include="Utils\ProcessManager.hpp" />
     <ClInclude Include="Utils\Random.h" />
     <ClInclude Include="Utils\Style.h" />
@@ -382,14 +367,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CS2_External.aps" />
-    <None Include="Utils\curl\lib\libcurl_imp.exp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Font\fa-regular.ttf" />
     <Font Include="Font\stratum2.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="Utils\curl\lib\libcurl_imp.lib" />
     <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
