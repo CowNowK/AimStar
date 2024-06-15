@@ -18,6 +18,7 @@
 <h4 align="center">
   ⛔ USE AT YOUR OWN RISK ⛔
 </h4>
+
 ## ⛔本软件不适合弱智群体使用⛔
 
 ![8370be7da27fe7040d9fb4735ec69eec](https://github.com/CowNowK/AimStar/assets/65479796/24caeb87-cc36-4280-9cdf-3703eede6f6a)
