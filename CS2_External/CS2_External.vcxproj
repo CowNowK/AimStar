@@ -288,6 +288,7 @@
     <ClInclude Include="Utils\Initial\Init.h" />
     <ClInclude Include="Utils\ProcessManager.hpp" />
     <ClInclude Include="Utils\Random.h" />
+    <ClInclude Include="Utils\newStructs.hpp" />
     <ClInclude Include="Utils\Style.h" />
     <ClInclude Include="Utils\XorStr.h" />
     <ClInclude Include="Utils\XorStr.hpp" />
