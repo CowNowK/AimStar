@@ -175,30 +175,15 @@
     <ClInclude Include="Utils\yaml-cpp\stlemitter.h" />
     <ClInclude Include="Utils\yaml-cpp\traits.h" />
     <ClInclude Include="Utils\yaml-cpp\yaml.h" />
-    <ClInclude Include="Utils\curl\curl.h" />
-    <ClInclude Include="Utils\curl\curlver.h" />
-    <ClInclude Include="Utils\curl\easy.h" />
-    <ClInclude Include="Utils\curl\header.h" />
-    <ClInclude Include="Utils\curl\mprintf.h" />
-    <ClInclude Include="Utils\curl\multi.h" />
-    <ClInclude Include="Utils\curl\options.h" />
-    <ClInclude Include="Utils\curl\stdcheaders.h" />
-    <ClInclude Include="Utils\curl\system.h" />
-    <ClInclude Include="Utils\curl\typecheck-gcc.h" />
-    <ClInclude Include="Utils\curl\urlapi.h" />
-    <ClInclude Include="Utils\curl\websockets.h" />
     <ClInclude Include="Resources\8964.h" />
     <ClInclude Include="Features\SkinChanger\SkinChanger.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
     <ClInclude Include="Resources\Sounds.h" />
-    <ClInclude Include="Utils\cpp-httplib\httplib.h" />
-    <ClInclude Include="Utils\json\json.hpp" />
     <ClInclude Include="Features\Aimbot\Legitbot.hpp" />
     <ClInclude Include="Utils\Initial\system.h" />
     <ClInclude Include="Utils\XorStr.hpp" />
     <ClInclude Include="Utils\driver.hpp" />
     <ClInclude Include="Utils\XorStr.h" />
-    <ClInclude Include="Utils\OffsetsUpdater.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
@@ -275,7 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CS2_External.aps" />
-    <None Include="Utils\curl\lib\libcurl_imp.exp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Font\stratum2.ttf" />
@@ -283,6 +267,5 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />
-    <Library Include="Utils\curl\lib\libcurl_imp.lib" />
   </ItemGroup>
 </Project>

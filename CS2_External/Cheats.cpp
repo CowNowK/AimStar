@@ -14,6 +14,7 @@
 #include "Features/RCS.H"
 #include "Features/BombTimer.h"
 #include "Features/SpectatorList.h"
+#include "Utils/XorStr.h"
 
 int PreviousTotalHits = 0;
 
@@ -37,7 +38,7 @@ void Cheats::RadarSetting(Base_Radar& Radar)
 {
 	// Radar window
 	ImGui::SetNextWindowBgAlpha(RadarCFG::RadarBgAlpha);
-	ImGui::Begin("Radar", 0, ImGuiWindowFlags_NoResize);
+	ImGui::Begin(XorStr("Radar"), 0, ImGuiWindowFlags_NoResize);
 	ImGui::SetWindowSize({ RadarCFG::RadarRange * 2,RadarCFG::RadarRange * 2 });
 	
 	if (!RadarCFG::customRadar)
@@ -144,7 +145,7 @@ void Cheats::Run()
 		CEntity Entity;
 		DWORD64 EntityAddress = 0;
 		if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListEntry() + (i + 1) * 0x78, EntityAddress))
-			continue;
+			continue; 
 		if (EntityAddress == LocalEntity.Controller.Address)
 		{
 			LocalPlayerControllerIndex = i;
@@ -154,13 +155,13 @@ void Cheats::Run()
 			continue;
 		if (!Entity.UpdatePawn(Entity.Pawn.Address))
 			continue;
-
+		Misc::SpectatorList(LocalEntity, Entity);
 		if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
 			continue;
 
 		Misc::MoneyService(Entity);
 
-		if (!Entity.IsAlive())
+		if (!Entity.ESPAlive())
 			continue;
 //		if (MenuConfig::VisibleCheck && (!Entity.Pawn.bSpottedByMask > 0))
 //			continue;
@@ -192,8 +193,21 @@ void Cheats::Run()
 			{
 				Vec3 TempPos;
 				DistanceToSight = Entity.GetBone().BonePosList[AimControl::HitboxList[i]].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
-
-				if (DistanceToSight < MaxAimDistance)
+				if (LocalEntity.Pawn.ShotsFired >= AimControl::AimBullet + 1 && MenuConfig::SparyPosition != 0)
+				{
+					if (!MenuConfig::VisibleCheck ||
+						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
+						LocalEntity.Pawn.bSpottedByMask & (DWORD64(1) << (i)))
+					{
+						TempPos = Entity.GetBone().BonePosList[AimControl::HitboxList[i]].Pos;
+						if (AimControl::HitboxList[i] == MenuConfig::SparyPositionIndex){
+							if (AimControl::HitboxList[i] == BONEINDEX::head)
+								TempPos.z -= 1.f;
+							AimPosList.push_back(TempPos);
+						}
+					}
+				}
+				else if (DistanceToSight < MaxAimDistance)
 				{
 					MaxAimDistance = DistanceToSight;
 
@@ -208,6 +222,8 @@ void Cheats::Run()
 						AimPosList.push_back(TempPos);
 					}
 				}
+				else
+					continue;
 			}
 		}
 
@@ -251,8 +267,8 @@ void Cheats::Run()
 				}
 			}
 		}
-		// Glow::Run(Entity);
-		// Misc::SpectatorList(LocalEntity, Entity);
+		Glow::Run(Entity);
+
 	}
 	
 	// Radar render
@@ -263,7 +279,7 @@ void Cheats::Run()
 	}
 
 	// TriggerBot
-	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways))
+	if (MenuConfig::TriggerBot && (GetAsyncKeyState(TriggerBot::HotKey) || MenuConfig::TriggerAlways) && !MenuConfig::ShowMenu)
 		TriggerBot::Run(LocalEntity);	
 
 	Misc::HitManager(LocalEntity, PreviousTotalHits);

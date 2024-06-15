@@ -1,8 +1,10 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+﻿
+#define _CRT_SECURE_NO_WARNINGS
 #include "Cheats.h"
 #include "Offsets.h"
 #include "Resources/Language.h"
 #include "Utils/Initial/Init.h"
+#include "Utils/XorStr.h"
 #include "Utils/ConfigSaver.hpp"
 #include <chrono>
 #include <filesystem>
@@ -10,8 +12,9 @@
 #include <KnownFolders.h>
 #include <ShlObj.h>
 #include <stdio.h>
-#include "Utils/curl/curl.h"
-#include "Utils/json/json.hpp"
+using namespace Lang;
+//#include "Utils/curl/curl.h"
+//#include "Utils/json/json.hpp"
 using namespace std;
 /*
 Contributors:
@@ -53,7 +56,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 void RandomTitle()
 {
 	constexpr int length = 25;
-	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`-=~!@#$%^&*()_+,./;'[]|{}:?");
+	const auto characters = TEXT("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`-=~!@#$%^&*()_+,./;'[]|{}:?甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戌亥");
 	TCHAR title[length + 1]{};
 
 	for (int j = 0; j != length; j++)
@@ -65,7 +68,7 @@ void RandomTitle()
 }
 
 
-using json = nlohmann::json;
+//using json = nlohmann::json;
 
 
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
@@ -75,46 +78,43 @@ static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* use
 
 
 
-bool checkHWIDFromURL(const std::string& url, const std::string& hwid) {
-	CURL* curl;
-	CURLcode res;
-	std::string readBuffer;
-	json jData;
+bool checkHWIDFromYAML(const std::string& hwid) {
+	std::ifstream fileStream(MenuConfig::path + XorStr("\\Offsets\\offsets.yaml"));
+	YAML::Node data = YAML::Load(fileStream);
+	fileStream.close();
 
-	curl = curl_easy_init();
-	if (curl) {
-		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-
-
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-
-		res = curl_easy_perform(curl);
-		curl_easy_cleanup(curl);
-
-		if (res != CURLE_OK) {
-			std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << '\n';
-			return false;
-		}
-
-		jData = json::parse(readBuffer);
+	if (!data["client.dll"]["VACManager_001"]) {
+		return false;
 	}
 
-	for (const auto& element : jData) {
-		if (element.get<std::string>() == hwid) {
+	for (const auto& item : data["client.dll"]["VACManager_001"]) {
+		if (item.as<std::string>() == hwid) {
 			return true;
 		}
 	}
+
 	return false;
 }
 
+void UpdateLang()
+{
+
+	std::string langPath = MenuConfig::path + XorStr("\\Languages\\lang.yaml");
+
+	if (!std::filesystem::exists(langPath)) {
+		English();
+		return;
+	}
+	std::ifstream langStream(langPath);
+	YAML::Node langs = YAML::Load(langStream);
+	langStream.close();
+
+	//const_cast<char*>(langs["node"].as<std::string>().c_str());
+	return;
+}
 void Cheat()
 {
-	MenuConfig::HWID = Init::Client::GenerateHWID();
-	//if (checkHWIDFromURL("http://aimstar.tkm.icu/drm", MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
-	//	MenuConfig::Ban = true;
+
 	if (Init::Verify::CheckWindowVersion())
 	{
 		Lang::GetCountry(MenuConfig::Country);
@@ -132,31 +132,37 @@ void Cheat()
  / ___ |/ / / / / / /__/ / /_/ /_/ / /    
 /_/  |_/_/_/ /_/ /_/____/\__/\__,_/_/    
 	)" << endl;
-	printf("Build-%s-%s\n", __DATE__, __TIME__);
+#ifdef USERMODE
+
+	cout << XorStr("[WARN] You are using usermode version, you may have higher possibility to get banned as VAC detected.") << endl;
+#endif // USERMODE
+	printf(XorStr("Build-%s-%s\n"), __DATE__, __TIME__);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
-	auto ProcessStatus = ProcessMgr.Attach("cs2.exe");
+	auto ProcessStatus = ProcessMgr.Attach(XorStr("cs2.exe"));
 
 	char documentsPath[MAX_PATH];
 	if (SHGetFolderPathA(NULL, CSIDL_PERSONAL, NULL, 0, documentsPath) != S_OK) {
-		cerr << "[Info] Error: Failed to get the Documents folder path." << endl;
+		cerr << XorStr("[Info] Error: Failed to get the Documents folder path.") << endl;
 		Exit();
 	}
 	MenuConfig::path = documentsPath;
-	MenuConfig::path += "\\AimStar";
-
+	MenuConfig::path += XorStr("\\AimStar");
+	MenuConfig::HWID = Init::Client::GenerateHWID();
+	if (checkHWIDFromYAML(MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
+		MenuConfig::DRM = true;
 	switch (ProcessStatus) {
 	case 1:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		cout << "[ERROR] Please launch the game first!" << endl;
+		cout << XorStr("[ERROR] Please launch the game first!") << endl;
 		Exit();
 	case 2:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		cout << "[ERROR] Failed to hook process, please run the cheat as Administrator (Right click AimStar > Run as Adminstrator)." << endl;
+		cout << XorStr("[ERROR] Failed to hook process, please run the cheat as Administrator (Right click AimStar > Run as Adminstrator).") << endl;
 		Exit();
 	case 3:
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		cout << "[ERROR] Failed to get module address." << endl;
+		cout << XorStr("[ERROR] Failed to get module address.") << endl;
 		Exit();
 	default:
 		break;
@@ -165,77 +171,78 @@ void Cheat()
 	if (!Offset::UpdateOffsets())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		cout << "[ERROR] Failed to update offsets." << endl;
+		cout << XorStr("[ERROR] Failed to update offsets.") << endl;
 		Exit();
 	}
 
 	if (!gGame.InitAddress())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		cout << "[ERROR] Failed to call InitAddress()." << endl;
+		cout << XorStr("[ERROR] Failed to call InitAddress().") << endl;
 		Exit();
 	}
 
-	cout << "[Game] Process ID: " << ProcessMgr.ProcessID << endl;
-	cout << "[Game] Client Address: " << gGame.GetClientDLLAddress() << endl;
+	cout << XorStr("[Game] Process ID: ") << ProcessMgr.ProcessID << endl;
+	cout << XorStr("[Game] Client Address: ") << gGame.GetClientDLLAddress() << endl;
 
 	if (fs::exists(MenuConfig::path))
 	{
-		cout << "[Info] Config folder connected: " << MenuConfig::path << endl;
+		cout << XorStr("[Info] Config folder connected: ") << MenuConfig::path << endl;
 	}
 	else
 	{
-		if (fs::create_directory(MenuConfig::path))
+		if (fs::create_directories(MenuConfig::path))
 		{
-			cout << "[Info] Config folder created: " << MenuConfig::path << endl;
+			cout << XorStr("[Info] Config folder created: ") << MenuConfig::path << endl;
 		}
 		else
 		{
-			cerr << "[Info] Error: Failed to create the config directory." << endl;
+			cerr << XorStr("[Info] Error: Failed to create the config directory.") << endl;
 			Exit();
 		}
 	}
 
-	ifstream defaultConfig(MenuConfig::path + "\\default.yml");
+	ifstream defaultConfig(MenuConfig::path + XorStr("\\default.yml"));
 	if (defaultConfig.is_open())
 	{
 		MenuConfig::defaultConfig = true;
 		defaultConfig.close();		
 	}
-
+	// Language initialize
+	UpdateLang();
 	cout << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-	cout << "Cheat running successfully!" << endl;
-	cout << "Press [INS] or [DEL] to show or hide Menu." << endl;
-	cout << "Have fun..." << endl << endl;
+	cout << XorStr("Cheat running successfully!") << endl;
+	cout << XorStr("Press [INS] or [DEL] to show or hide Menu.") << endl;
+	cout << XorStr("Have fun...") << endl << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED);
-	cout << "=======[ Offset List ]=======" << endl;
-	cout << setw(23) << left << "EntityList:" << setiosflags(ios::uppercase) << hex << Offset::EntityList << endl;
-	cout << setw(23) << left << "Matrix:" << setiosflags(ios::uppercase) << hex << Offset::Matrix << endl;
-	cout << setw(23) << left << "LocalPlayerController:" << setiosflags(ios::uppercase) << hex << Offset::LocalPlayerController << endl;
-	cout << setw(23) << left << "ViewAngles:" << setiosflags(ios::uppercase) << hex << Offset::ViewAngle << endl;
-	cout << setw(23) << left << "LocalPlayerPawn:" << setiosflags(ios::uppercase) << hex << Offset::LocalPlayerPawn << endl;
-	cout << setw(23) << left << "PlantedC4:" << setiosflags(ios::uppercase) << hex << Offset::PlantedC4 << endl;
-	cout << setw(23) << left << "ForceJump:" << setiosflags(ios::uppercase) << hex << Offset::ForceJump << endl;
-	cout << setw(23) << left << "Sensitivity:" << setiosflags(ios::uppercase) << hex << Offset::Sensitivity << endl;
-	// cout << setw(23) << left << "ForceCrouch:" << setiosflags(ios::uppercase) << hex << Offset::ForceCrouch << endl;
-	// cout << setw(23) << left << "ForceForward:" << setiosflags(ios::uppercase) << hex << Offset::ForceForward << endl;
-	// cout << setw(23) << left << "ForceLeft:" << setiosflags(ios::uppercase) << hex << Offset::ForceLeft << endl;
-	// cout << setw(23) << left << "ForceRight:" << setiosflags(ios::uppercase) << hex << Offset::ForceRight << endl;
-	// cout << setw(23) << left << "TestPointer:" << setiosflags(ios::uppercase) << hex << Offset::Pointer << endl;
+	cout << XorStr("=======[ Offset List ]=======") << endl;
+	cout << setw(23) << left << XorStr("EntityList:") << setiosflags(ios::uppercase) << hex << Offset::EntityList << endl;
+	cout << setw(23) << left << XorStr("Matrix:") << setiosflags(ios::uppercase) << hex << Offset::Matrix << endl;
+	cout << setw(23) << left << XorStr("LocalPlayerController:") << setiosflags(ios::uppercase) << hex << Offset::LocalPlayerController << endl;
+	cout << setw(23) << left << XorStr("ViewAngles:") << setiosflags(ios::uppercase) << hex << Offset::ViewAngle << endl;
+	cout << setw(23) << left << XorStr("LocalPlayerPawn:") << setiosflags(ios::uppercase) << hex << Offset::LocalPlayerPawn << endl;
+	cout << setw(23) << left << XorStr("PlantedC4:") << setiosflags(ios::uppercase) << hex << Offset::PlantedC4 << endl;
+	cout << setw(23) << left << XorStr("ForceJump:") << setiosflags(ios::uppercase) << hex << Offset::ForceJump << endl;
+	cout << setw(23) << left << XorStr("Sensitivity:") << setiosflags(ios::uppercase) << hex << Offset::Sensitivity << endl;
+	// cout << setw(23) << left << XorStr("ForceCrouch:") << setiosflags(ios::uppercase) << hex << Offset::ForceCrouch << endl;
+	// cout << setw(23) << left << XorStr("ForceForward:") << setiosflags(ios::uppercase) << hex << Offset::ForceForward << endl;
+	// cout << setw(23) << left << XorStr("ForceLeft:") << setiosflags(ios::uppercase) << hex << Offset::ForceLeft << endl;
+	// cout << setw(23) << left << XorStr("ForceRight:") << setiosflags(ios::uppercase) << hex << Offset::ForceRight << endl;
+	// cout << setw(23) << left << XorStr("TestPointer:") << setiosflags(ios::uppercase) << hex << Offset::Pointer << endl;
 	cout << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 
 	try
 	{
-		Gui.AttachAnotherWindow("Counter-Strike 2", "SDL_app", Cheats::Run);
+		Gui.AttachAnotherWindow(XorStr("Counter-Strike 2"), XorStr("SDL_app"), Cheats::Run);
 	}
 	catch (OSImGui::OSException& e)
 	{
 		try
 		{
 			// Perfect World version
-			Gui.AttachAnotherWindow("\u53cd\u6050\u7cbe\u82f1\uff1a\u5168\u7403\u653b\u52bf", "SDL_app", Cheats::Run);
+			Gui.AttachAnotherWindow(XorStr("\u53cd\u6050\u7cbe\u82f1\uff1a\u5168\u7403\u653b\u52bf"), XorStr("SDL_app"), Cheats::Run);
 		}
 		catch (OSImGui::OSException& e)
 		{
@@ -250,7 +257,7 @@ int main(void)
 	const char* tempPath = std::getenv("TMP");
 	if (tempPath != nullptr)
 	{
-		fileName = std::string(tempPath) + "\\Aimstar";
+		fileName = std::string(tempPath) + XorStr("\\Aimstar");
 		otp = Init::Verify::isVerified(fileName);
 	}
 
@@ -297,7 +304,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 	//bool showed = false;
 	if (!otp /*&& !showed*/)
 	{
-		cout << "Please enter your OTP code! Get the OTP code from: https://aimstar.tkm.icu" << endl;
+		cout << XorStr("Please enter your OTP code! Get the OTP code from: https://aimstar.tkm.icu") << endl;
 		//showed = true;
 	}
 	static int RetTimes = 0;
@@ -352,7 +359,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 		}
 		if (LOWORD(wParam) == 3)
 		{
-			ShellExecuteA(NULL, "open", "https://aimstar.tkm.icu", NULL, NULL, SW_SHOWNORMAL);
+			ShellExecuteA(NULL, "open", XorStr("https://aimstar.tkm.icu"), NULL, NULL, SW_SHOWNORMAL);
 			// ShellExecute(NULL, TEXT("open"), TEXT("https://aimstar.tkm.icu"), NULL, NULL, SW_SHOWNORMAL);
 		}
 		break;

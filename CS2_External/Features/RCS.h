@@ -50,8 +50,8 @@ namespace RCS
 		{
 			oldPunch.x = oldPunch.y = 0.f;
 		}
-
-		if (true/*Local.Pawn.ShotsFired > RCSBullet*/)
+		
+		if (Local.Pawn.Ammo > 1/*Local.Pawn.ShotsFired > RCSBullet*/)
 		{
 			Vec2 PunchAngle;
 			if (Local.Pawn.AimPunchCache.Count <= 0 && Local.Pawn.AimPunchCache.Count > 0xFFFF)
@@ -61,6 +61,11 @@ namespace RCS
 
 			Angles.x = PunchAngle.x;
 			Angles.y = PunchAngle.y;
+		}
+		else
+		{
+			Angles.x = 0.f;
+			Angles.y = 0.f;
 		}
 	}
 

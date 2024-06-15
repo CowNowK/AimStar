@@ -41,8 +41,7 @@ namespace OSImGui
         if (!ImGui_ImplDX11_Init(device, device_context))
             throw OSException("ImGui_ImplDX11_Init() call failed.");
 
-        // Language initialize
-        Lang::English();
+
 
         return true;
     }

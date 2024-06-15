@@ -56,12 +56,12 @@ bool globalvars::GetTickCount()
 
 bool globalvars::GetIntervalPerTick()
 {
-	return GetDataAddressWithOffset<float>(this->address, Offset::GlobalVar.IntervalPerTick, this->g_fIntervalPerTick);
+	return 15.625f;//GetDataAddressWithOffset<float>(this->address, Offset::GlobalVar.IntervalPerTick, this->g_fIntervalPerTick);
 }
 
 bool globalvars::GetIntervalPerTick2()
 {
-	return GetDataAddressWithOffset<float>(this->address, Offset::GlobalVar.IntervalPerTick2, this->g_fIntervalPerTick2);
+	return 15.625f;//GetDataAddressWithOffset<float>(this->address, Offset::GlobalVar.IntervalPerTick2, this->g_fIntervalPerTick2);
 }
 
 bool globalvars::GetcurrentTime()

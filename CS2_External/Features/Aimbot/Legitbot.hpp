@@ -73,7 +73,7 @@ namespace AimControl
         if (!IgnoreFlash && Local.Pawn.FlashDuration > 0.f)
             return;
 
-        if (MenuConfig::Ban) {//Bye and get vac ban
+        if (MenuConfig::DRM) {//ONLY DRM
             MenuConfig::SafeMode = false;
             gGame.SetViewAngle(rand() % 180, rand() % 89);
             gGame.SetForceJump(65537);
@@ -201,7 +201,7 @@ namespace AimControl
                 mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
 
-            int AimInterval = round(1000.0 / MenuConfig::MaxFrameRate);
+            int AimInterval = round(1000.0f / MenuConfig::MaxFrameRate);
             std::this_thread::sleep_for(std::chrono::milliseconds(AimInterval));
         }
         else

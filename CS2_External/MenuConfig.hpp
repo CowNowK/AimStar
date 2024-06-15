@@ -6,9 +6,9 @@
 namespace MenuConfig
 {
 	inline std::string path = "";
-	inline std::string LocalVersion = "4.5";
+	inline std::string LocalVersion = "4.6.3";
 	inline std::string HWID = "";
-	inline bool Ban = false;
+	inline bool DRM = false;
 
 	struct {
 		// 0: Visual 1: Aimbot 2: Misc 3: Config
@@ -47,7 +47,9 @@ namespace MenuConfig
 	inline int AimBotHotKey = 0;
 	// 0: head 1: neck 3: spine
 	inline int  AimPosition = 0;
+	inline int  SparyPosition = 0;
 	inline DWORD  AimPositionIndex = BONEINDEX::head;
+	inline DWORD  SparyPositionIndex = 0xff;
 	inline bool VisibleCheck = true;
 
 	inline bool RCS = false;

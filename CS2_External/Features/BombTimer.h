@@ -55,7 +55,7 @@ namespace bmb
 		ImGui::SetNextWindowSize({ windowWidth, 0 }, ImGuiCond_Once);
 		if (!MenuConfig::ShowMenu)
 			ImGui::SetNextWindowBgAlpha(0.5f);
-		ImGui::Begin("Bomb Timer", nullptr, flags);
+		ImGui::Begin(XorStr("Bomb Timer"), nullptr, flags);
 
 		ProcessMgr.ReadMemory(plantedAddress, isBombPlanted);
 
@@ -93,11 +93,11 @@ namespace bmb
 		{
 			std::ostringstream ss;
 			ss.precision(3);
-			ss << "Bomb on " << (!getBombSite(isBombPlanted) ? "A" : "B") << ": " << std::fixed << remaining << " s";
+			ss << XorStr("Bomb on ") << (!getBombSite(isBombPlanted) ? "A" : "B") << ": " << std::fixed << remaining << " s";
 			Gui.MyText(std::move(ss).str().c_str(), true);
 		}
 		else {
-			Gui.MyText("C4 not planted", true);
+			Gui.MyText(XorStr("C4 not planted"), true);
 			barLength = 0.0f;
 		}
 		Gui.MyProgressBar(barLength, { 180, 15 }, "", MiscCFG::BombTimerCol);

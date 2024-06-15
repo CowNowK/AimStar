@@ -6,37 +6,39 @@
 #include "a2x/client.dll.hpp"
 #include "a2x/buttons.hpp"
 
-#include "Utils/OffsetsUpdater.hpp"
+
 
 namespace Offset
 {
+
 	inline DWORD ForceJump = cs2_dumper::buttons::jump;
 	inline DWORD ForceCrouch = cs2_dumper::buttons::duck;
 	inline DWORD ForceForward = cs2_dumper::buttons::forward;
 	inline DWORD ForceLeft = cs2_dumper::buttons::left;
 	inline DWORD ForceRight = cs2_dumper::buttons::right;
 
-	inline DWORD EntityList;// = cs2_dumper::offsets::client_dll::dwEntityList;
-	inline DWORD Matrix;
-	inline DWORD ViewAngle;
-	inline DWORD LocalPlayerController;
-	inline DWORD LocalPlayerPawn;
-	inline DWORD GlobalVars;
+	inline DWORD EntityList = cs2_dumper::offsets::client_dll::dwEntityList;
+	inline DWORD Matrix = cs2_dumper::offsets::client_dll::dwViewMatrix;
+	inline DWORD ViewAngle = cs2_dumper::offsets::client_dll::dwViewAngles;
+	inline DWORD LocalPlayerController = cs2_dumper::offsets::client_dll::dwLocalPlayerController;
+	inline DWORD LocalPlayerPawn = cs2_dumper::offsets::client_dll::dwLocalPlayerPawn;
+	inline DWORD GlobalVars = cs2_dumper::offsets::client_dll::dwGlobalVars;
 	inline DWORD InventoryServices;
-	inline DWORD PlantedC4;
-	inline DWORD InputSystem;
-	inline DWORD Sensitivity;
+	inline DWORD PlantedC4 = cs2_dumper::offsets::client_dll::dwPlantedC4;
+	inline DWORD InputSystem = cs2_dumper::offsets::client_dll::dwCSGOInput;
+	inline DWORD Sensitivity = cs2_dumper::offsets::client_dll::dwSensitivity;
 	inline DWORD Pointer;
 
 	struct
 	{
-		//DWORD Health = Offset::Pawn.CurrentHealth;
-		//DWORD TeamID = Offset::Pawn.iTeamNum;
 		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
+		DWORD m_bControllingBot = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bControllingBot;
 		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
 		DWORD iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
-		//outdated DWORD EnemySensor = 0x1440;
+		DWORD m_sSanitizedPlayerName = cs2_dumper::schemas::client_dll::CCSPlayerController::m_sSanitizedPlayerName;
 		DWORD GravityScale = cs2_dumper::schemas::client_dll::C_BaseEntity::m_flGravityScale;
+		DWORD GlowFunction = cs2_dumper::schemas::client_dll::C_BaseModelEntity::m_Glow + cs2_dumper::schemas::client_dll::CGlowProperty::m_bGlowing;
+		DWORD GlowColorOverride = cs2_dumper::schemas::client_dll::C_BaseModelEntity::m_Glow + cs2_dumper::schemas::client_dll::CGlowProperty::m_glowColorOverride;
 	}Entity;
 
 	struct
@@ -76,6 +78,8 @@ namespace Offset
 		DWORD bSpottedByMask = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_entitySpottedState + cs2_dumper::schemas::client_dll::EntitySpottedState_t::m_bSpottedByMask;	// C_CSPlayerPawn::entitySpottedState + EntitySpottedState_t::bSpottedByMask
 		DWORD AbsVelocity = cs2_dumper::schemas::client_dll::C_BaseEntity::m_vecAbsVelocity;
 		DWORD IsBuying = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsBuyMenuOpen;
+		DWORD m_bWaitForNoAttack = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bWaitForNoAttack;
+		
 	} Pawn;
 
 	struct
@@ -119,8 +123,7 @@ namespace Offset
 
 	struct
 	{
-		//DWORD ClippingWeapon = Offset::Pawn.pClippingWeapon;			// WeaponBase
-		DWORD WeaponDataPTR = 0x360; // cs2_dumper::schemas::client_dll::C_BaseEntity::m_nSubclassID + 0x08
+		DWORD WeaponDataPTR = cs2_dumper::schemas::client_dll::C_BaseEntity::m_nSubclassID + 0x08;
 		DWORD szName = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_szName;
 		DWORD Clip1 = cs2_dumper::schemas::client_dll::C_BasePlayerWeapon::m_iClip1;					// C_BasePlayerWeapon::m_iClip1
 		DWORD MaxClip = cs2_dumper::schemas::client_dll::CBasePlayerWeaponVData::m_iMaxClip1;					// CBasePlayerWeaponVData::m_iMaxClip1
@@ -129,14 +132,14 @@ namespace Offset
 		DWORD WeaponType = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_WeaponType;
 		DWORD Inaccuracy = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_flInaccuracyMove;				// CCSWeaponBaseVData::m_flInaccuracyMove
 		DWORD inReload = cs2_dumper::schemas::client_dll::C_CSWeaponBase::m_bInReload;
-
+		DWORD m_nNumBullets = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_nNumBullets;
 		DWORD WeaponSize = 0x50;
 		DWORD ActiveWeapon = cs2_dumper::schemas::client_dll::CPlayer_WeaponServices::m_hActiveWeapon;
 		DWORD Item = cs2_dumper::schemas::client_dll::C_AttributeContainer::m_Item;						// C_AttributeContainer::m_Item
 		DWORD ItemDefinitionIndex = cs2_dumper::schemas::client_dll::C_EconItemView::m_iItemDefinitionIndex;
 		DWORD m_MeshGroupMask = cs2_dumper::schemas::client_dll::CModelState::m_MeshGroupMask;			// CModelState::m_MeshGroupMask
 	} WeaponBaseData;
-
+	
 	struct
 	{
 		DWORD m_bBeingDefused = cs2_dumper::schemas::client_dll::C_PlantedC4::m_bBeingDefused;
@@ -163,26 +166,6 @@ namespace Offset
 		DWORD bSmokeVolumeDataReceived = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeVolumeDataReceived; // bool
 		uintptr_t bSmokeEffectSpawned = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeEffectSpawned; // bool
 	} SmokeGrenadeProjectile; 
-
-	namespace Signatures
-	{
-/*
-		const std::string ForceForward = "48 8D 05 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 ?? E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 81 EC";
-		const std::string ForceLeft = "48 8D 05 ?? ?? ?? ?? 48 89 45 ? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
-		const std::string ForceRight = "48 8D 05 ?? ?? ?? ?? 48 89 45 ? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
-		const std::string ForceJump = "48 8D 05 ?? ?? ?? ?? 48 89 4D ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 48 8D 05 ?? ?? ?? ?? 48 89 45 ?? 4C 6B E3";
-		const std::string ForceCrouch = "48 8D 05 ?? ?? ?? ?? 48 89 05 ?? ?? ?? ?? 48 83 C4 ?? E9 ?? ?? ?? ?? CC CC CC CC CC CC CC CC CC CC 48 83 EC ?? 66 C7 44 24";
-*/
-		const std::string LocalPlayerPawn = "48 8D 05 ?? ?? ?? ?? C3 CC CC CC CC CC CC CC CC 48 83 EC ?? 8B 0D";
-		const std::string InventoryServices = "E8 ?? ?? ?? ?? 8B 45 D0 48 8B 55 D8";
-		const std::string GlobalVars = "48 89 15 ?? ?? ?? ?? 48 8D 05 ?? ?? ?? ?? 48 85 D2";
-		const std::string EntityList = "48 8B 0D ?? ?? ?? ?? 48 89 7C 24 ?? 8B FA C1 EB";
-		const std::string LocalPlayerController = "48 8B 05 ?? ?? ?? ?? 48 85 C0 74 ?? 8B 88";
-		const std::string ViewAngles = "48 8B 0D ?? ?? ?? ?? 48 8B 01 48 FF 60 30";
-		const std::string ViewMatrix = "48 8D 0D ?? ?? ?? ?? 48 C1 E0 06";
-		const std::string PlantedC4 = "48 8B 15 ?? ?? ?? ?? FF C0 48 8D 4C 24 40";
-		const std::string InputSystem = "48 89 05 ?? ?? ?? ?? 48 8D 05";
-		const std::string dwSensitivity = "48 8B 05 ?? ?? ?? ?? 48 8B 40 ?? F3 41 0F 59 F4";}
 
 	bool UpdateOffsets();
 }
