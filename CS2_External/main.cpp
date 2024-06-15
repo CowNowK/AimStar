@@ -178,7 +178,7 @@ void Cheat()
 	if (!gGame.InitAddress())
 	{
 		SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-		cout << XorStr("[ERROR] Failed to call InitAddress().") << endl;
+		cout << XorStr("[ERROR] Failed to call InitAddress(). If you are using kernel mode, please check whether the driver is mapped") << endl;
 		Exit();
 	}
 
