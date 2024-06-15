@@ -9,11 +9,42 @@
 <a href="https://discord.com/invite/VgRrxwesPz"><img src="https://img.shields.io/discord/1179009716307886080?logo=discord&logoColor=%234ec920"></a>
 </p>
 
+
+
+
+
 **Yes, there is a large leap other much nicer software than AimStar. However, we shall never stop our step.**
 
 <h4 align="center">
   ⛔ USE AT YOUR OWN RISK ⛔
 </h4>
+## ⛔本软件不适合弱智群体使用⛔
+
+![8370be7da27fe7040d9fb4735ec69eec](https://github.com/CowNowK/AimStar/assets/65479796/24caeb87-cc36-4280-9cdf-3703eede6f6a)
+
+
+**那么，很不幸的是，Yang先生，我要挂你**
+
+### 这是什么？
+![46256e095ece623b3dc26a423c89117c](https://github.com/CowNowK/AimStar/assets/65479796/dcff3a7c-9f41-4f50-b812-3364a4ca6850)
+- 大概Yang先生在吃精神病药的时候也没有看说明书，才造成了这样的结果吧
+- 另一方面也显现出了我们Yang先生的低能，想必是生活无法自理的巨婴，开个挂都要别人像喂饭一样教你吧
+- 如果我已经把用户端更新机制做得如此傻瓜化，仍然受到这样的攻击
+- 那我的选择是放弃中国用户，让你们享受GFW，我带着洋大人爽快github下载就好了
+
+### WOW 麻省理工学院毕业工程师
+
+- 首先，我没有做过MIT的学生，哪怕是一秒钟，我连MIT的mooc都没看过
+- 其次，我想也许这个世界上存在认为使用MIT licence就是MIT毕业生的弱智
+- 最后，除了正在备考低压电工证之外，作为一个文科生，我找不到我和工程师有什么搭边的
+
+### 笑死我了
+- 其实我觉得免费给你开挂，你不会用还要乱叫，说别人是一坨狗屎结果看个英语还要靠翻译的人更好笑
+- 请问全世界每天使用AimStar的那两千位用户，你们觉得他好笑吗？
+
+![4af0a65608a57a050673357e53b1eff1](https://github.com/CowNowK/AimStar/assets/65479796/046c6c47-d831-4b8d-af71-8c44f51e2ca3)
+
+**对了，顺便说一句，毕天宇牛逼**
 
 ## ❗ Info
 
