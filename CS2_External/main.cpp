@@ -149,7 +149,7 @@ void Cheat()
 	MenuConfig::path = documentsPath;
 	MenuConfig::path += XorStr("\\AimStar");
 	MenuConfig::HWID = Init::Client::GenerateHWID();
-	printf(XorStr("%s\n"),MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()));
+	printf("%s\n",MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str());
 	if (checkHWIDFromYAML(MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str()))
 		MenuConfig::DRM = true;
 	switch (ProcessStatus) {
