@@ -21,6 +21,10 @@
 
 ## ⛔本软件不适合弱智群体使用⛔
 
+<details>
+<summary>智障合集，持续更新中</summary>
+
+
 ![8370be7da27fe7040d9fb4735ec69eec](https://github.com/CowNowK/AimStar/assets/65479796/24caeb87-cc36-4280-9cdf-3703eede6f6a)
 
 
@@ -46,6 +50,12 @@
 ![4af0a65608a57a050673357e53b1eff1](https://github.com/CowNowK/AimStar/assets/65479796/046c6c47-d831-4b8d-af71-8c44f51e2ca3)
 
 **对了，顺便说一句，毕天宇牛逼**
+
+这位donk先生更是个逆天
+
+![Image_1718621059540](https://github.com/CowNowK/AimStar/assets/65479796/8a634c00-5d43-41a6-9b26-f7f749339b78)
+
+</details>
 
 ## ❗ Info
 
