@@ -255,7 +255,7 @@ namespace GUI
 			ImGui::SetCursorPos(LogoPos);
 			ImGui::Image(ImageID, LogoSize);
 			ImGui::SetCursorPosY(5);
-			ImGui::TextColored(ImColor(255, 255, 255, 20), MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str());
+			ImGui::TextColored(ImColor(255, 255, 255, 35), MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str());
 
 			ImGui::SetCursorPos(MenuConfig::WCS.Button1Pos);
 			ImGui::Image((void*)MenuButton1, ImVec2(buttonW, buttonH));
