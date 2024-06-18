@@ -789,7 +789,7 @@ namespace GUI
 					{
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 						if (ImGui::Button(XorStr(ICON_FA_COMMENT_DOTS " QQ Group"), { ImGui::GetColumnWidth() - 20.f, 25.f }))
-							Gui.OpenWebpage(XorStr("https://qm.qq.com/cgi-bin/qm/qr?k=bdYSbTfM9OBycOQw3PrEkRm9B_-s3cLj&jump_from=webapi&authKey=losu+2q8xDQCrHR00oG7vU2q8Bmc+PNFxZhWwODUULf4I0c6K+/uIXSya3Vmk/XA"));
+							Gui.OpenWebpage(XorStr("https://www.baidu.com"));
 					}
 
 					ImGui::NewLine();
