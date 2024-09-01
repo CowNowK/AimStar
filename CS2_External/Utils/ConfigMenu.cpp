@@ -82,7 +82,9 @@ namespace ConfigMenu {
 			}
 			ImGui::EndPopup();
 		}
+		
 		ImGui::SameLine();
+		/*
 		if (ImGui::Button(Lang::ConfigText.Reset, { 126.f, 30.f }))
 			ImGui::OpenPopup("##reallyReset");
 		if (ImGui::BeginPopup("##reallyReset"))
@@ -98,7 +100,7 @@ namespace ConfigMenu {
 			}
 			ImGui::EndPopup();
 		}
-
+		*/
 		ImGui::NewLine();
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		ImGui::SeparatorText(Lang::ConfigText.SeparateLine);

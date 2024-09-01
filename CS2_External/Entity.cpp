@@ -61,14 +61,17 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 	if (PlayerControllerAddress == 0)
 		return false;
 	this->Controller.Address = PlayerControllerAddress;
-
 	if (!this->Controller.GetHealth())
 		return false;
 	if (!this->Controller.GetIsAlive())
 		return false;
 	if (!this->Controller.GetIsCtrlBot())
-		return false;
+		return false; 
+	if (!this->Controller.GetConnected())
+		return false; 
 	if (!this->Controller.GetTeamID())
+		return false;
+	if (!this->Controller.GetPlayerSteamID())
 		return false;
 	if (!this->Controller.GetPlayerName())
 		return false;
@@ -76,7 +79,6 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 		return false;
 
 	this->Pawn.Address = this->Controller.GetPlayerPawnAddress();
-
 	return true;
 }
 
@@ -171,19 +173,31 @@ bool PlayerController::GetIsCtrlBot()
 	return GetDataAddressWithOffset<int>(Address, Offset::Entity.m_bControllingBot, this->CtrlBot);
 }
 
+bool PlayerController::GetConnected()
+{
+	return GetDataAddressWithOffset<bool>(Address, Offset::Entity.m_bEverPlayedOnTeam, this->Connected);
+}
+
 bool PlayerController::GetPlayerName()
 {
 	char Buffer[MAX_PATH]{};
 
 	if (!ProcessMgr.ReadMemory(Address + Offset::Entity.iszPlayerName, Buffer, MAX_PATH))
 		return false;
-	this->PlayerName = Buffer;
+	if (!this->SteamID)
+		this->PlayerName = "BOT " + std::string(Buffer);
+	else
+		this->PlayerName = Buffer;
 	if (this->PlayerName.empty())
 		this->PlayerName = "Name_None";
 
 	return true;
 }
 
+bool PlayerController::GetPlayerSteamID()
+{
+	return GetDataAddressWithOffset<INT64>(Address, Offset::PlayerController.m_steamID, this->SteamID);
+}
 bool PlayerPawn::GetViewAngle()
 {
 	return GetDataAddressWithOffset<Vec2>(Address, Offset::Pawn.angEyeAngles, this->ViewAngle);
@@ -261,6 +275,8 @@ DWORD64 PlayerController::GetPlayerPawnAddress()
 
 	return EntityPawnAddress;
 }
+
+
 
 bool PlayerPawn::GetPos()
 {

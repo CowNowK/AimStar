@@ -5,4 +5,5 @@
 namespace Glow
 {
 	void Run(const CEntity& Entity);
+	ImColor rainbow();
 }

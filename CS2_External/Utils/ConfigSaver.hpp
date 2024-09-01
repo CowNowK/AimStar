@@ -13,7 +13,11 @@ namespace MyConfigSaver {
     {
         return node.IsDefined() ? node.as<T>() : defaultValue;
     }
-    
+    static int ReadOffset(const YAML::Node& node, int defaultValue)
+    {
+        return node.IsDefined() ? std::stoi(node.as<std::string>(), nullptr, 16) : defaultValue;
+
+    } 
     static uint32_t ImColorToUInt32(const ImColor& color)
     {
         uint32_t r = static_cast<uint32_t>(color.Value.x * 255);

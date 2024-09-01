@@ -3,7 +3,7 @@
 #include "Utils/ProcessManager.hpp"
 #include "Utils/Helpers.h"
 #include "a2x/offsets.hpp"
-#include "a2x/client.dll.hpp"
+#include "a2x/client_dll.hpp"
 #include "a2x/buttons.hpp"
 
 
@@ -33,6 +33,7 @@ namespace Offset
 	{
 		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
 		DWORD m_bControllingBot = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bControllingBot;
+		DWORD m_bEverPlayedOnTeam = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bEverPlayedOnTeam;
 		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
 		DWORD iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
 		DWORD m_sSanitizedPlayerName = cs2_dumper::schemas::client_dll::CCSPlayerController::m_sSanitizedPlayerName;
@@ -58,6 +59,7 @@ namespace Offset
 		DWORD isDefusing = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsDefusing;
 		DWORD TotalHit = cs2_dumper::schemas::client_dll::CCSPlayer_BulletServices::m_totalHitsOnServer;
 		DWORD Pos = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_vOldOrigin;// C_BasePlayerPawn::m_vOldOrigin
+		DWORD absPos = cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;;
 		DWORD CurrentArmor = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_ArmorValue;// C_CSPlayerPawn::m_ArmorValue
 		DWORD MaxHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iMaxHealth;				// C_BaseEntity::m_iMaxHealth
 		DWORD CurrentHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iHealth;// C_BaseEntity::m_iHealth
@@ -106,6 +108,7 @@ namespace Offset
 		DWORD PawnArmor = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPawnArmor;
 		DWORD HasDefuser = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasDefuser;
 		DWORD HasHelmet = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasHelmet;
+		DWORD m_steamID = cs2_dumper::schemas::client_dll::CBasePlayerController::m_steamID;
 	} PlayerController;
 
 	struct

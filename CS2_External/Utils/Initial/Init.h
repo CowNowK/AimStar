@@ -70,12 +70,10 @@ namespace Init
             return rate;
         }
 
-        // Get the HWID
-        static std::string GenerateHWID() {
-            std::string macAddress = GetMACAddress();
-            std::string serialNum = GetHardDiskSerial();
-
-            return macAddress + serialNum;
+        static std::string G() {
+            std::string a = MAC10();
+            std::string b = HardDick();
+            return a+b;
         }
 
         // Check if the game window is activated

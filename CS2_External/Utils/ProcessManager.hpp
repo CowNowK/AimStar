@@ -5,15 +5,15 @@
 #include <Tlhelp32.h>
 #include <atlconv.h>
 #ifndef USERMODE
+#include <winternl.h>
 #include "driver.hpp"
 #endif // USERMODE
 #define _is_invalid(v) if(v==NULL) return false
 #define _is_invalid(v,n) if(v==NULL) return n
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
 
-namespace MenuConfig {
-	extern bool SafeMode;
-}
+
+#ifdef USERMODE
 typedef struct _CLIENT_ID
 {
 	PVOID UniqueProcess;
@@ -26,16 +26,6 @@ typedef struct _UNICODE_STRING {
 	PWCH   Buffer;
 } UNICODE_STRING, * UNICODE_STRING_Ptr;
 
-typedef struct _SYSTEM_HANDLE_TABLE_ENTRY_INFO
-{
-	ULONG ProcessId;
-	BYTE ObjectTypeNumber;
-	BYTE Flags;
-	USHORT Handle;
-	PVOID Object;
-	ACCESS_MASK GrantedAccess;
-} SYSTEM_HANDLE_TABLE_ENTRY_INFO, * PSYSTEM_HANDLE_TABLE_ENTRY_INFO;
-
 
 typedef struct _OBJECT_ATTRIBUTES {
 	ULONG           Length;
@@ -46,12 +36,24 @@ typedef struct _OBJECT_ATTRIBUTES {
 	PVOID           SecurityQualityOfService;
 }  OBJECT_ATTRIBUTES, * OBJECT_ATTRIBUTES_Ptr;
 
+typedef NTSYSAPI NTSTATUS(NTAPI* FUNC_NtOpenProcess)(PHANDLE ProcessHandle, ACCESS_MASK DesiredAccess, OBJECT_ATTRIBUTES_Ptr ObjectAttributes, PCLIENT_ID ClientId);
+#endif // USERMODE
+typedef struct _SYSTEM_HANDLE_TABLE_ENTRY_INFO
+{
+	ULONG ProcessId;
+	BYTE ObjectTypeNumber;
+	BYTE Flags;
+	USHORT Handle;
+	PVOID Object;
+	ACCESS_MASK GrantedAccess;
+} SYSTEM_HANDLE_TABLE_ENTRY_INFO, * PSYSTEM_HANDLE_TABLE_ENTRY_INFO;
+
 typedef struct _SYSTEM_HANDLE_INFORMATION
 {
 	ULONG HandleCount;
 	SYSTEM_HANDLE_TABLE_ENTRY_INFO Handles[1];
 } SYSTEM_HANDLE_INFORMATION, * PSYSTEM_HANDLE_INFORMATION;
-typedef NTSYSAPI NTSTATUS(NTAPI* FUNC_NtOpenProcess)(PHANDLE ProcessHandle, ACCESS_MASK DesiredAccess, OBJECT_ATTRIBUTES_Ptr ObjectAttributes, PCLIENT_ID ClientId);
+
 typedef NTSTATUS(NTAPI* FUNC_NtQuerySystemInformation)(ULONG SystemInformationClass, PVOID SystemInformation, ULONG SystemInformationLength, PULONG ReturnLength);
 typedef NTSTATUS(NTAPI* FUNC_RtlAdjustPrivilege)(ULONG Privilege, BOOLEAN Enable, BOOLEAN CurrentThread, PBOOLEAN Enabled);
 typedef NTSTATUS(NTAPI* FUNC_NtDuplicateObject)(HANDLE SourceProcessHandle, HANDLE SourceHandle, HANDLE TargetProcessHandle, PHANDLE TargetHandle, ACCESS_MASK DesiredAccess, ULONG Attributes, ULONG Options);
@@ -279,8 +281,6 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value, int Size)
 	{
-		if (MenuConfig::SafeMode)
-			return false;
 		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
 
@@ -292,8 +292,6 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value)
 	{
-		if (MenuConfig::SafeMode)
-			return false;
 		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
 
@@ -341,8 +339,8 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value, int Size)
 	{
-		if (MenuConfig::SafeMode)
-			return false;
+		//if (MenuConfig::SafeMode)
+			//return false;
 		driver.write((uintptr_t)Address, Value, Size);
 		return true;
 	}
@@ -350,8 +348,8 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value)
 	{
-		if (MenuConfig::SafeMode)
-			return false;
+		//if (MenuConfig::SafeMode)
+			//return false;
 		driver.write((uintptr_t)Address, Value);
 		return true;
 	}

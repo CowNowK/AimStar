@@ -1,4 +1,5 @@
 #include "TriggerBot.h"
+#include "Utils/XorStr.h"
 
 DWORD uHandle = 0;
 DWORD64 ListEntry = 0;
@@ -17,6 +18,15 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 {
 	if (LocalEntity.Controller.AliveStatus == 0)
 		return;
+	// When players hold these weapons, don't shot
+	std::vector<std::string> WeaponNames = {
+	XorStr("smokegrenade"), XorStr("flashbang"), XorStr("hegrenade"), XorStr("molotov"), XorStr("decoy"), XorStr("incgrenade"),
+	XorStr("knife"), XorStr("c4")
+	};
+	if (std::find(WeaponNames.begin(), WeaponNames.end(), LocalEntity.Pawn.WeaponName) != WeaponNames.end())
+	{
+		return;
+	}
 	if (!ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::Pawn.m_bWaitForNoAttack, WaitForNoAttack))
 		return;
 	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::Pawn.iIDEntIndex, uHandle))
@@ -84,11 +94,34 @@ void TriggerBot::TargetCheck(const CEntity& LocalEntity) noexcept
 			{
 				if (Entity.UpdatePawn(PawnAddress))
 				{
-					CrosshairsCFG::isAim = CrosshairsCFG::TeamCheck ? (LocalEntity.Pawn.TeamID != Entity.Pawn.TeamID) : true;
+					CrosshairsCFG::isAim = MenuConfig::TeamCheck ? (LocalEntity.Pawn.TeamID != Entity.Pawn.TeamID) : true;
 					return;
 				}
 			}
 		}
 		CrosshairsCFG::isAim = false;
+	}
+}
+bool TriggerBot::InCrosshairCheck(const CEntity& LocalEntity, const CEntity& TargetEntity) noexcept
+{
+	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::Pawn.iIDEntIndex, uHandle) || uHandle == -1)
+	{
+		return false;
+	}
+	else
+	{
+		ListEntry = ProcessMgr.TraceAddress(gGame.GetEntityListAddress(), { 0x8 * (uHandle >> 9) + 0x10, 0x0 });
+		if (ListEntry != 0)
+		{
+			if (ProcessMgr.ReadMemory<DWORD64>(ListEntry + 0x78 * (uHandle & 0x1FF), PawnAddress))
+			{
+				if (Entity.UpdatePawn(PawnAddress) && Entity.Pawn.Address == TargetEntity.Pawn.Address)
+					return true;
+				else
+					return false;
+			}
+		}
+		else
+			return false;
 	}
 }

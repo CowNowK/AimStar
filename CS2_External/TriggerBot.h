@@ -27,4 +27,5 @@ namespace TriggerBot
 	void ReleaseMouseButton();
 	void Run(const CEntity& LocalEntity);
 	void TargetCheck(const CEntity& LocalEntity) noexcept;
+	bool InCrosshairCheck(const CEntity& LocalEntity, const CEntity& TargetEntity) noexcept;
 }

@@ -185,6 +185,21 @@
     <ClInclude Include="Utils\driver.hpp" />
     <ClInclude Include="Utils\XorStr.h" />
     <ClInclude Include="Utils\newStructs.hpp" />
+    <ClInclude Include="Utils\kdm\intel_driver.hpp" />
+    <ClInclude Include="Utils\kdm\intel_driver_resource.hpp" />
+    <ClInclude Include="Utils\kdm\kdmapper.hpp" />
+    <ClInclude Include="Utils\kdm\nt.hpp" />
+    <ClInclude Include="Utils\kdm\portable_executable.hpp" />
+    <ClInclude Include="Utils\kdm\service.hpp" />
+    <ClInclude Include="Utils\kdm\utils.hpp" />
+    <ClInclude Include="Font\HarmonyOS_SansSC_Bold.h" />
+    <ClInclude Include="Features\HUD.h" />
+    <ClInclude Include="Utils\imgui_custom.hpp" />
+    <ClInclude Include="Utils\Ext-String.hpp" />
+    <ClInclude Include="Utils\Ext-Color.hpp" />
+    <ClInclude Include="Utils\Ext-Time.hpp" />
+    <ClInclude Include="Utils\BytesManager.h" />
+    <ClInclude Include="Features\Aimbot\SilentAim.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
@@ -252,6 +267,11 @@
     <ClCompile Include="Features\Misc.cpp" />
     <ClCompile Include="Features\StyleChanger.cpp" />
     <ClCompile Include="Features\SkinChanger\SkinChanger.cpp" />
+    <ClCompile Include="Utils\imgui_custom.cpp" />
+    <ClCompile Include="Utils\Ext-String.cpp" />
+    <ClCompile Include="Utils\Ext-Color.cpp" />
+    <ClCompile Include="Utils\Ext-Time.cpp" />
+    <ClCompile Include="Utils\BytesManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CS2_External.rc" />
@@ -265,6 +285,7 @@
   <ItemGroup>
     <Font Include="Font\stratum2.ttf" />
     <Font Include="Font\fa-regular.ttf" />
+    <Font Include="Font\HarmonyOS_SansSC_Bold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />

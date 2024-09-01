@@ -31,7 +31,7 @@ private:
 		size_t        size;
 
 		//function requests
-		int request_key;
+		DWORD64 request_key;
 
 		ULONG64 client_base;
 		ULONG64 engine_base;

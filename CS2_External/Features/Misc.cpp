@@ -13,46 +13,6 @@ namespace Misc
 	bool wKeyPressed = false;
 	bool sKeyPressed = false;
 
-	void CheatList() noexcept
-	{
-		if (!MiscCFG::CheatList)
-			return;
-
-		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse;
-		ImGui::SetNextWindowBgAlpha(0.3f);
-		ImGui::SetNextWindowSize(ImVec2(200, 0));
-		ImGui::Begin(XorStr("Cheats List"), nullptr, windowFlags);
-
-		if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
-			ImGui::Text(XorStr("Aimbot [Toggle]"));
-		CheatText(XorStr("Anti Record"), MenuConfig::BypassOBS);
-		CheatText(XorStr("Bhop"), MiscCFG::BunnyHop);
-		CheatText(XorStr("Bomb Timer"), MiscCFG::bmbTimer);
-		CheatText(XorStr("Crosshair"), CrosshairsCFG::ShowCrossHair);
-		CheatText(XorStr("Enemy Sensor"), MiscCFG::EnemySensor);
-		CheatText(XorStr("ESP"), ESPConfig::ESPenabled);
-		CheatText(XorStr("External Radar"), RadarCFG::ShowRadar);
-		CheatText(XorStr("Fake Duck"), MiscCFG::Jitter);
-		CheatText(XorStr("Fast Stop"), MiscCFG::FastStop);
-		if (MiscCFG::FlashImmunity != 0)
-			ImGui::Text(XorStr("Flash Immunity"));
-		CheatText(XorStr("Force Scope"), MiscCFG::ForceScope);
-		if (MiscCFG::Fov != 90)
-			ImGui::Text(XorStr("Fov Changer"));
-		CheatText(XorStr("Headshot Line"), MenuConfig::ShowHeadShootLine);
-		CheatText(XorStr("HitSound"), MiscCFG::HitSound);
-		CheatText(XorStr("Money Service"), MiscCFG::MoneyService);
-		CheatText(XorStr("No Smoke"), MiscCFG::NoSmoke);
-		CheatText(XorStr("Radar Hack"), MiscCFG::RadarHack);
-		CheatText(XorStr("RCS"), MenuConfig::RCS);
-		CheatText(XorStr("Smoke Color"), MiscCFG::SmokeColored);
-		CheatText(XorStr("Spec List"), MiscCFG::SpecList);
-		if (MenuConfig::TriggerBot && (MenuConfig::TriggerAlways || GetAsyncKeyState(MenuConfig::TriggerHotKey)))
-			ImGui::Text(XorStr("TriggerBot [Toggle]"));
-
-		ImGui::End();
-	}
-
 	void Watermark(const CEntity& LocalPlayer) noexcept
 	{
 		if (!MiscCFG::WaterMark)
@@ -175,9 +135,6 @@ namespace Misc
 
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept
 	{
-		if (MenuConfig::SafeMode)
-			return;
-
 		float MaxAlpha = 255.f - MiscCFG::FlashImmunity;
 		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
 	}
@@ -271,9 +228,6 @@ namespace Misc
 	*/
 	void RadarHack(const CEntity& EntityList) noexcept
 	{
-		if (MenuConfig::SafeMode)
-			return;
-
 		if (!MiscCFG::RadarHack)
 			return;
 
@@ -283,9 +237,6 @@ namespace Misc
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
 	{
-		if (MenuConfig::SafeMode)
-			return;
-
 		DWORD64 CameraServices = 0;
 		if (Zoom)
 			return;
@@ -344,7 +295,13 @@ namespace Misc
 	{
 		if (!MiscCFG::BunnyHop)
 			return;
+		HWND hwnd_cs2 = FindWindowA(NULL, "Counter-Strike 2");
+		HWND hwnd_perfectworld = FindWindowA(NULL, "\u53cd\u6050\u7cbe\u82f1\uff1a\u5168\u7403\u653b\u52bf");
 
+		if (hwnd_cs2 == NULL) {
+			hwnd_cs2 = FindWindowA(NULL, "Counter-Strike 2");
+			HWND foreground_window = hwnd_perfectworld;
+		}
 		int ForceJump;
 		bool spacePressed = GetAsyncKeyState(VK_SPACE);
 		bool isInAir = AirCheck(Local);
@@ -355,27 +312,28 @@ namespace Misc
 			// As of the latest update (11/8/2023) bhop doesn't work at all with sendinput,
 			// if +jump is sent on the same tick that you land on the ground, the jump won't register.
 			// But you can add 15ms of delay right before your sendinput to fix this problem temporarily
-			std::this_thread::sleep_for(std::chrono::milliseconds(16));
+			std::this_thread::sleep_for(std::chrono::microseconds(15625));
 			// Refer to -> https://www.unknowncheats.me/forum/counter-strike-2-a/609480-sendinput-bhop-inconsistency.html
-			gGame.SetForceJump(65537);
+			//gGame.SetForceJump(65537);
+			SendMessage(hwnd_cs2, WM_KEYUP, VK_SPACE, 0);
+			SendMessage(hwnd_cs2, WM_KEYDOWN, VK_SPACE, 0);
 		}
 
 		else if (spacePressed && !isInAir) // AirCheck = 0, isn't on ground
 		{
-			gGame.SetForceJump(256);
+			//gGame.SetForceJump(256);
+			SendMessage(hwnd_cs2, WM_KEYUP, VK_SPACE, 0);
 		}
-		else if (!spacePressed && ForceJump == 65537)
+		else if (!spacePressed /* && ForceJump == 65537*/)
 		{
-			gGame.SetForceJump(256);
+			//gGame.SetForceJump(256);
+			SendMessage(hwnd_cs2, WM_KEYUP, VK_SPACE, 0);
 		}
 	}
 
 	std::string OldWeaponCache;
 	void ForceScope(const CEntity& aLocalPlayer) noexcept
 	{
-		if (MenuConfig::SafeMode)
-			return;
-
 		if (!MiscCFG::ForceScope)
 			return;
 

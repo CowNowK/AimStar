@@ -19,6 +19,7 @@
 #include "..\MenuConfig.hpp"
 #include "..\OS-ImGui\imgui\imgui.h"
 #include "..\Utils\GlobalVars.h"
+#include "..\Utils\imgui_custom.hpp"
 
 #pragma comment(lib, "winmm.lib")
 
@@ -65,7 +66,8 @@ namespace Misc
 	static inline void CheatText(const char* Cheat, bool config)
 	{
 		if (config)
-			ImGui::Text(Cheat);
+			ImGui::TextColored(ImColor(255, 255, 255, 200), Cheat);
+			// ImGui::chromaText(Cheat, 10.f, 5.f, 1.f, 50.f, 0.02f, 0.08f);
 	}
 
 	static inline void getCurrentTime(struct tm* ptm) {
@@ -115,7 +117,6 @@ namespace Misc
 	void MoneyService(const CEntity& EntityList) noexcept;
 	void FakeDuck(const CEntity& EntityList) noexcept;
 	void BunnyHop(const CEntity& Local) noexcept;
-	void CheatList() noexcept;
 	void ForceScope(const CEntity& aLocalPlayer) noexcept;
 	void NightMode() noexcept;
 	void JumpThrow(const CEntity& Local) noexcept;

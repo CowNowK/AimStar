@@ -10,7 +10,7 @@
 
 namespace Init
 {
-    inline std::string GetMACAddress() {
+    inline std::string MAC10() {
         IP_ADAPTER_INFO AdapterInfo[16];
         DWORD dwBufLen = sizeof(AdapterInfo);
         DWORD dwStatus = GetAdaptersInfo(AdapterInfo, &dwBufLen);
@@ -37,7 +37,7 @@ namespace Init
         return macAddress.str();
     }
 
-    inline std::string GetHardDiskSerial() {
+    inline std::string HardDick() {
         DWORD serialNum;
         GetVolumeInformationA(
             "C:\\",

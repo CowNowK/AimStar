@@ -107,10 +107,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Ring0|x64'">
     <TargetName>AimStar-Ring0</TargetName>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <LibraryPath>$(ProjectDir)Utils\kdm;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <EnableMicrosoftCodeAnalysis>false</EnableMicrosoftCodeAnalysis>
     <EnableClangTidyCodeAnalysis>true</EnableClangTidyCodeAnalysis>
+    <IncludePath>$(ProjectDir)Utils\kdm;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Ring3|x64'">
     <TargetName>AimStar-Ring3</TargetName>
@@ -165,11 +166,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -186,21 +188,27 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>MaxSpeed</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <StringPooling>true</StringPooling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <OpenMPSupport>true</OpenMPSupport>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Utils\kdm\kdmapper_lib-Release.lib;$(CoreLibraryDependencies)</AdditionalDependencies>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
       <EnableUAC>true</EnableUAC>
     </Link>
@@ -213,14 +221,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>USERMODE;NDEBUG;_CRT_SECURE_NO_WARNINGS;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <Optimization>Disabled</Optimization>
+      <Optimization>MinSpace</Optimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <LanguageStandard_C>Default</LanguageStandard_C>
       <StringPooling>true</StringPooling>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -237,7 +246,9 @@
     <ClInclude Include="Cheats.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Features\Aimbot\Legitbot.hpp" />
+    <ClInclude Include="Features\Aimbot\SilentAim.hpp" />
     <ClInclude Include="Features\BombTimer.h" />
+    <ClInclude Include="Features\HUD.h" />
     <ClInclude Include="Features\Debugger.h" />
     <ClInclude Include="Features\ESP.h" />
     <ClInclude Include="Features\GetWeaponIcon.h" />
@@ -250,6 +261,7 @@
     <ClInclude Include="Features\SpectatorList.h" />
     <ClInclude Include="Features\StyleChanger.h" />
     <ClInclude Include="Font\fontArray.h" />
+    <ClInclude Include="Font\HarmonyOS_SansSC_Bold.h" />
     <ClInclude Include="Font\IconsFontAwesome5.h" />
     <ClInclude Include="Font\IconsFontAwesome6.h" />
     <ClInclude Include="Game.h" />
@@ -278,18 +290,30 @@
     <ClInclude Include="Resources\Sounds.h" />
     <ClInclude Include="Resources\WeaponIcon.h" />
     <ClInclude Include="TriggerBot.h" />
+    <ClInclude Include="Utils\BytesManager.h" />
+    <ClInclude Include="Utils\Ext-Color.hpp" />
     <ClInclude Include="Utils\ConfigMenu.hpp" />
     <ClInclude Include="Utils\ConfigSaver.hpp" />
     <ClInclude Include="Utils\driver.hpp" />
     <ClInclude Include="Utils\Format.h" />
     <ClInclude Include="Utils\Globals.hpp" />
     <ClInclude Include="Utils\GlobalVars.h" />
+    <ClInclude Include="Utils\imgui_custom.hpp" />
     <ClInclude Include="Utils\Initial\system.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
+    <ClInclude Include="Utils\kdm\intel_driver.hpp" />
+    <ClInclude Include="Utils\kdm\intel_driver_resource.hpp" />
+    <ClInclude Include="Utils\kdm\kdmapper.hpp" />
+    <ClInclude Include="Utils\kdm\nt.hpp" />
+    <ClInclude Include="Utils\kdm\portable_executable.hpp" />
+    <ClInclude Include="Utils\kdm\service.hpp" />
+    <ClInclude Include="Utils\kdm\utils.hpp" />
     <ClInclude Include="Utils\ProcessManager.hpp" />
     <ClInclude Include="Utils\Random.h" />
     <ClInclude Include="Utils\newStructs.hpp" />
+    <ClInclude Include="Utils\Ext-String.hpp" />
     <ClInclude Include="Utils\Style.h" />
+    <ClInclude Include="Utils\Ext-Time.hpp" />
     <ClInclude Include="Utils\XorStr.h" />
     <ClInclude Include="Utils\XorStr.hpp" />
     <ClInclude Include="Utils\yaml-cpp\anchor.h" />
@@ -355,10 +379,15 @@
     <ClCompile Include="OS-ImGui\OS-ImGui_External.cpp" />
     <ClCompile Include="Radar\Radar.cpp" />
     <ClCompile Include="TriggerBot.cpp" />
+    <ClCompile Include="Utils\BytesManager.cpp" />
+    <ClCompile Include="Utils\Ext-Color.cpp" />
     <ClCompile Include="Utils\ConfigMenu.cpp" />
     <ClCompile Include="Utils\ConfigSaver.cpp" />
     <ClCompile Include="Utils\GlobalVars.cpp" />
+    <ClCompile Include="Utils\imgui_custom.cpp" />
     <ClCompile Include="Utils\MemorySearch.cpp" />
+    <ClCompile Include="Utils\Ext-String.cpp" />
+    <ClCompile Include="Utils\Ext-Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CS2_External.rc" />
@@ -371,6 +400,7 @@
   </ItemGroup>
   <ItemGroup>
     <Font Include="Font\fa-regular.ttf" />
+    <Font Include="Font\HarmonyOS_SansSC_Bold.ttf" />
     <Font Include="Font\stratum2.ttf" />
   </ItemGroup>
   <ItemGroup>

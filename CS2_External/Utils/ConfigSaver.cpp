@@ -20,7 +20,7 @@ namespace MyConfigSaver {
 
         YAML::Emitter emitter;
 
-        emitter << YAML::Comment("AimStar Config File\nVersion: 4.6\nAuthor: " + author);
+        emitter << YAML::Comment("AimStar Config File\nVersion: 4.7\nAuthor: " + author);
         emitter << YAML::BeginMap;
 
         emitter << YAML::Key << "ESP";
@@ -227,7 +227,16 @@ namespace MyConfigSaver {
         emitter << YAML::EndMap;
         emitter << YAML::Key << "FastStop" << YAML::Value << MiscCFG::FastStop;
         emitter << YAML::Key << "SpecList" << YAML::Value << MiscCFG::SpecList;
-         emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
+        emitter << YAML::Key << "Glow" << YAML::Value << MiscCFG::EnemySensor;
+        emitter << YAML::Key << "GlowColor";
+        emitter << YAML::Value;
+        emitter << YAML::BeginMap;
+        emitter << YAML::Key << "r" << YAML::Value << MiscCFG::GlowColor.Value.x;
+        emitter << YAML::Key << "g" << YAML::Value << MiscCFG::GlowColor.Value.y;
+        emitter << YAML::Key << "b" << YAML::Value << MiscCFG::GlowColor.Value.z;
+        emitter << YAML::Key << "a" << YAML::Value << MiscCFG::GlowColor.Value.w;
+        emitter << YAML::EndMap;
+        emitter << YAML::Key << "RainbowedGlow" << YAML::Value << MiscCFG::GlowRainbow;
         emitter << YAML::Key << "RadarHack" << YAML::Value << MiscCFG::RadarHack;
         emitter << YAML::Key << "MoneyService";
         emitter << YAML::Value;
@@ -304,7 +313,6 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Menu";
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
-        emitter << YAML::Key << "SafeMode" << YAML::Value << MenuConfig::SafeMode;
         emitter << YAML::Key << "RenderFrameLimit" << YAML::Value << MenuConfig::MaxRenderFPS;
         emitter << YAML::Key << "Theme" << YAML::Value << MenuConfig::Theme;
         emitter << YAML::EndMap;
@@ -495,6 +503,11 @@ namespace MyConfigSaver {
             MiscCFG::FastStop = ReadData(config["Misc"]["FastStop"], false);
             MiscCFG::SpecList = ReadData(config["Misc"]["SpecList"], false);
             MiscCFG::EnemySensor = ReadData(config["Misc"]["Glow"], false);
+            MiscCFG::GlowColor.Value.x = ReadData(config["Misc"]["GlowColor"]["r"], 0.f);
+            MiscCFG::GlowColor.Value.y = ReadData(config["Misc"]["GlowColor"]["g"], 0.f);
+            MiscCFG::GlowColor.Value.z = ReadData(config["Misc"]["GlowColor"]["b"], 0.f);
+            MiscCFG::GlowColor.Value.w = ReadData(config["Misc"]["GlowColor"]["a"], 0.f);
+            MiscCFG::GlowRainbow = ReadData(config["Misc"]["RainbowedGlow"], false);
             MiscCFG::RadarHack = ReadData(config["Misc"]["RadarHack"], false);
             MiscCFG::MoneyService = ReadData(config["Misc"]["MoneyService"]["Enable"], false);
             MiscCFG::ShowCashSpent = ReadData(config["Misc"]["MoneyService"]["ShowCashSpent"], false);
@@ -551,12 +564,11 @@ namespace MyConfigSaver {
         }
         if (config["Menu"])
         {
-            MenuConfig::SafeMode = ReadData(config["Menu"]["SafeMode"], true);
             MenuConfig::MaxRenderFPS = ReadData(config["Menu"]["RenderFrameLimit"], MenuConfig::MaxFrameRate);
             MenuConfig::Theme = ReadData(config["Menu"]["Theme"], 0);
         }
 
-        if (MenuConfig::Theme == 3)
+        if (MenuConfig::Theme == 4)
         {
             // Custom Theme Loader
             if (config["Custom Theme"])
