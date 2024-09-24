@@ -348,7 +348,7 @@ namespace GUI
 			CircleImage((void*)AvatarImage, 40);
 			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15 + 48);
 			ImGui::SameLine();
-			ImGui::Text(XorStr("User:\n%s"), getenv("USERNAME")); //If u want current player name -> MenuConfig::UserName (2 lazy to adapt non-ascii)
+			ImGui::Text(XorStr("User:\n%s"), MenuConfig::UserName);
 			ImGui::EndChild();
 
 			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
