@@ -1150,7 +1150,6 @@ int main(void)
 		}
 
 		ShowWindow(hwnd, SW_SHOW);
-
 		MSG msg;
 		while (GetMessage(&msg, NULL, 0, 0)) {
 			TranslateMessage(&msg);

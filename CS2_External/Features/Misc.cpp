@@ -33,7 +33,7 @@ namespace Misc
 
 		// Player Ping
 		int playerPing;
-		ProcessMgr.ReadMemory(LocalPlayer.Controller.Address + 0x718, playerPing);
+		ProcessMgr.ReadMemory(LocalPlayer.Controller.Address + Offset::PlayerController.m_iPing, playerPing);
 
 		// Player Pos
 		Vec3 Pos = LocalPlayer.Pawn.Pos;

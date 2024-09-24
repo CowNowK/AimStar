@@ -126,7 +126,8 @@ bool Offset::UpdateOffsets()
 	Offset::PlayerController.HasDefuser = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnHasDefuser"], 0);
 	Offset::PlayerController.HasHelmet = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnHasHelmet"], 0);
 	Offset::PlayerController.m_steamID = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_steamID"], 0);
-
+	Offset::PlayerController.m_iPing = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_iPing"], 0);
+	
 	Offset::C4.m_bBeingDefused = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_bBeingDefused"], 0);
 	Offset::C4.m_flDefuseCountDown = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flDefuseCountDown"], 0);
 	Offset::C4.m_nBombSite = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_nBombSite"], 0);
