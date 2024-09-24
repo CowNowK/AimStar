@@ -46,7 +46,7 @@ Contributors:
 
 namespace fs = filesystem;
 bool otp = false;
-string fileName;
+//string fileName;
 
 
 
@@ -1108,13 +1108,19 @@ void Cheat()
 
 int main(void)
 {
-
+	/*
 	const char* tempPath = getenv("TMP");
 	if (tempPath != nullptr)
 	{
+
 		fileName = string(tempPath) + XorStr("\\Aimstar");
 		otp = Init::Verify::isVerified(fileName);
 	}
+	*/
+	//#ifdef _DEBUG
+
+	//#endif
+	otp = GlobalFindAtomA(XorStr("https://aimstar.tkm.icu"));
 
 	if (otp)
 	{
@@ -1205,8 +1211,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) 
 			}
 			else {
 				otp = true;
-				ofstream outfile(fileName);
-				outfile.close();
+				GlobalAddAtomA(XorStr("https://aimstar.tkm.icu"));
+				//ofstream outfile(fileName);
+				//outfile.close();
 				ShowWindow(hwnd, SW_HIDE);
 				system("cls");
 				Cheat();
