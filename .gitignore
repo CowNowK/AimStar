@@ -74,3 +74,4 @@ CS2_External/x64/Debug/CS2_External.res
 *.recipe
 *.lastbuildstate
 /CS2_External/x64
+CS2_External/Utils/kdm/kdmapper_lib-Debug.idb
