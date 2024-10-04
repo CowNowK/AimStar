@@ -73,3 +73,4 @@ CS2_External/x64/Debug/CS2_External.res
 *.pdb
 *.recipe
 *.lastbuildstate
+/CS2_External/x64

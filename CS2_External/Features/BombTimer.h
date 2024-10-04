@@ -24,8 +24,9 @@ namespace bmb
 	std::time_t plantTime;
 
 	uint64_t currentTimeMillis() {
-		using namespace std::chrono;
-		return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+		auto now = std::chrono::system_clock::now();
+		auto duration = now.time_since_epoch();
+		return std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
 	}
 
 	// Idea from Tokinaa

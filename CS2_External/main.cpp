@@ -933,20 +933,21 @@ void UpdateLang()
 }
 
 void UpdateSteamPath() {
+	
 	HKEY hKey;
 	wchar_t steamPath[MAX_PATH];
 	DWORD bufferSize = sizeof(steamPath);
 
-	if (RegOpenKeyExW(HKEY_LOCAL_MACHINE, L"SOFTWARE\\WOW6432Node\\Valve\\Steam", 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
-		if (RegQueryValueExW(hKey, L"InstallPath", NULL, NULL, (LPBYTE)steamPath, &bufferSize) == ERROR_SUCCESS) {
-			RegCloseKey(hKey);
+
+	if (RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"SOFTWARE\\WOW6432Node\\Valve\\Steam", 0, KEY_READ, &hKey) == ERROR_SUCCESS) {
+		if (RegQueryValueEx(hKey, L"InstallPath", nullptr, nullptr, (LPBYTE)steamPath, &bufferSize) == ERROR_SUCCESS)
 			MenuConfig::SteamPath = steamPath;
-		}
-		RegCloseKey(hKey);
+		else
+			MenuConfig::SteamPath = L"C:\\Program Files(x86)\\Steam";
 	}
 	else
 		MenuConfig::SteamPath = L"C:\\Program Files(x86)\\Steam";
-	return;
+	return; 
 }
 void AntiDebugger(string Log = "") noexcept
 {

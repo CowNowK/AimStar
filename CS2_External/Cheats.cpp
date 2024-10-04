@@ -177,9 +177,12 @@ void Cheats::Run()
 		return;
 	if (MenuConfig::AvatarPath == L"")
 		MenuConfig::AvatarPath = MenuConfig::SteamPath + L"\\config\\avatarcache\\" + std::to_wstring(LocalEntity.Controller.SteamID) + L".png";
+	/*
 	if (MenuConfig::UserName != LocalEntity.Controller.PlayerName)
 		MenuConfig::UserName = LocalEntity.Controller.PlayerName;
-
+	too lazy deal UTF8 shit*/
+	if (MenuConfig::UserName == "")
+		MenuConfig::UserName = getenv("USERNAME");
 	//std::wcout << MenuConfig::AvatarPath << std::endl;
 	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MiscCFG::WorkInSpec)
 		return;
