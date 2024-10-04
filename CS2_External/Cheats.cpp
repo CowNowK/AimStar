@@ -204,6 +204,13 @@ void Cheats::Run()
 		return;
 	MenuConfig::CurMap = MapName;*/
 	MenuConfig::CurTime = Global_Vars.m_curtime;
+	MenuConfig::TickCount = Global_Vars.m_tickcount;
+	static int LastTick;
+	if (MenuConfig::TickCount != LastTick)
+	{
+		//fetch sth u donot wanna frequency read
+		MenuConfig::FPS = static_cast<int>(std::floor(1.0f / Global_Vars.m_fratmetime));
+	}
 	// HealthBar Map
 	static std::map<DWORD64, Render::HealthBar> HealthBarMap;
 
@@ -420,7 +427,7 @@ void Cheats::Run()
 
 	bmb::RenderWindow(LocalEntity);
 	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
-	if (currentFPS > MenuConfig::MaxRenderFPS)
+	if (currentFPS > MenuConfig::MaxRenderFPS || (MenuConfig::MaxRenderFPS == 1200 && currentFPS > MenuConfig::FPS) )
 	{
 		int FrameWait = round(1000000.0f / MenuConfig::MaxRenderFPS);
 		std::this_thread::sleep_for(std::chrono::microseconds(FrameWait));

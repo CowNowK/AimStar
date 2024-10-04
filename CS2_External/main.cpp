@@ -962,7 +962,7 @@ void AntiDebugger(string Log = "") noexcept
 void Cheat()
 {
 #ifdef NDEBUG
-	//AntiDebugger("Initialize fail");
+	AntiDebugger("Initialize fail");
 #endif
 
 	if (Init::Verify::CheckWindowVersion())

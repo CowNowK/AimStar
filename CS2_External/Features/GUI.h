@@ -884,8 +884,11 @@ namespace GUI
 					ImGui::SeparatorText(XorStr("Cheat Settings"));
 					if (MenuConfig::MaxRenderFPS == MenuConfig::MaxFrameRate)
 						PutSliderInt(Lang::ConfigText.fpsCap, 5.f, &MenuConfig::MaxRenderFPS, &MenuConfig::MaxFrameRate, &FPS, "Monitor Refresh Rate");
+					else if(MenuConfig::MaxRenderFPS == FPS)
+						PutSliderInt(Lang::ConfigText.fpsCap, 5.f, &MenuConfig::MaxRenderFPS, &MenuConfig::MaxFrameRate, &FPS, "Game FPS");
 					else
 						PutSliderInt(Lang::ConfigText.fpsCap, 5.f, &MenuConfig::MaxRenderFPS, &MenuConfig::MaxFrameRate, &FPS, "%d");
+
 
 					ImGui::Columns(1);
 				}

@@ -34,7 +34,9 @@ namespace MenuConfig
 	inline std::string Country = "";
 	inline std::string UserName = "";
 	inline std::string CurMap = "";
-	inline float CurTime =0;
+	inline float CurTime = 0;
+	inline int32_t TickCount = 0;
+	inline int FPS = 0;
 	inline int MaxFrameRate = 60;
 	inline bool defaultConfig = false;
 	inline int Language = 0;
