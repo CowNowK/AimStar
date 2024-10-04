@@ -303,7 +303,7 @@ namespace GUI
 			ImGui::GetWindowDrawList()->AddRect(
 				ImVec2(MenuConfig::WCS.Button1Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button1Pos.y + ImGui::GetWindowPos().y), 
 				ImVec2(MenuConfig::WCS.Button1Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button1Pos.y + buttonH + ImGui::GetWindowPos().y), 
-				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				BorderColor, 5.f, ImDrawFlags_RoundCornersAll, 2.f);
 			
 			ImGui::SetCursorPos(MenuConfig::WCS.Button2Pos);
 			ImGui::Image((void*)MenuButton2, ImVec2(buttonW, buttonH));
@@ -313,7 +313,7 @@ namespace GUI
 			ImGui::GetWindowDrawList()->AddRect(
 				ImVec2(MenuConfig::WCS.Button2Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button2Pos.y + ImGui::GetWindowPos().y),
 				ImVec2(MenuConfig::WCS.Button2Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button2Pos.y + buttonH + ImGui::GetWindowPos().y),
-				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				BorderColor, 5.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(MenuConfig::WCS.Button3Pos);
 			ImGui::Image((void*)MenuButton3, ImVec2(buttonW, buttonH));
@@ -323,7 +323,7 @@ namespace GUI
 			ImGui::GetWindowDrawList()->AddRect(
 				ImVec2(MenuConfig::WCS.Button3Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button3Pos.y + ImGui::GetWindowPos().y),
 				ImVec2(MenuConfig::WCS.Button3Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button3Pos.y + buttonH + ImGui::GetWindowPos().y),
-				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				BorderColor, 5.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImGui::SetCursorPos(MenuConfig::WCS.Button4Pos);
 			ImGui::Image((void*)MenuButton4, ImVec2(buttonW, buttonH));
@@ -333,7 +333,7 @@ namespace GUI
 			ImGui::GetWindowDrawList()->AddRect(
 				ImVec2(MenuConfig::WCS.Button4Pos.x + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + ImGui::GetWindowPos().y),
 				ImVec2(MenuConfig::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
-				BorderColor, 9.f, ImDrawFlags_RoundCornersAll, 2.f);
+				BorderColor, 5.f, ImDrawFlags_RoundCornersAll, 2.f);
 
 			ImColor BgCol = ImGui::GetStyleColorVec4(ImGuiCol_ChildBg);
 			ImColor Alpha = ImColor(0, 0, 0, 0);
