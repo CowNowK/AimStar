@@ -24,9 +24,10 @@ namespace Misc
 		ImGui::Begin(XorStr("Watermark"), nullptr, windowFlags);
 
 		// Cheat FPS
+		/*
 		static auto FrameRate = 1.0f;
 		FrameRate = ImGui::GetIO().Framerate;
-
+		*/
 		// Current Time
 		struct tm ptm;
 		getCurrentTime(&ptm);
@@ -42,8 +43,8 @@ namespace Misc
 		Vec2 Angle = LocalPlayer.Pawn.ViewAngle;
 
 		ImGui::Text(XorStr("AimStar"));
-		ImGui::Text(XorStr("%d FPS | %d ms | %02d:%02d:%02d"),
-			FrameRate != 0.0f ? static_cast<int>(FrameRate) : 0,
+		ImGui::Text(XorStr(/*"%d FPS | */"%d ms | %02d:%02d:%02d"),
+			//FrameRate != 0.0f ? static_cast<int>(FrameRate) : 0,
 			playerPing,
 			ptm.tm_hour, ptm.tm_min, ptm.tm_sec);
 		ImGui::Text(XorStr("Pos: %.2f, %.2f, %.2f"), Pos.x, Pos.y, Pos.z);
