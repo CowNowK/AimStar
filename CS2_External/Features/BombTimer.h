@@ -20,14 +20,6 @@ namespace hash {
 #define HASH(str) hash::runtime(str)
 namespace bmb
 {
-	bool isPlanted = false;
-	std::time_t plantTime;
-
-	uint64_t currentTimeMillis() {
-		auto now = std::chrono::system_clock::now();
-		auto duration = now.time_since_epoch();
-		return std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
-	}
 
 	// Idea from Tokinaa
 	int getBombSite(bool Planted)
@@ -44,10 +36,74 @@ namespace bmb
 
 			if (!ProcessMgr.ReadMemory<int>(cPlantedC4 + Offset::C4.m_nBombSite, site))
 				return 0;
-			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			return site;
 		}
 		
+	}
+	bool getBombDefusing(bool Planted)
+	{
+		if (Planted)
+		{
+			int Defusing = false;
+			uintptr_t cPlantedC4;
+			ProcessMgr.ReadMemory(gGame.GetClientDLLAddress() + Offset::PlantedC4, cPlantedC4);
+			if (!ProcessMgr.ReadMemory<uintptr_t>(gGame.GetClientDLLAddress() + Offset::PlantedC4, cPlantedC4))
+				return Defusing;
+			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
+				return Defusing;
+
+			if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C4.m_bBeingDefused, Defusing))
+				return Defusing;
+			return Defusing;
+		}
+	}
+	float getBombDefuseTime(bool Planted)
+	{
+		if (Planted)
+		{
+			float DefuseTime = false;
+			uintptr_t cPlantedC4;
+			ProcessMgr.ReadMemory(gGame.GetClientDLLAddress() + Offset::PlantedC4, cPlantedC4);
+			if (!ProcessMgr.ReadMemory<uintptr_t>(gGame.GetClientDLLAddress() + Offset::PlantedC4, cPlantedC4))
+				return DefuseTime;
+			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
+				return DefuseTime;
+
+			if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C4.m_flDefuseCountDown, DefuseTime))
+				return DefuseTime;
+			return DefuseTime;
+		}
+	}
+	float getBombBoomTime(bool Planted)
+	{
+		if (Planted)
+		{
+			float BoomTime = false;
+			uintptr_t cPlantedC4;
+			ProcessMgr.ReadMemory(gGame.GetClientDLLAddress() + Offset::PlantedC4, cPlantedC4);
+			if (!ProcessMgr.ReadMemory<uintptr_t>(gGame.GetClientDLLAddress() + Offset::PlantedC4, cPlantedC4))
+				return BoomTime;
+			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
+				return BoomTime;
+
+			if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C4.m_flC4Blow, BoomTime))
+				return BoomTime;
+			return BoomTime;
+		}
+	}
+	bool getBombPlanted()
+	{
+		int Planted = false;
+		uintptr_t cPlantedC4;
+		ProcessMgr.ReadMemory(gGame.GetClientDLLAddress() + Offset::PlantedC4, cPlantedC4);
+		if (!ProcessMgr.ReadMemory<uintptr_t>(gGame.GetClientDLLAddress() + Offset::PlantedC4, cPlantedC4))
+			return Planted;
+		if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
+			return Planted;
+
+		if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C4.m_bC4Activated, Planted))
+			return Planted;
+		return Planted;
 	}
 	Vec3 getBombPos(bool Planted)
 	{
@@ -138,10 +194,21 @@ namespace bmb
 		if (!MiscCFG::bmbTimer)
 			return;
 
-		bool isBombPlanted;
-		bool IsBeingDefused;
-		float DefuseTime;
-		auto plantedAddress = gGame.GetClientDLLAddress() + Offset::PlantedC4 - 0x8;
+		bool isBombPlanted = getBombPlanted();
+		static float boomTime = 0;
+
+		if (!isBombPlanted)
+			boomTime = 0;
+		else if (boomTime == 0)
+			boomTime = getBombBoomTime(isBombPlanted);
+
+		bool IsBeingDefused = getBombDefusing(isBombPlanted);
+		static float DefuseTime = 0;
+
+		if (IsBeingDefused && DefuseTime == 0)
+			DefuseTime = getBombDefuseTime(isBombPlanted);
+		else if (!IsBeingDefused)
+			DefuseTime = 0;
 		static float windowWidth = 200.0f;
 		ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize;
 		ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - 200.0f) / 2.0f, 80.0f }, ImGuiCond_Once);
@@ -150,21 +217,7 @@ namespace bmb
 			ImGui::SetNextWindowBgAlpha(0.5f);
 		ImGui::Begin(XorStr("Bomb Timer"), nullptr, flags);
 
-		ProcessMgr.ReadMemory(plantedAddress, isBombPlanted);
-
-		//ProcessMgr.ReadMemory(Offset::PlantedC4 + Offset::C4.m_bBeingDefused, IsBeingDefused);
-		//ProcessMgr.ReadMemory(Offset::PlantedC4 + Offset::C4.m_flDefuseCountDown, DefuseTime);
-//		std::cout << IsBeingDefused << ", " << DefuseTime << std::endl;
-
-		auto time = currentTimeMillis();
-
-		if (isBombPlanted && !isPlanted && (plantTime == NULL || time - plantTime > 60000))
-		{
-			isPlanted = true;
-			plantTime = time;
-		}
-
-		float remaining = (40000 - (int64_t)time + plantTime) / (float)1000;
+		float remaining = boomTime - MenuConfig::CurTime;
 
 		/*
 		if (remaining > 10 || remaining < 0 || !isPlanted)
@@ -181,7 +234,7 @@ namespace bmb
 
 		ImGui::SetCursorPosX((ImGui::GetWindowSize().x - 180) * 0.5f);
 		float barLength = remaining <= 0.0f ? 0.0f : remaining >= 40 ? 1.0f : (remaining / 40.0f);
-		if (isPlanted && remaining >= 0)
+		if (isBombPlanted && remaining >= 0)
 		{
 			int damage = calculate_bomb_damage(Local.Pawn.Pos, getBombPos(isBombPlanted), Local.Pawn.Armor);
 			std::ostringstream ss,sv;
@@ -200,11 +253,6 @@ namespace bmb
 			Gui.MyText(XorStr("Estim Damage : 0"), true);
 		}
 
-
-		if (isPlanted && !isBombPlanted)
-		{
-			isPlanted = false;
-		}
 		ImGui::PopStyleColor();
 		ImGui::End();
 	}

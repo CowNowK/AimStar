@@ -68,7 +68,9 @@ DWORD64 CGame::GetServerPawnAddress()
 
 DWORD64 CGame::GetGlobalVarsAddress()
 {
-	return this->Address.GlobalVars;
+	DWORD64 Global_Vars_Addr = 0;
+	ProcessMgr.ReadMemory(this->Address.GlobalVars, Global_Vars_Addr);
+	return Global_Vars_Addr;
 }
 
 

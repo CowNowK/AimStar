@@ -146,6 +146,8 @@ namespace Offset
 	
 	struct
 	{
+		DWORD m_flC4Blow = cs2_dumper::schemas::client_dll::C_PlantedC4::m_flC4Blow;
+		DWORD m_bC4Activated = cs2_dumper::schemas::client_dll::C_PlantedC4::m_bC4Activated;
 		DWORD m_bBeingDefused = cs2_dumper::schemas::client_dll::C_PlantedC4::m_bBeingDefused;
 		DWORD m_flDefuseCountDown = cs2_dumper::schemas::client_dll::C_PlantedC4::m_flDefuseCountDown;
 		DWORD m_nBombSite = cs2_dumper::schemas::client_dll::C_PlantedC4::m_nBombSite;
