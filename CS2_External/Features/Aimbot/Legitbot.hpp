@@ -20,7 +20,7 @@ namespace AimControl
 {
     extern bool Rage;
 
-    inline int HotKey = VK_LMENU;
+    inline unsigned int HotKey = VK_LMENU;
     inline int AimBullet = 1;
     inline bool ScopeOnly = false;
     inline bool AutoShot = false;
@@ -33,12 +33,12 @@ namespace AimControl
     inline std::vector<int> HotKeyList{ VK_LMENU, VK_LBUTTON, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL };
 
     inline bool HasTarget = false;
-
+    /*
     inline void SetHotKey(int Index)
     {
         HotKey = HotKeyList.at(Index);
     }
-
+    */
     inline void switchToggle()
     {
         MenuConfig::AimAlways = !MenuConfig::AimAlways;

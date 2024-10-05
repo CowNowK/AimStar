@@ -633,7 +633,7 @@ namespace MyConfigSaver {
             StyleChanger::UpdateSkin(MenuConfig::Theme);
         }
 
-        AimControl::SetHotKey(MenuConfig::AimBotHotKey);
+        //AimControl::SetHotKey(MenuConfig::AimBotHotKey);
         TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
         MenuConfig::HitboxUpdated = false;
 

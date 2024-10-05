@@ -1,5 +1,4 @@
 ﻿#pragma once
-#define IMGUI_DEFINE_MATH_OPERATORS
 #include <functional>
 
 #include "..\MenuConfig.hpp"
@@ -38,6 +37,83 @@ bool checkbox2 = false;
 bool checkbox3 = false;
 bool checkbox4 = false;
 bool checkbox5 = false;
+static constexpr const char* arrKeyNames[] = {
+	"",
+	"mouse 1", "mouse 2", "cancel", "mouse 3", "mouse 4", "mouse 5", "",
+	"backspace", "tab", "", "", "clear", "enter", "", "",
+	"shift", "control", "alt", "pause", "caps", "", "", "", "", "", "",
+	"escape", "", "", "", "", "space", "page up", "page down",
+	"end", "home", "left", "up", "right", "down", "", "", "",
+	"print", "insert", "delete", "",
+	"0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+	"", "", "", "", "", "", "",
+	"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
+	"l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
+	"v", "w", "x", "y", "z", "lwin", "rwin", "", "", "",
+	"num0", "num1", "num2", "num3", "num4", "num5",
+	"num6", "num7", "num8", "num9",
+	"*", "+", "", "-", ".", "/",
+	"f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8",
+	"f9", "f10", "f11", "f12", "f13", "f14", "f15", "f16",
+	"f17", "f18", "f19", "f20", "f21", "f22", "f23", "f24",
+	"", "", "", "", "", "", "", "",
+	"num lock", "scroll lock",
+	"", "", "", "", "", "", "",
+	"", "", "", "", "", "", "",
+	"lshift", "rshift", "lctrl",
+	"rctrl", "lmenu", "rmenu"
+};
+bool ImGui::HotKey(const char* szLabel, unsigned int* pValue)
+{
+	ImGuiContext& g = *GImGui;
+	ImGuiWindow* pWindow = g.CurrentWindow;
+
+	if (pWindow->SkipItems)
+		return false;
+
+	ImGuiIO& io = g.IO;
+	const ImGuiStyle& style = g.Style;
+	const ImGuiID nIndex = pWindow->GetID(szLabel);
+
+	bool bValueChanged = false;
+	char szBuffer[64] = {};
+	char* szBufferEnd = strcpy(szBuffer, "  ");
+	if (*pValue != 0)
+		szBufferEnd = strcat(szBufferEnd, arrKeyNames[*pValue]);
+	else
+		szBufferEnd = strcat(szBufferEnd, "None");
+	strcat(szBufferEnd, "  ");
+
+	if (ImGui::Button(szBuffer))
+	{
+		ImGui::OpenPopup("##HotKeyPopup");
+	}
+
+	if (ImGui::BeginPopup("##HotKeyPopup"))
+	{
+		ImGui::Text("Press a key...");
+		for (int key = 0x01; key <= 0xFE; ++key)
+		{
+			if (GetAsyncKeyState(key) & 0x8000)
+			{
+				*pValue = key;
+				bValueChanged = true;
+				ImGui::CloseCurrentPopup();
+				break;
+			}
+		}
+
+		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+		{
+			*pValue = 0U;
+			ImGui::CloseCurrentPopup();
+		}
+
+		ImGui::EndPopup();
+	}
+
+	return bValueChanged;
+}
 
 namespace GUI
 {
@@ -135,6 +211,7 @@ namespace GUI
 
 	// Components Settings
 	// ########################################
+
 	void AlignRight(float ContentWidth)
 	{
 		float ColumnContentWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x;
@@ -496,10 +573,14 @@ namespace GUI
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 						ImGui::TextDisabled(Lang::AimbotText.HotKeyList);
 						ImGui::SameLine();
+						ImGui::HotKey("Hotkey##aimbothotkey", &AimControl::HotKey);
+						/*
+
 						if (ImGui::Combo(XorStr("###AimKey"), &MenuConfig::AimBotHotKey, XorStr("LALT\0LBUTTON\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0")))
 						{
 							AimControl::SetHotKey(MenuConfig::AimBotHotKey);
 						}
+						*/
 						if (!AimControl::Rage)
 							PutSliderInt(Lang::AimbotText.BulletSlider, 10.f, &AimControl::AimBullet, &BulletMin, &BulletMax, "%d");
 						PutSwitch(Lang::AimbotText.Toggle, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::AimToggleMode);

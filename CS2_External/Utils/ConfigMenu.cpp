@@ -220,7 +220,7 @@ namespace ConfigMenu {
 		MenuConfig::ShowHeadShootLine = false;
 		MenuConfig::HeadShootLineColor = ImColor(255, 255, 255, 200);
 		MenuConfig::AimBotHotKey = 0;
-		AimControl::SetHotKey(MenuConfig::AimBotHotKey);
+		//AimControl::SetHotKey(MenuConfig::AimBotHotKey);
 		ESPConfig::ShowLineToEnemy = false;
 		MenuConfig::FovLineSize = 60.0f;
 		TriggerBot::TriggerDelay = 90;

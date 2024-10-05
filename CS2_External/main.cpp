@@ -950,6 +950,7 @@ void UpdateSteamPath() {
 		MenuConfig::SteamPath = L"C:\\Program Files(x86)\\Steam";
 	return; 
 }
+
 void AntiDebugger(string Log = "") noexcept
 {
 	if (IsDebuggerPresent())
