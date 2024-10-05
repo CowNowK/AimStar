@@ -109,7 +109,7 @@ namespace Misc
 	void Watermark(const CEntity& aLocalPlayer) noexcept;
 	void HitMarker(float Size, float Gap);
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept;
-	void FastStop() noexcept;
+	void FastStop(const CEntity& aLocalPlayer) noexcept;
 	//void NadeManager(CGame Game) noexcept;
 	void HitManager(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void RadarHack(const CEntity& EntityList) noexcept;

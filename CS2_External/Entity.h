@@ -56,6 +56,7 @@ public:
 	Vec3 Pos;
 	Vec2 ScreenPos;
 	Vec3 CameraPos;
+	Vec3 Velocity;
 	float Speed;
 	std::string WeaponName;
 	DWORD ShotsFired;

@@ -136,10 +136,24 @@ namespace Misc
 		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
 	}
 
-	void FastStop() noexcept
+	void FastStop(const CEntity& aLocalPlayer) noexcept
 	{
 		if (!MiscCFG::FastStop)
 			return;
+		const float Trigger_Value = 24.f;//¼±Í£ÖÕÖ¹ËÙ¶È
+		if (!(GetAsyncKeyState('W') || GetAsyncKeyState('A') || GetAsyncKeyState('S') || GetAsyncKeyState('D') || GetAsyncKeyState(VK_SPACE) || GetAsyncKeyState(VK_LSHIFT)) && aLocalPlayer.Pawn.Speed > Trigger_Value && AirCheck(aLocalPlayer))
+		{
+				const auto LocalVel = aLocalPlayer.Pawn.Velocity;
+				const auto LocalYaw = aLocalPlayer.Pawn.ViewAngle.y;
+				const auto X = (LocalVel.x * cos(LocalYaw / 180 * 3.1415926) + LocalVel.y * sin(LocalYaw / 180 * 3.1415926));
+				const auto Y = (LocalVel.y * cos(LocalYaw / 180 * 3.1415926) - LocalVel.x * sin(LocalYaw / 180 * 3.1415926));
+				if (X > Trigger_Value) { keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_KEYUP, 0);}
+				else if (X < -Trigger_Value) { keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_KEYUP, 0); }
+				if (Y > Trigger_Value) { keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_KEYUP, 0); }
+				else if (Y < -Trigger_Value) { keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_KEYUP, 0); }
+		}
+
+		/*
 		// Disable when bhopping
 		if (GetAsyncKeyState(VK_SPACE) & 0x8000)
 			return;
@@ -151,6 +165,7 @@ namespace Misc
 		Misc::StopKeyEvent('D', &dKeyPressed, 'A', 50.f);
 		Misc::StopKeyEvent('W', &wKeyPressed, 'S', 50.f);
 		Misc::StopKeyEvent('S', &sKeyPressed, 'W', 50.f);
+		*/
 	}
 	/*
 	// This feature was removed temporarily from Cheats.hpp, because it may crash the game
