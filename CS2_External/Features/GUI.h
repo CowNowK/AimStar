@@ -751,7 +751,6 @@ namespace GUI
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(XorStr(ICON_FA_HEART" Menu Settings"));
-					PutSwitch(Lang::MiscText.AntiRecord, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::BypassOBS);
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);
 					ImGui::SameLine();
@@ -869,6 +868,9 @@ namespace GUI
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(XorStr("Cheat Settings"));
+					PutSwitch(Lang::MiscText.AntiRecord, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::BypassOBS);
+					PutSwitch(Lang::ConfigText.SafeMode, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::SafeMode);
+
 					if (MenuConfig::MaxRenderFPS == MenuConfig::MaxFrameRate)
 						PutSliderInt(Lang::ConfigText.fpsCap, 5.f, &MenuConfig::MaxRenderFPS, &MenuConfig::MaxFrameRate, &FPS, "Monitor Refresh Rate");
 					else if(MenuConfig::MaxRenderFPS == FPS)

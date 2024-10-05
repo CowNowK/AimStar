@@ -90,7 +90,7 @@ namespace MenuConfig
 	inline bool BypassOBS = false;
 	inline bool TargetingCrosshairs = false;
 	inline bool HitboxUpdated = false;
-
+	
 	// Theme Configs
 	inline ImColor ButtonBorderColor = ImColor(255, 204, 0, 255);
 }
