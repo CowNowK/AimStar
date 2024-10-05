@@ -440,8 +440,10 @@ void Cheats::Run() noexcept
 	Misc::ForceScope(LocalEntity);
 	Misc::JumpThrow(LocalEntity);
 	Misc::FastStop();
-
-
+	/* thirdperson POC
+	int shit = 256;
+	ProcessMgr.WriteMemory<int>(gGame.GetCSGOInputAddress() + 0x250, shit);
+	*/
 	std::thread tWatermark(Misc::Watermark,LocalEntity);
 
 	std::thread tCheatList(HUD::CheatList);

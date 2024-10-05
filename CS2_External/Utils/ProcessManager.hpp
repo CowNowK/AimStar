@@ -15,7 +15,7 @@
 
 namespace MenuConfig
 {
-	inline bool SafeMode;
+	inline bool SafeMode = true;
 }
 
 #ifdef USERMODE
