@@ -28,6 +28,7 @@ namespace MenuConfig
 		ImColor BorderColor_Purple	= ImColor(255, 0, 238, 255);
 		ImColor BorderColor_Red		= ImColor(200, 40, 40, 255);
 		ImColor BorderColor_Light	= ImColor(168, 197, 209, 250);
+		ImColor BorderColor_Fanta	= ImVec4(0.8509804010391235f, 0.105882354080677f, 0.4156862795352936f, 1.0f);
 	} WCS;	// Window Component Settings
 	inline std::wstring SteamPath = L"";
 	inline std::wstring AvatarPath = L"";

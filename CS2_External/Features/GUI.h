@@ -754,7 +754,7 @@ namespace GUI
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);
 					ImGui::SameLine();
-					if (ImGui::Combo(XorStr("###Theme"), &MenuConfig::Theme, XorStr("AimStar\0NeverLose\0AIMWARE\0Lumine\0Fatality\0Custom\0")))
+					if (ImGui::Combo(XorStr("###Theme"), &MenuConfig::Theme, XorStr("AimStar\0N199aLose\0AimWhere\0Lumine\0Falitata\0Custom\0")))
 						StyleChanger::UpdateSkin(MenuConfig::Theme);
 					if (MenuConfig::Theme == 5)
 					{	
