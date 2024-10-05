@@ -273,7 +273,7 @@ namespace GUI
 			ImageID = (void*)AS_Logo;
 			LogoSize = ImVec2(LogoW, LogoH);
 			LogoPos = MenuConfig::WCS.LogoPos;
-			MenuConfig::ButtonBorderColor = MenuConfig::ButtonBorderColor;
+			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Fanta;
 			break;
 		default:
 			ImageID = (void*)AS_Logo;
@@ -747,28 +747,14 @@ namespace GUI
 					PutSwitch(Lang::MiscText.TeamCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TeamCheck);
 					PutSwitch(Lang::MiscText.Watermark, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WaterMark);
 
-					ImGui::NewLine();
-					ImGui::SeparatorText(XorStr(ICON_FA_FUTBOL" Fun"));
-					PutSwitch(Lang::MiscText.FakeDuck, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::Jitter);
-					if (MiscCFG::Jitter)
-					{
-						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
-						ImGui::TextColored(ImColor(255, 50, 0, 255), XorStr("This might cause BAN"));
-					}
-					if (MenuConfig::Country == XorStr("CN") && MenuConfig::Language == 6)
-					{
-						PutSwitch(XorStr("Winnie"), 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::winniethepool);
-					}
-
 
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(XorStr(ICON_FA_HEART" Menu Settings"));
-					PutSwitch(Lang::MiscText.AntiRecord, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::BypassOBS);
 					ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 					ImGui::TextDisabled(Lang::MiscText.ThemeList);
 					ImGui::SameLine();
-					if (ImGui::Combo(XorStr("###Theme"), &MenuConfig::Theme, XorStr("AimStar\0NeverLose\0AIMWARE\0Lumine\0Fatality\0Custom\0")))
+					if (ImGui::Combo(XorStr("###Theme"), &MenuConfig::Theme, XorStr("AimStar\0N199aLose\0AimWhere\0Lumine\0Falitata\0Custom\0")))
 						StyleChanger::UpdateSkin(MenuConfig::Theme);
 					if (MenuConfig::Theme == 5)
 					{	
@@ -791,7 +777,7 @@ namespace GUI
 						ImColor Separator = ImGui::GetStyleColorVec4(ImGuiCol_Separator);
 						// ########################################
 						ImGui::SeparatorText(XorStr("Theme Color Settings"));
-						PutColorEditor(XorStr("Button Border"), XorStr("###ThemeCol1"), 5.f, 0.f, reinterpret_cast<float*>(&MenuConfig::ButtonBorderColor));
+						//PutColorEditor(XorStr("Button Border"), XorStr("###ThemeCol1"), 5.f, 0.f, reinterpret_cast<float*>(&MenuConfig::ButtonBorderColor));
 						PutColorEditor(XorStr("FeatureName"), XorStr("###ThemeCol16"), 5.f, 0.f, reinterpret_cast<float*>(&FeatureName));
 						PutColorEditor(XorStr("Text"), XorStr("###ThemeCol17"), 5.f, 0.f, reinterpret_cast<float*>(&Text));
 
@@ -882,6 +868,9 @@ namespace GUI
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(XorStr("Cheat Settings"));
+					PutSwitch(Lang::MiscText.AntiRecord, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::BypassOBS);
+					PutSwitch(Lang::ConfigText.SafeMode, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::SafeMode);
+
 					if (MenuConfig::MaxRenderFPS == MenuConfig::MaxFrameRate)
 						PutSliderInt(Lang::ConfigText.fpsCap, 5.f, &MenuConfig::MaxRenderFPS, &MenuConfig::MaxFrameRate, &FPS, "Monitor Refresh Rate");
 					else if(MenuConfig::MaxRenderFPS == FPS)

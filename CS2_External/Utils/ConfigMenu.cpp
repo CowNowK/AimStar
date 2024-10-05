@@ -54,10 +54,23 @@ namespace ConfigMenu {
 		}
 		ImGui::SameLine();
 		if (ImGui::Button(Lang::ConfigText.Save, { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())
+			ImGui::OpenPopup("##reallySave");
+		if (ImGui::BeginPopup("##reallySave"))
 		{
-			std::string selectedConfigFile = configFiles[selectedConfig];
-			MyConfigSaver::SaveConfig(selectedConfigFile);
+			ImGui::TextUnformatted("Are you sure?");
+			if (ImGui::Button("No", { 45.0f, 0.0f }))
+				ImGui::CloseCurrentPopup();
+			ImGui::SameLine();
+			if (ImGui::Button("Yes", { 45.0f, 0.0f }))
+			{
+				// Save
+				std::string selectedConfigFile = configFiles[selectedConfig];
+				MyConfigSaver::SaveConfig(selectedConfigFile);
+				ImGui::CloseCurrentPopup();
+			}
+			ImGui::EndPopup();
 		}
+
 
 		ImGui::SetCursorPosX(CurrentCursorX + CursorX);
 		if (ImGui::Button(Lang::ConfigText.Delete, { 126.f, 30.f }) && selectedConfig >= 0 && selectedConfig < configFiles.size())

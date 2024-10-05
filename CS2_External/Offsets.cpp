@@ -48,6 +48,7 @@ bool Offset::UpdateOffsets()
 	Offset::LocalPlayerController = MyConfigSaver::ReadData(offset["client_dll"]["dwLocalPlayerController"], 0);
 	Offset::Matrix = MyConfigSaver::ReadData(offset["client_dll"]["dwViewMatrix"], 0);
 	Offset::GlobalVars = MyConfigSaver::ReadData(offset["client_dll"]["dwGlobalVars"], 0);
+	Offset::CSGOInput = MyConfigSaver::ReadData(offset["client_dll"]["dwCSGOInput"], 0);
 	Offset::ViewAngle = MyConfigSaver::ReadData(offset["client_dll"]["dwViewAngles"], 0);
 	Offset::LocalPlayerPawn = MyConfigSaver::ReadData(offset["client_dll"]["dwLocalPlayerPawn"], 0);
 	Offset::PlantedC4 = MyConfigSaver::ReadData(offset["client_dll"]["dwPlantedC4"], 0);

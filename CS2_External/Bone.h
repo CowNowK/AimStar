@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Game.h"
+#include <list>
 
 enum BONEINDEX : DWORD
 {

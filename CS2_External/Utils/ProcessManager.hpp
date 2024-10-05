@@ -4,6 +4,7 @@
 #include <vector>
 #include <Tlhelp32.h>
 #include <atlconv.h>
+
 #ifndef USERMODE
 #include <winternl.h>
 #include "driver.hpp"
@@ -12,6 +13,10 @@
 #define _is_invalid(v,n) if(v==NULL) return n
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
 
+namespace MenuConfig
+{
+	inline bool SafeMode = true;
+}
 
 #ifdef USERMODE
 typedef struct _CLIENT_ID
@@ -281,6 +286,8 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value, int Size)
 	{
+		if (MenuConfig::SafeMode)
+			return false;
 		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
 
@@ -292,6 +299,8 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value)
 	{
+		if (MenuConfig::SafeMode)
+			return false;
 		_is_invalid(hProcess, false);
 		_is_invalid(ProcessID, false);
 
@@ -339,8 +348,8 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value, int Size)
 	{
-		//if (MenuConfig::SafeMode)
-			//return false;
+		if (MenuConfig::SafeMode)
+			return false;
 		driver.write((uintptr_t)Address, Value, Size);
 		return true;
 	}
@@ -348,8 +357,8 @@ public:
 	template <typename ReadType>
 	bool WriteMemory(DWORD64 Address, ReadType& Value)
 	{
-		//if (MenuConfig::SafeMode)
-			//return false;
+		if (MenuConfig::SafeMode)
+			return false;
 		driver.write((uintptr_t)Address, Value);
 		return true;
 	}

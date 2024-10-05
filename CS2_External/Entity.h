@@ -22,7 +22,8 @@ public:
 	int Health = 0;
 	int AliveStatus = 0;
 	int CtrlBot = 0;
-	bool Connected = 0;
+	bool Connected = false;
+	bool HasHelmet = false;	
 	INT64 SteamID = 0;
 	std::string PlayerName;
 	DWORD Pawn = 0;
@@ -33,6 +34,7 @@ public:
 	bool GetIsAlive();
 	bool GetIsCtrlBot();
 	bool GetConnected();
+	bool GetHasHelmet();
 	bool GetPlayerSteamID();
 	bool GetPlayerName();
 	DWORD64 GetPlayerPawnAddress();

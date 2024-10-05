@@ -25,6 +25,7 @@ private:
 		DWORD64 LocalPawn;
 		DWORD64 ServerPawn;
 		DWORD64 GlobalVars;
+		DWORD64 CSGOInput;
 	}Address;
 
 public:
@@ -52,6 +53,8 @@ public:
 	DWORD64 GetServerPawnAddress();
 
 	DWORD64 GetGlobalVarsAddress();
+
+	DWORD64 GetCSGOInputAddress();
 
 	bool UpdateEntityListEntry();
 

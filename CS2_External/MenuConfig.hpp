@@ -2,7 +2,7 @@
 #include "Bone.h"
 #include "Game.h"
 #include "Utils/Random.h"
-
+#include "Entity.h"
 namespace MenuConfig
 {
 
@@ -28,6 +28,7 @@ namespace MenuConfig
 		ImColor BorderColor_Purple	= ImColor(255, 0, 238, 255);
 		ImColor BorderColor_Red		= ImColor(200, 40, 40, 255);
 		ImColor BorderColor_Light	= ImColor(168, 197, 209, 250);
+		ImColor BorderColor_Fanta	= ImVec4(0.8509804010391235f, 0.105882354080677f, 0.4156862795352936f, 1.0f);
 	} WCS;	// Window Component Settings
 	inline std::wstring SteamPath = L"";
 	inline std::wstring AvatarPath = L"";
@@ -42,6 +43,8 @@ namespace MenuConfig
 	inline int Language = 0;
 	inline int Theme = 3;
 	inline int MaxRenderFPS = 1200;
+
+	inline std::vector<std::pair<CEntity, DWORD64>> ValidEntity;
 
 	inline bool AirJump = false;
 	inline float ComboWidth = 100.f;
@@ -88,7 +91,7 @@ namespace MenuConfig
 	inline bool BypassOBS = false;
 	inline bool TargetingCrosshairs = false;
 	inline bool HitboxUpdated = false;
-
+	
 	// Theme Configs
 	inline ImColor ButtonBorderColor = ImColor(255, 204, 0, 255);
 }
