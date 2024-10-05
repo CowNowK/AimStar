@@ -355,10 +355,9 @@ bool PlayerPawn::GetFlashDuration()
 
 bool PlayerPawn::GetVelocity()
 {
-	Vec3 Velocity;
-	if (!ProcessMgr.ReadMemory(Address + Offset::Pawn.AbsVelocity, Velocity))
+	if (!ProcessMgr.ReadMemory(Address + Offset::Pawn.AbsVelocity, this->Velocity))
 		return false;
-	this->Speed = sqrt(Velocity.x * Velocity.x + Velocity.y * Velocity.y);
+	this->Speed = sqrt(this->Velocity.x * this->Velocity.x + this->Velocity.y * this->Velocity.y);
 	return true;
 }
 
