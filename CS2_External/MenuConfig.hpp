@@ -55,7 +55,6 @@ namespace MenuConfig
 	inline bool AimBot = false;
 	inline bool AimAlways = false;
 	inline bool AimToggleMode = false;
-	inline int AimBotHotKey = 0;
 	// 0: head 1: neck 3: spine
 	inline int  AimPosition = 0;
 	inline int  SparyPosition = 0;
@@ -77,7 +76,6 @@ namespace MenuConfig
 
 	inline bool TriggerBot = false;
 	inline bool TriggerAlways = false;
-	inline int TriggerHotKey = 0;
 
 	inline bool TeamCheck = true;
 

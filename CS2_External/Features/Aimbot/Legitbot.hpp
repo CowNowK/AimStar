@@ -20,7 +20,7 @@ namespace AimControl
 {
     extern bool Rage;
 
-    inline unsigned int HotKey = VK_LMENU;
+    inline unsigned int HotKey = VK_LBUTTON;
     inline int AimBullet = 1;
     inline bool ScopeOnly = false;
     inline bool AutoShot = false;
@@ -30,7 +30,6 @@ namespace AimControl
     inline float AimFovMin = 0.f;
     inline float Smooth = 2.0f;
     inline std::vector<int> HitboxList{ BONEINDEX::head };
-    inline std::vector<int> HotKeyList{ VK_LMENU, VK_LBUTTON, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL };
 
     inline bool HasTarget = false;
     /*

@@ -13,6 +13,7 @@
 #include "StyleChanger.h"
 #include "..\Resources\Language.h"
 #include "..\Resources\Images.h"
+#include "../Utils/Ext-String.hpp"
 
 ID3D11ShaderResourceView* AS_Logo = NULL;
 ID3D11ShaderResourceView* NL_Logo = NULL;
@@ -37,32 +38,7 @@ bool checkbox2 = false;
 bool checkbox3 = false;
 bool checkbox4 = false;
 bool checkbox5 = false;
-static constexpr const char* arrKeyNames[] = {
-	"",
-	"mouse 1", "mouse 2", "cancel", "mouse 3", "mouse 4", "mouse 5", "",
-	"backspace", "tab", "", "", "clear", "enter", "", "",
-	"shift", "control", "alt", "pause", "caps", "", "", "", "", "", "",
-	"escape", "", "", "", "", "space", "page up", "page down",
-	"end", "home", "left", "up", "right", "down", "", "", "",
-	"print", "insert", "delete", "",
-	"0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-	"", "", "", "", "", "", "",
-	"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
-	"l", "m", "n", "o", "p", "q", "r", "s", "t", "u",
-	"v", "w", "x", "y", "z", "lwin", "rwin", "", "", "",
-	"num0", "num1", "num2", "num3", "num4", "num5",
-	"num6", "num7", "num8", "num9",
-	"*", "+", "", "-", ".", "/",
-	"f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8",
-	"f9", "f10", "f11", "f12", "f13", "f14", "f15", "f16",
-	"f17", "f18", "f19", "f20", "f21", "f22", "f23", "f24",
-	"", "", "", "", "", "", "", "",
-	"num lock", "scroll lock",
-	"", "", "", "", "", "", "",
-	"", "", "", "", "", "", "",
-	"lshift", "rshift", "lctrl",
-	"rctrl", "lmenu", "rmenu"
-};
+
 bool ImGui::HotKey(const char* szLabel, unsigned int* pValue)
 {
 	ImGuiContext& g = *GImGui;
@@ -79,17 +55,24 @@ bool ImGui::HotKey(const char* szLabel, unsigned int* pValue)
 	char szBuffer[64] = {};
 	char* szBufferEnd = strcpy(szBuffer, "  ");
 	if (*pValue != 0)
-		szBufferEnd = strcat(szBufferEnd, arrKeyNames[*pValue]);
+		szBufferEnd = strcat(szBufferEnd, StringH::vkToString(*pValue).c_str());
 	else
-		szBufferEnd = strcat(szBufferEnd, "None");
-	strcat(szBufferEnd, "  ");
-
+		szBufferEnd = strcat(szBufferEnd, XorStr("None"));
+	strcat(szBufferEnd, "  ");//more pretty
+	float buttonWidth = ImGui::CalcTextSize(szBufferEnd).x + 10;
+	strcat(szBufferEnd, "##");
+	strcat(szBufferEnd, szLabel);//avoid conflict
+	
+	//COPY OF GUI::AlignRight(buttonWidth);
+	float ColumnContentWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x;
+	float buttonPosX = ImGui::GetColumnOffset() + ColumnContentWidth - buttonWidth;
+	ImGui::SetCursorPosX(buttonPosX);
 	if (ImGui::Button(szBuffer))
 	{
-		ImGui::OpenPopup("##HotKeyPopup");
+		ImGui::OpenPopup(szLabel);
 	}
 
-	if (ImGui::BeginPopup("##HotKeyPopup"))
+	if (ImGui::BeginPopup(szLabel))
 	{
 		ImGui::Text("Press a key...");
 		for (int key = 0x01; key <= 0xFE; ++key)
@@ -114,6 +97,7 @@ bool ImGui::HotKey(const char* szLabel, unsigned int* pValue)
 
 	return bValueChanged;
 }
+
 
 namespace GUI
 {
@@ -773,10 +757,7 @@ namespace GUI
 							ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 							ImGui::TextDisabled(Lang::TriggerText.HotKeyList);
 							ImGui::SameLine();
-							if (ImGui::Combo(XorStr("###TriggerbotKey"), &MenuConfig::TriggerHotKey, XorStr("LALT\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0")))
-							{
-								TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
-							}
+							ImGui::HotKey("Hotkey##triggerbothotkey", &TriggerBot::HotKey);
 						}
 						PutSwitch(Lang::TriggerText.Toggle, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TriggerAlways);
 						PutSwitch(Lang::TriggerText.ScopeOnly, 5.f, ImGui::GetFrameHeight() * 1.7, &TriggerBot::ScopeOnly);
