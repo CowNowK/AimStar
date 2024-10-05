@@ -110,12 +110,11 @@ namespace Misc
 	void HitMarker(float Size, float Gap);
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept;
 	void FastStop() noexcept;
-	void NadeManager(CGame Game) noexcept;
+	//void NadeManager(CGame Game) noexcept;
 	void HitManager(const CEntity& aLocalPlayer, int& PreviousTotalHits) noexcept;
 	void RadarHack(const CEntity& EntityList) noexcept;
 	void FovChanger(const CEntity& aLocalPlayer) noexcept;
 	void MoneyService(const CEntity& EntityList) noexcept;
-	void FakeDuck(const CEntity& EntityList) noexcept;
 	void BunnyHop(const CEntity& Local) noexcept;
 	void ForceScope(const CEntity& aLocalPlayer) noexcept;
 	void NightMode() noexcept;

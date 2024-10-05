@@ -2,7 +2,7 @@
 #include "Bone.h"
 #include "Game.h"
 #include "Utils/Random.h"
-
+#include "Entity.h"
 namespace MenuConfig
 {
 
@@ -42,6 +42,8 @@ namespace MenuConfig
 	inline int Language = 0;
 	inline int Theme = 3;
 	inline int MaxRenderFPS = 1200;
+
+	inline std::vector<std::pair<CEntity, DWORD64>> ValidEntity;
 
 	inline bool AirJump = false;
 	inline float ComboWidth = 100.f;

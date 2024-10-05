@@ -272,22 +272,6 @@ namespace Misc
 		}
 	}
 
-	void FakeDuck(const CEntity& aLocalPlayer) noexcept
-	{
-
-		DWORD64 MovementServices;
-		float Tick;
-		bool Ducking = 1, unDuck = 0;
-		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.MovementServices, MovementServices);
-		if (!MiscCFG::Jitter)
-		{
-			ProcessMgr.WriteMemory(MovementServices + Offset::Pawn.CrouchState, unDuck);
-		}
-		else {
-			ProcessMgr.WriteMemory(MovementServices + Offset::Pawn.CrouchState, Ducking);
-		}
-	}
-
 	void BunnyHop(const CEntity& Local) noexcept
 	{
 		if (!MiscCFG::BunnyHop)
@@ -309,13 +293,13 @@ namespace Misc
 			// As of the latest update (11/8/2023) bhop doesn't work at all with sendinput,
 			// if +jump is sent on the same tick that you land on the ground, the jump won't register.
 			// But you can add 15ms of delay right before your sendinput to fix this problem temporarily
-			std::this_thread::sleep_for(std::chrono::microseconds(15625));
+			std::this_thread::sleep_for(std::chrono::microseconds(15627));
 			// Refer to -> https://www.unknowncheats.me/forum/counter-strike-2-a/609480-sendinput-bhop-inconsistency.html
 			//gGame.SetForceJump(65537);
-			SendMessage(hwnd_cs2, WM_KEYUP, VK_SPACE, 0);
 			SendMessage(hwnd_cs2, WM_KEYDOWN, VK_SPACE, 0);
-		}
+			SendMessage(hwnd_cs2, WM_KEYUP, VK_SPACE, 0);
 
+		}
 		else if (spacePressed && !isInAir) // AirCheck = 0, isn't on ground
 		{
 			//gGame.SetForceJump(256);

@@ -747,19 +747,6 @@ namespace GUI
 					PutSwitch(Lang::MiscText.TeamCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TeamCheck);
 					PutSwitch(Lang::MiscText.Watermark, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WaterMark);
 
-					ImGui::NewLine();
-					ImGui::SeparatorText(XorStr(ICON_FA_FUTBOL" Fun"));
-					PutSwitch(Lang::MiscText.FakeDuck, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::Jitter);
-					if (MiscCFG::Jitter)
-					{
-						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
-						ImGui::TextColored(ImColor(255, 50, 0, 255), XorStr("This might cause BAN"));
-					}
-					if (MenuConfig::Country == XorStr("CN") && MenuConfig::Language == 6)
-					{
-						PutSwitch(XorStr("Winnie"), 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::winniethepool);
-					}
-
 
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);

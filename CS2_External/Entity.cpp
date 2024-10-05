@@ -69,6 +69,8 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 		return false; 
 	if (!this->Controller.GetConnected())
 		return false; 
+	if (!this->Controller.GetHasHelmet())
+		return false;
 	if (!this->Controller.GetTeamID())
 		return false;
 	if (!this->Controller.GetPlayerSteamID())
@@ -177,6 +179,11 @@ bool PlayerController::GetConnected()
 {
 	return GetDataAddressWithOffset<bool>(Address, Offset::Entity.m_bEverPlayedOnTeam, this->Connected);
 }
+bool PlayerController::GetHasHelmet()
+{
+	return GetDataAddressWithOffset<bool>(Address, Offset::PlayerController.HasHelmet, this->HasHelmet);
+}
+
 
 bool PlayerController::GetPlayerName()
 {
