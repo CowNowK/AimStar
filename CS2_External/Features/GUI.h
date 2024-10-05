@@ -273,7 +273,7 @@ namespace GUI
 			ImageID = (void*)AS_Logo;
 			LogoSize = ImVec2(LogoW, LogoH);
 			LogoPos = MenuConfig::WCS.LogoPos;
-			MenuConfig::ButtonBorderColor = MenuConfig::ButtonBorderColor;
+			MenuConfig::ButtonBorderColor = MenuConfig::WCS.BorderColor_Fanta;
 			break;
 		default:
 			ImageID = (void*)AS_Logo;
