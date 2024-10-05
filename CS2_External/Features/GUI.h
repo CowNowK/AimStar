@@ -777,7 +777,7 @@ namespace GUI
 						ImColor Separator = ImGui::GetStyleColorVec4(ImGuiCol_Separator);
 						// ########################################
 						ImGui::SeparatorText(XorStr("Theme Color Settings"));
-						PutColorEditor(XorStr("Button Border"), XorStr("###ThemeCol1"), 5.f, 0.f, reinterpret_cast<float*>(&MenuConfig::ButtonBorderColor));
+						//PutColorEditor(XorStr("Button Border"), XorStr("###ThemeCol1"), 5.f, 0.f, reinterpret_cast<float*>(&MenuConfig::ButtonBorderColor));
 						PutColorEditor(XorStr("FeatureName"), XorStr("###ThemeCol16"), 5.f, 0.f, reinterpret_cast<float*>(&FeatureName));
 						PutColorEditor(XorStr("Text"), XorStr("###ThemeCol17"), 5.f, 0.f, reinterpret_cast<float*>(&Text));
 
