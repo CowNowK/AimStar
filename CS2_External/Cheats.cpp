@@ -229,13 +229,13 @@ void Cheats::Run() noexcept
 	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MiscCFG::WorkInSpec)
 		return;
 
-	if (!LocalEntity.Controller.Connected)
+	if (!LocalEntity.Controller.Connected || LocalEntity.Pawn.Pos == Vec3(0,0,0))
 	{
 		UserBruted = false;
 		GameKeepOn = false;
-		return;
 	}
-	GameKeepOn = true;
+	else
+		GameKeepOn = true;
 	CGlobalVarsBase Global_Vars;
 	if (!ProcessMgr.ReadMemory<CGlobalVarsBase>(gGame.GetGlobalVarsAddress(), Global_Vars))
 		return;
@@ -285,8 +285,6 @@ void Cheats::Run() noexcept
 			}
 			if (!Entity.UpdateController(EntityAddress))
 				continue;
-			if (!Entity.UpdatePawn(Entity.Pawn.Address))
-				continue;
 
 			//here,grab it.
 			MenuConfig::ValidEntity.push_back(std::make_pair(Entity, EntityAddress));
@@ -296,13 +294,13 @@ void Cheats::Run() noexcept
 		Misc::BunnyHop(LocalEntity);
 	}
 
-	if (!MenuConfig::ValidEntity.empty())
+	if (!MenuConfig::ValidEntity.empty() && GameKeepOn)
 	{
 		for (int index = 0; index < MenuConfig::ValidEntity.size(); index++)
 		{
 			CEntity Entity = MenuConfig::ValidEntity[index].first;
 			DWORD64 EntityAddress = MenuConfig::ValidEntity[index].second;
-			if (!Entity.UpdateController(EntityAddress))
+			if (!Entity.UpdatePawn(Entity.Pawn.Address))
 				continue;
 			//Misc::SpectatorList(LocalEntity, Entity);
 			if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
@@ -353,6 +351,8 @@ void Cheats::Run() noexcept
 				for (int p = 0; p < AimControl::HitboxList.size(); p++)
 				{
 					Vec3 TempPos;
+					if (Entity.Pawn.Address == 0)
+						continue;
 					DistanceToSight = Entity.GetBone().BonePosList[AimControl::HitboxList[p]].ScreenPos.DistanceTo({ Gui.Window.Size.x / 2,Gui.Window.Size.y / 2 });
 					if (!MenuConfig::VisibleCheck ||
 						Entity.Pawn.bSpottedByMask & (DWORD64(1) << (LocalPlayerControllerIndex)) ||
