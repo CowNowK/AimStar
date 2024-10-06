@@ -116,6 +116,7 @@ bool Cheats::AntiTKMAC(const INT64 hash) noexcept
 
 void Cheats::RenderESP(CEntity Entity,DWORD64 EntityAddress, CEntity LocalEntity,int LocalPlayerControllerIndex ,int index) noexcept
 {
+	ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[2]);
 	ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
 	int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
 
@@ -151,6 +152,7 @@ void Cheats::RenderESP(CEntity Entity,DWORD64 EntityAddress, CEntity LocalEntity
 			Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, Entity.Controller.HasHelmet, ArmorBarPos, ArmorBarSize);
 		}
 	}
+	ImGui::PopFont();
 }
 
 bool GameKeepOn,UserBruted;
@@ -188,7 +190,8 @@ void Cheats::Run() noexcept
 
 	if (MenuConfig::ShowMenu)
 	{
-		GUI::NewGui();
+		std::thread tGui(GUI::NewGui);
+		tGui.join();
 	}
 
 	if (!Init::Client::isGameWindowActive() && !MenuConfig::ShowMenu)

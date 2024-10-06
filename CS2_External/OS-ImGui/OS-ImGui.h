@@ -15,16 +15,16 @@ namespace OSImGui
 
 		void ShowRawImage(unsigned char* image, int width, int height);
 		// 文本
-		void Text(std::string Text, Vec2 Pos, ImColor Color, float FontSize = 15, bool KeepCenter = false);
+		void Text(std::string Text, Vec2 Pos, ImColor Color, float FontSize = 15, bool KeepCenter = false, bool IsItem = false);
 		void MyText(std::string Text, bool isCenter);
 		// 描边文本
-		void StrokeText(std::string Text, Vec2 Pos, ImColor Color, float FontSize = 15, bool KeepCenter = false);
+		void StrokeText(std::string Text, Vec2 Pos, ImColor Color, float FontSize = 15, bool KeepCenter = false,bool IsItem = false);
 		// 矩形
-		void Rectangle(Vec2 Pos, Vec2 Size, ImColor Color, float Thickness, float Rounding = 0);
-		void RectangleFilled(Vec2 Pos, Vec2 Size, ImColor Color, float Rounding = 0, int Nums = 15);
-		void RectangleFilledGraident(Vec2 Pos, Vec2 Size, ImColor BgColor, ImColor TopColor, ImColor BotColor, float Rounding, int Nums = 15);
+		void Rectangle(Vec2 Pos, Vec2 Size, ImColor Color, float Thickness, float Rounding = 0, bool IsItem = false);
+		void RectangleFilled(Vec2 Pos, Vec2 Size, ImColor Color, float Rounding = 0, int Nums = 15, bool IsItem = false);
+		void RectangleFilledGraident(Vec2 Pos, Vec2 Size, ImColor BgColor, ImColor TopColor, ImColor BotColor, float Rounding, int Nums = 15, bool IsItem = false);
 		// 线
-		void Line(Vec2 From, Vec2 To, ImColor Color, float Thickness);
+		void Line(Vec2 From, Vec2 To, ImColor Color, float Thickness, bool IsItem = false);
 		// 圆形
 		void Circle(Vec2 Center, float Radius, ImColor Color,float Thickness, int Num = 50);
 		void CircleFilled(Vec2 Center, float Radius, ImColor Color, int Num = 50);

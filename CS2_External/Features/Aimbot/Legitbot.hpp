@@ -21,7 +21,7 @@ namespace AimControl
     extern bool Rage;
 
     inline unsigned int HotKey = VK_LBUTTON;
-    inline int AimBullet = 1;
+    inline int AimBullet = 0;
     inline bool ScopeOnly = false;
     inline bool AutoShot = false;
     inline bool AimLock = false;

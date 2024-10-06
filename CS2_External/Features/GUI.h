@@ -418,7 +418,6 @@ namespace GUI
 
 			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 20, 85));
 #ifdef USERMODE
-
 			ImGui::Text(XorStr("Ring3-%s"), __DATE__);
 #else
 			ImGui::Text(XorStr("Kernel-%s"), __DATE__);
@@ -446,6 +445,7 @@ namespace GUI
 						{
 							PutSwitch(Lang::ESPtext.Outline, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::OutLine);
 							PutSliderInt(Lang::ESPtext.BoxType, 10.f, &MenuConfig::BoxType, &MinCombo, &MaxCombo, BoxTypes[MenuConfig::BoxType]);
+							if (MenuConfig::BoxType < 2)
 							PutSliderFloat(Lang::ESPtext.BoxRounding, 10.f, &ESPConfig::BoxRounding, &MinRounding, &MaxRouding, "%.1f");
 						}
 						PutSwitch(Lang::ESPtext.FilledBox, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::FilledBox, true, "###FilledBoxCol", reinterpret_cast<float*>(&ESPConfig::FilledColor));
@@ -477,11 +477,10 @@ namespace GUI
 					
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
-					ImGui::SeparatorText(XorStr(ICON_FA_GRIN_ALT " ESP Preview"));
+					//ImGui::SeparatorText(XorStr(ICON_FA_GRIN_ALT " ESP Preview"));
 					// ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() }, { ImGui::GetCursorPosX() - ImGui::GetColumnWidth() * 0.65f, ImGui::GetCursorPosY() - ImGui::GetFrameHeight() });
-					ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() });
-					ImGui::Dummy({ 0.f, ImGui::GetFrameHeight() * 9 });
 
+					//ImGui::Dummy({ 0.f, ImGui::GetFrameHeight() * 9 });
 					ImGui::SeparatorText(XorStr(ICON_FA_LIGHTBULB" Glow"));
 					float SpeedMin = 1.f, SpeedMax = 20.f;
 					PutSwitch(Lang::MiscText.EnemySensor, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor, true, "###GlowCol", reinterpret_cast<float*>(&MiscCFG::GlowColor));
@@ -891,7 +890,7 @@ namespace GUI
 			if (MenuConfig::WCS.MenuPage == 1 && MenuConfig::AimBot)
 			{
 				ImGui::TextDisabled(Lang::AimbotText.BoneList);
-				ImVec2 StartPos = ImGui::GetCursorScreenPos();
+				ImVec2 StartPos = ImGui::GetCursorScreenPos() + factor * 0.25f;
 				ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
 				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
 				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 203, StartPos.y + 63));
@@ -985,9 +984,92 @@ namespace GUI
 			{
 				ImGui::TextDisabled(" ");
 				ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
+				ImVec2 StartPos = ImGui::GetWindowPos() + factor * 0.05f;
+				//draw bone stuff here
+				if (ESPConfig::ShowBoneESP) {
+					ImU32 boneColor = ESPConfig::BoneColor;
+					ImVec2 SpineStart(StartPos.x + 138, StartPos.y + 150);
+					ImVec2 SpineEnd(StartPos.x + 120, StartPos.y + 218);
+					ImGui::GetWindowDrawList()->AddLine(SpineStart, SpineEnd, boneColor, 1.8f); // Neck to Spine
+					ImVec2 PelvisStart(StartPos.x + 120, StartPos.y + 218);
+					ImVec2 PelvisEnd(StartPos.x + 125, StartPos.y + 235);
+					ImGui::GetWindowDrawList()->AddLine(PelvisStart, PelvisEnd, boneColor, 1.8f); // Spine to Pelvis
+					ImVec2 UL_LegStart(StartPos.x + 125, StartPos.y + 235);
+					ImVec2 UL_LegEnd(StartPos.x + 143, StartPos.y + 253);
+					ImGui::GetWindowDrawList()->AddLine(UL_LegStart, UL_LegEnd, boneColor, 1.8f); // Left Leg_Up
+					ImVec2 ML_LegStart(StartPos.x + 143, StartPos.y + 253);
+					ImVec2 ML_LegEnd(StartPos.x + 130, StartPos.y + 330);
+					ImGui::GetWindowDrawList()->AddLine(ML_LegStart, ML_LegEnd, boneColor, 1.8f); // Left Leg_Mid
+					ImVec2 DL_LegStart(StartPos.x + 130, StartPos.y + 330);
+					ImVec2 DL_LegEnd(StartPos.x + 166, StartPos.y + 340);
+					ImGui::GetWindowDrawList()->AddLine(DL_LegStart, DL_LegEnd, boneColor, 1.8f); // Left Leg_Down
+					ImVec2 UR_LegStart(StartPos.x + 125, StartPos.y + 235);
+					ImVec2 UR_LegEnd(StartPos.x + 105, StartPos.y + 247);
+					ImGui::GetWindowDrawList()->AddLine(UR_LegStart, UR_LegEnd, boneColor, 1.8f); // Right Leg_Up
+					ImVec2 MR_LegStart(StartPos.x + 105, StartPos.y + 247);
+					ImVec2 MR_LegEnd(StartPos.x + 111, StartPos.y + 315);
+					ImGui::GetWindowDrawList()->AddLine(MR_LegStart, MR_LegEnd, boneColor, 1.8f); // Right Leg_Mid
+					ImVec2 DR_LegStart(StartPos.x + 111, StartPos.y + 315);
+					ImVec2 DR_LegEnd(StartPos.x + 107, StartPos.y + 325);
+					ImGui::GetWindowDrawList()->AddLine(DR_LegStart, DR_LegEnd, boneColor, 1.8f); // Right Leg_Down
+					ImVec2 L_ScapulaStart(StartPos.x + 140, StartPos.y + 160);
+					ImVec2 L_ScapulaEnd(StartPos.x + 156, StartPos.y + 168);
+					ImGui::GetWindowDrawList()->AddLine(L_ScapulaStart, L_ScapulaEnd, boneColor, 1.8f); // Left Scapula
+					ImVec2 UL_ArmStart(StartPos.x + 156, StartPos.y + 168);
+					ImVec2 UL_ArmEnd(StartPos.x + 166, StartPos.y + 212);
+					ImGui::GetWindowDrawList()->AddLine(UL_ArmStart, UL_ArmEnd, boneColor, 1.8f); // Left Arm_Up
+					ImVec2 DL_ArmStart(StartPos.x + 166, StartPos.y + 212);
+					ImVec2 DL_ArmEnd(StartPos.x + 162, StartPos.y + 183);
+					ImGui::GetWindowDrawList()->AddLine(DL_ArmStart, DL_ArmEnd, boneColor, 1.8f); // Left Arm_Down
+					ImVec2 R_ScapulaStart(StartPos.x + 140, StartPos.y + 160);
+					ImVec2 R_ScapulaEnd(StartPos.x + 116, StartPos.y + 168);
+					ImGui::GetWindowDrawList()->AddLine(R_ScapulaStart, R_ScapulaEnd, boneColor, 1.8f); // Right Scapula
+					ImVec2 UR_ArmStart(StartPos.x + 116, StartPos.y + 168);
+					ImVec2 UR_ArmEnd(StartPos.x + 100, StartPos.y + 200);
+					ImGui::GetWindowDrawList()->AddLine(UR_ArmStart, UR_ArmEnd, boneColor, 1.8f); // Right Arm_Up
+					ImVec2 DR_ArmStart(StartPos.x + 100, StartPos.y + 200);
+					ImVec2 DR_ArmEnd(StartPos.x + 102, StartPos.y + 172);
+					ImGui::GetWindowDrawList()->AddLine(DR_ArmStart, DR_ArmEnd, boneColor, 1.8f); // Right Arm_Down
+				}
+				if (ESPConfig::ShowPenis)
+				{
+					ImU32 PenisCol = ESPConfig::PenisColor;
+					ImVec2 BoneStart(StartPos.x + 125, StartPos.y + 235);
+					ImVec2 BoneEnd(StartPos.x + 120, StartPos.y + 257);
+					ImGui::GetWindowDrawList()->AddLine(BoneStart, BoneEnd, PenisCol, 2.0f);
+				}
+				if (ESPConfig::ShowHeadBox) {
+					switch (ESPConfig::HeadBoxStyle)
+					{
+					case 0:
+						ImGui::GetWindowDrawList()->AddCircle({ StartPos.x + 137, StartPos.y + 125 }, 26.0f, ESPConfig::HeadBoxColor, 0, 1.8f);
+						break;
+					case 1:
+						ImGui::GetWindowDrawList()->AddCircleFilled({ StartPos.x + 137, StartPos.y + 125 }, 26.0f, ESPConfig::HeadBoxColor, 0);
+					default:
+						break;
+					}
+
+				}
+				if (ESPConfig::ShowEyeRay) {
+					ImU32 EyeC = ESPConfig::EyeRayColor;
+					ImVec2 lineStart(StartPos.x + 135, StartPos.y + 130);
+					ImVec2 lineEnd(StartPos.x + 115, StartPos.y + 160);
+					ImGui::GetWindowDrawList()->AddLine(lineStart, lineEnd, EyeC, 2.0f);
+				}
+				ImGui::SetCursorPos(ImVec2{ 75 , 90 });
+				ImVec4 Rect;
+				if (MenuConfig::BoxType == 1)
+					Rect = ImVec4{ ImGui::GetWindowPos().x + ImGui::GetCursorPosX() + 20, ImGui::GetWindowPos().y + ImGui::GetCursorPosY() + 10, hitboxW * .3f, hitboxH * .8f };
+				else
+					Rect = ImVec4{ ImGui::GetWindowPos().x + ImGui::GetCursorPosX(), ImGui::GetWindowPos().y + ImGui::GetCursorPosY(), hitboxW * .5f, hitboxH * .85f };
+				Rect.x -= factor.x * 0.25f;
+				Rect.y -= factor.y * 0.15f;
+				ESP::RenderPreviewESP(Rect);
+				
 			}
 
-		}
+	}
 		ImGui::End();
 		ImGui::PopStyleColor();
 

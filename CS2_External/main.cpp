@@ -965,7 +965,7 @@ void Cheat()
 #ifdef NDEBUG
 	AntiDebugger("Initialize fail");
 #endif
-
+	ImGui_ImplWin32_EnableDpiAwareness();
 	if (Init::Verify::CheckWindowVersion())
 	{
 		Lang::GetCountry(MenuConfig::Country);

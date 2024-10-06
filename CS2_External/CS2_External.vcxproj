@@ -249,6 +249,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\TokiKiri\dependencies\imgui\imgui_freetype.h" />
     <ClInclude Include="Features\Aimbot\Ragebot.hpp" />
     <ClInclude Include="Bone.h" />
     <ClInclude Include="Cheats.h" />
@@ -364,6 +365,7 @@
     <ClInclude Include="View.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\TokiKiri\dependencies\imgui\imgui_freetype.cpp" />
     <ClCompile Include="Bone.cpp" />
     <ClCompile Include="Cheats.cpp" />
     <ClCompile Include="Entity.cpp" />
