@@ -39,6 +39,8 @@ bool checkbox3 = false;
 bool checkbox4 = false;
 bool checkbox5 = false;
 
+ImVec2 vecMenuPos = ImVec2(0, 0);
+
 bool ImGui::HotKey(const char* szLabel, unsigned int* pValue)
 {
 	ImGuiContext& g = *GImGui;
@@ -351,6 +353,7 @@ namespace GUI
 		ImGui::SetNextWindowSize({ 851,514 });
 		ImGui::Begin(XorStr("AimStar"), nullptr, Flags);
 		{
+			vecMenuPos = ImGui::GetWindowPos();
 			ImGui::SetCursorPos(LogoPos);
 			ImGui::Image(ImageID, LogoSize);
 			ImGui::SetCursorPos(ImVec2(20,5));
@@ -412,8 +415,8 @@ namespace GUI
 			ImGui::Text(XorStr("User:\n%s"), MenuConfig::UserName);
 			ImGui::EndChild();
 
-			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
-			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 85));
+
+			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 20, 85));
 #ifdef USERMODE
 
 			ImGui::Text(XorStr("Ring3-%s"), __DATE__);
@@ -552,8 +555,8 @@ namespace GUI
 					if (MenuConfig::AimBot)
 					{
 						// PutSwitch("Silent Aim", 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::silent);
-						PutSwitch(Lang::AimbotText.Ragebot, 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::Rage);
-
+						// PutSwitch(Lang::AimbotText.Ragebot, 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::Rage);
+						// hide these shit
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 						ImGui::TextDisabled(Lang::AimbotText.HotKeyList);
 						ImGui::SameLine();
@@ -582,7 +585,6 @@ namespace GUI
 							PutSliderFloat(Lang::AimbotText.SmoothSlider, 10.f, &AimControl::Smooth, &SmoothMin, &SmoothMax, "%.1f");
 						}
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
-						ImGui::TextDisabled(Lang::AimbotText.BoneList);
 						/*
 						ImGui::SameLine();
 						if (ImGui::Combo("###AimPos", &MenuConfig::AimPosition, "Head\0Neck\0Chest\0Penis\0"))
@@ -606,94 +608,6 @@ namespace GUI
 							}
 						}
 						*/
-						ImVec2 StartPos = ImGui::GetCursorScreenPos();
-						ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 203, StartPos.y + 63)); 
-						if (ImGui::Checkbox(XorStr("###Head"), &checkbox1))
-						{
-							if (checkbox1) {
-								addHitbox(BONEINDEX::head);
-							}
-							else {
-								removeHitbox(BONEINDEX::head);
-							}
-						}
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103), ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 39, StartPos.y + 92));
-						if (ImGui::Checkbox(XorStr("###Neck"), &checkbox2))
-						{
-							if (checkbox2) {
-								addHitbox(BONEINDEX::neck_0);
-							}
-							else {
-								removeHitbox(BONEINDEX::neck_0);
-							}
-						}
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141), ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 130));
-						if (ImGui::Checkbox(XorStr("###Chest"), &checkbox3))
-						{
-							if (checkbox3) {
-								addHitbox(BONEINDEX::spine_1);
-							}
-							else {
-								removeHitbox(BONEINDEX::spine_1);
-							}
-						}
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 167), ImVec2(StartPos.x + 44, StartPos.y + 167), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 24, StartPos.y + 156));
-						if (ImGui::Checkbox(XorStr("###Stomache"), &checkbox4))
-						{
-							if (checkbox4) {
-								addHitbox(BONEINDEX::spine_2);
-							}
-							else {
-								removeHitbox(BONEINDEX::spine_2);
-							}
-						}
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 195, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 189));
-						if (ImGui::Checkbox(XorStr("###Penis"), &checkbox5))
-						{
-							if (checkbox5) {
-								addHitbox(BONEINDEX::pelvis);
-							}
-							else {
-								removeHitbox(BONEINDEX::pelvis);
-							}
-						}
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
-						ImGui::TextDisabled(Lang::AimbotText.SprayBoneList);
-						ImGui::SameLine();
-						if (ImGui::Combo(XorStr("###SparyPos"), &MenuConfig::SparyPosition, XorStr("Nearest\0Head\0Neck\0Chest\0Penis\0")))
-						{
-							switch (MenuConfig::SparyPosition)
-							{
-							case 0:
-								MenuConfig::SparyPositionIndex = 0xff;
-								break;
-							case 1:
-								MenuConfig::SparyPositionIndex = BONEINDEX::head;
-								checkbox1 = true;
-								break;
-							case 2:
-								MenuConfig::SparyPositionIndex = BONEINDEX::neck_0;
-								checkbox2 = true;
-								break;
-							case 3:
-								MenuConfig::SparyPositionIndex = BONEINDEX::spine_1;
-								checkbox3 = true;
-								break;
-							case 4:
-								MenuConfig::SparyPositionIndex = BONEINDEX::pelvis;
-								checkbox5 = true;
-								break;
-							default:
-								break;
-							}
-							CheckHitbox();
-						}
 					}
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
@@ -945,6 +859,137 @@ namespace GUI
 				}
 			} ImGui::EndChild();
 		} ImGui::End();
+
+		ImVec2 mousePos = ImGui::GetMousePos();
+		float interpolationFactorX = 0.035f;
+		float interpolationFactorY = 0.015f;
+		ImVec2 center = ImVec2(vecMenuPos.x - 250, vecMenuPos.y + 35);
+		float radius = 40;
+		ImVec2 factor = ImVec2(interpolationFactorX * (mousePos.x - vecMenuPos.x), interpolationFactorY * (mousePos.y - vecMenuPos.y));
+		ImVec2 interpolatedPos = center - factor;
+
+		// 计算 interpolatedPos 到圆心的距离
+		float dx = interpolatedPos.x - center.x;
+		float dy = interpolatedPos.y - center.y;
+		float distance = sqrt(dx * dx + dy * dy);
+
+		// 如果距离超过半径，则调整 interpolatedPos
+		if (distance > radius)
+		{
+			float scale = radius / distance;
+			factor.x = -dx * scale;
+			factor.y = -dy * scale;
+			interpolatedPos = center - factor;
+		}
+
+		ImGui::PushStyleColor(ImGuiCol_WindowShadow, ImVec4(0, 0, 0, 0));
+		ImGui::SetNextWindowPos(interpolatedPos);
+		
+		ImGui::Begin(XorStr("moe"), nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_::ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_::ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_::ImGuiWindowFlags_NoNavFocus | ImGuiWindowFlags_::ImGuiWindowFlags_NoNav);
+		{
+			ImGui::SetCursorPos(ImVec2{ 50 , 25 });
+			if (MenuConfig::WCS.MenuPage == 1 && MenuConfig::AimBot)
+			{
+				ImGui::TextDisabled(Lang::AimbotText.BoneList);
+				ImVec2 StartPos = ImGui::GetCursorScreenPos();
+				ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 203, StartPos.y + 63));
+				if (ImGui::Checkbox(XorStr("###Head"), &checkbox1))
+				{
+					if (checkbox1) {
+						addHitbox(BONEINDEX::head);
+					}
+					else {
+						removeHitbox(BONEINDEX::head);
+					}
+				}
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103), ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 39, StartPos.y + 92));
+				if (ImGui::Checkbox(XorStr("###Neck"), &checkbox2))
+				{
+					if (checkbox2) {
+						addHitbox(BONEINDEX::neck_0);
+					}
+					else {
+						removeHitbox(BONEINDEX::neck_0);
+					}
+				}
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141), ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 130));
+				if (ImGui::Checkbox(XorStr("###Chest"), &checkbox3))
+				{
+					if (checkbox3) {
+						addHitbox(BONEINDEX::spine_1);
+					}
+					else {
+						removeHitbox(BONEINDEX::spine_1);
+					}
+				}
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 167), ImVec2(StartPos.x + 44, StartPos.y + 167), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 24, StartPos.y + 156));
+				if (ImGui::Checkbox(XorStr("###Stomache"), &checkbox4))
+				{
+					if (checkbox4) {
+						addHitbox(BONEINDEX::spine_2);
+					}
+					else {
+						removeHitbox(BONEINDEX::spine_2);
+					}
+				}
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 195, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 189));
+				if (ImGui::Checkbox(XorStr("###Penis"), &checkbox5))
+				{
+					if (checkbox5) {
+						addHitbox(BONEINDEX::pelvis);
+					}
+					else {
+						removeHitbox(BONEINDEX::pelvis);
+					}
+				}
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
+				ImGui::TextDisabled(Lang::AimbotText.SprayBoneList);
+				ImGui::SameLine();
+				ImGui::SetNextItemWidth(hitboxW * 0.75f);
+				if (ImGui::Combo(XorStr("###SparyPos"), &MenuConfig::SparyPosition, XorStr("Nearest\0Head\0Neck\0Chest\0Penis\0")))
+				{
+					switch (MenuConfig::SparyPosition)
+					{
+					case 0:
+						MenuConfig::SparyPositionIndex = 0xff;
+						break;
+					case 1:
+						MenuConfig::SparyPositionIndex = BONEINDEX::head;
+						checkbox1 = true;
+						break;
+					case 2:
+						MenuConfig::SparyPositionIndex = BONEINDEX::neck_0;
+						checkbox2 = true;
+						break;
+					case 3:
+						MenuConfig::SparyPositionIndex = BONEINDEX::spine_1;
+						checkbox3 = true;
+						break;
+					case 4:
+						MenuConfig::SparyPositionIndex = BONEINDEX::pelvis;
+						checkbox5 = true;
+						break;
+					default:
+						break;
+					}
+					CheckHitbox();
+				}
+			}
+			else
+			{
+				ImGui::TextDisabled(" ");
+				ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
+			}
+
+		}
+		ImGui::End();
+		ImGui::PopStyleColor();
 
 		LoadDefaultConfig();
 	}
