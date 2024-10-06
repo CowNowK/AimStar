@@ -44,7 +44,7 @@ namespace Styles
         style.Colors[ImGuiCol_WindowBg] = ImVec4(0.09803921729326248f, 0.08627451211214066f, 0.2078431397676468f, 1.0f);
         style.Colors[ImGuiCol_ChildBg] = ImVec4(0.1333333402872086f, 0.105882354080677f, 0.2705882489681244f, 1.0f);
         style.Colors[ImGuiCol_PopupBg] = ImVec4(0.1098039224743843f, 0.1098039224743843f, 0.1372549086809158f, 0.9200000166893005f);
-        style.Colors[ImGuiCol_Border] = ImVec4(0.6382946968078613f, 0.6355615854263306f, 0.6523605585098267f, 0.6866952776908875f);
+        style.Colors[ImGuiCol_Border] = ImVec4(0.9527897238731384f, 0.1635690629482269f, 0.4917187988758087f, 1.0f);
         style.Colors[ImGuiCol_BorderShadow] = ImVec4(9.999999974752427e-07f, 9.999902204071986e-07f, 9.999899930335232e-07f, 0.1931330561637878f);
         style.Colors[ImGuiCol_FrameBg] = ImVec4(0.1098039224743843f, 0.0784313753247261f, 0.250980406999588f, 1.0f);
         style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.1098039224743843f, 0.0784313753247261f, 0.250980406999588f, 0.3605149984359741f);
@@ -135,7 +135,7 @@ namespace Styles
         style.Colors[ImGuiCol_WindowBg] = ImColor(252, 239, 221, 155);
         style.Colors[ImGuiCol_ChildBg] = ImColor(254, 243, 226, 225);
         style.Colors[ImGuiCol_PopupBg] = ImColor(245, 243, 239, 225);
-        style.Colors[ImGuiCol_Border] = ImColor(168, 197, 209, 250);
+        style.Colors[ImGuiCol_Border] = ImColor(158, 207, 229, 250);
         style.Colors[ImGuiCol_BorderShadow] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
         style.Colors[ImGuiCol_FrameBg] = ImVec4(0.545064389705658f, 0.4210797846317291f, 0.0f, 0.5021458864212036f);
         style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(1.0f, 0.9999961853027344f, 0.9999899864196777f, 0.3133047223091125f);
@@ -408,7 +408,7 @@ namespace Styles
         style.Colors[ImGuiCol_WindowBg] = ImVec4(0.03921568766236305f, 0.03921568766236305f, 0.03921568766236305f, 1.0f);
         style.Colors[ImGuiCol_ChildBg] = ImVec4(0.08627451211214066f, 0.08627451211214066f, 0.08627451211214066f, 1.0f);
         style.Colors[ImGuiCol_PopupBg] = ImVec4(0.1502146124839783f, 0.1502131074666977f, 0.1502131074666977f, 1.0f);
-        style.Colors[ImGuiCol_Border] = ImVec4(1.0f, 0.9999899864196777f, 0.9999899864196777f, 0.1974248886108398f);
+        style.Colors[ImGuiCol_Border] = ImVec4(0.7843137383460999f, 0.1568627506494522f, 0.1568627506494522f, 1.0f);
         style.Colors[ImGuiCol_BorderShadow] = ImVec4(0.0f, 0.0f, 0.0f, 0.0f);
         style.Colors[ImGuiCol_FrameBg] = ImVec4(0.7843137383460999f, 0.1568627506494522f, 0.1568627506494522f, 1.0f);
         style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.8798283338546753f, 0.2756543755531311f, 0.2756543755531311f, 1.0f);

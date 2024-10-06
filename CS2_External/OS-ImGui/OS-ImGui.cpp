@@ -130,7 +130,7 @@ namespace OSImGui
         }
         // Hovered Color
         ImU32 Color;
-        Color = ImGui::GetColorU32(ImLerp(ImVec4(1.00f, 0.30f, 0.0f, 1.0f), ImVec4(0.0f, 1.0f, 0.63f, 1.000f), t));
+        Color = ImGui::GetColorU32(ImLerp(ImVec4(ImGui::GetStyleColorVec4(ImGuiCol_Border).x * 0.35f, ImGui::GetStyleColorVec4(ImGuiCol_Border).y * 0.35f, ImGui::GetStyleColorVec4(ImGuiCol_Border).z * 0.35f, ImGui::GetStyleColorVec4(ImGuiCol_Border).w), ImGui::GetStyleColorVec4(ImGuiCol_Border), t));
         // Rendering
         DrawList->AddRectFilled(ImVec2(p.x, p.y + Height * 0.30f), ImVec2(p.x + Width, p.y + Height * 0.70f), IM_COL32(87, 87, 87, 255), Height);
         DrawList->AddCircleFilled(ImVec2(p.x + Radius + t * (Width - Radius * 2), p.y + Radius + 2), Radius, Color, 360);
