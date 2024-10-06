@@ -892,7 +892,7 @@ namespace GUI
 				ImGui::TextDisabled(Lang::AimbotText.BoneList);
 				ImVec2 StartPos = ImGui::GetCursorScreenPos() + factor * 0.25f;
 				ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
-				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74) - factor * 0.25f, ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
 				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 203, StartPos.y + 63));
 				if (ImGui::Checkbox(XorStr("###Head"), &checkbox1))
 				{
@@ -903,7 +903,7 @@ namespace GUI
 						removeHitbox(BONEINDEX::head);
 					}
 				}
-				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103), ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103) - factor * 0.25f, ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
 				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 39, StartPos.y + 92));
 				if (ImGui::Checkbox(XorStr("###Neck"), &checkbox2))
 				{
@@ -914,7 +914,7 @@ namespace GUI
 						removeHitbox(BONEINDEX::neck_0);
 					}
 				}
-				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141), ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141) - factor * 0.25f, ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
 				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 130));
 				if (ImGui::Checkbox(XorStr("###Chest"), &checkbox3))
 				{
@@ -925,7 +925,7 @@ namespace GUI
 						removeHitbox(BONEINDEX::spine_1);
 					}
 				}
-				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 167), ImVec2(StartPos.x + 44, StartPos.y + 167), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 167) - factor * 0.25f, ImVec2(StartPos.x + 44, StartPos.y + 167), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
 				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 24, StartPos.y + 156));
 				if (ImGui::Checkbox(XorStr("###Stomache"), &checkbox4))
 				{
@@ -936,7 +936,7 @@ namespace GUI
 						removeHitbox(BONEINDEX::spine_2);
 					}
 				}
-				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 195, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200) - factor * 0.25f, ImVec2(StartPos.x + 195, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
 				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 189));
 				if (ImGui::Checkbox(XorStr("###Penis"), &checkbox5))
 				{
