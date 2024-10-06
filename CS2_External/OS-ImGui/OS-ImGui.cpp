@@ -599,11 +599,15 @@ namespace OSImGui
         ImGui::RenderNavHighlight(frame_bb, id);
         window->DrawList->AddRectFilled(frame_sc.Min, frame_sc.Max, frame_col, grab_radius);
 
+
+        
         // Slider behavior
         ImRect grab_bb;
         const bool value_changed = ImGui::SliderBehavior(frame_bb, id, data_type, p_data, p_min, p_max, format, flags, &grab_bb);
         if (value_changed)
             ImGui::MarkItemEdited(id);
+
+        window->DrawList->AddRectFilled(frame_sc.Min, ImVec2(grab_bb.Max.x , frame_sc.Max.y), ImGui::GetColorU32(ImGuiCol_Border), grab_radius);
 
         // Render grab
         if (grab_bb.Max.x > grab_bb.Min.x)
