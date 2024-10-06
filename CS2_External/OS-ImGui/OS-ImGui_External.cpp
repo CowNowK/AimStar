@@ -104,7 +104,7 @@ namespace OSImGui
         if (DestWindowName.empty() && DestWindowClassName.empty())
             throw OSException("DestWindowName and DestWindowClassName are empty");
 
-        Window.Name = "AimStar External";
+        Window.Name = "Zekamashi External";
         Window.wName = StringToWstring(Window.Name);
         Window.ClassName = "WindowClass";
         Window.wClassName = StringToWstring(Window.ClassName);

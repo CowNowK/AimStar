@@ -295,8 +295,7 @@ namespace Misc
 		HWND hwnd_perfectworld = FindWindowA(NULL, "\u53cd\u6050\u7cbe\u82f1\uff1a\u5168\u7403\u653b\u52bf");
 
 		if (hwnd_cs2 == NULL) {
-			hwnd_cs2 = FindWindowA(NULL, "Counter-Strike 2");
-			HWND foreground_window = hwnd_perfectworld;
+			hwnd_cs2 = hwnd_perfectworld;
 		}
 		int ForceJump;
 		bool spacePressed = GetAsyncKeyState(VK_SPACE);
