@@ -228,6 +228,9 @@ void Cheats::Run() noexcept
 	too lazy deal UTF8 shit*/
 	if (MenuConfig::UserName == "")
 		MenuConfig::UserName = getenv("USERNAME");
+
+	ProcessMgr.ReadMemory(LocalControllerAddress + Offset::PlayerController.m_iPing, MenuConfig::Ping);
+
 	//std::wcout << MenuConfig::AvatarPath << std::endl;
 	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MiscCFG::WorkInSpec)
 		return;
@@ -447,9 +450,9 @@ void Cheats::Run() noexcept
 	int shit = 256;
 	ProcessMgr.WriteMemory<int>(gGame.GetCSGOInputAddress() + 0x250, shit);
 	*/
-	std::thread tWatermark(Misc::Watermark,LocalEntity);
+	Misc::Watermark(LocalEntity);
 
-	std::thread tCheatList(HUD::CheatList);
+	HUD::CheatList();
 
 	// Fov line
 	std::thread tDrawFov(Render::DrawFov,LocalEntity, MenuConfig::FovLineSize, MenuConfig::FovLineColor, 1);
@@ -458,17 +461,14 @@ void Cheats::Run() noexcept
 	// CrossHair
 	TriggerBot::TargetCheck(LocalEntity);
 	std::thread tRenderCrossHair(RenderCrossHair,ImGui::GetBackgroundDrawList());
-	std::thread tBmb(bmb::RenderWindow,LocalEntity);
+	bmb::RenderWindow(LocalEntity);
 
 	
 
 	tHitMarker.join();
-	tWatermark.join();
-	tCheatList.join();
 	tDrawFov.join();
 	tHeadShootLine.join();
 	tRenderCrossHair.join();
-	tBmb.join();
 	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
 	if (currentFPS > MenuConfig::MaxRenderFPS || (MenuConfig::MaxRenderFPS == 1200 && currentFPS > MenuConfig::FPS + 15))
 	{

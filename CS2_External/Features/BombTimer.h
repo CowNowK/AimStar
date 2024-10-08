@@ -211,10 +211,13 @@ namespace bmb
 			DefuseTime = 0;
 		static float windowWidth = 200.0f;
 		ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize;
-		ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - 200.0f) / 2.0f, 80.0f }, ImGuiCond_Once);
-		ImGui::SetNextWindowSize({ windowWidth, 0 });
-		if (!MenuConfig::ShowMenu)
-			ImGui::SetNextWindowBgAlpha(0.5f);
+		//ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - 200.0f) / 2.0f, 80.0f }, ImGuiCond_Once);
+		//ImGui::SetNextWindowSize({ windowWidth, 0 });
+		//if (!MenuConfig::ShowMenu)
+			//ImGui::SetNextWindowBgAlpha(0.5f);
+		ImVec4 default_bg_color = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
+		default_bg_color.w = 0.5f;
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, default_bg_color);
 		ImGui::Begin(XorStr("Bomb Timer"), nullptr, flags);
 
 		float remaining = boomTime - MenuConfig::CurTime;

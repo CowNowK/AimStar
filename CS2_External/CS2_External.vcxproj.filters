@@ -200,7 +200,6 @@
     <ClInclude Include="Utils\Ext-Time.hpp" />
     <ClInclude Include="Utils\BytesManager.h" />
     <ClInclude Include="Features\Aimbot\SilentAim.hpp" />
-    <ClInclude Include="..\..\..\TokiKiri\dependencies\imgui\imgui_freetype.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OS-ImGui\imgui\imgui.cpp">
@@ -273,7 +272,6 @@
     <ClCompile Include="Utils\Ext-Color.cpp" />
     <ClCompile Include="Utils\Ext-Time.cpp" />
     <ClCompile Include="Utils\BytesManager.cpp" />
-    <ClCompile Include="..\..\..\TokiKiri\dependencies\imgui\imgui_freetype.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CS2_External.rc" />

@@ -39,6 +39,7 @@ namespace MenuConfig
 	inline int32_t TickCount = 0;
 	inline int FPS = 0;
 	inline int MaxFrameRate = 60;
+	inline int Ping = 0;
 	inline bool defaultConfig = false;
 	inline int Language = 0;
 	inline int Theme = 3;

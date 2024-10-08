@@ -20,17 +20,18 @@ namespace Misc
 
 		//	globalvars GV;
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
-		ImGui::SetNextWindowBgAlpha(0.5f);
+		ImVec4 default_bg_color = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
+		default_bg_color.w = 0.5f;
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, default_bg_color);
+		//ImGui::SetNextWindowBgAlpha(0.5f);
 		ImGui::Begin(XorStr("Watermark"), nullptr, windowFlags);
-
 
 		// Current Time
 		struct tm ptm;
 		getCurrentTime(&ptm);
 
 		// Player Ping
-		int playerPing;
-		ProcessMgr.ReadMemory(LocalPlayer.Controller.Address + Offset::PlayerController.m_iPing, playerPing);
+		int playerPing = MenuConfig::Ping;
 
 		// Player Pos
 		Vec3 Pos = LocalPlayer.Pawn.Pos;
@@ -46,7 +47,7 @@ namespace Misc
 		ImGui::Text(XorStr("Pos: %.2f, %.2f, %.2f"), Pos.x, Pos.y, Pos.z);
 		ImGui::Text(XorStr("Angle: %.2f, %.2f"), Angle.x, Angle.y);
 		ImGui::Text(XorStr("Vel: %.2f"), LocalPlayer.Pawn.Speed);
-
+		ImGui::PopStyleColor();
 		ImGui::End();
 	}
 
@@ -132,6 +133,8 @@ namespace Misc
 
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept
 	{
+		if (MiscCFG::FlashImmunity == 0)
+			return;
 		float MaxAlpha = 255.f - MiscCFG::FlashImmunity;
 		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
 	}
@@ -249,6 +252,8 @@ namespace Misc
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
 	{
+		if (MiscCFG::Fov == 90)
+			return;
 		DWORD64 CameraServices = 0;
 		if (Zoom)
 			return;

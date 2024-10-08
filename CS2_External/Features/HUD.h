@@ -10,29 +10,31 @@ namespace HUD
 			return;
 
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar;
-		ImGui::SetNextWindowBgAlpha(0.3f);
+		//ImGui::SetNextWindowBgAlpha(0.3f);
 		ImGui::SetNextWindowSize(ImVec2(250, 0));
-		ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0, 0, 0, 100));
+		ImVec4 default_bg_color = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
+		default_bg_color.w = 0.5f;
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, default_bg_color);
 		ImGui::Begin(XorStr("Cheats List"), nullptr, windowFlags);
 		ImGui::PopStyleColor();
 
-		if (MenuConfig::AimBot && (MenuConfig::AimAlways || GetAsyncKeyState(AimControl::HotKey)))
-			ImGui::TextColored(ImColor(255, 255, 255, 200), XorStr("Aimbot [Toggle]"));
+		Misc::CheatText(XorStr("Aimbot [Hold]"), MenuConfig::AimBot && GetAsyncKeyState(AimControl::HotKey) && !MenuConfig::AimToggleMode);
+		Misc::CheatText(XorStr("Aimbot [Toggle]"), MenuConfig::AimBot && MenuConfig::AimAlways);
+		Misc::CheatText(XorStr("TriggerBot [Hold]"), MenuConfig::TriggerBot && GetAsyncKeyState(TriggerBot::HotKey) && !MenuConfig::TriggerAlways);
+		Misc::CheatText(XorStr("TriggerBot [Always]"), MenuConfig::TriggerBot && MenuConfig::TriggerAlways);
 		Misc::CheatText(XorStr("External Radar"), RadarCFG::ShowRadar);
-		if (MiscCFG::FlashImmunity != 0)
-			ImGui::TextColored(ImColor(255, 255, 255, 200), XorStr("Flash Immunity"));
+		Misc::CheatText(XorStr("Flash Immunity"), MiscCFG::FlashImmunity);
 		Misc::CheatText(XorStr("Headshot Line"), MenuConfig::ShowHeadShootLine);
 		Misc::CheatText(XorStr("Money Service"), MiscCFG::MoneyService);
 		Misc::CheatText(XorStr("Anti Record"), MenuConfig::BypassOBS);
-		if (MiscCFG::Fov != 90)
-			ImGui::TextColored(ImColor(255, 255, 255, 200), XorStr("Fov Changer"));
+		Misc::CheatText(XorStr("Anti Record"), MenuConfig::BypassOBS);
+		Misc::CheatText(XorStr("Fov Changer"), MiscCFG::Fov != 90);
 		Misc::CheatText(XorStr("Force Scope"), MiscCFG::ForceScope);
 		Misc::CheatText(XorStr("Smoke Color"), MiscCFG::SmokeColored);
 		Misc::CheatText(XorStr("Bomb Timer"), MiscCFG::bmbTimer);
 		Misc::CheatText(XorStr("Radar Hack"), MiscCFG::RadarHack);
 		Misc::CheatText(XorStr("Jump Throw"), MiscCFG::jumpthrow);
 		Misc::CheatText(XorStr("Night Mode"), MiscCFG::NightMode);
-		Misc::CheatText(XorStr("TriggerBot"), MenuConfig::TriggerBot);
 		Misc::CheatText(XorStr("Crosshair"), CrosshairsCFG::ShowCrossHair);
 		Misc::CheatText(XorStr("Fake Duck"), MiscCFG::Jitter);
 		Misc::CheatText(XorStr("Fast Stop"), MiscCFG::FastStop);
