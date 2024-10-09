@@ -433,28 +433,67 @@ namespace Misc
 			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 		}
 	}
+	DWORD64 GethPawn(uint64_t Target)
+	{
+		DWORD64 EntityPawnListEntry = 0;
+		DWORD64 EntityPawnAddress = 0;
 
-	void SpectatorList(const CEntity& Local, const CEntity& Entity) {
+		if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListAddress(), EntityPawnListEntry))
+			return 0;
+
+		if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnListEntry + 0x10 + 8 * ((Target & 0x7FFF) >> 9), EntityPawnListEntry))
+			return 0;
+
+		if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnListEntry + 0x78 * (Target & 0x1FF), EntityPawnAddress))
+			return 0;
+
+		return EntityPawnAddress;
+	}
+	void SpectatorList(const CEntity& Local) {
 		if (!MiscCFG::SpecList)
 			return;
 
-		std::vector<std::string> spectators;
+		//render method de tkkr by ukia
+		ImGui::SetNextWindowSizeConstraints(ImVec2(200, 100), ImGui::GetIO().DisplaySize);
+		ImGui::Begin(XorStr("Spectators"), nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_::ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_::ImGuiWindowFlags_NoNavFocus | ImGuiWindowFlags_::ImGuiWindowFlags_NoNav);
+		{
+			ImGui::SetCursorPosY(22);
+			if (!MenuConfig::ValidEntity.empty())
+			{
+				int count = 0;
+				for (int index = 0; index < MenuConfig::ValidEntity.size(); index++)//traverse again.
+				{
+					
+					CEntity Entity = MenuConfig::ValidEntity[index].first;
+					DWORD64 EntityAddress = MenuConfig::ValidEntity[index].second;
+					auto pPlayer = Entity.Controller;
+					
+					/*
+					if (!Entity.UpdatePawn(Entity.Pawn.Address))
+						continue;
+					*/
 
-		DWORD64 l_pawn, l_observe, l_spec;
-		ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.m_pObserverServices, l_pawn);
-		ProcessMgr.ReadMemory(l_pawn + Offset::PlayerController.m_hObserverTarget, l_observe);
-		ProcessMgr.ReadMemory(l_observe + Offset::PlayerController.m_hController, l_spec);
+					//jakebooom idea + tokikiri stuff
+					uintptr_t obsServices;
+					if (!ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::PlayerController.m_pObserverServices, obsServices))
+						continue;
 
-		if (l_observe == Local.Pawn.Address) {
-			spectators.push_back(Entity.Controller.PlayerName);
+					uint64_t obsTarget;
+					if (!ProcessMgr.ReadMemory(obsServices + Offset::PlayerController.m_hObserverTarget, obsTarget))
+						continue;
+					uintptr_t obsPawn = GethPawn(obsTarget);
+
+					if (obsPawn != Local.Pawn.Address)
+						continue;
+
+					std::string Name = pPlayer.PlayerName;
+					ImGui::BulletText(Name.c_str());
+				}
+			}
 		}
 
-		if (spectators.empty())
-			return;
+		ImGui::End();
 
-		for (size_t i{}; i < spectators.size(); ++i) {
-			auto msg = spectators[i];
-			Gui.StrokeText(msg.substr(0, 24), ImVec2(Gui.Window.Size.x / 2, Gui.Window.Size.y / 2), 18.f, true);
-		}
 	}
+
 }

@@ -370,7 +370,7 @@ public:
 		std::vector<char> buffer(maxLength, 0);
 
 		if (!ReadMemory<char>(address, buffer[0], maxLength)) {
-			return "**invalid**";
+			return "";
 		}
 
 		buffer[maxLength - 1] = '\0';

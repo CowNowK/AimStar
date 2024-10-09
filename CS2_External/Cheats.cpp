@@ -13,7 +13,6 @@
 #include "Features/GUI.h"
 #include "Features/RCS.H"
 #include "Features/BombTimer.h"
-#include "Features/SpectatorList.h"
 #include "Utils/XorStr.h"
 #include "Features/Debugger.h"
 
@@ -231,8 +230,10 @@ void Cheats::Run() noexcept
 	ProcessMgr.ReadMemory(LocalControllerAddress + Offset::PlayerController.m_iPing, MenuConfig::Ping);
 
 	//std::wcout << MenuConfig::AvatarPath << std::endl;
+
 	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MiscCFG::WorkInSpec)
 		return;
+
 
 	if (!LocalEntity.Controller.Connected || LocalEntity.Pawn.Pos == Vec3(0,0,0))
 	{
@@ -244,7 +245,6 @@ void Cheats::Run() noexcept
 	CGlobalVarsBase Global_Vars;
 	if (!ProcessMgr.ReadMemory<CGlobalVarsBase>(gGame.GetGlobalVarsAddress(), Global_Vars))
 		return;
-	
 	
 	std::string MapName;
 	MapName = ProcessMgr.ReadString(Global_Vars.m_current_mapname, 32);
@@ -307,7 +307,6 @@ void Cheats::Run() noexcept
 			DWORD64 EntityAddress = MenuConfig::ValidEntity[index].second;
 			if (!Entity.UpdatePawn(Entity.Pawn.Address))
 				continue;
-			//Misc::SpectatorList(LocalEntity, Entity);
 			if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
 				continue;
 			if (!UserBruted)
@@ -461,7 +460,7 @@ void Cheats::Run() noexcept
 	TriggerBot::TargetCheck(LocalEntity);
 	std::thread tRenderCrossHair(RenderCrossHair,ImGui::GetBackgroundDrawList());
 	bmb::RenderWindow(LocalEntity);
-
+	Misc::SpectatorList(LocalEntity);
 	
 
 	tHitMarker.join();

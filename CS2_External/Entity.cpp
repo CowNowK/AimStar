@@ -80,7 +80,7 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 	if (!this->Controller.GetMoney())
 		return false;
 
-	this->Pawn.Address = this->Controller.GetPlayerPawnAddress();
+	this->Pawn.Address = this->Controller.GetPlayerhPawnAddress();//this->Controller.GetPlayerPawnAddress();
 	return true;
 }
 
@@ -269,6 +269,27 @@ DWORD64 PlayerController::GetPlayerPawnAddress()
 	DWORD64 EntityPawnAddress = 0;
 
 	if (!GetDataAddressWithOffset<DWORD>(Address, Offset::Entity.PlayerPawn, this->Pawn))
+		return 0;
+
+	if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListAddress(), EntityPawnListEntry))
+		return 0;
+
+	if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnListEntry + 0x10 + 8 * ((Pawn & 0x7FFF) >> 9), EntityPawnListEntry))
+		return 0;
+
+	if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnListEntry + 0x78 * (Pawn & 0x1FF), EntityPawnAddress))
+		return 0;
+
+	return EntityPawnAddress;
+}
+
+
+DWORD64 PlayerController::GetPlayerhPawnAddress()
+{
+	DWORD64 EntityPawnListEntry = 0;
+	DWORD64 EntityPawnAddress = 0;
+
+	if (!GetDataAddressWithOffset<DWORD>(Address, Offset::PlayerController.m_hPawn, this->Pawn))
 		return 0;
 
 	if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListAddress(), EntityPawnListEntry))
