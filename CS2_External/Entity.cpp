@@ -143,7 +143,7 @@ bool CEntity::UpdateClientData()
 bool PlayerController::GetMoney()
 {
 	DWORD64 MoneyServices;
-	if (!ProcessMgr.ReadMemory(Address + Offset::InGameMoneyServices.MoneyServices, MoneyServices))
+	if (!ProcessMgr.ReadMemory(Address + Offset::CCSPlayerController.m_pInGameMoneyServices, MoneyServices))
 	{
 		return false;
 	}
@@ -167,21 +167,21 @@ bool PlayerController::GetHealth()
 
 bool PlayerController::GetIsAlive()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Entity.IsAlive, this->AliveStatus);
+	return GetDataAddressWithOffset<int>(Address, Offset::CCSPlayerController.m_bPawnIsAlive, this->AliveStatus);
 }
 
 bool PlayerController::GetIsCtrlBot()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Entity.m_bControllingBot, this->CtrlBot);
+	return GetDataAddressWithOffset<int>(Address, Offset::CCSPlayerController.m_bControllingBot, this->CtrlBot);
 }
 
 bool PlayerController::GetConnected()
 {
-	return GetDataAddressWithOffset<bool>(Address, Offset::Entity.m_bEverPlayedOnTeam, this->Connected);
+	return GetDataAddressWithOffset<bool>(Address, Offset::CCSPlayerController.m_bEverPlayedOnTeam, this->Connected);
 }
 bool PlayerController::GetHasHelmet()
 {
-	return GetDataAddressWithOffset<bool>(Address, Offset::PlayerController.HasHelmet, this->HasHelmet);
+	return GetDataAddressWithOffset<bool>(Address, Offset::CCSPlayerController.m_bPawnHasHelmet, this->HasHelmet);
 }
 
 
@@ -268,7 +268,7 @@ DWORD64 PlayerController::GetPlayerPawnAddress()
 	DWORD64 EntityPawnListEntry = 0;
 	DWORD64 EntityPawnAddress = 0;
 
-	if (!GetDataAddressWithOffset<DWORD>(Address, Offset::Entity.PlayerPawn, this->Pawn))
+	if (!GetDataAddressWithOffset<DWORD>(Address, Offset::CCSPlayerController.m_hPlayerPawn, this->Pawn))
 		return 0;
 
 	if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListAddress(), EntityPawnListEntry))

@@ -215,7 +215,7 @@ void Cheats::Run() noexcept
 	if (MenuConfig::UserName == "")
 		MenuConfig::UserName = getenv("USERNAME");
 
-	ProcessMgr.ReadMemory(LocalControllerAddress + Offset::PlayerController.m_iPing, MenuConfig::Ping);
+	ProcessMgr.ReadMemory(LocalControllerAddress + Offset::CCSPlayerController.m_iPing, MenuConfig::Ping);
 
 	//std::wcout << MenuConfig::AvatarPath << std::endl;
 

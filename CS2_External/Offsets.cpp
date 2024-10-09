@@ -76,13 +76,16 @@ bool Offset::UpdateOffsets()
 	Offset::CBasePlayerController.m_iDesiredFOV = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_iDesiredFOV"], 0);
 	Offset::CBasePlayerController.m_steamID = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_steamID"], 0);
 
-	Offset::Entity.IsAlive = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnIsAlive"], 0);
-	Offset::Entity.m_bControllingBot = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bControllingBot"], 0); 
-	Offset::Entity.m_bEverPlayedOnTeam = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bEverPlayedOnTeam"], 0);
-	Offset::Entity.PlayerPawn = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_hPlayerPawn"], 0);
-
-	Offset::Entity.m_sSanitizedPlayerName = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_sSanitizedPlayerName"], 0);
-
+	Offset::CCSPlayerController.m_bPawnIsAlive = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnIsAlive"], 0);
+	Offset::CCSPlayerController.m_bControllingBot = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bControllingBot"], 0);
+	Offset::CCSPlayerController.m_bEverPlayedOnTeam = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bEverPlayedOnTeam"], 0);
+	Offset::CCSPlayerController.m_hPlayerPawn = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_hPlayerPawn"], 0);
+	Offset::CCSPlayerController.m_sSanitizedPlayerName = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_sSanitizedPlayerName"], 0);
+	Offset::CCSPlayerController.m_iPawnArmor = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_iPawnArmor"], 0);
+	Offset::CCSPlayerController.m_bPawnHasDefuser = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnHasDefuser"], 0);
+	Offset::CCSPlayerController.m_bPawnHasHelmet = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnHasHelmet"], 0);
+	Offset::CCSPlayerController.m_iPing = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_iPing"], 0);
+	Offset::CCSPlayerController.m_pInGameMoneyServices = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_pInGameMoneyServices"], 0);
 
 	Offset::Pawn.MovementServices = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_pMovementServices"], 0);
 	Offset::Pawn.WeaponServices = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_pWeaponServices"], 0);
@@ -134,11 +137,9 @@ bool Offset::UpdateOffsets()
 	Offset::PlayerController.m_pObserverServices = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_pObserverServices"], 0);
 	Offset::PlayerController.m_hObserverTarget = MyConfigSaver::ReadData(offset["client_dll"]["CPlayer_ObserverServices"]["m_hObserverTarget"], 0);
 	Offset::PlayerController.m_hController = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_hController"], 0);
-	Offset::PlayerController.PawnArmor = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_iPawnArmor"], 0);
-	Offset::PlayerController.HasDefuser = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnHasDefuser"], 0);
-	Offset::PlayerController.HasHelmet = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnHasHelmet"], 0);
 
-	Offset::PlayerController.m_iPing = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_iPing"], 0);
+
+
 
 	Offset::C4.m_flC4Blow = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flC4Blow"], 0);
 	Offset::C4.m_bC4Activated = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_bC4Activated"], 0);
@@ -146,7 +147,7 @@ bool Offset::UpdateOffsets()
 	Offset::C4.m_flDefuseCountDown = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flDefuseCountDown"], 0);
 	Offset::C4.m_nBombSite = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_nBombSite"], 0);
 
-	Offset::InGameMoneyServices.MoneyServices = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_pInGameMoneyServices"], 0);
+
 	Offset::InGameMoneyServices.Account = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iAccount"], 0);
 	Offset::InGameMoneyServices.TotalCashSpent = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iTotalCashSpent"], 0);
 	Offset::InGameMoneyServices.CashSpentThisRound = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iCashSpentThisRound"], 0);

@@ -76,14 +76,17 @@ namespace Offset
 
 	struct
 	{
-		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
+		DWORD m_bPawnIsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
 		DWORD m_bControllingBot = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bControllingBot;
 		DWORD m_bEverPlayedOnTeam = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bEverPlayedOnTeam;
-		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
-
+		DWORD m_hPlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
 		DWORD m_sSanitizedPlayerName = cs2_dumper::schemas::client_dll::CCSPlayerController::m_sSanitizedPlayerName;
-
-	}Entity;
+		DWORD m_iPawnArmor = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPawnArmor;
+		DWORD m_bPawnHasDefuser = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasDefuser;
+		DWORD m_bPawnHasHelmet = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasHelmet;
+		DWORD m_iPing = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPing;
+		DWORD m_pInGameMoneyServices = cs2_dumper::schemas::client_dll::CCSPlayerController::m_pInGameMoneyServices;
+	} CCSPlayerController;
 
 	struct
 	{
@@ -127,11 +130,7 @@ namespace Offset
 		DWORD m_pObserverServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pObserverServices;
 		DWORD m_hObserverTarget = cs2_dumper::schemas::client_dll::CPlayer_ObserverServices::m_hObserverTarget;
 		DWORD m_hController = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_hController;
-		DWORD PawnArmor = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPawnArmor;
-		DWORD HasDefuser = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasDefuser;
-		DWORD HasHelmet = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasHelmet;
 
-		DWORD m_iPing = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPing;
 	} PlayerController;
 
 	struct
@@ -177,7 +176,6 @@ namespace Offset
 
 	struct
 	{
-		DWORD MoneyServices = cs2_dumper::schemas::client_dll::CCSPlayerController::m_pInGameMoneyServices;
 		DWORD Account = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iAccount;
 		DWORD TotalCashSpent = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iTotalCashSpent;
 		DWORD CashSpentThisRound = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iCashSpentThisRound;
