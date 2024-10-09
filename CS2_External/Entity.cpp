@@ -308,7 +308,7 @@ DWORD64 PlayerController::GetPlayerhPawnAddress()
 
 bool PlayerPawn::GetPos()
 {
-	return GetDataAddressWithOffset<Vec3>(Address, Offset::Pawn.Pos, this->Pos);
+	return GetDataAddressWithOffset<Vec3>(Address, Offset::C_BasePlayerPawn.m_vOldOrigin, this->Pos);
 }
 
 bool PlayerPawn::GetHealth()
@@ -354,7 +354,7 @@ bool PlayerPawn::GetMaxAmmo()
 bool PlayerPawn::GetFov()
 {
 	DWORD64 CameraServices = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.CameraServices, CameraServices))
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::C_BasePlayerPawn.m_pCameraServices, CameraServices))
 		return false;
 	return GetDataAddressWithOffset<int>(CameraServices, Offset::Pawn.iFovStart, this->Fov);
 }

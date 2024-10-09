@@ -260,7 +260,7 @@ namespace Misc
 		if (Zoom)
 			return;
 
-		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::Pawn.CameraServices, CameraServices))
+		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::C_BasePlayerPawn.m_pCameraServices, CameraServices))
 			return;
 
 		UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
@@ -477,11 +477,11 @@ namespace Misc
 
 					//jakebooom idea + tokikiri stuff
 					uintptr_t obsServices;
-					if (!ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::PlayerController.m_pObserverServices, obsServices))
+					if (!ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::C_BasePlayerPawn.m_pObserverServices, obsServices))
 						continue;
 
 					uint64_t obsTarget;
-					if (!ProcessMgr.ReadMemory(obsServices + Offset::PlayerController.m_hObserverTarget, obsTarget))
+					if (!ProcessMgr.ReadMemory(obsServices + Offset::CPlayer_ObserverServices.m_hObserverTarget, obsTarget))
 						continue;
 					uintptr_t obsPawn = GethPawn(obsTarget);
 

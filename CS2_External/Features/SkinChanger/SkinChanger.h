@@ -15,7 +15,7 @@ namespace SkinChanger
 	inline DWORD64 GetWeaponServices(const CEntity& LocalPlayer)
 	{
 		DWORD64 WeaponServices;
-		ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::Pawn.WeaponServices, WeaponServices);
+		ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::C_BasePlayerPawn.m_pWeaponServices, WeaponServices);
 
 		return WeaponServices;
 	}
