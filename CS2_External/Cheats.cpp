@@ -309,7 +309,8 @@ void Cheats::Run() noexcept
 		}
 		GUI::InitHitboxList();
 		LastTick = MenuConfig::TickCount;
-		Misc::BunnyHop(LocalEntity);
+		std::thread tBhop (Misc::BunnyHop,LocalEntity);
+		tBhop.join();
 	}
 
 	if (!MenuConfig::ValidEntity.empty() && GameKeepOn)
