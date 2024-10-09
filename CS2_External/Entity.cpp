@@ -189,7 +189,7 @@ bool PlayerController::GetPlayerName()
 {
 	char Buffer[MAX_PATH]{};
 
-	if (!ProcessMgr.ReadMemory(Address + Offset::Entity.iszPlayerName, Buffer, MAX_PATH))
+	if (!ProcessMgr.ReadMemory(Address + Offset::CBasePlayerController.m_iszPlayerName, Buffer, MAX_PATH))
 		return false;
 	if (!this->SteamID)
 		this->PlayerName = "BOT " + std::string(Buffer);
@@ -203,7 +203,7 @@ bool PlayerController::GetPlayerName()
 
 bool PlayerController::GetPlayerSteamID()
 {
-	return GetDataAddressWithOffset<INT64>(Address, Offset::PlayerController.m_steamID, this->SteamID);
+	return GetDataAddressWithOffset<INT64>(Address, Offset::CBasePlayerController.m_steamID, this->SteamID);
 }
 bool PlayerPawn::GetViewAngle()
 {
@@ -289,7 +289,7 @@ DWORD64 PlayerController::GetPlayerhPawnAddress()
 	DWORD64 EntityPawnListEntry = 0;
 	DWORD64 EntityPawnAddress = 0;
 
-	if (!GetDataAddressWithOffset<DWORD>(Address, Offset::PlayerController.m_hPawn, this->Pawn))
+	if (!GetDataAddressWithOffset<DWORD>(Address, Offset::CBasePlayerController.m_hPawn, this->Pawn))
 		return 0;
 
 	if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListAddress(), EntityPawnListEntry))

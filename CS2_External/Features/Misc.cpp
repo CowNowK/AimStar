@@ -264,7 +264,7 @@ namespace Misc
 			return;
 
 		UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
-		ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Desiredfov);
+		ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::CBasePlayerController.m_iDesiredFOV, Desiredfov);
 
 	}
 
@@ -382,7 +382,7 @@ namespace Misc
 		if (Zoom)
 		{
 			UINT Scopefov = 45;
-			ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Scopefov);
+			ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::CBasePlayerController.m_iDesiredFOV, Scopefov);
 		}
 			
 	}
