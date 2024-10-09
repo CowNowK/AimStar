@@ -308,7 +308,12 @@ DWORD64 PlayerController::GetPlayerhPawnAddress()
 
 bool PlayerPawn::GetPos()
 {
-	return GetDataAddressWithOffset<Vec3>(Address, Offset::C_BasePlayerPawn.m_vOldOrigin, this->Pos);
+	DWORD64 GameSceneNode;
+	if (!ProcessMgr.ReadMemory<uintptr_t>(Address + Offset::C_BaseEntity.m_pGameSceneNode, GameSceneNode))
+		return false;
+	
+	return ProcessMgr.ReadMemory<Vec3>(GameSceneNode + Offset::CGameSceneNode.m_vecOrigin, this->Pos);
+	//return GetDataAddressWithOffset<Vec3>(Address, Offset::C_BasePlayerPawn.m_vOldOrigin, this->Pos);
 }
 
 bool PlayerPawn::GetHealth()
@@ -356,7 +361,7 @@ bool PlayerPawn::GetFov()
 	DWORD64 CameraServices = 0;
 	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::C_BasePlayerPawn.m_pCameraServices, CameraServices))
 		return false;
-	return GetDataAddressWithOffset<int>(CameraServices, Offset::Pawn.iFovStart, this->Fov);
+	return GetDataAddressWithOffset<int>(CameraServices, Offset::CCSPlayerBase_CameraServices.m_iFOVStart, this->Fov);
 }
 
 bool PlayerPawn::GetFFlags()

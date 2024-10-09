@@ -59,7 +59,7 @@ namespace Misc
 			uintptr_t pBulletServices;
 			int totalHits;
 			ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.BulletServices, pBulletServices);
-			ProcessMgr.ReadMemory(pBulletServices + Offset::Pawn.TotalHit, totalHits);
+			ProcessMgr.ReadMemory(pBulletServices + Offset::CCSPlayer_BulletServices.m_totalHitsOnServer, totalHits);
 
 			if (totalHits != PreviousTotalHits) {
 				if (totalHits == 0 && PreviousTotalHits != 0)

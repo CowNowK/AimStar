@@ -85,7 +85,7 @@ namespace SkinChanger
 	inline DWORD64 GetViewHandle(DWORD64 ViewModelServices)
 	{
 		DWORD64 ViewHandle;
-		ProcessMgr.ReadMemory(ViewModelServices + Offset::Pawn.ViewModel, ViewHandle);
+		ProcessMgr.ReadMemory(ViewModelServices + Offset::CCSPlayer_ViewModelServices.m_hViewModel, ViewHandle);
 
 		return ViewHandle;
 	}
