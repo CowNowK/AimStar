@@ -5,7 +5,7 @@
 void Glow::Run(const CEntity& Entity)
 {
 	int on = 1;
-	int off = 0;
+
 	DWORD color;
 	if (MiscCFG::GlowRainbow)
 		color = Glow::rainbow();
@@ -13,13 +13,11 @@ void Glow::Run(const CEntity& Entity)
 		color = MiscCFG::GlowColor;
 
 	if (!MiscCFG::EnemySensor)
-	{
-		ProcessMgr.WriteMemory(Entity.Pawn.Address + Offset::Entity.GlowFunction, off);
-	}
-	else {
-		ProcessMgr.WriteMemory(Entity.Pawn.Address + Offset::Entity.GlowFunction, on);
-		ProcessMgr.WriteMemory(Entity.Pawn.Address + Offset::Entity.GlowColorOverride, color);
-	}
+		return;
+
+	ProcessMgr.WriteMemory(Entity.Pawn.Address + Offset::C_BaseModelEntity.GlowFunction, on);
+	ProcessMgr.WriteMemory(Entity.Pawn.Address + Offset::C_BaseModelEntity.GlowColorOverride, color);
+
 	return;
 }
 

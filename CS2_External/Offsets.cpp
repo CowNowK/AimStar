@@ -68,6 +68,9 @@ bool Offset::UpdateOffsets()
 	Offset::C_BaseEntity.m_iTeamNum = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iTeamNum"], 0);
 	Offset::C_BaseEntity.m_fFlags = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_fFlags"], 0);
 
+	Offset::C_BaseModelEntity.GlowFunction = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["CGlowProperty"]["m_bGlowing"], 0);
+	Offset::C_BaseModelEntity.GlowColorOverride = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["CGlowProperty"]["m_glowColorOverride"], 0);
+
 	Offset::Entity.IsAlive = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnIsAlive"], 0);
 	Offset::Entity.m_bControllingBot = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bControllingBot"], 0); 
 	Offset::Entity.m_bEverPlayedOnTeam = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bEverPlayedOnTeam"], 0);
@@ -75,8 +78,6 @@ bool Offset::UpdateOffsets()
 	Offset::Entity.iszPlayerName = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_iszPlayerName"], 0);
 	Offset::Entity.m_sSanitizedPlayerName = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_sSanitizedPlayerName"], 0);
 
-	Offset::Entity.GlowFunction = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["CGlowProperty"]["m_bGlowing"], 0);
-	Offset::Entity.GlowColorOverride = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["CGlowProperty"]["m_glowColorOverride"], 0);
 
 	Offset::Pawn.MovementServices = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_pMovementServices"], 0);
 	Offset::Pawn.WeaponServices = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_pWeaponServices"], 0);
