@@ -49,6 +49,11 @@ namespace Offset
 	inline DWORD InputSystem = cs2_dumper::offsets::client_dll::dwCSGOInput;
 	inline DWORD Sensitivity = cs2_dumper::offsets::client_dll::dwSensitivity;
 	inline DWORD Pointer;
+//cvar stuff
+	struct
+	{
+		DWORD mp_teammates_are_enemies = 0x19BA550;
+	} Cvar;//put hardcoded offsets here.but should can be updated via yaml(need manual dump tho)
 //entity stuff
 	struct
 	{
@@ -118,19 +123,17 @@ namespace Offset
 	struct
 	{
 
-		DWORD BulletServices = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_pBulletServices;			// CCSPlayer_BulletServices*
-		DWORD isScoped = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsScoped;
-		DWORD isDefusing = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsDefusing;
-		DWORD CurrentArmor = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_ArmorValue;// C_CSPlayerPawn::m_ArmorValue
-		DWORD iShotsFired = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_iShotsFired;
-		DWORD aimPunchAngle = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchAngle;			// C_CSPlayerPawn::m_aimPunchAngle
-		DWORD aimPunchCache = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchCache;
-		DWORD bSpottedByMask = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_entitySpottedState + cs2_dumper::schemas::client_dll::EntitySpottedState_t::m_bSpottedByMask;	// C_CSPlayerPawn::entitySpottedState + EntitySpottedState_t::bSpottedByMask
-		DWORD IsBuying = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsBuyMenuOpen;
+		DWORD m_pBulletServices = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_pBulletServices;			// CCSPlayer_BulletServices*
+		DWORD m_bIsScoped = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsScoped;
+		DWORD m_bIsDefusing = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsDefusing;
+		DWORD m_ArmorValue = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_ArmorValue;// C_CSPlayerPawn::m_ArmorValue
+		DWORD m_iShotsFired = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_iShotsFired;
+		DWORD m_aimPunchAngle = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchAngle;			// C_CSPlayerPawn::m_aimPunchAngle
+		DWORD m_aimPunchCache = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchCache;
+		DWORD m_bIsBuyMenuOpen = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsBuyMenuOpen;
 		DWORD m_bWaitForNoAttack = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bWaitForNoAttack;
-		DWORD BoneArray = 0x1F0; // cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;//cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
-
-	} Pawn;
+		DWORD m_bSpottedByMask = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_entitySpottedState + cs2_dumper::schemas::client_dll::EntitySpottedState_t::m_bSpottedByMask;	// C_CSPlayerPawn::entitySpottedState + EntitySpottedState_t::bSpottedByMask
+	} C_CSPlayerPawn;
 //C4 stuff
 	struct
 	{
@@ -213,11 +216,11 @@ namespace Offset
 		DWORD bSmokeVolumeDataReceived = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeVolumeDataReceived; // bool
 		uintptr_t bSmokeEffectSpawned = cs2_dumper::schemas::client_dll::C_SmokeGrenadeProjectile::m_bSmokeEffectSpawned; // bool
 	} SmokeGrenadeProjectile; 
-	/*
+	
 	struct 
 	{
-		DWORD BoneArray = 0x1F0; // cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;//cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
+		DWORD BoneArray = 0x1F0; // NO NO NO... Just a hard coding. // cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;//cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
 	} Pawn;
-	*/
+	
 	bool UpdateOffsets();
 }

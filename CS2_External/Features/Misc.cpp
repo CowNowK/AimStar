@@ -58,7 +58,7 @@ namespace Misc
 		{
 			uintptr_t pBulletServices;
 			int totalHits;
-			ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.BulletServices, pBulletServices);
+			ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::C_CSPlayerPawn.m_pBulletServices, pBulletServices);
 			ProcessMgr.ReadMemory(pBulletServices + Offset::CCSPlayer_BulletServices.m_totalHitsOnServer, totalHits);
 
 			if (totalHits != PreviousTotalHits) {
@@ -249,7 +249,7 @@ namespace Misc
 			return;
 
 		bool SpottedStatus = true;
-		ProcessMgr.WriteMemory(EntityList.Pawn.Address + Offset::Pawn.bSpottedByMask, SpottedStatus);
+		ProcessMgr.WriteMemory(EntityList.Pawn.Address + Offset::C_CSPlayerPawn.m_bSpottedByMask, SpottedStatus);
 	}
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept

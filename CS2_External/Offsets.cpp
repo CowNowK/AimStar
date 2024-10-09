@@ -60,6 +60,8 @@ bool Offset::UpdateOffsets()
 	Offset::ForceLeft = MyConfigSaver::ReadData(offset["client_dll"]["left"], 0);
 	Offset::ForceRight = MyConfigSaver::ReadData(offset["client_dll"]["right"], 0);
 
+	Offset::Cvar.mp_teammates_are_enemies = MyConfigSaver::ReadData(offset["cvars"]["mp_teammates_are_enemies"], 0);
+
 	Offset::C_BaseEntity.m_flGravityScale = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_flGravityScale"], 0);
 	Offset::C_BaseEntity.m_iMaxHealth = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iMaxHealth"], 0);
 	Offset::C_BaseEntity.m_iHealth = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iHealth"], 0);
@@ -104,31 +106,16 @@ bool Offset::UpdateOffsets()
 	Offset::C_CSPlayerPawnBase.m_flFlashDuration = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_flFlashDuration"], 0);
 	Offset::C_CSPlayerPawnBase.m_iIDEntIndex = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_iIDEntIndex"], 0);
 
-	Offset::Pawn.BulletServices = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_pBulletServices"], 0);
-
-
-
-
-
-	Offset::Pawn.isScoped = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bIsScoped"], 0);
-	Offset::Pawn.isDefusing = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bIsDefusing"], 0);
-
-
-	Offset::Pawn.CurrentArmor = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_ArmorValue"], 0);
-
-
-	Offset::Pawn.iShotsFired = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_iShotsFired"], 0);
-
-	Offset::Pawn.aimPunchAngle = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_aimPunchAngle"], 0);
-	Offset::Pawn.aimPunchCache = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_aimPunchCache"], 0);
-
-
-
-
-	Offset::Pawn.bSpottedByMask = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_entitySpottedState"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["EntitySpottedState_t"]["m_bSpottedByMask"], 0);
-
-	Offset::Pawn.IsBuying = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bIsBuyMenuOpen"], 0);
-	Offset::Pawn.m_bWaitForNoAttack = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bWaitForNoAttack"], 0);
+	Offset::C_CSPlayerPawn.m_pBulletServices = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_pBulletServices"], 0);
+	Offset::C_CSPlayerPawn.m_bIsScoped = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bIsScoped"], 0);
+	Offset::C_CSPlayerPawn.m_bIsDefusing = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bIsDefusing"], 0);
+	Offset::C_CSPlayerPawn.m_ArmorValue = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_ArmorValue"], 0);
+	Offset::C_CSPlayerPawn.m_iShotsFired = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_iShotsFired"], 0);
+	Offset::C_CSPlayerPawn.m_aimPunchAngle = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_aimPunchAngle"], 0);
+	Offset::C_CSPlayerPawn.m_aimPunchCache = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_aimPunchCache"], 0);
+	Offset::C_CSPlayerPawn.m_bIsBuyMenuOpen = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bIsBuyMenuOpen"], 0);
+	Offset::C_CSPlayerPawn.m_bWaitForNoAttack = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bWaitForNoAttack"], 0);
+	Offset::C_CSPlayerPawn.m_bSpottedByMask = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_entitySpottedState"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["EntitySpottedState_t"]["m_bSpottedByMask"], 0);
 
 	Offset::C_PlantedC4.m_flC4Blow = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flC4Blow"], 0);
 	Offset::C_PlantedC4.m_bC4Activated = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_bC4Activated"], 0);

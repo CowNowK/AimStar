@@ -27,7 +27,7 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	{
 		return;
 	}
-	if (!ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::Pawn.m_bWaitForNoAttack, WaitForNoAttack))
+	if (!ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::C_CSPlayerPawn.m_bWaitForNoAttack, WaitForNoAttack))
 		return;
 	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::C_CSPlayerPawnBase.m_iIDEntIndex, uHandle))
 		return;
@@ -50,7 +50,7 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	if (ScopeOnly)
 	{
 		bool isScoped;
-		ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::Pawn.isScoped, isScoped);
+		ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::C_CSPlayerPawn.m_bIsScoped, isScoped);
 		if (!isScoped) {
 			return;
 		}

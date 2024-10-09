@@ -217,7 +217,7 @@ bool PlayerPawn::GetCameraPos()
 
 bool PlayerPawn::GetSpotted()
 {
-	return GetDataAddressWithOffset<DWORD64>(Address, Offset::Pawn.bSpottedByMask, this->bSpottedByMask);
+	return GetDataAddressWithOffset<DWORD64>(Address, Offset::C_CSPlayerPawn.m_bSpottedByMask, this->bSpottedByMask);
 }
 
 
@@ -245,12 +245,12 @@ bool PlayerPawn::GetWeaponName()
 
 bool PlayerPawn::GetShotsFired()
 {
-	return GetDataAddressWithOffset<DWORD>(Address, Offset::Pawn.iShotsFired, this->ShotsFired);
+	return GetDataAddressWithOffset<DWORD>(Address, Offset::C_CSPlayerPawn.m_iShotsFired, this->ShotsFired);
 }
 
 bool PlayerPawn::GetAimPunchAngle()
 {
-	return GetDataAddressWithOffset<Vec2>(Address, Offset::Pawn.aimPunchAngle, this->AimPunchAngle);
+	return GetDataAddressWithOffset<Vec2>(Address, Offset::C_CSPlayerPawn.m_aimPunchAngle, this->AimPunchAngle);
 }
 
 bool PlayerPawn::GetTeamID()
@@ -260,7 +260,7 @@ bool PlayerPawn::GetTeamID()
 
 bool PlayerPawn::GetAimPunchCache()
 {
-	return GetDataAddressWithOffset<C_UTL_VECTOR>(Address, Offset::Pawn.aimPunchCache, this->AimPunchCache);
+	return GetDataAddressWithOffset<C_UTL_VECTOR>(Address, Offset::C_CSPlayerPawn.m_aimPunchCache, this->AimPunchCache);
 }
 
 DWORD64 PlayerController::GetPlayerPawnAddress()
@@ -323,7 +323,7 @@ bool PlayerPawn::GetHealth()
 
 bool PlayerPawn::GetArmor()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentArmor, this->Armor);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_CSPlayerPawn.m_ArmorValue, this->Armor);
 }
 
 

@@ -232,7 +232,7 @@ namespace ESP
 		{
 			bool isScoped;
 			ImVec2 IconPos = { Rect.x, Rect.y };
-			ProcessMgr.ReadMemory<bool>(Entity.Pawn.Address + Offset::Pawn.isScoped, isScoped);
+			ProcessMgr.ReadMemory<bool>(Entity.Pawn.Address + Offset::C_CSPlayerPawn.m_bIsScoped, isScoped);
 			if (isScoped)
 			{
 				ImGui::GetBackgroundDrawList()->AddText(ImGui::GetIO().Fonts->Fonts[1], 13.0f, ImVec2{ IconPos.x - 1, IconPos.y - 1 }, ImColor(0, 0, 0, 255), "s");
