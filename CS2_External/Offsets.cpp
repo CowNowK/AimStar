@@ -94,12 +94,19 @@ bool Offset::UpdateOffsets()
 	Offset::C_BasePlayerPawn.m_vOldOrigin = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_vOldOrigin"], 0);
 	Offset::C_BasePlayerPawn.m_hController = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_hController"], 0);
 
+	Offset::C_CSPlayerPawnBase.m_pViewModelServices = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_pViewModelServices"], 0);
+	Offset::C_CSPlayerPawnBase.m_pClippingWeapon = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_pClippingWeapon"], 0);
+	Offset::C_CSPlayerPawnBase.m_angEyeAngles = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_angEyeAngles"], 0);
+	Offset::C_CSPlayerPawnBase.m_vecLastClipCameraPos = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_vecLastClipCameraPos"], 0);
+	Offset::C_CSPlayerPawnBase.m_flFlashMaxAlpha = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_flFlashMaxAlpha"], 0);
+	Offset::C_CSPlayerPawnBase.m_flFlashDuration = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_flFlashDuration"], 0);
+	Offset::C_CSPlayerPawnBase.m_iIDEntIndex = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_iIDEntIndex"], 0);
 
 	Offset::Pawn.BulletServices = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_pBulletServices"], 0);
 
-	Offset::Pawn.ViewModelServices = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_pViewModelServices"], 0);
 
-	Offset::Pawn.pClippingWeapon = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_pClippingWeapon"], 0);
+
+
 	Offset::Pawn.ViewModel = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayer_ViewModelServices"]["m_hViewModel"], 0);
 	Offset::Pawn.CrouchState = MyConfigSaver::ReadData(offset["client_dll"]["CPlayer_MovementServices_Humanoid"]["m_nCrouchState"], 0);
 	Offset::Pawn.isScoped = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bIsScoped"], 0);
@@ -108,14 +115,12 @@ bool Offset::UpdateOffsets()
 
 	Offset::Pawn.CurrentArmor = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_ArmorValue"], 0);
 
-	Offset::Pawn.angEyeAngles = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_angEyeAngles"], 0);
-	Offset::Pawn.vecLastClipCameraPos = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_vecLastClipCameraPos"], 0);
+
 	Offset::Pawn.iShotsFired = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_iShotsFired"], 0);
-	Offset::Pawn.flFlashMaxAlpha = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_flFlashMaxAlpha"], 0);
-	Offset::Pawn.flFlashDuration = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_flFlashDuration"], 0);
+
 	Offset::Pawn.aimPunchAngle = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_aimPunchAngle"], 0);
 	Offset::Pawn.aimPunchCache = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_aimPunchCache"], 0);
-	Offset::Pawn.iIDEntIndex = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_iIDEntIndex"], 0);
+
 
 
 	Offset::Pawn.iFovStart = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerBase_CameraServices"]["m_iFOVStart"], 0);
@@ -123,6 +128,12 @@ bool Offset::UpdateOffsets()
 
 	Offset::Pawn.IsBuying = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bIsBuyMenuOpen"], 0);
 	Offset::Pawn.m_bWaitForNoAttack = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bWaitForNoAttack"], 0);
+
+	Offset::C_PlantedC4.m_flC4Blow = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flC4Blow"], 0);
+	Offset::C_PlantedC4.m_bC4Activated = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_bC4Activated"], 0);
+	Offset::C_PlantedC4.m_bBeingDefused = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_bBeingDefused"], 0);
+	Offset::C_PlantedC4.m_flDefuseCountDown = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flDefuseCountDown"], 0);
+	Offset::C_PlantedC4.m_nBombSite = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_nBombSite"], 0);
 
 	Offset::WeaponBaseData.WeaponDataPTR = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_nSubclassID"],0) + 0x08;
 	Offset::WeaponBaseData.szName = MyConfigSaver::ReadData(offset["client_dll"]["CCSWeaponBaseVData"]["m_szName"], 0);
@@ -146,11 +157,7 @@ bool Offset::UpdateOffsets()
 
 
 
-	Offset::C4.m_flC4Blow = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flC4Blow"], 0);
-	Offset::C4.m_bC4Activated = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_bC4Activated"], 0);
-	Offset::C4.m_bBeingDefused = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_bBeingDefused"], 0);
-	Offset::C4.m_flDefuseCountDown = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flDefuseCountDown"], 0);
-	Offset::C4.m_nBombSite = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_nBombSite"], 0);
+
 
 
 	Offset::InGameMoneyServices.Account = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iAccount"], 0);

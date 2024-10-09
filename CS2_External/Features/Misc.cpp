@@ -138,7 +138,7 @@ namespace Misc
 		if (MiscCFG::FlashImmunity == 0)
 			return;
 		float MaxAlpha = 255.f - MiscCFG::FlashImmunity;
-		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
+		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::C_CSPlayerPawnBase.m_flFlashMaxAlpha, MaxAlpha);
 	}
 
 	void FastStop(const CEntity& aLocalPlayer) noexcept
@@ -360,7 +360,7 @@ namespace Misc
 		// When player reloading their weapon, cancel Scope
 		DWORD64 WeaponService;
 		bool inReload;
-		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.pClippingWeapon, WeaponService);
+		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, WeaponService);
 		ProcessMgr.ReadMemory(WeaponService + Offset::WeaponBaseData.inReload, inReload);
 		if (inReload)
 		{

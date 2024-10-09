@@ -207,12 +207,12 @@ bool PlayerController::GetPlayerSteamID()
 }
 bool PlayerPawn::GetViewAngle()
 {
-	return GetDataAddressWithOffset<Vec2>(Address, Offset::Pawn.angEyeAngles, this->ViewAngle);
+	return GetDataAddressWithOffset<Vec2>(Address, Offset::C_CSPlayerPawnBase.m_angEyeAngles, this->ViewAngle);
 }
 
 bool PlayerPawn::GetCameraPos()
 {
-	return GetDataAddressWithOffset<Vec3>(Address, Offset::Pawn.vecLastClipCameraPos, this->CameraPos);
+	return GetDataAddressWithOffset<Vec3>(Address, Offset::C_CSPlayerPawnBase.m_vecLastClipCameraPos, this->CameraPos);
 }
 
 bool PlayerPawn::GetSpotted()
@@ -226,13 +226,13 @@ bool PlayerPawn::GetWeaponName()
 	DWORD64 WeaponNameAddress = 0;
 	char Buffer[256]{};
 	
-	WeaponNameAddress = ProcessMgr.TraceAddress(this->Address + Offset::Pawn.pClippingWeapon, { 0x10,0x20 ,0x0 });
+	WeaponNameAddress = ProcessMgr.TraceAddress(this->Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, { 0x10,0x20 ,0x0 });
 	if (WeaponNameAddress == 0)
 		return false;
 
 	DWORD64 CurrentWeapon;
 	short weaponIndex;
-	ProcessMgr.ReadMemory(this->Address + Offset::Pawn.pClippingWeapon, CurrentWeapon);
+	ProcessMgr.ReadMemory(this->Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, CurrentWeapon);
 	ProcessMgr.ReadMemory(CurrentWeapon + Offset::EconEntity.AttributeManager + Offset::WeaponBaseData.Item + Offset::WeaponBaseData.ItemDefinitionIndex, weaponIndex);
 
 	if (weaponIndex == -1)
@@ -326,7 +326,7 @@ bool PlayerPawn::GetArmor()
 bool PlayerPawn::GetAmmo()
 {
 	DWORD64 ClippingWeapon = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.pClippingWeapon, ClippingWeapon))
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon))
 		return false;
 
 	return GetDataAddressWithOffset<int>(ClippingWeapon, Offset::WeaponBaseData.Clip1, this->Ammo);
@@ -334,7 +334,7 @@ bool PlayerPawn::GetAmmo()
 bool PlayerPawn::GetBullet()
 {
 	DWORD64 ClippingWeapon = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.pClippingWeapon, ClippingWeapon))
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon))
 		return false;
 
 	return GetDataAddressWithOffset<int>(ClippingWeapon, Offset::WeaponBaseData.Clip1, this->Bullet);
@@ -343,7 +343,7 @@ bool PlayerPawn::GetMaxAmmo()
 {
 	DWORD64 ClippingWeapon = 0;
 	DWORD64 WeaponData = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.pClippingWeapon, ClippingWeapon))
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon))
 		return false;
 	if (!ProcessMgr.ReadMemory<DWORD64>(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData))
 		return false;
@@ -366,12 +366,12 @@ bool PlayerPawn::GetFFlags()
 
 bool PlayerPawn::GetDefusing()
 {
-	return ProcessMgr.ReadMemory(Address + Offset::C4.m_bBeingDefused, this->isDefusing);
+	return ProcessMgr.ReadMemory(Address + Offset::C_PlantedC4.m_bBeingDefused, this->isDefusing);
 }
 
 bool PlayerPawn::GetFlashDuration()
 {
-	return ProcessMgr.ReadMemory(Address + Offset::Pawn.flFlashDuration, this->FlashDuration);
+	return ProcessMgr.ReadMemory(Address + Offset::C_CSPlayerPawnBase.m_flFlashDuration, this->FlashDuration);
 }
 
 bool PlayerPawn::GetVelocity()

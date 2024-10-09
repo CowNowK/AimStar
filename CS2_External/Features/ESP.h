@@ -95,7 +95,7 @@ namespace ESP
 	const char* RenderWeaponIcon(const CEntity& Entity)
 	{
 		uintptr_t ClippingWeapon, WeaponData, WeaponNameAddress;
-		ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::Pawn.pClippingWeapon, ClippingWeapon);
+		ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon);
 		ProcessMgr.ReadMemory(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData);
 		ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.szName, WeaponNameAddress);
 		std::string weaponName = XorStr("Invalid Weapon Name");

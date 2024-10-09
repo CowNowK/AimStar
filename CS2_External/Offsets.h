@@ -49,7 +49,7 @@ namespace Offset
 	inline DWORD InputSystem = cs2_dumper::offsets::client_dll::dwCSGOInput;
 	inline DWORD Sensitivity = cs2_dumper::offsets::client_dll::dwSensitivity;
 	inline DWORD Pointer;
-
+//entity stuff
 	struct
 	{
 		DWORD m_flGravityScale = cs2_dumper::schemas::client_dll::C_BaseEntity::m_flGravityScale;
@@ -66,6 +66,7 @@ namespace Offset
 		DWORD GlowFunction = cs2_dumper::schemas::client_dll::C_BaseModelEntity::m_Glow + cs2_dumper::schemas::client_dll::CGlowProperty::m_bGlowing;
 		DWORD GlowColorOverride = cs2_dumper::schemas::client_dll::C_BaseModelEntity::m_Glow + cs2_dumper::schemas::client_dll::CGlowProperty::m_glowColorOverride;
 	} C_BaseModelEntity;
+//contoller stuff
 	struct
 	{
 		DWORD m_hPawn = cs2_dumper::schemas::client_dll::CBasePlayerController::m_hPawn;
@@ -87,6 +88,7 @@ namespace Offset
 		DWORD m_iPing = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPing;
 		DWORD m_pInGameMoneyServices = cs2_dumper::schemas::client_dll::CCSPlayerController::m_pInGameMoneyServices;
 	} CCSPlayerController;
+//pawn stuff
 	struct
 	{
 		DWORD m_pMovementServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pMovementServices;		// CPlayer_MovementServices*
@@ -96,13 +98,24 @@ namespace Offset
 		DWORD m_vOldOrigin = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_vOldOrigin;							// C_BasePlayerPawn::m_vOldOrigin
 		DWORD m_hController = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_hController;
 	} C_BasePlayerPawn;
+
+	struct
+	{
+		DWORD m_pViewModelServices = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_pViewModelServices;		// CPlayer_ViewModelServices*
+		DWORD m_pClippingWeapon = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_pClippingWeapon;			// C_CSWeaponBase*
+		DWORD m_angEyeAngles = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_angEyeAngles;
+		DWORD m_vecLastClipCameraPos = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_vecLastClipCameraPos;
+		DWORD m_flFlashMaxAlpha = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_flFlashMaxAlpha;
+		DWORD m_flFlashDuration = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_flFlashDuration;
+		DWORD m_iIDEntIndex = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_iIDEntIndex;
+	} C_CSPlayerPawnBase;
+	
 	struct
 	{
 
 		DWORD BulletServices = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_pBulletServices;			// CCSPlayer_BulletServices*
 
-		DWORD ViewModelServices = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_pViewModelServices;		// CPlayer_ViewModelServices*
-		DWORD pClippingWeapon = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_pClippingWeapon;			// C_CSWeaponBase*
+
 
 		DWORD ViewModel = cs2_dumper::schemas::client_dll::CCSPlayer_ViewModelServices::m_hViewModel;				// CCSPlayer_ViewModelServices::m_hViewModel
 		DWORD CrouchState = cs2_dumper::schemas::client_dll::CPlayer_MovementServices_Humanoid::m_nCrouchState;
@@ -114,14 +127,12 @@ namespace Offset
 		DWORD absPos = cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;;
 		DWORD CurrentArmor = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_ArmorValue;// C_CSPlayerPawn::m_ArmorValue
 		DWORD BoneArray = 0x1F0; // cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;//cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
-		DWORD angEyeAngles = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_angEyeAngles;
-		DWORD vecLastClipCameraPos = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_vecLastClipCameraPos;
+
 		DWORD iShotsFired = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_iShotsFired;
-		DWORD flFlashMaxAlpha = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_flFlashMaxAlpha;
-		DWORD flFlashDuration = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_flFlashDuration;
+
 		DWORD aimPunchAngle = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchAngle;			// C_CSPlayerPawn::m_aimPunchAngle
 		DWORD aimPunchCache = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchCache;
-		DWORD iIDEntIndex = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_iIDEntIndex;
+
 
 		DWORD iFovStart = cs2_dumper::schemas::client_dll::CCSPlayerBase_CameraServices::m_iFOVStart;
 		DWORD bSpottedByMask = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_entitySpottedState + cs2_dumper::schemas::client_dll::EntitySpottedState_t::m_bSpottedByMask;	// C_CSPlayerPawn::entitySpottedState + EntitySpottedState_t::bSpottedByMask
@@ -129,12 +140,21 @@ namespace Offset
 		DWORD m_bWaitForNoAttack = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bWaitForNoAttack;
 		
 	} Pawn;
-
+//C4 stuff
+	struct
+	{
+		DWORD m_flC4Blow = cs2_dumper::schemas::client_dll::C_PlantedC4::m_flC4Blow;
+		DWORD m_bC4Activated = cs2_dumper::schemas::client_dll::C_PlantedC4::m_bC4Activated;
+		DWORD m_bBeingDefused = cs2_dumper::schemas::client_dll::C_PlantedC4::m_bBeingDefused;
+		DWORD m_flDefuseCountDown = cs2_dumper::schemas::client_dll::C_PlantedC4::m_flDefuseCountDown;
+		DWORD m_nBombSite = cs2_dumper::schemas::client_dll::C_PlantedC4::m_nBombSite;
+	} C_PlantedC4;
+//services stuff
 	struct
 	{
 		DWORD m_hObserverTarget = cs2_dumper::schemas::client_dll::CPlayer_ObserverServices::m_hObserverTarget;
 	} CPlayer_ObserverServices;
-
+//random misc stuff
 	struct
 	{
 		DWORD AttributeManager = cs2_dumper::schemas::client_dll::C_EconEntity::m_AttributeManager;		// C_AttributeContainer
@@ -143,7 +163,6 @@ namespace Offset
 		DWORD FallbackWear = cs2_dumper::schemas::client_dll::C_EconEntity::m_flFallbackWear;
 		DWORD FallbackStatTrak = cs2_dumper::schemas::client_dll::C_EconEntity::m_nFallbackStatTrak;
 		DWORD szCustomName = cs2_dumper::schemas::client_dll::C_EconItemView::m_szCustomName;
-
 		DWORD EntityQuality = cs2_dumper::schemas::client_dll::C_EconItemView::m_iEntityQuality;			// EconItemView::m_iEntityQuality
 		DWORD ItemIDHigh = cs2_dumper::schemas::client_dll::C_EconItemView::m_iItemIDHigh;				// EconItemView::m_iItemIDHigh
 	} EconEntity;
@@ -166,15 +185,6 @@ namespace Offset
 		DWORD ItemDefinitionIndex = cs2_dumper::schemas::client_dll::C_EconItemView::m_iItemDefinitionIndex;
 		DWORD m_MeshGroupMask = cs2_dumper::schemas::client_dll::CModelState::m_MeshGroupMask;			// CModelState::m_MeshGroupMask
 	} WeaponBaseData;
-	
-	struct
-	{
-		DWORD m_flC4Blow = cs2_dumper::schemas::client_dll::C_PlantedC4::m_flC4Blow;
-		DWORD m_bC4Activated = cs2_dumper::schemas::client_dll::C_PlantedC4::m_bC4Activated;
-		DWORD m_bBeingDefused = cs2_dumper::schemas::client_dll::C_PlantedC4::m_bBeingDefused;
-		DWORD m_flDefuseCountDown = cs2_dumper::schemas::client_dll::C_PlantedC4::m_flDefuseCountDown;
-		DWORD m_nBombSite = cs2_dumper::schemas::client_dll::C_PlantedC4::m_nBombSite;
-	} C4;
 
 	struct
 	{

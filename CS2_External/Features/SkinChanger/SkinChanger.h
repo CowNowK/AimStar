@@ -77,7 +77,7 @@ namespace SkinChanger
 	inline DWORD64 GetViewModelServices(const CEntity& LocalPlayer)
 	{
 		DWORD64 ViewModelServices;
-		ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::Pawn.ViewModelServices, ViewModelServices);
+		ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::C_CSPlayerPawnBase.m_pViewModelServices, ViewModelServices);
 
 		return ViewModelServices;
 	}
