@@ -5,7 +5,7 @@
 #include "Utils/XorStr.h"
 
 namespace fs = std::filesystem;
-
+/*
 DWORD64 SearchOffsets(std::string Signature, DWORD64 ModuleAddress)
 {
 	std::vector<DWORD64> TempAddressList;
@@ -23,7 +23,7 @@ DWORD64 SearchOffsets(std::string Signature, DWORD64 ModuleAddress)
 	Address = TempAddressList.at(0) + Offsets + 7;
 	return Address;
 }
-
+*/
 bool Offset::UpdateOffsets()
 {
 

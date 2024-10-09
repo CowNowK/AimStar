@@ -56,7 +56,7 @@ void SearchMemoryBlock(byte* MemoryBuffer, const std::vector<short>& NextArray, 
 			i += (SignatureLength - Num);
 	}
 }
-
+/*
 std::vector<DWORD64> ProcessManager::SearchMemory(const std::string& Signature, DWORD64 StartAddress, DWORD64 EndAddress, int SearchNum)
 {
 	std::vector<DWORD64> ResultArray;
@@ -101,3 +101,4 @@ END:
 	delete[] MemoryBuffer;
 	return ResultArray;
 }
+*/

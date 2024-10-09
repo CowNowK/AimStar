@@ -152,8 +152,20 @@ namespace bmb
 		else if (map_hash == hash::runtime("de_vertigo")) {
 			return { 500, 1750 };
 		}
+		else if (map_hash == hash::runtime("de_assembly")) {
+			return { 500, 1750 };
+		}
+		else if (map_hash == hash::runtime("de_memento")) {
+			return { 500, 1750 };
+		}
+		else if (map_hash == hash::runtime("de_thera")) {
+			return { 500, 1750 };
+		}
+		else if (map_hash == hash::runtime("de_mills")) {
+			return { 500, 1750 };
+		}
 		else {
-			return { 650, 2275 };
+			return { 500, 1750 };
 		}
 	}
 	float armor_modifier(float damage, int armor) {

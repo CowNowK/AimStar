@@ -1083,6 +1083,7 @@ void Cheat()
 	cout << setw(23) << left << XorStr("PlantedC4:") << setiosflags(ios::uppercase) << hex << Offset::PlantedC4 << endl;
 	cout << setw(23) << left << XorStr("ForceJump:") << setiosflags(ios::uppercase) << hex << Offset::ForceJump << endl;
 	cout << setw(23) << left << XorStr("Sensitivity:") << setiosflags(ios::uppercase) << hex << Offset::Sensitivity << endl;
+	cout << setw(23) << left << XorStr("GlobalVars:") << setiosflags(ios::uppercase) << hex << Offset::GlobalVars << endl;
 	// cout << setw(23) << left << XorStr("ForceCrouch:") << setiosflags(ios::uppercase) << hex << Offset::ForceCrouch << endl;
 	// cout << setw(23) << left << XorStr("ForceForward:") << setiosflags(ios::uppercase) << hex << Offset::ForceForward << endl;
 	// cout << setw(23) << left << XorStr("ForceLeft:") << setiosflags(ios::uppercase) << hex << Offset::ForceLeft << endl;

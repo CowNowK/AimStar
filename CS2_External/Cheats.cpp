@@ -194,7 +194,7 @@ void Cheats::Run() noexcept
 		tGui.join();
 	}
 
-	if (!Init::Client::isGameWindowActive() && !MenuConfig::ShowMenu)
+	if (!Init::Client::isGameWindowActive())
 		return;
 
 	// The overlay should be rendered at the bottom
@@ -203,7 +203,6 @@ void Cheats::Run() noexcept
 	// Update matrix
 	if(!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix,64))
 		return;
-
 	// Update EntityList Entry
 	gGame.UpdateEntityListEntry();
 
@@ -245,12 +244,12 @@ void Cheats::Run() noexcept
 	CGlobalVarsBase Global_Vars;
 	if (!ProcessMgr.ReadMemory<CGlobalVarsBase>(gGame.GetGlobalVarsAddress(), Global_Vars))
 		return;
-	/*
+	
 	
 	std::string MapName;
-	if (!ProcessMgr.ReadMemory<std::string>(Global_Vars.m_current_mapname, MapName))
-		return;
-	MenuConfig::CurMap = MapName;*/
+	MapName = ProcessMgr.ReadString(Global_Vars.m_current_mapname, 32);
+
+	MenuConfig::CurMap = MapName;
 	MenuConfig::CurTime = Global_Vars.m_curtime;
 	MenuConfig::TickCount = Global_Vars.m_tickcount;
 
