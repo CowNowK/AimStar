@@ -197,7 +197,7 @@ namespace bmb
 			pow(player.z - bomb.z, 2)), 2) / (2 * std::pow(c, 2)));
 		const float damage_armor = armor_modifier(damage, armor);
 
-		return static_cast<int>(std::floor(damage_armor));
+		return static_cast<int>(std::ceil(damage_armor));
 
 	}
 
