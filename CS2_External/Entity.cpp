@@ -148,9 +148,9 @@ bool PlayerController::GetMoney()
 		return false;
 	}
 	else {
-		GetDataAddressWithOffset<int>(MoneyServices, Offset::InGameMoneyServices.Account, this->Money);
-		GetDataAddressWithOffset<int>(MoneyServices, Offset::InGameMoneyServices.CashSpentThisRound, this->CashSpent);
-		GetDataAddressWithOffset<int>(MoneyServices, Offset::InGameMoneyServices.TotalCashSpent, this->CashSpentTotal);
+		GetDataAddressWithOffset<int>(MoneyServices, Offset::CCSPlayerController_InGameMoneyServices.m_iAccount, this->Money);
+		GetDataAddressWithOffset<int>(MoneyServices, Offset::CCSPlayerController_InGameMoneyServices.m_iTotalCashSpent, this->CashSpent);
+		GetDataAddressWithOffset<int>(MoneyServices, Offset::CCSPlayerController_InGameMoneyServices.m_iCashSpentThisRound, this->CashSpentTotal);
 		return true;
 	}
 }

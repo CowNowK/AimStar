@@ -123,11 +123,16 @@ bool Offset::UpdateOffsets()
 	Offset::C_PlantedC4.m_flDefuseCountDown = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flDefuseCountDown"], 0);
 	Offset::C_PlantedC4.m_nBombSite = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_nBombSite"], 0);
 
-
+	Offset::CPlayer_ObserverServices.m_hObserverTarget = MyConfigSaver::ReadData(offset["client_dll"]["CPlayer_ObserverServices"]["m_hObserverTarget"], 0);
 	Offset::CCSPlayer_ViewModelServices.m_hViewModel = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayer_ViewModelServices"]["m_hViewModel"], 0);
 	Offset::CPlayer_MovementServices_Humanoid.m_nCrouchState = MyConfigSaver::ReadData(offset["client_dll"]["CPlayer_MovementServices_Humanoid"]["m_nCrouchState"], 0);
 	Offset::CCSPlayerBase_CameraServices.m_iFOVStart = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerBase_CameraServices"]["m_iFOVStart"], 0);
 	Offset::CCSPlayer_BulletServices.m_totalHitsOnServer = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayer_BulletServices"]["m_totalHitsOnServer"], 0);
+
+
+	Offset::CCSPlayerController_InGameMoneyServices.m_iAccount = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iAccount"], 0);
+	Offset::CCSPlayerController_InGameMoneyServices.m_iTotalCashSpent = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iTotalCashSpent"], 0);
+	Offset::CCSPlayerController_InGameMoneyServices.m_iCashSpentThisRound = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iCashSpentThisRound"], 0);
 
 	Offset::WeaponBaseData.WeaponDataPTR = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_nSubclassID"],0) + 0x08;
 	Offset::WeaponBaseData.szName = MyConfigSaver::ReadData(offset["client_dll"]["CCSWeaponBaseVData"]["m_szName"], 0);
@@ -144,19 +149,14 @@ bool Offset::UpdateOffsets()
 	Offset::WeaponBaseData.ItemDefinitionIndex = MyConfigSaver::ReadData(offset["client_dll"]["C_EconItemView"]["m_iItemDefinitionIndex"], 0);
 	Offset::WeaponBaseData.m_MeshGroupMask = MyConfigSaver::ReadData(offset["client_dll"]["CModelState"]["m_MeshGroupMask"], 0);
 
-
-	Offset::CPlayer_ObserverServices.m_hObserverTarget = MyConfigSaver::ReadData(offset["client_dll"]["CPlayer_ObserverServices"]["m_hObserverTarget"], 0);
-
-
-
-
-
-
-
-
-	Offset::InGameMoneyServices.Account = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iAccount"], 0);
-	Offset::InGameMoneyServices.TotalCashSpent = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iTotalCashSpent"], 0);
-	Offset::InGameMoneyServices.CashSpentThisRound = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController_InGameMoneyServices"]["m_iCashSpentThisRound"], 0);
+	Offset::EconEntity.AttributeManager = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_AttributeManager"], 0);
+	Offset::EconEntity.FallbackPaintKit = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_nFallbackPaintKit"], 0);
+	Offset::EconEntity.FallbackSeed = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_nFallbackSeed"], 0);
+	Offset::EconEntity.FallbackWear = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_flFallbackWear"], 0);
+	Offset::EconEntity.FallbackStatTrak = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_nFallbackStatTrak"], 0);
+	Offset::EconEntity.szCustomName = MyConfigSaver::ReadData(offset["client_dll"]["C_EconItemView"]["m_szCustomName"], 0);
+	Offset::EconEntity.EntityQuality = MyConfigSaver::ReadData(offset["client_dll"]["C_EconItemView"]["m_iEntityQuality"], 0);
+	Offset::EconEntity.ItemIDHigh = MyConfigSaver::ReadData(offset["client_dll"]["C_EconItemView"]["m_iItemIDHigh"], 0);
 
 	Offset::SmokeGrenadeProjectile.nSmokeEffectTickBegin = MyConfigSaver::ReadData(offset["client_dll"]["C_SmokeGrenadeProjectile"]["m_nSmokeEffectTickBegin"], 0);
 	Offset::SmokeGrenadeProjectile.bDidSmokeEffect = MyConfigSaver::ReadData(offset["client_dll"]["C_SmokeGrenadeProjectile"]["m_bDidSmokeEffect"], 0);
@@ -166,15 +166,6 @@ bool Offset::UpdateOffsets()
 	Offset::SmokeGrenadeProjectile.VoxelFrameData = MyConfigSaver::ReadData(offset["client_dll"]["C_SmokeGrenadeProjectile"]["m_VoxelFrameData"], 0);
 	Offset::SmokeGrenadeProjectile.bSmokeVolumeDataReceived = MyConfigSaver::ReadData(offset["client_dll"]["C_SmokeGrenadeProjectile"]["m_bSmokeVolumeDataReceived"], 0);
 	Offset::SmokeGrenadeProjectile.bSmokeEffectSpawned = MyConfigSaver::ReadData(offset["client_dll"]["C_SmokeGrenadeProjectile"]["m_bSmokeEffectSpawned"], 0);
-
-	Offset::EconEntity.AttributeManager = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_AttributeManager"], 0);
-	Offset::EconEntity.FallbackPaintKit = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_nFallbackPaintKit"], 0);
-	Offset::EconEntity.FallbackSeed = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_nFallbackSeed"], 0);
-	Offset::EconEntity.FallbackWear = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_flFallbackWear"], 0);
-	Offset::EconEntity.FallbackStatTrak = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_nFallbackStatTrak"], 0);
-	Offset::EconEntity.szCustomName = MyConfigSaver::ReadData(offset["client_dll"]["C_EconItemView"]["m_szCustomName"], 0);
-	Offset::EconEntity.EntityQuality = MyConfigSaver::ReadData(offset["client_dll"]["C_EconItemView"]["m_iEntityQuality"], 0);
-	Offset::EconEntity.ItemIDHigh = MyConfigSaver::ReadData(offset["client_dll"]["C_EconItemView"]["m_iItemIDHigh"], 0);
 
 	return true;
 }

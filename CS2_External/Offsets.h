@@ -164,7 +164,12 @@ namespace Offset
 	{
 		DWORD m_totalHitsOnServer = cs2_dumper::schemas::client_dll::CCSPlayer_BulletServices::m_totalHitsOnServer;
 	} CCSPlayer_BulletServices;
-	
+	struct
+	{
+		DWORD m_iAccount = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iAccount;
+		DWORD m_iTotalCashSpent = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iTotalCashSpent;
+		DWORD m_iCashSpentThisRound = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iCashSpentThisRound;
+	} CCSPlayerController_InGameMoneyServices;
 	
 //random misc stuff
 	struct
@@ -197,13 +202,6 @@ namespace Offset
 		DWORD ItemDefinitionIndex = cs2_dumper::schemas::client_dll::C_EconItemView::m_iItemDefinitionIndex;
 		DWORD m_MeshGroupMask = cs2_dumper::schemas::client_dll::CModelState::m_MeshGroupMask;			// CModelState::m_MeshGroupMask
 	} WeaponBaseData;
-
-	struct
-	{
-		DWORD Account = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iAccount;
-		DWORD TotalCashSpent = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iTotalCashSpent;
-		DWORD CashSpentThisRound = cs2_dumper::schemas::client_dll::CCSPlayerController_InGameMoneyServices::m_iCashSpentThisRound;
-	} InGameMoneyServices;
 
 	struct // C_BaseCSGrenadeProjectile
 	{ 
