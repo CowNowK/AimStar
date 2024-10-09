@@ -38,6 +38,7 @@ public:
 	bool GetPlayerSteamID();
 	bool GetPlayerName();
 	DWORD64 GetPlayerPawnAddress();
+	DWORD64 GetPlayerhPawnAddress();
 };
 
 class PlayerPawn

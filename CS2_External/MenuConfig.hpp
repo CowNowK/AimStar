@@ -36,9 +36,11 @@ namespace MenuConfig
 	inline std::string UserName = "";
 	inline std::string CurMap = "";
 	inline float CurTime = 0;
+	inline float ChkTime = 0;
 	inline int32_t TickCount = 0;
 	inline int FPS = 0;
 	inline int MaxFrameRate = 60;
+	inline int Ping = 0;
 	inline bool defaultConfig = false;
 	inline int Language = 0;
 	inline int Theme = 3;
@@ -55,7 +57,6 @@ namespace MenuConfig
 	inline bool AimBot = false;
 	inline bool AimAlways = false;
 	inline bool AimToggleMode = false;
-	inline int AimBotHotKey = 0;
 	// 0: head 1: neck 3: spine
 	inline int  AimPosition = 0;
 	inline int  SparyPosition = 0;
@@ -77,7 +78,6 @@ namespace MenuConfig
 
 	inline bool TriggerBot = false;
 	inline bool TriggerAlways = false;
-	inline int TriggerHotKey = 0;
 
 	inline bool TeamCheck = true;
 

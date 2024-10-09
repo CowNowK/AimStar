@@ -18,7 +18,6 @@
 #include "..\Entity.h"
 #include "..\MenuConfig.hpp"
 #include "..\OS-ImGui\imgui\imgui.h"
-#include "..\Utils\GlobalVars.h"
 #include "..\Utils\imgui_custom.hpp"
 
 #pragma comment(lib, "winmm.lib")
@@ -66,7 +65,7 @@ namespace Misc
 	static inline void CheatText(const char* Cheat, bool config)
 	{
 		if (config)
-			ImGui::TextColored(ImColor(255, 255, 255, 200), Cheat);
+			ImGui::Text(Cheat);
 			// ImGui::chromaText(Cheat, 10.f, 5.f, 1.f, 50.f, 0.02f, 0.08f);
 	}
 
@@ -119,5 +118,5 @@ namespace Misc
 	void ForceScope(const CEntity& aLocalPlayer) noexcept;
 	void NightMode() noexcept;
 	void JumpThrow(const CEntity& Local) noexcept;
-	void SpectatorList(const CEntity& Local, const CEntity& Entity);
+	void SpectatorList(const CEntity& Local);
 }

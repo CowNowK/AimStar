@@ -3,6 +3,13 @@
 #include "..\..\MenuConfig.hpp"
 #include "..\..\OS-ImGui\imgui\imgui.h"
 
+/*
+Not working at all.
+I'm not sure what this is supposed to do.
+And not interested in fixing it.
+--Ukia 10/09/2024
+*/
+
 namespace SkinChanger
 {
 	inline DWORD64 GetWeaponServices(const CEntity& LocalPlayer)
@@ -54,7 +61,7 @@ namespace SkinChanger
 	inline DWORD64 GameSenceNode(DWORD64 CHandle)
 	{
 		DWORD64 GameSenceNode;
-		ProcessMgr.ReadMemory(CHandle + Offset::Pawn.GameSceneNode, GameSenceNode);
+		ProcessMgr.ReadMemory(CHandle + Offset::C_BaseEntity.m_pGameSceneNode, GameSenceNode);
 
 		return GameSenceNode;
 	}

@@ -30,6 +30,9 @@ namespace OSImGui
 
         ImFont* WeaponIconFont = fontAtlas->AddFontFromMemoryTTF((void*)cs_icon, sizeof(cs_icon), 25.0f);
 
+        ImFontConfig ESPConfig;
+        ESPConfig.FontDataOwnedByAtlas = false;
+        ImFont* ESPFont = fontAtlas->AddFontFromFileTTF("c:\\Windows\\Fonts\\msyh.ttc", 18.0f, &arialConfig, io.Fonts->GetGlyphRangesAll());
         io.Fonts = fontAtlas;
 
         // ImGui::StyleColorsEnemyMouse();

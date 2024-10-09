@@ -363,6 +363,26 @@ public:
 		return true;
 	}
 #endif // USERMODE
+
+	//tewshi0 idea
+	std::string ReadString(DWORD64 address, size_t maxLength = 256)
+	{
+		std::vector<char> buffer(maxLength, 0);
+
+		if (!ReadMemory<char>(address, buffer[0], maxLength)) {
+			return "";
+		}
+
+		buffer[maxLength - 1] = '\0';
+
+		size_t actualLength = 0;
+		while (actualLength < maxLength && buffer[actualLength] != '\0') {
+			++actualLength;
+		}
+
+		return std::string(buffer.data(), actualLength);
+	}
+
 	/// <summary>
 	/// 特征码搜索
 	/// </summary>
@@ -370,7 +390,8 @@ public:
 	/// <param name="StartAddress">起始地址</param>
 	/// <param name="EndAddress">结束地址</param>
 	/// <returns>匹配特征结果</returns>
-	std::vector<DWORD64> SearchMemory(const std::string& Signature, DWORD64 StartAddress, DWORD64 EndAddress, int SearchNum = 1);
+	//std::vector<DWORD64> SearchMemory(const std::string& Signature, DWORD64 StartAddress, DWORD64 EndAddress, int SearchNum = 1);
+	//current not use it anymore
 
 
 

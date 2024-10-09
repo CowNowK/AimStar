@@ -60,6 +60,7 @@ namespace Render
 
 	void DrawFovCircle(const CEntity& LocalEntity)
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		if (!ESPConfig::DrawFov)
 			return;
 
@@ -141,7 +142,7 @@ namespace Render
 		Gui.Line({ SightPos.x,SightPos.y - CrosshairsCFG::CrossHairSize }, { SightPos.x ,SightPos.y + CrosshairsCFG::CrossHairSize }, CrosshairsCFG::CrossHairColor, 1);
 	}
 
-	void LineToEnemy(ImVec4 Rect, ImColor Color, float Thickness)
+	void LineToEnemy(ImVec4 Rect, ImColor Color, float Thickness, bool IsItem = false)
 	{
 		if (!ESPConfig::ShowLineToEnemy)
 			return;
@@ -149,13 +150,13 @@ namespace Render
 		switch (ESPConfig::LinePos)
 		{
 		case 0:
-			Gui.Line({ Rect.x + Rect.z / 2,Rect.y }, { Gui.Window.Size.x / 2,0 }, Color, Thickness);
+			Gui.Line({ Rect.x + Rect.z / 2,Rect.y }, { Gui.Window.Size.x / 2,0 }, Color, Thickness, IsItem);
 			break;
 		case 1:
-			Gui.Line({ Rect.x + Rect.z / 2,Rect.y }, { Gui.Window.Size.x / 2, Gui.Window.Size.y/2 }, Color, Thickness);
+			Gui.Line({ Rect.x + Rect.z / 2,Rect.y }, { Gui.Window.Size.x / 2, Gui.Window.Size.y/2 }, Color, Thickness, IsItem);
 			break;
 		case 2:
-			Gui.Line({ Rect.x + Rect.z / 2,Rect.y + Rect.w }, { Gui.Window.Size.x / 2, Gui.Window.Size.y }, Color, Thickness);
+			Gui.Line({ Rect.x + Rect.z / 2,Rect.y + Rect.w }, { Gui.Window.Size.x / 2, Gui.Window.Size.y }, Color, Thickness, IsItem);
 			break;
 		default:
 			break;
@@ -165,6 +166,7 @@ namespace Render
 
 	void DrawFov(const CEntity& LocalEntity, float Size, ImColor Color, float Thickness)
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		if (!MenuConfig::ShowFovLine)
 			return;
 
@@ -189,6 +191,7 @@ namespace Render
 
 	void HeadShootLine(const CEntity& LocalEntity, ImColor Color)
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		if (!MenuConfig::ShowHeadShootLine)
 			return;
 

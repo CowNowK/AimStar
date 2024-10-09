@@ -19,7 +19,7 @@ namespace AimControl
 {
     inline bool Rage = false;
 
-    extern int HotKey;
+    extern unsigned int HotKey;
     extern int AimBullet;
     extern bool ScopeOnly;
     extern bool AutoShot;

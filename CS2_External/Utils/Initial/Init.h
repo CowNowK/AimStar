@@ -83,16 +83,11 @@ namespace Init
 
             if (hwnd_cs2 != NULL || hwnd_perfectworld != NULL) {
                 HWND foreground_window = GetForegroundWindow();
-                if (foreground_window == hwnd_cs2 || foreground_window == hwnd_perfectworld) {
+                if (foreground_window == hwnd_cs2 || foreground_window == hwnd_perfectworld || foreground_window == Gui.Window.hWnd) {
                     return true;
                 }
             }
             return false;
-        }
-
-        static void SleepGameTick(int TickCount)
-        {
-            std::this_thread::sleep_for(std::chrono::milliseconds(15 * TickCount));
         }
 
         static void Exit()

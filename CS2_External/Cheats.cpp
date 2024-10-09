@@ -13,27 +13,12 @@
 #include "Features/GUI.h"
 #include "Features/RCS.H"
 #include "Features/BombTimer.h"
-#include "Features/SpectatorList.h"
 #include "Utils/XorStr.h"
 #include "Features/Debugger.h"
 
-int PreviousTotalHits = 0;
 
-// Does not work and not use it for now
-void Cheats::KeyCheckThread() noexcept
-{
-	try
-	{
-        if ((GetAsyncKeyState(VK_INSERT) & 0x8000) || (GetAsyncKeyState(VK_DELETE) & 0x8000))
-		{
-			MenuConfig::ShowMenu = !MenuConfig::ShowMenu;
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(150));
-	}
-	catch (const std::exception& e) {
-		std::cout << e.what() << std::endl;
-	}
-}
+
+int PreviousTotalHits = 0;
 
 void Cheats::RadarSetting(Base_Radar& Radar) noexcept
 {
@@ -71,6 +56,7 @@ void Cheats::RadarSetting(Base_Radar& Radar) noexcept
 
 void Cheats::RenderCrossHair(ImDrawList* drawList) noexcept
 {
+	std::lock_guard<std::mutex> lock(std::mutex);
 	if (!CrosshairsCFG::ShowCrossHair)
 		return;
 
@@ -116,6 +102,8 @@ bool Cheats::AntiTKMAC(const INT64 hash) noexcept
 
 void Cheats::RenderESP(CEntity Entity,DWORD64 EntityAddress, CEntity LocalEntity,int LocalPlayerControllerIndex ,int index) noexcept
 {
+	std::lock_guard<std::mutex> lock(std::mutex);
+	ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[2]);
 	ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
 	int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
 
@@ -151,6 +139,7 @@ void Cheats::RenderESP(CEntity Entity,DWORD64 EntityAddress, CEntity LocalEntity
 			Render::DrawArmorBar(EntityAddress, 100, Entity.Pawn.Armor, Entity.Controller.HasHelmet, ArmorBarPos, ArmorBarSize);
 		}
 	}
+	ImGui::PopFont();
 }
 
 bool GameKeepOn,UserBruted;
@@ -188,10 +177,11 @@ void Cheats::Run() noexcept
 
 	if (MenuConfig::ShowMenu)
 	{
-		GUI::NewGui();
+		std::thread tGui(GUI::NewGui);
+		tGui.join();
 	}
 
-	if (!Init::Client::isGameWindowActive() && !MenuConfig::ShowMenu)
+	if (!Init::Client::isGameWindowActive())
 		return;
 
 	// The overlay should be rendered at the bottom
@@ -200,7 +190,6 @@ void Cheats::Run() noexcept
 	// Update matrix
 	if(!ProcessMgr.ReadMemory(gGame.GetMatrixAddress(), gGame.View.Matrix,64))
 		return;
-
 	// Update EntityList Entry
 	gGame.UpdateEntityListEntry();
 
@@ -225,9 +214,14 @@ void Cheats::Run() noexcept
 	too lazy deal UTF8 shit*/
 	if (MenuConfig::UserName == "")
 		MenuConfig::UserName = getenv("USERNAME");
+
+	ProcessMgr.ReadMemory(LocalControllerAddress + Offset::PlayerController.m_iPing, MenuConfig::Ping);
+
 	//std::wcout << MenuConfig::AvatarPath << std::endl;
+
 	if (!LocalEntity.UpdatePawn(LocalPawnAddress) && !MiscCFG::WorkInSpec)
 		return;
+
 
 	if (!LocalEntity.Controller.Connected || LocalEntity.Pawn.Pos == Vec3(0,0,0))
 	{
@@ -239,12 +233,11 @@ void Cheats::Run() noexcept
 	CGlobalVarsBase Global_Vars;
 	if (!ProcessMgr.ReadMemory<CGlobalVarsBase>(gGame.GetGlobalVarsAddress(), Global_Vars))
 		return;
-	/*
 	
 	std::string MapName;
-	if (!ProcessMgr.ReadMemory<std::string>(Global_Vars.m_current_mapname, MapName))
-		return;
-	MenuConfig::CurMap = MapName;*/
+	MapName = ProcessMgr.ReadString(Global_Vars.m_current_mapname, 32);
+
+	MenuConfig::CurMap = MapName;
 	MenuConfig::CurTime = Global_Vars.m_curtime;
 	MenuConfig::TickCount = Global_Vars.m_tickcount;
 
@@ -263,11 +256,20 @@ void Cheats::Run() noexcept
 	Base_Radar Radar;
 	if (RadarCFG::ShowRadar)
 		RadarSetting(Radar);
+
+	static float LastQuarterSec;
+	if (MenuConfig::CurTime > LastQuarterSec + 0.25f || MenuConfig::CurTime < -1 /*may game restart and recount curtime*/)
+	{
+		//per 1/4 second
+		MenuConfig::FPS = static_cast<int>(std::floor(1.0f / Global_Vars.m_frametime));
+		LastQuarterSec = MenuConfig::CurTime;
+	}
+
 	static int LastTick;
 	if (MenuConfig::TickCount != LastTick)
 	{
+		MenuConfig::ChkTime = MenuConfig::CurTime;
 		//fetch sth u donot wanna frequency read
-		MenuConfig::FPS = static_cast<int>(std::floor(1.0f / Global_Vars.m_frametime));
 		MenuConfig::ValidEntity.clear();
 		MenuConfig::ValidEntity.shrink_to_fit();
 		for (int i = 0; i < 64; i++)
@@ -291,7 +293,8 @@ void Cheats::Run() noexcept
 		}
 		GUI::InitHitboxList();
 		LastTick = MenuConfig::TickCount;
-		Misc::BunnyHop(LocalEntity);
+		std::thread tBhop (Misc::BunnyHop,LocalEntity);
+		tBhop.detach();
 	}
 
 	if (!MenuConfig::ValidEntity.empty() && GameKeepOn)
@@ -302,7 +305,6 @@ void Cheats::Run() noexcept
 			DWORD64 EntityAddress = MenuConfig::ValidEntity[index].second;
 			if (!Entity.UpdatePawn(Entity.Pawn.Address))
 				continue;
-			//Misc::SpectatorList(LocalEntity, Entity);
 			if (MenuConfig::TeamCheck && Entity.Controller.TeamID == LocalEntity.Controller.TeamID)
 				continue;
 			if (!UserBruted)
@@ -444,9 +446,9 @@ void Cheats::Run() noexcept
 	int shit = 256;
 	ProcessMgr.WriteMemory<int>(gGame.GetCSGOInputAddress() + 0x250, shit);
 	*/
-	std::thread tWatermark(Misc::Watermark,LocalEntity);
+	Misc::Watermark(LocalEntity);
 
-	std::thread tCheatList(HUD::CheatList);
+	HUD::CheatList();
 
 	// Fov line
 	std::thread tDrawFov(Render::DrawFov,LocalEntity, MenuConfig::FovLineSize, MenuConfig::FovLineColor, 1);
@@ -455,19 +457,16 @@ void Cheats::Run() noexcept
 	// CrossHair
 	TriggerBot::TargetCheck(LocalEntity);
 	std::thread tRenderCrossHair(RenderCrossHair,ImGui::GetBackgroundDrawList());
-	std::thread tBmb(bmb::RenderWindow,LocalEntity);
-
+	bmb::RenderWindow(LocalEntity);
+	Misc::SpectatorList(LocalEntity);
 	
 
 	tHitMarker.join();
-	tWatermark.join();
-	tCheatList.join();
 	tDrawFov.join();
 	tHeadShootLine.join();
 	tRenderCrossHair.join();
-	tBmb.join();
 	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
-	if (currentFPS > MenuConfig::MaxRenderFPS || (MenuConfig::MaxRenderFPS == 1200 && currentFPS > MenuConfig::FPS + 15))
+	if (currentFPS > MenuConfig::MaxRenderFPS || (MenuConfig::MaxRenderFPS == 1201 && currentFPS > MenuConfig::FPS * 2))
 	{
 		int FrameWait = round(1000000.0f / MenuConfig::MaxRenderFPS);
 		std::this_thread::sleep_for(std::chrono::microseconds(FrameWait));

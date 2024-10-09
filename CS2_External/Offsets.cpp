@@ -5,7 +5,7 @@
 #include "Utils/XorStr.h"
 
 namespace fs = std::filesystem;
-
+/*
 DWORD64 SearchOffsets(std::string Signature, DWORD64 ModuleAddress)
 {
 	std::vector<DWORD64> TempAddressList;
@@ -23,7 +23,7 @@ DWORD64 SearchOffsets(std::string Signature, DWORD64 ModuleAddress)
 	Address = TempAddressList.at(0) + Offsets + 7;
 	return Address;
 }
-
+*/
 bool Offset::UpdateOffsets()
 {
 
@@ -60,15 +60,29 @@ bool Offset::UpdateOffsets()
 	Offset::ForceLeft = MyConfigSaver::ReadData(offset["client_dll"]["left"], 0);
 	Offset::ForceRight = MyConfigSaver::ReadData(offset["client_dll"]["right"], 0);
 
+	Offset::C_BaseEntity.m_flGravityScale = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_flGravityScale"], 0);
+	Offset::C_BaseEntity.m_iMaxHealth = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iMaxHealth"], 0);
+	Offset::C_BaseEntity.m_iHealth = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iHealth"], 0);
+	Offset::C_BaseEntity.m_pGameSceneNode = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_pGameSceneNode"], 0);
+	Offset::C_BaseEntity.m_vecAbsVelocity = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_vecAbsVelocity"], 0);
+	Offset::C_BaseEntity.m_iTeamNum = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iTeamNum"], 0);
+	Offset::C_BaseEntity.m_fFlags = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_fFlags"], 0);
+
+	Offset::C_BaseModelEntity.GlowFunction = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["CGlowProperty"]["m_bGlowing"], 0);
+	Offset::C_BaseModelEntity.GlowColorOverride = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["CGlowProperty"]["m_glowColorOverride"], 0);
+
+	Offset::CBasePlayerController.m_hPawn = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_hPawn"], 0);
+	Offset::CBasePlayerController.m_iszPlayerName = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_iszPlayerName"], 0);
+	Offset::CBasePlayerController.m_iDesiredFOV = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_iDesiredFOV"], 0);
+	Offset::CBasePlayerController.m_steamID = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_steamID"], 0);
+
 	Offset::Entity.IsAlive = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnIsAlive"], 0);
 	Offset::Entity.m_bControllingBot = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bControllingBot"], 0); 
 	Offset::Entity.m_bEverPlayedOnTeam = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bEverPlayedOnTeam"], 0);
 	Offset::Entity.PlayerPawn = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_hPlayerPawn"], 0);
-	Offset::Entity.iszPlayerName = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_iszPlayerName"], 0);
+
 	Offset::Entity.m_sSanitizedPlayerName = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_sSanitizedPlayerName"], 0);
-	Offset::Entity.GravityScale = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_flGravityScal"], 0);
-	Offset::Entity.GlowFunction = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["CGlowProperty"]["m_bGlowing"], 0);
-	Offset::Entity.GlowColorOverride = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseModelEntity"]["m_Glow"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["CGlowProperty"]["m_glowColorOverride"], 0);
+
 
 	Offset::Pawn.MovementServices = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_pMovementServices"], 0);
 	Offset::Pawn.WeaponServices = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_pWeaponServices"], 0);
@@ -84,9 +98,7 @@ bool Offset::UpdateOffsets()
 	Offset::Pawn.TotalHit = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayer_BulletServices"]["m_totalHitsOnServer"], 0);
 	Offset::Pawn.Pos = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_vOldOrigin"], 0);
 	Offset::Pawn.CurrentArmor = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_ArmorValue"], 0);
-	Offset::Pawn.MaxHealth = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iMaxHealth"], 0);
-	Offset::Pawn.CurrentHealth = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iHealth"], 0);
-	Offset::Pawn.GameSceneNode = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_pGameSceneNode"], 0);
+
 	Offset::Pawn.angEyeAngles = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_angEyeAngles"], 0);
 	Offset::Pawn.vecLastClipCameraPos = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_vecLastClipCameraPos"], 0);
 	Offset::Pawn.iShotsFired = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_iShotsFired"], 0);
@@ -95,12 +107,11 @@ bool Offset::UpdateOffsets()
 	Offset::Pawn.aimPunchAngle = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_aimPunchAngle"], 0);
 	Offset::Pawn.aimPunchCache = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_aimPunchCache"], 0);
 	Offset::Pawn.iIDEntIndex = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawnBase"]["m_iIDEntIndex"], 0);
-	Offset::Pawn.iTeamNum = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iTeamNum"], 0);
-	Offset::Pawn.DesiredFov = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_iDesiredFOV"], 0);
+
+
 	Offset::Pawn.iFovStart = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerBase_CameraServices"]["m_iFOVStart"], 0);
-	Offset::Pawn.fFlags = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_fFlags;"], 0);
 	Offset::Pawn.bSpottedByMask = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_entitySpottedState"], 0) + MyConfigSaver::ReadData(offset["client_dll"]["EntitySpottedState_t"]["m_bSpottedByMask"], 0);
-	Offset::Pawn.AbsVelocity = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_vecAbsVelocity"], 0);
+
 	Offset::Pawn.IsBuying = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bIsBuyMenuOpen"], 0);
 	Offset::Pawn.m_bWaitForNoAttack = MyConfigSaver::ReadData(offset["client_dll"]["C_CSPlayerPawn"]["m_bWaitForNoAttack"], 0);
 
@@ -119,14 +130,14 @@ bool Offset::UpdateOffsets()
 	Offset::WeaponBaseData.ItemDefinitionIndex = MyConfigSaver::ReadData(offset["client_dll"]["C_EconItemView"]["m_iItemDefinitionIndex"], 0);
 	Offset::WeaponBaseData.m_MeshGroupMask = MyConfigSaver::ReadData(offset["client_dll"]["CModelState"]["m_MeshGroupMask"], 0);
 
-	Offset::PlayerController.m_hPawn = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_hPawn"], 0);
+
 	Offset::PlayerController.m_pObserverServices = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_pObserverServices"], 0);
 	Offset::PlayerController.m_hObserverTarget = MyConfigSaver::ReadData(offset["client_dll"]["CPlayer_ObserverServices"]["m_hObserverTarget"], 0);
 	Offset::PlayerController.m_hController = MyConfigSaver::ReadData(offset["client_dll"]["C_BasePlayerPawn"]["m_hController"], 0);
 	Offset::PlayerController.PawnArmor = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_iPawnArmor"], 0);
 	Offset::PlayerController.HasDefuser = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnHasDefuser"], 0);
 	Offset::PlayerController.HasHelmet = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_bPawnHasHelmet"], 0);
-	Offset::PlayerController.m_steamID = MyConfigSaver::ReadData(offset["client_dll"]["CBasePlayerController"]["m_steamID"], 0);
+
 	Offset::PlayerController.m_iPing = MyConfigSaver::ReadData(offset["client_dll"]["CCSPlayerController"]["m_iPing"], 0);
 
 	Offset::C4.m_flC4Blow = MyConfigSaver::ReadData(offset["client_dll"]["C_PlantedC4"]["m_flC4Blow"], 0);

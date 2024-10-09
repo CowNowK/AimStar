@@ -268,7 +268,7 @@ namespace MyConfigSaver {
         emitter << YAML::Key << "Ragebot" << YAML::Value << AimControl::Rage;
         emitter << YAML::Key << "AimLock" << YAML::Value << AimControl::AimLock;
         emitter << YAML::Key << "ToggleMode" << YAML::Value << MenuConfig::AimToggleMode;
-        emitter << YAML::Key << "Hotkey" << YAML::Value << MenuConfig::AimBotHotKey; 
+        emitter << YAML::Key << "Hotkey" << YAML::Value << AimControl::HotKey;
         emitter << YAML::Key << "AimBullet" << YAML::Value << AimControl::AimBullet;
         emitter << YAML::Key << "Fov" << YAML::Value << AimControl::AimFov;
         emitter << YAML::Key << "FovMin" << YAML::Value << AimControl::AimFovMin;
@@ -302,7 +302,7 @@ namespace MyConfigSaver {
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
         emitter << YAML::Key << "Enable" << YAML::Value << MenuConfig::TriggerBot;
-        emitter << YAML::Key << "Hotkey" << YAML::Value << MenuConfig::TriggerHotKey;
+        emitter << YAML::Key << "Hotkey" << YAML::Value << TriggerBot::HotKey;
         emitter << YAML::Key << "Delay" << YAML::Value << TriggerBot::TriggerDelay;
         emitter << YAML::Key << "FakeShot" << YAML::Value << TriggerBot::ShotDuration;
         emitter << YAML::Key << "ScopeOnly" << YAML::Value << TriggerBot::ScopeOnly;
@@ -529,7 +529,7 @@ namespace MyConfigSaver {
             AimControl::Rage = ReadData(config["Aimbot"]["Ragebot"], false);
             AimControl::AimLock = ReadData(config["Aimbot"]["AimLock"], false);
             MenuConfig::AimToggleMode = ReadData(config["Aimbot"]["ToggleMode"], false);
-            MenuConfig::AimBotHotKey = ReadData(config["Aimbot"]["Hotkey"], 0);
+            AimControl::HotKey = ReadData(config["Aimbot"]["Hotkey"], 0);
             AimControl::AimBullet = ReadData(config["Aimbot"]["AimBullet"], 0);
             AimControl::AimFov = ReadData(config["Aimbot"]["Fov"], 5.f);
             AimControl::AimFovMin = ReadData(config["Aimbot"]["FovMin"], .5f);
@@ -555,7 +555,7 @@ namespace MyConfigSaver {
         if (config["Triggerbot"])
         {
             MenuConfig::TriggerBot = ReadData(config["Triggerbot"]["Enable"], false);
-            MenuConfig::TriggerHotKey = ReadData(config["Triggerbot"]["Hotkey"], 0);
+            TriggerBot::HotKey = ReadData(config["Triggerbot"]["Hotkey"], 0);
             TriggerBot::TriggerDelay = ReadData(config["Triggerbot"]["Delay"], 20);
             TriggerBot::ShotDuration = ReadData(config["Triggerbot"]["FakeShot"], 200);
             TriggerBot::ScopeOnly = ReadData(config["Triggerbot"]["ScopeOnly"], false);
@@ -633,8 +633,6 @@ namespace MyConfigSaver {
             StyleChanger::UpdateSkin(MenuConfig::Theme);
         }
 
-        AimControl::SetHotKey(MenuConfig::AimBotHotKey);
-        TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
         MenuConfig::HitboxUpdated = false;
 
         std::cout << "[Info] Configuration loaded from " << MenuConfig::path + '\\' + filename << std::endl;

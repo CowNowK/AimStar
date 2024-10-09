@@ -20,8 +20,8 @@ namespace AimControl
 {
     extern bool Rage;
 
-    inline int HotKey = VK_LMENU;
-    inline int AimBullet = 1;
+    inline unsigned int HotKey = VK_LBUTTON;
+    inline int AimBullet = 0;
     inline bool ScopeOnly = false;
     inline bool AutoShot = false;
     inline bool AimLock = false;
@@ -30,15 +30,14 @@ namespace AimControl
     inline float AimFovMin = 0.f;
     inline float Smooth = 2.0f;
     inline std::vector<int> HitboxList{ BONEINDEX::head };
-    inline std::vector<int> HotKeyList{ VK_LMENU, VK_LBUTTON, VK_RBUTTON, VK_XBUTTON1, VK_XBUTTON2, VK_CAPITAL, VK_LSHIFT, VK_LCONTROL };
 
     inline bool HasTarget = false;
-
+    /*
     inline void SetHotKey(int Index)
     {
         HotKey = HotKeyList.at(Index);
     }
-
+    */
     inline void switchToggle()
     {
         MenuConfig::AimAlways = !MenuConfig::AimAlways;
@@ -210,8 +209,6 @@ namespace AimControl
                 mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
 
-            int AimInterval = round(1000000.0f / MenuConfig::MaxFrameRate);
-            std::this_thread::sleep_for(std::chrono::microseconds(AimInterval));
         }
         else
             HasTarget = false;

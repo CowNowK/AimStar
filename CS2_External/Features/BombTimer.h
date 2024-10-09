@@ -119,7 +119,7 @@ namespace bmb
 			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
 				return { 0,0,0 };
 
-			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4 +Offset::Pawn.GameSceneNode, node))
+			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4 +Offset::C_BaseEntity.m_pGameSceneNode, node))
 				return { 0,0,0 };
 			ProcessMgr.ReadMemory<Vec3>(node + Offset::Pawn.absPos, c4origin);
 			return c4origin;
@@ -152,8 +152,20 @@ namespace bmb
 		else if (map_hash == hash::runtime("de_vertigo")) {
 			return { 500, 1750 };
 		}
+		else if (map_hash == hash::runtime("de_assembly")) {
+			return { 500, 1750 };
+		}
+		else if (map_hash == hash::runtime("de_memento")) {
+			return { 500, 1750 };
+		}
+		else if (map_hash == hash::runtime("de_thera")) {
+			return { 500, 1750 };
+		}
+		else if (map_hash == hash::runtime("de_mills")) {
+			return { 500, 1750 };
+		}
 		else {
-			return { 650, 2275 };
+			return { 500, 1750 };
 		}
 	}
 	float armor_modifier(float damage, int armor) {
@@ -185,8 +197,7 @@ namespace bmb
 			pow(player.z - bomb.z, 2)), 2) / (2 * std::pow(c, 2)));
 		const float damage_armor = armor_modifier(damage, armor);
 
-		return static_cast<int>(std::floor(damage_armor));
-
+		return static_cast<int>(std::ceil(damage_armor));//if wanna more accurte, use std::round, ceil is to estim max damage to avoid unexpected death
 	}
 
 	void RenderWindow(CEntity Local)
@@ -211,10 +222,13 @@ namespace bmb
 			DefuseTime = 0;
 		static float windowWidth = 200.0f;
 		ImGuiWindowFlags flags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize;
-		ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - 200.0f) / 2.0f, 80.0f }, ImGuiCond_Once);
-		ImGui::SetNextWindowSize({ windowWidth, 0 });
-		if (!MenuConfig::ShowMenu)
-			ImGui::SetNextWindowBgAlpha(0.5f);
+		//ImGui::SetNextWindowPos({ (ImGui::GetIO().DisplaySize.x - 200.0f) / 2.0f, 80.0f }, ImGuiCond_Once);
+		//ImGui::SetNextWindowSize({ windowWidth, 0 });
+		//if (!MenuConfig::ShowMenu)
+			//ImGui::SetNextWindowBgAlpha(0.5f);
+		ImVec4 default_bg_color = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
+		default_bg_color.w = 0.5f;
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, default_bg_color);
 		ImGui::Begin(XorStr("Bomb Timer"), nullptr, flags);
 
 		float remaining = boomTime - MenuConfig::CurTime;

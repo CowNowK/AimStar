@@ -130,7 +130,7 @@ namespace OSImGui
         }
         // Hovered Color
         ImU32 Color;
-        Color = ImGui::GetColorU32(ImLerp(ImVec4(1.00f, 0.30f, 0.0f, 1.0f), ImVec4(0.0f, 1.0f, 0.63f, 1.000f), t));
+        Color = ImGui::GetColorU32(ImLerp(ImVec4(ImGui::GetStyleColorVec4(ImGuiCol_Border).x * 0.35f, ImGui::GetStyleColorVec4(ImGuiCol_Border).y * 0.35f, ImGui::GetStyleColorVec4(ImGuiCol_Border).z * 0.35f, ImGui::GetStyleColorVec4(ImGuiCol_Border).w), ImGui::GetStyleColorVec4(ImGuiCol_Border), t));
         // Rendering
         DrawList->AddRectFilled(ImVec2(p.x, p.y + Height * 0.30f), ImVec2(p.x + Width, p.y + Height * 0.70f), IM_COL32(87, 87, 87, 255), Height);
         DrawList->AddCircleFilled(ImVec2(p.x + Radius + t * (Width - Radius * 2), p.y + Radius + 2), Radius, Color, 360);
@@ -165,37 +165,48 @@ namespace OSImGui
         ImGui::Text(Text.c_str());
     }
 
-    void OSImGui::Text(std::string Text, Vec2 Pos, ImColor Color, float FontSize, bool KeepCenter)
+    void OSImGui::Text(std::string Text, Vec2 Pos, ImColor Color, float FontSize, bool KeepCenter ,bool IsItem)
     {
+        auto Drawlist = ImGui::GetBackgroundDrawList();
+
+		if (IsItem)
+            Drawlist = ImGui::GetWindowDrawList();
         if (!KeepCenter)
         {
-            ImGui::GetBackgroundDrawList()->AddText(ImGui::GetFont(), FontSize, Pos.ToImVec2(), Color, Text.c_str());
+            Drawlist->AddText(ImGui::GetFont(), FontSize, Pos.ToImVec2(), Color, Text.c_str());
         }
         else
         {
             float TextWidth = ImGui::GetFont()->CalcTextSizeA(FontSize, FLT_MAX, 0.f, Text.c_str()).x;
             ImVec2 Pos_ = { Pos.x - TextWidth / 2,Pos.y };
-            ImGui::GetBackgroundDrawList()->AddText(ImGui::GetFont(), FontSize, Pos_, Color, Text.c_str());
+            Drawlist->AddText(ImGui::GetFont(), FontSize, Pos_, Color, Text.c_str());
         }
     }
 
-    void OSImGui::StrokeText(std::string Text, Vec2 Pos, ImColor Color, float FontSize, bool KeepCenter)
+    void OSImGui::StrokeText(std::string Text, Vec2 Pos, ImColor Color, float FontSize, bool KeepCenter , bool IsItem)
     {
-        this->Text(Text, Vec2(Pos.x - 1, Pos.y + 1), ImColor(0, 0, 0), FontSize, KeepCenter);
-        this->Text(Text, Vec2(Pos.x - 1, Pos.y - 1), ImColor(0, 0, 0), FontSize, KeepCenter);
-        this->Text(Text, Vec2(Pos.x + 1, Pos.y + 1), ImColor(0, 0, 0), FontSize, KeepCenter);
-        this->Text(Text, Vec2(Pos.x + 1, Pos.y - 1), ImColor(0, 0, 0), FontSize, KeepCenter);
-        this->Text(Text, Pos, Color, FontSize, KeepCenter);
+        this->Text(Text, Vec2(Pos.x - 1, Pos.y + 1), ImColor(0, 0, 0), FontSize, KeepCenter,IsItem);
+        this->Text(Text, Vec2(Pos.x - 1, Pos.y - 1), ImColor(0, 0, 0), FontSize, KeepCenter,IsItem);
+        this->Text(Text, Vec2(Pos.x + 1, Pos.y + 1), ImColor(0, 0, 0), FontSize, KeepCenter,IsItem);
+        this->Text(Text, Vec2(Pos.x + 1, Pos.y - 1), ImColor(0, 0, 0), FontSize, KeepCenter,IsItem);
+        this->Text(Text, Pos, Color, FontSize, KeepCenter, IsItem);
     }
 
-    void OSImGui::Rectangle(Vec2 Pos, Vec2 Size, ImColor Color, float Thickness, float Rounding)
+    void OSImGui::Rectangle(Vec2 Pos, Vec2 Size, ImColor Color, float Thickness, float Rounding, bool IsItem)
     {
-        ImGui::GetBackgroundDrawList()->AddRect(Pos.ToImVec2(), { Pos.x + Size.x,Pos.y + Size.y }, Color, Rounding, 0, Thickness);
+        auto DrawList = ImGui::GetBackgroundDrawList();
+
+        if (IsItem)
+            DrawList = ImGui::GetWindowDrawList();
+        DrawList->AddRect(Pos.ToImVec2(), { Pos.x + Size.x,Pos.y + Size.y }, Color, Rounding, 0, Thickness);
     }
 
-    void OSImGui::RectangleFilled(Vec2 Pos, Vec2 Size, ImColor Color, float Rounding, int Nums)
+    void OSImGui::RectangleFilled(Vec2 Pos, Vec2 Size, ImColor Color, float Rounding, int Nums, bool IsItem)
     {
-        ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+        auto DrawList = ImGui::GetBackgroundDrawList();
+
+        if (IsItem)
+            DrawList = ImGui::GetWindowDrawList();
         ImDrawCornerFlags rounding_corners = ImDrawCornerFlags_All;
         ImVec2 a = Pos.ToImVec2();
         ImVec2 b = { Pos.x + Size.x,Pos.y + Size.y };
@@ -219,9 +230,12 @@ namespace OSImGui
         DrawList->PathFillConvex(Color);
     }
 
-    void OSImGui::RectangleFilledGraident(Vec2 Pos, Vec2 Size, ImColor BgColor, ImColor TopColor, ImColor BotColor, float Rounding, int Nums)
+    void OSImGui::RectangleFilledGraident(Vec2 Pos, Vec2 Size, ImColor BgColor, ImColor TopColor, ImColor BotColor, float Rounding, int Nums, bool IsItem)
     {
-        ImDrawList* DrawList = ImGui::GetBackgroundDrawList();
+        auto DrawList = ImGui::GetBackgroundDrawList();
+
+        if (IsItem)
+            DrawList = ImGui::GetWindowDrawList();
         ImDrawCornerFlags rounding_corners = ImDrawCornerFlags_All;
         ImVec2 a = Pos.ToImVec2();
         ImVec2 b = { Pos.x + Size.x,Pos.y + Size.y };
@@ -232,9 +246,13 @@ namespace OSImGui
         DrawList->AddRectFilledMultiColorRounded(a, b, BgColor, TopColor, TopColor, BotColor, BotColor, Rounding, rounding_corners);
     }
 
-    void OSImGui::Line(Vec2 From, Vec2 To, ImColor Color, float Thickness)
+    void OSImGui::Line(Vec2 From, Vec2 To, ImColor Color, float Thickness, bool IsItem)
     {
-        ImGui::GetBackgroundDrawList()->AddLine(From.ToImVec2(), To.ToImVec2(), Color, Thickness);
+        auto DrawList = ImGui::GetBackgroundDrawList();
+
+        if (IsItem)
+            DrawList = ImGui::GetWindowDrawList();
+        DrawList->AddLine(From.ToImVec2(), To.ToImVec2(), Color, Thickness);
     }
 
     void OSImGui::Circle(Vec2 Center, float Radius, ImColor Color, float Thickness, int Num)
@@ -599,11 +617,15 @@ namespace OSImGui
         ImGui::RenderNavHighlight(frame_bb, id);
         window->DrawList->AddRectFilled(frame_sc.Min, frame_sc.Max, frame_col, grab_radius);
 
+
+        
         // Slider behavior
         ImRect grab_bb;
         const bool value_changed = ImGui::SliderBehavior(frame_bb, id, data_type, p_data, p_min, p_max, format, flags, &grab_bb);
         if (value_changed)
             ImGui::MarkItemEdited(id);
+
+        window->DrawList->AddRectFilled(frame_sc.Min, ImVec2(grab_bb.Max.x , frame_sc.Max.y), ImGui::GetColorU32(ImGuiCol_Border), grab_radius);
 
         // Render grab
         if (grab_bb.Max.x > grab_bb.Min.x)

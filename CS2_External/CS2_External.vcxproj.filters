@@ -115,7 +115,6 @@
     <ClInclude Include="Utils\ConfigSaver.hpp">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\GlobalVars.h" />
     <ClInclude Include="Utils\Format.h" />
     <ClInclude Include="Utils\Globals.hpp" />
     <ClInclude Include="Font\fontArray.h" />
@@ -126,7 +125,6 @@
     <ClInclude Include="Features\Mouse.h" />
     <ClInclude Include="Features\ESP.h" />
     <ClInclude Include="Features\Debugger.h" />
-    <ClInclude Include="Features\SpectatorList.h" />
     <ClInclude Include="Features\GUI.h" />
     <ClInclude Include="Features\Glow.h" />
     <ClInclude Include="Features\GetWeaponIcon.h" />
@@ -261,7 +259,6 @@
     </ClCompile>
     <ClCompile Include="Utils\ConfigMenu.cpp" />
     <ClCompile Include="Utils\ConfigSaver.cpp" />
-    <ClCompile Include="Utils\GlobalVars.cpp" />
     <ClCompile Include="Features\Mouse.cpp" />
     <ClCompile Include="Features\Glow.cpp" />
     <ClCompile Include="Features\Misc.cpp" />

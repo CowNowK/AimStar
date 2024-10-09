@@ -1,5 +1,4 @@
 ﻿#pragma once
-#define IMGUI_DEFINE_MATH_OPERATORS
 #include <functional>
 
 #include "..\MenuConfig.hpp"
@@ -14,6 +13,7 @@
 #include "StyleChanger.h"
 #include "..\Resources\Language.h"
 #include "..\Resources\Images.h"
+#include "../Utils/Ext-String.hpp"
 
 ID3D11ShaderResourceView* AS_Logo = NULL;
 ID3D11ShaderResourceView* NL_Logo = NULL;
@@ -38,6 +38,68 @@ bool checkbox2 = false;
 bool checkbox3 = false;
 bool checkbox4 = false;
 bool checkbox5 = false;
+
+ImVec2 vecMenuPos = ImVec2(0, 0);
+
+bool ImGui::HotKey(const char* szLabel, unsigned int* pValue)
+{
+	ImGuiContext& g = *GImGui;
+	ImGuiWindow* pWindow = g.CurrentWindow;
+
+	if (pWindow->SkipItems)
+		return false;
+
+	ImGuiIO& io = g.IO;
+	const ImGuiStyle& style = g.Style;
+	const ImGuiID nIndex = pWindow->GetID(szLabel);
+
+	bool bValueChanged = false;
+	char szBuffer[64] = {};
+	char* szBufferEnd = strcpy(szBuffer, "  ");
+	if (*pValue != 0)
+		szBufferEnd = strcat(szBufferEnd, StringH::vkToString(*pValue).c_str());
+	else
+		szBufferEnd = strcat(szBufferEnd, XorStr("None"));
+	strcat(szBufferEnd, "  ");//more pretty
+	float buttonWidth = ImGui::CalcTextSize(szBufferEnd).x + 10;
+	strcat(szBufferEnd, "##");
+	strcat(szBufferEnd, szLabel);//avoid conflict
+	
+	//COPY OF GUI::AlignRight(buttonWidth);
+	float ColumnContentWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x;
+	float buttonPosX = ImGui::GetColumnOffset() + ColumnContentWidth - buttonWidth;
+	ImGui::SetCursorPosX(buttonPosX);
+	if (ImGui::Button(szBuffer))
+	{
+		ImGui::OpenPopup(szLabel);
+	}
+
+	if (ImGui::BeginPopup(szLabel))
+	{
+		ImGui::Text("Press a key...");
+		for (int key = 0x01; key <= 0xFE; ++key)
+		{
+			if (GetAsyncKeyState(key) & 0x8000)
+			{
+				*pValue = key;
+				bValueChanged = true;
+				ImGui::CloseCurrentPopup();
+				break;
+			}
+		}
+
+		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+		{
+			*pValue = 0U;
+			ImGui::CloseCurrentPopup();
+		}
+
+		ImGui::EndPopup();
+	}
+
+	return bValueChanged;
+}
+
 
 namespace GUI
 {
@@ -135,6 +197,7 @@ namespace GUI
 
 	// Components Settings
 	// ########################################
+
 	void AlignRight(float ContentWidth)
 	{
 		float ColumnContentWidth = ImGui::GetColumnWidth() - ImGui::GetStyle().ItemSpacing.x;
@@ -240,6 +303,7 @@ namespace GUI
 
 	void NewGui()
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		LoadImages();
 		ImTextureID ImageID;
 		ImVec2 LogoSize, LogoPos;
@@ -290,6 +354,7 @@ namespace GUI
 		ImGui::SetNextWindowSize({ 851,514 });
 		ImGui::Begin(XorStr("AimStar"), nullptr, Flags);
 		{
+			vecMenuPos = ImGui::GetWindowPos();
 			ImGui::SetCursorPos(LogoPos);
 			ImGui::Image(ImageID, LogoSize);
 			ImGui::SetCursorPos(ImVec2(20,5));
@@ -351,10 +416,9 @@ namespace GUI
 			ImGui::Text(XorStr("User:\n%s"), MenuConfig::UserName);
 			ImGui::EndChild();
 
-			ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 15);
-			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15, 85));
-#ifdef USERMODE
 
+			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 20, 85));
+#ifdef USERMODE
 			ImGui::Text(XorStr("Ring3-%s"), __DATE__);
 #else
 			ImGui::Text(XorStr("Kernel-%s"), __DATE__);
@@ -382,6 +446,7 @@ namespace GUI
 						{
 							PutSwitch(Lang::ESPtext.Outline, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::OutLine);
 							PutSliderInt(Lang::ESPtext.BoxType, 10.f, &MenuConfig::BoxType, &MinCombo, &MaxCombo, BoxTypes[MenuConfig::BoxType]);
+							if (MenuConfig::BoxType < 2)
 							PutSliderFloat(Lang::ESPtext.BoxRounding, 10.f, &ESPConfig::BoxRounding, &MinRounding, &MaxRouding, "%.1f");
 						}
 						PutSwitch(Lang::ESPtext.FilledBox, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::FilledBox, true, "###FilledBoxCol", reinterpret_cast<float*>(&ESPConfig::FilledColor));
@@ -413,11 +478,10 @@ namespace GUI
 					
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
-					ImGui::SeparatorText(XorStr(ICON_FA_GRIN_ALT " ESP Preview"));
+					//ImGui::SeparatorText(XorStr(ICON_FA_GRIN_ALT " ESP Preview"));
 					// ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() }, { ImGui::GetCursorPosX() - ImGui::GetColumnWidth() * 0.65f, ImGui::GetCursorPosY() - ImGui::GetFrameHeight() });
-					ESP::RenderPreview({ ImGui::GetColumnWidth(), ImGui::GetCursorPosY() });
-					ImGui::Dummy({ 0.f, ImGui::GetFrameHeight() * 9 });
 
+					//ImGui::Dummy({ 0.f, ImGui::GetFrameHeight() * 9 });
 					ImGui::SeparatorText(XorStr(ICON_FA_LIGHTBULB" Glow"));
 					float SpeedMin = 1.f, SpeedMax = 20.f;
 					PutSwitch(Lang::MiscText.EnemySensor, 5.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::EnemySensor, true, "###GlowCol", reinterpret_cast<float*>(&MiscCFG::GlowColor));
@@ -491,15 +555,19 @@ namespace GUI
 					if (MenuConfig::AimBot)
 					{
 						// PutSwitch("Silent Aim", 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::silent);
-						PutSwitch(Lang::AimbotText.Ragebot, 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::Rage);
-
+						// PutSwitch(Lang::AimbotText.Ragebot, 10.f, ImGui::GetFrameHeight() * 1.7, &AimControl::Rage);
+						// hide these shit
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
 						ImGui::TextDisabled(Lang::AimbotText.HotKeyList);
 						ImGui::SameLine();
+						ImGui::HotKey("Hotkey##aimbothotkey", &AimControl::HotKey);
+						/*
+
 						if (ImGui::Combo(XorStr("###AimKey"), &MenuConfig::AimBotHotKey, XorStr("LALT\0LBUTTON\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0")))
 						{
 							AimControl::SetHotKey(MenuConfig::AimBotHotKey);
 						}
+						*/
 						if (!AimControl::Rage)
 							PutSliderInt(Lang::AimbotText.BulletSlider, 10.f, &AimControl::AimBullet, &BulletMin, &BulletMax, "%d");
 						PutSwitch(Lang::AimbotText.Toggle, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::AimToggleMode);
@@ -517,7 +585,6 @@ namespace GUI
 							PutSliderFloat(Lang::AimbotText.SmoothSlider, 10.f, &AimControl::Smooth, &SmoothMin, &SmoothMax, "%.1f");
 						}
 						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
-						ImGui::TextDisabled(Lang::AimbotText.BoneList);
 						/*
 						ImGui::SameLine();
 						if (ImGui::Combo("###AimPos", &MenuConfig::AimPosition, "Head\0Neck\0Chest\0Penis\0"))
@@ -541,94 +608,6 @@ namespace GUI
 							}
 						}
 						*/
-						ImVec2 StartPos = ImGui::GetCursorScreenPos();
-						ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74), ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 203, StartPos.y + 63)); 
-						if (ImGui::Checkbox(XorStr("###Head"), &checkbox1))
-						{
-							if (checkbox1) {
-								addHitbox(BONEINDEX::head);
-							}
-							else {
-								removeHitbox(BONEINDEX::head);
-							}
-						}
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103), ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 39, StartPos.y + 92));
-						if (ImGui::Checkbox(XorStr("###Neck"), &checkbox2))
-						{
-							if (checkbox2) {
-								addHitbox(BONEINDEX::neck_0);
-							}
-							else {
-								removeHitbox(BONEINDEX::neck_0);
-							}
-						}
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141), ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 130));
-						if (ImGui::Checkbox(XorStr("###Chest"), &checkbox3))
-						{
-							if (checkbox3) {
-								addHitbox(BONEINDEX::spine_1);
-							}
-							else {
-								removeHitbox(BONEINDEX::spine_1);
-							}
-						}
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 167), ImVec2(StartPos.x + 44, StartPos.y + 167), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 24, StartPos.y + 156));
-						if (ImGui::Checkbox(XorStr("###Stomache"), &checkbox4))
-						{
-							if (checkbox4) {
-								addHitbox(BONEINDEX::spine_2);
-							}
-							else {
-								removeHitbox(BONEINDEX::spine_2);
-							}
-						}
-						ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200), ImVec2(StartPos.x + 195, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 189));
-						if (ImGui::Checkbox(XorStr("###Penis"), &checkbox5))
-						{
-							if (checkbox5) {
-								addHitbox(BONEINDEX::pelvis);
-							}
-							else {
-								removeHitbox(BONEINDEX::pelvis);
-							}
-						}
-						ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
-						ImGui::TextDisabled(Lang::AimbotText.SprayBoneList);
-						ImGui::SameLine();
-						if (ImGui::Combo(XorStr("###SparyPos"), &MenuConfig::SparyPosition, XorStr("Nearest\0Head\0Neck\0Chest\0Penis\0")))
-						{
-							switch (MenuConfig::SparyPosition)
-							{
-							case 0:
-								MenuConfig::SparyPositionIndex = 0xff;
-								break;
-							case 1:
-								MenuConfig::SparyPositionIndex = BONEINDEX::head;
-								checkbox1 = true;
-								break;
-							case 2:
-								MenuConfig::SparyPositionIndex = BONEINDEX::neck_0;
-								checkbox2 = true;
-								break;
-							case 3:
-								MenuConfig::SparyPositionIndex = BONEINDEX::spine_1;
-								checkbox3 = true;
-								break;
-							case 4:
-								MenuConfig::SparyPositionIndex = BONEINDEX::pelvis;
-								checkbox5 = true;
-								break;
-							default:
-								break;
-							}
-							CheckHitbox();
-						}
 					}
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
@@ -692,10 +671,7 @@ namespace GUI
 							ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 5.f);
 							ImGui::TextDisabled(Lang::TriggerText.HotKeyList);
 							ImGui::SameLine();
-							if (ImGui::Combo(XorStr("###TriggerbotKey"), &MenuConfig::TriggerHotKey, XorStr("LALT\0RBUTTON\0XBUTTON1\0XBUTTON2\0CAPITAL\0SHIFT\0CONTROL\0")))
-							{
-								TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
-							}
+							ImGui::HotKey("Hotkey##triggerbothotkey", &TriggerBot::HotKey);
 						}
 						PutSwitch(Lang::TriggerText.Toggle, 5.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TriggerAlways);
 						PutSwitch(Lang::TriggerText.ScopeOnly, 5.f, ImGui::GetFrameHeight() * 1.7, &TriggerBot::ScopeOnly);
@@ -743,7 +719,7 @@ namespace GUI
 					if (MiscCFG::MoneyService)
 						PutSwitch(Lang::MiscText.ShowCashSpent, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::ShowCashSpent);
 					PutSwitch(Lang::MiscText.SpecCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WorkInSpec);
-					// PutSwitch(Lang::MiscText.SpecList, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::SpecList);
+					PutSwitch(Lang::MiscText.SpecList, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::SpecList);
 					PutSwitch(Lang::MiscText.TeamCheck, 10.f, ImGui::GetFrameHeight() * 1.7, &MenuConfig::TeamCheck);
 					PutSwitch(Lang::MiscText.Watermark, 10.f, ImGui::GetFrameHeight() * 1.7, &MiscCFG::WaterMark);
 
@@ -864,7 +840,7 @@ namespace GUI
 					ImGui::Columns(2, nullptr, false);
 					ConfigMenu::RenderCFGmenu();
 
-					int FPS = 1200;
+					int FPS = 1201;
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(XorStr("Cheat Settings"));
@@ -883,6 +859,220 @@ namespace GUI
 				}
 			} ImGui::EndChild();
 		} ImGui::End();
+
+		ImVec2 mousePos = ImGui::GetMousePos();
+		float interpolationFactorX = 0.035f;
+		float interpolationFactorY = 0.015f;
+		ImVec2 center = ImVec2(vecMenuPos.x - 250, vecMenuPos.y + 35);
+		float radius = 40;
+		ImVec2 factor = ImVec2(interpolationFactorX * (mousePos.x - vecMenuPos.x), interpolationFactorY * (mousePos.y - vecMenuPos.y));
+		ImVec2 interpolatedPos = center - factor;
+
+		// 计算 interpolatedPos 到圆心的距离
+		float dx = interpolatedPos.x - center.x;
+		float dy = interpolatedPos.y - center.y;
+		float distance = sqrt(dx * dx + dy * dy);
+
+		// 如果距离超过半径，则调整 interpolatedPos
+		if (distance > radius)
+		{
+			float scale = radius / distance;
+			factor.x = -dx * scale;
+			factor.y = -dy * scale;
+			interpolatedPos = center - factor;
+		}
+
+		ImGui::PushStyleColor(ImGuiCol_WindowShadow, ImVec4(0, 0, 0, 0));
+		ImGui::SetNextWindowPos(interpolatedPos);
+		
+		ImGui::Begin(XorStr("moe"), nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_::ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_::ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_::ImGuiWindowFlags_NoNavFocus | ImGuiWindowFlags_::ImGuiWindowFlags_NoNav);
+		{
+			ImGui::SetCursorPos(ImVec2{ 50 , 25 });
+			if (MenuConfig::WCS.MenuPage == 1 && MenuConfig::AimBot)
+			{
+				ImGui::TextDisabled(Lang::AimbotText.BoneList);
+				ImVec2 StartPos = ImGui::GetCursorScreenPos() + factor * 0.25f;
+				ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 130, StartPos.y + 74) - factor * 0.25f, ImVec2(StartPos.x + 205, StartPos.y + 74), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Head
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 203, StartPos.y + 63));
+				if (ImGui::Checkbox(XorStr("###Head"), &checkbox1))
+				{
+					if (checkbox1) {
+						addHitbox(BONEINDEX::head);
+					}
+					else {
+						removeHitbox(BONEINDEX::head);
+					}
+				}
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 129, StartPos.y + 103) - factor * 0.25f, ImVec2(StartPos.x + 59, StartPos.y + 103), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Neck
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 39, StartPos.y + 92));
+				if (ImGui::Checkbox(XorStr("###Neck"), &checkbox2))
+				{
+					if (checkbox2) {
+						addHitbox(BONEINDEX::neck_0);
+					}
+					else {
+						removeHitbox(BONEINDEX::neck_0);
+					}
+				}
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 120, StartPos.y + 141) - factor * 0.25f, ImVec2(StartPos.x + 195, StartPos.y + 141), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Chest
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 130));
+				if (ImGui::Checkbox(XorStr("###Chest"), &checkbox3))
+				{
+					if (checkbox3) {
+						addHitbox(BONEINDEX::spine_1);
+					}
+					else {
+						removeHitbox(BONEINDEX::spine_1);
+					}
+				}
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 167) - factor * 0.25f, ImVec2(StartPos.x + 44, StartPos.y + 167), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 24, StartPos.y + 156));
+				if (ImGui::Checkbox(XorStr("###Stomache"), &checkbox4))
+				{
+					if (checkbox4) {
+						addHitbox(BONEINDEX::spine_2);
+					}
+					else {
+						removeHitbox(BONEINDEX::spine_2);
+					}
+				}
+				ImGui::GetWindowDrawList()->AddLine(ImVec2(StartPos.x + 119, StartPos.y + 200) - factor * 0.25f, ImVec2(StartPos.x + 195, StartPos.y + 200), ImColor(ImGui::GetStyleColorVec4(ImGuiCol_Border)), 1.8f); // Penis
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x + 193, StartPos.y + 189));
+				if (ImGui::Checkbox(XorStr("###Penis"), &checkbox5))
+				{
+					if (checkbox5) {
+						addHitbox(BONEINDEX::pelvis);
+					}
+					else {
+						removeHitbox(BONEINDEX::pelvis);
+					}
+				}
+				ImGui::SetCursorScreenPos(ImVec2(StartPos.x, StartPos.y + hitboxH));
+				ImGui::TextDisabled(Lang::AimbotText.SprayBoneList);
+				ImGui::SameLine();
+				ImGui::SetNextItemWidth(hitboxW * 0.75f);
+				if (ImGui::Combo(XorStr("###SparyPos"), &MenuConfig::SparyPosition, XorStr("Nearest\0Head\0Neck\0Chest\0Penis\0")))
+				{
+					switch (MenuConfig::SparyPosition)
+					{
+					case 0:
+						MenuConfig::SparyPositionIndex = 0xff;
+						break;
+					case 1:
+						MenuConfig::SparyPositionIndex = BONEINDEX::head;
+						checkbox1 = true;
+						break;
+					case 2:
+						MenuConfig::SparyPositionIndex = BONEINDEX::neck_0;
+						checkbox2 = true;
+						break;
+					case 3:
+						MenuConfig::SparyPositionIndex = BONEINDEX::spine_1;
+						checkbox3 = true;
+						break;
+					case 4:
+						MenuConfig::SparyPositionIndex = BONEINDEX::pelvis;
+						checkbox5 = true;
+						break;
+					default:
+						break;
+					}
+					CheckHitbox();
+				}
+			}
+			else
+			{
+				ImGui::TextDisabled(" ");
+				ImGui::Image((void*)HitboxImage, ImVec2(hitboxW, hitboxH));
+				ImVec2 StartPos = ImGui::GetWindowPos() + factor * 0.05f;
+				//draw bone stuff here
+				if (ESPConfig::ShowBoneESP) {
+					ImU32 boneColor = ESPConfig::BoneColor;
+					ImVec2 SpineStart(StartPos.x + 138, StartPos.y + 150);
+					ImVec2 SpineEnd(StartPos.x + 120, StartPos.y + 218);
+					ImGui::GetWindowDrawList()->AddLine(SpineStart, SpineEnd, boneColor, 1.8f); // Neck to Spine
+					ImVec2 PelvisStart(StartPos.x + 120, StartPos.y + 218);
+					ImVec2 PelvisEnd(StartPos.x + 125, StartPos.y + 235);
+					ImGui::GetWindowDrawList()->AddLine(PelvisStart, PelvisEnd, boneColor, 1.8f); // Spine to Pelvis
+					ImVec2 UL_LegStart(StartPos.x + 125, StartPos.y + 235);
+					ImVec2 UL_LegEnd(StartPos.x + 143, StartPos.y + 253);
+					ImGui::GetWindowDrawList()->AddLine(UL_LegStart, UL_LegEnd, boneColor, 1.8f); // Left Leg_Up
+					ImVec2 ML_LegStart(StartPos.x + 143, StartPos.y + 253);
+					ImVec2 ML_LegEnd(StartPos.x + 130, StartPos.y + 330);
+					ImGui::GetWindowDrawList()->AddLine(ML_LegStart, ML_LegEnd, boneColor, 1.8f); // Left Leg_Mid
+					ImVec2 DL_LegStart(StartPos.x + 130, StartPos.y + 330);
+					ImVec2 DL_LegEnd(StartPos.x + 166, StartPos.y + 340);
+					ImGui::GetWindowDrawList()->AddLine(DL_LegStart, DL_LegEnd, boneColor, 1.8f); // Left Leg_Down
+					ImVec2 UR_LegStart(StartPos.x + 125, StartPos.y + 235);
+					ImVec2 UR_LegEnd(StartPos.x + 105, StartPos.y + 247);
+					ImGui::GetWindowDrawList()->AddLine(UR_LegStart, UR_LegEnd, boneColor, 1.8f); // Right Leg_Up
+					ImVec2 MR_LegStart(StartPos.x + 105, StartPos.y + 247);
+					ImVec2 MR_LegEnd(StartPos.x + 111, StartPos.y + 315);
+					ImGui::GetWindowDrawList()->AddLine(MR_LegStart, MR_LegEnd, boneColor, 1.8f); // Right Leg_Mid
+					ImVec2 DR_LegStart(StartPos.x + 111, StartPos.y + 315);
+					ImVec2 DR_LegEnd(StartPos.x + 107, StartPos.y + 325);
+					ImGui::GetWindowDrawList()->AddLine(DR_LegStart, DR_LegEnd, boneColor, 1.8f); // Right Leg_Down
+					ImVec2 L_ScapulaStart(StartPos.x + 140, StartPos.y + 160);
+					ImVec2 L_ScapulaEnd(StartPos.x + 156, StartPos.y + 168);
+					ImGui::GetWindowDrawList()->AddLine(L_ScapulaStart, L_ScapulaEnd, boneColor, 1.8f); // Left Scapula
+					ImVec2 UL_ArmStart(StartPos.x + 156, StartPos.y + 168);
+					ImVec2 UL_ArmEnd(StartPos.x + 166, StartPos.y + 212);
+					ImGui::GetWindowDrawList()->AddLine(UL_ArmStart, UL_ArmEnd, boneColor, 1.8f); // Left Arm_Up
+					ImVec2 DL_ArmStart(StartPos.x + 166, StartPos.y + 212);
+					ImVec2 DL_ArmEnd(StartPos.x + 162, StartPos.y + 183);
+					ImGui::GetWindowDrawList()->AddLine(DL_ArmStart, DL_ArmEnd, boneColor, 1.8f); // Left Arm_Down
+					ImVec2 R_ScapulaStart(StartPos.x + 140, StartPos.y + 160);
+					ImVec2 R_ScapulaEnd(StartPos.x + 116, StartPos.y + 168);
+					ImGui::GetWindowDrawList()->AddLine(R_ScapulaStart, R_ScapulaEnd, boneColor, 1.8f); // Right Scapula
+					ImVec2 UR_ArmStart(StartPos.x + 116, StartPos.y + 168);
+					ImVec2 UR_ArmEnd(StartPos.x + 100, StartPos.y + 200);
+					ImGui::GetWindowDrawList()->AddLine(UR_ArmStart, UR_ArmEnd, boneColor, 1.8f); // Right Arm_Up
+					ImVec2 DR_ArmStart(StartPos.x + 100, StartPos.y + 200);
+					ImVec2 DR_ArmEnd(StartPos.x + 102, StartPos.y + 172);
+					ImGui::GetWindowDrawList()->AddLine(DR_ArmStart, DR_ArmEnd, boneColor, 1.8f); // Right Arm_Down
+				}
+				if (ESPConfig::ShowPenis)
+				{
+					ImU32 PenisCol = ESPConfig::PenisColor;
+					ImVec2 BoneStart(StartPos.x + 125, StartPos.y + 235);
+					ImVec2 BoneEnd(StartPos.x + 120, StartPos.y + 257);
+					ImGui::GetWindowDrawList()->AddLine(BoneStart, BoneEnd, PenisCol, 2.0f);
+				}
+				if (ESPConfig::ShowHeadBox) {
+					switch (ESPConfig::HeadBoxStyle)
+					{
+					case 0:
+						ImGui::GetWindowDrawList()->AddCircle({ StartPos.x + 137, StartPos.y + 125 }, 26.0f, ESPConfig::HeadBoxColor, 0, 1.8f);
+						break;
+					case 1:
+						ImGui::GetWindowDrawList()->AddCircleFilled({ StartPos.x + 137, StartPos.y + 125 }, 26.0f, ESPConfig::HeadBoxColor, 0);
+					default:
+						break;
+					}
+
+				}
+				if (ESPConfig::ShowEyeRay) {
+					ImU32 EyeC = ESPConfig::EyeRayColor;
+					ImVec2 lineStart(StartPos.x + 135, StartPos.y + 130);
+					ImVec2 lineEnd(StartPos.x + 115, StartPos.y + 160);
+					ImGui::GetWindowDrawList()->AddLine(lineStart, lineEnd, EyeC, 2.0f);
+				}
+				ImGui::SetCursorPos(ImVec2{ 75 , 90 });
+				ImVec4 Rect;
+				if (MenuConfig::BoxType == 1)
+					Rect = ImVec4{ ImGui::GetWindowPos().x + ImGui::GetCursorPosX() + 20, ImGui::GetWindowPos().y + ImGui::GetCursorPosY() + 10, hitboxW * .3f, hitboxH * .8f };
+				else
+					Rect = ImVec4{ ImGui::GetWindowPos().x + ImGui::GetCursorPosX(), ImGui::GetWindowPos().y + ImGui::GetCursorPosY(), hitboxW * .5f, hitboxH * .85f };
+				Rect.x -= factor.x * 0.25f;
+				Rect.y -= factor.y * 0.15f;
+				ESP::RenderPreviewESP(Rect);
+				
+			}
+
+	}
+		ImGui::End();
+		ImGui::PopStyleColor();
 
 		LoadDefaultConfig();
 	}

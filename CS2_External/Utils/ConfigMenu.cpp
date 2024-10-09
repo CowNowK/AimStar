@@ -219,15 +219,14 @@ namespace ConfigMenu {
 		MenuConfig::VisibleCheck = true;
 		MenuConfig::ShowHeadShootLine = false;
 		MenuConfig::HeadShootLineColor = ImColor(255, 255, 255, 200);
-		MenuConfig::AimBotHotKey = 0;
-		AimControl::SetHotKey(MenuConfig::AimBotHotKey);
+		TriggerBot::HotKey = VK_LBUTTON;
+		//AimControl::SetHotKey(MenuConfig::AimBotHotKey);
 		ESPConfig::ShowLineToEnemy = false;
 		MenuConfig::FovLineSize = 60.0f;
 		TriggerBot::TriggerDelay = 90;
 		TriggerBot::ShotDuration = 500;
 		RCS::RCSBullet = 1;
-		MenuConfig::TriggerHotKey = 0;
-		TriggerBot::SetHotKey(MenuConfig::TriggerHotKey);
+		TriggerBot::HotKey = VK_XBUTTON2;
 		RCS::RCSScale = ImVec2(1.2f, 1.4f);
 		AimControl::ScopeOnly = false;
 		AimControl::AutoShot = false;

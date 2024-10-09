@@ -3,6 +3,7 @@
 #include <iostream>
 #include <Shellapi.h>
 #include "../Utils/XorStr.h"
+#include <mutex>
 
 namespace Misc
 {
@@ -20,17 +21,18 @@ namespace Misc
 
 		//	globalvars GV;
 		ImGuiWindowFlags windowFlags = ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize;
-		ImGui::SetNextWindowBgAlpha(0.5f);
+		ImVec4 default_bg_color = ImGui::GetStyleColorVec4(ImGuiCol_WindowBg);
+		default_bg_color.w = 0.5f;
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, default_bg_color);
+		//ImGui::SetNextWindowBgAlpha(0.5f);
 		ImGui::Begin(XorStr("Watermark"), nullptr, windowFlags);
-
 
 		// Current Time
 		struct tm ptm;
 		getCurrentTime(&ptm);
 
 		// Player Ping
-		int playerPing;
-		ProcessMgr.ReadMemory(LocalPlayer.Controller.Address + Offset::PlayerController.m_iPing, playerPing);
+		int playerPing = MenuConfig::Ping;
 
 		// Player Pos
 		Vec3 Pos = LocalPlayer.Pawn.Pos;
@@ -46,7 +48,7 @@ namespace Misc
 		ImGui::Text(XorStr("Pos: %.2f, %.2f, %.2f"), Pos.x, Pos.y, Pos.z);
 		ImGui::Text(XorStr("Angle: %.2f, %.2f"), Angle.x, Angle.y);
 		ImGui::Text(XorStr("Vel: %.2f"), LocalPlayer.Pawn.Speed);
-
+		ImGui::PopStyleColor();
 		ImGui::End();
 	}
 
@@ -112,6 +114,7 @@ namespace Misc
 
 	void HitMarker(float Size, float Gap)
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		ImGuiIO& io = ImGui::GetIO();
 		ImVec2 center = ImVec2(Gui.Window.Size.x / 2, Gui.Window.Size.y / 2);
 
@@ -132,6 +135,8 @@ namespace Misc
 
 	void FlashImmunity(const CEntity& aLocalPlayer) noexcept
 	{
+		if (MiscCFG::FlashImmunity == 0)
+			return;
 		float MaxAlpha = 255.f - MiscCFG::FlashImmunity;
 		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
 	}
@@ -249,6 +254,8 @@ namespace Misc
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
 	{
+		if (MiscCFG::Fov == 90)
+			return;
 		DWORD64 CameraServices = 0;
 		if (Zoom)
 			return;
@@ -257,7 +264,7 @@ namespace Misc
 			return;
 
 		UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
-		ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Desiredfov);
+		ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::CBasePlayerController.m_iDesiredFOV, Desiredfov);
 
 	}
 
@@ -295,8 +302,7 @@ namespace Misc
 		HWND hwnd_perfectworld = FindWindowA(NULL, "\u53cd\u6050\u7cbe\u82f1\uff1a\u5168\u7403\u653b\u52bf");
 
 		if (hwnd_cs2 == NULL) {
-			hwnd_cs2 = FindWindowA(NULL, "Counter-Strike 2");
-			HWND foreground_window = hwnd_perfectworld;
+			hwnd_cs2 = hwnd_perfectworld;
 		}
 		int ForceJump;
 		bool spacePressed = GetAsyncKeyState(VK_SPACE);
@@ -308,10 +314,11 @@ namespace Misc
 			// As of the latest update (11/8/2023) bhop doesn't work at all with sendinput,
 			// if +jump is sent on the same tick that you land on the ground, the jump won't register.
 			// But you can add 15ms of delay right before your sendinput to fix this problem temporarily
-			std::this_thread::sleep_for(std::chrono::microseconds(15627));
+			std::this_thread::sleep_for(std::chrono::microseconds(15626));
 			// Refer to -> https://www.unknowncheats.me/forum/counter-strike-2-a/609480-sendinput-bhop-inconsistency.html
 			//gGame.SetForceJump(65537);
 			SendMessage(hwnd_cs2, WM_KEYDOWN, VK_SPACE, 0);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			SendMessage(hwnd_cs2, WM_KEYUP, VK_SPACE, 0);
 
 		}
@@ -375,7 +382,7 @@ namespace Misc
 		if (Zoom)
 		{
 			UINT Scopefov = 45;
-			ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::Pawn.DesiredFov, Scopefov);
+			ProcessMgr.WriteMemory<UINT>(aLocalPlayer.Controller.Address + Offset::CBasePlayerController.m_iDesiredFOV, Scopefov);
 		}
 			
 	}
@@ -419,8 +426,7 @@ namespace Misc
 		bool isOnGround = AirCheck(Local);
 		if (!isOnGround)
 		{
-			Vec3 Velocity;
-			ProcessMgr.ReadMemory<Vec3>(Local.Pawn.Address + Offset::Pawn.AbsVelocity, Velocity);
+			Vec3 Velocity = Local.Pawn.Velocity;
 
 			if (Velocity.z > 250.f || Velocity.z < 200.f)
 				return;
@@ -429,28 +435,67 @@ namespace Misc
 			mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
 		}
 	}
+	DWORD64 GethPawn(uint64_t Target)
+	{
+		DWORD64 EntityPawnListEntry = 0;
+		DWORD64 EntityPawnAddress = 0;
 
-	void SpectatorList(const CEntity& Local, const CEntity& Entity) {
+		if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListAddress(), EntityPawnListEntry))
+			return 0;
+
+		if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnListEntry + 0x10 + 8 * ((Target & 0x7FFF) >> 9), EntityPawnListEntry))
+			return 0;
+
+		if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnListEntry + 0x78 * (Target & 0x1FF), EntityPawnAddress))
+			return 0;
+
+		return EntityPawnAddress;
+	}
+	void SpectatorList(const CEntity& Local) {
 		if (!MiscCFG::SpecList)
 			return;
 
-		std::vector<std::string> spectators;
+		//render method de tkkr by ukia
+		ImGui::SetNextWindowSizeConstraints(ImVec2(200, 100), ImGui::GetIO().DisplaySize);
+		ImGui::Begin(XorStr("Spectators"), nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_::ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_::ImGuiWindowFlags_NoNavFocus | ImGuiWindowFlags_::ImGuiWindowFlags_NoNav);
+		{
+			ImGui::SetCursorPosY(22);
+			if (!MenuConfig::ValidEntity.empty())
+			{
+				int count = 0;
+				for (int index = 0; index < MenuConfig::ValidEntity.size(); index++)//traverse again.
+				{
+					
+					CEntity Entity = MenuConfig::ValidEntity[index].first;
+					DWORD64 EntityAddress = MenuConfig::ValidEntity[index].second;
+					auto pPlayer = Entity.Controller;
+					
+					/*
+					if (!Entity.UpdatePawn(Entity.Pawn.Address))
+						continue;
+					*/
 
-		DWORD64 l_pawn, l_observe, l_spec;
-		ProcessMgr.ReadMemory(Entity.Controller.Address + Offset::PlayerController.m_pObserverServices, l_pawn);
-		ProcessMgr.ReadMemory(l_pawn + Offset::PlayerController.m_hObserverTarget, l_observe);
-		ProcessMgr.ReadMemory(l_observe + Offset::PlayerController.m_hController, l_spec);
+					//jakebooom idea + tokikiri stuff
+					uintptr_t obsServices;
+					if (!ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::PlayerController.m_pObserverServices, obsServices))
+						continue;
 
-		if (l_observe == Local.Pawn.Address) {
-			spectators.push_back(Entity.Controller.PlayerName);
+					uint64_t obsTarget;
+					if (!ProcessMgr.ReadMemory(obsServices + Offset::PlayerController.m_hObserverTarget, obsTarget))
+						continue;
+					uintptr_t obsPawn = GethPawn(obsTarget);
+
+					if (obsPawn != Local.Pawn.Address)
+						continue;
+
+					std::string Name = pPlayer.PlayerName;
+					ImGui::BulletText(Name.c_str());
+				}
+			}
 		}
 
-		if (spectators.empty())
-			return;
+		ImGui::End();
 
-		for (size_t i{}; i < spectators.size(); ++i) {
-			auto msg = spectators[i];
-			Gui.StrokeText(msg.substr(0, 24), ImVec2(Gui.Window.Size.x / 2, Gui.Window.Size.y / 2), 18.f, true);
-		}
 	}
+
 }

@@ -80,7 +80,7 @@ bool CEntity::UpdateController(const DWORD64& PlayerControllerAddress)
 	if (!this->Controller.GetMoney())
 		return false;
 
-	this->Pawn.Address = this->Controller.GetPlayerPawnAddress();
+	this->Pawn.Address = this->Controller.GetPlayerhPawnAddress();//this->Controller.GetPlayerPawnAddress();
 	return true;
 }
 
@@ -157,12 +157,12 @@ bool PlayerController::GetMoney()
 
 bool PlayerController::GetTeamID()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.iTeamNum, this->TeamID);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_iTeamNum, this->TeamID);
 }
 
 bool PlayerController::GetHealth()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentHealth, this->Health);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_iHealth, this->Health);
 }
 
 bool PlayerController::GetIsAlive()
@@ -189,7 +189,7 @@ bool PlayerController::GetPlayerName()
 {
 	char Buffer[MAX_PATH]{};
 
-	if (!ProcessMgr.ReadMemory(Address + Offset::Entity.iszPlayerName, Buffer, MAX_PATH))
+	if (!ProcessMgr.ReadMemory(Address + Offset::CBasePlayerController.m_iszPlayerName, Buffer, MAX_PATH))
 		return false;
 	if (!this->SteamID)
 		this->PlayerName = "BOT " + std::string(Buffer);
@@ -203,7 +203,7 @@ bool PlayerController::GetPlayerName()
 
 bool PlayerController::GetPlayerSteamID()
 {
-	return GetDataAddressWithOffset<INT64>(Address, Offset::PlayerController.m_steamID, this->SteamID);
+	return GetDataAddressWithOffset<INT64>(Address, Offset::CBasePlayerController.m_steamID, this->SteamID);
 }
 bool PlayerPawn::GetViewAngle()
 {
@@ -255,7 +255,7 @@ bool PlayerPawn::GetAimPunchAngle()
 
 bool PlayerPawn::GetTeamID()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.iTeamNum, this->TeamID);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_iTeamNum, this->TeamID);
 }
 
 bool PlayerPawn::GetAimPunchCache()
@@ -284,6 +284,27 @@ DWORD64 PlayerController::GetPlayerPawnAddress()
 }
 
 
+DWORD64 PlayerController::GetPlayerhPawnAddress()
+{
+	DWORD64 EntityPawnListEntry = 0;
+	DWORD64 EntityPawnAddress = 0;
+
+	if (!GetDataAddressWithOffset<DWORD>(Address, Offset::CBasePlayerController.m_hPawn, this->Pawn))
+		return 0;
+
+	if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListAddress(), EntityPawnListEntry))
+		return 0;
+
+	if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnListEntry + 0x10 + 8 * ((Pawn & 0x7FFF) >> 9), EntityPawnListEntry))
+		return 0;
+
+	if (!ProcessMgr.ReadMemory<DWORD64>(EntityPawnListEntry + 0x78 * (Pawn & 0x1FF), EntityPawnAddress))
+		return 0;
+
+	return EntityPawnAddress;
+}
+
+
 
 bool PlayerPawn::GetPos()
 {
@@ -292,7 +313,7 @@ bool PlayerPawn::GetPos()
 
 bool PlayerPawn::GetHealth()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentHealth, this->Health);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_iHealth, this->Health);
 }
 
 bool PlayerPawn::GetArmor()
@@ -340,7 +361,7 @@ bool PlayerPawn::GetFov()
 
 bool PlayerPawn::GetFFlags()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.fFlags, this->fFlags);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_fFlags, this->fFlags);
 }
 
 bool PlayerPawn::GetDefusing()
@@ -355,7 +376,7 @@ bool PlayerPawn::GetFlashDuration()
 
 bool PlayerPawn::GetVelocity()
 {
-	if (!ProcessMgr.ReadMemory(Address + Offset::Pawn.AbsVelocity, this->Velocity))
+	if (!ProcessMgr.ReadMemory(Address + Offset::C_BaseEntity.m_vecAbsVelocity, this->Velocity))
 		return false;
 	this->Speed = sqrt(this->Velocity.x * this->Velocity.x + this->Velocity.y * this->Velocity.y);
 	return true;

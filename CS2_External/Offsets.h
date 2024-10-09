@@ -2,12 +2,32 @@
 #include <Windows.h>
 #include "Utils/ProcessManager.hpp"
 #include "Utils/Helpers.h"
+
 #include "a2x/offsets.hpp"
 #include "a2x/client_dll.hpp"
 #include "a2x/buttons.hpp"
-
-
-
+/*
+We using a2x header for quick PoC while develop & to figure out type of data
+In the end, we use our own offset system by reading offset.yaml for release version.
+*/
+class CGlobalVarsBase
+{
+public:
+	float m_realtime; //0x0000
+	int32_t m_framecount; //0x0004
+	float m_frametime; //0x0008
+	float m_abs_frametime; //0x000C
+	int32_t m_maxclients; //0x0010
+	char pad_0014[28]; //0x0014
+	float m_frametime2; //0x0030
+	float m_curtime; //0x0034
+	float m_curtime2; //0x0038
+	char pad_003C[20]; //0x003C
+	int32_t m_tickcount; //0x0050
+	char pad_0054[292]; //0x0054
+	uint64_t m_current_map; //0x0178
+	uint64_t m_current_mapname; //0x0180
+};
 namespace Offset
 {
 
@@ -32,15 +52,37 @@ namespace Offset
 
 	struct
 	{
+		DWORD m_flGravityScale = cs2_dumper::schemas::client_dll::C_BaseEntity::m_flGravityScale;
+		DWORD m_iMaxHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iMaxHealth;				// C_BaseEntity::m_iMaxHealth
+		DWORD m_iHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iHealth;// C_BaseEntity::m_iHealth
+		DWORD m_pGameSceneNode = cs2_dumper::schemas::client_dll::C_BaseEntity::m_pGameSceneNode;			// C_BaseEntity::m_pGameSceneNode
+		DWORD m_vecAbsVelocity = cs2_dumper::schemas::client_dll::C_BaseEntity::m_vecAbsVelocity;
+		DWORD m_fFlags = cs2_dumper::schemas::client_dll::C_BaseEntity::m_fFlags;
+		DWORD m_iTeamNum = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iTeamNum;
+	} C_BaseEntity;//依旧使用匿名结构体，避免日后对变量类型命名规范化导致的冲突
+
+	struct
+	{
+		DWORD GlowFunction = cs2_dumper::schemas::client_dll::C_BaseModelEntity::m_Glow + cs2_dumper::schemas::client_dll::CGlowProperty::m_bGlowing;
+		DWORD GlowColorOverride = cs2_dumper::schemas::client_dll::C_BaseModelEntity::m_Glow + cs2_dumper::schemas::client_dll::CGlowProperty::m_glowColorOverride;
+	} C_BaseModelEntity;
+	struct
+	{
+		DWORD m_hPawn = cs2_dumper::schemas::client_dll::CBasePlayerController::m_hPawn;
+		DWORD m_iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
+		DWORD m_iDesiredFOV = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iDesiredFOV;
+		DWORD m_steamID = cs2_dumper::schemas::client_dll::CBasePlayerController::m_steamID;
+	} CBasePlayerController;
+
+	struct
+	{
 		DWORD IsAlive = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnIsAlive;
 		DWORD m_bControllingBot = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bControllingBot;
 		DWORD m_bEverPlayedOnTeam = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bEverPlayedOnTeam;
 		DWORD PlayerPawn = cs2_dumper::schemas::client_dll::CCSPlayerController::m_hPlayerPawn;
-		DWORD iszPlayerName = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iszPlayerName;
+
 		DWORD m_sSanitizedPlayerName = cs2_dumper::schemas::client_dll::CCSPlayerController::m_sSanitizedPlayerName;
-		DWORD GravityScale = cs2_dumper::schemas::client_dll::C_BaseEntity::m_flGravityScale;
-		DWORD GlowFunction = cs2_dumper::schemas::client_dll::C_BaseModelEntity::m_Glow + cs2_dumper::schemas::client_dll::CGlowProperty::m_bGlowing;
-		DWORD GlowColorOverride = cs2_dumper::schemas::client_dll::C_BaseModelEntity::m_Glow + cs2_dumper::schemas::client_dll::CGlowProperty::m_glowColorOverride;
+
 	}Entity;
 
 	struct
@@ -62,9 +104,6 @@ namespace Offset
 		DWORD Pos = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_vOldOrigin;// C_BasePlayerPawn::m_vOldOrigin
 		DWORD absPos = cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;;
 		DWORD CurrentArmor = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_ArmorValue;// C_CSPlayerPawn::m_ArmorValue
-		DWORD MaxHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iMaxHealth;				// C_BaseEntity::m_iMaxHealth
-		DWORD CurrentHealth = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iHealth;// C_BaseEntity::m_iHealth
-		DWORD GameSceneNode = cs2_dumper::schemas::client_dll::C_BaseEntity::m_pGameSceneNode;			// C_BaseEntity::m_pGameSceneNode
 		DWORD BoneArray = 0x1F0; // cs2_dumper::schemas::client_dll::CSkeletonInstance::m_modelState + cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;//cs2_dumper::schemas::client_dll::CGameSceneNode::m_vecOrigin;				// CSkeletonInstance_::m_modelState + CGameSceneNode_::m_vecOrigin
 		DWORD angEyeAngles = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_angEyeAngles;
 		DWORD vecLastClipCameraPos = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_vecLastClipCameraPos;
@@ -74,12 +113,9 @@ namespace Offset
 		DWORD aimPunchAngle = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchAngle;			// C_CSPlayerPawn::m_aimPunchAngle
 		DWORD aimPunchCache = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_aimPunchCache;
 		DWORD iIDEntIndex = cs2_dumper::schemas::client_dll::C_CSPlayerPawnBase::m_iIDEntIndex;
-		DWORD iTeamNum = cs2_dumper::schemas::client_dll::C_BaseEntity::m_iTeamNum;
-		DWORD DesiredFov = cs2_dumper::schemas::client_dll::CBasePlayerController::m_iDesiredFOV;
+
 		DWORD iFovStart = cs2_dumper::schemas::client_dll::CCSPlayerBase_CameraServices::m_iFOVStart;
-		DWORD fFlags = cs2_dumper::schemas::client_dll::C_BaseEntity::m_fFlags;
 		DWORD bSpottedByMask = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_entitySpottedState + cs2_dumper::schemas::client_dll::EntitySpottedState_t::m_bSpottedByMask;	// C_CSPlayerPawn::entitySpottedState + EntitySpottedState_t::bSpottedByMask
-		DWORD AbsVelocity = cs2_dumper::schemas::client_dll::C_BaseEntity::m_vecAbsVelocity;
 		DWORD IsBuying = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bIsBuyMenuOpen;
 		DWORD m_bWaitForNoAttack = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bWaitForNoAttack;
 		
@@ -87,29 +123,14 @@ namespace Offset
 
 	struct
 	{
-		DWORD RealTime = 0x00;
-		DWORD FrameCount = 0x04;
-		DWORD MaxClients = 0x10;
-		DWORD IntervalPerTick = 0x14;
-		DWORD CurrentTime = 0x2C;
-		DWORD CurrentTime2 = 0x30;
-		DWORD TickCount = 0x40;
-		DWORD IntervalPerTick2 = 0x44;
-		DWORD CurrentNetchan = 0x0048;
-		DWORD CurrentMap = 0x0180;
-		DWORD CurrentMapName = 0x0188;
-	} GlobalVar;
 
-	struct
-	{
-		DWORD m_hPawn = cs2_dumper::schemas::client_dll::CBasePlayerController::m_hPawn;
 		DWORD m_pObserverServices = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_pObserverServices;
 		DWORD m_hObserverTarget = cs2_dumper::schemas::client_dll::CPlayer_ObserverServices::m_hObserverTarget;
 		DWORD m_hController = cs2_dumper::schemas::client_dll::C_BasePlayerPawn::m_hController;
 		DWORD PawnArmor = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPawnArmor;
 		DWORD HasDefuser = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasDefuser;
 		DWORD HasHelmet = cs2_dumper::schemas::client_dll::CCSPlayerController::m_bPawnHasHelmet;
-		DWORD m_steamID = cs2_dumper::schemas::client_dll::CBasePlayerController::m_steamID;
+
 		DWORD m_iPing = cs2_dumper::schemas::client_dll::CCSPlayerController::m_iPing;
 	} PlayerController;
 
