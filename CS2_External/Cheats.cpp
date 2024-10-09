@@ -441,7 +441,10 @@ void Cheats::Run() noexcept
 
 	Misc::ForceScope(LocalEntity);
 	Misc::JumpThrow(LocalEntity);
-	Misc::FastStop(LocalEntity);
+
+	std::thread tFastStop(Misc::FastStop, LocalEntity);
+	tFastStop.detach();
+
 	/*thirdperson POC
 	int shit = 256;
 	ProcessMgr.WriteMemory<int>(gGame.GetCSGOInputAddress() + 0x250, shit);

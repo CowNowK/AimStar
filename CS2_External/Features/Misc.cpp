@@ -152,10 +152,10 @@ namespace Misc
 				const auto LocalYaw = aLocalPlayer.Pawn.ViewAngle.y;
 				const auto X = (LocalVel.x * cos(LocalYaw / 180 * 3.1415926) + LocalVel.y * sin(LocalYaw / 180 * 3.1415926));
 				const auto Y = (LocalVel.y * cos(LocalYaw / 180 * 3.1415926) - LocalVel.x * sin(LocalYaw / 180 * 3.1415926));
-				if (X > Trigger_Value) { keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_KEYUP, 0);}
-				else if (X < -Trigger_Value) { keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_KEYUP, 0); }
-				if (Y > Trigger_Value) { keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_KEYUP, 0); }
-				else if (Y < -Trigger_Value) { keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_KEYUP, 0); }
+				if (X > Trigger_Value) { keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_SCANCODE, 0); std::this_thread::sleep_for(std::chrono::milliseconds(1)); keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_KEYUP, 0);}
+				else if (X < -Trigger_Value) { keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_SCANCODE, 0); std::this_thread::sleep_for(std::chrono::milliseconds(1)); keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_KEYUP, 0); }
+				if (Y > Trigger_Value) { keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_SCANCODE, 0); std::this_thread::sleep_for(std::chrono::milliseconds(1)); keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_KEYUP, 0); }
+				else if (Y < -Trigger_Value) { keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_SCANCODE, 0); std::this_thread::sleep_for(std::chrono::milliseconds(1)); keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_KEYUP, 0); }
 		}
 
 		/*
