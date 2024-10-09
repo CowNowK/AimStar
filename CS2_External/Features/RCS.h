@@ -6,7 +6,7 @@
 
 namespace RCS
 {
-	inline int RCSBullet = 1;
+	inline int RCSBullet = 0;
 	inline Vec2 RCSScale = { 1.f,1.f };
 
 	inline void UpdateAngles(const CEntity& Local, Vec2& Angles)
@@ -73,8 +73,13 @@ namespace RCS
 	{
 		if (!MenuConfig::RCS)
 			return;
+		uintptr_t ClippingWeapon, WeaponData;
+		bool IsAuto;
+		ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon);
+		ProcessMgr.ReadMemory(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData);
+		ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.m_bIsFullAuto, IsAuto);
 		static Vec2 OldPunch;
-		if (LocalPlayer.Pawn.ShotsFired > RCSBullet)
+		if (LocalPlayer.Pawn.ShotsFired > RCSBullet && IsAuto)
 		{       
 			Vec2 viewAngles = LocalPlayer.Pawn.ViewAngle;
 			Vec2 delta = viewAngles - (viewAngles + (OldPunch - (LocalPlayer.Pawn.AimPunchAngle * 2.f)));

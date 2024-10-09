@@ -60,7 +60,7 @@ bool Offset::UpdateOffsets()
 	Offset::ForceLeft = MyConfigSaver::ReadData(offset["client_dll"]["left"], 0);
 	Offset::ForceRight = MyConfigSaver::ReadData(offset["client_dll"]["right"], 0);
 
-	Offset::Cvar.mp_teammates_are_enemies = MyConfigSaver::ReadData(offset["cvars"]["mp_teammates_are_enemies"], 0);
+	Offset::Cvar.mp_teammates_are_enemies = MyConfigSaver::ReadData(offset["cvars"]["mp_teammates_are_enemies"], Offset::Cvar.mp_teammates_are_enemies);
 
 	Offset::C_BaseEntity.m_flGravityScale = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_flGravityScale"], 0);
 	Offset::C_BaseEntity.m_iMaxHealth = MyConfigSaver::ReadData(offset["client_dll"]["C_BaseEntity"]["m_iMaxHealth"], 0);
@@ -148,6 +148,7 @@ bool Offset::UpdateOffsets()
 	Offset::WeaponBaseData.Item = MyConfigSaver::ReadData(offset["client_dll"]["C_AttributeContainer"]["m_Item"], 0);
 	Offset::WeaponBaseData.ItemDefinitionIndex = MyConfigSaver::ReadData(offset["client_dll"]["C_EconItemView"]["m_iItemDefinitionIndex"], 0);
 	Offset::WeaponBaseData.m_MeshGroupMask = MyConfigSaver::ReadData(offset["client_dll"]["CModelState"]["m_MeshGroupMask"], 0);
+	Offset::WeaponBaseData.m_bIsFullAuto = MyConfigSaver::ReadData(offset["client_dll"]["CCSWeaponBaseVData"]["m_bIsFullAuto"], 0);
 
 	Offset::EconEntity.AttributeManager = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_AttributeManager"], 0);
 	Offset::EconEntity.FallbackPaintKit = MyConfigSaver::ReadData(offset["client_dll"]["C_EconEntity"]["m_nFallbackPaintKit"], 0);

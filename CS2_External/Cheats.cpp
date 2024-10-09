@@ -248,7 +248,6 @@ void Cheats::Run() noexcept
 	float DistanceToSight = 0;
 	float MaxAimDistance = 100000;
 	CEntity NearestEntity;
-	Vec3  HeadPos{ 0,0,0 };
 	Vec2  Angles{ 0,0 };
 	std::vector<Vec3> AimPosList;
 

@@ -201,6 +201,7 @@ namespace Offset
 		DWORD Item = cs2_dumper::schemas::client_dll::C_AttributeContainer::m_Item;						// C_AttributeContainer::m_Item
 		DWORD ItemDefinitionIndex = cs2_dumper::schemas::client_dll::C_EconItemView::m_iItemDefinitionIndex;
 		DWORD m_MeshGroupMask = cs2_dumper::schemas::client_dll::CModelState::m_MeshGroupMask;			// CModelState::m_MeshGroupMask
+		DWORD m_bIsFullAuto = cs2_dumper::schemas::client_dll::CCSWeaponBaseVData::m_bIsFullAuto;
 	} WeaponBaseData;
 
 	struct // C_BaseCSGrenadeProjectile

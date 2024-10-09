@@ -104,6 +104,11 @@ namespace AimControl
 
         Vec2 ScreenPos;
 
+        uintptr_t ClippingWeapon, WeaponData;
+        bool IsAuto;
+        ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon);
+        ProcessMgr.ReadMemory(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData);
+        ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.m_bIsFullAuto, IsAuto);
 
         for (int i = 0; i < ListSize; i++)
         {
@@ -116,8 +121,9 @@ namespace AimControl
             Length = sqrt(Distance * Distance + OppPos.z * OppPos.z);
 
             // RCS by @Tairitsu
-            if (MenuConfig::RCS)
+            if (MenuConfig::RCS && IsAuto)
             {
+
                 RCS::UpdateAngles(Local, Angles);
                 float rad = Angles.x * RCS::RCSScale.x / 360.f * M_PI;
                 float si = sinf(rad);
