@@ -296,7 +296,6 @@ namespace Misc
 
 	void BunnyHop(const CEntity& Local) noexcept
 	{
-		std::lock_guard<std::mutex> lock(std::mutex);
 		if (!MiscCFG::BunnyHop)
 			return;
 		HWND hwnd_cs2 = FindWindowA(NULL, "Counter-Strike 2");

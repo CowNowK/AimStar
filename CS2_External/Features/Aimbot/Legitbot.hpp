@@ -209,8 +209,6 @@ namespace AimControl
                 mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0);
             }
 
-            int AimInterval = round(1000000.0f / MenuConfig::MaxFrameRate);
-            std::this_thread::sleep_for(std::chrono::microseconds(AimInterval));
         }
         else
             HasTarget = false;

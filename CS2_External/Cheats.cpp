@@ -20,22 +20,6 @@
 
 int PreviousTotalHits = 0;
 
-// Does not work and not use it for now
-void Cheats::KeyCheckThread() noexcept
-{
-	try
-	{
-        if ((GetAsyncKeyState(VK_INSERT) & 0x8000) || (GetAsyncKeyState(VK_DELETE) & 0x8000))
-		{
-			MenuConfig::ShowMenu = !MenuConfig::ShowMenu;
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(150));
-	}
-	catch (const std::exception& e) {
-		std::cout << e.what() << std::endl;
-	}
-}
-
 void Cheats::RadarSetting(Base_Radar& Radar) noexcept
 {
 	// Radar window 
@@ -310,7 +294,7 @@ void Cheats::Run() noexcept
 		GUI::InitHitboxList();
 		LastTick = MenuConfig::TickCount;
 		std::thread tBhop (Misc::BunnyHop,LocalEntity);
-		tBhop.join();
+		tBhop.detach();
 	}
 
 	if (!MenuConfig::ValidEntity.empty() && GameKeepOn)
