@@ -21,7 +21,7 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	// When players hold these weapons, don't shot
 	std::vector<std::string> WeaponNames = {
 	XorStr("smokegrenade"), XorStr("flashbang"), XorStr("hegrenade"), XorStr("molotov"), XorStr("decoy"), XorStr("incgrenade"),
-	XorStr("ct_knife"), XorStr("t_knife"), XorStr("c4")
+	XorStr("c4")
 	};
 	if (std::find(WeaponNames.begin(), WeaponNames.end(), LocalEntity.Pawn.WeaponName) != WeaponNames.end())
 	{
@@ -61,6 +61,10 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	else
 		AllowShoot = Entity.Pawn.Health > 0;
 
+	if (Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) >= 74.f && (LocalEntity.Pawn.WeaponName == XorStr("ct_knife")|| LocalEntity.Pawn.WeaponName == XorStr("t_knife")))
+		return;
+	if (Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) >= 120.f && LocalEntity.Pawn.WeaponName == XorStr("zeus"))
+		return;
 	if (!AllowShoot)
 		return;
 
