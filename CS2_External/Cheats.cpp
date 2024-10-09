@@ -105,7 +105,7 @@ void Cheats::RenderESP(CEntity Entity,DWORD64 EntityAddress, CEntity LocalEntity
 	std::lock_guard<std::mutex> lock(std::mutex);
 	ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[2]);
 	ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
-	int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) * 0.01905f);
+	int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) * 0.025f);
 
 	if (ESPConfig::RenderDistance == 0 || (distance <= ESPConfig::RenderDistance && ESPConfig::RenderDistance > 0))
 	{
