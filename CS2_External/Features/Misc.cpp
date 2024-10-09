@@ -3,6 +3,7 @@
 #include <iostream>
 #include <Shellapi.h>
 #include "../Utils/XorStr.h"
+#include <mutex>
 
 namespace Misc
 {
@@ -113,6 +114,7 @@ namespace Misc
 
 	void HitMarker(float Size, float Gap)
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		ImGuiIO& io = ImGui::GetIO();
 		ImVec2 center = ImVec2(Gui.Window.Size.x / 2, Gui.Window.Size.y / 2);
 

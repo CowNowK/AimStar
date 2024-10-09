@@ -303,6 +303,7 @@ namespace GUI
 
 	void NewGui()
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		LoadImages();
 		ImTextureID ImageID;
 		ImVec2 LogoSize, LogoPos;

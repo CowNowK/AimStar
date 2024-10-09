@@ -60,6 +60,7 @@ namespace Render
 
 	void DrawFovCircle(const CEntity& LocalEntity)
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		if (!ESPConfig::DrawFov)
 			return;
 
@@ -165,6 +166,7 @@ namespace Render
 
 	void DrawFov(const CEntity& LocalEntity, float Size, ImColor Color, float Thickness)
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		if (!MenuConfig::ShowFovLine)
 			return;
 
@@ -189,6 +191,7 @@ namespace Render
 
 	void HeadShootLine(const CEntity& LocalEntity, ImColor Color)
 	{
+		std::lock_guard<std::mutex> lock(std::mutex);
 		if (!MenuConfig::ShowHeadShootLine)
 			return;
 

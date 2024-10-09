@@ -16,6 +16,8 @@
 #include "Utils/XorStr.h"
 #include "Features/Debugger.h"
 
+
+
 int PreviousTotalHits = 0;
 
 // Does not work and not use it for now
@@ -70,6 +72,7 @@ void Cheats::RadarSetting(Base_Radar& Radar) noexcept
 
 void Cheats::RenderCrossHair(ImDrawList* drawList) noexcept
 {
+	std::lock_guard<std::mutex> lock(std::mutex);
 	if (!CrosshairsCFG::ShowCrossHair)
 		return;
 
@@ -115,6 +118,7 @@ bool Cheats::AntiTKMAC(const INT64 hash) noexcept
 
 void Cheats::RenderESP(CEntity Entity,DWORD64 EntityAddress, CEntity LocalEntity,int LocalPlayerControllerIndex ,int index) noexcept
 {
+	std::lock_guard<std::mutex> lock(std::mutex);
 	ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[2]);
 	ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
 	int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
@@ -448,7 +452,7 @@ void Cheats::Run() noexcept
 	int shit = 256;
 	ProcessMgr.WriteMemory<int>(gGame.GetCSGOInputAddress() + 0x250, shit);
 	*/
-	Misc::Watermark(LocalEntity);
+	std::thread tWatermark(Misc::Watermark,LocalEntity);
 
 	HUD::CheatList();
 
@@ -459,14 +463,15 @@ void Cheats::Run() noexcept
 	// CrossHair
 	TriggerBot::TargetCheck(LocalEntity);
 	std::thread tRenderCrossHair(RenderCrossHair,ImGui::GetBackgroundDrawList());
-	bmb::RenderWindow(LocalEntity);
+	std::thread tBmb(bmb::RenderWindow,LocalEntity);
 	Misc::SpectatorList(LocalEntity);
 	
-
+	tWatermark.join();
 	tHitMarker.join();
 	tDrawFov.join();
 	tHeadShootLine.join();
 	tRenderCrossHair.join();
+	tBmb.join();
 	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
 	if (currentFPS > MenuConfig::MaxRenderFPS || (MenuConfig::MaxRenderFPS == 1200 && currentFPS > MenuConfig::FPS + 15))
 	{
