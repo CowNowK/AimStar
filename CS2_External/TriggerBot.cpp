@@ -21,7 +21,7 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	// When players hold these weapons, don't shot
 	std::vector<std::string> WeaponNames = {
 	XorStr("smokegrenade"), XorStr("flashbang"), XorStr("hegrenade"), XorStr("molotov"), XorStr("decoy"), XorStr("incgrenade"),
-	XorStr("knife"), XorStr("c4")
+	XorStr("ct_knife"), XorStr("t_knife"), XorStr("c4")
 	};
 	if (std::find(WeaponNames.begin(), WeaponNames.end(), LocalEntity.Pawn.WeaponName) != WeaponNames.end())
 	{

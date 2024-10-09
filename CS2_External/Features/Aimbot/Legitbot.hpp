@@ -51,11 +51,10 @@ namespace AimControl
         //int isFired;
         //ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
         //if (!isFired && !AimLock)
-
         // When players hold these weapons, don't aim
         std::vector<std::string> WeaponNames = {
         XorStr("smokegrenade"), XorStr("flashbang"), XorStr("hegrenade"), XorStr("molotov"), XorStr("decoy"), XorStr("incgrenade"),
-        XorStr("knife"), XorStr("c4")
+        XorStr("ct_knife"), XorStr("t_knife"),XorStr("c4")
         };
         if (std::find(WeaponNames.begin(), WeaponNames.end(), Local.Pawn.WeaponName) != WeaponNames.end())
         {
