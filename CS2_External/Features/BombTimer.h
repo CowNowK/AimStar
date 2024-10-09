@@ -202,7 +202,6 @@ namespace bmb
 
 	void RenderWindow(CEntity Local)
 	{
-		std::lock_guard<std::mutex> lock(std::mutex);
 		if (!MiscCFG::bmbTimer)
 			return;
 

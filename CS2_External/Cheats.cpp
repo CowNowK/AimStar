@@ -452,7 +452,7 @@ void Cheats::Run() noexcept
 	int shit = 256;
 	ProcessMgr.WriteMemory<int>(gGame.GetCSGOInputAddress() + 0x250, shit);
 	*/
-	std::thread tWatermark(Misc::Watermark,LocalEntity);
+	Misc::Watermark(LocalEntity);
 
 	HUD::CheatList();
 
@@ -463,15 +463,14 @@ void Cheats::Run() noexcept
 	// CrossHair
 	TriggerBot::TargetCheck(LocalEntity);
 	std::thread tRenderCrossHair(RenderCrossHair,ImGui::GetBackgroundDrawList());
-	std::thread tBmb(bmb::RenderWindow,LocalEntity);
+	bmb::RenderWindow(LocalEntity);
 	Misc::SpectatorList(LocalEntity);
 	
-	tWatermark.join();
+
 	tHitMarker.join();
 	tDrawFov.join();
 	tHeadShootLine.join();
 	tRenderCrossHair.join();
-	tBmb.join();
 	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
 	if (currentFPS > MenuConfig::MaxRenderFPS || (MenuConfig::MaxRenderFPS == 1200 && currentFPS > MenuConfig::FPS + 15))
 	{
