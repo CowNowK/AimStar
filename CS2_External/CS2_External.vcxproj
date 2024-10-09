@@ -314,7 +314,6 @@
     <ClInclude Include="Utils\driver.hpp" />
     <ClInclude Include="Utils\Format.h" />
     <ClInclude Include="Utils\Globals.hpp" />
-    <ClInclude Include="Utils\GlobalVars.h" />
     <ClInclude Include="Utils\imgui_custom.hpp" />
     <ClInclude Include="Utils\Initial\system.h" />
     <ClInclude Include="Utils\Initial\Init.h" />
@@ -400,7 +399,6 @@
     <ClCompile Include="Utils\Ext-Color.cpp" />
     <ClCompile Include="Utils\ConfigMenu.cpp" />
     <ClCompile Include="Utils\ConfigSaver.cpp" />
-    <ClCompile Include="Utils\GlobalVars.cpp" />
     <ClCompile Include="Utils\imgui_custom.cpp" />
     <ClCompile Include="Utils\MemorySearch.cpp" />
     <ClCompile Include="Utils\Ext-String.cpp" />

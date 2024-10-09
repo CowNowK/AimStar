@@ -272,12 +272,20 @@ void Cheats::Run() noexcept
 	Base_Radar Radar;
 	if (RadarCFG::ShowRadar)
 		RadarSetting(Radar);
+
+	static float LastQuarterSec;
+	if (MenuConfig::CurTime > LastQuarterSec + 0.25f || MenuConfig::CurTime < -1 /*may game restart and recount curtime*/)
+	{
+		//per 1/4 second
+		MenuConfig::FPS = static_cast<int>(std::floor(1.0f / Global_Vars.m_frametime));
+		LastQuarterSec = MenuConfig::CurTime;
+	}
+
 	static int LastTick;
 	if (MenuConfig::TickCount != LastTick)
 	{
 		MenuConfig::ChkTime = MenuConfig::CurTime;
 		//fetch sth u donot wanna frequency read
-		MenuConfig::FPS = static_cast<int>(std::floor(1.0f / Global_Vars.m_frametime));
 		MenuConfig::ValidEntity.clear();
 		MenuConfig::ValidEntity.shrink_to_fit();
 		for (int i = 0; i < 64; i++)

@@ -18,7 +18,6 @@
 #include "..\Entity.h"
 #include "..\MenuConfig.hpp"
 #include "..\OS-ImGui\imgui\imgui.h"
-#include "..\Utils\GlobalVars.h"
 #include "..\Utils\imgui_custom.hpp"
 
 #pragma comment(lib, "winmm.lib")

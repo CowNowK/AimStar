@@ -10,7 +10,24 @@
 We using a2x header for quick PoC while develop & to figure out type of data
 In the end, we use our own offset system by reading offset.yaml for release version.
 */
-
+class CGlobalVarsBase
+{
+public:
+	float m_realtime; //0x0000
+	int32_t m_framecount; //0x0004
+	float m_frametime; //0x0008
+	float m_abs_frametime; //0x000C
+	int32_t m_maxclients; //0x0010
+	char pad_0014[28]; //0x0014
+	float m_frametime2; //0x0030
+	float m_curtime; //0x0034
+	float m_curtime2; //0x0038
+	char pad_003C[20]; //0x003C
+	int32_t m_tickcount; //0x0050
+	char pad_0054[292]; //0x0054
+	uint64_t m_current_map; //0x0178
+	uint64_t m_current_mapname; //0x0180
+};
 namespace Offset
 {
 
@@ -96,21 +113,6 @@ namespace Offset
 		DWORD m_bWaitForNoAttack = cs2_dumper::schemas::client_dll::C_CSPlayerPawn::m_bWaitForNoAttack;
 		
 	} Pawn;
-
-	struct
-	{
-		DWORD RealTime = 0x00;
-		DWORD FrameCount = 0x04;
-		DWORD MaxClients = 0x10;
-		DWORD IntervalPerTick = 0x14;
-		DWORD CurrentTime = 0x2C;
-		DWORD CurrentTime2 = 0x30;
-		DWORD TickCount = 0x40;
-		DWORD IntervalPerTick2 = 0x44;
-		DWORD CurrentNetchan = 0x0048;
-		DWORD CurrentMap = 0x0180;
-		DWORD CurrentMapName = 0x0188;
-	} GlobalVar;
 
 	struct
 	{
