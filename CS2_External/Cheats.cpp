@@ -275,6 +275,7 @@ void Cheats::Run() noexcept
 	static int LastTick;
 	if (MenuConfig::TickCount != LastTick)
 	{
+		MenuConfig::ChkTime = MenuConfig::CurTime;
 		//fetch sth u donot wanna frequency read
 		MenuConfig::FPS = static_cast<int>(std::floor(1.0f / Global_Vars.m_frametime));
 		MenuConfig::ValidEntity.clear();
@@ -472,7 +473,7 @@ void Cheats::Run() noexcept
 	tHeadShootLine.join();
 	tRenderCrossHair.join();
 	int currentFPS = static_cast<int>(ImGui::GetIO().Framerate);
-	if (currentFPS > MenuConfig::MaxRenderFPS || (MenuConfig::MaxRenderFPS == 1200 && currentFPS > MenuConfig::FPS + 15))
+	if (currentFPS > MenuConfig::MaxRenderFPS || (MenuConfig::MaxRenderFPS == 1201 && currentFPS > MenuConfig::FPS * 2))
 	{
 		int FrameWait = round(1000000.0f / MenuConfig::MaxRenderFPS);
 		std::this_thread::sleep_for(std::chrono::microseconds(FrameWait));

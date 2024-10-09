@@ -840,7 +840,7 @@ namespace GUI
 					ImGui::Columns(2, nullptr, false);
 					ConfigMenu::RenderCFGmenu();
 
-					int FPS = 1200;
+					int FPS = 1201;
 					ImGui::NextColumn();
 					ImGui::SetCursorPosY(24.f);
 					ImGui::SeparatorText(XorStr("Cheat Settings"));
