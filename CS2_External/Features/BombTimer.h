@@ -119,7 +119,7 @@ namespace bmb
 			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
 				return { 0,0,0 };
 
-			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4 +Offset::Pawn.GameSceneNode, node))
+			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4 +Offset::C_BaseEntity.m_pGameSceneNode, node))
 				return { 0,0,0 };
 			ProcessMgr.ReadMemory<Vec3>(node + Offset::Pawn.absPos, c4origin);
 			return c4origin;

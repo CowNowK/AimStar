@@ -157,12 +157,12 @@ bool PlayerController::GetMoney()
 
 bool PlayerController::GetTeamID()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.iTeamNum, this->TeamID);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_iTeamNum, this->TeamID);
 }
 
 bool PlayerController::GetHealth()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentHealth, this->Health);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_iHealth, this->Health);
 }
 
 bool PlayerController::GetIsAlive()
@@ -255,7 +255,7 @@ bool PlayerPawn::GetAimPunchAngle()
 
 bool PlayerPawn::GetTeamID()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.iTeamNum, this->TeamID);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_iTeamNum, this->TeamID);
 }
 
 bool PlayerPawn::GetAimPunchCache()
@@ -313,7 +313,7 @@ bool PlayerPawn::GetPos()
 
 bool PlayerPawn::GetHealth()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentHealth, this->Health);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_iHealth, this->Health);
 }
 
 bool PlayerPawn::GetArmor()
@@ -361,7 +361,7 @@ bool PlayerPawn::GetFov()
 
 bool PlayerPawn::GetFFlags()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.fFlags, this->fFlags);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_BaseEntity.m_fFlags, this->fFlags);
 }
 
 bool PlayerPawn::GetDefusing()
@@ -376,7 +376,7 @@ bool PlayerPawn::GetFlashDuration()
 
 bool PlayerPawn::GetVelocity()
 {
-	if (!ProcessMgr.ReadMemory(Address + Offset::Pawn.AbsVelocity, this->Velocity))
+	if (!ProcessMgr.ReadMemory(Address + Offset::C_BaseEntity.m_vecAbsVelocity, this->Velocity))
 		return false;
 	this->Speed = sqrt(this->Velocity.x * this->Velocity.x + this->Velocity.y * this->Velocity.y);
 	return true;

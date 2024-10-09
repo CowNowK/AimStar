@@ -312,10 +312,11 @@ namespace Misc
 			// As of the latest update (11/8/2023) bhop doesn't work at all with sendinput,
 			// if +jump is sent on the same tick that you land on the ground, the jump won't register.
 			// But you can add 15ms of delay right before your sendinput to fix this problem temporarily
-			std::this_thread::sleep_for(std::chrono::microseconds(15627));
+			std::this_thread::sleep_for(std::chrono::microseconds(15626));
 			// Refer to -> https://www.unknowncheats.me/forum/counter-strike-2-a/609480-sendinput-bhop-inconsistency.html
 			//gGame.SetForceJump(65537);
 			SendMessage(hwnd_cs2, WM_KEYDOWN, VK_SPACE, 0);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			SendMessage(hwnd_cs2, WM_KEYUP, VK_SPACE, 0);
 
 		}
@@ -423,8 +424,7 @@ namespace Misc
 		bool isOnGround = AirCheck(Local);
 		if (!isOnGround)
 		{
-			Vec3 Velocity;
-			ProcessMgr.ReadMemory<Vec3>(Local.Pawn.Address + Offset::Pawn.AbsVelocity, Velocity);
+			Vec3 Velocity = Local.Pawn.Velocity;
 
 			if (Velocity.z > 250.f || Velocity.z < 200.f)
 				return;
