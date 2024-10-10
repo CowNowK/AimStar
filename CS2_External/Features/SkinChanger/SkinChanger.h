@@ -15,7 +15,7 @@ namespace SkinChanger
 	inline DWORD64 GetWeaponServices(const CEntity& LocalPlayer)
 	{
 		DWORD64 WeaponServices;
-		ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::Pawn.WeaponServices, WeaponServices);
+		ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::C_BasePlayerPawn.m_pWeaponServices, WeaponServices);
 
 		return WeaponServices;
 	}
@@ -77,7 +77,7 @@ namespace SkinChanger
 	inline DWORD64 GetViewModelServices(const CEntity& LocalPlayer)
 	{
 		DWORD64 ViewModelServices;
-		ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::Pawn.ViewModelServices, ViewModelServices);
+		ProcessMgr.ReadMemory(LocalPlayer.Pawn.Address + Offset::C_CSPlayerPawnBase.m_pViewModelServices, ViewModelServices);
 
 		return ViewModelServices;
 	}
@@ -85,7 +85,7 @@ namespace SkinChanger
 	inline DWORD64 GetViewHandle(DWORD64 ViewModelServices)
 	{
 		DWORD64 ViewHandle;
-		ProcessMgr.ReadMemory(ViewModelServices + Offset::Pawn.ViewModel, ViewHandle);
+		ProcessMgr.ReadMemory(ViewModelServices + Offset::CCSPlayer_ViewModelServices.m_hViewModel, ViewHandle);
 
 		return ViewHandle;
 	}

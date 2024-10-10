@@ -34,7 +34,7 @@ namespace bmb
 			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
 				return 0;
 
-			if (!ProcessMgr.ReadMemory<int>(cPlantedC4 + Offset::C4.m_nBombSite, site))
+			if (!ProcessMgr.ReadMemory<int>(cPlantedC4 + Offset::C_PlantedC4.m_nBombSite, site))
 				return 0;
 			return site;
 		}
@@ -52,7 +52,7 @@ namespace bmb
 			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
 				return Defusing;
 
-			if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C4.m_bBeingDefused, Defusing))
+			if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C_PlantedC4.m_bBeingDefused, Defusing))
 				return Defusing;
 			return Defusing;
 		}
@@ -69,7 +69,7 @@ namespace bmb
 			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
 				return DefuseTime;
 
-			if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C4.m_flDefuseCountDown, DefuseTime))
+			if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C_PlantedC4.m_flDefuseCountDown, DefuseTime))
 				return DefuseTime;
 			return DefuseTime;
 		}
@@ -86,7 +86,7 @@ namespace bmb
 			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
 				return BoomTime;
 
-			if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C4.m_flC4Blow, BoomTime))
+			if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C_PlantedC4.m_flC4Blow, BoomTime))
 				return BoomTime;
 			return BoomTime;
 		}
@@ -101,7 +101,7 @@ namespace bmb
 		if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4, cPlantedC4))
 			return Planted;
 
-		if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C4.m_bC4Activated, Planted))
+		if (!ProcessMgr.ReadMemory(cPlantedC4 + Offset::C_PlantedC4.m_bC4Activated, Planted))
 			return Planted;
 		return Planted;
 	}
@@ -121,7 +121,7 @@ namespace bmb
 
 			if (!ProcessMgr.ReadMemory<uintptr_t>(cPlantedC4 +Offset::C_BaseEntity.m_pGameSceneNode, node))
 				return { 0,0,0 };
-			ProcessMgr.ReadMemory<Vec3>(node + Offset::Pawn.absPos, c4origin);
+			ProcessMgr.ReadMemory<Vec3>(node + Offset::CGameSceneNode.m_vecOrigin, c4origin);
 			return c4origin;
 		}
 

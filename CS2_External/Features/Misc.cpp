@@ -58,8 +58,8 @@ namespace Misc
 		{
 			uintptr_t pBulletServices;
 			int totalHits;
-			ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.BulletServices, pBulletServices);
-			ProcessMgr.ReadMemory(pBulletServices + Offset::Pawn.TotalHit, totalHits);
+			ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::C_CSPlayerPawn.m_pBulletServices, pBulletServices);
+			ProcessMgr.ReadMemory(pBulletServices + Offset::CCSPlayer_BulletServices.m_totalHitsOnServer, totalHits);
 
 			if (totalHits != PreviousTotalHits) {
 				if (totalHits == 0 && PreviousTotalHits != 0)
@@ -138,7 +138,7 @@ namespace Misc
 		if (MiscCFG::FlashImmunity == 0)
 			return;
 		float MaxAlpha = 255.f - MiscCFG::FlashImmunity;
-		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.flFlashMaxAlpha, MaxAlpha);
+		ProcessMgr.WriteMemory(aLocalPlayer.Pawn.Address + Offset::C_CSPlayerPawnBase.m_flFlashMaxAlpha, MaxAlpha);
 	}
 
 	void FastStop(const CEntity& aLocalPlayer) noexcept
@@ -152,10 +152,10 @@ namespace Misc
 				const auto LocalYaw = aLocalPlayer.Pawn.ViewAngle.y;
 				const auto X = (LocalVel.x * cos(LocalYaw / 180 * 3.1415926) + LocalVel.y * sin(LocalYaw / 180 * 3.1415926));
 				const auto Y = (LocalVel.y * cos(LocalYaw / 180 * 3.1415926) - LocalVel.x * sin(LocalYaw / 180 * 3.1415926));
-				if (X > Trigger_Value) { keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_KEYUP, 0);}
-				else if (X < -Trigger_Value) { keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_KEYUP, 0); }
-				if (Y > Trigger_Value) { keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_KEYUP, 0); }
-				else if (Y < -Trigger_Value) { keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_SCANCODE, 0); Sleep(1); keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_KEYUP, 0); }
+				if (X > Trigger_Value) { keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_SCANCODE, 0); std::this_thread::sleep_for(std::chrono::milliseconds(1)); keybd_event('S', MapVirtualKey('S', 0), KEYEVENTF_KEYUP, 0);}
+				else if (X < -Trigger_Value) { keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_SCANCODE, 0); std::this_thread::sleep_for(std::chrono::milliseconds(1)); keybd_event('W', MapVirtualKey('W', 0), KEYEVENTF_KEYUP, 0); }
+				if (Y > Trigger_Value) { keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_SCANCODE, 0); std::this_thread::sleep_for(std::chrono::milliseconds(1)); keybd_event('D', MapVirtualKey('D', 0), KEYEVENTF_KEYUP, 0); }
+				else if (Y < -Trigger_Value) { keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_SCANCODE, 0); std::this_thread::sleep_for(std::chrono::milliseconds(1)); keybd_event('A', MapVirtualKey('A', 0), KEYEVENTF_KEYUP, 0); }
 		}
 
 		/*
@@ -249,7 +249,7 @@ namespace Misc
 			return;
 
 		bool SpottedStatus = true;
-		ProcessMgr.WriteMemory(EntityList.Pawn.Address + Offset::Pawn.bSpottedByMask, SpottedStatus);
+		ProcessMgr.WriteMemory(EntityList.Pawn.Address + Offset::C_CSPlayerPawn.m_bSpottedByMask, SpottedStatus);
 	}
 
 	void FovChanger(const CEntity& aLocalPlayer) noexcept
@@ -260,7 +260,7 @@ namespace Misc
 		if (Zoom)
 			return;
 
-		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::Pawn.CameraServices, CameraServices))
+		if (!ProcessMgr.ReadMemory<DWORD64>(aLocalPlayer.Pawn.Address + Offset::C_BasePlayerPawn.m_pCameraServices, CameraServices))
 			return;
 
 		UINT Desiredfov = static_cast<UINT>(MiscCFG::Fov);
@@ -360,7 +360,7 @@ namespace Misc
 		// When player reloading their weapon, cancel Scope
 		DWORD64 WeaponService;
 		bool inReload;
-		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::Pawn.pClippingWeapon, WeaponService);
+		ProcessMgr.ReadMemory(aLocalPlayer.Pawn.Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, WeaponService);
 		ProcessMgr.ReadMemory(WeaponService + Offset::WeaponBaseData.inReload, inReload);
 		if (inReload)
 		{
@@ -477,11 +477,11 @@ namespace Misc
 
 					//jakebooom idea + tokikiri stuff
 					uintptr_t obsServices;
-					if (!ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::PlayerController.m_pObserverServices, obsServices))
+					if (!ProcessMgr.ReadMemory(Entity.Pawn.Address + Offset::C_BasePlayerPawn.m_pObserverServices, obsServices))
 						continue;
 
 					uint64_t obsTarget;
-					if (!ProcessMgr.ReadMemory(obsServices + Offset::PlayerController.m_hObserverTarget, obsTarget))
+					if (!ProcessMgr.ReadMemory(obsServices + Offset::CPlayer_ObserverServices.m_hObserverTarget, obsTarget))
 						continue;
 					uintptr_t obsPawn = GethPawn(obsTarget);
 

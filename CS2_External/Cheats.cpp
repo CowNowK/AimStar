@@ -105,7 +105,7 @@ void Cheats::RenderESP(CEntity Entity,DWORD64 EntityAddress, CEntity LocalEntity
 	std::lock_guard<std::mutex> lock(std::mutex);
 	ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[2]);
 	ImVec4 Rect = ESP::GetBoxRect(Entity, MenuConfig::BoxType);
-	int distance = static_cast<int>(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) / 100);
+	int distance = static_cast<int>(std::round(Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) * 0.025f));
 
 	if (ESPConfig::RenderDistance == 0 || (distance <= ESPConfig::RenderDistance && ESPConfig::RenderDistance > 0))
 	{
@@ -215,7 +215,7 @@ void Cheats::Run() noexcept
 	if (MenuConfig::UserName == "")
 		MenuConfig::UserName = getenv("USERNAME");
 
-	ProcessMgr.ReadMemory(LocalControllerAddress + Offset::PlayerController.m_iPing, MenuConfig::Ping);
+	ProcessMgr.ReadMemory(LocalControllerAddress + Offset::CCSPlayerController.m_iPing, MenuConfig::Ping);
 
 	//std::wcout << MenuConfig::AvatarPath << std::endl;
 
@@ -248,7 +248,6 @@ void Cheats::Run() noexcept
 	float DistanceToSight = 0;
 	float MaxAimDistance = 100000;
 	CEntity NearestEntity;
-	Vec3  HeadPos{ 0,0,0 };
 	Vec2  Angles{ 0,0 };
 	std::vector<Vec3> AimPosList;
 
@@ -441,7 +440,10 @@ void Cheats::Run() noexcept
 
 	Misc::ForceScope(LocalEntity);
 	Misc::JumpThrow(LocalEntity);
-	Misc::FastStop(LocalEntity);
+
+	std::thread tFastStop(Misc::FastStop, LocalEntity);
+	tFastStop.detach();
+
 	/*thirdperson POC
 	int shit = 256;
 	ProcessMgr.WriteMemory<int>(gGame.GetCSGOInputAddress() + 0x250, shit);

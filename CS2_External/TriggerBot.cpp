@@ -21,15 +21,15 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	// When players hold these weapons, don't shot
 	std::vector<std::string> WeaponNames = {
 	XorStr("smokegrenade"), XorStr("flashbang"), XorStr("hegrenade"), XorStr("molotov"), XorStr("decoy"), XorStr("incgrenade"),
-	XorStr("knife"), XorStr("c4")
+	XorStr("c4")
 	};
 	if (std::find(WeaponNames.begin(), WeaponNames.end(), LocalEntity.Pawn.WeaponName) != WeaponNames.end())
 	{
 		return;
 	}
-	if (!ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::Pawn.m_bWaitForNoAttack, WaitForNoAttack))
+	if (!ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::C_CSPlayerPawn.m_bWaitForNoAttack, WaitForNoAttack))
 		return;
-	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::Pawn.iIDEntIndex, uHandle))
+	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::C_CSPlayerPawnBase.m_iIDEntIndex, uHandle))
 		return;
 	if (uHandle == -1)
 		return;
@@ -50,7 +50,7 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	if (ScopeOnly)
 	{
 		bool isScoped;
-		ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::Pawn.isScoped, isScoped);
+		ProcessMgr.ReadMemory<bool>(LocalEntity.Pawn.Address + Offset::C_CSPlayerPawn.m_bIsScoped, isScoped);
 		if (!isScoped) {
 			return;
 		}
@@ -61,6 +61,10 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 	else
 		AllowShoot = Entity.Pawn.Health > 0;
 
+	if (Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) >= 74.f && (LocalEntity.Pawn.WeaponName == XorStr("ct_knife")|| LocalEntity.Pawn.WeaponName == XorStr("t_knife")))
+		return;
+	if (Entity.Pawn.Pos.DistanceTo(LocalEntity.Pawn.Pos) >= 120.f && LocalEntity.Pawn.WeaponName == XorStr("zeus"))
+		return;
 	if (!AllowShoot)
 		return;
 
@@ -81,7 +85,7 @@ void TriggerBot::Run(const CEntity& LocalEntity)
 
 void TriggerBot::TargetCheck(const CEntity& LocalEntity) noexcept
 {
-	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::Pawn.iIDEntIndex, uHandle) || uHandle == -1)
+	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::C_CSPlayerPawnBase.m_iIDEntIndex, uHandle) || uHandle == -1)
 	{
 		CrosshairsCFG::isAim = false;
 	}
@@ -104,7 +108,7 @@ void TriggerBot::TargetCheck(const CEntity& LocalEntity) noexcept
 }
 bool TriggerBot::InCrosshairCheck(const CEntity& LocalEntity, const CEntity& TargetEntity) noexcept
 {
-	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::Pawn.iIDEntIndex, uHandle) || uHandle == -1)
+	if (!ProcessMgr.ReadMemory<DWORD>(LocalEntity.Pawn.Address + Offset::C_CSPlayerPawnBase.m_iIDEntIndex, uHandle) || uHandle == -1)
 	{
 		return false;
 	}

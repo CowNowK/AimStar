@@ -51,11 +51,10 @@ namespace AimControl
         //int isFired;
         //ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::Pawn.iShotsFired, isFired);
         //if (!isFired && !AimLock)
-
         // When players hold these weapons, don't aim
         std::vector<std::string> WeaponNames = {
         XorStr("smokegrenade"), XorStr("flashbang"), XorStr("hegrenade"), XorStr("molotov"), XorStr("decoy"), XorStr("incgrenade"),
-        XorStr("knife"), XorStr("c4")
+        XorStr("ct_knife"), XorStr("t_knife"),XorStr("c4")
         };
         if (std::find(WeaponNames.begin(), WeaponNames.end(), Local.Pawn.WeaponName) != WeaponNames.end())
         {
@@ -73,7 +72,7 @@ namespace AimControl
         if (AimControl::ScopeOnly)
         {
             bool isScoped;
-            ProcessMgr.ReadMemory<bool>(Local.Pawn.Address + Offset::Pawn.isScoped, isScoped);
+            ProcessMgr.ReadMemory<bool>(Local.Pawn.Address + Offset::C_CSPlayerPawn.m_bIsScoped, isScoped);
             if (!isScoped) {
                 HasTarget = false;
                 return;
@@ -104,6 +103,11 @@ namespace AimControl
 
         Vec2 ScreenPos;
 
+        uintptr_t ClippingWeapon, WeaponData;
+        bool IsAuto;
+        ProcessMgr.ReadMemory(Local.Pawn.Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon);
+        ProcessMgr.ReadMemory(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData);
+        ProcessMgr.ReadMemory(WeaponData + Offset::WeaponBaseData.m_bIsFullAuto, IsAuto);
 
         for (int i = 0; i < ListSize; i++)
         {
@@ -113,11 +117,12 @@ namespace AimControl
 
             Distance = sqrt(pow(OppPos.x, 2) + pow(OppPos.y, 2));
 
-            Length = sqrt(Distance * Distance + OppPos.z * OppPos.z);
+            Length = OppPos.Length();
 
             // RCS by @Tairitsu
-            if (MenuConfig::RCS)
+            if (MenuConfig::RCS && IsAuto)
             {
+
                 RCS::UpdateAngles(Local, Angles);
                 float rad = Angles.x * RCS::RCSScale.x / 360.f * M_PI;
                 float si = sinf(rad);

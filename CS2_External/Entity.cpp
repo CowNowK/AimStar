@@ -143,14 +143,14 @@ bool CEntity::UpdateClientData()
 bool PlayerController::GetMoney()
 {
 	DWORD64 MoneyServices;
-	if (!ProcessMgr.ReadMemory(Address + Offset::InGameMoneyServices.MoneyServices, MoneyServices))
+	if (!ProcessMgr.ReadMemory(Address + Offset::CCSPlayerController.m_pInGameMoneyServices, MoneyServices))
 	{
 		return false;
 	}
 	else {
-		GetDataAddressWithOffset<int>(MoneyServices, Offset::InGameMoneyServices.Account, this->Money);
-		GetDataAddressWithOffset<int>(MoneyServices, Offset::InGameMoneyServices.CashSpentThisRound, this->CashSpent);
-		GetDataAddressWithOffset<int>(MoneyServices, Offset::InGameMoneyServices.TotalCashSpent, this->CashSpentTotal);
+		GetDataAddressWithOffset<int>(MoneyServices, Offset::CCSPlayerController_InGameMoneyServices.m_iAccount, this->Money);
+		GetDataAddressWithOffset<int>(MoneyServices, Offset::CCSPlayerController_InGameMoneyServices.m_iTotalCashSpent, this->CashSpent);
+		GetDataAddressWithOffset<int>(MoneyServices, Offset::CCSPlayerController_InGameMoneyServices.m_iCashSpentThisRound, this->CashSpentTotal);
 		return true;
 	}
 }
@@ -167,21 +167,21 @@ bool PlayerController::GetHealth()
 
 bool PlayerController::GetIsAlive()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Entity.IsAlive, this->AliveStatus);
+	return GetDataAddressWithOffset<int>(Address, Offset::CCSPlayerController.m_bPawnIsAlive, this->AliveStatus);
 }
 
 bool PlayerController::GetIsCtrlBot()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Entity.m_bControllingBot, this->CtrlBot);
+	return GetDataAddressWithOffset<int>(Address, Offset::CCSPlayerController.m_bControllingBot, this->CtrlBot);
 }
 
 bool PlayerController::GetConnected()
 {
-	return GetDataAddressWithOffset<bool>(Address, Offset::Entity.m_bEverPlayedOnTeam, this->Connected);
+	return GetDataAddressWithOffset<bool>(Address, Offset::CCSPlayerController.m_bEverPlayedOnTeam, this->Connected);
 }
 bool PlayerController::GetHasHelmet()
 {
-	return GetDataAddressWithOffset<bool>(Address, Offset::PlayerController.HasHelmet, this->HasHelmet);
+	return GetDataAddressWithOffset<bool>(Address, Offset::CCSPlayerController.m_bPawnHasHelmet, this->HasHelmet);
 }
 
 
@@ -207,17 +207,17 @@ bool PlayerController::GetPlayerSteamID()
 }
 bool PlayerPawn::GetViewAngle()
 {
-	return GetDataAddressWithOffset<Vec2>(Address, Offset::Pawn.angEyeAngles, this->ViewAngle);
+	return GetDataAddressWithOffset<Vec2>(Address, Offset::C_CSPlayerPawnBase.m_angEyeAngles, this->ViewAngle);
 }
 
 bool PlayerPawn::GetCameraPos()
 {
-	return GetDataAddressWithOffset<Vec3>(Address, Offset::Pawn.vecLastClipCameraPos, this->CameraPos);
+	return GetDataAddressWithOffset<Vec3>(Address, Offset::C_CSPlayerPawnBase.m_vecLastClipCameraPos, this->CameraPos);
 }
 
 bool PlayerPawn::GetSpotted()
 {
-	return GetDataAddressWithOffset<DWORD64>(Address, Offset::Pawn.bSpottedByMask, this->bSpottedByMask);
+	return GetDataAddressWithOffset<DWORD64>(Address, Offset::C_CSPlayerPawn.m_bSpottedByMask, this->bSpottedByMask);
 }
 
 
@@ -226,13 +226,13 @@ bool PlayerPawn::GetWeaponName()
 	DWORD64 WeaponNameAddress = 0;
 	char Buffer[256]{};
 	
-	WeaponNameAddress = ProcessMgr.TraceAddress(this->Address + Offset::Pawn.pClippingWeapon, { 0x10,0x20 ,0x0 });
+	WeaponNameAddress = ProcessMgr.TraceAddress(this->Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, { 0x10,0x20 ,0x0 });
 	if (WeaponNameAddress == 0)
 		return false;
 
 	DWORD64 CurrentWeapon;
 	short weaponIndex;
-	ProcessMgr.ReadMemory(this->Address + Offset::Pawn.pClippingWeapon, CurrentWeapon);
+	ProcessMgr.ReadMemory(this->Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, CurrentWeapon);
 	ProcessMgr.ReadMemory(CurrentWeapon + Offset::EconEntity.AttributeManager + Offset::WeaponBaseData.Item + Offset::WeaponBaseData.ItemDefinitionIndex, weaponIndex);
 
 	if (weaponIndex == -1)
@@ -245,12 +245,12 @@ bool PlayerPawn::GetWeaponName()
 
 bool PlayerPawn::GetShotsFired()
 {
-	return GetDataAddressWithOffset<DWORD>(Address, Offset::Pawn.iShotsFired, this->ShotsFired);
+	return GetDataAddressWithOffset<DWORD>(Address, Offset::C_CSPlayerPawn.m_iShotsFired, this->ShotsFired);
 }
 
 bool PlayerPawn::GetAimPunchAngle()
 {
-	return GetDataAddressWithOffset<Vec2>(Address, Offset::Pawn.aimPunchAngle, this->AimPunchAngle);
+	return GetDataAddressWithOffset<Vec2>(Address, Offset::C_CSPlayerPawn.m_aimPunchAngle, this->AimPunchAngle);
 }
 
 bool PlayerPawn::GetTeamID()
@@ -260,7 +260,7 @@ bool PlayerPawn::GetTeamID()
 
 bool PlayerPawn::GetAimPunchCache()
 {
-	return GetDataAddressWithOffset<C_UTL_VECTOR>(Address, Offset::Pawn.aimPunchCache, this->AimPunchCache);
+	return GetDataAddressWithOffset<C_UTL_VECTOR>(Address, Offset::C_CSPlayerPawn.m_aimPunchCache, this->AimPunchCache);
 }
 
 DWORD64 PlayerController::GetPlayerPawnAddress()
@@ -268,7 +268,7 @@ DWORD64 PlayerController::GetPlayerPawnAddress()
 	DWORD64 EntityPawnListEntry = 0;
 	DWORD64 EntityPawnAddress = 0;
 
-	if (!GetDataAddressWithOffset<DWORD>(Address, Offset::Entity.PlayerPawn, this->Pawn))
+	if (!GetDataAddressWithOffset<DWORD>(Address, Offset::CCSPlayerController.m_hPlayerPawn, this->Pawn))
 		return 0;
 
 	if (!ProcessMgr.ReadMemory<DWORD64>(gGame.GetEntityListAddress(), EntityPawnListEntry))
@@ -308,7 +308,12 @@ DWORD64 PlayerController::GetPlayerhPawnAddress()
 
 bool PlayerPawn::GetPos()
 {
-	return GetDataAddressWithOffset<Vec3>(Address, Offset::Pawn.Pos, this->Pos);
+	DWORD64 GameSceneNode;
+	if (!ProcessMgr.ReadMemory<uintptr_t>(Address + Offset::C_BaseEntity.m_pGameSceneNode, GameSceneNode))
+		return false;
+	
+	return ProcessMgr.ReadMemory<Vec3>(GameSceneNode + Offset::CGameSceneNode.m_vecOrigin, this->Pos);
+	//return GetDataAddressWithOffset<Vec3>(Address, Offset::C_BasePlayerPawn.m_vOldOrigin, this->Pos);
 }
 
 bool PlayerPawn::GetHealth()
@@ -318,7 +323,7 @@ bool PlayerPawn::GetHealth()
 
 bool PlayerPawn::GetArmor()
 {
-	return GetDataAddressWithOffset<int>(Address, Offset::Pawn.CurrentArmor, this->Armor);
+	return GetDataAddressWithOffset<int>(Address, Offset::C_CSPlayerPawn.m_ArmorValue, this->Armor);
 }
 
 
@@ -326,7 +331,7 @@ bool PlayerPawn::GetArmor()
 bool PlayerPawn::GetAmmo()
 {
 	DWORD64 ClippingWeapon = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.pClippingWeapon, ClippingWeapon))
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon))
 		return false;
 
 	return GetDataAddressWithOffset<int>(ClippingWeapon, Offset::WeaponBaseData.Clip1, this->Ammo);
@@ -334,7 +339,7 @@ bool PlayerPawn::GetAmmo()
 bool PlayerPawn::GetBullet()
 {
 	DWORD64 ClippingWeapon = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.pClippingWeapon, ClippingWeapon))
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon))
 		return false;
 
 	return GetDataAddressWithOffset<int>(ClippingWeapon, Offset::WeaponBaseData.Clip1, this->Bullet);
@@ -343,7 +348,7 @@ bool PlayerPawn::GetMaxAmmo()
 {
 	DWORD64 ClippingWeapon = 0;
 	DWORD64 WeaponData = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.pClippingWeapon, ClippingWeapon))
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::C_CSPlayerPawnBase.m_pClippingWeapon, ClippingWeapon))
 		return false;
 	if (!ProcessMgr.ReadMemory<DWORD64>(ClippingWeapon + Offset::WeaponBaseData.WeaponDataPTR, WeaponData))
 		return false;
@@ -354,9 +359,9 @@ bool PlayerPawn::GetMaxAmmo()
 bool PlayerPawn::GetFov()
 {
 	DWORD64 CameraServices = 0;
-	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::Pawn.CameraServices, CameraServices))
+	if (!ProcessMgr.ReadMemory<DWORD64>(Address + Offset::C_BasePlayerPawn.m_pCameraServices, CameraServices))
 		return false;
-	return GetDataAddressWithOffset<int>(CameraServices, Offset::Pawn.iFovStart, this->Fov);
+	return GetDataAddressWithOffset<int>(CameraServices, Offset::CCSPlayerBase_CameraServices.m_iFOVStart, this->Fov);
 }
 
 bool PlayerPawn::GetFFlags()
@@ -366,12 +371,12 @@ bool PlayerPawn::GetFFlags()
 
 bool PlayerPawn::GetDefusing()
 {
-	return ProcessMgr.ReadMemory(Address + Offset::C4.m_bBeingDefused, this->isDefusing);
+	return ProcessMgr.ReadMemory(Address + Offset::C_PlantedC4.m_bBeingDefused, this->isDefusing);
 }
 
 bool PlayerPawn::GetFlashDuration()
 {
-	return ProcessMgr.ReadMemory(Address + Offset::Pawn.flFlashDuration, this->FlashDuration);
+	return ProcessMgr.ReadMemory(Address + Offset::C_CSPlayerPawnBase.m_flFlashDuration, this->FlashDuration);
 }
 
 bool PlayerPawn::GetVelocity()
