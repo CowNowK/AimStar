@@ -354,12 +354,14 @@ namespace GUI
 		ImGui::SetNextWindowSize({ 851,514 });
 		ImGui::Begin(XorStr("AimStar"), nullptr, Flags);
 		{
+			// Render logo image
 			vecMenuPos = ImGui::GetWindowPos();
 			ImGui::SetCursorPos(LogoPos);
 			ImGui::Image(ImageID, LogoSize);
 			ImGui::SetCursorPos(ImVec2(20,5));
 			ImGui::TextColored(ImColor(255, 255, 255, 45), MenuConfig::HWID.substr(MenuConfig::HWID.length() - 16).c_str());
 
+			// Render button and frame
 			ImGui::SetCursorPos(MenuConfig::WCS.Button1Pos);
 			ImGui::Image((void*)MenuButton1, ImVec2(buttonW, buttonH));
 			if (ImGui::IsItemClicked()) {
@@ -400,6 +402,7 @@ namespace GUI
 				ImVec2(MenuConfig::WCS.Button4Pos.x + buttonW + ImGui::GetWindowPos().x, MenuConfig::WCS.Button4Pos.y + buttonH + ImGui::GetWindowPos().y),
 				BorderColor, 5.f, ImDrawFlags_RoundCornersAll, 2.f);
 
+			// User info
 			ImColor BgCol = ImGui::GetStyleColorVec4(ImGuiCol_ChildBg);
 			ImColor Alpha = ImColor(0, 0, 0, 0);
 			ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 15,440));
@@ -426,6 +429,7 @@ namespace GUI
 			
 			ImGui::SetCursorPos(MenuConfig::WCS.ChildPos);
 			
+			// The beginning of menu
 			ImGui::BeginChild(XorStr("Page"), MenuConfig::WCS.ChildSize);
 			{
 				if (MenuConfig::WCS.MenuPage == 0)
@@ -868,12 +872,12 @@ namespace GUI
 		ImVec2 factor = ImVec2(interpolationFactorX * (mousePos.x - vecMenuPos.x), interpolationFactorY * (mousePos.y - vecMenuPos.y));
 		ImVec2 interpolatedPos = center - factor;
 
-		// 计算 interpolatedPos 到圆心的距离
+		// Calculate the distance from interpolatedPos to center
 		float dx = interpolatedPos.x - center.x;
 		float dy = interpolatedPos.y - center.y;
 		float distance = sqrt(dx * dx + dy * dy);
 
-		// 如果距离超过半径，则调整 interpolatedPos
+		// If the distance exceeds the radius, adjust the interpolatePos
 		if (distance > radius)
 		{
 			float scale = radius / distance;
