@@ -27,8 +27,6 @@ Discord server: [AimShit Club](https://discord.com/invite/VgRrxwesPz)
 
 Most of the code is contributed by users, and the code structure might be very messy. If you try to download and understand the code, you will find a lot of **shitty** logic
 
-> **Due to some force majeure disease factors that happened to me personally, I am unable to maintain the repo in time. I apologize for your understanding.**
-
 ## ⚠️ Notice
 
 **Isnt working?** -> [**__COMMON ISSUES__**](https://github.com/CowNowK/AimStar/wiki)
