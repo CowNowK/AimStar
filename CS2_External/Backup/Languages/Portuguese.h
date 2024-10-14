@@ -11,6 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Definições";
 
 		// ESP
+		ESPtext.Enable = u8"Ativar ESP";
+		ESPtext.Hotkey = u8"Tecla de atalho";
+		ESPtext.AlwaysActive = u8"Sempre ativo";
 		ESPtext.FeatureName = u8" ESP";
 		ESPtext.Box = u8"Caixa";
 		ESPtext.BoxRounding = u8"Borda da Caixa";

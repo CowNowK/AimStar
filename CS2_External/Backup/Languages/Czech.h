@@ -11,7 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Nastavení";
 
 		// ESP
-		ESPtext.Toggle = u8"Toggle";
+		ESPtext.Enable = u8"Enable ESP";
+		ESPtext.Hotkey = u8"Klávesa";
+		ESPtext.AlwaysActive = u8"Vždy aktivní";
 		ESPtext.FeatureName = u8"RÁMEČEK";
 		ESPtext.Box = u8"Rámec";
 		ESPtext.BoxRounding = u8"Zaoblení rámu";

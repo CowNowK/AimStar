@@ -11,6 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Ayarlar";
 
 		// ESP
+		ESPtext.Enable = u8"ESP'yi Etkinleştir";
+		ESPtext.Hotkey = u8"Kısayol Tuşu";
+		ESPtext.AlwaysActive = u8"Her zaman aktif";
 		ESPtext.FeatureName = u8" Görüş Hilesi";
 		ESPtext.Box = u8"Çerçeve";
 		ESPtext.BoxRounding = u8"Köşe Yuvarlaklığı";

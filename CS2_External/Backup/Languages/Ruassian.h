@@ -12,7 +12,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Настройки";
 
 		// ESP
-		ESPtext.Toggle = u8"Toggle";
+		ESPtext.Enable = u8"Включить ESP";
+		ESPtext.Hotkey = u8"Горячая клавиша";
+		ESPtext.AlwaysActive = u8"Всегда активна";
 		ESPtext.FeatureName = u8" ESP (WH)";
 		ESPtext.Box = u8"Обводка";
 		ESPtext.BoxRounding = u8"Округление обводки";

@@ -11,6 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Indstillinger";
 
 		// ESP
+		ESPtext.Enable = u8"Enable ESP";
+		ESPtext.Hotkey = u8"Nøgle";
+		ESPtext.AlwaysActive = u8"Altid aktiv";
 		ESPtext.FeatureName = u8" ESP";
 		ESPtext.Box = u8"Boks";
 		ESPtext.BoxRounding = u8"Boks Runding";
