@@ -34,7 +34,9 @@ namespace Lang
 
 	inline struct ESPtext
 	{
-		inline static const char* Toggle;
+		inline static const char* Enable;
+		inline static const char* Hotkey;
+		inline static const char* AlwaysActive;
 		inline static const char* FeatureName;
 		inline static const char* Box;
 		inline static const char* BoxRounding;
@@ -237,7 +239,9 @@ namespace Lang
 		Global.FeatureSettings ="Settings";
 
 		// ESP
-		ESPtext.Toggle ="Toggle";
+		ESPtext.Enable ="Enable ESP";
+		ESPtext.Hotkey ="Hotkey";
+		ESPtext.AlwaysActive ="Always Active";
 		ESPtext.FeatureName =" ESP";
 		ESPtext.Box ="Frame";
 		ESPtext.BoxRounding ="Box Rounding: ";

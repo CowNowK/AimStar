@@ -99,6 +99,7 @@ namespace MenuConfig
 namespace ESPConfig
 {
 	inline bool ESPenabled = true;
+	inline bool AlwaysActive = false;
 	inline bool AmmoBar = false;
 	inline bool ShowScoping = false;
 	inline bool ShowBoneESP = true;

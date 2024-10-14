@@ -440,11 +440,16 @@ namespace GUI
 					float MinRounding = 0.f, MaxRouding = 5.f;
 					int MinCombo = 0, MaxCombo = 2;
 					int MinDis = 0, MaxDis = 128;
-					PutSwitch(Lang::ESPtext.Toggle, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ESPenabled);
+					PutSwitch(Lang::ESPtext.Enable, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ESPenabled);
 					if (ESPConfig::ESPenabled)
 					{
 						const char* BoxTypes[] = { Lang::ESPtext.BoxType_Normal, Lang::ESPtext.BoxType_Edge, Lang::ESPtext.BoxType_Corner };
 						const char* LinePos[] = { Lang::ESPtext.LinePos_1, Lang::ESPtext.LinePos_2, Lang::ESPtext.LinePos_3 };
+						ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.f);
+						ImGui::TextDisabled(Lang::ESPtext.Hotkey);
+						ImGui::SameLine();
+						ImGui::HotKey("Hotkey##esphotkey", &ESP::HotKey);
+						PutSwitch(Lang::ESPtext.AlwaysActive, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::AlwaysActive);
 						PutSwitch(Lang::ESPtext.Box, 10.f, ImGui::GetFrameHeight() * 1.7, &ESPConfig::ShowBoxESP, true, "###BoxCol", reinterpret_cast<float*>(&ESPConfig::BoxColor));
 						if (ESPConfig::ShowBoxESP)
 						{
