@@ -11,6 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Instellingen";
 
 		// ESP
+		ESPtext.Enable = u8"Aan ESP";
+		ESPtext.Hotkey = u8"Sneltoets";
+		ESPtext.AlwaysActive = u8"Altijd actief";
 		ESPtext.FeatureName = u8" ESP";
 		ESPtext.Box = u8"Omlijning";
 		ESPtext.BoxRounding = u8"Omlijning Afronding";

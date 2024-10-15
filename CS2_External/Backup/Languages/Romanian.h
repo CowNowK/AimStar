@@ -11,7 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Setări";
 
 		// ESP
-		ESPtext.Toggle = u8"Activează";
+		ESPtext.Enable = u8"Activează ESP";
+		ESPtext.Hotkey = u8"Hotkey";
+		ESPtext.AlwaysActive = u8"Întotdeauna activă";
 		ESPtext.FeatureName = u8"ESP";
 		ESPtext.Box = u8"Ramă";
 		ESPtext.BoxRounding = u8"Rotunjirea cadrului";

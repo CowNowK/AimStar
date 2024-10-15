@@ -11,7 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Ajustes detallados";
 
 		// ESP
-		ESPtext.Toggle = u8"interruptor principal";
+		ESPtext.Enable = u8"Activar ESP";
+		ESPtext.Hotkey = u8"Tecla de acceso rápido";
+		ESPtext.AlwaysActive = u8"Siempre activa";
 		ESPtext.FeatureName = u8" ESP";	
 		ESPtext.Box = u8"cajas";
 		ESPtext.BoxRounding = u8"redondeo:";

@@ -384,14 +384,28 @@ void Cheats::Run() noexcept
 				}
 			}
 
-			if (ESPConfig::ESPenabled)
-			{
-				std::thread tESP(Cheats::RenderESP,Entity, EntityAddress, LocalEntity, LocalPlayerControllerIndex, index);
-				
-				tESP.join();
-			}
-			Glow::Run(Entity);
+			// Check if ESP should be rendered based on hotkey state
+			if (ESPConfig::ESPenabled && GetAsyncKeyState(ESP::HotKey) & 0x8000 || ESPConfig::AlwaysActive) {
+				bool renderSuccess = false;
+				const int maxRetries = 3; // Maximum retries for rendering
+				for (int attempt = 0; attempt < maxRetries; ++attempt) {
+					try {
+						Cheats::RenderESP(Entity, EntityAddress, LocalEntity, LocalPlayerControllerIndex, index);
+						renderSuccess = true;
+						break; // Exit if rendering was successful
+					}
+					catch (...) {
+						std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Optional delay before retrying
+					}
+				}
 
+				// Optionally handle the case where rendering continuously fails
+				if (!renderSuccess) {
+					// Handle failed rendering if necessary; you might want to log or print something here
+				}
+			}
+
+			Glow::Run(Entity);
 		}
 
 		// Aimbot

@@ -12,6 +12,7 @@ int winnie_h = 0, winnie_w = 0;
 
 namespace ESP
 {
+	inline unsigned int HotKey = VK_XBUTTON2;
 	struct WeaponIconSize
 	{
 		float width;

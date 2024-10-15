@@ -11,7 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"详细设置";
 
 		// ESP
-		ESPtext.Toggle = u8"总开关";
+		ESPtext.Enable = u8"启用 ESP";
+		ESPtext.Hotkey = u8"热键";
+		ESPtext.AlwaysActive = u8"始终激活";
 		ESPtext.FeatureName = u8" ESP";
 		ESPtext.Box = u8"方框";
 		ESPtext.BoxRounding = u8"圆角化:";

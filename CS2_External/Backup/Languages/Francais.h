@@ -11,7 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Parametres";
 
 		// ESP
-		ESPtext.Toggle = u8"basculer";
+		ESPtext.Enable = u8"Basculer ESP";
+		ESPtext.Hotkey = u8"Touche d'activation";
+		ESPtext.AlwaysActive = u8"Tout le temps";
 		ESPtext.FeatureName = u8" Hack des boxs";
 		ESPtext.Box = u8"portrait";
 		ESPtext.BoxRounding = u8"Boite arrondie: ";

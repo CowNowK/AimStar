@@ -11,6 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Beállítások";
 
 		// ESP
+		ESPtext.Enable = u8"ESP engedélyezése";
+		ESPtext.Hotkey = u8"Hotkey";
+		ESPtext.AlwaysActive = u8"Mindig aktív";
 		ESPtext.FeatureName = u8"Extraszenzoros észlelés";
 		ESPtext.Box = u8"Doboz";
 		ESPtext.BoxRounding = u8"Doboz kerekítés";

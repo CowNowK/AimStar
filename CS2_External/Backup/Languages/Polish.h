@@ -13,6 +13,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Ustawienia";
 
 		// ESP
+		ESPtext.Enable = u8"Włącz ESP";
+		ESPtext.Hotkey = u8"Klawisz skrótu";
+		ESPtext.AlwaysActive = u8"Zawsze aktywny";
 		ESPtext.FeatureName = u8" ESP";
 		ESPtext.Box = u8"Box";
 		ESPtext.BoxRounding = u8"Zaokrąglenie Boxa";

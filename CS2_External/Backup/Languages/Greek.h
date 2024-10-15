@@ -11,7 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Ρυθμίσεις";
 
 		// ESP
-		ESPtext.Toggle = u8"Εναλλαγή";
+		ESPtext.Enable = u8"Ενεργοποίηση ESP";
+		ESPtext.Hotkey = u8"Hotkey";
+		ESPtext.AlwaysActive = u8"Πάντα ενεργό";
 		ESPtext.FeatureName = u8" ESP";
 		ESPtext.Box = u8"Πλαίσιο";
 		ESPtext.BoxRounding = u8"Στρογγυλοποίηση Κουτιού: ";

@@ -11,7 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"Settings";
 
 		// ESP
-		ESPtext.Toggle = u8"Toggle";
+		ESPtext.Enable = u8"Enable ESP";
+		ESPtext.Hotkey = u8"Hotkey";
+		ESPtext.AlwaysActive = u8"Always Active";
 		ESPtext.FeatureName = u8" ESP";
 		ESPtext.Box = u8"Frame";
 		ESPtext.BoxRounding = u8"Box Rounding: ";

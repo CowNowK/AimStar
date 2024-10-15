@@ -11,6 +11,9 @@ namespace Lang
 		Global.FeatureSettings = u8"설정";
 
 		// ESP
+		ESPtext.Enable = u8"ESP 사용";
+		ESPtext.Hotkey = u8"핫키";
+		ESPtext.AlwaysActive = u8"항상 활성화";
 		ESPtext.FeatureName = u8" 이에스피 ";
 		ESPtext.Box = u8"박스";
 		ESPtext.BoxRounding = u8"박스 랜더링";
