@@ -1,3 +1,4 @@
+# Cheat Status: 🟢 Available
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/CowNowK/AimStar/master/AS_Logo.png" alt="icon" style="width: 100px; height: 100px"><br>
   AimStar
