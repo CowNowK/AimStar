@@ -1073,6 +1073,7 @@ void Cheat()
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
 	cout << XorStr("Cheat running successfully!") << endl;
 	cout << XorStr("Press [INS] or [DEL] to show or hide Menu.") << endl;
+	cout << XorStr("Press [HOME] to show or hide Console.") << endl;
 	cout << XorStr("Have fun...") << endl << endl;
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_RED);
 	cout << XorStr("=======[ Offset List ]=======") << endl;
@@ -1113,6 +1114,7 @@ void Cheat()
 
 int main(void)
 {
+	MenuConfig::ConsoleHandle = GetConsoleWindow();
 	/*
 	const char* tempPath = getenv("TMP");
 	if (tempPath != nullptr)

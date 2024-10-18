@@ -171,6 +171,23 @@ void Cheats::Run() noexcept
 		MenuConfig::ShowMenu = !MenuConfig::ShowMenu;
 		lastTick = currentTick;
 	}
+
+	if (GetAsyncKeyState(VK_HOME) < 0 && !MenuConfig::ShowConsole)
+	{
+		MenuConfig::ShowConsole = true;
+
+		if (IsWindowVisible(MenuConfig::ConsoleHandle)) {
+			ShowWindow(MenuConfig::ConsoleHandle, SW_HIDE);
+		}
+		else {
+			ShowWindow(MenuConfig::ConsoleHandle, SW_SHOW);
+		}
+	}
+	else if (GetAsyncKeyState(VK_HOME) >= 0)
+	{
+		MenuConfig::ShowConsole = false;
+	}
+
 //	std::thread keyCheckThread(KeyCheckThread);
 //  std::future<void> Thread_PlayerESP = std::async(ESP::RenderPlayerESP, std::ref(Entity), std::ref(Rect));
 
