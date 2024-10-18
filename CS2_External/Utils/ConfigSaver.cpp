@@ -27,6 +27,7 @@ namespace MyConfigSaver {
         emitter << YAML::Value;
         emitter << YAML::BeginMap;
         emitter << YAML::Key << "Enable" << YAML::Value << ESPConfig::ESPenabled;
+        emitter << YAML::Key << "AlwaysActive" << YAML::Value << ESPConfig::AlwaysActive;
         emitter << YAML::Key << "BoneESP" << YAML::Value << ESPConfig::ShowBoneESP;
         emitter << YAML::Key << "BoxESP" << YAML::Value << ESPConfig::ShowBoxESP;
         emitter << YAML::Key << "BoxType" << YAML::Value << MenuConfig::BoxType;
@@ -374,6 +375,7 @@ namespace MyConfigSaver {
         if (config["ESP"]) {
             // If you want to make the new version compatible with the old configuration, you can use "<Config>.IsDefine() ? <Config>.as() : <Default Value>"
             ESPConfig::ESPenabled = ReadData(config["ESP"]["Enable"], false);
+            ESPConfig::AlwaysActive = ReadData(config["ESP"]["AlwaysActive"], false);
             ESPConfig::ShowBoneESP = ReadData(config["ESP"]["BoneESP"], false);
             ESPConfig::ShowBoxESP = ReadData(config["ESP"]["BoxESP"], false);
             MenuConfig::BoxType = ReadData(config["ESP"]["BoxType"], 0);
