@@ -802,12 +802,13 @@ LONG WINAPI SimplestCrashHandler(EXCEPTION_POINTERS* ExceptionInfo)
 	return EXCEPTION_EXECUTE_HANDLER;
 }
 
-bool callbackEx(ULONG64* param1, ULONG64* param2, ULONG64 allocationPtr, ULONG64 allocationSize, ULONG64 mdlptr) {
+bool callbackEx(ULONG64* param1, ULONG64* param2, ULONG64 allocationPtr, ULONG64 allocationSize) {
+	// bool callbackEx(ULONG64* param1, ULONG64* param2, ULONG64 allocationPtr, ULONG64 allocationSize, ULONG64 mdlptr) {
 	UNREFERENCED_PARAMETER(param1);
 	UNREFERENCED_PARAMETER(param2);
 	UNREFERENCED_PARAMETER(allocationPtr);
 	UNREFERENCED_PARAMETER(allocationSize);
-	UNREFERENCED_PARAMETER(mdlptr);
+	// UNREFERENCED_PARAMETER(mdlptr);
 	Log("[+] Callbacked" << endl);
 
 	/*

@@ -419,6 +419,7 @@
     <Font Include="Font\stratum2.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <Library Include="Utils\kdm\kdmapper_lib-Release.lib" />
     <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

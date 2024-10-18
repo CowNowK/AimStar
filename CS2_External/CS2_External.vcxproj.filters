@@ -286,5 +286,6 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="Utils\yaml-cpp\lib\yaml-cpp.lib" />
+    <Library Include="Utils\kdm\kdmapper_lib-Release.lib" />
   </ItemGroup>
 </Project>
